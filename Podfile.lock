@@ -1,0 +1,163 @@
+PODS:
+  - Alamofire (5.5.0)
+  - Cache (5.3.0)
+  - CryptoSwift (1.4.2)
+  - ESTabBarController-swift (2.8.0)
+  - Haptica (3.0.3)
+  - IQKeyboardManagerSwift (6.5.9)
+  - KeychainAccess (4.2.2)
+  - Kingfisher (6.3.1)
+  - MarqueeLabel (4.0.5)
+  - MJRefresh (3.7.5)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - NotificationBannerSwift (2.5.0):
+    - MarqueeLabel (~> 4.0.0)
+    - SnapKit (~> 5.0.0)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - ObjectMapper (4.2.0)
+  - Realm (10.21.1):
+    - Realm/Headers (= 10.21.1)
+  - Realm/Headers (10.21.1)
+  - RealmSwift (10.21.1):
+    - Realm (= 10.21.1)
+  - SDCycleScrollView (1.82):
+    - SDWebImage (>= 5.0.0)
+  - SDWebImage (5.12.2):
+    - SDWebImage/Core (= 5.12.2)
+  - SDWebImage/Core (5.12.2)
+  - SnapKit (5.0.1)
+  - SPPermissions/Bluetooth (7.1.1):
+    - SPPermissions/Core
+  - SPPermissions/Camera (7.1.1):
+    - SPPermissions/Core
+  - SPPermissions/Core (7.1.1)
+  - SPPermissions/Notification (7.1.1):
+    - SPPermissions/Core
+  - SPPermissions/PhotoLibrary (7.1.1):
+    - SPPermissions/Core
+  - SVProgressHUD (2.2.5)
+  - SwiftEntryKit (2.0.0)
+  - SwifterSwift (5.2.0):
+    - SwifterSwift/AppKit (= 5.2.0)
+    - SwifterSwift/CoreAnimation (= 5.2.0)
+    - SwifterSwift/CoreGraphics (= 5.2.0)
+    - SwifterSwift/CoreLocation (= 5.2.0)
+    - SwifterSwift/Dispatch (= 5.2.0)
+    - SwifterSwift/Foundation (= 5.2.0)
+    - SwifterSwift/MapKit (= 5.2.0)
+    - SwifterSwift/SceneKit (= 5.2.0)
+    - SwifterSwift/SpriteKit (= 5.2.0)
+    - SwifterSwift/StoreKit (= 5.2.0)
+    - SwifterSwift/SwiftStdlib (= 5.2.0)
+    - SwifterSwift/UIKit (= 5.2.0)
+  - SwifterSwift/AppKit (5.2.0)
+  - SwifterSwift/CoreAnimation (5.2.0)
+  - SwifterSwift/CoreGraphics (5.2.0)
+  - SwifterSwift/CoreLocation (5.2.0)
+  - SwifterSwift/Dispatch (5.2.0)
+  - SwifterSwift/Foundation (5.2.0)
+  - SwifterSwift/MapKit (5.2.0)
+  - SwifterSwift/SceneKit (5.2.0)
+  - SwifterSwift/SpriteKit (5.2.0)
+  - SwifterSwift/StoreKit (5.2.0)
+  - SwifterSwift/SwiftStdlib (5.2.0)
+  - SwifterSwift/UIKit (5.2.0)
+  - SwiftyJSON (5.0.1)
+  - SwiftyUserDefaults (5.3.0)
+  - XCGLogger (7.0.1):
+    - XCGLogger/Core (= 7.0.1)
+  - XCGLogger/Core (7.0.1):
+    - ObjcExceptionBridging
+
+DEPENDENCIES:
+  - Cache (= 5.3.0)
+  - CryptoSwift (= 1.4.2)
+  - ESTabBarController-swift (= 2.8.0)
+  - Haptica (= 3.0.3)
+  - IQKeyboardManagerSwift (= 6.5.9)
+  - KeychainAccess (= 4.2.2)
+  - Kingfisher (= 6.3.1)
+  - MJRefresh (= 3.7.5)
+  - Moya
+  - NotificationBannerSwift (= 2.5.0)
+  - ObjectMapper (= 4.2.0)
+  - Realm
+  - RealmSwift
+  - SDCycleScrollView (= 1.82)
+  - SnapKit (= 5.0.1)
+  - SPPermissions/Bluetooth
+  - SPPermissions/Camera
+  - SPPermissions/Notification
+  - SPPermissions/PhotoLibrary
+  - SVProgressHUD (= 2.2.5)
+  - SwiftEntryKit (= 2.0.0)
+  - SwifterSwift (= 5.2.0)
+  - SwiftyJSON (= 5.0.1)
+  - SwiftyUserDefaults (= 5.3.0)
+  - XCGLogger (= 7.0.1)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Cache
+    - CryptoSwift
+    - ESTabBarController-swift
+    - Haptica
+    - IQKeyboardManagerSwift
+    - KeychainAccess
+    - Kingfisher
+    - MarqueeLabel
+    - MJRefresh
+    - Moya
+    - NotificationBannerSwift
+    - ObjcExceptionBridging
+    - ObjectMapper
+    - Realm
+    - RealmSwift
+    - SDCycleScrollView
+    - SDWebImage
+    - SnapKit
+    - SPPermissions
+    - SVProgressHUD
+    - SwiftEntryKit
+    - SwifterSwift
+    - SwiftyJSON
+    - SwiftyUserDefaults
+    - XCGLogger
+
+SPEC CHECKSUMS:
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Cache: 48762993ec44e1d93483c4d4a13edd18452326f4
+  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
+  ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
+  Haptica: 23497230b2d7476621f7860263ae0667279a0a89
+  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  NotificationBannerSwift: 684966fa934c48b70eff8bbec93fccf8db603365
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  Realm: 44b41c3ae39e3ecfded71a04434bfde066c7b317
+  RealmSwift: dbf9a4eb06e0c929d51c4ef2e8f951bca541feab
+  SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
+  SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SPPermissions: c2f74985c97a4bca97e6faa0698a483bc0e0d13f
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
+  SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
+  XCGLogger: 1943831ef907df55108b0b18657953f868de973b
+
+PODFILE CHECKSUM: 48b618d0fcaa70fd3691543066e39514c06d1225
+
+COCOAPODS: 1.11.2
