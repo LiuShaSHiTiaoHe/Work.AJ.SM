@@ -115,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */,
+				416F2E2E279D1E76004E5AD9 /* Classes */,
 				416F2E02279BAF67004E5AD9 /* ViewController.swift */,
 				416F2E04279BAF67004E5AD9 /* Main.storyboard */,
 				416F2E07279BAF67004E5AD9 /* Assets.xcassets */,
@@ -139,6 +140,45 @@
 				416F2E21279BAF67004E5AD9 /* Work_AJ_SMUITestsLaunchTests.swift */,
 			);
 			path = Work.AJ.SMUITests;
+			sourceTree = "<group>";
+		};
+		416F2E2E279D1E76004E5AD9 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				416F2E31279D1E9F004E5AD9 /* Utils */,
+				416F2E30279D1E8A004E5AD9 /* Module */,
+				416F2E2F279D1E84004E5AD9 /* Base */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		416F2E2F279D1E84004E5AD9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		416F2E30279D1E8A004E5AD9 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		416F2E31279D1E9F004E5AD9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				416F2E32279D57FF004E5AD9 /* NetWork */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		416F2E32279D57FF004E5AD9 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetWork;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
