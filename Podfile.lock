@@ -6,7 +6,6 @@ PODS:
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
   - KeychainAccess (4.2.2)
-  - Kingfisher (6.3.1)
   - MarqueeLabel (4.0.5)
   - MJRefresh (3.7.5)
   - Moya (15.0.0):
@@ -20,6 +19,9 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ObjectMapper (4.2.0)
+  - R.swift (6.1.0):
+    - R.swift.Library (~> 5.3.0)
+  - R.swift.Library (5.3.0)
   - Realm (10.21.1):
     - Realm/Headers (= 10.21.1)
   - Realm/Headers (10.21.1)
@@ -81,11 +83,11 @@ DEPENDENCIES:
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
   - KeychainAccess (= 4.2.2)
-  - Kingfisher (= 6.3.1)
   - MJRefresh (= 3.7.5)
   - Moya
   - NotificationBannerSwift (= 2.5.0)
   - ObjectMapper (= 4.2.0)
+  - R.swift
   - Realm
   - RealmSwift
   - SDCycleScrollView (= 1.82)
@@ -110,13 +112,14 @@ SPEC REPOS:
     - Haptica
     - IQKeyboardManagerSwift
     - KeychainAccess
-    - Kingfisher
     - MarqueeLabel
     - MJRefresh
     - Moya
     - NotificationBannerSwift
     - ObjcExceptionBridging
     - ObjectMapper
+    - R.swift
+    - R.swift.Library
     - Realm
     - RealmSwift
     - SDCycleScrollView
@@ -138,13 +141,14 @@ SPEC CHECKSUMS:
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   NotificationBannerSwift: 684966fa934c48b70eff8bbec93fccf8db603365
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
+  R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Realm: 44b41c3ae39e3ecfded71a04434bfde066c7b317
   RealmSwift: dbf9a4eb06e0c929d51c4ef2e8f951bca541feab
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
@@ -158,6 +162,6 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 48b618d0fcaa70fd3691543066e39514c06d1225
+PODFILE CHECKSUM: 69addf9b3687dbcfb67714b09aafc11baf59aef9
 
 COCOAPODS: 1.11.2

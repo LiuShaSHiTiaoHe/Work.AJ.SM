@@ -11,7 +11,8 @@ target 'Work.AJ.SM' do
   pod 'RealmSwift'
   pod 'Realm'
   pod 'XCGLogger', '7.0.1'
-
+  pod 'R.swift'
+  
   pod 'SnapKit', '5.0.1'
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'SVProgressHUD', '2.2.5'
@@ -28,7 +29,7 @@ target 'Work.AJ.SM' do
   pod 'Cache', '5.3.0'
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
-  pod 'Kingfisher', '6.3.1'
+#  pod 'Kingfisher', '6.3.1'
   pod 'SwifterSwift', '5.2.0'
 
   pod 'SPPermissions/Camera'
@@ -37,13 +38,6 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/Bluetooth'
 #  pod 'NIMSDK'
 
-  target 'Work.AJ.SMTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
-  target 'Work.AJ.SMUITests' do
-    # Pods for testing
-  end
 
 end
