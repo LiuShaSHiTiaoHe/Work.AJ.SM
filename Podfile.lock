@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (5.5.0)
-  - Cache (5.3.0)
   - CryptoSwift (1.4.2)
   - ESTabBarController-swift (2.8.0)
   - Haptica (3.0.3)
@@ -75,9 +74,9 @@ PODS:
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
     - ObjcExceptionBridging
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
-  - Cache (= 5.3.0)
   - CryptoSwift (= 1.4.2)
   - ESTabBarController-swift (= 2.8.0)
   - Haptica (= 3.0.3)
@@ -102,11 +101,11 @@ DEPENDENCIES:
   - SwiftyJSON (= 5.0.1)
   - SwiftyUserDefaults (= 5.3.0)
   - XCGLogger (= 7.0.1)
+  - YYCache
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - Cache
     - CryptoSwift
     - ESTabBarController-swift
     - Haptica
@@ -132,10 +131,10 @@ SPEC REPOS:
     - SwiftyJSON
     - SwiftyUserDefaults
     - XCGLogger
+    - YYCache
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
-  Cache: 48762993ec44e1d93483c4d4a13edd18452326f4
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
@@ -161,7 +160,8 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 69addf9b3687dbcfb67714b09aafc11baf59aef9
+PODFILE CHECKSUM: 369124b58a859080ec7fe46b55211f7a68e42b8e
 
 COCOAPODS: 1.11.2

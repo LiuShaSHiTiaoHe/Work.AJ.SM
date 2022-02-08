@@ -31,10 +31,10 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 
     private func setupTabBar(){
         self.tabBar.isTranslucent = false
-        self.tabBar.barTintColor = R.color.backgroundColor()//tab_background_color
+        self.tabBar.barTintColor = R.color.backgroundColor()
         if #available(iOS 15, *) {
             let bar = UITabBarAppearance.init()
-            bar.backgroundColor = R.color.backgroundColor()//tab_background_color
+            bar.backgroundColor = R.color.backgroundColor()
             self.tabBar.scrollEdgeAppearance = bar
             self.tabBar.standardAppearance = bar
         }

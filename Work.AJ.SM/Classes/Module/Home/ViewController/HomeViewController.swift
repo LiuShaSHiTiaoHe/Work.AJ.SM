@@ -41,9 +41,9 @@ class HomeViewController: BaseViewController {
     }
     
     private func initData() {
-
+        
     }
-    
+        
 
 }
 

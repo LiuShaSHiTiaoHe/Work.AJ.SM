@@ -26,10 +26,10 @@ target 'Work.AJ.SM' do
   pod 'CryptoSwift', '1.4.2'
   pod 'KeychainAccess', '4.2.2'
   pod 'SwiftyUserDefaults', '5.3.0'
-  pod 'Cache', '5.3.0'
+#  pod 'Cache', '5.3.0'
+  pod 'YYCache'
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
-#  pod 'Kingfisher', '6.3.1'
   pod 'SwifterSwift', '5.2.0'
 
   pod 'SPPermissions/Camera'

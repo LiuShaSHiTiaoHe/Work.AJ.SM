@@ -12,7 +12,7 @@ class HomeHeaderView: UICollectionReusableView {
 
     private lazy var imageCycleScrollView: SDCycleScrollView = {
         let cycleView = SDCycleScrollView.init()
-        cycleView.placeholderImage = UIImage(named: "home_banner")
+        cycleView.placeholderImage = R.image.home_banner()
         cycleView.scrollDirection = .horizontal
         cycleView.backgroundColor = R.color.backgroundColor()
         cycleView.bannerImageViewContentMode = .scaleToFill
@@ -35,7 +35,7 @@ class HomeHeaderView: UICollectionReusableView {
     }()
     
     private lazy var iconImage: UIImageView = {
-        let imageView = UIImageView.init(image: UIImage.init(named: "icon_notice"))
+        let imageView = UIImageView.init(image: R.image.icon_notice())
         return imageView
     }()
     
