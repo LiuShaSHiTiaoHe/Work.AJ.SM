@@ -53,7 +53,7 @@
 		416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E8827B0CAD0004E5AD9 /* Config.Font.swift */; };
 		416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E8C27B0E8FB004E5AD9 /* R.generated.swift */; };
 		416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */; };
-		416F2E9427B2141B004E5AD9 /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9327B2141B004E5AD9 /* HomeDataManager.swift */; };
+		416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9327B2141B004E5AD9 /* HomeRepository.swift */; };
 		416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9527B2426C004E5AD9 /* AppDelegate.Service.swift */; };
 		416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9727B259C0004E5AD9 /* CacheManager.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
@@ -127,7 +127,7 @@
 		416F2E8827B0CAD0004E5AD9 /* Config.Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.Font.swift; sourceTree = "<group>"; };
 		416F2E8C27B0E8FB004E5AD9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.Extension.swift; sourceTree = "<group>"; };
-		416F2E9327B2141B004E5AD9 /* HomeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
+		416F2E9327B2141B004E5AD9 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		416F2E9527B2426C004E5AD9 /* AppDelegate.Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.Service.swift; sourceTree = "<group>"; };
 		416F2E9727B259C0004E5AD9 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				416F2E9227B20C5C004E5AD9 /* Datasource */,
+				416F2E9227B20C5C004E5AD9 /* Repository */,
 				416F2E5E27B0BEE5004E5AD9 /* View */,
 				416F2E5D27B0BEDB004E5AD9 /* NetWork */,
 				416F2E5C27B0BED3004E5AD9 /* Model */,
@@ -406,12 +406,12 @@
 			path = SCFont;
 			sourceTree = "<group>";
 		};
-		416F2E9227B20C5C004E5AD9 /* Datasource */ = {
+		416F2E9227B20C5C004E5AD9 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				416F2E9327B2141B004E5AD9 /* HomeDataManager.swift */,
+				416F2E9327B2141B004E5AD9 /* HomeRepository.swift */,
 			);
-			path = Datasource;
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -641,7 +641,7 @@
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
 				416F2E7327B0BFB5004E5AD9 /* UnitCodesModel.swift in Sources */,
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
-				416F2E9427B2141B004E5AD9 /* HomeDataManager.swift in Sources */,
+				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,

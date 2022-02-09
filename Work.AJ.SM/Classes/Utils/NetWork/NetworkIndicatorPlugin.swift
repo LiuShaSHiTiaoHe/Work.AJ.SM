@@ -32,18 +32,5 @@ public final class NetworkIndicatorPlugin: PluginType {
     
     public func didReceive(_ result: Result<Moya.Response, MoyaError>, target: TargetType) {
         NetworkIndicatorPlugin.numberOfRequests -= 1
-        switch result {
-        case .success(let response):
-            do{
-                let json = try JSONSerialization.jsonObject(with: response.data, options: .mutableContainers)
-                if let dictionaryFromJson = json as? Dictionary<String, Any> {
-                    logger.info("response: \(dictionaryFromJson)")
-                }
-            } catch {
-                logger.error("JSONSerialization catch error \(error)")
-            }
-        case .failure(let error):
-            logger.error("\(error.localizedDescription)")
-        }
     }
 }

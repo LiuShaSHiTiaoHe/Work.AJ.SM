@@ -48,9 +48,6 @@ public enum NetworkCacheType {
     /** 只从网络获取数据，且数据不会缓存在本地 */
     /** Only get data from the network, and the data will not be cached locally */
     case ignoreCache
-    /** 先从网络获取数据，同时会在本地缓存数据 */
-    /** Get the data from the network first, and cache the data locally at the same time */
-    case networkOnly
     /** 先从缓存读取数据，如果没有再从网络获取 */
     /** Read the data from the cache first, if not, then get it from the network */
     case cacheElseNetwork
@@ -83,7 +80,7 @@ typealias errorCallback = (() -> Void)
 
 extension TargetType {
     @discardableResult
-    func request<T: Mappable>(modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, cacheType: NetworkCacheType, showError: Bool = false, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+    func request<T: Mappable>(modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
         return NetWorkRequest(successCallback: { responseModel in
             if let model = T(JSONString: responseModel.data) {
                 successCallback(model, responseModel)
@@ -93,7 +90,7 @@ extension TargetType {
         }, cacheType: cacheType, failureCallback: failureCallback, showError: showError)
     }
     @discardableResult
-    func request<T: Mappable>(modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, cacheType: NetworkCacheType, showError: Bool = false, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+    func request<T: Mappable>(modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
         return NetWorkRequest(successCallback: { responseModel in
             if let model = [T](JSONString: responseModel.data) {
                 successCallback(model, responseModel)
@@ -102,29 +99,62 @@ extension TargetType {
             }
         }, cacheType: cacheType, failureCallback: failureCallback, showError: showError)
     }
-    
-    private func NetWorkRequest(successCallback:@escaping RequestFailureCallback,cacheType: NetworkCacheType , failureCallback: RequestFailureCallback? = nil, showError: Bool = false) -> Cancellable? {
-        // TODO: enum 各状态判断
-        if (cacheType == .cacheElseNetwork || cacheType == .cacheThenNetwork), let response = self.readCacheResponse() {
-            processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
-        }
         
-        return Network.default.provider.request(MultiTarget(self)) { result in
-            switch result {
-            case let .success(response):
-                
-                switch cacheType {
-                case .networkElseCache, .cacheThenNetwork, .cacheElseNetwork:
-                    self.saveCacheResponse(response)
-                default:
-                    break
+    private func NetWorkRequest(successCallback:@escaping RequestFailureCallback,cacheType: NetworkCacheType , failureCallback: RequestFailureCallback? = nil, showError: Bool = false) -> Cancellable? {
+
+        switch cacheType {
+        case .ignoreCache:
+            return Network.default.provider.request(MultiTarget(self)) { result in
+                switch result {
+                case let .success(response):
+                    processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
+                case let .failure(error):
+                    errorHandler(code: error.errorCode, message: error.localizedDescription, showError: showError, failure: failureCallback)
                 }
+            }
+        case .cacheElseNetwork:
+            if let response = self.readCacheResponse() {
                 processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
-            case let .failure(error):
-                errorHandler(code: error.errorCode, message: error.localizedDescription, showError: showError, failure: failureCallback)
+            }else{
+                return Network.default.provider.request(MultiTarget(self)) { result in
+                    switch result {
+                    case let .success(response):
+                        processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
+                    case let .failure(error):
+                        errorHandler(code: error.errorCode, message: error.localizedDescription, showError: showError, failure: failureCallback)
+                    }
+                }
+            }
+        case .networkElseCache:
+            return Network.default.provider.request(MultiTarget(self)) { result in
+                switch result {
+                case let .success(response):
+                    processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
+                case let .failure(error):
+                    if let response = self.readCacheResponse() {
+                        processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
+                    }else{
+                        errorHandler(code: error.errorCode, message: error.localizedDescription, showError: showError, failure: failureCallback)
+                    }
+                }
+            }
+        case .cacheThenNetwork:
+            if let response = self.readCacheResponse() {
+                processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
+            }
+            return Network.default.provider.request(MultiTarget(self)) { result in
+                switch result {
+                case let .success(response):
+                    processResponseData(successCallback: successCallback, response: response, showError: showError, failureCallback: failureCallback)
+                case let .failure(error):
+                    errorHandler(code: error.errorCode, message: error.localizedDescription, showError: showError, failure: failureCallback)
+                }
             }
         }
+        
+        return nil
     }
+    
     
     private func processResponseData(successCallback:@escaping RequestFailureCallback, response: Moya.Response, showError: Bool = false,  failureCallback: RequestFailureCallback? = nil) {
         do {
@@ -133,7 +163,7 @@ extension TargetType {
             logger.info("\(self.baseURL)\(self.path) --- \(self.method.rawValue) ----> responseData：\(jsonData)")
             #endif
             let respModel = ResponseModel()
-            respModel.code = jsonData[codeKey].int ?? 0
+            respModel.code = jsonData[codeKey].intValue
             respModel.message = jsonData[messageKey].stringValue
 
             if respModel.code == successCode {

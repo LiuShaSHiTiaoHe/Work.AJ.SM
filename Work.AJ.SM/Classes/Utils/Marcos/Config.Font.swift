@@ -7,30 +7,28 @@
 
 import Foundation
 //MARK: Font
-let RegularFontName = "DINPro-Medium"
-let BoldFontName = "DINPro-Bold"
-let k10Font = UIFont.init(name: RegularFontName, size: 10.0)!
-let k11Font = UIFont.init(name: RegularFontName, size: 11.0)!
-let k12Font = UIFont.init(name: RegularFontName, size: 12.0)!
-let k13Font = UIFont.init(name: RegularFontName, size: 13.0)!
-let k14Font = UIFont.init(name: RegularFontName, size: 14.0)!
-let k15Font = UIFont.init(name: RegularFontName, size: 15.0)!
-let k16Font = UIFont.init(name: RegularFontName, size: 16.0)!
-let k18Font = UIFont.init(name: RegularFontName, size: 18.0)!
-let k20Font = UIFont.init(name: RegularFontName, size: 20.0)!
-let k22Font = UIFont.init(name: RegularFontName, size: 22.0)!
-let k24Font = UIFont.init(name: RegularFontName, size: 24.0)!
-let k25Font = UIFont.init(name: RegularFontName, size: 25.0)!
-let k28Font = UIFont.init(name: RegularFontName, size: 28.0)!
+let k10Font = R.font.dinProRegular(size: 10.0)!
+let k11Font = R.font.dinProRegular(size: 11.0)!
+let k12Font = R.font.dinProRegular(size: 12.0)!
+let k13Font = R.font.dinProRegular(size: 13.0)!
+let k14Font = R.font.dinProRegular(size: 14.0)!
+let k15Font = R.font.dinProRegular(size: 15.0)!
+let k16Font = R.font.dinProRegular(size: 16.0)!
+let k18Font = R.font.dinProRegular(size: 18.0)!
+let k20Font = R.font.dinProRegular(size: 20.0)!
+let k22Font = R.font.dinProRegular(size: 22.0)!
+let k24Font = R.font.dinProRegular(size: 24.0)!
+let k25Font = R.font.dinProRegular(size: 25.0)!
+let k28Font = R.font.dinProRegular(size: 28.0)!
 
-let k10BoldFont = UIFont.init(name: BoldFontName, size: 10.0)!
-let k12BoldFont = UIFont.init(name: BoldFontName, size: 12.0)!
-let k13BoldFont = UIFont.init(name: BoldFontName, size: 13.0)!
-let k14BoldFont = UIFont.init(name: BoldFontName, size: 14.0)!
-let k15BoldFont = UIFont.init(name: BoldFontName, size: 15.0)!
-let k16BoldFont = UIFont.init(name: BoldFontName, size: 16.0)!
-let k18BoldFont = UIFont.init(name: BoldFontName, size: 18.0)!
-let k20BoldFont = UIFont.init(name: BoldFontName, size: 20.0)!
+let k10BoldFont = R.font.dinProBold(size: 10.0)!
+let k12BoldFont = R.font.dinProBold(size: 12.0)!
+let k13BoldFont = R.font.dinProBold(size: 13.0)!
+let k14BoldFont = R.font.dinProBold(size: 14.0)!
+let k15BoldFont = R.font.dinProBold(size: 15.0)!
+let k16BoldFont = R.font.dinProBold(size: 16.0)!
+let k18BoldFont = R.font.dinProBold(size: 18.0)!
+let k20BoldFont = R.font.dinProBold(size: 20.0)!
 
 let k10SysFont = UIFont.systemFont(ofSize: 10)
 let k11SysFont = UIFont.systemFont(ofSize: 11)

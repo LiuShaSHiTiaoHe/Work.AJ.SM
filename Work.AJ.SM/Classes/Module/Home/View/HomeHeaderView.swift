@@ -17,6 +17,8 @@ class HomeHeaderView: UICollectionReusableView {
         cycleView.backgroundColor = R.color.backgroundColor()
         cycleView.bannerImageViewContentMode = .scaleToFill
         cycleView.delegate = self
+        cycleView.layer.cornerRadius = 10
+        cycleView.clipsToBounds = true
         return cycleView
     }()
     
@@ -42,7 +44,8 @@ class HomeHeaderView: UICollectionReusableView {
     private lazy var textCycleBackground: UIView = {
         let view = UIView.init()
         view.backgroundColor = R.color.contentColor()
-        view.layer.cornerRadius = 4
+        view.layer.cornerRadius = 20
+        view.clipsToBounds = true
         return view
     }()
     
@@ -55,40 +58,63 @@ class HomeHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func initData(ads: [AdsModel], notice: [NoticeModel]) {
+        var urlStrings = [String]()
+        var noticeStrings = [String]()
+
+        if !ads.isEmpty {
+            ads.forEach { model in
+                if let url = model.adurl, !url.isEmpty, url.isValidUrl {
+                    urlStrings.append(url)
+                }
+            }
+        }
+        if !notice.isEmpty {
+            notice.forEach { model in
+                if let notice = model.noticetitle {
+                    noticeStrings.append(notice)
+                }
+            }
+        }
+        
+        self.imageCycleScrollView.imageURLStringsGroup = urlStrings
+        self.textCycleScrollView.titlesGroup = noticeStrings.isEmpty ? ["暂无公告"] : noticeStrings
+    }
+    
     private func initUI() {
         self.addSubview(imageCycleScrollView)
         self.addSubview(textCycleBackground)
         textCycleBackground.addSubview(iconImage)
         textCycleBackground.addSubview(textCycleScrollView)
 
-        imageCycleScrollView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-kMargin*1.5)
-        }
-
         textCycleBackground.snp.makeConstraints { make in
-            make.left.equalTo(imageCycleScrollView.snp.left).offset(kMargin/2)
-            make.right.equalTo(imageCycleScrollView.snp.right).offset(-kMargin/2)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(kMargin*1.2)
+            make.left.equalToSuperview().offset(kMargin)
+            make.right.equalToSuperview().offset(-kMargin)
+            make.top.equalToSuperview().offset(kMargin)
+            make.height.equalTo(kMargin*2)
         }
         
         iconImage.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin/2)
-            make.width.height.equalTo(16)
+            make.width.height.equalTo(20)
             make.centerY.equalToSuperview()
         }
         
         textCycleScrollView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(kMargin*2)
-            make.right.equalToSuperview().offset(-kMargin/4)
+            make.right.equalToSuperview().offset(-kMargin)
             make.centerY.equalToSuperview()
             make.height.equalToSuperview()
         }
         
-        textCycleBackground.addShadow(ofColor: .gray, radius: 5, offset: CGSize.init(width: 0, height: 0), opacity: 0.2)
+        imageCycleScrollView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(kMargin)
+            make.right.equalToSuperview().offset(-kMargin)
+            make.top.equalTo(textCycleBackground.snp.bottom).offset(kMargin)
+            make.bottom.equalToSuperview().offset(-kMargin/2)
+        }
+        
+        textCycleBackground.addShadow(ofColor: .gray, radius: 10, offset: CGSize.init(width: 0, height: 0), opacity: 0.2)
     }
         
 }

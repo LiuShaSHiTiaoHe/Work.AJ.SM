@@ -17,8 +17,8 @@ class HomeModuleCell: UICollectionViewCell {
     let nameLabel: UILabel = {
         let label = UILabel.init()
         label.textAlignment = .center
-        label.font = k12Font
-        label.textColor = R.color.secondtextColor()
+        label.font = k16Font
+        label.textColor = R.color.blackColor()
         return label
     }()
     
@@ -33,21 +33,22 @@ class HomeModuleCell: UICollectionViewCell {
     
     private func initUI() {
         contentView.addSubviews([iconImage, nameLabel])
-        self.backgroundColor = .white
+        self.backgroundColor = R.color.whiteColor()
         iconImage.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-kMargin/2)
+            make.left.equalToSuperview().offset(kMargin/2)
+            make.centerY.equalToSuperview()
             make.width.height.equalTo(30)
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(iconImage.snp.bottom)
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview().offset(-kMargin)
+            make.centerY.equalToSuperview()
+            make.left.equalTo(iconImage.snp.right).offset(kMargin/2)
+            make.height.equalTo(30)
+            make.right.equalToSuperview().offset(-kMargin)
+            
         }
-        self.layer.cornerRadius = 15
-        self.addShadow(ofColor: .gray, radius: 4, offset: CGSize.init(width: 0, height: 0), opacity: 0.1)
+        self.layer.cornerRadius = 10
+        self.addShadow(ofColor: .gray, radius: 4, offset: CGSize.init(width: 0, height: 0), opacity: 0.3)
     }
     
     func initData(_ model: HomePageFunctionModule) {

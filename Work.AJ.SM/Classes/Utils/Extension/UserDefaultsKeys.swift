@@ -11,5 +11,6 @@ import SwiftyUserDefaults
 extension DefaultsKeys {
     var username: DefaultsKey<String?> { .init("username") }
     
+    var currentUnitID: DefaultsKey<Int?> { .init("currentUnitID") }
     
 }

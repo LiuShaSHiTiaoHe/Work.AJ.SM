@@ -24,8 +24,8 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     func initUI() {
         let v1 = BaseNavigationController.init(rootViewController: HomeViewController())
         let v2 = BaseNavigationController.init(rootViewController: HomeViewController())
-        v1.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "Home", image: UIImage.init(named: "tab_icon_home_gray"), selectedImage: UIImage.init(named: "tab_icon_home_blue"))
-        v2.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "Setting", image: UIImage.init(named: "tab_icon_setting_gray"), selectedImage: UIImage.init(named: "tab_icon_setting_blue"))
+        v1.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "首页", image: UIImage.init(named: "tab_icon_home_gray"), selectedImage: UIImage.init(named: "tab_icon_home_blue"))
+        v2.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "我的", image: UIImage.init(named: "tab_icon_setting_gray"), selectedImage: UIImage.init(named: "tab_icon_setting_blue"))
         self.viewControllers = [v1, v2]
     }
 
