@@ -13,7 +13,7 @@ class HomeRepository {
     static let shared = HomeRepository()
     
     func allUnits(completion: @escaping HomeModulesCompletion) {
-        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, successCallback: { [weak self] models, response in
+        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheElseNetwork, showError: true) { [weak self] models, response in
             guard let `self` = self else { return }
             guard models.count > 0 else {
                 return
@@ -29,9 +29,8 @@ class HomeRepository {
                     Defaults.currentUnitID = unitID
                     completion(self.filterHomePageModules(firstUnit))
                 }
-
             }
-        }, cacheType: .cacheElseNetwork, showError: true) { response in
+        } failureCallback: { response in
             logger.info("\(response.message)")
             completion([])
         }

@@ -18,9 +18,9 @@ class NoticeModel: Mappable {
     var rid: String?
     var username: String?
     
-    required init?(map: Map) {}
+    required init?(map: ObjectMapper.Map) {}
     
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         communityid <- map["COMMUNITYID"]
         creby <- map["CREBY"]
         crebyname <- map["CREBYNAME"]

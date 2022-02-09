@@ -64,7 +64,7 @@ class HomeHeaderView: UICollectionReusableView {
 
         if !ads.isEmpty {
             ads.forEach { model in
-                if let url = model.adurl, !url.isEmpty, url.isValidUrl {
+                if let url = model.adurl, !url.isEmpty, url.jk.verifyUrl() {
                     urlStrings.append(url)
                 }
             }
@@ -114,7 +114,7 @@ class HomeHeaderView: UICollectionReusableView {
             make.bottom.equalToSuperview().offset(-kMargin/2)
         }
         
-        textCycleBackground.addShadow(ofColor: .gray, radius: 10, offset: CGSize.init(width: 0, height: 0), opacity: 0.2)
+        textCycleBackground.jk.addShadow(shadowColor: R.color.blackColor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.2, shadowRadius: 10)
     }
         
 }

@@ -32,23 +32,24 @@ class HomeModuleCell: UICollectionViewCell {
     }
     
     private func initUI() {
-        contentView.addSubviews([iconImage, nameLabel])
+        contentView.addSubview(iconImage)
+        contentView.addSubview(nameLabel)
         self.backgroundColor = R.color.whiteColor()
         iconImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin/2)
+            make.left.equalToSuperview().offset(kMargin)
             make.centerY.equalToSuperview()
             make.width.height.equalTo(30)
         }
         
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(iconImage.snp.right).offset(kMargin/2)
+            make.left.equalTo(iconImage.snp.right).offset(kMargin)
             make.height.equalTo(30)
             make.right.equalToSuperview().offset(-kMargin)
             
         }
         self.layer.cornerRadius = 10
-        self.addShadow(ofColor: .gray, radius: 4, offset: CGSize.init(width: 0, height: 0), opacity: 0.3)
+        self.jk.addShadow(shadowColor: R.color.blackColor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.3, shadowRadius: 4)
     }
     
     func initData(_ model: HomePageFunctionModule) {

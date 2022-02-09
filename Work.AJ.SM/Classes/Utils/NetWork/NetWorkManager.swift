@@ -25,7 +25,7 @@ final class NetWorkManager {
             var task = target.task
             switch task {
             case .requestParameters(let parameters, let encoding):
-                if parameters.has(key: "ekey"), let eValue = parameters["ekey"] as? String {
+                if parameters.has("ekey"), let eValue = parameters["ekey"] as? String {
                     let eParameters = GDataManager.shared.headerMD5(parameters, eValue)
                     task = .requestParameters(parameters: eParameters, encoding: encoding)
                 }
@@ -80,7 +80,7 @@ typealias errorCallback = (() -> Void)
 
 extension TargetType {
     @discardableResult
-    func request<T: Mappable>(modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+    func request<T: Mappable>(modelType: T.Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
         return NetWorkRequest(successCallback: { responseModel in
             if let model = T(JSONString: responseModel.data) {
                 successCallback(model, responseModel)
@@ -90,7 +90,7 @@ extension TargetType {
         }, cacheType: cacheType, failureCallback: failureCallback, showError: showError)
     }
     @discardableResult
-    func request<T: Mappable>(modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+    func request<T: Mappable>(modelType: [T].Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
         return NetWorkRequest(successCallback: { responseModel in
             if let model = [T](JSONString: responseModel.data) {
                 successCallback(model, responseModel)
@@ -101,7 +101,6 @@ extension TargetType {
     }
         
     private func NetWorkRequest(successCallback:@escaping RequestFailureCallback,cacheType: NetworkCacheType , failureCallback: RequestFailureCallback? = nil, showError: Bool = false) -> Cancellable? {
-
         switch cacheType {
         case .ignoreCache:
             return Network.default.provider.request(MultiTarget(self)) { result in

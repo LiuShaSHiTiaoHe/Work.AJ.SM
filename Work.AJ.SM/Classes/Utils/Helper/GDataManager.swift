@@ -12,8 +12,8 @@ final class GDataManager {
     static let shared = GDataManager()
     
     func headerMD5(_ dic: Dictionary<String, Any>, _ key: String) -> [String: Any] {
-        if dic.has(key: key), let evalue = dic[key] as? String {
-            let timestamp = NSDate().timeIntervalSince1970.int.string
+        if dic.has(key), let evalue = dic[key] as? String {
+            let timestamp = NSDate().timeIntervalSince1970.jk.string//NSDate().timeIntervalSince1970.int.string
             let encryptString = evalue + timestamp + "p!P2QklnjGGaZKlw"
             let fkey = encryptString.md5()
             var result = Dictionary().merging(dic){ (_, new) in new }

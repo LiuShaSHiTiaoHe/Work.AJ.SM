@@ -33,10 +33,10 @@ class UnitLockModel: Mappable {
     var ifon: String?
     
     
-    required init?(map: Map) {}
+    required init?(map: ObjectMapper.Map) {}
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         lockcom <- map["LOCKCOM"]
         credate <- map["CREDATE"]
         locktype <- map["LOCKTYPE"]

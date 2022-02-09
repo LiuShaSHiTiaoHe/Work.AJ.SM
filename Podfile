@@ -8,8 +8,9 @@ target 'Work.AJ.SM' do
 
   # Pods for Work.AJ.SM
   pod 'Moya'
-  pod 'RealmSwift'
   pod 'Realm'
+  pod 'RealmSwift'
+  pod "ObjectMapper+Realm"
   pod 'XCGLogger', '7.0.1'
   pod 'R.swift'
   
@@ -26,8 +27,9 @@ target 'Work.AJ.SM' do
   pod 'YYCache'
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
-  pod 'SwifterSwift', '5.2.0'
-
+#  pod 'SwifterSwift', '5.2.0'
+  pod 'JKSwiftExtension'
+  
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
   pod 'SDCycleScrollView', '1.82'

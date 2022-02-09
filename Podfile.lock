@@ -4,6 +4,7 @@ PODS:
   - ESTabBarController-swift (2.8.0)
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
+  - JKSwiftExtension (2.0.2)
   - KeychainAccess (4.2.2)
   - MarqueeLabel (4.0.5)
   - MJRefresh (3.7.5)
@@ -18,6 +19,9 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ObjectMapper (4.2.0)
+  - "ObjectMapper+Realm (1.2)":
+    - ObjectMapper
+    - RealmSwift
   - R.swift (6.1.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
@@ -43,31 +47,6 @@ PODS:
     - SPPermissions/Core
   - SVProgressHUD (2.2.5)
   - SwiftEntryKit (2.0.0)
-  - SwifterSwift (5.2.0):
-    - SwifterSwift/AppKit (= 5.2.0)
-    - SwifterSwift/CoreAnimation (= 5.2.0)
-    - SwifterSwift/CoreGraphics (= 5.2.0)
-    - SwifterSwift/CoreLocation (= 5.2.0)
-    - SwifterSwift/Dispatch (= 5.2.0)
-    - SwifterSwift/Foundation (= 5.2.0)
-    - SwifterSwift/MapKit (= 5.2.0)
-    - SwifterSwift/SceneKit (= 5.2.0)
-    - SwifterSwift/SpriteKit (= 5.2.0)
-    - SwifterSwift/StoreKit (= 5.2.0)
-    - SwifterSwift/SwiftStdlib (= 5.2.0)
-    - SwifterSwift/UIKit (= 5.2.0)
-  - SwifterSwift/AppKit (5.2.0)
-  - SwifterSwift/CoreAnimation (5.2.0)
-  - SwifterSwift/CoreGraphics (5.2.0)
-  - SwifterSwift/CoreLocation (5.2.0)
-  - SwifterSwift/Dispatch (5.2.0)
-  - SwifterSwift/Foundation (5.2.0)
-  - SwifterSwift/MapKit (5.2.0)
-  - SwifterSwift/SceneKit (5.2.0)
-  - SwifterSwift/SpriteKit (5.2.0)
-  - SwifterSwift/StoreKit (5.2.0)
-  - SwifterSwift/SwiftStdlib (5.2.0)
-  - SwifterSwift/UIKit (5.2.0)
   - SwiftyJSON (5.0.1)
   - SwiftyUserDefaults (5.3.0)
   - XCGLogger (7.0.1):
@@ -81,11 +60,13 @@ DEPENDENCIES:
   - ESTabBarController-swift (= 2.8.0)
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
+  - JKSwiftExtension
   - KeychainAccess (= 4.2.2)
   - MJRefresh (= 3.7.5)
   - Moya
   - NotificationBannerSwift (= 2.5.0)
   - ObjectMapper (= 4.2.0)
+  - "ObjectMapper+Realm"
   - R.swift
   - Realm
   - RealmSwift
@@ -97,7 +78,6 @@ DEPENDENCIES:
   - SPPermissions/PhotoLibrary
   - SVProgressHUD (= 2.2.5)
   - SwiftEntryKit (= 2.0.0)
-  - SwifterSwift (= 5.2.0)
   - SwiftyJSON (= 5.0.1)
   - SwiftyUserDefaults (= 5.3.0)
   - XCGLogger (= 7.0.1)
@@ -110,6 +90,7 @@ SPEC REPOS:
     - ESTabBarController-swift
     - Haptica
     - IQKeyboardManagerSwift
+    - JKSwiftExtension
     - KeychainAccess
     - MarqueeLabel
     - MJRefresh
@@ -117,6 +98,7 @@ SPEC REPOS:
     - NotificationBannerSwift
     - ObjcExceptionBridging
     - ObjectMapper
+    - "ObjectMapper+Realm"
     - R.swift
     - R.swift.Library
     - Realm
@@ -127,7 +109,6 @@ SPEC REPOS:
     - SPPermissions
     - SVProgressHUD
     - SwiftEntryKit
-    - SwifterSwift
     - SwiftyJSON
     - SwiftyUserDefaults
     - XCGLogger
@@ -139,6 +120,7 @@ SPEC CHECKSUMS:
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  JKSwiftExtension: bf92c1dfd68c4d02313796f6ac857f8d62572e4a
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
@@ -146,6 +128,7 @@ SPEC CHECKSUMS:
   NotificationBannerSwift: 684966fa934c48b70eff8bbec93fccf8db603365
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  "ObjectMapper+Realm": 0f8d0ac5b0e87ba63d2d0bea76a111b4eae98b9a
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Realm: 44b41c3ae39e3ecfded71a04434bfde066c7b317
@@ -156,12 +139,11 @@ SPEC CHECKSUMS:
   SPPermissions: c2f74985c97a4bca97e6faa0698a483bc0e0d13f
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
-  SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 369124b58a859080ec7fe46b55211f7a68e42b8e
+PODFILE CHECKSUM: 55b496c3cb739fe4befe7f240a6b784132b24e91
 
 COCOAPODS: 1.11.2

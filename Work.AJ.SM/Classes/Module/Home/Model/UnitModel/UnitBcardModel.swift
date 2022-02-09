@@ -37,10 +37,10 @@ class UnitBcardModel: Mappable {
     var blockid: Int?
     var birthdate: String?
     
-    required init?(map: Map) {}
+    required init?(map: ObjectMapper.Map) {}
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         sex <- map["SEX"]
         activation <- map["ACTIVATION"]
         credate <- map["CREDATE"]

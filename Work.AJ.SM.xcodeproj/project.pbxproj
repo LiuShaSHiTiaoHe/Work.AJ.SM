@@ -56,6 +56,7 @@
 		416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9327B2141B004E5AD9 /* HomeRepository.swift */; };
 		416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9527B2426C004E5AD9 /* AppDelegate.Service.swift */; };
 		416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9727B259C0004E5AD9 /* CacheManager.swift */; };
+		416F2E9B27B3BA45004E5AD9 /* RealmTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9A27B3BA45004E5AD9 /* RealmTools.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,7 @@
 		416F2E9327B2141B004E5AD9 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		416F2E9527B2426C004E5AD9 /* AppDelegate.Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.Service.swift; sourceTree = "<group>"; };
 		416F2E9727B259C0004E5AD9 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		416F2E9A27B3BA45004E5AD9 /* RealmTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTools.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		416F2E31279D1E9F004E5AD9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				416F2E9927B3BA39004E5AD9 /* Realm */,
 				416F2E4127B0B4EA004E5AD9 /* Helper */,
 				416F2E3A27B0B466004E5AD9 /* Extension */,
 				416F2E3527B0B3F3004E5AD9 /* Marcos */,
@@ -412,6 +415,14 @@
 				416F2E9327B2141B004E5AD9 /* HomeRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		416F2E9927B3BA39004E5AD9 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				416F2E9A27B3BA45004E5AD9 /* RealmTools.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -658,6 +669,7 @@
 				416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */,
 				416F2E7227B0BFB5004E5AD9 /* UnitBcardModel.swift in Sources */,
 				416F2E3C27B0B46F004E5AD9 /* UserDefaultsKeys.swift in Sources */,
+				416F2E9B27B3BA45004E5AD9 /* RealmTools.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,

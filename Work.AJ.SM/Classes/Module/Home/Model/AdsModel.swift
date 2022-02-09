@@ -38,9 +38,9 @@ class AdsModel: Mappable {
     }
     var folderpath: String?//新增相对路径
     
-    required init?(map: Map) {}
+    required init?(map: ObjectMapper.Map) {}
     
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         adid <- map["ADID"]
         covers <- map["COVERS"]
         credate <- map["CREDATE"]

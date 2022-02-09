@@ -20,10 +20,9 @@ class HomeViewController: BaseViewController {
         flowLayout.minimumInteritemSpacing = 0
         let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         c.alwaysBounceVertical = true
-        c.backgroundColor = UIColor.clear//R.color.contentColor()
+        c.backgroundColor = UIColor.clear
         c.register(HomeModuleCell.self, forCellWithReuseIdentifier: cellIdentifier)
         c.register(HomeHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderIdentifier)
-//        c.refreshControl = UIRefreshControl()
         return c
     }()
     

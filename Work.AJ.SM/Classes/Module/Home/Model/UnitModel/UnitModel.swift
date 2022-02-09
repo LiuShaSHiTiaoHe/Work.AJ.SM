@@ -86,12 +86,12 @@ class UnitModel: NSObject, Mappable  {
     var cellid: Int?
     var physicalfloor: String?
     
-    required init?(map: Map) {
+    required init?(map: ObjectMapper.Map) {
         
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         myset4 <- map["MYSET4"]
         moudle12 <- map["MOUDLE12"]
         myset6 <- map["MYSET6"]

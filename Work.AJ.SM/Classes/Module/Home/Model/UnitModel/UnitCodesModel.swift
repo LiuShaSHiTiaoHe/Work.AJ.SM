@@ -13,10 +13,10 @@ class UnitCodesModel: Mappable {
     var showfloor: String?
     var increaseid: Int?
     
-    required init?(map: Map) {}
+    required init?(map: ObjectMapper.Map) {}
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         communityid <- map["COMMUNITYID"]
         showfloor <- map["SHOWFLOOR"]
         increaseid <- map["INCREASEID"]

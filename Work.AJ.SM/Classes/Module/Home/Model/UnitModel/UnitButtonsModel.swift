@@ -17,10 +17,10 @@ class UnitButtonsModel: Mappable {
     var provider: String?
     
     
-    required init?(map: Map) {}
+    required init?(map: ObjectMapper.Map) {}
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         ifon <- map["IFON"]
         type <- map["TYPE"]
         desc <- map["DESC"]
