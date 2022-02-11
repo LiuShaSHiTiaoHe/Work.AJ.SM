@@ -1,11 +1,13 @@
 PODS:
   - Alamofire (5.5.0)
+  - BetterSegmentedControl (2.0.1)
   - CryptoSwift (1.4.2)
   - ESTabBarController-swift (2.8.0)
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
   - JKSwiftExtension (2.0.2)
   - KeychainAccess (4.2.2)
+  - LTMorphingLabel (0.9.3)
   - MarqueeLabel (4.0.5)
   - MJRefresh (3.7.5)
   - Moya (15.0.0):
@@ -56,12 +58,14 @@ PODS:
   - YYCache (1.0.4)
 
 DEPENDENCIES:
+  - BetterSegmentedControl
   - CryptoSwift (= 1.4.2)
   - ESTabBarController-swift (= 2.8.0)
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
   - JKSwiftExtension
   - KeychainAccess (= 4.2.2)
+  - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
   - Moya
   - NotificationBannerSwift (= 2.5.0)
@@ -86,12 +90,14 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - BetterSegmentedControl
     - CryptoSwift
     - ESTabBarController-swift
     - Haptica
     - IQKeyboardManagerSwift
     - JKSwiftExtension
     - KeychainAccess
+    - LTMorphingLabel
     - MarqueeLabel
     - MJRefresh
     - Moya
@@ -116,12 +122,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JKSwiftExtension: bf92c1dfd68c4d02313796f6ac857f8d62572e4a
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  LTMorphingLabel: f2b256e4fe665aac27f0d0e8ccdcd79590f0cd70
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -144,6 +152,6 @@ SPEC CHECKSUMS:
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 55b496c3cb739fe4befe7f240a6b784132b24e91
+PODFILE CHECKSUM: 166e06d8a43654f528f0ad8ae3510de8188c1316
 
 COCOAPODS: 1.11.2

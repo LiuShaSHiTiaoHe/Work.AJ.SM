@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        Defaults.username = "15295776453"
+//        Defaults.username = "15295776453"
         logger.info("\(FileManager.jk.DocumnetsDirectory())")
         initUI()
         initService()

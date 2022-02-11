@@ -32,6 +32,8 @@ target 'Work.AJ.SM' do
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
   pod 'SDCycleScrollView', '1.82'
+  pod 'BetterSegmentedControl'
+  pod 'LTMorphingLabel', '~> 0.9.3'
 
   pod 'SPPermissions/Camera'
   pod 'SPPermissions/PhotoLibrary'

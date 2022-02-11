@@ -35,6 +35,13 @@ let k11SysFont = UIFont.systemFont(ofSize: 11)
 let k12SysFont = UIFont.systemFont(ofSize: 12)
 let k13SysFont = UIFont.systemFont(ofSize: 13)
 let k14SysFont = UIFont.systemFont(ofSize: 14)
+let k15SysFont = UIFont.systemFont(ofSize: 15)
+let k16SysFont = UIFont.systemFont(ofSize: 16)
+let k17SysFont = UIFont.systemFont(ofSize: 17)
+let k18SysFont = UIFont.systemFont(ofSize: 18)
+let k19SysFont = UIFont.systemFont(ofSize: 19)
+let k20SysFont = UIFont.systemFont(ofSize: 20)
+let k34SysFont = UIFont.systemFont(ofSize: 34)
 
 let kNaviTitleFont      = k22Font
 let kHeaderTitleFont    = k20Font

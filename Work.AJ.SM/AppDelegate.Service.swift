@@ -28,6 +28,15 @@ extension AppDelegate {
     }
     
     func setupRootViewController() {
+        if GDataManager.shared.loginState() {
+            let mainTabBarVc = BaseTabBarViewController()
+            self.window?.rootViewController = mainTabBarVc
+        }else{
+            self.window?.rootViewController = LoginViewController()
+        }
+    }
+    
+    func resetRootViewController() {
         let mainTabBarVc = BaseTabBarViewController()
         self.window?.rootViewController = mainTabBarVc
     }
@@ -48,6 +57,7 @@ extension AppDelegate {
         SVProgressHUD.setDefaultAnimationType(.native)
         
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
 
     

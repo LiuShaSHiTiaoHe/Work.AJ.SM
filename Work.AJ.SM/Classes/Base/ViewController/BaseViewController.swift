@@ -27,7 +27,7 @@ class BaseViewController: UIViewController {
         self.navigationController?.hidesBottomBarWhenPushed = true
 //        self.navigationController?.isNavigationBarHidden = true
         initUI()
-        addlayer()
+//        addlayer()
     }
     
     deinit {

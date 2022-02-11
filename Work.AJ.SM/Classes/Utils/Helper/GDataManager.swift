@@ -24,6 +24,13 @@ final class GDataManager {
         }
         return dic
     }
+    
+    func loginState() -> Bool {
+        if let _ = Defaults.username {
+            return true
+        }
+        return false
+    }
 }
 
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // keyWindow
 let KeyWindow : UIWindow                        = UIApplication.shared.keyWindow!
@@ -13,6 +14,8 @@ let KeyWindow : UIWindow                        = UIApplication.shared.keyWindow
 let kScreenWidth                                = UIScreen.main.bounds.size.width
 /// 屏幕的高
 let kScreenHeight                               = UIScreen.main.bounds.size.height
+
+let kScale = UIScreen.main.scale
 
 let kIs_iphone                                  = (UIDevice().userInterfaceIdiom == .phone)
 let kIs_iPhoneX                                 = (kScreenWidth >= 375.0 && kScreenHeight >= 812.0 && kIs_iphone)

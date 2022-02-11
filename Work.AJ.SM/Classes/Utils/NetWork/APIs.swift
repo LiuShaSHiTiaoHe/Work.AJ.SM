@@ -9,6 +9,11 @@ import Foundation
 final class APIs {
     
     static let baseUrl = host + servicePath
+    //MARK: 用户鉴权
+    static let login = "appcity/login.do"
+    static let regist = "appcity/register.do"
+    static let editPassword = "appcity/editPassword.do"
+    static let msgCode = "appcity/getMessageCode.do"
     //MARK: 房屋
     static let userUnit = "appcity/getMyUnit.do"
     static let allCity = "appcity/getCity.do"
