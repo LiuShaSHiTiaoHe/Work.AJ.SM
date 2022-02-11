@@ -14,6 +14,12 @@ class PasswordInputView: UIView {
             tipLabel.text = errorMsg
         }
     }
+    
+    var inputString: String? {
+        get {
+            return textInput.text
+        }
+    }
     private let titleLabel: UILabel = {
         let label = UILabel.init()
         label.font = k16SysFont

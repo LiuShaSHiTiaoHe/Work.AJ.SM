@@ -8,6 +8,7 @@
 import UIKit
 import BetterSegmentedControl
 import JKSwiftExtension
+import SVProgressHUD
 
 protocol LoginViewDelegate: NSObjectProtocol {
     func login(mobile: String, password: String)
@@ -314,12 +315,43 @@ class LoginView: UIView {
     func comfirmButtonAction() {
         switch viewType {
         case .login:
+            
             if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
                 
             }else{
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
             }
         case .register:
+            if !registerCheckButton.isSelected {
+                SVProgressHUD.showInfo(withStatus: "服务以及隐私协议")
+                return
+            }
+            var registerMobile = ""
+            var registerCode = ""
+            var registerPassword = ""
+            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
+                registerMobile = mobile
+            }else{
+                loginMobileInputView.errorMsg = "请填写正确的手机号码"
+                return
+            }
+            
+            if let code = registerCodeInputView.inputString {
+                registerCode = code
+            }else{
+                registerCodeInputView.errorMsg = "请输入验证码"
+                return
+            }
+            
+            if let password = registerPasswordInputView.inputString, password.count > 6, password.count < 12 {
+                registerPassword = password
+            }else{
+                registerPasswordInputView.errorMsg = "请设置正确格式的密码"
+                return
+            }
+            if !registerCode.isEmpty && !registerCode.isEmpty && !registerPassword.isEmpty {
+                delegate?.register(mobile: registerMobile, code: registerCode, password: registerPassword)
+            }
             
         }
     }

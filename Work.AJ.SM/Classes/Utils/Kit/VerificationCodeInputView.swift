@@ -9,8 +9,17 @@ import UIKit
 
 class VerificationCodeInputView: UIView {
 
-    var errorMsg: String?
-
+    var errorMsg: String? {
+        didSet {
+            tipLabel.text = errorMsg
+        }
+    }
+    
+    var inputString: String? {
+        get {
+            return textInput.text
+        }
+    }
     private let titleLabel: UILabel = {
         let label = UILabel.init()
         label.font = k16SysFont
