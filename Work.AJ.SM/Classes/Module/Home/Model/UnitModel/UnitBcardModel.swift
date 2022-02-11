@@ -6,39 +6,43 @@
 //
 
 import UIKit
+import RealmSwift
 
-class UnitBcardModel: Mappable {
+class UnitBcardModel: Object, Mappable {
     
-    var sex: String?
-    var activation: String?
-    var credate: Int?
-    var idcard: String?
-    var unitid: Int?
-    var cellid: Int?
-    var jjmoblie: String?
-    var gzdw: String?
-    var cardtype: String?
-    var enddate: Int?
-    var picurl: String?
-    var ownerid: Int?
-    var xzdz: String?
-    var mobile: String?
-    var cardno: String?
-    var communityid: Int?
-    var username: String?
-    var sqr: String?
-    var hjdz: String?
-    var userid: Int?
-    var type: String?
-    var unitno: String?
-    var gj : String?
-    var mz: String?
-    var idname: String?
-    var blockid: Int?
-    var birthdate: String?
-    
-    required init?(map: ObjectMapper.Map) {}
-    
+    @Persisted var sex: String?
+    @Persisted var activation: String?
+    @Persisted var credate: Int?
+    @Persisted var idcard: String?
+    @Persisted var unitid: Int?
+    @Persisted var cellid: Int?
+    @Persisted var jjmoblie: String?
+    @Persisted var gzdw: String?
+    @Persisted var cardtype: String?
+    @Persisted var enddate: Int?
+    @Persisted var picurl: String?
+    @Persisted var ownerid: Int?
+    @Persisted var xzdz: String?
+    @Persisted var mobile: String?
+    @Persisted var cardno: String?
+    @Persisted var communityid: Int?
+    @Persisted var username: String?
+    @Persisted var sqr: String?
+    @Persisted var hjdz: String?
+    @Persisted var userid: Int?
+    @Persisted var type: String?
+    @Persisted var unitno: String?
+    @Persisted var gj : String?
+    @Persisted var mz: String?
+    @Persisted var idname: String?
+    @Persisted var blockid: Int?
+    @Persisted var birthdate: String?
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(originProperty: "bcards") var assignee: LinkingObjects<UnitModel>
+    required convenience init?(map: ObjectMapper.Map) {
+      self.init()
+    }
+
     // Mappable
     func mapping(map: ObjectMapper.Map) {
         sex <- map["SEX"]

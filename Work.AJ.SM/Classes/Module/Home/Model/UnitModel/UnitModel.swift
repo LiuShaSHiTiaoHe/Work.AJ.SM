@@ -7,8 +7,10 @@
 
 import Foundation
 import ObjectMapper
+import ObjectMapper_Realm
+import RealmSwift
 
-class UnitModel: NSObject, Mappable  {
+class UnitModel: Object, Mappable  {
     
     //MYSET1    人脸识别
     //MYSET2    户户通
@@ -26,68 +28,80 @@ class UnitModel: NSObject, Mappable  {
     //1:标识为n方对讲房间 非1:非n方对讲房间
     //模块化设置 MOUDLE1-MOUDLE10
     
-    var moudle1: String?
-    var moudle2: String?
-    var moudle3: String?
-    var moudle4: String?
-    var moudle5: String?
-    var moudle6: String?
-    var moudle7: String?
-    var moudle8: String?
-    var moudle9: String?
-    var moudle10: String?
-    var moudle11: String?
-    var moudle12: String?
-    var moudle13: String?
-    var moudle14: String?
-    var moudle15: String?
+    @Persisted var moudle1: String?
+    @Persisted var moudle2: String?
+    @Persisted var moudle3: String?
+    @Persisted var moudle4: String?
+    @Persisted var moudle5: String?
+    @Persisted var moudle6: String?
+    @Persisted var moudle7: String?
+    @Persisted var moudle8: String?
+    @Persisted var moudle9: String?
+    @Persisted var moudle10: String?
+    @Persisted var moudle11: String?
+    @Persisted var moudle12: String?
+    @Persisted var moudle13: String?
+    @Persisted var moudle14: String?
+    @Persisted var moudle15: String?
 
-    var myset1: String?
-    var myset2: String?
-    var myset3: String?
-    var myset4: String?
-    var myset5: String?
-    var myset6: String?
-    var myset7: String?
-    var myset8: String?
-    var myset9: String?
-    var myset10: String?
-    var myset11: String?
-    var myset12: String?
+    @Persisted var myset1: String?
+    @Persisted var myset2: String?
+    @Persisted var myset3: String?
+    @Persisted var myset4: String?
+    @Persisted var myset5: String?
+    @Persisted var myset6: String?
+    @Persisted var myset7: String?
+    @Persisted var myset8: String?
+    @Persisted var myset9: String?
+    @Persisted var myset10: String?
+    @Persisted var myset11: String?
+    @Persisted var myset12: String?
     
-    var state: String?
-    var enddate: String?
-    var communityname: String?
-    var auditdate: Int?
-    var codes: [UnitCodesModel]?
-    var unitid: Int?
-    var defaultflag: String?
-    var cellno: String?
-    var bcards: [UnitBcardModel]?
-    var operid: Int?
-    var mobile: String?
-    var rid, blockid: Int?
-    var mac: String?
-    var unitno: String?
-    var buttons: [UnitButtonsModel]?
-    var mgruserid: Int?
-    var credate, unitarea: Int?
-    var startdate: String?
-    var blockname, sortbar, callorderstr: String?
-    var otherused: Int?
-    var cellmm, usertype, logintoken, blockno: String?
-    var ismgr: Bool?
-    var rentername, renterid: String?
-    var doorside: String?
-    var communityid: Int?
-    var locks: [UnitLockModel]?
-    var userid: Int?
-    var cellname: String?
-    var cellid: Int?
-    var physicalfloor: String?
+    @Persisted var state: String?
+    @Persisted var enddate: String?
+    @Persisted var communityname: String?
+    @Persisted var auditdate: Int?
+    @Persisted var codes: List<UnitCodesModel>
+    @Persisted var unitid: Int?
+    @Persisted var defaultflag: String?
+    @Persisted var cellno: String?
+    @Persisted var bcards: List<UnitBcardModel>
+    @Persisted var operid: Int?
+    @Persisted var mobile: String?
+    @Persisted var rid: Int?
+    @Persisted var blockid: Int?
+    @Persisted var mac: String?
+    @Persisted var unitno: String?
+    @Persisted var buttons: List<UnitButtonsModel>
+    @Persisted var mgruserid: Int?
+    @Persisted var credate: Int?
+    @Persisted var unitarea: Int?
+    @Persisted var startdate: String?
+    @Persisted var blockname: String?
+    @Persisted var sortbar: String?
+    @Persisted var callorderstr: String?
+    @Persisted var otherused: Int?
+    @Persisted var cellmm: String?
+    @Persisted var usertype: String?
+    @Persisted var logintoken: String?
+    @Persisted var blockno: String?
+    @Persisted var ismgr: Bool?
+    @Persisted var rentername: String?
+    @Persisted var renterid: String?
+    @Persisted var doorside: String?
+    @Persisted var communityid: Int?
+    @Persisted var locks: List<UnitLockModel>
+    @Persisted var userid: Int?
+    @Persisted var cellname: String?
+    @Persisted var cellid: Int?
+    @Persisted var physicalfloor: String?
     
-    required init?(map: ObjectMapper.Map) {
-        
+    required convenience init?(map: ObjectMapper.Map) {
+      self.init()
+    }
+    
+    override class func primaryKey() -> String? {
+      return "unitid"
     }
     
     // Mappable
@@ -108,14 +122,14 @@ class UnitModel: NSObject, Mappable  {
         enddate <- map["ENDDATE"]
         communityname <- map["COMMUNITYNAME"]
         auditdate <- map["AUDITDATE"]
-        codes <- map["CODES"]
+        codes <- (map["CODES"], ListTransform<UnitCodesModel>())
         unitid <- map["UNITID"]
         defaultflag <- map["DEFAULTFLAG"]
         myset10 <- map["MYSET10"]
         myset11 <- map["MYSET11"]
         myset12 <- map["MYSET12"]
         cellno <- map["CELLNO"]
-        bcards <- map["BCARDS"]
+        bcards <- (map["BCARDS"], ListTransform<UnitBcardModel>())
         operid <- map["OPERID"]
         mobile <- map["MOBILE"]
         rid <- map["RID"]
@@ -124,7 +138,7 @@ class UnitModel: NSObject, Mappable  {
         unitno <- map["UNITNO"]
         myset1 <- map["MYSET1"]
         myset3 <- map["MYSET3"]
-        buttons <- map["BUTTONS"]
+        buttons <- (map["BUTTONS"], ListTransform<UnitButtonsModel>())
         myset5 <- map["MYSET5"]
         myset7 <- map["MYSET7"]
         myset9 <- map["MYSET9"]
@@ -145,7 +159,7 @@ class UnitModel: NSObject, Mappable  {
         renterid <- map["RENTERID"]
         doorside <- map["DOORSIDE"]
         communityid <- map["COMMUNITYID"]
-        locks <- map["LOCKS"]
+        locks <- (map["LOCKS"], ListTransform<UnitLockModel>())
         moudle1 <- map["MOUDLE1"]
         moudle2 <- map["MOUDLE2"]
         userid <- map["USERID"]

@@ -6,18 +6,22 @@
 //
 
 import Foundation
+import RealmSwift
 
-class UnitButtonsModel: Mappable {
-    var ifon: String?
-    var type: String?
-    var desc: String?
-    var title: String?
-    var realfloor: String?
-    var physicalfloor: String?
-    var provider: String?
-    
-    
-    required init?(map: ObjectMapper.Map) {}
+class UnitButtonsModel: Object,  Mappable {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var ifon: String?
+    @Persisted var type: String?
+    @Persisted var desc: String?
+    @Persisted var title: String?
+    @Persisted var realfloor: String?
+    @Persisted var physicalfloor: String?
+    @Persisted var provider: String?
+    @Persisted(originProperty: "buttons") var assignee: LinkingObjects<UnitModel>
+
+    required convenience init?(map: ObjectMapper.Map) {
+      self.init()
+    }
     
     // Mappable
     func mapping(map: ObjectMapper.Map) {

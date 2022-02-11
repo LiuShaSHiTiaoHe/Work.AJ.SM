@@ -6,15 +6,19 @@
 //
 
 import UIKit
+import RealmSwift
 
-class UnitCodesModel: Mappable {
-    
-    var communityid: Int?
-    var showfloor: String?
-    var increaseid: Int?
-    
-    required init?(map: ObjectMapper.Map) {}
-    
+class UnitCodesModel: Object, Mappable {
+    @Persisted var communityid: Int?
+    @Persisted var showfloor: String?
+    @Persisted var increaseid: Int?
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(originProperty: "codes") var assignee: LinkingObjects<UnitModel>
+
+    required convenience init?(map: ObjectMapper.Map) {
+      self.init()
+    }
+
     // Mappable
     func mapping(map: ObjectMapper.Map) {
         communityid <- map["COMMUNITYID"]

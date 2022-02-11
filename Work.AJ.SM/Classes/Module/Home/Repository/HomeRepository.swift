@@ -18,6 +18,7 @@ class HomeRepository {
             guard models.count > 0 else {
                 return
             }
+
             if let currentUnitID = Defaults.currentUnitID {
                 if let unit = models.first(where: { model in
                     model.unitid == currentUnitID
@@ -29,6 +30,9 @@ class HomeRepository {
                     Defaults.currentUnitID = unitID
                     completion(self.filterHomePageModules(firstUnit))
                 }
+            }
+            RealmTools.addList(models, update: .modified) {
+                logger.info("update done")
             }
         } failureCallback: { response in
             logger.info("\(response.message)")

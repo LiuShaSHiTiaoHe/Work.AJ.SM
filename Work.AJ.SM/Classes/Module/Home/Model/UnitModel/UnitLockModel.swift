@@ -6,35 +6,41 @@
 //
 
 import Foundation
+import RealmSwift
 
-class UnitLockModel: Mappable {
+class UnitLockModel: Object, Mappable {
     
-    var lockcom: String?
-    var credate: Int?
-    var locktype: String?
-    var lockmac: String?
-    var resetflag: String?
-    var cellid: Int?
-    var function: String?
-    var iscall: Int?
-    var realfloor: String?
-    var lockkey: String?
-    var physicalfloor: String?
-    var functionname: String?
-    var provider: String?
-    var districtid: String?
-    var lockname: String?
-    var lastconnecttime: Int?
-    var communityid: Int?
-    var size: String?
-    var locksn: String?
-    var lockposition: String?
-    var blockid: Int?
-    var ifon: String?
+    @Persisted var lockcom: String?
+    @Persisted var credate: Int?
+    @Persisted var locktype: String?
+    @Persisted var lockmac: String?
+    @Persisted var resetflag: String?
+    @Persisted var cellid: Int?
+    @Persisted var function: String?
+    @Persisted var iscall: Int?
+    @Persisted var realfloor: String?
+    @Persisted var lockkey: String?
+    @Persisted var physicalfloor: String?
+    @Persisted var functionname: String?
+    @Persisted var provider: String?
+    @Persisted var districtid: String?
+    @Persisted var lockname: String?
+    @Persisted var lastconnecttime: Int?
+    @Persisted var communityid: Int?
+    @Persisted var size: String?
+    @Persisted var locksn: String?
+    @Persisted var lockposition: String?
+    @Persisted var blockid: Int?
+    @Persisted var ifon: String?
     
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(originProperty: "locks") var assignee: LinkingObjects<UnitModel>
+
     
-    required init?(map: ObjectMapper.Map) {}
-    
+    required convenience init?(map: ObjectMapper.Map) {
+      self.init()
+    }
+
     // Mappable
     func mapping(map: ObjectMapper.Map) {
         lockcom <- map["LOCKCOM"]
