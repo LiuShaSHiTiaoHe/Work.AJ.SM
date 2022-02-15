@@ -105,6 +105,7 @@ class HouseCell: UITableViewCell {
         button.backgroundColor = R.color.blueColor()
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = k12Font
+        button.addTarget(self, action: #selector(chooseUnit), for: .touchUpInside)
         return button
     }()
     
@@ -164,6 +165,13 @@ class HouseCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.height.equalTo(30)
             make.width.equalTo(80)
+        }
+    }
+    
+    @objc
+    func chooseUnit() {
+        if let unitID = unit?.unitid {
+            delegate?.chooseCurrentUnit(unitID: unitID)
         }
     }
     

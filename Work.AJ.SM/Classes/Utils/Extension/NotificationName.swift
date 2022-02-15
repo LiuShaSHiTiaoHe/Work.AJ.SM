@@ -8,5 +8,7 @@
 import Foundation
 extension Notification.Name {
     static let kUserBioMetricesStateChanged = Notification.Name("userBioMetricesStateChanged")
+    
+    static let kCurrentUnitChanged = Notification.Name("kCurrentUnitChanged")
 
 }

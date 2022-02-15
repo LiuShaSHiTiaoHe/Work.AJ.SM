@@ -10,6 +10,7 @@ import UIKit
 class HouseViewController: BaseViewController {
 
     var units: [UnitModel] = []
+    private var initialUnitID: Int = 0
     
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView.init()
@@ -28,6 +29,16 @@ class HouseViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         initData()
+        if let unitID = Defaults.currentUnitID {
+            initialUnitID = unitID
+        }
+    }
+        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let unitID = Defaults.currentUnitID, initialUnitID != unitID {
+            NotificationCenter.default.post(name: .kCurrentUnitChanged, object: nil)
+        }
     }
     
     override func initUI() {

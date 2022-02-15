@@ -61,7 +61,12 @@ class HomeViewController: BaseViewController {
     }
     
     private func initData() {
+        NotificationCenter.default.addObserver(self, selector: #selector(currentUnitChanged), name: .kCurrentUnitChanged, object: nil)
         headerView.delegate = self
+        getData()
+    }
+    
+    func getData() {
         HomeRepository.shared.allUnits { [weak self] modules in
             guard let `self` = self else { return }
             self.functionModules.removeAll()
@@ -75,7 +80,12 @@ class HomeViewController: BaseViewController {
     }
     
     override func headerRefresh() {
-        initData()
+        getData()
+    }
+    
+    @objc
+    func currentUnitChanged() {
+        getData()
     }
     
     func getAdsAndNotices() {

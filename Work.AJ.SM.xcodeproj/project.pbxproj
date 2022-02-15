@@ -831,6 +831,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2EC027BA5436004E5AD9 /* HomeNaviHeaderView.swift in Sources */,
 				416F2E5727B0B691004E5AD9 /* BaseWebViewController.swift in Sources */,
 				416F2E3927B0B427004E5AD9 /* ImportFile.swift in Sources */,
@@ -873,7 +874,6 @@
 				416F2EA327B5FE25004E5AD9 /* LoginViewController.swift in Sources */,
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,
-				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
 				416F2EAC27B60BA4004E5AD9 /* MobileInputView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
