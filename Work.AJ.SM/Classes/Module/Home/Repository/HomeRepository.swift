@@ -6,14 +6,18 @@
 //
 
 import Foundation
+import SVProgressHUD
 
 typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
+typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
     
     func allUnits(completion: @escaping HomeModulesCompletion) {
+        SVProgressHUD.show()
         HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheElseNetwork, showError: true) { [weak self] models, response in
+            SVProgressHUD.dismiss()
             guard let `self` = self else { return }
             guard models.count > 0 else {
                 return
@@ -39,11 +43,47 @@ class HomeRepository {
         }
     }
     
+    func adsAndNotice(completion: @escaping HomeAdsAndNoticeCompletion) {
+        var adsData: [AdsModel] = []
+        var noticeData: [NoticeModel] = []
+        if let unit = getCurrentUnit(), let operID = unit.operid?.jk.intToString, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
+            SVProgressHUD.show()
+            let group = DispatchGroup()
+            group.enter()
+            HomeAPI.getAdvertisement(operID: operID, communitID: communityID).request(modelType: [AdsModel].self) { models, response in
+                adsData.append(contentsOf: models)
+                group.leave()
+            } failureCallback: { response in
+                group.leave()
+            }
+            group.enter()
+            HomeAPI.getNotice(communitID: communityID, blockID: blockID, cellID: cellID).request(modelType: [NoticeModel].self) { models, response in
+                noticeData.append(contentsOf: models)
+                group.leave()
+            } failureCallback: { response in
+                group.leave()
+            }
+            group.notify(queue: DispatchQueue.main) {
+                SVProgressHUD.dismiss()
+                completion(adsData, noticeData)
+            }
+        }
+    }
+    
     func getUnitName(unitID: Int) -> String {
         if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname {
             return communityname + cellname
         }
         return ""
+    }
+    
+    func getCurrentUnit() -> UnitModel? {
+        if let unitID = Defaults.currentUnitID {
+            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first{
+                return unit
+            }
+        }
+        return nil
     }
     
     

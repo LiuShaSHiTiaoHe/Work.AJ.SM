@@ -12,6 +12,8 @@ class HomeViewController: BaseViewController {
     private let cellIdentifier = "HomeModuleCell"
     private let sectionHeaderIdentifier = "HomeHeaderView"
     private var functionModules: [HomePageFunctionModule] = []
+    private var advertisements: [AdsModel] = []
+    private var notices: [NoticeModel] = []
     
     lazy var headerView: HomeNaviHeaderView = {
         let view = HomeNaviHeaderView.init()
@@ -64,16 +66,32 @@ class HomeViewController: BaseViewController {
             guard let `self` = self else { return }
             self.functionModules.removeAll()
             self.functionModules.append(contentsOf: modules)
-            self.collectionView.reloadData()
-            self.collectionView.mj_header?.endRefreshing()
+            self.getAdsAndNotices()
         }
         if let unitID = Defaults.currentUnitID {
             headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
+   
         }
     }
     
     override func headerRefresh() {
         initData()
+    }
+    
+    func getAdsAndNotices() {
+        HomeRepository.shared.adsAndNotice { [weak self] ads, notice in
+            guard let `self` = self else { return }
+            self.advertisements.removeAll()
+            self.notices.removeAll()
+            self.advertisements.append(contentsOf: ads)
+            self.notices.append(contentsOf: notice)
+            self.reloadView()
+        }
+    }
+    
+    func reloadView() {
+        collectionView.reloadData()
+        collectionView.mj_header?.endRefreshing()
     }
 
 }

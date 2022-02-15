@@ -55,7 +55,9 @@ extension AppDelegate {
         SVProgressHUD.appearance().imageViewSize = CGSize(width: 60, height: 60)
         SVProgressHUD.setRingRadius(30)
         SVProgressHUD.setDefaultAnimationType(.native)
-        
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = 0
+        }
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }

@@ -17,7 +17,8 @@ enum HomePageModule: String {
     case scanElevatorQRCode = "扫码乘梯"
     case inviteVisitors = "访客邀请"
     case deviceConfiguration = "设备配置"
-
+    case addFamilyMember = "添加成员"
+    
     case ncall = "N方对讲"
     case bleOpenDoor = "蓝牙开门"
     case propertyBill = "物业账单"
@@ -48,9 +49,13 @@ enum HomePageModule: String {
             return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7, showinpage: .home)
         case .inviteVisitors:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8, showinpage: .home)
+        //MARK: FIXME 暂时显示两个模块，tag写死为2
+        case .addFamilyMember:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "addFamilyMember", tag: "MOUDLE2", index: 9, showinpage: .home)
         case .deviceConfiguration:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleSetting", tag: "MOUDLE10", index: 9, showinpage: .home)
-            
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleSetting", tag: "MOUDLE2", index: 10, showinpage: .home)
+        
+
             
         case .bleOpenDoor:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "bleOpenDoor", tag: "MOUDLE3", index: 4 )
