@@ -20,6 +20,12 @@ class MobileInputView: UIView {
             return textInput.text
         }
     }
+    
+    var placeHolders: String = "" {
+        didSet {
+            textInput.placeholder = placeHolders
+        }
+    }
 
     private let titleLabel: UILabel = {
         let label = UILabel.init()
@@ -49,7 +55,7 @@ class MobileInputView: UIView {
     /// 展示一些错误的原因
     private lazy var tipLabel: UILabel = {
         let label = UILabel()
-        label.font = k12Font
+        label.font = k10Font
         label.textColor = R.color.errorRedColor()
         return label
     }()

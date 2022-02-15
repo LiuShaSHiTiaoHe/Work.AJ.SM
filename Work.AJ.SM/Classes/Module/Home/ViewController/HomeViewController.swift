@@ -13,6 +13,11 @@ class HomeViewController: BaseViewController {
     private let sectionHeaderIdentifier = "HomeHeaderView"
     private var functionModules: [HomePageFunctionModule] = []
     
+    lazy var headerView: HomeNaviHeaderView = {
+        let view = HomeNaviHeaderView.init()
+        return view
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout.init()
         flowLayout.sectionInset = UIEdgeInsets.init(top: kMargin/2, left: kMargin/2, bottom: kMargin/2, right: kMargin/2)
@@ -33,14 +38,23 @@ class HomeViewController: BaseViewController {
     
     override func initUI() {
         addlayer()
+        view.addSubview(headerView)
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.mj_header = refreshHeader
+        
+        
+        headerView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.height.equalTo(kOriginTitleAndStateHeight)
+        }
+        
         collectionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(1)
-            make.top.equalToSuperview()
+            make.top.equalTo(headerView.snp.bottom)
         }
     }
     
@@ -51,6 +65,9 @@ class HomeViewController: BaseViewController {
             self.functionModules.append(contentsOf: modules)
             self.collectionView.reloadData()
             self.collectionView.mj_header?.endRefreshing()
+        }
+        if let unitID = Defaults.currentUnitID {
+            headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
         }
     }
     

@@ -20,6 +20,12 @@ class PasswordInputView: UIView {
             return textInput.text
         }
     }
+    
+    var placeHolders: String = "" {
+        didSet {
+            textInput.placeholder = placeHolders
+        }
+    }
     private let titleLabel: UILabel = {
         let label = UILabel.init()
         label.font = k16SysFont
@@ -41,7 +47,8 @@ class PasswordInputView: UIView {
     
     private let eyeButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(R.image.login_secure(), for: .normal)
+        button.setImage(R.image.password_eye_close(), for: .normal)
+        button.setImage(R.image.password_eye_open(), for: .selected)
         button.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
         return button
     }()
@@ -55,7 +62,7 @@ class PasswordInputView: UIView {
     /// 展示一些错误的原因
     private lazy var tipLabel: UILabel = {
         let label = UILabel()
-        label.font = k12Font
+        label.font = k10Font
         label.textColor = R.color.errorRedColor()
         return label
     }()
@@ -140,7 +147,8 @@ class PasswordInputView: UIView {
     
     @objc
     func showPassword() {
-        
+        eyeButton.isSelected = !eyeButton.isSelected
+        textInput.isSecureTextEntry = !eyeButton.isSelected
     }
 
 }

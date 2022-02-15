@@ -20,6 +20,13 @@ class VerificationCodeInputView: UIView {
             return textInput.text
         }
     }
+    
+    var placeHolders: String = "" {
+        didSet {
+            textInput.placeholder = placeHolders
+        }
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel.init()
         label.font = k16SysFont
@@ -45,6 +52,7 @@ class VerificationCodeInputView: UIView {
         button.setTitleColor(R.color.themeColor(), for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.textAlignment = .right
+        button.addTarget(self, action: #selector(sendCodeButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -68,7 +76,7 @@ class VerificationCodeInputView: UIView {
     /// 展示一些错误的原因
     private lazy var tipLabel: UILabel = {
         let label = UILabel()
-        label.font = k12Font
+        label.font = k10Font
         label.textColor = R.color.errorRedColor()
         return label
     }()
@@ -157,8 +165,25 @@ class VerificationCodeInputView: UIView {
         textInput.text = ""
     }
 
+    ///发送验证码
+    @objc
+    func sendCodeButtonAction() {
+        self.setupCountDownTime(59)
+    }
+    
+    func setupCountDownTime(_ minutes: TimeInterval) {
+        sendCodeButton.isHidden = true
+        countDownLabel.isHidden = false
+        countDownLabel.dispose()
+        countDownLabel.setCountDownTime(minutes: minutes)
+        countDownLabel.start {}
+    }
 }
 
 extension VerificationCodeInputView: CountdownLabelDelegate {
-    
+    func countdownFinished() {
+        sendCodeButton.setTitle("重新发送", for: .normal)
+        sendCodeButton.isHidden = false
+        countDownLabel.isHidden = true
+    }
 }

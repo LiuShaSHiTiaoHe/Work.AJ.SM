@@ -18,7 +18,6 @@ class HomeRepository {
             guard models.count > 0 else {
                 return
             }
-
             if let currentUnitID = Defaults.currentUnitID {
                 if let unit = models.first(where: { model in
                     model.unitid == currentUnitID
@@ -38,6 +37,13 @@ class HomeRepository {
             logger.info("\(response.message)")
             completion([])
         }
+    }
+    
+    func getUnitName(unitID: Int) -> String {
+        if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname {
+            return communityname + cellname
+        }
+        return ""
     }
     
     

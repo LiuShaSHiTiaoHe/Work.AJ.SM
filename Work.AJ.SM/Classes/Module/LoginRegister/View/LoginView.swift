@@ -31,6 +31,7 @@ class LoginView: UIView {
     
     lazy var backgroundImage: UIImageView = {
         let view = UIImageView()
+        view.image = R.image.login_content_image()
         return view
     }()
     
@@ -46,7 +47,7 @@ class LoginView: UIView {
     lazy var appNameLabel: UILabel = {
         let label = UILabel.init()
         label.text = "安杰智慧社区"
-        label.textColor = R.color.secondtextColor()
+        label.textColor = R.color.whiteColor()
         label.textAlignment = .left
         label.font = k20SysFont
         return label
@@ -54,6 +55,7 @@ class LoginView: UIView {
     
     lazy var iconImageView: UIImageView = {
         let view = UIImageView()
+        view.image = R.image.login_tips_icon()
         return view
     }()
     
@@ -90,6 +92,7 @@ class LoginView: UIView {
     
     lazy var loginPasswordInputView: PasswordInputView = {
         let view = PasswordInputView.init()
+        view.placeHolders = "请输入密码"
         return view
     }()
     
@@ -98,6 +101,7 @@ class LoginView: UIView {
         button.setTitle("忘记密码?", for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.addTarget(self, action: #selector(forgetPassword), for: .touchUpInside)
         return button
     }()
     
@@ -124,7 +128,9 @@ class LoginView: UIView {
     
     lazy var registerCheckButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(R.image.mine_checkMark(), for: .normal)
+        button.setImage(R.image.mine_address_btn_nor(), for: .normal)
+        button.setImage(R.image.mine_address_btn_sel(), for: .selected)
+        button.addTarget(self, action: #selector(policyCheckBox), for: .touchUpInside)
         return button
     }()
     
@@ -140,7 +146,7 @@ class LoginView: UIView {
         let button = UIButton.init(type: .custom)
         button.setTitle("登录", for: .normal)
         button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.titleLabel?.font = k16Font
+        button.titleLabel?.font = k18Font
         button.backgroundColor = R.color.themeColor()
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(comfirmButtonAction), for: .touchUpInside)
@@ -148,32 +154,31 @@ class LoginView: UIView {
     }()
     
     func initializeView() {
+        self.backgroundColor = R.color.whiteColor()
         addSubview(backgroundImage)
         addSubview(tipsLabel)
         addSubview(appNameLabel)
         addSubview(iconImageView)
-        
         addSubview(inputContentView)
         inputContentView.addSubview(segment)
-        
         inputContentView.addSubview(loginInputContentView)
         loginInputContentView.addSubview(loginMobileInputView)
         loginInputContentView.addSubview(loginPasswordInputView)
         loginInputContentView.addSubview(forgetPasswordButton)
-        
         inputContentView.addSubview(registerInputContentView)
         registerInputContentView.addSubview(registerMobileInputView)
         registerInputContentView.addSubview(registerCodeInputView)
         registerInputContentView.addSubview(registerPasswordInputView)
         registerInputContentView.addSubview(registerCheckButton)
         registerInputContentView.addSubview(policyLabel)
-        
         inputContentView.addSubview(comfirmButton)
-        
         registerInputContentView.isHidden = true
+        self.bringSubviewToFront(iconImageView)
         
         backgroundImage.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.height.equalTo(kScreenWidth*278/375)
         }
         
         tipsLabel.snp.makeConstraints { make in
@@ -191,10 +196,10 @@ class LoginView: UIView {
         }
         
         iconImageView.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(kMargin*1.5)
+            make.right.equalToSuperview().offset(-kMargin*1.5)
             make.width.equalTo(150)
-            make.height.equalTo(175)
-            make.top.equalTo(55 - kTitleAndStateHeight)
+            make.height.equalTo(160)
+            make.top.equalTo(50)
         }
         
         inputContentView.snp.makeConstraints { make in
@@ -289,6 +294,10 @@ class LoginView: UIView {
             make.bottom.equalToSuperview().offset(-kMargin)
         }
     }
+    
+    func initData() {
+        
+    }
 
     @objc func navigationSegmentedControlValueChanged(_ sender: BetterSegmentedControl) {
         if sender.index == 0 {
@@ -299,7 +308,6 @@ class LoginView: UIView {
             inputContentView.snp.updateConstraints { make in
                 make.height.equalTo(325)
             }
-
         } else {
             viewType = .register
             loginInputContentView.isHidden = true
@@ -312,15 +320,34 @@ class LoginView: UIView {
     }
     
     @objc
+    func forgetPassword() {
+        delegate?.forgetPassword(mobile: "")
+    }
+    
+    @objc
+    func policyCheckBox() {
+        registerCheckButton.isSelected = !registerCheckButton.isSelected
+    }
+    
+    @objc
     func comfirmButtonAction() {
         switch viewType {
         case .login:
-            
+            var loginMobile = ""
+            var loginPassword = ""
             if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
-                
+                loginMobile = mobile
             }else{
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
+                return
             }
+            if let password = loginPasswordInputView.inputString {
+                loginPassword = password
+            }else{
+                loginPasswordInputView.errorMsg = "密码格式错误"
+                return
+            }
+            delegate?.login(mobile: loginMobile, password: loginPassword)
         case .register:
             if !registerCheckButton.isSelected {
                 SVProgressHUD.showInfo(withStatus: "服务以及隐私协议")
@@ -335,14 +362,12 @@ class LoginView: UIView {
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
                 return
             }
-            
             if let code = registerCodeInputView.inputString {
                 registerCode = code
             }else{
                 registerCodeInputView.errorMsg = "请输入验证码"
                 return
             }
-            
             if let password = registerPasswordInputView.inputString, password.count > 6, password.count < 12 {
                 registerPassword = password
             }else{
@@ -352,13 +377,13 @@ class LoginView: UIView {
             if !registerCode.isEmpty && !registerCode.isEmpty && !registerPassword.isEmpty {
                 delegate?.register(mobile: registerMobile, code: registerCode, password: registerPassword)
             }
-            
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeView()
+        initData()
     }
     
     required init?(coder aDecoder: NSCoder) {

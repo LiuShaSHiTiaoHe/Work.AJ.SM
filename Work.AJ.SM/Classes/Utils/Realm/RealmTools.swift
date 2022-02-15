@@ -6,6 +6,7 @@
 //
 import UIKit
 import RealmSwift
+import SwiftyUserDefaults
 
 /**
  Realm 致力于平衡数据库读取的灵活性和性能。为了实现这个目标，在 Realm 中所存储的信息的各个方面都有基本的限制。例如：
@@ -191,8 +192,7 @@ extension RealmTools {
         guard let results: Array<Object> = objectsWithPredicate(object: object, predicate: predicate) else {
             return
         }
-        deleteList(results) {
-        }
+        deleteList(results) {}
     }
 }
 
@@ -265,11 +265,15 @@ extension RealmTools {
     /// 查询某个对象数据
     /// - Parameter type: 对象类型
     /// - Returns: 返回查询的结果
-    static func objects(_ object: Object.Type) -> Array<Object>? {
-        guard let results = queryWithType(object: object) else {
-            return nil
-        }
-        return resultsToObjectList(results: results)
+//    static func objects(_ object: Object.Type) -> Array<Object>? {
+//        guard let results = queryWithType(object: object) else {
+//            return nil
+//        }
+//        return resultsToObjectList(results: results)
+//    }
+    
+    static func objects<T: Object>(_ object: T) -> [T] {
+        return queryWithType(object: object)
     }
     
     // MARK: 查询某个对象数据(根据条件)
@@ -284,7 +288,9 @@ extension RealmTools {
         }
         return resultsToObjectList(results: results)
     }
-    
+    static func objectsWithPredicate<T: Object>(object: T, predicate: NSPredicate) -> [T] {
+        return queryWith(object: object, predicate: predicate)
+    }
     // MARK: 带排序条件查询
     ///  带排序条件查询
     /// - Parameters:
@@ -293,14 +299,21 @@ extension RealmTools {
     ///   - sortedKey: 排序的键
     ///   - isAssending: 升序还是降序，默认升序
     /// - Returns: 返回查询对象数组
-    static func objectsWithPredicateAndSorted(object: Object.Type,
+//    static func objectsWithPredicateAndSorted(object: Object.Type,
+//                                           predicate: NSPredicate,
+//                                           sortedKey: String,
+//                                         isAssending: Bool = true) -> Array<Object>? {
+//        guard let results = queryWithSorted(object: object, predicate: predicate, sortedKey: sortedKey, isAssending: isAssending) else {
+//            return nil
+//        }
+//        return resultsToObjectList(results: results)
+//    }
+  
+    static func objectsWithPredicateAndSorted<T: Object>(object: T,
                                            predicate: NSPredicate,
                                            sortedKey: String,
-                                         isAssending: Bool = true) -> Array<Object>? {
-        guard let results = queryWithSorted(object: object, predicate: predicate, sortedKey: sortedKey, isAssending: isAssending) else {
-            return nil
-        }
-        return resultsToObjectList(results: results)
+                                         isAssending: Bool = true) -> [T] {
+        return queryWithSorted(object: object, predicate: predicate, sortedKey: sortedKey, isAssending: isAssending)
     }
     
     // MARK: 带分页的查询
@@ -313,29 +326,29 @@ extension RealmTools {
     ///   - fromIndex: 起始页
     ///   - pageSize: 一页的数量
     /// - Returns: 返回查询对象数组
-    static func objectsWithPredicateAndSortedForPages(object: Object.Type,
-                                                      predicate: NSPredicate,
-                                                      sortedKey: String,
-                                                      isAssending: Bool,
-                                                      fromIndex: Int,
-                                                      pageSize: Int) -> Array<Object>? {
-        guard let results = queryWithSorted(object: object,
-                                         predicate: predicate,
-                                         sortedKey: sortedKey,
-                                     isAssending: isAssending) else {
-            return nil
-        }
-        var resultsArray = Array<Object>()
-        if results.count <= pageSize * (fromIndex - 1) || fromIndex <= 0 {
-            return resultsArray
-        }
-        if results.count > 0 {
-            for i in pageSize * (fromIndex - 1)...(fromIndex * pageSize - 1) {
-                resultsArray.append(results[i])
-            }
-        }
-        return resultsArray
-    }
+//    static func objectsWithPredicateAndSortedForPages(object: Object.Type,
+//                                                      predicate: NSPredicate,
+//                                                      sortedKey: String,
+//                                                      isAssending: Bool,
+//                                                      fromIndex: Int,
+//                                                      pageSize: Int) -> Array<Object>? {
+//        guard let results = queryWithSorted(object: object,
+//                                         predicate: predicate,
+//                                         sortedKey: sortedKey,
+//                                     isAssending: isAssending) else {
+//            return nil
+//        }
+//        var resultsArray = Array<Object>()
+//        if results.count <= pageSize * (fromIndex - 1) || fromIndex <= 0 {
+//            return resultsArray
+//        }
+//        if results.count > 0 {
+//            for i in pageSize * (fromIndex - 1)...(fromIndex * pageSize - 1) {
+//                resultsArray.append(results[i])
+//            }
+//        }
+//        return resultsArray
+//    }
 }
 
 //MARK:- 私有(查询)
@@ -344,13 +357,27 @@ extension RealmTools {
     /// 查询某个对象数据
     /// - Parameter object: 对象类型
     /// - Returns: 返回查询对象数组
-    private static func queryWithType(object: Object.Type) -> Results<Object>? {
-        guard let weakCurrentRealm = sharedInstance.currentRealm else {
-            return nil
-        }
-        return weakCurrentRealm.objects(object)
-    }
+//    private static func queryWithType(object: Object.Type) -> Results<Object>? {
+//        guard let weakCurrentRealm = sharedInstance.currentRealm else {
+//            return nil
+//        }
+//        return weakCurrentRealm.objects(object)
+//    }
     
+    
+    private static func queryWithType<T: Object>(object: T) -> [T] {
+        guard let weakCurrentRealm = sharedInstance.currentRealm else {
+            return []
+        }
+        var results : Results<Object>
+        results = weakCurrentRealm.objects((T.self as Object.Type).self)
+        guard results.count > 0 else { return [] }
+        var objectArray = [T]()
+        for model in results{
+           objectArray.append(model as! T)
+        }
+        return objectArray
+    }
     // MARK: 根据条件查询数据
     /// 根据条件查询数据
     /// - Parameters:
@@ -365,6 +392,21 @@ extension RealmTools {
         return weakCurrentRealm.objects(object).filter(predicate)
     }
     
+    private static func queryWith<T: Object>(object: T,
+                               predicate: NSPredicate) -> [T] {
+        guard let weakCurrentRealm = sharedInstance.currentRealm else {
+            return []
+        }
+        var results : Results<Object>
+        results = weakCurrentRealm.objects((T.self as Object.Type).self).filter(predicate)
+        guard results.count > 0 else { return [] }
+        var objectArray = [T]()
+        for model in results{
+           objectArray.append(model as! T)
+        }
+        return objectArray
+    }
+    
     // MARK: 带排序条件查询
     /// 带排序条件查询
     /// - Parameters:
@@ -373,15 +415,32 @@ extension RealmTools {
     ///   - sortedKey: 排序的键
     ///   - isAssending: 升序还是降序，默认升序
     /// - Returns: 返回查询对象数组
-    private static func queryWithSorted(object: Object.Type,
+//    private static func queryWithSorted1(object: Object.Type,
+//                                     predicate: NSPredicate,
+//                                     sortedKey: String,
+//                                   isAssending: Bool = true) -> Results<Object>? {
+//        guard let weakCurrentRealm = sharedInstance.currentRealm else {
+//            return nil
+//        }
+//        return weakCurrentRealm.objects(object).filter(predicate)
+//            .sorted(byKeyPath: sortedKey, ascending: isAssending)
+//    }
+    
+    private static func queryWithSorted<T: Object>(object: T,
                                      predicate: NSPredicate,
                                      sortedKey: String,
-                                   isAssending: Bool = true) -> Results<Object>? {
+                                   isAssending: Bool = true) -> [T] {
         guard let weakCurrentRealm = sharedInstance.currentRealm else {
-            return nil
+            return []
         }
-        return weakCurrentRealm.objects(object).filter(predicate)
-            .sorted(byKeyPath: sortedKey, ascending: isAssending)
+        var results : Results<Object>
+        results = weakCurrentRealm.objects((T.self as Object.Type).self).filter(predicate).sorted(byKeyPath: sortedKey, ascending: isAssending)
+        guard results.count > 0 else { return [] }
+        var objectArray = [T]()
+        for model in results{
+           objectArray.append(model as! T)
+        }
+        return objectArray
     }
     
     // MARK: 查询结果转Array<Object>

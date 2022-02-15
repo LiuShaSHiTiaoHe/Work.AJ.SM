@@ -19,7 +19,7 @@ final class NetWorkManager {
     
     func initNetWork(){
         Network.Configuration.default.timeoutInterval = 10
-        Network.Configuration.default.plugins = [NetworkIndicatorPlugin()]
+        Network.Configuration.default.plugins = []//[NetworkIndicatorPlugin()]
         Network.Configuration.default.replacingTask = { (target: TargetType) -> Task in
             let url = target.baseURL.absoluteString + target.path
             var task = target.task
@@ -78,6 +78,8 @@ typealias RequestModelsSuccessCallback<T:Mappable> = (([T],ResponseModel?) -> Vo
 typealias RequestFailureCallback = ((ResponseModel) -> Void)
 typealias errorCallback = (() -> Void)
 
+typealias DefaultSuccessCallback = ((JSON) -> Void)
+
 extension TargetType {
     @discardableResult
     func request<T: Mappable>(modelType: T.Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
@@ -99,6 +101,33 @@ extension TargetType {
             }
         }, cacheType: cacheType, failureCallback: failureCallback, showError: showError)
     }
+    
+    @discardableResult
+    func defaultRequest(successCallback:@escaping DefaultSuccessCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+        return Network.default.provider.request(MultiTarget(self)) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    let jsonData = try JSON(data: response.data)
+                    #if DEBUG
+                    logger.info("\(self.baseURL)\(self.path) --- \(self.method.rawValue) ----> responseData：\(jsonData)")
+                    #endif
+                    successCallback(jsonData)
+                } catch {
+                    let model = ResponseModel()
+                    model.code = JsonDecodeErrorCode
+                    model.message = String(data: response.data, encoding: String.Encoding.utf8)!
+                    failureCallback?(model)
+                }
+            case let .failure(error):
+                let model = ResponseModel()
+                model.code = error.errorCode
+                model.message = error.localizedDescription
+                failureCallback?(model)
+            }
+        }
+    }
+    
         
     private func NetWorkRequest(successCallback:@escaping RequestFailureCallback,cacheType: NetworkCacheType , failureCallback: RequestFailureCallback? = nil, showError: Bool = false) -> Cancellable? {
         switch cacheType {

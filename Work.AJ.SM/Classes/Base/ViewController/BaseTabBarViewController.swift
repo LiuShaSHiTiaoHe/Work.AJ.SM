@@ -24,9 +24,13 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     func initUI() {
         let v1 = BaseNavigationController.init(rootViewController: HomeViewController())
         let v2 = BaseNavigationController.init(rootViewController: HomeViewController())
-        v1.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "首页", image: UIImage.init(named: "tab_icon_home_gray"), selectedImage: UIImage.init(named: "tab_icon_home_blue"))
-        v2.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "我的", image: UIImage.init(named: "tab_icon_setting_gray"), selectedImage: UIImage.init(named: "tab_icon_setting_blue"))
-        self.viewControllers = [v1, v2]
+        let v3 = BaseNavigationController.init(rootViewController: HomeViewController())
+        let v4 = BaseNavigationController.init(rootViewController: HomeViewController())
+        v1.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "首页", image: R.image.tab_icon_home_normal(), selectedImage: R.image.tab_icon_home_selected())
+        v2.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "服务", image: R.image.tab_icon_service_normal(), selectedImage: R.image.tab_icon_service_selected())
+        v3.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "邻里圈", image: R.image.tab_icon_neighbourhood_normal(), selectedImage: R.image.tab_icon_neighbourhood_selected())
+        v4.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "我的", image: R.image.tab_icon_mine_normal(), selectedImage: R.image.tab_icon_mine_selected())
+        self.viewControllers = [v1, v2, v3, v4]
     }
 
     private func setupTabBar(){
