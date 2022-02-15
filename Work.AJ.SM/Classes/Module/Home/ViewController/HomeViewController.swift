@@ -59,6 +59,7 @@ class HomeViewController: BaseViewController {
     }
     
     private func initData() {
+        headerView.delegate = self
         HomeRepository.shared.allUnits { [weak self] modules in
             guard let `self` = self else { return }
             self.functionModules.removeAll()
@@ -75,6 +76,14 @@ class HomeViewController: BaseViewController {
         initData()
     }
 
+}
+
+extension HomeViewController: HomeNaviHeaderViewDelegate {
+    func chooseUnit() {
+        let vc = HouseViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource {
@@ -109,7 +118,7 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 260)
+        return .init(width: view.frame.width, height: 220)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

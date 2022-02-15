@@ -8,11 +8,17 @@
 import Foundation
 
 enum HomePageModule: String {
+    case mobileCallElevator = "乘梯选层"
+    case ownerQRCode = "业主一码通"
+    case indoorCallElevator = "室内呼梯"
+    case bleCallElevator = "蓝牙呼梯"
+    case cloudOpneGate = "远程开门"
+    case cloudIntercom = "门禁对讲"
+    case scanElevatorQRCode = "扫码乘梯"
+    case inviteVisitors = "访客邀请"
+    case deviceConfiguration = "设备配置"
+
     case ncall = "N方对讲"
-    case indoorCall = "室内呼梯"
-    case cloudGate = "云门禁"
-    case cloudIntercom = "云对讲"
-    case inElevatorCall = "轿厢呼梯"
     case bleOpenDoor = "蓝牙开门"
     case propertyBill = "物业账单"
     case contactProperty = "联系物业"
@@ -21,24 +27,31 @@ enum HomePageModule: String {
     case rent = "房屋租赁"
     case samrtParking = "智慧停车"
     case smartHome = "智能家居"
-    case scanQR = "扫码乘梯"
-    case deviceConfiguration = "设备配置"
-    case mobileCallElevator = "手机呼梯"
     case openUnitDoor = "开单元门"
     case emergencyCall = "困人呼叫"
-    case qrcode = "一码通"
-    case visitorqrcode = "访客邀请"
 
     var model: HomePageFunctionModule {
         switch self {
-        case .indoorCall:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "callLitHouse", tag: "MOUDLE1", index: 0 )
-        case .cloudGate:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudMenjin", tag: "MOUDLE2", index: 1 )
+        case .mobileCallElevator:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "mobileCallElevator", tag: "MOUDLE12", index: 1, showinpage: .home)
+        case .ownerQRCode:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "ownerQRCode", tag: "MOUDLE16", index: 2, showinpage: .home)
+        case .indoorCallElevator:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "indoorCallElevator", tag: "MOUDLE1", index: 3, showinpage: .home)
+        case .bleCallElevator:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleCallElevator", tag: "MOUDLE3", index: 4, showinpage: .home)
+        case .cloudOpneGate:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudOpneGate", tag: "MOUDLE2", index: 5, showinpage: .home)
         case .cloudIntercom:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudSpeak", tag: "MOUDLE2", index: 2 )
-        case .inElevatorCall:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "callLift", tag: "MOUDLE3", index: 3 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudIntercom", tag: "MOUDLE2", index: 6, showinpage: .home)
+        case .scanElevatorQRCode:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7, showinpage: .home)
+        case .inviteVisitors:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8, showinpage: .home)
+        case .deviceConfiguration:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleSetting", tag: "MOUDLE10", index: 9, showinpage: .home)
+            
+            
         case .bleOpenDoor:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "bleOpenDoor", tag: "MOUDLE3", index: 4 )
         case .propertyBill:
@@ -55,22 +68,12 @@ enum HomePageModule: String {
             return HomePageFunctionModule.init(name: self.rawValue, icon: "parking", tag: "MOUDLE5", index: 10 )
         case .smartHome:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "jiajuModule", tag: "MOUDLE6", index: 11 )
-        case .scanQR:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "qrCode", tag: "MOUDLE8", index: 12 )
         case .ncall:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudSpeak", tag: "OTHERUSED", index: 13 )
-        case .deviceConfiguration:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleSetting", tag: "MOUDLE10", index: 14 )
-        case .mobileCallElevator:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cellphonecallelevator", tag: "MOUDLE12", index: 15 )
         case .openUnitDoor:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "openunitdoor", tag: "MOUDLE14", index: 16 )
         case .emergencyCall:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "emergencycall", tag: "MOUDLE15", index: 17 )
-        case .qrcode:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "oneQRCode", tag: "MOUDLE16", index: -2 )
-        case .visitorqrcode:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "visitorQRCode", tag: "MOUDLE17", index: -1 )
         }
     }
 }
@@ -78,10 +81,17 @@ enum HomePageModule: String {
 extension HomePageModule: CaseIterable {}
 
 
+enum ShowInPage {
+    case home
+    case service
+    case neighbour
+    case unkown
+}
 
 struct HomePageFunctionModule {
     var name: String = ""
     var icon: String = ""
     var tag: String = ""
     var index: Int = 0
+    var showinpage: ShowInPage = .unkown
 }

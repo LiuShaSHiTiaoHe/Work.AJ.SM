@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.backgroundColor = R.color.backgroundColor()
-        self.navigationController?.hidesBottomBarWhenPushed = true
+//        self.hidesBottomBarWhenPushed = true
         self.navigationController?.isNavigationBarHidden = true
         initUI()
 //        addlayer()

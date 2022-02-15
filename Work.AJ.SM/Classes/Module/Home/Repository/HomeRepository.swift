@@ -58,7 +58,7 @@ class HomeRepository {
         }else{
             let jsonUnit = unit.toJSON()
             allModules.forEach { module in
-                if !module.tag.isEmpty, module.tag != "OTHERUSED", let moduleTag = jsonUnit[module.tag] as? String, moduleTag == "T" {
+                if !module.tag.isEmpty, module.tag != "OTHERUSED", let moduleTag = jsonUnit[module.tag] as? String, moduleTag == "T", module.showinpage == .home {
                     result.append(module)
                 }
             }

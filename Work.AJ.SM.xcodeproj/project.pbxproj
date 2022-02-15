@@ -68,6 +68,10 @@
 		416F2EB627BA1E18004E5AD9 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EB527BA1E18004E5AD9 /* ResetPasswordViewController.swift */; };
 		416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EB727BA1E30004E5AD9 /* ResetPasswordView.swift */; };
 		416F2EC027BA5436004E5AD9 /* HomeNaviHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EBF27BA5436004E5AD9 /* HomeNaviHeaderView.swift */; };
+		416F2EC427BB7787004E5AD9 /* HouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EC327BB7787004E5AD9 /* HouseViewController.swift */; };
+		416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EC727BB77C8004E5AD9 /* MineAPI.swift */; };
+		416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ECB27BB78D4004E5AD9 /* CommonHeaderView.swift */; };
+		416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +158,10 @@
 		416F2EB527BA1E18004E5AD9 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		416F2EB727BA1E30004E5AD9 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		416F2EBF27BA5436004E5AD9 /* HomeNaviHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNaviHeaderView.swift; sourceTree = "<group>"; };
+		416F2EC327BB7787004E5AD9 /* HouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseViewController.swift; sourceTree = "<group>"; };
+		416F2EC727BB77C8004E5AD9 /* MineAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineAPI.swift; sourceTree = "<group>"; };
+		416F2ECB27BB78D4004E5AD9 /* CommonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHeaderView.swift; sourceTree = "<group>"; };
+		416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCell.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -513,6 +521,7 @@
 				416F2EAD27B60C6E004E5AD9 /* VerificationCodeInputView.swift */,
 				416F2EAF27B60C7F004E5AD9 /* PasswordInputView.swift */,
 				416F2EB127B63828004E5AD9 /* CountdownLabel.swift */,
+				416F2ECB27BB78D4004E5AD9 /* CommonHeaderView.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -536,16 +545,10 @@
 		416F2EBB27BA46F1004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				416F2EBC27BA4B43004E5AD9 /* ViewController */,
+				416F2EC527BB779D004E5AD9 /* Mine */,
+				416F2EC227BB776D004E5AD9 /* House */,
 			);
 			path = Mine;
-			sourceTree = "<group>";
-		};
-		416F2EBC27BA4B43004E5AD9 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		416F2EBD27BA4B4D004E5AD9 /* ViewController */ = {
@@ -560,6 +563,55 @@
 			children = (
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		416F2EC227BB776D004E5AD9 /* House */ = {
+			isa = PBXGroup;
+			children = (
+				416F2ECA27BB78A8004E5AD9 /* View */,
+				416F2EC927BB7897004E5AD9 /* Controller */,
+			);
+			path = House;
+			sourceTree = "<group>";
+		};
+		416F2EC527BB779D004E5AD9 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EC627BB77A2004E5AD9 /* NetWork */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		416F2EC627BB77A2004E5AD9 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EC727BB77C8004E5AD9 /* MineAPI.swift */,
+			);
+			path = NetWork;
+			sourceTree = "<group>";
+		};
+		416F2EC927BB7897004E5AD9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EC327BB7787004E5AD9 /* HouseViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		416F2ECA27BB78A8004E5AD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				416F2ECD27BB7E0E004E5AD9 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		416F2ECD27BB7E0E004E5AD9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -792,6 +844,7 @@
 				416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,
+				416F2EC427BB7787004E5AD9 /* HouseViewController.swift in Sources */,
 				416F2E7327B0BFB5004E5AD9 /* UnitCodesModel.swift in Sources */,
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
@@ -803,6 +856,7 @@
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
 				416F2EAE27B60C6E004E5AD9 /* VerificationCodeInputView.swift in Sources */,
 				416F2E6327B0BF95004E5AD9 /* HomeModuleCell.swift in Sources */,
+				416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */,
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
@@ -817,11 +871,13 @@
 				416F2E3C27B0B46F004E5AD9 /* UserDefaultsKeys.swift in Sources */,
 				416F2E9B27B3BA45004E5AD9 /* RealmTools.swift in Sources */,
 				416F2EA327B5FE25004E5AD9 /* LoginViewController.swift in Sources */,
+				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
 				416F2EAC27B60BA4004E5AD9 /* MobileInputView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
+				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
 				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
