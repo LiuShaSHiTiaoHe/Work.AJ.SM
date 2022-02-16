@@ -173,5 +173,7 @@ class UnitModel: Object, Mappable  {
         cellid <- map["CELLID"]
         moudle11 <- map["MOUDLE11"]
         physicalfloor <- map["PHYSICALFLOOR"]
+        moudle16 <- map["MOUDLE16"]
+        moudle17 <- map["MOUDLE17"]
     }
 }
