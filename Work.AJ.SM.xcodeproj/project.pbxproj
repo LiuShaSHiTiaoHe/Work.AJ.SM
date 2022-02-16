@@ -79,6 +79,10 @@
 		416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EDD27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift */; };
 		416F2EE227BCD0C8004E5AD9 /* OwnerQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EE127BCD0C8004E5AD9 /* OwnerQRCodeViewController.swift */; };
 		416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EE427BCD0E5004E5AD9 /* OwnerQRCodeView.swift */; };
+		416F2EE727BCEABE004E5AD9 /* EntryKitAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EE627BCEABE004E5AD9 /* EntryKitAttributes.swift */; };
+		416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EEA27BCF931004E5AD9 /* PopViewManager.swift */; };
+		416F2EED27BCF98B004E5AD9 /* BleCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EEC27BCF98B004E5AD9 /* BleCallElevatorViewController.swift */; };
+		416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EEE27BCF99E004E5AD9 /* BleCallElevatorView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -176,6 +180,10 @@
 		416F2EDD27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorCallElevatorView.swift; sourceTree = "<group>"; };
 		416F2EE127BCD0C8004E5AD9 /* OwnerQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerQRCodeViewController.swift; sourceTree = "<group>"; };
 		416F2EE427BCD0E5004E5AD9 /* OwnerQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerQRCodeView.swift; sourceTree = "<group>"; };
+		416F2EE627BCEABE004E5AD9 /* EntryKitAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryKitAttributes.swift; sourceTree = "<group>"; };
+		416F2EEA27BCF931004E5AD9 /* PopViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewManager.swift; sourceTree = "<group>"; };
+		416F2EEC27BCF98B004E5AD9 /* BleCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCallElevatorViewController.swift; sourceTree = "<group>"; };
+		416F2EEE27BCF99E004E5AD9 /* BleCallElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCallElevatorView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -373,6 +381,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				416F2EE827BCF8D5004E5AD9 /* BleCallElevator */,
 				416F2EDF27BCD09A004E5AD9 /* OwnerQRCode */,
 				416F2ED827BCBE0C004E5AD9 /* Home */,
 				416F2ED727BCBDF7004E5AD9 /* IndoorCallElevator */,
@@ -534,6 +543,8 @@
 				416F2EAF27B60C7F004E5AD9 /* PasswordInputView.swift */,
 				416F2EB127B63828004E5AD9 /* CountdownLabel.swift */,
 				416F2ECB27BB78D4004E5AD9 /* CommonHeaderView.swift */,
+				416F2EE627BCEABE004E5AD9 /* EntryKitAttributes.swift */,
+				416F2EEA27BCF931004E5AD9 /* PopViewManager.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -695,6 +706,31 @@
 			isa = PBXGroup;
 			children = (
 				416F2EE427BCD0E5004E5AD9 /* OwnerQRCodeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		416F2EE827BCF8D5004E5AD9 /* BleCallElevator */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EF027BCF9A2004E5AD9 /* View */,
+				416F2EE927BCF8E0004E5AD9 /* ViewController */,
+			);
+			path = BleCallElevator;
+			sourceTree = "<group>";
+		};
+		416F2EE927BCF8E0004E5AD9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EEC27BCF98B004E5AD9 /* BleCallElevatorViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		416F2EF027BCF9A2004E5AD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EEE27BCF99E004E5AD9 /* BleCallElevatorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -925,6 +961,7 @@
 				416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */,
 				416F2EB627BA1E18004E5AD9 /* ResetPasswordViewController.swift in Sources */,
 				416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */,
+				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
 				416F2E4927B0B56D004E5AD9 /* Network.Configuration.swift in Sources */,
 				416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */,
@@ -952,6 +989,7 @@
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
 				416F2E5327B0B64F004E5AD9 /* BaseNavigationController.swift in Sources */,
 				416F2ED327BCA221004E5AD9 /* NeighbourhoodViewController.swift in Sources */,
+				416F2EE727BCEABE004E5AD9 /* EntryKitAttributes.swift in Sources */,
 				416F2E5127B0B638004E5AD9 /* BaseTabBarViewController.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
@@ -968,6 +1006,7 @@
 				416F2EAC27B60BA4004E5AD9 /* MobileInputView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
 				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
+				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
@@ -976,6 +1015,7 @@
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
 				416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */,
 				416F2EE227BCD0C8004E5AD9 /* OwnerQRCodeViewController.swift in Sources */,
+				416F2EED27BCF98B004E5AD9 /* BleCallElevatorViewController.swift in Sources */,
 				416F2E4527B0B514004E5AD9 /* GDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
