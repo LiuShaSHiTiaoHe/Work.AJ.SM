@@ -1,4 +1,5 @@
 PODS:
+  - ActiveLabel (1.1.0)
   - Alamofire (5.5.0)
   - BetterSegmentedControl (2.0.1)
   - CryptoSwift (1.4.2)
@@ -58,6 +59,7 @@ PODS:
   - YYCache (1.0.4)
 
 DEPENDENCIES:
+  - ActiveLabel
   - BetterSegmentedControl
   - CryptoSwift (= 1.4.2)
   - ESTabBarController-swift (= 2.8.0)
@@ -89,6 +91,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ActiveLabel
     - Alamofire
     - BetterSegmentedControl
     - CryptoSwift
@@ -121,6 +124,7 @@ SPEC REPOS:
     - YYCache
 
 SPEC CHECKSUMS:
+  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
@@ -152,6 +156,6 @@ SPEC CHECKSUMS:
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 166e06d8a43654f528f0ad8ae3510de8188c1316
+PODFILE CHECKSUM: c36c707964c0c6d4613cc4ac6fe4223fea3ac1b0
 
 COCOAPODS: 1.11.2

@@ -34,6 +34,7 @@ target 'Work.AJ.SM' do
   pod 'SDCycleScrollView', '1.82'
   pod 'BetterSegmentedControl'
   pod 'LTMorphingLabel', '~> 0.9.3'
+  pod 'ActiveLabel'
 
   pod 'SPPermissions/Camera'
   pod 'SPPermissions/PhotoLibrary'

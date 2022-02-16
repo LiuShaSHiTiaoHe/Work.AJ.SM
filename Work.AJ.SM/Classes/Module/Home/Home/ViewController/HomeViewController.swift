@@ -143,7 +143,37 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let module = functionModules[indexPath.row]
+        if let homePageModule: HomePageModule = HomePageModule.init(rawValue: module.name) {
+            switch homePageModule {
+            case .mobileCallElevator:
+                break
+            case .ownerQRCode:
+                break
+            case .indoorCallElevator:
+                let vc = IndoorCallElevatorViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            case .bleCallElevator:
+                break
+            case .cloudOpneGate:
+                break
+            case .cloudIntercom:
+                break
+            case .scanElevatorQRCode:
+                break
+            case .inviteVisitors:
+                break
+            case .addFamilyMember:
+                break
+            case .deviceConfiguration:
+                break
+            default :
+                return
+                
+            }
+        }
+
     }
 }
 

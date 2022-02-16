@@ -9,13 +9,15 @@ import UIKit
 import BetterSegmentedControl
 import JKSwiftExtension
 import SVProgressHUD
+import ActiveLabel
 
 protocol LoginViewDelegate: NSObjectProtocol {
     func login(mobile: String, password: String)
     func forgetPassword(mobile: String?)
     func register(mobile: String, code: String, password: String)
     func sendCode(mobile: String)
-    func showPolicyOrPrivacy()
+    func showTermsOfServices()
+    func showPrivacy()
 }
 
 enum loginOrRegisterType {
@@ -128,18 +130,14 @@ class LoginView: UIView {
     
     lazy var registerCheckButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(R.image.mine_address_btn_nor(), for: .normal)
-        button.setImage(R.image.mine_address_btn_sel(), for: .selected)
+        button.setImage(R.image.login_checkbox_uncheck(), for: .normal)
+        button.setImage(R.image.login_checkbox_checked(), for: .selected)
+        button.setImage(R.image.login_checkbox_checked(), for: .highlighted)
         button.addTarget(self, action: #selector(policyCheckBox), for: .touchUpInside)
         return button
     }()
     
-    lazy var policyLabel: UILabel = {
-        let label = UILabel.init()
-        label.font = k12SysFont
-        label.text = "已阅读并同意《用户协议》和《隐私声明》"
-        return label
-    }()
+    private let policyLabel = ActiveLabel()
     
     //comfirm button
     lazy var comfirmButton: UIButton = {
@@ -284,7 +282,7 @@ class LoginView: UIView {
             make.left.equalTo(registerCheckButton.snp.right).offset(kMargin/4)
             make.right.equalToSuperview()
             make.centerY.equalTo(registerCheckButton)
-            make.height.equalTo(20)
+            make.height.equalTo(22)
         }
         
         comfirmButton.snp.makeConstraints { make in
@@ -295,8 +293,27 @@ class LoginView: UIView {
         }
     }
     
-    func initData() {
-        
+    func configurePolicyLabel() {
+        let customType1 = ActiveType.custom(pattern: "《用户协议》")
+        let customType2 = ActiveType.custom(pattern: "《隐私声明》")
+        policyLabel.enabledTypes.append(customType1)
+        policyLabel.enabledTypes.append(customType2)
+        policyLabel.customize { label in
+            label.text = "已阅读并同意《用户协议》和《隐私声明》"
+            label.font = k12Font
+            label.numberOfLines = 0
+            label.textColor = R.color.secondtextColor()
+            label.customColor[customType1] = R.color.themeColor()
+            label.customColor[customType2] = R.color.themeColor()
+            label.customSelectedColor[customType1] = R.color.themeColor()
+            label.customSelectedColor[customType2] = R.color.themeColor()
+            label.handleCustomTap(for: customType1) { element in
+                self.delegate?.showTermsOfServices()
+            }
+            label.handleCustomTap(for: customType2) { element in
+                self.delegate?.showPrivacy()
+            }
+        }
     }
 
     @objc func navigationSegmentedControlValueChanged(_ sender: BetterSegmentedControl) {
@@ -383,7 +400,7 @@ class LoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeView()
-        initData()
+        configurePolicyLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {

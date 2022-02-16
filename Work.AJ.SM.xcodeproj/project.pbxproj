@@ -75,6 +75,8 @@
 		416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ED027BCA210004E5AD9 /* ServiceViewController.swift */; };
 		416F2ED327BCA221004E5AD9 /* NeighbourhoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ED227BCA221004E5AD9 /* NeighbourhoodViewController.swift */; };
 		416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ED527BCA24F004E5AD9 /* MineViewController.swift */; };
+		416F2EDB27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EDA27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift */; };
+		416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EDD27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +170,8 @@
 		416F2ED027BCA210004E5AD9 /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		416F2ED227BCA221004E5AD9 /* NeighbourhoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighbourhoodViewController.swift; sourceTree = "<group>"; };
 		416F2ED527BCA24F004E5AD9 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		416F2EDA27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorCallElevatorViewController.swift; sourceTree = "<group>"; };
+		416F2EDD27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorCallElevatorView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -365,11 +369,8 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				416F2E9227B20C5C004E5AD9 /* Repository */,
-				416F2E5E27B0BEE5004E5AD9 /* View */,
-				416F2E5D27B0BEDB004E5AD9 /* NetWork */,
-				416F2E5C27B0BED3004E5AD9 /* Model */,
-				416F2E5B27B0BEC2004E5AD9 /* ViewController */,
+				416F2ED827BCBE0C004E5AD9 /* Home */,
+				416F2ED727BCBDF7004E5AD9 /* IndoorCallElevator */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -631,6 +632,43 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		416F2ED727BCBDF7004E5AD9 /* IndoorCallElevator */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EDC27BCBE3C004E5AD9 /* View */,
+				416F2ED927BCBE22004E5AD9 /* ViewController */,
+			);
+			path = IndoorCallElevator;
+			sourceTree = "<group>";
+		};
+		416F2ED827BCBE0C004E5AD9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				416F2E9227B20C5C004E5AD9 /* Repository */,
+				416F2E5E27B0BEE5004E5AD9 /* View */,
+				416F2E5D27B0BEDB004E5AD9 /* NetWork */,
+				416F2E5C27B0BED3004E5AD9 /* Model */,
+				416F2E5B27B0BEC2004E5AD9 /* ViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		416F2ED927BCBE22004E5AD9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EDA27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		416F2EDC27BCBE3C004E5AD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EDD27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,8 +897,10 @@
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
 				416F2E4927B0B56D004E5AD9 /* Network.Configuration.swift in Sources */,
 				416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */,
+				416F2EDB27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift in Sources */,
 				416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
+				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,
 				416F2EC427BB7787004E5AD9 /* HouseViewController.swift in Sources */,
 				416F2E7327B0BFB5004E5AD9 /* UnitCodesModel.swift in Sources */,

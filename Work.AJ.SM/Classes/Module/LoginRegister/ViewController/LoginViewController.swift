@@ -74,8 +74,12 @@ extension LoginViewController: LoginViewDelegate {
     func sendCode(mobile: String) {
         
     }
+
+    func showPrivacy() {
+        
+    }
     
-    func showPolicyOrPrivacy() {
+    func showTermsOfServices() {
         
     }
     
