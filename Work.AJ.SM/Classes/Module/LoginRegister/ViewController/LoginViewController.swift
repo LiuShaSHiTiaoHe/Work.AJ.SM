@@ -44,6 +44,7 @@ extension LoginViewController: LoginViewDelegate {
                 Defaults.username = mobile
                 Defaults.userRealName = userModel.realName
                 Defaults.userID = userModel.rid
+                GDataManager.shared.setupDataBase()
                 RealmTools.addList(units) {}
                 RealmTools.add(userModel) {}
                 SVProgressHUD.showSuccess(withStatus: "登录成功")

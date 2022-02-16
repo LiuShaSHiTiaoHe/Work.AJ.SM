@@ -22,6 +22,9 @@ class HomeRepository {
             guard models.count > 0 else {
                 return
             }
+            RealmTools.addList(models, update: .modified) {
+                logger.info("update done")
+            }
             if let currentUnitID = Defaults.currentUnitID {
                 if let unit = models.first(where: { model in
                     model.unitid == currentUnitID
@@ -33,9 +36,6 @@ class HomeRepository {
                     Defaults.currentUnitID = unitID
                     completion(self.filterHomePageModules(firstUnit))
                 }
-            }
-            RealmTools.addList(models, update: .modified) {
-                logger.info("update done")
             }
         } failureCallback: { response in
             logger.info("\(response.message)")
@@ -96,9 +96,8 @@ class HomeRepository {
         if let otherused = unit.otherused, otherused == 1 {
             return allModules.filter {$0.tag == "OTHERUSED"}
         }else{
-            let jsonUnit = unit.toJSON()
             allModules.forEach { module in
-                if !module.tag.isEmpty, module.tag != "OTHERUSED", let moduleTag = jsonUnit[module.tag] as? String, moduleTag == "T", module.showinpage == .home {
+                if !module.tag.isEmpty, module.tag != "OTHERUSED", let moduleTag = unit.value(forKey: module.tag.lowercased()) as? String, moduleTag == "T", module.showinpage == .home {
                     result.append(module)
                 }
             }

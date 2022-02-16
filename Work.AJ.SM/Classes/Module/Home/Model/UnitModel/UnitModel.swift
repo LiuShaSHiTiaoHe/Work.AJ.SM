@@ -43,6 +43,8 @@ class UnitModel: Object, Mappable  {
     @Persisted var moudle13: String?
     @Persisted var moudle14: String?
     @Persisted var moudle15: String?
+    @Persisted var moudle16: String?
+    @Persisted var moudle17: String?
 
     @Persisted var myset1: String?
     @Persisted var myset2: String?

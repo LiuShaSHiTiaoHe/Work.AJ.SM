@@ -71,12 +71,10 @@ class HomeViewController: BaseViewController {
             guard let `self` = self else { return }
             self.functionModules.removeAll()
             self.functionModules.append(contentsOf: modules)
+            self.updateTitle()
             self.getAdsAndNotices()
         }
-        if let unitID = Defaults.currentUnitID {
-            headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
    
-        }
     }
     
     override func headerRefresh() {
@@ -86,6 +84,12 @@ class HomeViewController: BaseViewController {
     @objc
     func currentUnitChanged() {
         getData()
+    }
+    
+    func updateTitle() {
+        if let unitID = Defaults.currentUnitID {
+            headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
+        }
     }
     
     func getAdsAndNotices() {

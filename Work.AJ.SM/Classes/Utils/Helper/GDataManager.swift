@@ -31,6 +31,12 @@ final class GDataManager {
         }
         return false
     }
+    
+    func setupDataBase() {
+        if let username = Defaults.username {
+            RealmTools.configRealm(userID: username)
+        }
+    }
 }
 
 

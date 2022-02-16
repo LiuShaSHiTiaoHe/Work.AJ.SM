@@ -23,7 +23,7 @@ extension AppDelegate {
     
     func initService() {
         NetWorkManager.shared.initNetWork()
-        setupDataBase()
+        GDataManager.shared.setupDataBase()
         setuplibs()
     }
     
@@ -39,13 +39,6 @@ extension AppDelegate {
     func resetRootViewController() {
         let mainTabBarVc = BaseTabBarViewController()
         self.window?.rootViewController = mainTabBarVc
-    }
-    
-   
-    private func setupDataBase() {
-        if let username = Defaults.username {
-            RealmTools.configRealm(userID: username)
-        }
     }
     
     private func setuplibs(){
