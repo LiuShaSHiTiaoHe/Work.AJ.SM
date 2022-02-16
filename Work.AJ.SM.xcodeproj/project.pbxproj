@@ -72,6 +72,9 @@
 		416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EC727BB77C8004E5AD9 /* MineAPI.swift */; };
 		416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ECB27BB78D4004E5AD9 /* CommonHeaderView.swift */; };
 		416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */; };
+		416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ED027BCA210004E5AD9 /* ServiceViewController.swift */; };
+		416F2ED327BCA221004E5AD9 /* NeighbourhoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ED227BCA221004E5AD9 /* NeighbourhoodViewController.swift */; };
+		416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2ED527BCA24F004E5AD9 /* MineViewController.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +165,9 @@
 		416F2EC727BB77C8004E5AD9 /* MineAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineAPI.swift; sourceTree = "<group>"; };
 		416F2ECB27BB78D4004E5AD9 /* CommonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHeaderView.swift; sourceTree = "<group>"; };
 		416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCell.swift; sourceTree = "<group>"; };
+		416F2ED027BCA210004E5AD9 /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		416F2ED227BCA221004E5AD9 /* NeighbourhoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighbourhoodViewController.swift; sourceTree = "<group>"; };
+		416F2ED527BCA24F004E5AD9 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -554,6 +560,7 @@
 		416F2EBD27BA4B4D004E5AD9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				416F2ED227BCA221004E5AD9 /* NeighbourhoodViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -561,6 +568,7 @@
 		416F2EBE27BA4B52004E5AD9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				416F2ED027BCA210004E5AD9 /* ServiceViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -577,6 +585,7 @@
 		416F2EC527BB779D004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				416F2ED427BCA246004E5AD9 /* Controller */,
 				416F2EC627BB77A2004E5AD9 /* NetWork */,
 			);
 			path = Mine;
@@ -612,6 +621,14 @@
 				416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		416F2ED427BCA246004E5AD9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				416F2ED527BCA24F004E5AD9 /* MineViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -859,9 +876,11 @@
 				416F2E6327B0BF95004E5AD9 /* HomeModuleCell.swift in Sources */,
 				416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */,
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
+				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
 				416F2E5327B0B64F004E5AD9 /* BaseNavigationController.swift in Sources */,
+				416F2ED327BCA221004E5AD9 /* NeighbourhoodViewController.swift in Sources */,
 				416F2E5127B0B638004E5AD9 /* BaseTabBarViewController.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
@@ -882,6 +901,7 @@
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
+				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
 				416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */,
 				416F2E4527B0B514004E5AD9 /* GDataManager.swift in Sources */,
