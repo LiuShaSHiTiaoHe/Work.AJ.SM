@@ -148,6 +148,9 @@ extension HomeViewController: UICollectionViewDelegate {
         if let homePageModule: HomePageModule = HomePageModule.init(rawValue: module.name) {
             switch homePageModule {
             case .mobileCallElevator:
+                let vc = MobileCallElevatorViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
                 break
             case .ownerQRCode:
                 let vc = OwnerQRCodeViewController()

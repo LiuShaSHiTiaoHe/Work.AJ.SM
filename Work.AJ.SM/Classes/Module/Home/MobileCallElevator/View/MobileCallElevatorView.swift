@@ -7,9 +7,15 @@
 
 import UIKit
 
-class MobileCallElevatorView: UIView {
+let MobileCallElevatorCellidentifier = "MCECollectionViewCell"
 
-    let cellidentifier = "MCECollectionViewCell"
+protocol MobileCallElevatorViewDelegate: NSObjectProtocol {
+    func chooseElevator()
+}
+
+class MobileCallElevatorView: UIView {
+    
+    weak var delegate: MobileCallElevatorViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,11 +28,67 @@ class MobileCallElevatorView: UIView {
     }
     
     func initData() {
+        titleContentView.isUserInteractionEnabled = true
+        titleContentView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(chooseElevatorAction)))
+    }
+    
+    @objc
+    func chooseElevatorAction() {
+        delegate?.chooseElevator()
+    }
+    
+    func updateTitle() {
         
     }
     
     func initializeView() {
-       
+        self.backgroundColor = R.color.backgroundColor()
+        
+        self.addSubview(headerView)
+        self.addSubview(titleContentView)
+        titleContentView.addSubview(elevatorTitle)
+        titleContentView.addSubview(elevatorLocation)
+        titleContentView.addSubview(downArrow)
+        self.addSubview(tipsLabel)
+        self.addSubview(collectionView)
+        
+        headerView.snp.makeConstraints { make in
+            make.left.top.right.equalToSuperview()
+            make.height.equalTo(kTitleAndStateHeight)
+        }
+        titleContentView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(headerView.snp.bottom)
+            make.height.equalTo(75)
+        }
+        
+        elevatorTitle.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(kMargin)
+            make.height.equalTo(20)
+        }
+        
+        elevatorLocation.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(elevatorTitle.snp.bottom)
+            make.height.equalTo(20)
+        }
+        downArrow.snp.makeConstraints { make in
+            make.left.equalTo(elevatorLocation.snp.right)
+            make.width.height.equalTo(12)
+            make.centerY.equalToSuperview()
+        }
+        
+        tipsLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(titleContentView.snp.bottom).offset(kMargin/2)
+            make.height.equalTo(30)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(tipsLabel.snp.bottom).offset(kMargin/2)
+        }
         
     }
     
@@ -78,13 +140,13 @@ class MobileCallElevatorView: UIView {
     
     lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.sectionInset = UIEdgeInsets.init(top: kMargin/2, left: kMargin/2, bottom: kMargin/2, right: kMargin/2)
+        flowLayout.sectionInset = UIEdgeInsets.init(top: kMargin, left: kMargin, bottom: kMargin/2, right: kMargin)
         flowLayout.minimumLineSpacing = 10
-        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumInteritemSpacing = 10
         let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         c.alwaysBounceVertical = true
-        c.backgroundColor = UIColor.clear
-        c.register(MCECollectionViewCell.self, forCellWithReuseIdentifier: cellidentifier)
+        c.backgroundColor = R.color.backgroundColor()
+        c.register(MCECollectionViewCell.self, forCellWithReuseIdentifier: MobileCallElevatorCellidentifier)
         return c
     }()
     

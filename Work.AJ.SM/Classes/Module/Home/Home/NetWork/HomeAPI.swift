@@ -9,8 +9,9 @@ import Moya
 
 enum HomeAPI {
     case getMyUnit(mobile: String)
-    case getAdvertisement(operID: String, communitID: String)
-    case getNotice(communitID:String, blockID: String, cellID: String)
+    case getAdvertisement(operID: String, communityID: String)
+    case getNotice(communityID:String, blockID: String, cellID: String)
+    case getElevators(communityID:String, unitID: String, cellID: String, groupID: String)
 }
 
 extension HomeAPI: TargetType {
@@ -27,12 +28,14 @@ extension HomeAPI: TargetType {
             return APIs.advertisement
         case .getNotice:
             return APIs.notice
+        case .getElevators:
+            return APIs.cellGroupElevators
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement:
+        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators:
             return .post
         }
     }
@@ -41,10 +44,12 @@ extension HomeAPI: TargetType {
         switch self {
         case let .getMyUnit(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
-        case let .getAdvertisement(operID, communitID):
-            return .requestParameters(parameters: ["OPERID": operID, "COMMUNITYID": communitID, "COVERS": "A"].ekey("OPERID"), encoding: URLEncoding.default)
-        case let .getNotice(communitID, blockID, cellID):
-            return .requestParameters(parameters: ["BLOCKID": blockID, "COMMUNITYID": communitID, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getAdvertisement(operID, communityID):
+            return .requestParameters(parameters: ["OPERID": operID, "COMMUNITYID": communityID, "COVERS": "A"].ekey("OPERID"), encoding: URLEncoding.default)
+        case let .getNotice(communityID, blockID, cellID):
+            return .requestParameters(parameters: ["BLOCKID": blockID, "COMMUNITYID": communityID, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getElevators(communityID, unitID, cellID, groupID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "CELLID": cellID, "UNITID": unitID, "GROUPID": groupID].ekey("CELLID"), encoding: URLEncoding.default)
         }
     }
     

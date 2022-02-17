@@ -25,19 +25,23 @@ class MCECollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         initializeView()
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func initializeView() {
+        self.backgroundColor = R.color.backgroundColor()
         self.contentView.addSubview(elevatorName)
         
         elevatorName.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin/2)
-            make.top.equalToSuperview().offset(kMargin/2)
-            make.bottom.right.equalToSuperview().offset(-kMargin/2)
+            make.left.equalToSuperview().offset(8)
+            make.top.equalToSuperview().offset(8)
+            make.bottom.right.equalToSuperview().offset(-8)
         }
+        
+        self.layer.cornerRadius = 10.0
     }
 
 }

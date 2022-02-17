@@ -50,14 +50,14 @@ class HomeRepository {
             SVProgressHUD.show()
             let group = DispatchGroup()
             group.enter()
-            HomeAPI.getAdvertisement(operID: operID, communitID: communityID).request(modelType: [AdsModel].self) { models, response in
+            HomeAPI.getAdvertisement(operID: operID, communityID: communityID).request(modelType: [AdsModel].self) { models, response in
                 adsData.append(contentsOf: models)
                 group.leave()
             } failureCallback: { response in
                 group.leave()
             }
             group.enter()
-            HomeAPI.getNotice(communitID: communityID, blockID: blockID, cellID: cellID).request(modelType: [NoticeModel].self) { models, response in
+            HomeAPI.getNotice(communityID: communityID, blockID: blockID, cellID: cellID).request(modelType: [NoticeModel].self) { models, response in
                 noticeData.append(contentsOf: models)
                 group.leave()
             } failureCallback: { response in
@@ -84,6 +84,15 @@ class HomeRepository {
             }
         }
         return nil
+    }
+    
+    func getCurrentUnitName() -> String {
+        if let unitID = Defaults.currentUnitID {
+            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname{
+                return communityname + cellname
+            }
+        }
+        return ""
     }
     
     
