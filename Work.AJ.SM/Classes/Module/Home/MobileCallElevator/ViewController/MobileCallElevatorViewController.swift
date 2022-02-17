@@ -40,7 +40,7 @@ class MobileCallElevatorViewController: BaseViewController {
     func initData() {
         mobileCallElevator.collectionView.delegate = self
         mobileCallElevator.collectionView.dataSource = self
-        
+        mobileCallElevator.delegate = self
         MCERepository.shared.getElevators {[weak self] model, response in
             guard let `self` = self else { return }
             self.dataSource = model
@@ -60,6 +60,18 @@ class MobileCallElevatorViewController: BaseViewController {
     
 
 }
+
+extension MobileCallElevatorViewController: MobileCallElevatorViewDelegate {
+    func chooseElevator() {
+        if let lifts = originalData?.lifts, !currentFloorID.isEmpty {
+            let vc = SelectElevatorViewController()
+            vc.currentFloorID = currentFloorID
+            vc.dataSource = lifts
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
 extension MobileCallElevatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MobileCallElevatorCellidentifier, for: indexPath) as? MCECollectionViewCell else { return UICollectionViewCell() }
@@ -69,6 +81,7 @@ extension MobileCallElevatorViewController: UICollectionViewDataSource {
                 cell.elevatorName.text = showFloor
                 if selectFloor == showFloor {
                     cell.backgroundColor = R.color.blueColor()
+                    cell.elevatorName.textColor = R.color.whiteColor()
                 }
             }
         }

@@ -16,7 +16,7 @@ class HomeModuleCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel.init()
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = k16Font
         label.textColor = R.color.blackColor()
         return label
@@ -45,7 +45,7 @@ class HomeModuleCell: UICollectionViewCell {
             make.centerY.equalToSuperview()
             make.left.equalTo(iconImage.snp.right).offset(kMargin)
             make.height.equalTo(30)
-            make.right.equalToSuperview().offset(-kMargin)
+            make.right.equalToSuperview()
             
         }
         self.layer.cornerRadius = 10
