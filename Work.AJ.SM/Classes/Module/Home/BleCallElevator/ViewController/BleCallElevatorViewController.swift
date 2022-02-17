@@ -7,12 +7,25 @@
 
 import UIKit
 
-class BleCallElevatorViewController: UIViewController {
+class BleCallElevatorViewController: BaseViewController {
 
+    lazy var bleCallElevator: BleCallElevatorView = {
+        let view = BleCallElevatorView()
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func initUI() {
+        view.addSubview(bleCallElevator)
+        
+        bleCallElevator.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
 }

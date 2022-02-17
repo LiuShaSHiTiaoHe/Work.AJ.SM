@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 class HomeViewController: BaseViewController {
 
@@ -157,7 +158,10 @@ extension HomeViewController: UICollectionViewDelegate {
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             case .bleCallElevator:
-                break
+                PopViewManager.shared.display(BleCallElevatorViewController(), .center, .init(
+                    width: .constant(value: 280),
+                    height: .constant(value: 380)
+                ), true)
             case .cloudOpneGate:
                 break
             case .cloudIntercom:

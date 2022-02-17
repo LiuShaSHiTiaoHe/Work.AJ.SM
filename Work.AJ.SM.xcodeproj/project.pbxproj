@@ -83,6 +83,9 @@
 		416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EEA27BCF931004E5AD9 /* PopViewManager.swift */; };
 		416F2EED27BCF98B004E5AD9 /* BleCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EEC27BCF98B004E5AD9 /* BleCallElevatorViewController.swift */; };
 		416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EEE27BCF99E004E5AD9 /* BleCallElevatorView.swift */; };
+		416F2EF527BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EF427BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift */; };
+		416F2EF727BDE0C8004E5AD9 /* MobileCallElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EF627BDE0C8004E5AD9 /* MobileCallElevatorView.swift */; };
+		416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EF827BDE39E004E5AD9 /* MCECollectionViewCell.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +187,9 @@
 		416F2EEA27BCF931004E5AD9 /* PopViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewManager.swift; sourceTree = "<group>"; };
 		416F2EEC27BCF98B004E5AD9 /* BleCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCallElevatorViewController.swift; sourceTree = "<group>"; };
 		416F2EEE27BCF99E004E5AD9 /* BleCallElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCallElevatorView.swift; sourceTree = "<group>"; };
+		416F2EF427BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileCallElevatorViewController.swift; sourceTree = "<group>"; };
+		416F2EF627BDE0C8004E5AD9 /* MobileCallElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileCallElevatorView.swift; sourceTree = "<group>"; };
+		416F2EF827BDE39E004E5AD9 /* MCECollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCECollectionViewCell.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -381,6 +387,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				416F2EF127BDE087004E5AD9 /* MobileCallElevator */,
 				416F2EE827BCF8D5004E5AD9 /* BleCallElevator */,
 				416F2EDF27BCD09A004E5AD9 /* OwnerQRCode */,
 				416F2ED827BCBE0C004E5AD9 /* Home */,
@@ -735,6 +742,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		416F2EF127BDE087004E5AD9 /* MobileCallElevator */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EF327BDE09C004E5AD9 /* View */,
+				416F2EF227BDE091004E5AD9 /* ViewController */,
+			);
+			path = MobileCallElevator;
+			sourceTree = "<group>";
+		};
+		416F2EF227BDE091004E5AD9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EF427BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		416F2EF327BDE09C004E5AD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				416F2EF627BDE0C8004E5AD9 /* MobileCallElevatorView.swift */,
+				416F2EF827BDE39E004E5AD9 /* MCECollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,6 +987,7 @@
 			files = (
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2EC027BA5436004E5AD9 /* HomeNaviHeaderView.swift in Sources */,
+				416F2EF727BDE0C8004E5AD9 /* MobileCallElevatorView.swift in Sources */,
 				416F2E5727B0B691004E5AD9 /* BaseWebViewController.swift in Sources */,
 				416F2E3927B0B427004E5AD9 /* ImportFile.swift in Sources */,
 				416F2EB027B60C7F004E5AD9 /* PasswordInputView.swift in Sources */,
@@ -973,6 +1007,7 @@
 				416F2EC427BB7787004E5AD9 /* HouseViewController.swift in Sources */,
 				416F2E7327B0BFB5004E5AD9 /* UnitCodesModel.swift in Sources */,
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
+				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
@@ -1000,6 +1035,7 @@
 				416F2E3C27B0B46F004E5AD9 /* UserDefaultsKeys.swift in Sources */,
 				416F2E9B27B3BA45004E5AD9 /* RealmTools.swift in Sources */,
 				416F2EA327B5FE25004E5AD9 /* LoginViewController.swift in Sources */,
+				416F2EF527BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift in Sources */,
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
