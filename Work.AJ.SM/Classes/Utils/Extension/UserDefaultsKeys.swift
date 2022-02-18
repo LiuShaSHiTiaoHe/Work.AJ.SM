@@ -8,6 +8,8 @@
 import Foundation
 import SwiftyUserDefaults
 
+let ud = Defaults
+
 extension DefaultsKeys {
     var username: DefaultsKey<String?> { .init("username") }
     var userID: DefaultsKey<String?> { .init("userid") }
@@ -15,4 +17,7 @@ extension DefaultsKeys {
 
     var currentUnitID: DefaultsKey<Int?> { .init("currentUnitID") }
     
+    //Setting
+    var bluetoothSignalStrength: DefaultsKey<Int> { .init("BluetoothSignalStrength", defaultValue: 75) }
+    var openDoorStyle: DefaultsKey<Int> { .init("openDoorStyle", defaultValue: 2) }//NonStopSend 0 Shake 1 ButtonPress 2
 }

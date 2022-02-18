@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftyUserDefaults
 
 // keyWindow
 let KeyWindow : UIWindow                        = UIApplication.shared.keyWindow!
@@ -61,3 +62,4 @@ fileprivate func getStatusBarHeight() -> CGFloat {
    }
    return statusBarHeight
 }
+

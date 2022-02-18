@@ -91,6 +91,7 @@
 		416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0127BE4559004E5AD9 /* SelectElevatorViewController.swift */; };
 		416F2F0627BE4597004E5AD9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0527BE4597004E5AD9 /* BaseView.swift */; };
 		416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0727BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift */; };
+		416F2F0B27BF4724004E5AD9 /* BLEAdvertisingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -200,6 +201,7 @@
 		416F2F0127BE4559004E5AD9 /* SelectElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectElevatorViewController.swift; sourceTree = "<group>"; };
 		416F2F0527BE4597004E5AD9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		416F2F0727BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectElevatorTableViewCell.swift; sourceTree = "<group>"; };
+		416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdvertisingManager.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				416F2E4227B0B4F6004E5AD9 /* Logger.swift */,
 				416F2E4427B0B514004E5AD9 /* GDataManager.swift */,
 				416F2E9727B259C0004E5AD9 /* CacheManager.swift */,
+				416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1030,6 +1033,7 @@
 				416F2EF727BDE0C8004E5AD9 /* MobileCallElevatorView.swift in Sources */,
 				416F2E5727B0B691004E5AD9 /* BaseWebViewController.swift in Sources */,
 				416F2E3927B0B427004E5AD9 /* ImportFile.swift in Sources */,
+				416F2F0B27BF4724004E5AD9 /* BLEAdvertisingManager.swift in Sources */,
 				416F2EB027B60C7F004E5AD9 /* PasswordInputView.swift in Sources */,
 				416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */,
 				416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */,
