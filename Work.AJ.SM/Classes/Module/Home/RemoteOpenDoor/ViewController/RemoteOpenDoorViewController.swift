@@ -33,5 +33,28 @@ class RemoteOpenDoorViewController: BaseViewController {
     
     func initData() {
         dataSource = HomeRepository.shared.getCurrentLocks()
+        
+        openDoorView.tableView.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)
+        openDoorView.tableView.delegate = self
+        openDoorView.tableView.dataSource = self
     }
+}
+
+extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RemoteOpenDoorCellIdentifier, for: indexPath) as! RemoteOpenDoorCell
+        let unitLock = dataSource[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
+    
+
 }

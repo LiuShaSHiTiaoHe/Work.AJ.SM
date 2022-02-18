@@ -12,8 +12,8 @@ class UnitLockModel: Object, Mappable {
     
     @Persisted var lockcom: String?
     @Persisted var credate: Int?
-    @Persisted var locktype: String?
-    @Persisted var lockmac: String?
+    @Persisted var locktype: String?//W门口机 B蓝牙
+    @Persisted var lockmac: String?//门口机mac值（开门用到）
     @Persisted var resetflag: String?
     @Persisted var cellid: Int?
     @Persisted var function: String?
@@ -24,7 +24,7 @@ class UnitLockModel: Object, Mappable {
     @Persisted var functionname: String?
     @Persisted var provider: String?
     @Persisted var districtid: String?
-    @Persisted var lockname: String?
+    @Persisted var lockname: String?//门口机名称
     @Persisted var lastconnecttime: Int?
     @Persisted var communityid: Int?
     @Persisted var size: String?
@@ -32,7 +32,7 @@ class UnitLockModel: Object, Mappable {
     @Persisted var lockposition: String?
     @Persisted var blockid: Int?
     @Persisted var ifon: String?
-    
+    @Persisted var gap: String?// T在线  F不在线
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted(originProperty: "locks") var assignee: LinkingObjects<UnitModel>
 
@@ -65,5 +65,6 @@ class UnitLockModel: Object, Mappable {
         lockposition <- map["LOCKPOSITION"]
         blockid <- map["BLOCKID"]
         ifon <- map["IFON"]
+        gap <- map["GAP"]
     }
 }
