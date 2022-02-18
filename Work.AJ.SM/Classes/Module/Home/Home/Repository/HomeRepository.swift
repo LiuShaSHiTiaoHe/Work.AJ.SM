@@ -32,7 +32,9 @@ class HomeRepository {
                     completion(self.filterHomePageModules(unit))
                 }
             }else{
-                if let firstUnit = models.first, let unitID = firstUnit.unitid {
+                if let firstUnit = models.first(where: { model in
+                    model.state == "N"
+                }), let unitID = firstUnit.unitid {
                     Defaults.currentUnitID = unitID
                     completion(self.filterHomePageModules(firstUnit))
                 }
@@ -94,7 +96,24 @@ class HomeRepository {
         }
         return ""
     }
+}
+
+extension HomeRepository {
     
+    func getCurrentLocks() -> [UnitLockModel] {
+        var result = [UnitLockModel]()
+        if let unit = getCurrentUnit() {
+            let locks = unit.locks
+            result.append(contentsOf: locks.filter({ model in
+                model.locktype == "B"
+            }))
+        }
+        return result
+    }
+}
+
+
+extension HomeRepository {
     
     private func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule]{
         var result = [HomePageFunctionModule]()
@@ -113,4 +132,5 @@ class HomeRepository {
         }
         return result
     }
+    
 }

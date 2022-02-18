@@ -92,6 +92,9 @@
 		416F2F0627BE4597004E5AD9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0527BE4597004E5AD9 /* BaseView.swift */; };
 		416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0727BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift */; };
 		416F2F0B27BF4724004E5AD9 /* BLEAdvertisingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */; };
+		416F2F0F27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F0E27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift */; };
+		416F2F1227BF93CD004E5AD9 /* RemoteOpenDoorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F1127BF93CD004E5AD9 /* RemoteOpenDoorView.swift */; };
+		416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F1427BF97EC004E5AD9 /* RemoteOpenDoorCell.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -202,6 +205,9 @@
 		416F2F0527BE4597004E5AD9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		416F2F0727BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectElevatorTableViewCell.swift; sourceTree = "<group>"; };
 		416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdvertisingManager.swift; sourceTree = "<group>"; };
+		416F2F0E27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteOpenDoorViewController.swift; sourceTree = "<group>"; };
+		416F2F1127BF93CD004E5AD9 /* RemoteOpenDoorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteOpenDoorView.swift; sourceTree = "<group>"; };
+		416F2F1427BF97EC004E5AD9 /* RemoteOpenDoorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteOpenDoorCell.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -401,6 +407,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				416F2F0C27BF7C5C004E5AD9 /* RemoteOpenDoor */,
 				416F2EF127BDE087004E5AD9 /* MobileCallElevator */,
 				416F2EE827BCF8D5004E5AD9 /* BleCallElevator */,
 				416F2EDF27BCD09A004E5AD9 /* OwnerQRCode */,
@@ -810,6 +817,40 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		416F2F0C27BF7C5C004E5AD9 /* RemoteOpenDoor */ = {
+			isa = PBXGroup;
+			children = (
+				416F2F1027BF93B8004E5AD9 /* View */,
+				416F2F0D27BF7C67004E5AD9 /* ViewController */,
+			);
+			path = RemoteOpenDoor;
+			sourceTree = "<group>";
+		};
+		416F2F0D27BF7C67004E5AD9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				416F2F0E27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		416F2F1027BF93B8004E5AD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				416F2F1327BF97D7004E5AD9 /* Cell */,
+				416F2F1127BF93CD004E5AD9 /* RemoteOpenDoorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		416F2F1327BF97D7004E5AD9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				416F2F1427BF97EC004E5AD9 /* RemoteOpenDoorCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1027,6 +1068,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416F2F1227BF93CD004E5AD9 /* RemoteOpenDoorView.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2F0627BE4597004E5AD9 /* BaseView.swift in Sources */,
 				416F2EC027BA5436004E5AD9 /* HomeNaviHeaderView.swift in Sources */,
@@ -1036,6 +1078,7 @@
 				416F2F0B27BF4724004E5AD9 /* BLEAdvertisingManager.swift in Sources */,
 				416F2EB027B60C7F004E5AD9 /* PasswordInputView.swift in Sources */,
 				416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */,
+				416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */,
 				416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */,
 				416F2EB627BA1E18004E5AD9 /* ResetPasswordViewController.swift in Sources */,
 				416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */,
@@ -1087,6 +1130,7 @@
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
 				416F2EAC27B60BA4004E5AD9 /* MobileInputView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
+				416F2F0F27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift in Sources */,
 				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
