@@ -187,7 +187,9 @@ extension HomeViewController: UICollectionViewDelegate {
                     SVProgressHUD.showError(withStatus: "没有可使用的相机")
                 }
             case .inviteVisitors:
-                break
+                let view = ChooseVisitorModeView()
+                view.delegate = self
+                PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
             case .addFamilyMember:
                 break
             case .deviceConfiguration:
@@ -209,5 +211,15 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: (view.frame.width - kMargin*2)/2, height: (view.frame.width - kMargin*2)/4 )
+    }
+}
+
+extension HomeViewController: ChooseVisitorModeDelegate {
+    func qrcode() {
+        SwiftEntryKit.dismiss()
+    }
+    
+    func password() {
+        SwiftEntryKit.dismiss()
     }
 }

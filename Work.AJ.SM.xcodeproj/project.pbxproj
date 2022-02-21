@@ -100,6 +100,7 @@
 		4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20427C36FD400B8FBB8 /* QRCode.swift */; };
 		4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20527C36FD400B8FBB8 /* QRCodeView.swift */; };
 		4173C20927C36FD400B8FBB8 /* QRCodeImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20627C36FD400B8FBB8 /* QRCodeImageGenerator.swift */; };
+		4173C20E27C3722800B8FBB8 /* ChooseVisitorModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20D27C3722800B8FBB8 /* ChooseVisitorModeView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -218,6 +219,7 @@
 		4173C20427C36FD400B8FBB8 /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
 		4173C20527C36FD400B8FBB8 /* QRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		4173C20627C36FD400B8FBB8 /* QRCodeImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeImageGenerator.swift; sourceTree = "<group>"; };
+		4173C20D27C3722800B8FBB8 /* ChooseVisitorModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVisitorModeView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				4173C20A27C371B600B8FBB8 /* Visitant */,
 				4173C1FC27C351BE00B8FBB8 /* RemoteIntercom */,
 				416F2F0C27BF7C5C004E5AD9 /* RemoteOpenDoor */,
 				416F2EF127BDE087004E5AD9 /* MobileCallElevator */,
@@ -898,6 +901,30 @@
 			path = QRCode;
 			sourceTree = "<group>";
 		};
+		4173C20A27C371B600B8FBB8 /* Visitant */ = {
+			isa = PBXGroup;
+			children = (
+				4173C20C27C371D100B8FBB8 /* View */,
+				4173C20B27C371C600B8FBB8 /* Controller */,
+			);
+			path = Visitant;
+			sourceTree = "<group>";
+		};
+		4173C20B27C371C600B8FBB8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4173C20C27C371D100B8FBB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4173C20D27C3722800B8FBB8 /* ChooseVisitorModeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1143,6 +1170,7 @@
 				416F2F0027BE16C7004E5AD9 /* MobileCallElevatorModel.swift in Sources */,
 				416F2EC427BB7787004E5AD9 /* HouseViewController.swift in Sources */,
 				416F2E7327B0BFB5004E5AD9 /* UnitCodesModel.swift in Sources */,
+				4173C20E27C3722800B8FBB8 /* ChooseVisitorModeView.swift in Sources */,
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
 				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,

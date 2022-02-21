@@ -29,12 +29,19 @@ class CommonHeaderView: UIView {
         return button
     }()
     
+    lazy var lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = R.color.secondtextColor()
+        return view
+    }()
+    
     private func initializeView() {
         self.backgroundColor = R.color.themebackgroundColor()
         
         self.addSubview(closeButton)
         self.addSubview(titleLabel)
         self.addSubview(rightButton)
+        self.addSubview(lineView)
         
         closeButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin/2)
@@ -54,6 +61,12 @@ class CommonHeaderView: UIView {
             make.centerY.equalTo(closeButton)
             make.height.equalTo(30)
             make.width.equalTo(kMargin*3)
+        }
+        
+        lineView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1/kScale)
         }
             
     }
