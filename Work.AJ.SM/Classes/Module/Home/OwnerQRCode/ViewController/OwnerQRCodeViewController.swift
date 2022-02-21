@@ -32,8 +32,25 @@ class OwnerQRCodeViewController: BaseViewController {
     
     func initData() {
         ownerQRCodeView.delegate = self
+        updateImageData()
     }
     
+    func updateImageData() {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString {
+            HomeAPI.getUserOfflineQRCode(unitID: unitID).defaultRequest { JsonData in
+                if let data = JsonData["data"].dictionary, let qrcode = data["qrcode"]?.string {
+                    if let qrcodeImage = QRCode.init(string: qrcode, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
+                        DispatchQueue.main.async {
+                            self.ownerQRCodeView.qrcodeView.image = image
+                        }
+                    }
+                }
+            } failureCallback: { response in
+                logger.info("\(response.message)")
+            }
+        }
+    }
+     
 }
 
 extension OwnerQRCodeViewController: OwnerQRCodeViewDelegate {
@@ -42,6 +59,6 @@ extension OwnerQRCodeViewController: OwnerQRCodeViewDelegate {
     }
     
     func refresh() {
-        
+        updateImageData()
     }
 }

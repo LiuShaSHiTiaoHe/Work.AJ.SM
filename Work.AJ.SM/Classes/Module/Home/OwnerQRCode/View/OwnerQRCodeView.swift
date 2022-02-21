@@ -25,6 +25,7 @@ class OwnerQRCodeView: UIView {
     
     lazy var backImage: UIImageView = {
         let view = UIImageView.init()
+        view.isUserInteractionEnabled = true
         view.image = R.image.oqc_back_image()
         return view
     }()

@@ -18,7 +18,7 @@ target 'Work.AJ.SM' do
   pod 'SVProgressHUD', '2.2.5'
   pod 'SwiftEntryKit', '2.0.0'
   pod 'NotificationBannerSwift', '2.5.0'
-
+  pod 'swiftScan'
   pod 'SwiftyJSON', '5.0.1'
   pod 'ObjectMapper', '4.2.0'
   pod 'CryptoSwift', '1.4.2'
@@ -28,7 +28,6 @@ target 'Work.AJ.SM' do
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
   pod 'JKSwiftExtension'
-  
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
   pod 'SDCycleScrollView', '1.82'

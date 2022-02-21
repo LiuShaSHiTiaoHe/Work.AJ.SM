@@ -33,28 +33,44 @@ enum HomePageModule: String {
 
     var model: HomePageFunctionModule {
         switch self {
-        case .mobileCallElevator:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "mobileCallElevator", tag: "MOUDLE12", index: 1, showinpage: .home)
-        case .ownerQRCode:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "ownerQRCode", tag: "MOUDLE16", index: 2, showinpage: .home)
-        case .indoorCallElevator:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "indoorCallElevator", tag: "MOUDLE1", index: 3, showinpage: .home)
-        case .bleCallElevator:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleCallElevator", tag: "MOUDLE3", index: 4, showinpage: .home)
-        case .cloudOpneGate:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudOpneGate", tag: "MOUDLE2", index: 5, showinpage: .home)
-        case .cloudIntercom:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudIntercom", tag: "MOUDLE2", index: 6, showinpage: .home)
-        case .scanElevatorQRCode:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7, showinpage: .home)
-        case .inviteVisitors:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8, showinpage: .home)
+//        case .mobileCallElevator:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "mobileCallElevator", tag: "MOUDLE12", index: 1, showinpage: .home)
+//        case .ownerQRCode:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "ownerQRCode", tag: "MOUDLE16", index: 2, showinpage: .home)
+//        case .indoorCallElevator:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "indoorCallElevator", tag: "MOUDLE1", index: 3, showinpage: .home)
+//        case .bleCallElevator:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleCallElevator", tag: "MOUDLE3", index: 4, showinpage: .home)
+//        case .cloudOpneGate:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudOpneGate", tag: "MOUDLE2", index: 5, showinpage: .home)
+//        case .cloudIntercom:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudIntercom", tag: "MOUDLE2", index: 6, showinpage: .home)
+//        case .scanElevatorQRCode:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7, showinpage: .home)
+//        case .inviteVisitors:
+//            return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8, showinpage: .home)
         //MARK: FIXME 暂时显示两个模块，tag写死为2
         case .addFamilyMember:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "addFamilyMember", tag: "MOUDLE2", index: 9, showinpage: .home)
         case .deviceConfiguration:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "bleSetting", tag: "MOUDLE2", index: 10, showinpage: .home)
-        
+        //MARK: FIXME 测试模块 
+        case .mobileCallElevator:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "mobileCallElevator", tag: "MOUDLE2", index: 1, showinpage: .home)
+        case .ownerQRCode:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "ownerQRCode", tag: "MOUDLE2", index: 2, showinpage: .home)
+        case .indoorCallElevator:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "indoorCallElevator", tag: "MOUDLE2", index: 3, showinpage: .home)
+        case .bleCallElevator:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleCallElevator", tag: "MOUDLE2", index: 4, showinpage: .home)
+        case .cloudOpneGate:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudOpneGate", tag: "MOUDLE2", index: 5, showinpage: .home)
+        case .cloudIntercom:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudIntercom", tag: "MOUDLE2", index: 6, showinpage: .home)
+        case .scanElevatorQRCode:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE2", index: 7, showinpage: .home)
+        case .inviteVisitors:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE2", index: 8, showinpage: .home)
 
             
         case .bleOpenDoor:

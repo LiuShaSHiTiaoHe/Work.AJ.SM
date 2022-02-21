@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftEntryKit
+import AVFoundation
+import SVProgressHUD
 
 class HomeViewController: BaseViewController {
 
@@ -174,7 +176,16 @@ extension HomeViewController: UICollectionViewDelegate {
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             case .scanElevatorQRCode:
-                break
+                if let device = AVCaptureDevice.default(for: .video) {
+                    do {
+                        let _ = try AVCaptureDeviceInput.init(device: device)
+                        
+                    } catch {
+                        SVProgressHUD.showError(withStatus: "没有可使用的相机")
+                    }
+                }else{
+                    SVProgressHUD.showError(withStatus: "没有可使用的相机")
+                }
             case .inviteVisitors:
                 break
             case .addFamilyMember:

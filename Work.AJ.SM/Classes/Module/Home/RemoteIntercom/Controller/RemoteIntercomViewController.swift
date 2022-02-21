@@ -11,8 +11,8 @@ class RemoteIntercomViewController: BaseViewController {
 
     private var dataSource: [UnitLockModel] = []
     
-    lazy var openDoorView: RemoteOpenDoorView = {
-        let view = RemoteOpenDoorView()
+    lazy var openDoorView: RemoteIntercomView = {
+        let view = RemoteIntercomView()
         return view
     }()
     

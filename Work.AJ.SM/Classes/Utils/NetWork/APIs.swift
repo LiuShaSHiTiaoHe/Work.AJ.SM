@@ -30,5 +30,8 @@ final class APIs {
     static let cellGroupElevators = "appcity/getLiftByCellGroup"
     
     static let locks = "appcity/getLock.do"
+    
+    //获取二维码信息
+    static let userQRCode = "appcity/createOfflineQrcode"
 
 }

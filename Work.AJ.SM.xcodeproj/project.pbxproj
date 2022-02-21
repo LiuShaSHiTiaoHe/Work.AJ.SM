@@ -97,6 +97,9 @@
 		416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2F1427BF97EC004E5AD9 /* RemoteOpenDoorCell.swift */; };
 		4173C20027C3521E00B8FBB8 /* RemoteIntercomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C1FF27C3521E00B8FBB8 /* RemoteIntercomViewController.swift */; };
 		4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20127C3524C00B8FBB8 /* RemoteIntercomView.swift */; };
+		4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20427C36FD400B8FBB8 /* QRCode.swift */; };
+		4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20527C36FD400B8FBB8 /* QRCodeView.swift */; };
+		4173C20927C36FD400B8FBB8 /* QRCodeImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C20627C36FD400B8FBB8 /* QRCodeImageGenerator.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -212,6 +215,9 @@
 		416F2F1427BF97EC004E5AD9 /* RemoteOpenDoorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteOpenDoorCell.swift; sourceTree = "<group>"; };
 		4173C1FF27C3521E00B8FBB8 /* RemoteIntercomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteIntercomViewController.swift; sourceTree = "<group>"; };
 		4173C20127C3524C00B8FBB8 /* RemoteIntercomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteIntercomView.swift; sourceTree = "<group>"; };
+		4173C20427C36FD400B8FBB8 /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		4173C20527C36FD400B8FBB8 /* QRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		4173C20627C36FD400B8FBB8 /* QRCodeImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeImageGenerator.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -333,6 +339,7 @@
 		416F2E31279D1E9F004E5AD9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4173C20327C36FB500B8FBB8 /* QRCode */,
 				416F2EAA27B60B85004E5AD9 /* Kit */,
 				416F2E9927B3BA39004E5AD9 /* Realm */,
 				416F2E4127B0B4EA004E5AD9 /* Helper */,
@@ -881,6 +888,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4173C20327C36FB500B8FBB8 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				4173C20427C36FD400B8FBB8 /* QRCode.swift */,
+				4173C20627C36FD400B8FBB8 /* QRCodeImageGenerator.swift */,
+				4173C20527C36FD400B8FBB8 /* QRCodeView.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1119,6 +1136,7 @@
 				416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */,
 				416F2EDB27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift in Sources */,
 				416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */,
+				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,
@@ -1164,9 +1182,11 @@
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
 				416F2F0F27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift in Sources */,
 				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
+				4173C20927C36FD400B8FBB8 /* QRCodeImageGenerator.swift in Sources */,
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
+				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
 				416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */,
 				416F2EFD27BDF812004E5AD9 /* MCERepository.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,

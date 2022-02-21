@@ -59,7 +59,7 @@ class RemoteOpenDoorView: BaseView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "远程开门"
-        view.closeButton.setImage(R.image.common_close_black(), for: .normal)
+        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.backgroundColor = R.color.whiteColor()
         view.titleLabel.textColor = R.color.blackColor()
         return view

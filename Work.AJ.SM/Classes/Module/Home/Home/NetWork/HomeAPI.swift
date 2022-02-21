@@ -13,6 +13,7 @@ enum HomeAPI {
     case getNotice(communityID:String, blockID: String, cellID: String)
     case getElevators(communityID:String, unitID: String, cellID: String, groupID: String)
     case getLocks(communityID: String, blockID: String, cellID: String, unitID: String, userID: String, physicfloor: String)
+    case getUserOfflineQRCode(unitID: String)
 }
 
 extension HomeAPI: TargetType {
@@ -33,12 +34,14 @@ extension HomeAPI: TargetType {
             return APIs.cellGroupElevators
         case .getLocks:
             return APIs.locks
+        case .getUserOfflineQRCode:
+            return APIs.userQRCode
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks:
+        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode:
             return .post
         }
     }
@@ -55,6 +58,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "CELLID": cellID, "UNITID": unitID, "GROUPID": groupID].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getLocks(communityID, blockID, cellID, unitID, userID, physicfloor):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID, "PHYSICALFLOOR": physicfloor].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getUserOfflineQRCode(unitID):
+            return .requestParameters(parameters: ["UNITID": unitID, "isVisitor": "0"].ekey("UNITID"), encoding: URLEncoding.default)
         }
     }
     
