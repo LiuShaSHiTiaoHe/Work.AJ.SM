@@ -1,16 +1,13 @@
 //
-//  RemoteOpenDoorView.swift
+//  RemoteIntercomView.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/18.
+//  Created by Fairdesk on 2022/2/21.
 //
 
 import UIKit
-import SnapKit
 
-let RemoteOpenDoorCellIdentifier = "RemoteOpenDoorCell"
-
-class RemoteOpenDoorView: BaseView {
+class RemoteIntercomView: BaseView {
 
     override func initializeView(){
         self.addSubview(headerView)
@@ -58,8 +55,8 @@ class RemoteOpenDoorView: BaseView {
     
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.titleLabel.text = "远程开门"
-        view.closeButton.setImage(R.image.common_close_black(), for: .normal)
+        view.titleLabel.text = "门禁对讲"
+        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.backgroundColor = R.color.whiteColor()
         view.titleLabel.textColor = R.color.blackColor()
         return view
@@ -90,7 +87,7 @@ class RemoteOpenDoorView: BaseView {
         view.textColor = R.color.themeColor()
         view.font = k15Font
         view.backgroundColor = R.color.backgroundColor()
-        view.text = "请选择设备开门"
+        view.text = "请选择视频通话的门禁设备"
         return view
     }()
     

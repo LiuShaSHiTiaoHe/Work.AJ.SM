@@ -28,6 +28,8 @@ class IndoorCallElevatorViewController: BaseViewController {
         indoorCallElevatorView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        indoorCallElevatorView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
     }
 }
 
@@ -39,10 +41,6 @@ extension IndoorCallElevatorViewController: IndoorCallElevatorViewDelegate {
     
     func callDownAction() {
         
-    }
-    
-    func closeAction() {
-        self.navigationController?.popViewController(animated: true)
     }
     
 }

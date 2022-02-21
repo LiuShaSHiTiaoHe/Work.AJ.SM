@@ -166,9 +166,13 @@ extension HomeViewController: UICollectionViewDelegate {
                     height: .constant(value: 380)
                 ), true)
             case .cloudOpneGate:
-                break
+                let vc = RemoteOpenDoorViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
             case .cloudIntercom:
-                break
+                let vc = RemoteIntercomViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
             case .scanElevatorQRCode:
                 break
             case .inviteVisitors:

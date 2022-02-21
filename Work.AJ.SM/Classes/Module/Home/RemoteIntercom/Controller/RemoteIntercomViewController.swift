@@ -1,13 +1,13 @@
 //
-//  RemoteOpenDoorViewController.swift
+//  RemoteIntercomViewController.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/18.
+//  Created by Fairdesk on 2022/2/21.
 //
 
 import UIKit
 
-class RemoteOpenDoorViewController: BaseViewController {
+class RemoteIntercomViewController: BaseViewController {
 
     private var dataSource: [UnitLockModel] = []
     
@@ -41,9 +41,10 @@ class RemoteOpenDoorViewController: BaseViewController {
         
         openDoorView.tableView.reloadData()
     }
+    
 }
 
-extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSource {
+extension RemoteIntercomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }

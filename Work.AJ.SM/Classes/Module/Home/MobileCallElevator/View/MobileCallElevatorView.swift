@@ -11,7 +11,6 @@ let MobileCallElevatorCellidentifier = "MCECollectionViewCell"
 
 protocol MobileCallElevatorViewDelegate: NSObjectProtocol {
     func chooseElevator()
-    func closeAction()
 }
 
 class MobileCallElevatorView: UIView {
@@ -31,7 +30,6 @@ class MobileCallElevatorView: UIView {
     func initData() {
         titleContentView.isUserInteractionEnabled = true
         titleContentView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(chooseElevatorAction)))
-        headerView.closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
     }
     
     @objc
@@ -39,10 +37,6 @@ class MobileCallElevatorView: UIView {
         delegate?.chooseElevator()
     }
     
-    @objc
-    func close()  {
-        delegate?.closeAction()
-    }
     
     func updateTitle() {
         

@@ -28,5 +28,7 @@ final class APIs {
     static let advertisement = "appcity/getAdByPosition.do"
     //根据单元电梯群组获取电梯
     static let cellGroupElevators = "appcity/getLiftByCellGroup"
+    
+    static let locks = "appcity/getLock.do"
 
 }

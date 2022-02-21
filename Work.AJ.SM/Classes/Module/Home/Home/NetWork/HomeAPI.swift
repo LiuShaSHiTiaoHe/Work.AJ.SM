@@ -12,6 +12,7 @@ enum HomeAPI {
     case getAdvertisement(operID: String, communityID: String)
     case getNotice(communityID:String, blockID: String, cellID: String)
     case getElevators(communityID:String, unitID: String, cellID: String, groupID: String)
+    case getLocks(communityID: String, blockID: String, cellID: String, unitID: String, userID: String, physicfloor: String)
 }
 
 extension HomeAPI: TargetType {
@@ -30,12 +31,14 @@ extension HomeAPI: TargetType {
             return APIs.notice
         case .getElevators:
             return APIs.cellGroupElevators
+        case .getLocks:
+            return APIs.locks
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators:
+        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks:
             return .post
         }
     }
@@ -50,6 +53,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["BLOCKID": blockID, "COMMUNITYID": communityID, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getElevators(communityID, unitID, cellID, groupID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "CELLID": cellID, "UNITID": unitID, "GROUPID": groupID].ekey("CELLID"), encoding: URLEncoding.default)
+        case let .getLocks(communityID, blockID, cellID, unitID, userID, physicfloor):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID, "PHYSICALFLOOR": physicfloor].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         }
     }
     

@@ -44,6 +44,11 @@ class BaseViewController: UIViewController {
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
+    @objc
+    func closeAction() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func initUI() {}
     
     @objc func headerRefresh() {}

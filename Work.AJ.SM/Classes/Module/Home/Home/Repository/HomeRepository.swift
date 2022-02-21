@@ -105,7 +105,7 @@ extension HomeRepository {
         if let unit = getCurrentUnit() {
             let locks = unit.locks
             result.append(contentsOf: locks.filter({ model in
-                model.locktype == "B"
+                model.locktype != "B"
             }))
         }
         return result

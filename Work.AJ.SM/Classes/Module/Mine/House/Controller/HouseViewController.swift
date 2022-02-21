@@ -69,10 +69,6 @@ class HouseViewController: BaseViewController {
         
     }
     
-    @objc
-    func closeAction(){
-        self.navigationController?.popViewController(animated: true)
-    }
     
     @objc
     func addHouse(){

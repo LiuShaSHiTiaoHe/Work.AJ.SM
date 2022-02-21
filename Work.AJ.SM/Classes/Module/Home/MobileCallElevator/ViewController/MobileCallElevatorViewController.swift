@@ -41,7 +41,7 @@ class MobileCallElevatorViewController: BaseViewController {
         mobileCallElevator.collectionView.delegate = self
         mobileCallElevator.collectionView.dataSource = self
         mobileCallElevator.delegate = self
-        
+        mobileCallElevator.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         MCERepository.shared.getElevators {[weak self] model, response in
             guard let `self` = self else { return }
             self.dataSource = model
@@ -69,9 +69,6 @@ extension MobileCallElevatorViewController: MobileCallElevatorViewDelegate {
             vc.dataSource = lifts
             self.navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    func closeAction() {
-        self.navigationController?.popViewController(animated: true)
     }
 }
 

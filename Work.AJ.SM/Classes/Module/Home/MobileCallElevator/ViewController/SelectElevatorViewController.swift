@@ -60,11 +60,6 @@ class SelectElevatorViewController: BaseViewController {
         tableView.delegate = self
     }
     
-    @objc
-    func closeAction(){
-        self.navigationController?.popViewController(animated: true)
-    }
-
 }
 
 extension SelectElevatorViewController: UITableViewDataSource, UITableViewDelegate {

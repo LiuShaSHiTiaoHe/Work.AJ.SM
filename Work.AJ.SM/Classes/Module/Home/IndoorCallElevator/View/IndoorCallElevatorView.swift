@@ -10,7 +10,6 @@ import UIKit
 protocol IndoorCallElevatorViewDelegate: NSObjectProtocol {
     func callUpAction()
     func callDownAction()
-    func closeAction()
 }
 
 class IndoorCallElevatorView: UIView {
@@ -67,10 +66,6 @@ class IndoorCallElevatorView: UIView {
         downButton.isSelected = true
     }
     
-    @objc
-    func close() {
-        delegate?.closeAction()
-    }
     
     func initializeView() {
         self.backgroundColor = R.color.backgroundColor()
@@ -116,7 +111,6 @@ class IndoorCallElevatorView: UIView {
     func initData() {
         headerView.titleLabel.text = "室内呼梯"
         headerView.rightButton.isHidden = true
-        headerView.closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
     }
     
     override init(frame: CGRect) {
