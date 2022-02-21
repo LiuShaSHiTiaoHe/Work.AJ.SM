@@ -216,10 +216,16 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController: ChooseVisitorModeDelegate {
     func qrcode() {
-        SwiftEntryKit.dismiss()
+        SwiftEntryKit.dismiss(.displayed) {
+            let vc = SetVisitorQRCodeViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func password() {
-        SwiftEntryKit.dismiss()
+        SwiftEntryKit.dismiss(.displayed) {
+            let vc = SetVisitorQRCodeViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

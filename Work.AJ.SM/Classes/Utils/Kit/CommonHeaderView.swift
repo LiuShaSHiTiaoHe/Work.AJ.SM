@@ -31,7 +31,7 @@ class CommonHeaderView: UIView {
     
     lazy var lineView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.secondtextColor()
+        view.backgroundColor = R.color.lineColor()
         return view
     }()
     
