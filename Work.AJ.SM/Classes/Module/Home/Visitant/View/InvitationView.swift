@@ -84,7 +84,7 @@ class InvitationView: BaseView {
         
         qrCodeView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-kMargin)
+            make.bottom.equalToSuperview().offset(-kMargin*1.5)
             make.width.height.equalTo(290)
         }
         

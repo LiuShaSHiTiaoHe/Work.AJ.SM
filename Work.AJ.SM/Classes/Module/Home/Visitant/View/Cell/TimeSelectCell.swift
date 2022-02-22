@@ -7,9 +7,9 @@
 
 import UIKit
 
-let SetVisitorQRCodeCellIdentifier = "SetVisitorQRCodeCellIdentifier"
+let TimeSelectCellIdentifier = "TimeSelectCellIdentifier"
 
-class SetVisitorQRCodeCell: UITableViewCell {
+class TimeSelectCell: UITableViewCell {
         
     lazy var nameLabel: UILabel = {
         let view = UILabel()

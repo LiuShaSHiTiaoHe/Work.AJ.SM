@@ -1,8 +1,8 @@
 //
-//  SetVisitorQRCodeViewController.swift
+//  SetVisitorPasswordViewController.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/21.
+//  Created by Fairdesk on 2022/2/22.
 //
 
 import UIKit
@@ -10,19 +10,14 @@ import PGDatePicker
 import YYCategories
 import SVProgressHUD
 
-enum SelectTimeType {
-    case arrive
-    case valid
-}
-
-class SetVisitorQRCodeViewController: BaseViewController {
+class SetVisitorPasswordViewController: BaseViewController {
 
     private var arriveTime: Date?
     private var validTime: Date?
     private var timeType: SelectTimeType = .arrive
     
-    lazy var contentView: SetVisitorQRCodeView = {
-        let view = SetVisitorQRCodeView()
+    lazy var contentView: SetVisitorPasswordView = {
+        let view = SetVisitorPasswordView()
         return view
     }()
     
@@ -40,7 +35,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
         }
         
     }
-
+    
     func initData() {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
@@ -108,31 +103,41 @@ class SetVisitorQRCodeViewController: BaseViewController {
             SVProgressHUD.showError(withStatus: "请选择来访时间")
         }
     }
+
 }
 
-extension SetVisitorQRCodeViewController: UITableViewDelegate, UITableViewDataSource {
+extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
-        cell.accessoryType = .disclosureIndicator
+        
         switch indexPath.row {
         case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
+            cell.accessoryType = .disclosureIndicator
             if let arriveTimeString = arriveTime?.jk.toformatterTimeString(formatter: "yyyy-MM-dd HH:mm") {
                 cell.timeLabel.text = arriveTimeString
             }
             cell.nameLabel.text = "来访时间"
+            return cell
         case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
+            cell.accessoryType = .disclosureIndicator
             if let validTimeString = validTime?.jk.toformatterTimeString(formatter: "yyyy-MM-dd HH:mm") {
                 cell.timeLabel.text = validTimeString
             }
             cell.nameLabel.text = "有效期至"
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: NumberOfUseCellIdentifier, for: indexPath) as! NumberOfUseCell
+            cell.accessoryType = .none
+            cell.delegate = self
+            return cell
         default:
             fatalError()
         }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -144,12 +149,25 @@ extension SetVisitorQRCodeViewController: UITableViewDelegate, UITableViewDataSo
         switch indexPath.row {
         case 0:
             timeType = .arrive
+            self.selectTime()
         case 1:
             timeType = .valid
+            self.selectTime()
+        case 2:
+            break
         default:
             fatalError()
         }
-        self.selectTime()
     }
 
+}
+
+extension SetVisitorPasswordViewController: NumberOfUseCellDelegate {
+    func single(isSelected: Bool) {
+        
+    }
+    
+    func mutify(isSelected: Bool) {
+        
+    }
 }

@@ -1,13 +1,13 @@
 //
-//  SetVisitorQRCodeView.swift
+//  SetVisitorPasswordView.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/21.
+//  Created by Fairdesk on 2022/2/22.
 //
 
 import UIKit
 
-class SetVisitorQRCodeView: UIView {
+class SetVisitorPasswordView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,7 +70,7 @@ class SetVisitorQRCodeView: UIView {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.backgroundColor = R.color.whiteColor()
-        view.titleLabel.text = "设置访客二维码"
+        view.titleLabel.text = "设置访客密码"
         view.titleLabel.textColor = R.color.blackColor()
         return view
     }()
@@ -101,6 +101,7 @@ class SetVisitorQRCodeView: UIView {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(TimeSelectCell.self, forCellReuseIdentifier: TimeSelectCellIdentifier)
+        view.register(NumberOfUseCell.self, forCellReuseIdentifier: NumberOfUseCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
         return view
