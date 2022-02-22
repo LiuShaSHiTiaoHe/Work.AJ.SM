@@ -104,11 +104,14 @@
 		4173C21227C3875700B8FBB8 /* SetVisitorQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21127C3875700B8FBB8 /* SetVisitorQRCodeViewController.swift */; };
 		4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21327C387EA00B8FBB8 /* SetVisitorQRCodeView.swift */; };
 		4173C21727C38BA200B8FBB8 /* TimeSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21627C38BA200B8FBB8 /* TimeSelectCell.swift */; };
-		4173C21927C48E7C00B8FBB8 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21827C48E7C00B8FBB8 /* InvitationViewController.swift */; };
-		4173C21B27C4A88500B8FBB8 /* InvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21A27C4A88500B8FBB8 /* InvitationView.swift */; };
+		4173C21927C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21827C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift */; };
+		4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21A27C4A88500B8FBB8 /* QRCodeInvitationView.swift */; };
 		4173C21D27C4C8C800B8FBB8 /* SetVisitorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21C27C4C8C800B8FBB8 /* SetVisitorPasswordViewController.swift */; };
 		4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C21E27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift */; };
 		4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22027C4C9B900B8FBB8 /* NumberOfUseCell.swift */; };
+		4173C22327C4DEDD00B8FBB8 /* PasswordInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22227C4DEDD00B8FBB8 /* PasswordInvitationView.swift */; };
+		4173C22527C4E09E00B8FBB8 /* PasswordInvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22427C4E09E00B8FBB8 /* PasswordInvitationViewController.swift */; };
+		4173C22727C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22627C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -231,11 +234,14 @@
 		4173C21127C3875700B8FBB8 /* SetVisitorQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVisitorQRCodeViewController.swift; sourceTree = "<group>"; };
 		4173C21327C387EA00B8FBB8 /* SetVisitorQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVisitorQRCodeView.swift; sourceTree = "<group>"; };
 		4173C21627C38BA200B8FBB8 /* TimeSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectCell.swift; sourceTree = "<group>"; };
-		4173C21827C48E7C00B8FBB8 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
-		4173C21A27C4A88500B8FBB8 /* InvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationView.swift; sourceTree = "<group>"; };
+		4173C21827C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeInvitationViewController.swift; sourceTree = "<group>"; };
+		4173C21A27C4A88500B8FBB8 /* QRCodeInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeInvitationView.swift; sourceTree = "<group>"; };
 		4173C21C27C4C8C800B8FBB8 /* SetVisitorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVisitorPasswordViewController.swift; sourceTree = "<group>"; };
 		4173C21E27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVisitorPasswordView.swift; sourceTree = "<group>"; };
 		4173C22027C4C9B900B8FBB8 /* NumberOfUseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfUseCell.swift; sourceTree = "<group>"; };
+		4173C22227C4DEDD00B8FBB8 /* PasswordInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInvitationView.swift; sourceTree = "<group>"; };
+		4173C22427C4E09E00B8FBB8 /* PasswordInvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInvitationViewController.swift; sourceTree = "<group>"; };
+		4173C22627C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationPhoneNumberCell.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -931,7 +937,6 @@
 			children = (
 				4173C21027C3873300B8FBB8 /* Password */,
 				4173C20F27C3872C00B8FBB8 /* QRCode */,
-				4173C21827C48E7C00B8FBB8 /* InvitationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -943,7 +948,8 @@
 				4173C20D27C3722800B8FBB8 /* ChooseVisitorModeView.swift */,
 				4173C21327C387EA00B8FBB8 /* SetVisitorQRCodeView.swift */,
 				4173C21E27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift */,
-				4173C21A27C4A88500B8FBB8 /* InvitationView.swift */,
+				4173C21A27C4A88500B8FBB8 /* QRCodeInvitationView.swift */,
+				4173C22227C4DEDD00B8FBB8 /* PasswordInvitationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -951,6 +957,7 @@
 		4173C20F27C3872C00B8FBB8 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
+				4173C21827C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift */,
 				4173C21127C3875700B8FBB8 /* SetVisitorQRCodeViewController.swift */,
 			);
 			path = QRCode;
@@ -960,6 +967,7 @@
 			isa = PBXGroup;
 			children = (
 				4173C21C27C4C8C800B8FBB8 /* SetVisitorPasswordViewController.swift */,
+				4173C22427C4E09E00B8FBB8 /* PasswordInvitationViewController.swift */,
 			);
 			path = Password;
 			sourceTree = "<group>";
@@ -969,6 +977,7 @@
 			children = (
 				4173C21627C38BA200B8FBB8 /* TimeSelectCell.swift */,
 				4173C22027C4C9B900B8FBB8 /* NumberOfUseCell.swift */,
+				4173C22627C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1190,6 +1199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4173C22727C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift in Sources */,
 				416F2F1227BF93CD004E5AD9 /* RemoteOpenDoorView.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2F0627BE4597004E5AD9 /* BaseView.swift in Sources */,
@@ -1220,6 +1230,7 @@
 				416F2EC427BB7787004E5AD9 /* HouseViewController.swift in Sources */,
 				416F2E7327B0BFB5004E5AD9 /* UnitCodesModel.swift in Sources */,
 				4173C21227C3875700B8FBB8 /* SetVisitorQRCodeViewController.swift in Sources */,
+				4173C22327C4DEDD00B8FBB8 /* PasswordInvitationView.swift in Sources */,
 				4173C20E27C3722800B8FBB8 /* ChooseVisitorModeView.swift in Sources */,
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
 				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
@@ -1247,7 +1258,7 @@
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
-				4173C21B27C4A88500B8FBB8 /* InvitationView.swift in Sources */,
+				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,
@@ -1259,8 +1270,9 @@
 				416F2EF527BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift in Sources */,
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,
+				4173C22527C4E09E00B8FBB8 /* PasswordInvitationViewController.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
-				4173C21927C48E7C00B8FBB8 /* InvitationViewController.swift in Sources */,
+				4173C21927C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift in Sources */,
 				416F2EAC27B60BA4004E5AD9 /* MobileInputView.swift in Sources */,
 				4173C21727C38BA200B8FBB8 /* TimeSelectCell.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,

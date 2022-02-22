@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class InvitationView: BaseView {
+class QRCodeInvitationView: BaseView {
     
     override func initializeView() {
         self.addSubview(bgImageView)

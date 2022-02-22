@@ -10,11 +10,18 @@ import PGDatePicker
 import YYCategories
 import SVProgressHUD
 
+enum VisitTimes {
+    case single
+    case multy
+    case initial
+}
+
 class SetVisitorPasswordViewController: BaseViewController {
 
     private var arriveTime: Date?
     private var validTime: Date?
     private var timeType: SelectTimeType = .arrive
+    private var visitTimes: VisitTimes = .initial
     
     lazy var contentView: SetVisitorPasswordView = {
         let view = SetVisitorPasswordView()
@@ -91,10 +98,15 @@ class SetVisitorPasswordViewController: BaseViewController {
                 if interval > 12*60*60 {
                     SVProgressHUD.showError(withStatus: "有效期超出限值")
                 }else{
-                    let vc = InvitationViewController()
-                    vc.arriveTime = arriveTime
-                    vc.validTime = validTime
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if visitTimes == .initial {
+                        SVProgressHUD.showError(withStatus: "选择使用次数")
+                    }else{
+                        let vc = PasswordInvitationViewController()
+                        vc.arriveTime = arriveTime
+                        vc.validTime = validTime
+                        vc.visitTimes = visitTimes
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
             }else{
                 SVProgressHUD.showError(withStatus: "有效期早于来访时间")
@@ -108,13 +120,17 @@ class SetVisitorPasswordViewController: BaseViewController {
 
 extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
         case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: InvitationPhoneNumberCellIdentifier, for: indexPath) as! InvitationPhoneNumberCell
+            
+            return cell
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
             cell.accessoryType = .disclosureIndicator
             if let arriveTimeString = arriveTime?.jk.toformatterTimeString(formatter: "yyyy-MM-dd HH:mm") {
@@ -122,7 +138,7 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
             }
             cell.nameLabel.text = "来访时间"
             return cell
-        case 1:
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
             cell.accessoryType = .disclosureIndicator
             if let validTimeString = validTime?.jk.toformatterTimeString(formatter: "yyyy-MM-dd HH:mm") {
@@ -130,7 +146,7 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
             }
             cell.nameLabel.text = "有效期至"
             return cell
-        case 2:
+        case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: NumberOfUseCellIdentifier, for: indexPath) as! NumberOfUseCell
             cell.accessoryType = .none
             cell.delegate = self
@@ -141,19 +157,21 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
+        return 70.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         switch indexPath.row {
         case 0:
+            break
+        case 1:
             timeType = .arrive
             self.selectTime()
-        case 1:
+        case 2:
             timeType = .valid
             self.selectTime()
-        case 2:
+        case 3:
             break
         default:
             fatalError()
@@ -164,10 +182,18 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
 
 extension SetVisitorPasswordViewController: NumberOfUseCellDelegate {
     func single(isSelected: Bool) {
-        
+        if isSelected {
+            visitTimes = .single
+        }else{
+            visitTimes = .initial
+        }
     }
     
-    func mutify(isSelected: Bool) {
-        
+    func multy(isSelected: Bool) {
+        if isSelected {
+            visitTimes = .multy
+        }else{
+            visitTimes = .initial
+        }
     }
 }

@@ -96,7 +96,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
                 if interval > 12*60*60 {
                     SVProgressHUD.showError(withStatus: "有效期超出限值")
                 }else{
-                    let vc = InvitationViewController()
+                    let vc = QRCodeInvitationViewController()
                     vc.arriveTime = arriveTime
                     vc.validTime = validTime
                     self.navigationController?.pushViewController(vc, animated: true)

@@ -1,5 +1,5 @@
 //
-//  InvitationViewController.swift
+//  PasswordInvitationViewController.swift
 //  Work.AJ.SM
 //
 //  Created by Fairdesk on 2022/2/22.
@@ -8,16 +8,16 @@
 import UIKit
 import SVProgressHUD
 
-class InvitationViewController: BaseViewController {
+class PasswordInvitationViewController: BaseViewController {
 
     var arriveTime: Date?
     var validTime: Date?
+    var visitTimes: VisitTimes?
     
-    lazy var contentView: InvitationView = {
-        let view = InvitationView()
+    lazy var contentView: PasswordInvitationView = {
+        let view = PasswordInvitationView()
         return view
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +25,7 @@ class InvitationViewController: BaseViewController {
         initData()
     }
     
+
     override func initUI() {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
@@ -35,7 +36,6 @@ class InvitationViewController: BaseViewController {
     func initData()  {
         contentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
         contentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
-        generateQRCode()
     }
     
     @objc
@@ -67,32 +67,6 @@ class InvitationViewController: BaseViewController {
                 }else{
                     SVProgressHUD.showError(withStatus: "分享取消")
                 }
-            }
-        }
-    }
-    
-    func generateQRCode() {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityname = unit.communityname, let cellname = unit.cellname {
-            contentView.locationLabel.text = communityname + cellname
-            if let arriveTime = arriveTime, let validTime = validTime {
-                contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-                contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-
-                let arriveTimeString = arriveTime.jk.toformatterTimeString()
-                let validTimeString = validTime.jk.toformatterTimeString()
-                
-                HomeAPI.getInvitationQRCode(unitID: unitID, arriveTime: arriveTimeString, validTime: validTimeString).defaultRequest { JsonData in
-                    if let data = JsonData["data"].dictionary, let qrcode = data["qrcode"]?.string {
-                        if let qrcodeImage = QRCode.init(string: qrcode, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
-                            DispatchQueue.main.async {
-                                self.contentView.qrCodeView.image = image
-                            }
-                        }
-                    }
-                } failureCallback: { response in
-                    logger.info("\(response.message)")
-                }
-                
             }
         }
     }

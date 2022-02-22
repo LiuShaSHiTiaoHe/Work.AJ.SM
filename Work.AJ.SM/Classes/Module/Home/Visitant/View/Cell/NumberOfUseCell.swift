@@ -9,7 +9,7 @@ import UIKit
 
 protocol NumberOfUseCellDelegate: NSObjectProtocol {
     func single(isSelected: Bool)
-    func mutify(isSelected: Bool)
+    func multy(isSelected: Bool)
 }
 
 let NumberOfUseCellIdentifier = "NumberOfUseCellIdentifier"
@@ -47,7 +47,7 @@ class NumberOfUseCell: UITableViewCell {
         }else{
             multyButton.backgroundColor = R.color.whiteColor()
         }
-        delegate?.mutify(isSelected: state)
+        delegate?.multy(isSelected: state)
     }
     
     func initializeView() {
@@ -64,19 +64,20 @@ class NumberOfUseCell: UITableViewCell {
             make.width.equalTo(100)
         }
         
-        multyButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin*2)
+        singleButton.snp.makeConstraints { make in
+            make.left.equalTo(contentView.snp.centerX)
             make.centerY.equalToSuperview()
             make.width.equalTo(60)
             make.height.equalTo(24)
         }
         
-        singleButton.snp.makeConstraints { make in
-            make.right.equalTo(multyButton.snp.left).offset(-kMargin*2)
+        multyButton.snp.makeConstraints { make in
+            make.left.equalTo(singleButton.snp.right).offset(kMargin)
             make.centerY.equalToSuperview()
             make.width.equalTo(60)
             make.height.equalTo(24)
         }
+        
     }
     
     lazy var nameLabel: UILabel = {

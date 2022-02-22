@@ -54,6 +54,7 @@ class TimeSelectCell: UITableViewCell {
         
         timeLabel.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
+            make.left.equalTo(contentView.snp.centerX)
             make.centerY.equalToSuperview()
             make.height.equalTo(30)
         }
