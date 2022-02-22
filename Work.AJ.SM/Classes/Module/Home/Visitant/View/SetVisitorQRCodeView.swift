@@ -25,6 +25,7 @@ class SetVisitorQRCodeView: UIView {
         titleContentView.addSubview(locationIcon)
         titleContentView.addSubview(tipsLabel)
         self.addSubview(tableView)
+        self.addSubview(confirmButton)
         
         headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
@@ -47,12 +48,20 @@ class SetVisitorQRCodeView: UIView {
             make.width.equalTo(12)
             make.height.equalTo(15)
             make.centerY.equalToSuperview()
-            make.right.equalTo(tipsLabel.snp.left)
+            make.right.equalTo(tipsLabel.snp.left).offset(-kMargin/2)
         }
         
         tableView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(titleContentView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.top.equalTo(titleContentView.snp.bottom).offset(kMargin)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
+        }
+        
+        confirmButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(tableView.snp.bottom).offset(kMargin/2)
+            make.height.equalTo(40)
+            make.width.equalTo(250)
         }
         
     }
@@ -68,7 +77,7 @@ class SetVisitorQRCodeView: UIView {
     
     lazy var titleContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.whiteColor()
         return view
     }()
     
@@ -95,6 +104,15 @@ class SetVisitorQRCodeView: UIView {
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
         return view
+    }()
+    
+    lazy var confirmButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setTitle("完成", for: .normal)
+        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.layer.cornerRadius = 20.0
+        button.backgroundColor = R.color.themeColor()
+        return button
     }()
     
 

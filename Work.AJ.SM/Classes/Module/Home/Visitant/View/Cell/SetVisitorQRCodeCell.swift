@@ -10,6 +10,25 @@ import UIKit
 let SetVisitorQRCodeCellIdentifier = "SetVisitorQRCodeCellIdentifier"
 
 class SetVisitorQRCodeCell: UITableViewCell {
+        
+    lazy var nameLabel: UILabel = {
+        let view = UILabel()
+        view.font = k14Font
+        view.textColor = R.color.maintextColor()
+        view.textAlignment = .left
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        return view
+    }()
+    
+    lazy var timeLabel: UILabel = {
+        let view = UILabel()
+        view.textColor = R.color.secondtextColor()
+        view.font = k12Font
+        view.textAlignment = .right
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        return view
+    }()
+    
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -22,8 +41,22 @@ class SetVisitorQRCodeCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.whiteColor()
         
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(timeLabel)
+        
+        nameLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(kMargin)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(30)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-kMargin)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(30)
+        }
     }
     
     override func awakeFromNib() {

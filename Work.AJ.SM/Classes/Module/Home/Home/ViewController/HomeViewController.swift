@@ -218,6 +218,7 @@ extension HomeViewController: ChooseVisitorModeDelegate {
     func qrcode() {
         SwiftEntryKit.dismiss(.displayed) {
             let vc = SetVisitorQRCodeViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -225,6 +226,7 @@ extension HomeViewController: ChooseVisitorModeDelegate {
     func password() {
         SwiftEntryKit.dismiss(.displayed) {
             let vc = SetVisitorQRCodeViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -24,6 +24,7 @@ target 'Work.AJ.SM' do
   pod 'KeychainAccess', '4.2.2'
   pod 'SwiftyUserDefaults', '5.3.0'
   pod 'YYCache'
+  pod 'YYCategories'
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
   pod 'JKSwiftExtension'

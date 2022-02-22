@@ -61,6 +61,9 @@ PODS:
   - XCGLogger/Core (7.0.1):
     - ObjcExceptionBridging
   - YYCache (1.0.4)
+  - YYCategories (1.0.4):
+    - YYCategories/no-arc (= 1.0.4)
+  - YYCategories/no-arc (1.0.4)
 
 DEPENDENCIES:
   - ActiveLabel
@@ -94,6 +97,7 @@ DEPENDENCIES:
   - SwiftyUserDefaults (= 5.3.0)
   - XCGLogger (= 7.0.1)
   - YYCache
+  - YYCategories
 
 SPEC REPOS:
   trunk:
@@ -131,6 +135,7 @@ SPEC REPOS:
     - SwiftyUserDefaults
     - XCGLogger
     - YYCache
+    - YYCategories
 
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
@@ -167,7 +172,8 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 4ef8a3ceb7bd9a26130b3270411d9d9104d5762a
+PODFILE CHECKSUM: 1984e0e2fd660cc1edc8abffe55c595d3d8e266a
 
 COCOAPODS: 1.11.2

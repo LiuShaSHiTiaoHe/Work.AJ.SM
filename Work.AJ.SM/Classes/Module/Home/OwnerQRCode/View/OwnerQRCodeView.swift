@@ -163,7 +163,7 @@ class OwnerQRCodeView: UIView {
         }
         
         qrcodeView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(118)
+            make.top.equalTo(tipsLabel.snp.bottom).offset(kMargin)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(290)
         }

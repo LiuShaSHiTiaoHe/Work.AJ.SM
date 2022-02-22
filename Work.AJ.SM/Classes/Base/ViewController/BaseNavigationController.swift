@@ -13,7 +13,7 @@ class BaseNavigationController: UINavigationController {
         super.viewDidLoad()
 
         self.interactivePopGestureRecognizer?.delegate = self
-        
+        self.isNavigationBarHidden = true
         let navigationBarAppearence = UINavigationBar.appearance()
         let nBar = self.navigationBar
         nBar.isTranslucent = false
