@@ -8,6 +8,7 @@ PODS:
   - IQKeyboardManagerSwift (6.5.9)
   - JKSwiftExtension (2.0.2)
   - KeychainAccess (4.2.2)
+  - Kingfisher (6.3.1)
   - LTMorphingLabel (0.9.3)
   - MarqueeLabel (4.0.5)
   - MJRefresh (3.7.5)
@@ -74,6 +75,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (= 6.5.9)
   - JKSwiftExtension
   - KeychainAccess (= 4.2.2)
+  - Kingfisher
   - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
   - Moya
@@ -110,6 +112,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - JKSwiftExtension
     - KeychainAccess
+    - Kingfisher
     - LTMorphingLabel
     - MarqueeLabel
     - MJRefresh
@@ -147,6 +150,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JKSwiftExtension: bf92c1dfd68c4d02313796f6ac857f8d62572e4a
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   LTMorphingLabel: f2b256e4fe665aac27f0d0e8ccdcd79590f0cd70
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
@@ -174,6 +178,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 1984e0e2fd660cc1edc8abffe55c595d3d8e266a
+PODFILE CHECKSUM: fa40e4675a565df7f8a041330f90efc488bb4cb2
 
 COCOAPODS: 1.11.2

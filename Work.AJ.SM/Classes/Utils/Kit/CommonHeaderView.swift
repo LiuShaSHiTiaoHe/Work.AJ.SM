@@ -50,10 +50,10 @@ class CommonHeaderView: UIView {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin*3)
             make.centerY.equalTo(closeButton)
             make.height.equalTo(30)
-            make.right.equalToSuperview().offset(-kMargin*4)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(200)
         }
         
         rightButton.snp.makeConstraints { make in

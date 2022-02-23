@@ -28,7 +28,8 @@ target 'Work.AJ.SM' do
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
   pod 'JKSwiftExtension'
-  
+  pod 'Kingfisher'
+
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
   pod 'SDCycleScrollView', '1.82'

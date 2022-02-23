@@ -112,6 +112,12 @@
 		4173C22327C4DEDD00B8FBB8 /* PasswordInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22227C4DEDD00B8FBB8 /* PasswordInvitationView.swift */; };
 		4173C22527C4E09E00B8FBB8 /* PasswordInvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22427C4E09E00B8FBB8 /* PasswordInvitationViewController.swift */; };
 		4173C22727C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22627C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift */; };
+		4173C22C27C5D96400B8FBB8 /* AddMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22B27C5D96400B8FBB8 /* AddMemberViewController.swift */; };
+		4173C22E27C5D97200B8FBB8 /* AddMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C22D27C5D97200B8FBB8 /* AddMemberView.swift */; };
+		4173C23127C5D9A600B8FBB8 /* CommonInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C23027C5D9A600B8FBB8 /* CommonInputCell.swift */; };
+		4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C23227C5DA9500B8FBB8 /* CommonSelectButtonCell.swift */; };
+		4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C23427C5F92000B8FBB8 /* MemberInvitationViewController.swift */; };
+		4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C23627C5F93400B8FBB8 /* MemberInvitationView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -242,6 +248,12 @@
 		4173C22227C4DEDD00B8FBB8 /* PasswordInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInvitationView.swift; sourceTree = "<group>"; };
 		4173C22427C4E09E00B8FBB8 /* PasswordInvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInvitationViewController.swift; sourceTree = "<group>"; };
 		4173C22627C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationPhoneNumberCell.swift; sourceTree = "<group>"; };
+		4173C22B27C5D96400B8FBB8 /* AddMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberViewController.swift; sourceTree = "<group>"; };
+		4173C22D27C5D97200B8FBB8 /* AddMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberView.swift; sourceTree = "<group>"; };
+		4173C23027C5D9A600B8FBB8 /* CommonInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonInputCell.swift; sourceTree = "<group>"; };
+		4173C23227C5DA9500B8FBB8 /* CommonSelectButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSelectButtonCell.swift; sourceTree = "<group>"; };
+		4173C23427C5F92000B8FBB8 /* MemberInvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInvitationViewController.swift; sourceTree = "<group>"; };
+		4173C23627C5F93400B8FBB8 /* MemberInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInvitationView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -442,6 +454,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				4173C22827C5D93A00B8FBB8 /* AddMember */,
 				4173C20A27C371B600B8FBB8 /* Visitant */,
 				4173C1FC27C351BE00B8FBB8 /* RemoteIntercom */,
 				416F2F0C27BF7C5C004E5AD9 /* RemoteOpenDoor */,
@@ -610,6 +623,8 @@
 				416F2ECB27BB78D4004E5AD9 /* CommonHeaderView.swift */,
 				416F2EE627BCEABE004E5AD9 /* EntryKitAttributes.swift */,
 				416F2EEA27BCF931004E5AD9 /* PopViewManager.swift */,
+				4173C23027C5D9A600B8FBB8 /* CommonInputCell.swift */,
+				4173C23227C5DA9500B8FBB8 /* CommonSelectButtonCell.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -982,6 +997,41 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		4173C22827C5D93A00B8FBB8 /* AddMember */ = {
+			isa = PBXGroup;
+			children = (
+				4173C22A27C5D94900B8FBB8 /* View */,
+				4173C22927C5D94300B8FBB8 /* ViewController */,
+			);
+			path = AddMember;
+			sourceTree = "<group>";
+		};
+		4173C22927C5D94300B8FBB8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4173C22B27C5D96400B8FBB8 /* AddMemberViewController.swift */,
+				4173C23427C5F92000B8FBB8 /* MemberInvitationViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		4173C22A27C5D94900B8FBB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4173C22F27C5D98200B8FBB8 /* Cell */,
+				4173C22D27C5D97200B8FBB8 /* AddMemberView.swift */,
+				4173C23627C5F93400B8FBB8 /* MemberInvitationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4173C22F27C5D98200B8FBB8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1201,6 +1251,7 @@
 			files = (
 				4173C22727C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift in Sources */,
 				416F2F1227BF93CD004E5AD9 /* RemoteOpenDoorView.swift in Sources */,
+				4173C22C27C5D96400B8FBB8 /* AddMemberViewController.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				416F2F0627BE4597004E5AD9 /* BaseView.swift in Sources */,
 				4173C21D27C4C8C800B8FBB8 /* SetVisitorPasswordViewController.swift in Sources */,
@@ -1224,6 +1275,7 @@
 				416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */,
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
+				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,
 				416F2F0027BE16C7004E5AD9 /* MobileCallElevatorModel.swift in Sources */,
@@ -1240,6 +1292,7 @@
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
 				416F2EA727B5FE7C004E5AD9 /* AuthenticationAPI.swift in Sources */,
+				4173C22E27C5D97200B8FBB8 /* AddMemberView.swift in Sources */,
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
@@ -1261,6 +1314,7 @@
 				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
+				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,
 				416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */,
 				416F2E7227B0BFB5004E5AD9 /* UnitBcardModel.swift in Sources */,
@@ -1284,10 +1338,12 @@
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
 				416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */,
+				4173C23127C5D9A600B8FBB8 /* CommonInputCell.swift in Sources */,
 				416F2EFD27BDF812004E5AD9 /* MCERepository.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
+				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
 				416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */,
 				416F2EE227BCD0C8004E5AD9 /* OwnerQRCodeViewController.swift in Sources */,

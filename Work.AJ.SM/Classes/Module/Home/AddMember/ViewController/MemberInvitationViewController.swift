@@ -1,20 +1,21 @@
 //
-//  InvitationViewController.swift
+//  MemberInvitationViewController.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/22.
+//  Created by Fairdesk on 2022/2/23.
 //
 
 import UIKit
 import SVProgressHUD
+import Kingfisher
 
-class QRCodeInvitationViewController: BaseViewController {
+class MemberInvitationViewController: BaseViewController {
 
-    var arriveTime: Date?
-    var validTime: Date?
+    var phone: String?
+    var qrCodeString: String?
     
-    lazy var contentView: QRCodeInvitationView = {
-        let view = QRCodeInvitationView()
+    lazy var contentView: MemberInvitationView = {
+        let view = MemberInvitationView()
         return view
     }()
     
@@ -32,12 +33,29 @@ class QRCodeInvitationViewController: BaseViewController {
         }
     }
     
-    func initData()  {
+    func initData() {
         contentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
         contentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
         contentView.hearderView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        generateQRCode()
+        if let qrCodeString = qrCodeString, let qrcodeImage = QRCode.init(string: qrCodeString, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
+            DispatchQueue.main.async {
+                self.contentView.qrCodeView.image = image
+            }
+        }
+        if let phone = phone,let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname {
+            let phoneLast4 = phone.jk.sub(from: phone.count - 4)
+            contentView.tips2Label.text = "2. 下载“智慧社区”APP，使用手机尾号\(phoneLast4)登录即可加入房屋。"
+            contentView.locationLabel.text = communityname + cellname
+            
+        }
+        if let userModel = HomeRepository.shared.getCurrentUser(), let name = userModel.realName {
+            contentView.nameLabel.text = name
+//            if let imageUrl = userModel.HeadImageUrl {
+//                contentView.avatar.kf.setImage(with: URL.init(string: imageUrl), placeholder: R.image.defaultavatar!, options: nil, completionHandler: nil)
+//            }
+        }
     }
+
     
     @objc
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
@@ -68,32 +86,6 @@ class QRCodeInvitationViewController: BaseViewController {
                 }else{
                     SVProgressHUD.showError(withStatus: "分享取消")
                 }
-            }
-        }
-    }
-    
-    func generateQRCode() {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityname = unit.communityname, let cellname = unit.cellname {
-            contentView.locationLabel.text = communityname + cellname
-            if let arriveTime = arriveTime, let validTime = validTime {
-                contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-                contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-
-                let arriveTimeString = arriveTime.jk.toformatterTimeString()
-                let validTimeString = validTime.jk.toformatterTimeString()
-                
-                HomeAPI.getInvitationQRCode(unitID: unitID, arriveTime: arriveTimeString, validTime: validTimeString).defaultRequest { JsonData in
-                    if let data = JsonData["data"].dictionary, let qrcode = data["qrcode"]?.string {
-                        if let qrcodeImage = QRCode.init(string: qrcode, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
-                            DispatchQueue.main.async {
-                                self.contentView.qrCodeView.image = image
-                            }
-                        }
-                    }
-                } failureCallback: { response in
-                    logger.info("\(response.message)")
-                }
-                
             }
         }
     }

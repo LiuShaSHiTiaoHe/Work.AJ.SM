@@ -191,7 +191,9 @@ extension HomeViewController: UICollectionViewDelegate {
                 view.delegate = self
                 PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
             case .addFamilyMember:
-                break
+                let vc = AddMemberViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
             case .deviceConfiguration:
                 break
             default :

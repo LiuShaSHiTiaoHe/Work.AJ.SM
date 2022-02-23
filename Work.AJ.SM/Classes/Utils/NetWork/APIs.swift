@@ -33,5 +33,18 @@ final class APIs {
     
     //获取二维码信息
     static let userQRCode = "appcity/createOfflineQrcode"
+    
+    //访客
+    static let visitors = "appcity/getMyGuest.do"
+    static let generateVisitorPassword = "appcity/reduceGuestPassword.do"
+    static let updateVisitorPassword = "appcity/updateGuestStatus.do"
+
+
+    //业主添加家属
+    static let addFamilyMember = "appcity/addFamilyer"
+    //业主查询本房间 业主|家属|访客列表
+    static let unitMembers = "appcity/getUnitUsers"
+    // 业主删除房间 家属|访客（租客）
+    static let deleteUnitMembers = "appcity/delUnitUser"
 
 }

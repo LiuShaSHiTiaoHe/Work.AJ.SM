@@ -96,6 +96,15 @@ class HomeRepository {
         }
         return ""
     }
+    
+    func getCurrentUser() -> UserModel? {
+        if let userID = ud.userID, let intUserID = userID.jk.toInt() {
+            if let user = RealmTools.objectsWithPredicate(object: UserModel(), predicate: NSPredicate.init(format: "rid == %@", userID)).first {
+                return user
+            }
+        }
+        return nil
+    }
 }
 
 extension HomeRepository {

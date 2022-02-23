@@ -99,6 +99,17 @@ class SetVisitorPasswordViewController: BaseViewController {
     @objc
     func confirm() {
         if let validTime = validTime, let arriveTime = arriveTime {
+            let phoneNumber = getVisitorPhoneNumber()
+            if phoneNumber.isEmpty {
+                SVProgressHUD.showError(withStatus: "请输入访客的手机号码")
+                return
+            }else{
+                if !phoneNumber.jk.isValidMobile {
+                    SVProgressHUD.showError(withStatus: "请输入正确的手机号码")
+                    return
+                }
+            }
+            
             if let interval = validTime.jk.numberOfMinutes(from: arriveTime), interval >= 30 {
                 if interval > 12*60*60 {
                     SVProgressHUD.showError(withStatus: "有效期超出限值")
@@ -110,6 +121,7 @@ class SetVisitorPasswordViewController: BaseViewController {
                         vc.arriveTime = arriveTime
                         vc.validTime = validTime
                         vc.visitTimes = visitTimes
+                        vc.phoneNumber = phoneNumber
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                 }
@@ -121,6 +133,14 @@ class SetVisitorPasswordViewController: BaseViewController {
         }
     }
 
+    func getVisitorPhoneNumber() -> String {
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! InvitationPhoneNumberCell
+        if let number = cell.phoneInput.text {
+            return number
+        }else{
+            return ""
+        }
+    }
 }
 
 extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewDataSource {
@@ -133,7 +153,7 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: InvitationPhoneNumberCellIdentifier, for: indexPath) as! InvitationPhoneNumberCell
-            
+            cell.placeholder = "请输入访客手机号"
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
