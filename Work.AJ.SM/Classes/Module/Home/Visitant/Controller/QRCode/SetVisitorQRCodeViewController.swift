@@ -55,6 +55,8 @@ class SetVisitorQRCodeViewController: BaseViewController {
         let datePickerManager = PGDatePickManager.init()
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
+        datePickerManager.cancelButtonTextColor = R.color.errorRedColor()
+        datePickerManager.confirmButtonTextColor = R.color.themeColor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line
         datePicker?.datePickerMode = .dateHourMinute
@@ -65,6 +67,9 @@ class SetVisitorQRCodeViewController: BaseViewController {
         case .valid:
             datePickerManager.title = "有效期至"
         }
+        datePicker?.textColorOfSelectedRow = R.color.themeColor()
+        datePicker?.textFontOfSelectedRow = k18Font
+        datePicker?.lineBackgroundColor = R.color.themeColor()
         datePicker?.minimumDate = Date()
         datePicker?.maximumDate = NSDate.init().addingMonths(13)
         datePicker?.selectedDate = {[weak self] dateComponents in
@@ -78,7 +83,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
                 self.contentView.tableView.reloadRow(at: IndexPath.init(row: 1, section: 0), with: .none)
             }
         }
-        self.present(datePickerManager, animated: true) {
+        self.present(datePickerManager, animated: false) {
             
         }
     }
@@ -117,7 +122,7 @@ extension SetVisitorQRCodeViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
-        cell.accessoryType = .disclosureIndicator
+        cell.accessoryType = .none
         switch indexPath.row {
         case 0:
             if let arriveTimeString = arriveTime?.jk.toformatterTimeString(formatter: "yyyy-MM-dd HH:mm") {

@@ -64,20 +64,19 @@ class NumberOfUseCell: UITableViewCell {
             make.width.equalTo(100)
         }
         
-        singleButton.snp.makeConstraints { make in
-            make.left.equalTo(contentView.snp.centerX)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(60)
-            make.height.equalTo(24)
-        }
-        
         multyButton.snp.makeConstraints { make in
-            make.left.equalTo(singleButton.snp.right).offset(kMargin)
+            make.right.equalToSuperview().offset(-30)
             make.centerY.equalToSuperview()
             make.width.equalTo(60)
             make.height.equalTo(24)
         }
         
+        singleButton.snp.makeConstraints { make in
+            make.right.equalTo(multyButton.snp.left).offset(-kMargin)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(60)
+            make.height.equalTo(24)
+        }
     }
     
     lazy var nameLabel: UILabel = {

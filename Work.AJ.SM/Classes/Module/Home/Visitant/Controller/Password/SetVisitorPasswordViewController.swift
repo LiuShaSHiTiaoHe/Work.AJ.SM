@@ -57,6 +57,8 @@ class SetVisitorPasswordViewController: BaseViewController {
         let datePickerManager = PGDatePickManager.init()
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
+        datePickerManager.cancelButtonTextColor = R.color.errorRedColor()
+        datePickerManager.confirmButtonTextColor = R.color.themeColor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line
         datePicker?.datePickerMode = .dateHourMinute
@@ -67,6 +69,9 @@ class SetVisitorPasswordViewController: BaseViewController {
         case .valid:
             datePickerManager.title = "有效期至"
         }
+        datePicker?.textColorOfSelectedRow = R.color.themeColor()
+        datePicker?.textFontOfSelectedRow = k18Font
+        datePicker?.lineBackgroundColor = R.color.themeColor()
         datePicker?.minimumDate = Date()
         datePicker?.maximumDate = NSDate.init().addingMonths(13)
         datePicker?.selectedDate = {[weak self] dateComponents in
@@ -132,7 +137,7 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
-            cell.accessoryType = .disclosureIndicator
+            cell.accessoryType = .none
             if let arriveTimeString = arriveTime?.jk.toformatterTimeString(formatter: "yyyy-MM-dd HH:mm") {
                 cell.timeLabel.text = arriveTimeString
             }
@@ -140,7 +145,7 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
-            cell.accessoryType = .disclosureIndicator
+            cell.accessoryType = .none
             if let validTimeString = validTime?.jk.toformatterTimeString(formatter: "yyyy-MM-dd HH:mm") {
                 cell.timeLabel.text = validTimeString
             }

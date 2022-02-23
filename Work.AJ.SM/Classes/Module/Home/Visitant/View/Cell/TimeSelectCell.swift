@@ -29,6 +29,11 @@ class TimeSelectCell: UITableViewCell {
         return view
     }()
     
+    lazy var arrowImage: UIImageView = {
+        let view = UIImageView()
+        view.image = R.image.base_icon_rightarrow()
+        return view
+    }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,6 +50,7 @@ class TimeSelectCell: UITableViewCell {
         
         contentView.addSubview(nameLabel)
         contentView.addSubview(timeLabel)
+        contentView.addSubview(arrowImage)
         
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
@@ -53,11 +59,19 @@ class TimeSelectCell: UITableViewCell {
         }
         
         timeLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin)
+            make.right.equalTo(arrowImage.snp.left).offset(-kMargin/2)
             make.left.equalTo(contentView.snp.centerX)
             make.centerY.equalToSuperview()
             make.height.equalTo(30)
         }
+        
+        arrowImage.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-30)
+            make.width.equalTo(6)
+            make.height.equalTo(11)
+            make.centerY.equalToSuperview()
+        }
+        
     }
     
     override func awakeFromNib() {

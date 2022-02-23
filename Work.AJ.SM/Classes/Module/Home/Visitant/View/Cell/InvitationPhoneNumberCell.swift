@@ -63,7 +63,7 @@ class InvitationPhoneNumberCell: UITableViewCell {
         }
         
         phoneInput.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin*2)
+            make.right.equalToSuperview().offset(-30)
             make.height.equalTo(30)
             make.left.equalTo(contentView.snp.centerX)
             make.centerY.equalToSuperview()
