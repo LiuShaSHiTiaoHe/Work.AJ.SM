@@ -115,7 +115,7 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: HomeNaviHeaderViewDelegate {
     func chooseUnit() {
-        let vc = HouseViewController()
+        let vc = SelectHouseViewController()
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -179,7 +179,6 @@ extension HomeViewController: UICollectionViewDelegate {
                 if let device = AVCaptureDevice.default(for: .video) {
                     do {
                         let _ = try AVCaptureDeviceInput.init(device: device)
-                        
                     } catch {
                         SVProgressHUD.showError(withStatus: "没有可使用的相机")
                     }

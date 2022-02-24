@@ -16,6 +16,19 @@ class HouseCell: UITableViewCell {
     //height 80
     weak var delegate: HouseCellDelegate?
     
+    var isSelectHouse: Bool? = true {
+        didSet {
+            if let _ = unit, let flag = isSelectHouse {
+                if !flag {
+                    selectButton.isHidden = true
+                    currentStateLabel.isHidden = false
+                }
+            }else{
+                fatalError("set after unit")
+            }
+        }
+    }
+    
     var unit: UnitModel? {
         didSet {
             if let defaultUnitID = Defaults.currentUnitID, let unitID = unit?.unitid {
@@ -26,16 +39,20 @@ class HouseCell: UITableViewCell {
                     selectButton.isHidden = true
                     currentStateLabel.isHidden = false
                     currentStateLabel.text = "当前房屋"
+                    currentStateLabel.textColor = R.color.secondtextColor()
                 }
             }
             
             if let state = unit?.state {
                 if state == "P" {
                     currentStateLabel.text = "未审核"
+                    currentStateLabel.textColor = R.color.family_yellowColor()
                 }else if state == "H" {
                     currentStateLabel.text = "已失效"
+                    currentStateLabel.textColor = R.color.errorRedColor()
                 }else if state == "E" {
                     currentStateLabel.text = "已过期"
+                    currentStateLabel.textColor = R.color.errorRedColor()
                 }
             }
             
@@ -133,14 +150,14 @@ class HouseCell: UITableViewCell {
         }
         
         ownerType.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin/2)
             make.top.equalToSuperview().offset(kMargin)
             make.width.equalTo(50)
             make.height.equalTo(20)
         }
         
         cellName.snp.makeConstraints { make in
-            make.left.equalTo(ownerType.snp.right).offset(kMargin/4)
+            make.left.equalTo(ownerType.snp.right).offset(kMargin/2)
             make.height.equalTo(30)
             make.centerY.equalTo(ownerType)
             make.right.equalToSuperview().offset(-80-10-10)

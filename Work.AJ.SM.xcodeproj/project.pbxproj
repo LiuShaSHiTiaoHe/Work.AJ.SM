@@ -122,6 +122,7 @@
 		4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C23C27C619A000B8FBB8 /* MineView.swift */; };
 		4173C24027C61DD000B8FBB8 /* MineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C23F27C61DD000B8FBB8 /* MineTableViewCell.swift */; };
 		4173C24327C72C5A00B8FBB8 /* MineModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24227C72C5A00B8FBB8 /* MineModule.swift */; };
+		4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24427C75E0300B8FBB8 /* SelectHouseViewController.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +263,7 @@
 		4173C23C27C619A000B8FBB8 /* MineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineView.swift; sourceTree = "<group>"; };
 		4173C23F27C61DD000B8FBB8 /* MineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTableViewCell.swift; sourceTree = "<group>"; };
 		4173C24227C72C5A00B8FBB8 /* MineModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineModule.swift; sourceTree = "<group>"; };
+		4173C24427C75E0300B8FBB8 /* SelectHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseViewController.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -711,6 +713,7 @@
 			isa = PBXGroup;
 			children = (
 				416F2EC327BB7787004E5AD9 /* HouseViewController.swift */,
+				4173C24427C75E0300B8FBB8 /* SelectHouseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1389,6 +1392,7 @@
 				416F2EFD27BDF812004E5AD9 /* MCERepository.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
+				4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */,
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
