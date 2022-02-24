@@ -66,7 +66,6 @@ class HouseViewController: BaseViewController {
         
         units.removeAll()
         units.append(contentsOf: RealmTools.objects(UnitModel()))
-        
     }
     
     

@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 
+let MineTableViewCellIdentifier = "MineTableViewCellIdentifier"
+
 class MineTableViewCell: UITableViewCell {
     
     var iconName: String? {
@@ -90,8 +92,8 @@ class MineTableViewCell: UITableViewCell {
         
         arrowImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.width.equalTo(12)
-            make.height.equalTo(22)
+            make.width.equalTo(6)
+            make.height.equalTo(11)
             make.right.equalToSuperview().offset(-kMargin)
         }
     }
