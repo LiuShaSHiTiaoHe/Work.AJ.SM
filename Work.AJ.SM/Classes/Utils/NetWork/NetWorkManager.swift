@@ -91,6 +91,7 @@ extension TargetType {
             }
         }, cacheType: cacheType, failureCallback: failureCallback, showError: showError)
     }
+    
     @discardableResult
     func request<T: Mappable>(modelType: [T].Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
         return NetWorkRequest(successCallback: { responseModel in

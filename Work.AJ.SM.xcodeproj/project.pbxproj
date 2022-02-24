@@ -123,6 +123,10 @@
 		4173C24027C61DD000B8FBB8 /* MineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C23F27C61DD000B8FBB8 /* MineTableViewCell.swift */; };
 		4173C24327C72C5A00B8FBB8 /* MineModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24227C72C5A00B8FBB8 /* MineModule.swift */; };
 		4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24427C75E0300B8FBB8 /* SelectHouseViewController.swift */; };
+		4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24927C769BE00B8FBB8 /* MemberListCell.swift */; };
+		4173C24C27C76CA700B8FBB8 /* MemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24B27C76CA700B8FBB8 /* MemberListViewController.swift */; };
+		4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24E27C7732500B8FBB8 /* MemberModel.swift */; };
+		4173C25127C7883000B8FBB8 /* MemberListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25027C7883000B8FBB8 /* MemberListHeaderView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -264,6 +268,10 @@
 		4173C23F27C61DD000B8FBB8 /* MineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTableViewCell.swift; sourceTree = "<group>"; };
 		4173C24227C72C5A00B8FBB8 /* MineModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineModule.swift; sourceTree = "<group>"; };
 		4173C24427C75E0300B8FBB8 /* SelectHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseViewController.swift; sourceTree = "<group>"; };
+		4173C24927C769BE00B8FBB8 /* MemberListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListCell.swift; sourceTree = "<group>"; };
+		4173C24B27C76CA700B8FBB8 /* MemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListViewController.swift; sourceTree = "<group>"; };
+		4173C24E27C7732500B8FBB8 /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
+		4173C25027C7883000B8FBB8 /* MemberListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListHeaderView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -658,6 +666,7 @@
 		416F2EBB27BA46F1004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				4173C24627C7699200B8FBB8 /* Member */,
 				416F2EC527BB779D004E5AD9 /* Mine */,
 				416F2EC227BB776D004E5AD9 /* House */,
 			);
@@ -1079,6 +1088,41 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4173C24627C7699200B8FBB8 /* Member */ = {
+			isa = PBXGroup;
+			children = (
+				4173C24D27C7730D00B8FBB8 /* Model */,
+				4173C24827C769A200B8FBB8 /* View */,
+				4173C24727C7699900B8FBB8 /* ViewController */,
+			);
+			path = Member;
+			sourceTree = "<group>";
+		};
+		4173C24727C7699900B8FBB8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4173C24B27C76CA700B8FBB8 /* MemberListViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		4173C24827C769A200B8FBB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4173C24927C769BE00B8FBB8 /* MemberListCell.swift */,
+				4173C25027C7883000B8FBB8 /* MemberListHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4173C24D27C7730D00B8FBB8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4173C24E27C7732500B8FBB8 /* MemberModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1301,6 +1345,7 @@
 				4173C22C27C5D96400B8FBB8 /* AddMemberViewController.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				4173C24327C72C5A00B8FBB8 /* MineModule.swift in Sources */,
+				4173C24C27C76CA700B8FBB8 /* MemberListViewController.swift in Sources */,
 				416F2F0627BE4597004E5AD9 /* BaseView.swift in Sources */,
 				4173C21D27C4C8C800B8FBB8 /* SetVisitorPasswordViewController.swift in Sources */,
 				416F2EC027BA5436004E5AD9 /* HomeNaviHeaderView.swift in Sources */,
@@ -1344,6 +1389,7 @@
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
+				4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */,
 				416F2EAE27B60C6E004E5AD9 /* VerificationCodeInputView.swift in Sources */,
 				416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */,
 				416F2E6327B0BF95004E5AD9 /* HomeModuleCell.swift in Sources */,
@@ -1357,6 +1403,7 @@
 				416F2EE727BCEABE004E5AD9 /* EntryKitAttributes.swift in Sources */,
 				416F2E5127B0B638004E5AD9 /* BaseTabBarViewController.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
+				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
 				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
@@ -1369,6 +1416,7 @@
 				416F2E3C27B0B46F004E5AD9 /* UserDefaultsKeys.swift in Sources */,
 				416F2E9B27B3BA45004E5AD9 /* RealmTools.swift in Sources */,
 				416F2EA327B5FE25004E5AD9 /* LoginViewController.swift in Sources */,
+				4173C25127C7883000B8FBB8 /* MemberListHeaderView.swift in Sources */,
 				416F2EF527BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift in Sources */,
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,

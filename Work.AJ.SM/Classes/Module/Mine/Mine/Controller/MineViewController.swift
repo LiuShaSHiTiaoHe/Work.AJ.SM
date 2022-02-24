@@ -77,8 +77,10 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .faceCertification:
                     break
-                case .memeberManager:
-                    break
+                case .memeberManager:                    
+                    let vc = MemberListViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
                 case .visitorRecord:
                     break
                 case .setting:

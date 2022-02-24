@@ -75,7 +75,7 @@ class AddMemberViewController: BaseViewController {
         
         
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString {
-            HomeAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone).defaultRequest { jsonData in
+            MineAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone).defaultRequest { jsonData in
                 
             } failureCallback: { response in
                 SVProgressHUD.showError(withStatus: "\(response.message)")

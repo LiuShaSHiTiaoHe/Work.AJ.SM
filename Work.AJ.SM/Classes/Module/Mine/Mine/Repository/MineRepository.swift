@@ -8,6 +8,7 @@
 import UIKit
 
 typealias HouseUpdateUnitsCompletion = ((_ errorMsg: String) -> Void)
+typealias UnitMembersCompletion = (([MemberModel]) -> Void)
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
@@ -27,6 +28,24 @@ class MineRepository: NSObject {
         } failureCallback: { response in
             logger.info("\(response.message)")
             completion(response.message)
+        }
+    }
+    
+    func getCurrentUnitMembers(completion: @escaping UnitMembersCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let userID = unit.userid?.jk.intToString, let unitID = unit.unitid?.jk.intToString {
+            SVProgressHUD.show()
+            MineAPI.getUnitMembers(unitID: unitID, userID: userID).defaultRequest { jsonData in
+                SVProgressHUD.dismiss()
+                if let memberJsonString = jsonData["data"]["users"].rawString(), let members = [MemberModel](JSONString: memberJsonString) {
+                    guard members.count > 0 else { return  }
+                    completion(members)
+                }
+            } failureCallback: { response in
+                logger.info("\(response.message)")
+                completion([])
+            }
+        }else{
+            completion([])
         }
     }
     
