@@ -11,6 +11,7 @@ import SVProgressHUD
 
 class ScanQRCodeCallElevatorViewController: LBXScanViewController {
 
+    private let symbolSeperator = "sn=" //"?C="
     private var isOpenFlash: Bool = false
     
     lazy var bottonFuncView: UIView = {
@@ -57,12 +58,24 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
     
     
     override func handleCodeResult(arrayResult: [LBXScanResult]) {
-        for result: LBXScanResult in arrayResult {
-            if let str = result.strScanned {
-                print(str)
-            }
-        }
         let result: LBXScanResult = arrayResult[0]
+        if let qrString = result.strScanned {
+            if qrString.contains(symbolSeperator) {
+                let StrArray = qrString.components(separatedBy: symbolSeperator)
+                if StrArray.count > 1 {
+                    let infoStr = StrArray.last!
+                    let vc = ScanQRCodeSelectElevatorViewController()
+                    vc.SNCode = infoStr
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    SVProgressHUD.showInfo(withStatus: "数据格式未按要求设定")
+                }
+            }else{
+                SVProgressHUD.showInfo(withStatus: "数据格式未按要求设定")
+            }
+        }else{
+            SVProgressHUD.showInfo(withStatus: "扫描结果不符合要求")
+        }
     }
     
     
@@ -84,6 +97,7 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
     }
     
     func setUpStyle() {
+        arrayCodeType = [.qr]
         readyString = "正在启动相机..."
         scanStyle?.centerUpOffset = 60
         scanStyle?.xScanRetangleOffset = 30

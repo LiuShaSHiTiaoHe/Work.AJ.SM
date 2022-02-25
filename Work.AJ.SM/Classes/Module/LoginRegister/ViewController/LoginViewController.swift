@@ -42,6 +42,7 @@ extension LoginViewController: LoginViewDelegate {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData  in
             if let data = JsonData["data"].rawString(), let userInfo = JsonData["map"].rawString(), let units = [UnitModel](JSONString: data), let userModel = UserModel(JSONString: userInfo) {
                 Defaults.username = mobile
+                ud.userMobile = mobile
                 Defaults.userRealName = userModel.realName
                 Defaults.userID = userModel.rid
                 GDataManager.shared.setupDataBase()

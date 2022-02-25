@@ -16,6 +16,7 @@ enum HomeAPI {
     case getUserOfflineQRCode(unitID: String)
     case getInvitationQRCode(unitID: String, arriveTime: String, validTime: String)
     case generateVisitorPassword(communityID: String, blockID: String, unitID: String, userID: String, phone: String, time: String, type: String)
+    case getFloorsBySN(SNCode: String, phone: String, userID: String)
 }
 
 extension HomeAPI: TargetType {
@@ -40,12 +41,14 @@ extension HomeAPI: TargetType {
             return APIs.userQRCode
         case .generateVisitorPassword:
             return APIs.generateVisitorPassword
+        case .getFloorsBySN:
+            return APIs.floorsBySN
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword:
+        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN:
             return .post
         }
     }
@@ -68,6 +71,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["UNITID": unitID, "isVisitor": "1", "startTime": arriveTime, "endTime": validTime].ekey("UNITID"), encoding: URLEncoding.default)
         case let .generateVisitorPassword(communityID, blockID, unitID, userID, phone, time, type):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "USERID": userID, "PHONE": phone, "HOUR": time, "PASSTYPE": type].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getFloorsBySN(SNCode, phone, userID):
+            return .requestParameters(parameters: ["LIFTSN": SNCode, "MOBILE": phone, "USERID": userID].ekey("LIFTSN"), encoding: URLEncoding.default)
         }
     }
     

@@ -128,7 +128,8 @@
 		4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24E27C7732500B8FBB8 /* MemberModel.swift */; };
 		4173C25127C7883000B8FBB8 /* MemberListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25027C7883000B8FBB8 /* MemberListHeaderView.swift */; };
 		4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */; };
-		4173C25727C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25627C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift */; };
+		4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */; };
+		4173C25C27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -275,7 +276,8 @@
 		4173C24E27C7732500B8FBB8 /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
 		4173C25027C7883000B8FBB8 /* MemberListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListHeaderView.swift; sourceTree = "<group>"; };
 		4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeCallElevatorViewController.swift; sourceTree = "<group>"; };
-		4173C25627C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeCallElevatorManager.swift; sourceTree = "<group>"; };
+		4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorViewController.swift; sourceTree = "<group>"; };
+		4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -1131,8 +1133,8 @@
 		4173C25227C86E6600B8FBB8 /* ScanQRCodeForElevator */ = {
 			isa = PBXGroup;
 			children = (
+				4173C25827C8996000B8FBB8 /* View */,
 				4173C25327C86E7600B8FBB8 /* ViewController */,
-				4173C25627C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift */,
 			);
 			path = ScanQRCodeForElevator;
 			sourceTree = "<group>";
@@ -1141,8 +1143,17 @@
 			isa = PBXGroup;
 			children = (
 				4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */,
+				4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		4173C25827C8996000B8FBB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -1421,6 +1432,7 @@
 				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
+				4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */,
 				416F2E5327B0B64F004E5AD9 /* BaseNavigationController.swift in Sources */,
 				416F2ED327BCA221004E5AD9 /* NeighbourhoodViewController.swift in Sources */,
 				416F2EE727BCEABE004E5AD9 /* EntryKitAttributes.swift in Sources */,
@@ -1431,7 +1443,6 @@
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
 				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
-				4173C25727C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,
@@ -1461,6 +1472,7 @@
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
 				416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */,
 				4173C23127C5D9A600B8FBB8 /* CommonInputCell.swift in Sources */,
+				4173C25C27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift in Sources */,
 				416F2EFD27BDF812004E5AD9 /* MCERepository.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,

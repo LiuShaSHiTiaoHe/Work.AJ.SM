@@ -115,3 +115,25 @@ class FloorMapInfo {
     var controlA: String?//A门是否受控（1受控，0不受控）
     var controlB: String?//B门是否受控（1受控，0不受控，单开门
 }
+
+
+class FloorInfoMappable: Mappable {
+    
+    var increasID: String? //显示楼层对应的自增字符
+    var physicalFloor: String?//物理楼层
+    var showFloor: String?//显示楼层
+    var doorType: String?//电梯门类型  1单开门  2贯穿门
+    var controlA: String?//A门是否受控（1受控，0不受控）
+    var controlB: String?//B门是否受控（1受控，0不受控，单开门
+
+    required init?(map: ObjectMapper.Map) {}
+    
+    func mapping(map: ObjectMapper.Map) {
+        increasID <- map["INCREASEID"]
+        physicalFloor <- map["PHYSICALFLOOR"]
+        showFloor <- map["SHOWFLOOR"]
+        doorType <- map["doorType"]
+        controlA <- map["CONTROLA"]
+        controlB <- map["CONTROLB"]
+    }
+}

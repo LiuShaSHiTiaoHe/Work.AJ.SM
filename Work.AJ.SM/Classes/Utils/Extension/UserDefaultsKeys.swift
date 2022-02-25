@@ -13,6 +13,8 @@ let ud = Defaults
 extension DefaultsKeys {
     var username: DefaultsKey<String?> { .init("username") }
     var userID: DefaultsKey<String?> { .init("userid") }
+    var userMobile: DefaultsKey<String?> { .init("userMobile") }
+
     var userRealName: DefaultsKey<String?> { .init("userRealName") }
 
     var currentUnitID: DefaultsKey<Int?> { .init("currentUnitID") }

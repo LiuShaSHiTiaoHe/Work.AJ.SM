@@ -10,9 +10,26 @@ import Foundation
 
 typealias ElevatorsCompletion = ((Dictionary<String, Array<FloorMapInfo>>, MobileCallElevatorModel) -> Void)
 
+typealias FloorsCompletion = (([FloorInfoMappable]) -> Void)
+
 class MCERepository {
     
     static let shared = MCERepository()
+    
+    func getFloorsBySNCode(code: String, completion: @escaping FloorsCompletion) {
+        if let userID = ud.userID,let mobile = ud.userMobile {
+            HomeAPI.getFloorsBySN(SNCode: code, phone: mobile, userID: userID).defaultRequest { jsonData in
+                if let floorsJsonString = jsonData["data"]["floors"].rawString(), let floors = [FloorInfoMappable](JSONString: floorsJsonString) {
+                    completion(self.processFloorsBySNCode(floors: floors))
+                }else{
+                    completion([])
+                }
+            } failureCallback: { response in
+                completion([])
+            }
+
+        }
+    }
 
     func getElevators(completion: @escaping ElevatorsCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
@@ -164,4 +181,28 @@ class MCERepository {
         return increaseID
     }
     
+    private func processFloorsBySNCode(floors: [FloorInfoMappable]) -> [FloorInfoMappable] {
+        var floorMapInfoArray: [FloorInfoMappable] = []
+        if let unit = HomeRepository.shared.getCurrentUnit(), let physicalfloor = unit.physicalfloor {
+            for floor in floors {
+                if floor.physicalFloor == physicalfloor {
+                    floorMapInfoArray.append(floor)
+                    continue
+                }
+                //电梯门类型  1单开门  2贯穿门
+                if floor.doorType == "1" {
+                    if floor.controlA == "0" {
+                        floorMapInfoArray.append(floor)
+                        continue
+                    }
+                }else{
+                    if floor.controlA == "0" || floor.controlB == "0" {
+                        floorMapInfoArray.append(floor)
+                        continue
+                    }
+                }
+            }
+        }
+       return floorMapInfoArray
+    }
 }
