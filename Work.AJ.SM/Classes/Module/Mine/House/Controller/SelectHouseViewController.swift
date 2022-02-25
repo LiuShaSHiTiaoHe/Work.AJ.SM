@@ -63,14 +63,25 @@ class SelectHouseViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.dataSource = self
         tableView.delegate = self
-        MineRepository.shared.getAllUnits { [weak self] errorMsg in
+//        MineRepository.shared.getAllUnits { [weak self] errorMsg in
+//            guard let `self` = self else { return }
+//            if errorMsg.isEmpty {
+//                self.units.removeAll()
+//                self.units.append(contentsOf: RealmTools.objects(UnitModel()))
+//                self.tableView.reloadData()
+//            }else {
+//                SVProgressHUD.showError(withStatus: errorMsg)
+//            }
+//        }
+        
+        MineRepository.shared.getAllSelectableUnit { [weak self]  models in
             guard let `self` = self else { return }
-            if errorMsg.isEmpty {
+            if models.isEmpty {
+                SVProgressHUD.showError(withStatus: "数据为空")
+            }else{
                 self.units.removeAll()
-                self.units.append(contentsOf: RealmTools.objects(UnitModel()))
+                self.units.append(contentsOf: models)
                 self.tableView.reloadData()
-            }else {
-                SVProgressHUD.showError(withStatus: errorMsg)
             }
         }
     }

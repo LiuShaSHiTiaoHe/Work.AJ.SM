@@ -9,6 +9,7 @@ import UIKit
 
 typealias HouseUpdateUnitsCompletion = ((_ errorMsg: String) -> Void)
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
+typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
@@ -28,6 +29,31 @@ class MineRepository: NSObject {
         } failureCallback: { response in
             logger.info("\(response.message)")
             completion(response.message)
+        }
+    }
+    
+    func getAllSelectableUnit(completion: @escaping HouseChooseCompletion) {
+        SVProgressHUD.show()
+        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { models, response in
+            SVProgressHUD.dismiss()
+            guard models.count > 0 else {
+                completion([])
+                return
+            }
+            RealmTools.addList(models, update: .modified) {
+                logger.info("update done")
+            }
+            
+            completion(models.filter { unit in
+                if let state = unit.state {
+                    return state == "N"
+                }else{
+                    return false
+                }
+            })
+        } failureCallback: { response in
+            logger.info("\(response.message)")
+            completion([])
         }
     }
     

@@ -42,6 +42,7 @@ PODS:
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
+  - SGQRCode (3.5.1)
   - SnapKit (5.0.1)
   - SPPermissions/Bluetooth (7.1.1):
     - SPPermissions/Core
@@ -87,6 +88,7 @@ DEPENDENCIES:
   - Realm
   - RealmSwift
   - SDCycleScrollView (= 1.82)
+  - SGQRCode
   - SnapKit (= 5.0.1)
   - SPPermissions/Bluetooth
   - SPPermissions/Camera
@@ -129,6 +131,7 @@ SPEC REPOS:
     - RealmSwift
     - SDCycleScrollView
     - SDWebImage
+    - SGQRCode
     - SnapKit
     - SPPermissions
     - SVProgressHUD
@@ -167,6 +170,7 @@ SPEC CHECKSUMS:
   RealmSwift: dbf9a4eb06e0c929d51c4ef2e8f951bca541feab
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SGQRCode: 65d6170ddcf3feecc6e2f3601aac78ad93e56589
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPPermissions: c2f74985c97a4bca97e6faa0698a483bc0e0d13f
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -178,6 +182,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: fa40e4675a565df7f8a041330f90efc488bb4cb2
+PODFILE CHECKSUM: fb0220635106bf2bbbe3d23f9fd81f5d056c5b85
 
 COCOAPODS: 1.11.2

@@ -56,6 +56,7 @@ class MemberListViewController: BaseViewController {
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)
+        view.bringSubviewToFront(addButton)
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(kTitleAndStateHeight)
@@ -63,7 +64,8 @@ class MemberListViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-60)
+//            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.bottom.equalToSuperview()
         }
         addButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -91,7 +93,8 @@ class MemberListViewController: BaseViewController {
     
     @objc
     func addMemberAction() {
-        
+        let vc = AddMemberViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

@@ -38,7 +38,8 @@ target 'Work.AJ.SM' do
   pod 'ActiveLabel'
   pod 'PGDatePicker'
   pod 'swiftScan'
-
+  pod 'SGQRCode'
+  
   pod 'SPPermissions/Camera'
   pod 'SPPermissions/PhotoLibrary'
   pod 'SPPermissions/Notification'

@@ -9,6 +9,7 @@ import UIKit
 import SwiftEntryKit
 import AVFoundation
 import SVProgressHUD
+import swiftScan
 
 class HomeViewController: BaseViewController {
 
@@ -179,6 +180,10 @@ extension HomeViewController: UICollectionViewDelegate {
                 if let device = AVCaptureDevice.default(for: .video) {
                     do {
                         let _ = try AVCaptureDeviceInput.init(device: device)
+                        let vc = ScanQRCodeCallElevatorViewController()//ScanQRCodeCallElevatorManager.manager.setUpScanManager()
+//                        vc.scanResultDelegate = self
+                        vc.hidesBottomBarWhenPushed = true
+                        self.navigationController?.pushViewController(vc, animated: true)
                     } catch {
                         SVProgressHUD.showError(withStatus: "没有可使用的相机")
                     }
@@ -232,3 +237,4 @@ extension HomeViewController: ChooseVisitorModeDelegate {
         }
     }
 }
+

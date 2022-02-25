@@ -127,6 +127,8 @@
 		4173C24C27C76CA700B8FBB8 /* MemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24B27C76CA700B8FBB8 /* MemberListViewController.swift */; };
 		4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C24E27C7732500B8FBB8 /* MemberModel.swift */; };
 		4173C25127C7883000B8FBB8 /* MemberListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25027C7883000B8FBB8 /* MemberListHeaderView.swift */; };
+		4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */; };
+		4173C25727C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25627C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -272,6 +274,8 @@
 		4173C24B27C76CA700B8FBB8 /* MemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListViewController.swift; sourceTree = "<group>"; };
 		4173C24E27C7732500B8FBB8 /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
 		4173C25027C7883000B8FBB8 /* MemberListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListHeaderView.swift; sourceTree = "<group>"; };
+		4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeCallElevatorViewController.swift; sourceTree = "<group>"; };
+		4173C25627C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeCallElevatorManager.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -472,6 +476,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				4173C25227C86E6600B8FBB8 /* ScanQRCodeForElevator */,
 				4173C22827C5D93A00B8FBB8 /* AddMember */,
 				4173C20A27C371B600B8FBB8 /* Visitant */,
 				4173C1FC27C351BE00B8FBB8 /* RemoteIntercom */,
@@ -1123,6 +1128,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4173C25227C86E6600B8FBB8 /* ScanQRCodeForElevator */ = {
+			isa = PBXGroup;
+			children = (
+				4173C25327C86E7600B8FBB8 /* ViewController */,
+				4173C25627C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift */,
+			);
+			path = ScanQRCodeForElevator;
+			sourceTree = "<group>";
+		};
+		4173C25327C86E7600B8FBB8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1389,6 +1411,7 @@
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
+				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
 				4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */,
 				416F2EAE27B60C6E004E5AD9 /* VerificationCodeInputView.swift in Sources */,
 				416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */,
@@ -1408,6 +1431,7 @@
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
 				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
+				4173C25727C872C700B8FBB8 /* ScanQRCodeCallElevatorManager.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,
@@ -1632,6 +1656,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "我们需要在呼梯和开门等使用蓝牙,激活蓝牙卡的时候使用蓝牙做连接硬件";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "是否允许使用进行蓝牙开门";
+				INFOPLIST_KEY_NSCameraUsageDescription = "是否允许使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "允许使用局域网";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "我们需要通过您的地理位置信息获取您周边的相关数据";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "是否允许使用麦克风进行视频通话";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "截屏的时候需要访问您的相册";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "是否允许使用相册进行本地二维码扫描、头像上传、物业报修图片上传等功能";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1663,6 +1695,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "我们需要在呼梯和开门等使用蓝牙,激活蓝牙卡的时候使用蓝牙做连接硬件";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "是否允许使用进行蓝牙开门";
+				INFOPLIST_KEY_NSCameraUsageDescription = "是否允许使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "允许使用局域网";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "我们需要通过您的地理位置信息获取您周边的相关数据";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "是否允许使用麦克风进行视频通话";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "截屏的时候需要访问您的相册";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "是否允许使用相册进行本地二维码扫描、头像上传、物业报修图片上传等功能";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
