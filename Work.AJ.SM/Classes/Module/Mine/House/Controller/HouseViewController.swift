@@ -28,7 +28,6 @@ class HouseViewController: BaseViewController {
     
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
-//        button.setBackgroundImage(R.image.btn_image_bg_blue(), for: .normal)
         button.setTitle("添加房屋", for: .normal)
         button.setTitleColor(R.color.whiteColor(), for: .normal)
         button.backgroundColor = R.color.themeColor()

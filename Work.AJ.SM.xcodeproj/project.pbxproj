@@ -131,6 +131,9 @@
 		4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */; };
 		4173C25C27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
+		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
+		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
+		41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501F27CC8DDA006E440F /* FaceTableViewCell.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -280,6 +283,9 @@
 		4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorViewController.swift; sourceTree = "<group>"; };
 		4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorView.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
+		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
+		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
+		41C3501F27CC8DDA006E440F /* FaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTableViewCell.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -676,6 +682,7 @@
 		416F2EBB27BA46F1004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				41C3501827CC6B26006E440F /* Face */,
 				4173C24627C7699200B8FBB8 /* Member */,
 				416F2EC527BB779D004E5AD9 /* Mine */,
 				416F2EC227BB776D004E5AD9 /* House */,
@@ -1159,6 +1166,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		41C3501827CC6B26006E440F /* Face */ = {
+			isa = PBXGroup;
+			children = (
+				41C3501E27CC8DC3006E440F /* View */,
+				41C3501B27CC6E5C006E440F /* Model */,
+				41C3501927CC6B48006E440F /* FaceListViewController.swift */,
+			);
+			path = Face;
+			sourceTree = "<group>";
+		};
+		41C3501B27CC6E5C006E440F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41C3501C27CC6E71006E440F /* FaceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		41C3501E27CC8DC3006E440F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41C3501F27CC8DDA006E440F /* FaceTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1398,6 +1431,7 @@
 				416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */,
 				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
+				41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */,
 				416F2E4927B0B56D004E5AD9 /* Network.Configuration.swift in Sources */,
 				416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */,
 				416F2EDB27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift in Sources */,
@@ -1443,10 +1477,12 @@
 				416F2E5127B0B638004E5AD9 /* BaseTabBarViewController.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
+				41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
 				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
+				41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,

@@ -10,6 +10,8 @@ import UIKit
 typealias HouseUpdateUnitsCompletion = ((_ errorMsg: String) -> Void)
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
 typealias HouseChooseCompletion = (([UnitModel]) -> Void)
+typealias FaceListCompletion = (([FaceModel]) -> Void)
+typealias DeleteFaceCompletion = ((_ errorMsg: String) -> Void)
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
@@ -120,4 +122,34 @@ class MineRepository: NSObject {
         }
     }
     
+}
+
+extension MineRepository {
+    func getFaceList(completion: @escaping FaceListCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString{
+            SVProgressHUD.show()
+            MineAPI.allFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID).request(modelType: [FaceModel].self) { models, response in
+                SVProgressHUD.dismiss()
+                completion(models)
+            } failureCallback: { response in
+                logger.info("\(response.message)")
+                completion([])
+            }
+        }else {
+            completion([])
+        }
+    }
+    
+    func deleteFace(_ path: String, completion: @escaping DeleteFaceCompletion)  {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString{
+            SVProgressHUD.show()
+            MineAPI.deleteFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, imagePath: path).defaultRequest { jsonData in
+                completion("")
+            } failureCallback: { response in
+                completion(response.message)
+            }
+        }else {
+            completion("数据完整性错误")
+        }
+    }
 }

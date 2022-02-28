@@ -6,6 +6,11 @@
 //
 
 import Foundation
+
+let host = "http://120.27.237.7:9393/"
+//let host = "http://47.111.8.231:9091/"
+let servicePath = "hxcloudplus/"
+
 final class APIs {
     
     static let baseUrl = host + servicePath
@@ -46,5 +51,10 @@ final class APIs {
     static let unitMembers = "appcity/getUnitUsers"
     // 业主删除房间 家属|访客（租客）
     static let deleteUnitMembers = "appcity/delUnitUser"
+    
+    //人脸
+    static let faceFile = "appcity/getFaceFile.do"
+    static let addFaceFile = "appcity/addFaceFile.do"
+    static let deleteFaceFile = "appcity/delFaceFile.do"
 
 }
