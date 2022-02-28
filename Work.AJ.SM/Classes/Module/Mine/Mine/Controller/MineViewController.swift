@@ -63,7 +63,7 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

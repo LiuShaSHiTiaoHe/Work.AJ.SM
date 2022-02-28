@@ -130,6 +130,7 @@
 		4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */; };
 		4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */; };
 		4173C25C27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */; };
+		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -278,6 +279,7 @@
 		4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeCallElevatorViewController.swift; sourceTree = "<group>"; };
 		4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorViewController.swift; sourceTree = "<group>"; };
 		4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorView.swift; sourceTree = "<group>"; };
+		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 				416F2EEA27BCF931004E5AD9 /* PopViewManager.swift */,
 				4173C23027C5D9A600B8FBB8 /* CommonInputCell.swift */,
 				4173C23227C5DA9500B8FBB8 /* CommonSelectButtonCell.swift */,
+				41C3501627CC5EFB006E440F /* CommonStatusView.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -1415,6 +1418,7 @@
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
+				41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
 				416F2EA727B5FE7C004E5AD9 /* AuthenticationAPI.swift in Sources */,
