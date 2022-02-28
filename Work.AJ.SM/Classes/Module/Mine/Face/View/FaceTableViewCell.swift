@@ -65,8 +65,8 @@ class FaceTableViewCell: UITableViewCell {
         
         deleteButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
-            make.width.equalTo(100)
-            make.height.equalTo(40)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
             make.centerY.equalToSuperview()
         }
     }
@@ -124,7 +124,7 @@ class FaceTableViewCell: UITableViewCell {
         button.setTitle("删除", for: .normal)
         button.setTitleColor(R.color.errorRedColor(), for: .normal)
         button.titleLabel?.font = k15Font
-        button.layer.cornerRadius = 20.0
+        button.layer.cornerRadius = 15.0
         button.backgroundColor = R.color.backgroundColor()
         return button
     }()

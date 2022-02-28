@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class FaceListViewController: BaseViewController {
     
     private var dataSource:[FaceModel] = []
+    private var faceImage: UIImage?
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView.init()
@@ -72,6 +74,10 @@ class FaceListViewController: BaseViewController {
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "人脸认证"
+       reloadData()
+    }
+    
+    private func reloadData() {
         MineRepository.shared.getFaceList { [weak self] faces in
             guard let `self` = self else { return }
             self.dataSource = faces
@@ -81,7 +87,8 @@ class FaceListViewController: BaseViewController {
     
     @objc
     func addFaceImage() {
-        
+        let vc = FaceImageViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -111,6 +118,14 @@ extension FaceListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FaceListViewController: FaceTableViewCellDelegate {
     func deleteFace(path: String) {
-        
+        MineRepository.shared.deleteFace(path) { errorMsg in
+            if errorMsg.isEmpty {
+                SVProgressHUD.showSuccess(withStatus: "删除成功")
+                self.reloadData()
+            }else{
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }
+        }
     }
 }
+

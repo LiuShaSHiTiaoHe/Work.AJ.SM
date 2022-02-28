@@ -38,6 +38,8 @@ target 'Work.AJ.SM' do
   pod 'ActiveLabel'
   pod 'PGDatePicker'
   pod 'swiftScan'
+  pod "SwiftyCam"
+#  pod 'ImagePicker', :git => 'https://github.com/hyperoslo/ImagePicker.git'
 #  pod 'SGQRCode'
   
   pod 'SPPermissions/Camera'
