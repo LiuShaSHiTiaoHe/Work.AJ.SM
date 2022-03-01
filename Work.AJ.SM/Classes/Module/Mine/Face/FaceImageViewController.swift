@@ -87,6 +87,12 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
             present(imagePicker, animated: true, completion: nil)
         }
     }
+    
+    func confirmFaceImage(_ image: UIImage) {
+        let vc = ConfirmFaceImageViewController()
+        vc.faceImage = image
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
 }
 
@@ -105,7 +111,7 @@ extension FaceImageViewController: SwiftyCamViewControllerDelegate {
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
         if detect(photo){
-            
+            confirmFaceImage(photo)
         }else{
             SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
         }
@@ -118,7 +124,7 @@ extension FaceImageViewController: UIImagePickerControllerDelegate {
         if let type = info[.mediaType] as? String, type == UIImagePickerController.availableMediaTypes(for: .photoLibrary)?.first {
             if let image = info[.originalImage] as? UIImage {
                 if detect(image) {
-                    
+                    confirmFaceImage(image)
                 }else{
                     SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
                 }
