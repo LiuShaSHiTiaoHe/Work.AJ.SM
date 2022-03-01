@@ -12,6 +12,8 @@ enum MineAPI {
     case addFamilyMember(communityID: String, unitID: String, userID: String, name: String, phone: String)
     case allFace(communityID: String, blockID: String, cellID: String, unitID: String)
     case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String)
+    case versionCheck(type: String)
+    case deleteAccount(userID: String)
 }
 
 extension MineAPI: TargetType {
@@ -29,12 +31,16 @@ extension MineAPI: TargetType {
             return APIs.faceFile
         case .deleteFace:
             return APIs.deleteFaceFile
+        case .versionCheck:
+            return APIs.versionCheck
+        case .deleteAccount:
+            return APIs.deleteAccount
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace:
+        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount:
             return .post
         }
     }
@@ -49,6 +55,10 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .deleteFace(communityID, blockID, cellID, unitID, imagePath):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "IMAGE": imagePath].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .versionCheck(type):
+            return .requestParameters(parameters: ["TYPE": type].ekey("TYPE"), encoding: URLEncoding.default)
+        case let .deleteAccount(userID):
+            return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
         }
     }
     

@@ -7,6 +7,7 @@
 
 import Foundation
 import CryptoSwift
+import Siren
 
 final class GDataManager {
     static let shared = GDataManager()
@@ -35,6 +36,29 @@ final class GDataManager {
     func setupDataBase() {
         if let username = Defaults.username {
             RealmTools.configRealm(userID: username)
+        }
+    }
+    
+    func checkAppStoreVersion(_ force: Bool, _ frequency: Rules.UpdatePromptFrequency) {
+        let siren = Siren.shared
+        siren.apiManager = APIManager.init(countryCode: "cn")
+        if force {
+            let rule = Rules.init(promptFrequency: frequency, forAlertType: .force)
+            siren.rulesManager = RulesManager(globalRules: rule)
+        }else {
+            let rule = Rules.init(promptFrequency: frequency, forAlertType: .option)
+            siren.rulesManager = RulesManager(globalRules: rule)
+        }
+        siren.presentationManager = PresentationManager(alertTintColor: R.color.themeColor(),
+                                                           appName: Bundle.jk.appDisplayName,
+                                                           forceLanguageLocalization: .chineseSimplified)
+        siren.wail(performCheck: .onDemand) { results in
+            switch results {
+            case .success(let updateResults):
+                logger.info(updateResults.localization)
+            case .failure(let error):
+                logger.info(error.localizedDescription)
+            }
         }
     }
 }

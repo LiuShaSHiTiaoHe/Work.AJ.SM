@@ -74,7 +74,7 @@ class FaceListViewController: BaseViewController {
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "人脸认证"
-       reloadData()
+        reloadData()
     }
     
     private func reloadData() {

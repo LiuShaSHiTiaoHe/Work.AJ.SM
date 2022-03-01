@@ -29,6 +29,7 @@ target 'Work.AJ.SM' do
   pod 'IQKeyboardManagerSwift', '6.5.9'
   pod 'JKSwiftExtension'
   pod 'Kingfisher'
+  pod 'Siren'
 
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
@@ -39,8 +40,6 @@ target 'Work.AJ.SM' do
   pod 'PGDatePicker'
   pod 'swiftScan'
   pod "SwiftyCam"
-#  pod 'ImagePicker', :git => 'https://github.com/hyperoslo/ImagePicker.git'
-#  pod 'SGQRCode'
   
   pod 'SPPermissions/Camera'
   pod 'SPPermissions/PhotoLibrary'

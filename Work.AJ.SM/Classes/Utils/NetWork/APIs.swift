@@ -14,11 +14,15 @@ let servicePath = "hxcloudplus/"
 final class APIs {
     
     static let baseUrl = host + servicePath
+    //MARK: 基础
+    static let versionCheck = "appcity/getAppversion.do"
     //MARK: 用户鉴权
     static let login = "appcity/login.do"
     static let regist = "appcity/register.do"
     static let editPassword = "appcity/editPassword.do"
     static let msgCode = "appcity/getMessageCode.do"
+    static let deleteAccount = "appcity/delMyself"
+    
     //MARK: 房屋
     static let userUnit = "appcity/getMyUnit.do"
     static let allCity = "appcity/getCity.do"

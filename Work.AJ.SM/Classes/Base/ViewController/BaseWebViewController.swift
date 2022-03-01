@@ -28,7 +28,7 @@ class BaseWebViewController: UIViewController{
     //MARK: - 返回或关闭Item
     fileprivate lazy var backItem: UIBarButtonItem = {
         let item = UIBarButtonItem(
-            image: UIImage(named: "btn_back"),
+            image: R.image.common_back_white(),
             style: .plain,
             target:self,
             action: #selector(selectedToBack)
@@ -38,7 +38,7 @@ class BaseWebViewController: UIViewController{
     //MARK: - 关闭item
     fileprivate lazy var closeItem: UIBarButtonItem = {
         let item = UIBarButtonItem(
-            image: UIImage(named: "btn_close"),
+            image: R.image.common_close_black(),
             style: .plain,
             target:self,
             action:  #selector(selectedToClose)
@@ -89,7 +89,7 @@ class BaseWebViewController: UIViewController{
         self.view.addSubview(self.progress)
         progress.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(kOriginTitleAndStateHeight)
+            make.top.equalToSuperview()
             make.height.equalTo(2)
             make.trailing.equalToSuperview()
         }

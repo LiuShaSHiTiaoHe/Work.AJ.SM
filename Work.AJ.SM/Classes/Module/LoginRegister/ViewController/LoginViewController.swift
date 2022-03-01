@@ -39,7 +39,9 @@ class LoginViewController: BaseViewController {
 extension LoginViewController: LoginViewDelegate {
     
     func login(mobile: String, password: String) {
+        SVProgressHUD.show()
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData  in
+            SVProgressHUD.dismiss()
             if let data = JsonData["data"].rawString(), let userInfo = JsonData["map"].rawString(), let units = [UnitModel](JSONString: data), let userModel = UserModel(JSONString: userInfo) {
                 Defaults.username = mobile
                 ud.userMobile = mobile
@@ -49,8 +51,7 @@ extension LoginViewController: LoginViewDelegate {
                 RealmTools.addList(units) {}
                 RealmTools.add(userModel) {}
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.resetRootViewController()
                 }

@@ -22,7 +22,7 @@ class HomeRepository {
             guard models.count > 0 else {
                 return
             }
-            RealmTools.addList(models, update: .modified) {
+            RealmTools.addList(models, update: .all) {
                 logger.info("update done")
             }
             if let currentUnitID = Defaults.currentUnitID {

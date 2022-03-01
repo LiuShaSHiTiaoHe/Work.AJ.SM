@@ -12,6 +12,7 @@ import ObjectMapper
 import SwiftyJSON
 import SVProgressHUD
 import IQKeyboardManagerSwift
+import Siren
 
 extension AppDelegate {
     
@@ -52,8 +53,6 @@ extension AppDelegate {
             UITableView.appearance().sectionHeaderTopPadding = 0
         }
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true        
     }
-
-    
 }

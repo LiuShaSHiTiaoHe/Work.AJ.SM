@@ -87,7 +87,9 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                 case .visitorRecord:
                     break
                 case .setting:
-                    break
+                    let vc = SettingViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
                 case .opendoorSetting:
                     break
                 case .passRecord:
