@@ -89,7 +89,7 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
             switch indexPath.row {
             case 0:
                 cell.nameLabel.text = "个人开门密码"
-                if ud.personalOpenDoorPasswordStatus {
+                if !ud.personalOpenDoorPasswordStatus {
                     cell.tipsLabel.text = "密码还未设置"
                 }
             default:

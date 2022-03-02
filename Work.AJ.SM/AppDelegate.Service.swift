@@ -46,7 +46,7 @@ extension AppDelegate {
         SVProgressHUD.appearance().defaultStyle = .dark
         SVProgressHUD.appearance().maximumDismissTimeInterval = 2
         SVProgressHUD.appearance().minimumSize = CGSize.init(width: 100, height: 100)
-        SVProgressHUD.appearance().imageViewSize = CGSize(width: 60, height: 60)
+        SVProgressHUD.appearance().imageViewSize = CGSize(width: 30, height: 30)
         SVProgressHUD.setRingRadius(30)
         SVProgressHUD.setDefaultAnimationType(.native)
         if #available(iOS 15.0, *) {
