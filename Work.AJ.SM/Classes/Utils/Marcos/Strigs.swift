@@ -9,6 +9,7 @@ import Foundation
 
 let kConstAPPNameString = "智慧社区"
 let kAboutUsPageURLString = "http://www.njanjar.com/index.php/Home/Index/about.html"
+let kPrivacyPageURLString = "http://www.njanjar.com/smarthome_privacy_statement.html"
 let kDefaultDateFormatte = "yyyy-MM-dd HH:mm:ss"
 let kServiceSupportNumber = "025-52309399"
 let kAppID = "1444571864"

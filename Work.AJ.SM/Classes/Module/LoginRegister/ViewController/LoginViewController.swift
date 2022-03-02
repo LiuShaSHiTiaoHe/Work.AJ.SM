@@ -78,11 +78,17 @@ extension LoginViewController: LoginViewDelegate {
     }
 
     func showPrivacy() {
-        
+        let vc = BaseWebViewController.init()
+        vc.urlString = kPrivacyPageURLString
+//        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func showTermsOfServices() {
-        
+        let vc = BaseWebViewController.init()
+        vc.urlString = kPrivacyPageURLString
+//        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

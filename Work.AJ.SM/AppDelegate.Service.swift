@@ -33,7 +33,8 @@ extension AppDelegate {
             let mainTabBarVc = BaseTabBarViewController()
             self.window?.rootViewController = mainTabBarVc
         }else{
-            self.window?.rootViewController = LoginViewController()
+            let navi = BaseNavigationController.init(rootViewController: LoginViewController())
+            self.window?.rootViewController = navi
         }
     }
     

@@ -150,6 +150,7 @@ class BaseWebViewController: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = R.color.backgroundColor()
         self.navigationItem.title = titleString
+        self.navigationController?.navigationBar.tintColor = R.color.whiteColor()
         self.setupUI()
         self.loadRequest()
         self.addKVOObserver()
@@ -182,15 +183,23 @@ extension BaseWebViewController{
         if (self.wkWebview.canGoBack){
             self.wkWebview.goBack()
         }else{
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-            self.navigationController?.popViewController(animated: true)
+            if self.isBeingPresented {
+                self.dismiss(animated: true, completion: nil)
+            }else{
+                self.navigationController?.setNavigationBarHidden(true, animated: false)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 
     //MARK: - 关闭按钮执行事件
     fileprivate func selectedToClose(){
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.navigationController?.popViewController(animated: true)
+        if self.isBeingPresented {
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

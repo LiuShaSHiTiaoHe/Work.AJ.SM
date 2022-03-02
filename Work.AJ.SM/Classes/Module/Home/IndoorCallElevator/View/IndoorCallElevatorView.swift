@@ -40,16 +40,16 @@ class IndoorCallElevatorView: UIView {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.ice_up_image(), for: .normal)
         button.setImage(R.image.ice_up_selected_image(), for: .selected)
+        button.setImage(R.image.ice_up_selected_image(), for: .highlighted)
         button.addTarget(self, action: #selector(callup), for: .touchUpInside)
         return button
     }()
     
     lazy var downButton: UIButton = {
         let button = UIButton.init(type: .custom)
-//        button.setImage(R.image.ice_down_image(), for: .normal)
-//        button.setImage(R.image.ice_down_selected_image(), for: .selected)
-        button.setImage(R.image.ice_up_image(), for: .normal)
-        button.setImage(R.image.ice_up_selected_image(), for: .selected)
+        button.setImage(R.image.ice_down_image(), for: .normal)
+        button.setImage(R.image.ice_down_selected_image(), for: .selected)
+        button.setImage(R.image.ice_down_selected_image(), for: .highlighted)
         button.addTarget(self, action: #selector(calldown), for: .touchUpInside)
         return button
     }()

@@ -100,9 +100,9 @@ class ChooseVisitorModeView: UIView {
         self.addSubview(passwordTitle)
         
         closeButton.snp.makeConstraints { make in
-            make.width.height.equalTo(20)
-            make.top.equalToSuperview().offset(kMargin)
-            make.right.equalToSuperview().offset(-kMargin)
+            make.width.height.equalTo(30)
+            make.top.equalToSuperview().offset(kMargin/2)
+            make.right.equalToSuperview().offset(-kMargin/2)
         }
         
         titleLabel.snp.makeConstraints { make in
