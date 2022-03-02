@@ -19,6 +19,16 @@ class UnitButtonsModel: Object,  Mappable {
     @Persisted var provider: String?
     @Persisted(originProperty: "buttons") var assignee: LinkingObjects<UnitModel>
 
+    ///reserved value
+    @Persisted var reservedString1: String?
+    @Persisted var reservedString2: String?
+    @Persisted var reservedString3: String?
+    @Persisted var reservedString4: String?
+    @Persisted var reservedBool1: Bool = false
+    @Persisted var reservedBool2: Bool = false
+    @Persisted var reservedInt1: Int
+    @Persisted var reservedInt2: Int
+    
     required convenience init?(map: ObjectMapper.Map) {
       self.init()
     }
