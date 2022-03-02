@@ -15,7 +15,7 @@ class SettingViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.whiteColor()
+        view.titleLabel.textColor = R.color.maintextColor()
         view.backgroundColor = R.color.whiteColor()
         view.titleLabel.text = "通用设置"
         return view
@@ -150,7 +150,6 @@ class SettingViewController: BaseViewController {
         alert.addAction(action: cancleAction)
         alert.addAction(action: confirmAction)
         alert.show()
-       
     }
 }
 

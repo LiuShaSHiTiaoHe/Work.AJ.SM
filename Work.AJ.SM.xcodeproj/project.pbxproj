@@ -139,6 +139,9 @@
 		41C3502827CDB254006E440F /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3502727CDB254006E440F /* SettingViewController.swift */; };
 		41C3502A27CDB416006E440F /* SettingNoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3502927CDB416006E440F /* SettingNoticeTableViewCell.swift */; };
 		41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3502B27CDB428006E440F /* SettingTableViewCell.swift */; };
+		41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */; };
+		41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */; };
+		41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -296,6 +299,9 @@
 		41C3502727CDB254006E440F /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		41C3502927CDB416006E440F /* SettingNoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNoticeTableViewCell.swift; sourceTree = "<group>"; };
 		41C3502B27CDB428006E440F /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorSettingViewController.swift; sourceTree = "<group>"; };
+		41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorPasswordViewController.swift; sourceTree = "<group>"; };
+		41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOpenDoorStyleCell.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -692,6 +698,7 @@
 		416F2EBB27BA46F1004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				41C3502D27CEF8CC006E440F /* OpenDoorSetting */,
 				41C3502527CDB225006E440F /* Setting */,
 				41C3501827CC6B26006E440F /* Face */,
 				4173C24627C7699200B8FBB8 /* Member */,
@@ -1223,6 +1230,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		41C3502D27CEF8CC006E440F /* OpenDoorSetting */ = {
+			isa = PBXGroup;
+			children = (
+				41C3503327CEFE26006E440F /* View */,
+				41C3502E27CEF8DB006E440F /* ViewController */,
+			);
+			path = OpenDoorSetting;
+			sourceTree = "<group>";
+		};
+		41C3502E27CEF8DB006E440F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */,
+				41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		41C3503327CEFE26006E440F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1487,6 +1520,7 @@
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
 				41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */,
+				41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
 				416F2EA727B5FE7C004E5AD9 /* AuthenticationAPI.swift in Sources */,
@@ -1504,10 +1538,12 @@
 				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
+				41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */,
 				4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */,
 				416F2E5327B0B64F004E5AD9 /* BaseNavigationController.swift in Sources */,
 				416F2ED327BCA221004E5AD9 /* NeighbourhoodViewController.swift in Sources */,
 				416F2EE727BCEABE004E5AD9 /* EntryKitAttributes.swift in Sources */,
+				41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */,
 				416F2E5127B0B638004E5AD9 /* BaseTabBarViewController.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,

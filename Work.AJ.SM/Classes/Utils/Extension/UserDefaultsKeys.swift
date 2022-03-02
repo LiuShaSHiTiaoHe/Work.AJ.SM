@@ -24,6 +24,7 @@ extension DefaultsKeys {
     //Setting
     var bluetoothSignalStrength: DefaultsKey<Int> { .init("BluetoothSignalStrength", defaultValue: 75) }
     var openDoorStyle: DefaultsKey<Int> { .init("openDoorStyle", defaultValue: 2) }//NonStopSend 0 Shake 1 ButtonPress 2
+    var personalOpenDoorPasswordStatus: DefaultsKey<Bool> { .init("personalOpenDoorPasswordStatus", defaultValue: false) }
     
     //common control
     var inAppNotification: DefaultsKey<Bool> { .init("inAppNotification", defaultValue: false) }//通知栏显示
