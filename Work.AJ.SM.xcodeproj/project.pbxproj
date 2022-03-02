@@ -130,6 +130,10 @@
 		4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */; };
 		4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */; };
 		4173C25C27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */; };
+		41985F2E27CF3B7100E02A9A /* OnBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F2D27CF3B7100E02A9A /* OnBoardViewController.swift */; };
+		41985F3327CF456E00E02A9A /* SwiftyOnboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3027CF456E00E02A9A /* SwiftyOnboard.swift */; };
+		41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3127CF456E00E02A9A /* SwiftyOnboardOverlay.swift */; };
+		41985F3527CF456E00E02A9A /* SwiftyOnboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3227CF456E00E02A9A /* SwiftyOnboardPage.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -290,6 +294,10 @@
 		4173C25427C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeCallElevatorViewController.swift; sourceTree = "<group>"; };
 		4173C25927C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorViewController.swift; sourceTree = "<group>"; };
 		4173C25B27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeSelectElevatorView.swift; sourceTree = "<group>"; };
+		41985F2D27CF3B7100E02A9A /* OnBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardViewController.swift; sourceTree = "<group>"; };
+		41985F3027CF456E00E02A9A /* SwiftyOnboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboard.swift; sourceTree = "<group>"; };
+		41985F3127CF456E00E02A9A /* SwiftyOnboardOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardOverlay.swift; sourceTree = "<group>"; };
+		41985F3227CF456E00E02A9A /* SwiftyOnboardPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardPage.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -411,6 +419,7 @@
 		416F2E30279D1E8A004E5AD9 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				41C3503827CF3AD8006E440F /* OnBoard */,
 				416F2EBB27BA46F1004E5AD9 /* Mine */,
 				416F2EBA27BA46E7004E5AD9 /* Neighbourhood */,
 				416F2EB927BA46C1004E5AD9 /* Service */,
@@ -1184,6 +1193,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		41985F2F27CF454100E02A9A /* SwiftyOnboard */ = {
+			isa = PBXGroup;
+			children = (
+				41985F3027CF456E00E02A9A /* SwiftyOnboard.swift */,
+				41985F3127CF456E00E02A9A /* SwiftyOnboardOverlay.swift */,
+				41985F3227CF456E00E02A9A /* SwiftyOnboardPage.swift */,
+			);
+			path = SwiftyOnboard;
+			sourceTree = "<group>";
+		};
 		41C3501827CC6B26006E440F /* Face */ = {
 			isa = PBXGroup;
 			children = (
@@ -1254,6 +1273,15 @@
 				41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		41C3503827CF3AD8006E440F /* OnBoard */ = {
+			isa = PBXGroup;
+			children = (
+				41985F2F27CF454100E02A9A /* SwiftyOnboard */,
+				41985F2D27CF3B7100E02A9A /* OnBoardViewController.swift */,
+			);
+			path = OnBoard;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -1531,7 +1559,9 @@
 				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
 				4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */,
 				416F2EAE27B60C6E004E5AD9 /* VerificationCodeInputView.swift in Sources */,
+				41985F3527CF456E00E02A9A /* SwiftyOnboardPage.swift in Sources */,
 				416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */,
+				41985F2E27CF3B7100E02A9A /* OnBoardViewController.swift in Sources */,
 				416F2E6327B0BF95004E5AD9 /* HomeModuleCell.swift in Sources */,
 				416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */,
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
@@ -1541,6 +1571,7 @@
 				41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */,
 				4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */,
 				416F2E5327B0B64F004E5AD9 /* BaseNavigationController.swift in Sources */,
+				41985F3327CF456E00E02A9A /* SwiftyOnboard.swift in Sources */,
 				416F2ED327BCA221004E5AD9 /* NeighbourhoodViewController.swift in Sources */,
 				416F2EE727BCEABE004E5AD9 /* EntryKitAttributes.swift in Sources */,
 				41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */,
@@ -1580,6 +1611,7 @@
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				4173C23A27C6192400B8FBB8 /* MineRepository.swift in Sources */,
 				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
+				41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */,
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
 				416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */,

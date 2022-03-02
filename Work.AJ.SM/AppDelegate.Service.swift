@@ -29,12 +29,16 @@ extension AppDelegate {
     }
     
     func setupRootViewController() {
-        if GDataManager.shared.loginState() {
-            let mainTabBarVc = BaseTabBarViewController()
-            self.window?.rootViewController = mainTabBarVc
+        if !ud.onboardStatus {
+            self.window?.rootViewController = OnBoardViewController()
         }else{
-            let navi = BaseNavigationController.init(rootViewController: LoginViewController())
-            self.window?.rootViewController = navi
+            if GDataManager.shared.loginState() {
+                let mainTabBarVc = BaseTabBarViewController()
+                self.window?.rootViewController = mainTabBarVc
+            }else{
+                let navi = BaseNavigationController.init(rootViewController: LoginViewController())
+                self.window?.rootViewController = navi
+            }
         }
     }
     

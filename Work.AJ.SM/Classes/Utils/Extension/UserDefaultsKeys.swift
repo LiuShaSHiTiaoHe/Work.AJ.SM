@@ -11,6 +11,10 @@ import SwiftyUserDefaults
 let ud = Defaults
 
 extension DefaultsKeys {
+    //system
+    var onboardStatus: DefaultsKey<Bool> { .init("onboardStatus", defaultValue: false) }
+    
+    //user
     var username: DefaultsKey<String?> { .init("username") }
     var userID: DefaultsKey<String?> { .init("userid") }
     var userMobile: DefaultsKey<String?> { .init("userMobile") }

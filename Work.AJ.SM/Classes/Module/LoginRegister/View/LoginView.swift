@@ -101,7 +101,7 @@ class LoginView: UIView {
     lazy var forgetPasswordButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("忘记密码?", for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.font = k14Font
         button.setTitleColor(R.color.themeColor(), for: .normal)
         button.addTarget(self, action: #selector(forgetPassword), for: .touchUpInside)
         return button
