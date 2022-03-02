@@ -40,27 +40,17 @@ extension LoginViewController: LoginViewDelegate {
     
     func login(mobile: String, password: String) {
         SVProgressHUD.show()
-        AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData  in
-            SVProgressHUD.dismiss()
-            if let data = JsonData["data"].rawString(), let userInfo = JsonData["map"].rawString(), let units = [UnitModel](JSONString: data), let userModel = UserModel(JSONString: userInfo) {
-                Defaults.username = mobile
-                ud.userMobile = mobile
-                Defaults.userRealName = userModel.realName
-                Defaults.userID = userModel.rid
-                GDataManager.shared.setupDataBase()
-                RealmTools.addList(units) {}
-                RealmTools.add(userModel) {}
+        AuthenticationRepository.shared.login(mobile: mobile, passWord: password) { errorMsg in
+            if let errorMsg = errorMsg {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }else{
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.resetRootViewController()
                 }
-
             }
-        } failureCallback: { response in
-            SVProgressHUD.showError(withStatus: "\(response.message)")
         }
-
     }
     
     func forgetPassword(mobile: String?) {
@@ -74,20 +64,25 @@ extension LoginViewController: LoginViewDelegate {
     }
     
     func sendCode(mobile: String) {
-        
+        SVProgressHUD.show()
+        AuthenticationRepository.shared.sendMessageCode(mobile) { errorMsg in
+            if let errorMsg = errorMsg {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }else{
+                SVProgressHUD.showSuccess(withStatus: "验证码已发送")
+            }
+        }
     }
 
     func showPrivacy() {
         let vc = BaseWebViewController.init()
         vc.urlString = kPrivacyPageURLString
-//        present(vc, animated: true, completion: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func showTermsOfServices() {
         let vc = BaseWebViewController.init()
         vc.urlString = kPrivacyPageURLString
-//        present(vc, animated: true, completion: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

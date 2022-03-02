@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol VerificationCodeInputViewDelegate: NSObjectProtocol {
+    func sendCodeButtonPressed()
+}
+
 class VerificationCodeInputView: UIView {
 
+    weak var delegate: VerificationCodeInputViewDelegate?
+    
     var errorMsg: String? {
         didSet {
             tipLabel.text = errorMsg
@@ -168,6 +174,7 @@ class VerificationCodeInputView: UIView {
     ///发送验证码
     @objc
     func sendCodeButtonAction() {
+        delegate?.sendCodeButtonPressed()
         self.setupCountDownTime(59)
     }
     

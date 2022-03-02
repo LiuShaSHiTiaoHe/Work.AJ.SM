@@ -134,6 +134,7 @@
 		41985F3327CF456E00E02A9A /* SwiftyOnboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3027CF456E00E02A9A /* SwiftyOnboard.swift */; };
 		41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3127CF456E00E02A9A /* SwiftyOnboardOverlay.swift */; };
 		41985F3527CF456E00E02A9A /* SwiftyOnboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3227CF456E00E02A9A /* SwiftyOnboardPage.swift */; };
+		41985F3727CF600100E02A9A /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3627CF600100E02A9A /* AuthenticationRepository.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -298,6 +299,7 @@
 		41985F3027CF456E00E02A9A /* SwiftyOnboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboard.swift; sourceTree = "<group>"; };
 		41985F3127CF456E00E02A9A /* SwiftyOnboardOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardOverlay.swift; sourceTree = "<group>"; };
 		41985F3227CF456E00E02A9A /* SwiftyOnboardPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardPage.swift; sourceTree = "<group>"; };
+		41985F3627CF600100E02A9A /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 		416F2EA127B5FDF1004E5AD9 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				41985F3627CF600100E02A9A /* AuthenticationRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1503,6 +1506,7 @@
 			files = (
 				4173C22727C4E37300B8FBB8 /* InvitationPhoneNumberCell.swift in Sources */,
 				416F2F1227BF93CD004E5AD9 /* RemoteOpenDoorView.swift in Sources */,
+				41985F3727CF600100E02A9A /* AuthenticationRepository.swift in Sources */,
 				4173C22C27C5D96400B8FBB8 /* AddMemberViewController.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				4173C24327C72C5A00B8FBB8 /* MineModule.swift in Sources */,

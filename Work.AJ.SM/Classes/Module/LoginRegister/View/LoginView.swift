@@ -31,6 +31,125 @@ class LoginView: UIView {
     weak var delegate: LoginViewDelegate?
     private var viewType: loginOrRegisterType = .login
     
+    func configurePolicyLabel() {
+        let customType1 = ActiveType.custom(pattern: "《用户协议》")
+        let customType2 = ActiveType.custom(pattern: "《隐私声明》")
+        policyLabel.enabledTypes.append(customType1)
+        policyLabel.enabledTypes.append(customType2)
+        policyLabel.customize { label in
+            label.text = "已阅读并同意《用户协议》和《隐私声明》"
+            label.font = k12Font
+            label.numberOfLines = 0
+            label.textColor = R.color.secondtextColor()
+            label.customColor[customType1] = R.color.themeColor()
+            label.customColor[customType2] = R.color.themeColor()
+            label.customSelectedColor[customType1] = R.color.themeColor()
+            label.customSelectedColor[customType2] = R.color.themeColor()
+            label.handleCustomTap(for: customType1) { element in
+                self.delegate?.showTermsOfServices()
+            }
+            label.handleCustomTap(for: customType2) { element in
+                self.delegate?.showPrivacy()
+            }
+        }
+    }
+
+    @objc func navigationSegmentedControlValueChanged(_ sender: BetterSegmentedControl) {
+        if sender.index == 0 {
+            viewType = .login
+            loginInputContentView.isHidden = false
+            registerInputContentView.isHidden = true
+            comfirmButton.setTitle("登录", for: .normal)
+            inputContentView.snp.updateConstraints { make in
+                make.height.equalTo(325)
+            }
+        } else {
+            viewType = .register
+            loginInputContentView.isHidden = true
+            registerInputContentView.isHidden = false
+            comfirmButton.setTitle("注册", for: .normal)
+            inputContentView.snp.updateConstraints { make in
+                make.height.equalTo(375)
+            }
+        }
+    }
+    
+    @objc
+    func forgetPassword() {
+        delegate?.forgetPassword(mobile: "")
+    }
+    
+    @objc
+    func policyCheckBox() {
+        registerCheckButton.isSelected = !registerCheckButton.isSelected
+    }
+    
+    @objc
+    func comfirmButtonAction() {
+        switch viewType {
+        case .login:
+            var loginMobile = ""
+            var loginPassword = ""
+            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
+                loginMobile = mobile
+            }else{
+                loginMobileInputView.errorMsg = "请填写正确的手机号码"
+                return
+            }
+            if let password = loginPasswordInputView.inputString {
+                loginPassword = password
+            }else{
+                loginPasswordInputView.errorMsg = "密码格式错误"
+                return
+            }
+            delegate?.login(mobile: loginMobile, password: loginPassword)
+        case .register:
+            if !registerCheckButton.isSelected {
+                SVProgressHUD.showInfo(withStatus: "服务以及隐私协议")
+                return
+            }
+            var registerMobile = ""
+            var registerCode = ""
+            var registerPassword = ""
+            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
+                registerMobile = mobile
+            }else{
+                loginMobileInputView.errorMsg = "请填写正确的手机号码"
+                return
+            }
+            if let code = registerCodeInputView.inputString {
+                registerCode = code
+            }else{
+                registerCodeInputView.errorMsg = "请输入验证码"
+                return
+            }
+            if let password = registerPasswordInputView.inputString, password.count > 6, password.count < 12 {
+                registerPassword = password
+            }else{
+                registerPasswordInputView.errorMsg = "请设置正确格式的密码"
+                return
+            }
+            if !registerCode.isEmpty && !registerCode.isEmpty && !registerPassword.isEmpty {
+                delegate?.register(mobile: registerMobile, code: registerCode, password: registerPassword)
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initializeView()
+        initData()
+    }
+    
+    func initData() {
+        configurePolicyLabel()
+        registerCodeInputView.delegate = self
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var backgroundImage: UIImageView = {
         let view = UIImageView()
         view.image = R.image.login_content_image()
@@ -292,119 +411,18 @@ class LoginView: UIView {
             make.bottom.equalToSuperview().offset(-kMargin)
         }
     }
-    
-    func configurePolicyLabel() {
-        let customType1 = ActiveType.custom(pattern: "《用户协议》")
-        let customType2 = ActiveType.custom(pattern: "《隐私声明》")
-        policyLabel.enabledTypes.append(customType1)
-        policyLabel.enabledTypes.append(customType2)
-        policyLabel.customize { label in
-            label.text = "已阅读并同意《用户协议》和《隐私声明》"
-            label.font = k12Font
-            label.numberOfLines = 0
-            label.textColor = R.color.secondtextColor()
-            label.customColor[customType1] = R.color.themeColor()
-            label.customColor[customType2] = R.color.themeColor()
-            label.customSelectedColor[customType1] = R.color.themeColor()
-            label.customSelectedColor[customType2] = R.color.themeColor()
-            label.handleCustomTap(for: customType1) { element in
-                self.delegate?.showTermsOfServices()
-            }
-            label.handleCustomTap(for: customType2) { element in
-                self.delegate?.showPrivacy()
-            }
-        }
-    }
-
-    @objc func navigationSegmentedControlValueChanged(_ sender: BetterSegmentedControl) {
-        if sender.index == 0 {
-            viewType = .login
-            loginInputContentView.isHidden = false
-            registerInputContentView.isHidden = true
-            comfirmButton.setTitle("登录", for: .normal)
-            inputContentView.snp.updateConstraints { make in
-                make.height.equalTo(325)
-            }
-        } else {
-            viewType = .register
-            loginInputContentView.isHidden = true
-            registerInputContentView.isHidden = false
-            comfirmButton.setTitle("注册", for: .normal)
-            inputContentView.snp.updateConstraints { make in
-                make.height.equalTo(375)
-            }
-        }
-    }
-    
-    @objc
-    func forgetPassword() {
-        delegate?.forgetPassword(mobile: "")
-    }
-    
-    @objc
-    func policyCheckBox() {
-        registerCheckButton.isSelected = !registerCheckButton.isSelected
-    }
-    
-    @objc
-    func comfirmButtonAction() {
-        switch viewType {
-        case .login:
-            var loginMobile = ""
-            var loginPassword = ""
-            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
-                loginMobile = mobile
-            }else{
-                loginMobileInputView.errorMsg = "请填写正确的手机号码"
-                return
-            }
-            if let password = loginPasswordInputView.inputString {
-                loginPassword = password
-            }else{
-                loginPasswordInputView.errorMsg = "密码格式错误"
-                return
-            }
-            delegate?.login(mobile: loginMobile, password: loginPassword)
-        case .register:
-            if !registerCheckButton.isSelected {
-                SVProgressHUD.showInfo(withStatus: "服务以及隐私协议")
-                return
-            }
-            var registerMobile = ""
-            var registerCode = ""
-            var registerPassword = ""
-            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
-                registerMobile = mobile
-            }else{
-                loginMobileInputView.errorMsg = "请填写正确的手机号码"
-                return
-            }
-            if let code = registerCodeInputView.inputString {
-                registerCode = code
-            }else{
-                registerCodeInputView.errorMsg = "请输入验证码"
-                return
-            }
-            if let password = registerPasswordInputView.inputString, password.count > 6, password.count < 12 {
-                registerPassword = password
-            }else{
-                registerPasswordInputView.errorMsg = "请设置正确格式的密码"
-                return
-            }
-            if !registerCode.isEmpty && !registerCode.isEmpty && !registerPassword.isEmpty {
-                delegate?.register(mobile: registerMobile, code: registerCode, password: registerPassword)
-            }
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeView()
-        configurePolicyLabel()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
     
+extension LoginView: VerificationCodeInputViewDelegate {
+    func sendCodeButtonPressed() {
+        if let phoneNumber = registerMobileInputView.inputString {
+            if phoneNumber.jk.isValidMobile {
+                delegate?.sendCode(mobile: phoneNumber)
+            }else{
+                SVProgressHUD.showInfo(withStatus: "请输入正确的手机号码")
+            }
+        }else{
+            SVProgressHUD.showInfo(withStatus: "请输入手机号码")
+        }
+    }
+}

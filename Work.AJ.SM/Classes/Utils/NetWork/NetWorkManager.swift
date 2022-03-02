@@ -113,7 +113,17 @@ extension TargetType {
                     #if DEBUG
                     logger.info("\(self.baseURL)\(self.path) --- \(self.method.rawValue) ----> responseData：\(jsonData)")
                     #endif
-                    successCallback(jsonData)
+                    let respModel = ResponseModel()
+                    respModel.code = jsonData[codeKey].intValue
+                    respModel.message = jsonData[messageKey].stringValue
+                    if respModel.code == successCode {
+                        successCallback(jsonData)
+                    } else {
+                        let model = ResponseModel()
+                        model.code = respModel.code
+                        model.message = respModel.message
+                        failureCallback?(model)
+                    }
                 } catch {
                     let model = ResponseModel()
                     model.code = JsonDecodeErrorCode
