@@ -14,6 +14,7 @@ enum MineAPI {
     case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String)
     case versionCheck(type: String)
     case deleteAccount(userID: String)
+    case ownerOpenDoorPassword(communityID: String, unitID: String, blockID: String, userID: String, phone: String, openDoorPassword: String)
 }
 
 extension MineAPI: TargetType {
@@ -35,12 +36,14 @@ extension MineAPI: TargetType {
             return APIs.versionCheck
         case .deleteAccount:
             return APIs.deleteAccount
+        case .ownerOpenDoorPassword:
+            return APIs.ownerOpenDoorPassword
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount:
+        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword:
             return .post
         }
     }
@@ -59,6 +62,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["TYPE": type].ekey("TYPE"), encoding: URLEncoding.default)
         case let .deleteAccount(userID):
             return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
+        case let .ownerOpenDoorPassword(communityID, unitID, blockID, userID, phone, openDoorPassword):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "UNITID": unitID, "BLOCKID": blockID, "USERID": userID, "PHONE": phone, "PASSWORD": openDoorPassword].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         }
     }
     

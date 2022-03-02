@@ -36,6 +36,14 @@ class AuthenticationRepository: NSObject {
         }
     }
     
+    func register(mobile: String, passWord: String, code: String, completion: @escaping LoginCompletion) {
+        AuthenticationAPI.regist(mobile: mobile, code: code, passWord: passWord).defaultRequest { jsonData in
+            completion(nil)
+        } failureCallback: { response in
+            completion(response.message)
+        }
+    }
+    
     
     func sendMessageCode(_ mobile: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.getMessageCode(mobile: mobile).defaultRequest { jsonData in

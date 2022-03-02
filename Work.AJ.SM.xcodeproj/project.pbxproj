@@ -135,6 +135,8 @@
 		41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3127CF456E00E02A9A /* SwiftyOnboardOverlay.swift */; };
 		41985F3527CF456E00E02A9A /* SwiftyOnboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3227CF456E00E02A9A /* SwiftyOnboardPage.swift */; };
 		41985F3727CF600100E02A9A /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3627CF600100E02A9A /* AuthenticationRepository.swift */; };
+		41985F3927CF6E8200E02A9A /* CodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3827CF6E8200E02A9A /* CodeTextField.swift */; };
+		41985F3B27CF708700E02A9A /* StyleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3A27CF708700E02A9A /* StyleLabel.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -300,6 +302,8 @@
 		41985F3127CF456E00E02A9A /* SwiftyOnboardOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardOverlay.swift; sourceTree = "<group>"; };
 		41985F3227CF456E00E02A9A /* SwiftyOnboardPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardPage.swift; sourceTree = "<group>"; };
 		41985F3627CF600100E02A9A /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
+		41985F3827CF6E8200E02A9A /* CodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextField.swift; sourceTree = "<group>"; };
+		41985F3A27CF708700E02A9A /* StyleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleLabel.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -687,6 +691,8 @@
 				4173C23027C5D9A600B8FBB8 /* CommonInputCell.swift */,
 				4173C23227C5DA9500B8FBB8 /* CommonSelectButtonCell.swift */,
 				41C3501627CC5EFB006E440F /* CommonStatusView.swift */,
+				41985F3827CF6E8200E02A9A /* CodeTextField.swift */,
+				41985F3A27CF708700E02A9A /* StyleLabel.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -1508,6 +1514,7 @@
 				416F2F1227BF93CD004E5AD9 /* RemoteOpenDoorView.swift in Sources */,
 				41985F3727CF600100E02A9A /* AuthenticationRepository.swift in Sources */,
 				4173C22C27C5D96400B8FBB8 /* AddMemberViewController.swift in Sources */,
+				41985F3927CF6E8200E02A9A /* CodeTextField.swift in Sources */,
 				416F2E8D27B0E8FB004E5AD9 /* R.generated.swift in Sources */,
 				4173C24327C72C5A00B8FBB8 /* MineModule.swift in Sources */,
 				41C3502827CDB254006E440F /* SettingViewController.swift in Sources */,
@@ -1562,6 +1569,7 @@
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
 				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
 				4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */,
+				41985F3B27CF708700E02A9A /* StyleLabel.swift in Sources */,
 				416F2EAE27B60C6E004E5AD9 /* VerificationCodeInputView.swift in Sources */,
 				41985F3527CF456E00E02A9A /* SwiftyOnboardPage.swift in Sources */,
 				416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */,

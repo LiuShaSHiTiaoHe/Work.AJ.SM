@@ -16,6 +16,9 @@ final class APIs {
     static let baseUrl = host + servicePath
     //MARK: 基础
     static let versionCheck = "appcity/getAppversion.do"
+    static let notice = "appcity/getNotice.do"
+    static let advertisement = "appcity/getAdByPosition.do"
+    
     //MARK: 用户鉴权
     static let login = "appcity/login.do"
     static let regist = "appcity/register.do"
@@ -32,9 +35,8 @@ final class APIs {
     static let allUnit = "appcity/getUnit.do"
     static let deleteUserUnit = "appcity/deleteMyUnit.do"
     static let userAuthentication = "appcity/authentication.do"
+    static let ownerOpenDoorPassword = "appcity/setMyUnitOpenDoorMM.do"
     
-    static let notice = "appcity/getNotice.do"
-    static let advertisement = "appcity/getAdByPosition.do"
     //根据单元电梯群组获取电梯
     static let cellGroupElevators = "appcity/getLiftByCellGroup"
     static let floorsBySN = "appcity/getFloorsByLiftsn.do"
@@ -55,7 +57,6 @@ final class APIs {
     static let unitMembers = "appcity/getUnitUsers"
     // 业主删除房间 家属|访客（租客）
     static let deleteUnitMembers = "appcity/delUnitUser"
-    
     //人脸
     static let faceFile = "appcity/getFaceFile.do"
     static let addFaceFile = "appcity/addFaceFile.do"

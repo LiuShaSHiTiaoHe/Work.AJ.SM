@@ -60,7 +60,18 @@ extension LoginViewController: LoginViewDelegate {
     }
     
     func register(mobile: String, code: String, password: String) {
-        
+        SVProgressHUD.show()
+        AuthenticationRepository.shared.register(mobile: mobile, passWord: password, code: code) { errorMsg in
+            if let errorMsg = errorMsg {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }else{
+                SVProgressHUD.showSuccess(withStatus: "注册成功")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.resetRootViewController()
+                }
+            }
+        }
     }
     
     func sendCode(mobile: String) {
