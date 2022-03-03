@@ -6,25 +6,55 @@
 //
 
 import UIKit
+import BEMCheckBox
+
+protocol BleOpenDoorStyleCellDelegate: NSObjectProtocol {
+    func switchValueChanged(style: Int, status: Bool)
+}
 
 let BleOpenDoorStyleCellIdentifier = "BleOpenDoorStyleCellIdentifier"
 
 class BleOpenDoorStyleCell: UITableViewCell {
 
+    var status: Bool? {
+        didSet {
+            if let status = status {
+                checkBox.setOn(status, animated: true)
+                checkBox.isUserInteractionEnabled = !status
+            }
+        }
+    }
+    
+    var openDoorStyle: Int?
+
+    weak var delegate: BleOpenDoorStyleCellDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initializeView()
+        initData()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func initData() {
+        checkBox.addTarget(self, action: #selector(switchChange(_:)), for: .valueChanged)
+    }
+    
+    @objc
+    func switchChange(_ sender: BEMCheckBox) {
+        if let openDoorStyle = openDoorStyle {
+            delegate?.switchValueChanged(style: openDoorStyle, status: sender.on)
+        }
+    }
+    
     func initializeView() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(tipsLabel)
-        contentView.addSubview(switchView)
-        
+        contentView.addSubview(checkBox)
+
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.height.equalTo(30)
@@ -39,9 +69,10 @@ class BleOpenDoorStyleCell: UITableViewCell {
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
         
-        switchView.snp.makeConstraints { make in
+        checkBox.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-kMargin)
+            make.height.width.equalTo(30)
         }
     }
     
@@ -63,10 +94,15 @@ class BleOpenDoorStyleCell: UITableViewCell {
         return view
     }()
     
-    lazy var switchView: UISwitch = {
-        let view = UISwitch.init()
-        view.tintColor = R.color.owner_greenColor()
-        return view
+    lazy var checkBox: BEMCheckBox = {
+        let box = BEMCheckBox.init()
+        box.boxType = .circle
+        box.onAnimationType = .oneStroke
+        box.offAnimationType = .oneStroke
+        box.tintColor = R.color.owner_greenColor()!
+        box.onTintColor = R.color.owner_greenColor()!
+        box.onCheckColor = R.color.owner_greenColor()!
+        return box
     }()
     
     override func awakeFromNib() {

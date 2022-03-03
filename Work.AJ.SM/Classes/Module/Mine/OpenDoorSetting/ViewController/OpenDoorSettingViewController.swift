@@ -114,11 +114,13 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
             default:
                 break
             }
+            cell.openDoorStyle = indexPath.row
             if ud.openDoorStyle == indexPath.row {
-                cell.switchView.isOn = true
+                cell.status = true
             }else{
-                cell.switchView.isOn = false
+                cell.status = false
             }
+            cell.delegate = self
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
@@ -165,5 +167,12 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
         default:
             break
         }
+    }
+}
+
+extension OpenDoorSettingViewController : BleOpenDoorStyleCellDelegate {
+    func switchValueChanged(style: Int, status: Bool) {
+        ud.openDoorStyle = style
+        tableView.reloadData()
     }
 }

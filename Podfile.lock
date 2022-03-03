@@ -1,6 +1,7 @@
 PODS:
   - ActiveLabel (1.1.0)
   - Alamofire (5.5.0)
+  - BEMCheckBox (1.4.1)
   - BetterSegmentedControl (2.0.1)
   - CryptoSwift (1.4.2)
   - ESTabBarController-swift (2.8.0)
@@ -70,6 +71,7 @@ PODS:
 
 DEPENDENCIES:
   - ActiveLabel
+  - BEMCheckBox
   - BetterSegmentedControl
   - CryptoSwift (= 1.4.2)
   - ESTabBarController-swift (= 2.8.0)
@@ -109,6 +111,7 @@ SPEC REPOS:
   trunk:
     - ActiveLabel
     - Alamofire
+    - BEMCheckBox
     - BetterSegmentedControl
     - CryptoSwift
     - ESTabBarController-swift
@@ -149,6 +152,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
@@ -186,6 +190,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: f0a59305b6c2fcce06226af873d3dae2296e25a7
+PODFILE CHECKSUM: 8a4acdd33d81d960c3e2351bbaa35c0f76fb7378
 
 COCOAPODS: 1.11.2

@@ -12,7 +12,6 @@ class OpenDoorPasswordViewController: BaseViewController {
 
     private var spacingWidth: CGFloat = 15.0
     private var boxSizeWidth: CGFloat = 0.0
-//    private var isFirstSet: Bool = true
     private var firstPassword: String = ""
 
     lazy var headerView: CommonHeaderView = {

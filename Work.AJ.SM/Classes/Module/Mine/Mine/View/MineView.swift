@@ -82,7 +82,7 @@ class MineView: BaseView {
             make.left.equalTo(nameLabel)
             make.height.equalTo(20)
             make.right.equalToSuperview().offset(-kMargin)
-            make.bottom.equalTo(avatar.snp.bottom).offset(-kMargin/4)
+            make.bottom.equalTo(avatar.snp.bottom)
         }
         
         tableView.snp.makeConstraints { make in
