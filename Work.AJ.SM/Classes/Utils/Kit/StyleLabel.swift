@@ -47,7 +47,7 @@ public class StyleLabel: UILabel, CodeLable {
             switch style {
             case .line:
                 layer.addSublayer(lineLayer)
-                lineLayer.backgroundColor = kSecondTextColor.cgColor//style.nomal.cgColor
+                lineLayer.backgroundColor = R.color.secondtextColor()!.cgColor
                 layer.borderWidth = 0
                 layer.borderColor = UIColor.clear.cgColor
             default:
@@ -123,7 +123,7 @@ public class DashLineLabel: UILabel {
     /// 线
     private lazy var lineLayer: CAShapeLayer = {
         let temLayer = CAShapeLayer()
-        temLayer.strokeColor = kSingleLineColor.cgColor
+        temLayer.strokeColor = R.color.separateColor()!.cgColor
         temLayer.lineWidth = 1
         temLayer.lineDashPattern = [5,2]
         let path = CGMutablePath()

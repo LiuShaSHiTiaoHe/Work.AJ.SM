@@ -12,6 +12,8 @@ typealias UnitMembersCompletion = (([MemberModel]) -> Void)
 typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 typealias FaceListCompletion = (([FaceModel]) -> Void)
 typealias DeleteFaceCompletion = ((_ errorMsg: String) -> Void)
+typealias OwnerPasswordCompletion = ((_ errorMsg: String?) -> Void)
+
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
@@ -150,6 +152,20 @@ extension MineRepository {
             }
         }else {
             completion("数据完整性错误")
+        }
+    }
+}
+
+extension MineRepository {
+    func setOwnerPassword(_ password: String, competion: @escaping OwnerPasswordCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let phone = ud.userMobile, let userID = ud.userID{
+            MineAPI.ownerOpenDoorPassword(communityID: communityID, unitID: unitID, blockID: blockID, userID: userID, phone: phone, openDoorPassword: password).defaultRequest { jsonData in
+                competion(nil)
+            } failureCallback: { response in
+                competion(response.message)
+            }
+        }else{
+            competion("参数错误")
         }
     }
 }
