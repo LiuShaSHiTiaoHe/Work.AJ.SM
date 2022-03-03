@@ -45,7 +45,6 @@ class SettingViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func initUI() {
@@ -64,7 +63,7 @@ class SettingViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "通用设置"
         headerView.titleLabel.textColor = R.color.maintextColor()

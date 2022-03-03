@@ -23,10 +23,9 @@ class ScanQRCodeSelectElevatorViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
-    func initData() {
+    override func initData() {
         contentView.headerView.titleLabel.text = "选择楼层"
         contentView.headerView.closeButton.addTarget(self, action: #selector(popRoot), for: .touchUpInside)
         

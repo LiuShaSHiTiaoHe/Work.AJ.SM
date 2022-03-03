@@ -20,10 +20,9 @@ class MineViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
-    func initData() {
+    override func initData() {
         if let userID = ud.userID, let userInfo = HomeRepository.shared.getCurrentUser(), let name = userInfo.userName, let mobile = userInfo.mobile {
             contentView.nameLabel.text = name
             contentView.phoneLabel.text = mobile.jk.hidePhone()

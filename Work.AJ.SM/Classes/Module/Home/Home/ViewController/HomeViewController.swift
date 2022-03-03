@@ -39,7 +39,6 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
     }
     
     override func initUI() {
@@ -64,7 +63,7 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    private func initData() {
+    override func initData() {
         NotificationCenter.default.addObserver(self, selector: #selector(currentUnitChanged), name: .kCurrentUnitChanged, object: nil)
         headerView.delegate = self
         getData()

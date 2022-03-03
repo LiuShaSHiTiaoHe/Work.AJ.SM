@@ -21,6 +21,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         initUI()
+        initData()
     }
     
     deinit {
@@ -43,6 +44,7 @@ class BaseViewController: UIViewController {
     }
     
     func initUI() {}
+    func initData() {}
     
     @objc func headerRefresh() {}
 

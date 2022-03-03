@@ -27,10 +27,9 @@ class AddMemberViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
-    func initData() {
+    override func initData() {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         let location = HomeRepository.shared.getCurrentUnitName()

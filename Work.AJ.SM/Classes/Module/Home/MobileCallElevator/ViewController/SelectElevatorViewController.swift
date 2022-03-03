@@ -27,9 +27,7 @@ class SelectElevatorViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        initData()
-        
+        // Do any additional setup after loading the view.        
     }
         
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,7 +50,7 @@ class SelectElevatorViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         headerView.rightButton.isHidden = true
         headerView.titleLabel.text = "请选择电梯"
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)

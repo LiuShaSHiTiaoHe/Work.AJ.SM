@@ -23,7 +23,6 @@ class MobileCallElevatorViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +36,7 @@ class MobileCallElevatorViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         mobileCallElevator.collectionView.delegate = self
         mobileCallElevator.collectionView.dataSource = self
         mobileCallElevator.delegate = self

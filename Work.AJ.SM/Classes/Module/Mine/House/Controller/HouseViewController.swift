@@ -38,7 +38,6 @@ class HouseViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        initData()
         if let unitID = Defaults.currentUnitID {
             initialUnitID = unitID
         }
@@ -75,7 +74,7 @@ class HouseViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         headerView.rightButton.isHidden = true
         headerView.rightButton.addTarget(self, action: #selector(addHouse), for: .touchUpInside)
         headerView.titleLabel.text = "我的房屋"

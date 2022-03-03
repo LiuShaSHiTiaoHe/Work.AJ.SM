@@ -22,7 +22,6 @@ class QRCodeInvitationViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func initUI() {
@@ -32,7 +31,7 @@ class QRCodeInvitationViewController: BaseViewController {
         }
     }
     
-    func initData()  {
+    override func initData()  {
         contentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
         contentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
         contentView.hearderView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)

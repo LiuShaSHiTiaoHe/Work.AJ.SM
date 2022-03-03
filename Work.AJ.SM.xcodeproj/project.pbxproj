@@ -137,6 +137,7 @@
 		41985F3727CF600100E02A9A /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3627CF600100E02A9A /* AuthenticationRepository.swift */; };
 		41985F3927CF6E8200E02A9A /* CodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3827CF6E8200E02A9A /* CodeTextField.swift */; };
 		41985F3B27CF708700E02A9A /* StyleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3A27CF708700E02A9A /* StyleLabel.swift */; };
+		41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -304,6 +305,7 @@
 		41985F3627CF600100E02A9A /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		41985F3827CF6E8200E02A9A /* CodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextField.swift; sourceTree = "<group>"; };
 		41985F3A27CF708700E02A9A /* StyleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleLabel.swift; sourceTree = "<group>"; };
+		41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorRecordViewController.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -716,6 +718,7 @@
 		416F2EBB27BA46F1004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				41985F3C27D08FA600E02A9A /* VisitorRecord */,
 				41C3502D27CEF8CC006E440F /* OpenDoorSetting */,
 				41C3502527CDB225006E440F /* Setting */,
 				41C3501827CC6B26006E440F /* Face */,
@@ -1212,6 +1215,14 @@
 			path = SwiftyOnboard;
 			sourceTree = "<group>";
 		};
+		41985F3C27D08FA600E02A9A /* VisitorRecord */ = {
+			isa = PBXGroup;
+			children = (
+				41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */,
+			);
+			path = VisitorRecord;
+			sourceTree = "<group>";
+		};
 		41C3501827CC6B26006E440F /* Face */ = {
 			isa = PBXGroup;
 			children = (
@@ -1544,6 +1555,7 @@
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
+				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
 				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,

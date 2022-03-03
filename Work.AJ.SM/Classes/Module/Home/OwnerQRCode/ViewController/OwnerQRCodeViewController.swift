@@ -18,7 +18,6 @@ class OwnerQRCodeViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func initUI() {
@@ -30,7 +29,7 @@ class OwnerQRCodeViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         ownerQRCodeView.delegate = self
         updateImageData()
     }

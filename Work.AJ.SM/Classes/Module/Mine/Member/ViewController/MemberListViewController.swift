@@ -48,7 +48,6 @@ class MemberListViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func initUI() {
@@ -75,7 +74,7 @@ class MemberListViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         tableView.delegate = self
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)

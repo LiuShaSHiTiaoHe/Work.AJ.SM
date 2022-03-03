@@ -42,7 +42,6 @@ class OpenDoorSettingViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func initUI() {
@@ -61,7 +60,7 @@ class OpenDoorSettingViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self

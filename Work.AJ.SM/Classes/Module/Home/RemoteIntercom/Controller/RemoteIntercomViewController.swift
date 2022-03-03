@@ -20,7 +20,6 @@ class RemoteIntercomViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func initUI() {
@@ -31,7 +30,7 @@ class RemoteIntercomViewController: BaseViewController {
         
     }
     
-    func initData() {
+    override func initData() {
         dataSource = HomeRepository.shared.getCurrentLocks()
         
         openDoorView.tableView.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)

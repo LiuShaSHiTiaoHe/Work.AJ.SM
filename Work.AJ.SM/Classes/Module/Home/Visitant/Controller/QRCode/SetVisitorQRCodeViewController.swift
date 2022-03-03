@@ -30,7 +30,6 @@ class SetVisitorQRCodeViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initData()
     }
     
     override func initUI() {
@@ -41,7 +40,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
         
     }
 
-    func initData() {
+    override func initData() {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         let location = HomeRepository.shared.getCurrentUnitName()

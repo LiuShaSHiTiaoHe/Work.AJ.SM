@@ -42,9 +42,7 @@ class FaceListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        initData()
-  
+        // Do any additional setup after loading the view.  
     }
     
     override func initUI() {
@@ -69,7 +67,7 @@ class FaceListViewController: BaseViewController {
         
     }
     
-    func initData() {
+    override func initData() {
         tableView.delegate = self
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)

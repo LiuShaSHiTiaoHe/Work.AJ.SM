@@ -28,7 +28,6 @@ class SelectHouseViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        initData()
         if let unitID = Defaults.currentUnitID {
             initialUnitID = unitID
         }
@@ -56,24 +55,13 @@ class SelectHouseViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         headerView.rightButton.setTitle("添加", for: .normal)
         headerView.rightButton.addTarget(self, action: #selector(addHouse), for: .touchUpInside)
         headerView.titleLabel.text = "选择房屋"
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.dataSource = self
         tableView.delegate = self
-//        MineRepository.shared.getAllUnits { [weak self] errorMsg in
-//            guard let `self` = self else { return }
-//            if errorMsg.isEmpty {
-//                self.units.removeAll()
-//                self.units.append(contentsOf: RealmTools.objects(UnitModel()))
-//                self.tableView.reloadData()
-//            }else {
-//                SVProgressHUD.showError(withStatus: errorMsg)
-//            }
-//        }
-        
         MineRepository.shared.getAllSelectableUnit { [weak self]  models in
             guard let `self` = self else { return }
             if models.isEmpty {

@@ -19,8 +19,6 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        initUI()
-        initData()
     }
     override func initUI() {
         view.addSubview(loginView)
@@ -29,7 +27,7 @@ class LoginViewController: BaseViewController {
         }
     }
     
-    func initData() {
+    override func initData() {
         loginView.delegate = self
     }
 
