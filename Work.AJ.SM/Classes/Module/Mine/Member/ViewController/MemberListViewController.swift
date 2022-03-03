@@ -30,7 +30,6 @@ class MemberListViewController: BaseViewController {
         view.register(MemberListCell.self, forCellReuseIdentifier: MemberListCellIdentifier)
         view.separatorStyle = .none
         view.backgroundColor = R.color.backgroundColor()
-//        view.tableHeaderView = titleView
         return view
     }()
     
@@ -63,7 +62,6 @@ class MemberListViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-//            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.bottom.equalToSuperview()
         }
         addButton.snp.makeConstraints { make in
@@ -85,7 +83,7 @@ class MemberListViewController: BaseViewController {
         
         MineRepository.shared.getCurrentUnitMembers { [weak self] members in
             guard let `self` = self else { return }
-            self.dataSource = members
+            self.dataSource = members.filter{$0.userType != "R"}
             self.tableView.reloadData()
         }
     }

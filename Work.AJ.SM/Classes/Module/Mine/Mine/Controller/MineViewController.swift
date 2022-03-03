@@ -84,6 +84,9 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .visitorRecord:
+                    let vc = VisitorRecordViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
                     break
                 case .setting:
                     let vc = SettingViewController()
