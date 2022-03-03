@@ -18,6 +18,8 @@ final class APIs {
     static let versionCheck = "appcity/getAppversion.do"
     static let notice = "appcity/getNotice.do"
     static let advertisement = "appcity/getAdByPosition.do"
+    static let notificationStatus = "appcity/getMyNoDisturbTime.do"
+    static let updateNotificationStatus = "appcity/addMyNoDisturbTime.do"
     
     //MARK: 用户鉴权
     static let login = "appcity/login.do"
@@ -36,6 +38,7 @@ final class APIs {
     static let deleteUserUnit = "appcity/deleteMyUnit.do"
     static let userAuthentication = "appcity/authentication.do"
     static let ownerOpenDoorPassword = "appcity/setMyUnitOpenDoorMM.do"
+    static let findUnit = "appcity/findUnit.do"
     
     //根据单元电梯群组获取电梯
     static let cellGroupElevators = "appcity/getLiftByCellGroup"
@@ -49,17 +52,21 @@ final class APIs {
     static let visitors = "appcity/getMyGuest.do"
     static let generateVisitorPassword = "appcity/reduceGuestPassword.do"
     static let updateVisitorPassword = "appcity/updateGuestStatus.do"
-
-
+    static let inviteVisitor = "appcity/inviteUser.do"
     //业主添加家属
     static let addFamilyMember = "appcity/addFamilyer"
-    //业主查询本房间 业主|家属|访客列表
     static let unitMembers = "appcity/getUnitUsers"
-    // 业主删除房间 家属|访客（租客）
     static let deleteUnitMembers = "appcity/delUnitUser"
     //人脸
     static let faceFile = "appcity/getFaceFile.do"
     static let addFaceFile = "appcity/addFaceFile.do"
     static let deleteFaceFile = "appcity/delFaceFile.do"
+    
+    //通话
+    static let pushApp = "appDevice/pushApp.do"
+    static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"
+    
+    //记录
+    static let openDoorRecord = "appcity/findAccess.do"
 
 }
