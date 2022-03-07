@@ -51,6 +51,10 @@ PODS:
   - SPPermissions/Camera (7.1.1):
     - SPPermissions/Core
   - SPPermissions/Core (7.1.1)
+  - SPPermissions/LocationExtension (7.1.1)
+  - SPPermissions/LocationWhenInUse (7.1.1):
+    - SPPermissions/Core
+    - SPPermissions/LocationExtension
   - SPPermissions/Notification (7.1.1):
     - SPPermissions/Core
   - SPPermissions/PhotoLibrary (7.1.1):
@@ -97,6 +101,7 @@ DEPENDENCIES:
   - SnapKit (= 5.0.1)
   - SPPermissions/Bluetooth
   - SPPermissions/Camera
+  - SPPermissions/LocationWhenInUse
   - SPPermissions/Notification
   - SPPermissions/PhotoLibrary
   - SVProgressHUD (= 2.2.5)
@@ -194,6 +199,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 0767e51b91540c47b610563ca2792e78f42d4057
+PODFILE CHECKSUM: de6aee54490afddb8d78c57ff08fc9e5b3f2ae6a
 
 COCOAPODS: 1.11.2

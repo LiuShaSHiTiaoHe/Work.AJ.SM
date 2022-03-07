@@ -7,6 +7,7 @@
 
 import UIKit
 import SVProgressHUD
+import SPPermissions
 
 class HouseViewController: BaseViewController {
 
@@ -96,7 +97,18 @@ class HouseViewController: BaseViewController {
     
     @objc
     func addHouse(){
-        self.navigationController?.pushViewController(SelectUnitCityViewController(), animated: true)
+        if SPPermissions.Permission.locationWhenInUse.isPrecise {
+            self.navigationController?.pushViewController(SelectUnitCityViewController(), animated: true)
+        }else{
+            let permissions: [SPPermissions.Permission] = [.locationWhenInUse]
+            let controller = SPPermissions.dialog(permissions)
+            controller.titleText = "需要授权"
+            controller.headerText = "授权请求"
+            controller.footerText = "为了提供更好的服务, App 需要如下权限. 请参考每个权限的说明."
+            controller.dataSource = self
+            controller.delegate = self
+            controller.present(on: self)
+        }
     }
 
 }
@@ -133,5 +145,46 @@ extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "如需加快房屋审核，请联系物业"
+    }
+}
+
+extension HouseViewController: SPPermissionsDelegate, SPPermissionsDataSource {
+    func deniedAlertTexts(for permission: SPPermissions.Permission) -> SPPermissionsDeniedAlertTexts? {
+        let texts = SPPermissionsDeniedAlertTexts()
+        texts.titleText = "已拒绝授权"
+        texts.descriptionText = "请跳转至设置并允许授权"
+        texts.actionText = "设置"
+        texts.cancelText = "取消"
+        return texts
+    }
+    
+    
+    func configure(_ cell: SPPermissionsTableViewCell, for permission: SPPermissions.Permission) {
+            
+            // Here you can customise cell, like texts or colors.
+            cell.permissionTitleLabel.text = "使用 App 期间访问位置"
+            cell.permissionDescriptionLabel.text = "访问您的位置"
+    }
+    
+    func didHidePermissions(_ permissions: [SPPermissions.Permission]) { }
+    
+    func didAllowPermission(_ permission: SPPermissions.Permission) {
+        switch permission {
+        case .locationWhenInUse:
+            self.navigationController?.pushViewController(SelectUnitCityViewController(), animated: true)
+            break
+        default:
+            break
+        }
+    }
+    
+    func didDeniedPermission(_ permission: SPPermissions.Permission) {
+        switch permission {
+        case .locationWhenInUse:
+            SVProgressHUD.showInfo(withStatus: "需要您的位置信息")
+            break
+        default:
+            break
+        }
     }
 }
