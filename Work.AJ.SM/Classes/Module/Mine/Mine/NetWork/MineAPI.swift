@@ -15,6 +15,11 @@ enum MineAPI {
     case versionCheck(type: String)
     case deleteAccount(userID: String)
     case ownerOpenDoorPassword(communityID: String, unitID: String, blockID: String, userID: String, phone: String, openDoorPassword: String)
+    case allCity(encryptString: String)
+    case communitiesInCity(city: String)
+    case blockInCommunity(communityID: String)
+    case cellInBlock(blockID: String)
+    case unitInCell(blockID: String, cellID: String)
 }
 
 extension MineAPI: TargetType {
@@ -38,12 +43,22 @@ extension MineAPI: TargetType {
             return APIs.deleteAccount
         case .ownerOpenDoorPassword:
             return APIs.ownerOpenDoorPassword
+        case .allCity:
+            return APIs.allCity
+        case .communitiesInCity:
+            return APIs.userCommunity
+        case .blockInCommunity:
+            return APIs.userBlock
+        case .cellInBlock:
+            return APIs.userCell
+        case .unitInCell:
+            return APIs.allUnit
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword:
+        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell:
             return .post
         }
     }
@@ -64,6 +79,16 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
         case let .ownerOpenDoorPassword(communityID, unitID, blockID, userID, phone, openDoorPassword):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "UNITID": unitID, "BLOCKID": blockID, "USERID": userID, "PHONE": phone, "PASSWORD": openDoorPassword].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case .allCity(_):
+            return .requestParameters(parameters: ["ignore": ""].ekey("ignore"), encoding: URLEncoding.default)
+        case let .communitiesInCity(city):
+            return .requestParameters(parameters: ["CITY": city].ekey("CITY"), encoding: URLEncoding.default)
+        case let .blockInCommunity(communityID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .cellInBlock(blockID):
+            return .requestParameters(parameters: ["BLOCKID": blockID].ekey("BLOCKID"), encoding: URLEncoding.default)
+        case let .unitInCell(blockID, cellID):
+            return .requestParameters(parameters: ["BLOCKID": blockID, "CELLID": cellID].ekey("BLOCKID"), encoding: URLEncoding.default)
         }
     }
     

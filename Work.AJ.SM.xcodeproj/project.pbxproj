@@ -138,6 +138,8 @@
 		41985F3927CF6E8200E02A9A /* CodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3827CF6E8200E02A9A /* CodeTextField.swift */; };
 		41985F3B27CF708700E02A9A /* StyleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3A27CF708700E02A9A /* StyleLabel.swift */; };
 		41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */; };
+		41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */; };
+		41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F4127D5B60E00E02A9A /* CommonSearchView.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -306,6 +308,8 @@
 		41985F3827CF6E8200E02A9A /* CodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextField.swift; sourceTree = "<group>"; };
 		41985F3A27CF708700E02A9A /* StyleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleLabel.swift; sourceTree = "<group>"; };
 		41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorRecordViewController.swift; sourceTree = "<group>"; };
+		41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCityViewController.swift; sourceTree = "<group>"; };
+		41985F4127D5B60E00E02A9A /* CommonSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchView.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -695,6 +699,8 @@
 				41C3501627CC5EFB006E440F /* CommonStatusView.swift */,
 				41985F3827CF6E8200E02A9A /* CodeTextField.swift */,
 				41985F3A27CF708700E02A9A /* StyleLabel.swift */,
+				41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */,
+				41985F4127D5B60E00E02A9A /* CommonSearchView.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -1569,6 +1575,7 @@
 				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
+				41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
 				41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */,
 				41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */,
@@ -1585,6 +1592,7 @@
 				416F2EAE27B60C6E004E5AD9 /* VerificationCodeInputView.swift in Sources */,
 				41985F3527CF456E00E02A9A /* SwiftyOnboardPage.swift in Sources */,
 				416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */,
+				41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */,
 				41985F2E27CF3B7100E02A9A /* OnBoardViewController.swift in Sources */,
 				416F2E6327B0BF95004E5AD9 /* HomeModuleCell.swift in Sources */,
 				416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */,
