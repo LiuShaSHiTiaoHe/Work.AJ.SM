@@ -5,6 +5,7 @@ PODS:
   - BetterSegmentedControl (2.0.1)
   - CryptoSwift (1.4.2)
   - ESTabBarController-swift (2.8.0)
+  - HanziPinyin (1.0.0)
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
   - JKSwiftExtension (2.0.2)
@@ -75,6 +76,7 @@ DEPENDENCIES:
   - BetterSegmentedControl
   - CryptoSwift (= 1.4.2)
   - ESTabBarController-swift (= 2.8.0)
+  - HanziPinyin
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
   - JKSwiftExtension
@@ -115,6 +117,7 @@ SPEC REPOS:
     - BetterSegmentedControl
     - CryptoSwift
     - ESTabBarController-swift
+    - HanziPinyin
     - Haptica
     - IQKeyboardManagerSwift
     - JKSwiftExtension
@@ -156,6 +159,7 @@ SPEC CHECKSUMS:
   BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
+  HanziPinyin: 786d8e35fbf1483d3881bf65514242cf6b9b7b6e
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JKSwiftExtension: bf92c1dfd68c4d02313796f6ac857f8d62572e4a
@@ -190,6 +194,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 8a4acdd33d81d960c3e2351bbaa35c0f76fb7378
+PODFILE CHECKSUM: 0767e51b91540c47b610563ca2792e78f42d4057
 
 COCOAPODS: 1.11.2

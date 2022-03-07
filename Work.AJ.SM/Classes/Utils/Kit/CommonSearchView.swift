@@ -73,7 +73,7 @@ class CommonSearchView: UIView {
         searchView.snp.makeConstraints { make in
             make.height.equalTo(30)
             make.centerY.equalToSuperview()
-            make.left.equalTo(iconImageView.snp.right)
+            make.left.equalTo(iconImageView.snp.right).offset(kMargin/2)
             make.right.equalToSuperview()
         }
         

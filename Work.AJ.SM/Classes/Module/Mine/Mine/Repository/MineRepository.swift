@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HanziPinyin
 
 typealias HouseUpdateUnitsCompletion = ((_ errorMsg: String) -> Void)
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
@@ -13,6 +14,8 @@ typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 typealias FaceListCompletion = (([FaceModel]) -> Void)
 typealias DeleteFaceCompletion = ((_ errorMsg: String) -> Void)
 typealias OwnerPasswordCompletion = ((_ errorMsg: String?) -> Void)
+
+typealias CityListCompletion = ((Dictionary<String, Array<String>>) -> Void)
 
 
 class MineRepository: NSObject {
@@ -167,5 +170,68 @@ extension MineRepository {
         }else{
             competion("参数错误")
         }
+    }
+}
+
+extension MineRepository {
+    
+    func getAllCity(competion: @escaping CityListCompletion) {
+        MineAPI.allCity(encryptString: "").defaultRequest { jsonData in
+            if let cityArray = jsonData["data"].arrayObject as? Array<Dictionary<String, String>> {
+                competion(self.sortCityWithPY(cityArray))
+            }else{
+                competion([:])
+            }
+        } failureCallback: { response in
+            competion([:])
+        }
+    }
+    
+    private func sortCityWithPY(_ dataSource: Array<Dictionary<String, String>>) -> Dictionary<String, Array<String>> {
+        var result = Dictionary<String, Array<String>>()
+        let cityNames = dataSource.compactMap { item in
+            item["CITY"]
+        }
+        
+        cityNames.forEach { name in
+            let firstLetter = self.findFirstLetterFromString(aString: name)
+            if result.has(firstLetter), let values = result[firstLetter] {
+                var names = Array<String>()
+                names.append(values)
+                names.append(name)
+                result.updateValue(names, forKey: firstLetter)
+            }else{
+                result.updateValue([name], forKey: firstLetter)
+            }
+        }
+        return result
+    }
+    
+    //获取拼音首字母（大写字母）
+    func findFirstLetterFromString(aString: String) -> String {
+        //转变成可变字符串
+        let mutableString = NSMutableString.init(string: aString)
+        //将中文转换成带声调的拼音
+        CFStringTransform(mutableString as CFMutableString, nil, kCFStringTransformToLatin, false)
+        //去掉声调
+        let pinyinString = mutableString.folding(options: String.CompareOptions.diacriticInsensitive, locale: NSLocale.current)
+        //将拼音首字母换成大写
+        let strPinYin = polyphoneStringHandle(nameString: aString, pinyinString: pinyinString).uppercased()
+        //截取大写首字母
+        let firstString = strPinYin.substring(to:strPinYin.index(strPinYin.startIndex, offsetBy: 1))
+        //判断首字母是否为大写
+        let regexA = "^[A-Z]$"
+        let predA = NSPredicate.init(format: "SELF MATCHES %@", regexA)
+        return predA.evaluate(with: firstString) ? firstString : "#"
+    }
+
+    //多音字处理，根据需要添自行加
+    func polyphoneStringHandle(nameString: String, pinyinString: String) -> String {
+        if nameString.hasPrefix("长") {return "chang"}
+        if nameString.hasPrefix("沈") {return "shen"}
+        if nameString.hasPrefix("厦") {return "xia"}
+        if nameString.hasPrefix("地") {return "di"}
+        if nameString.hasPrefix("重") {return "chong"}
+        return pinyinString
     }
 }
