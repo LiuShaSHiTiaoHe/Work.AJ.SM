@@ -7,6 +7,8 @@
 
 import UIKit
 import SVProgressHUD
+import SPPermissions
+import SnapKit
 
 let UnitCityCellIdentifier = "UnitCityCellIdentifier"
 
@@ -14,7 +16,8 @@ class SelectUnitCityViewController: BaseViewController {
 
     private var dataSource = Dictionary<String, Array<String>>()
     private var keysArray  = Array<String>()
-    
+    private var locationManager: LocationManager!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,26 +25,57 @@ class SelectUnitCityViewController: BaseViewController {
     }
     
     override func initData() {
+        locationManager = LocationManager.shared
+        currentLocation.locationButton.addTarget(self, action: #selector(reLocated), for: .touchUpInside)
         searchView.initViewType(true)
         tableVeiw.delegate = self
         tableVeiw.dataSource = self
-        
+        judgePermission()
+    }
+    
+    func getAllCity() {
         MineRepository.shared.getAllCity {[weak self] cityArray in
             if cityArray.isEmpty {
                 SVProgressHUD.showInfo(withStatus: "数据为空")
             }else{
                 self?.dataSource = cityArray
                 self?.keysArray = cityArray.allKeys().sorted{$0 < $1}
+                self?.sortAllCity()
                 self?.tableVeiw.reloadData()
             }
         }
     }
-
+    
+    func judgePermission() {
+        if SPPermissions.Permission.locationWhenInUse.isPrecise {
+            getAllCity()
+            locationManager.requestLocation()
+            locationManager.getCurrentCity = { [weak self] cityName in
+                self?.currentLocation.locationName.text = cityName
+            }
+        }else{
+            let permissions: [SPPermissions.Permission] = [.locationWhenInUse]
+            let controller = SPPermissions.dialog(permissions)
+            controller.titleText = "需要授权"
+            controller.headerText = "授权请求"
+            controller.footerText = "为了提供更好的服务, App 需要如下权限. 请参考每个权限的说明."
+            controller.dataSource = self
+            controller.delegate = self
+            controller.present(on: self)
+        }
+    }
+    
+    @objc
+    func reLocated() {
+        judgePermission()
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         
         view.addSubview(headerView)
         view.addSubview(searchView)
+        view.addSubview(currentLocation)
         view.addSubview(tableVeiw)
         
         headerView.snp.makeConstraints { make in
@@ -55,9 +89,15 @@ class SelectUnitCityViewController: BaseViewController {
             make.height.equalTo(60)
         }
         
+        currentLocation.snp.makeConstraints { make in
+            make.top.equalTo(searchView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(80)
+        }
+        
         tableVeiw.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(searchView.snp.bottom)
+            make.top.equalTo(currentLocation.snp.bottom)
         }
     }
     
@@ -76,18 +116,45 @@ class SelectUnitCityViewController: BaseViewController {
         return view
     }()
     
-    lazy var tableVeiw: UITableView = {
-        let view = UITableView.init(frame: CGRect.zero, style: .plain)
-        view.register(UITableViewCell.self, forCellReuseIdentifier: UnitCityCellIdentifier)
+    lazy var currentLocation: CurrentLocationView = {
+        let view = CurrentLocationView()
         return view
     }()
     
+    lazy var tableVeiw: UITableView = {
+        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
+        view.register(UITableViewCell.self, forCellReuseIdentifier: UnitCityCellIdentifier)
+        view.separatorStyle = .singleLine
+        return view
+    }()
+    
+    func sortAllCity() {
+        let items = self.items()
+        let configuration = SectionIndexViewConfiguration.init()
+        configuration.adjustedContentInset = UIApplication.shared.statusBarFrame.size.height + 44
+        self.tableVeiw.sectionIndexView(items: items, configuration: configuration)
+    }
+
+    private func items() -> [SectionIndexViewItemView] {
+        var items = [SectionIndexViewItemView]()
+        for title in self.keysArray {
+            let item = SectionIndexViewItemView.init()
+            item.title = title
+            item.indicator = SectionIndexViewItemIndicator.init(title: title)
+            items.append(item)
+        }
+        return items
+    }
 }
 
 extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+         return 25
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -112,4 +179,45 @@ extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSour
         return keysArray[section]
     }
     
+}
+
+
+extension SelectUnitCityViewController: SPPermissionsDelegate, SPPermissionsDataSource {
+    func deniedAlertTexts(for permission: SPPermissions.Permission) -> SPPermissionsDeniedAlertTexts? {
+        let texts = SPPermissionsDeniedAlertTexts()
+        texts.titleText = "已拒绝授权"
+        texts.descriptionText = "请跳转至设置并允许授权"
+        texts.actionText = "设置"
+        texts.cancelText = "取消"
+        return texts
+    }
+    
+    
+    func configure(_ cell: SPPermissionsTableViewCell, for permission: SPPermissions.Permission) {
+        // Here you can customise cell, like texts or colors.
+        cell.permissionTitleLabel.text = "使用 App 期间访问位置"
+        cell.permissionDescriptionLabel.text = "访问您的位置"
+    }
+    
+    func didHidePermissions(_ permissions: [SPPermissions.Permission]) { }
+    
+    func didAllowPermission(_ permission: SPPermissions.Permission) {
+        switch permission {
+        case .locationWhenInUse:
+            getAllCity()
+            break
+        default:
+            break
+        }
+    }
+    
+    func didDeniedPermission(_ permission: SPPermissions.Permission) {
+        switch permission {
+        case .locationWhenInUse:
+            SVProgressHUD.showInfo(withStatus: "需要您的位置信息")
+            break
+        default:
+            break
+        }
+    }
 }

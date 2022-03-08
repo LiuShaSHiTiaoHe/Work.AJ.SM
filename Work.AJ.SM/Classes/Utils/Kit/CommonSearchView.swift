@@ -25,10 +25,17 @@ class CommonSearchView: UIView {
         }
     }
     
+    @objc
+    func cancleAction() {
+        searchView.resignFirstResponder()
+        searchView.text = ""
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = R.color.whiteColor()
         initializeView()
+        cancleButton.addTarget(self, action: #selector(cancleAction), for: .touchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,8 +60,8 @@ class CommonSearchView: UIView {
         titleButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
-            make.width.equalTo(100)
-            make.left.equalToSuperview()
+            make.width.equalTo(80)
+            make.left.equalToSuperview().offset(10)
         }
         
         separator.snp.makeConstraints { make in

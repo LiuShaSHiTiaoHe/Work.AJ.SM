@@ -11,11 +11,12 @@ import CoreLocation
 class LocationManager: NSObject {
     
     static let shared = LocationManager()
-    
+    private lazy var geoCoder = CLGeocoder()
+
     var getLocationHandle: ((_ success: Bool, _ latitude: Double, _ longitude: Double) -> Void)?
     
-    var getAuthHandle: ((_ success: Bool) -> Void)?
-    
+    var getCurrentCity: ((_ cityName: String) -> Void)?
+        
     private var locationManager: CLLocationManager!
     
     override init() {
@@ -24,47 +25,8 @@ class LocationManager: NSObject {
         //设置了精度最差的 3公里内 kCLLocationAccuracyThreeKilometers
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.delegate = self
-        
     }
-    /// 设备是否开启了定位服务
-    func hasLocationService() -> Bool {
-        
-        return CLLocationManager.locationServicesEnabled()
-        
-    }
-    /// APP是否有定位权限
-    func hasLocationPermission() -> Bool {
-        
-        switch locationPermission() {
-        case .notDetermined, .restricted, .denied:
-            return false
-        case .authorizedWhenInUse, .authorizedAlways:
-            return true
-        default:
-            break
-        }
-        return false
-    }
-    
-    /// 定位的权限
-    func locationPermission() -> CLAuthorizationStatus {
-        if #available(iOS 14.0, *) {
-            let status: CLAuthorizationStatus = locationManager.authorizationStatus
-            print("location authorizationStatus is \(status.rawValue)")
-            return status
-        } else {
-            let status = CLLocationManager.authorizationStatus()
-            print("location authorizationStatus is \(status.rawValue)")
-            return status
-        }
-    }
-    
-    
-    //MARK: - 获取权限，在代理‘didChangeAuthorization’中拿到结果
-    func requestLocationAuthorizaiton() {
-        locationManager.requestWhenInUseAuthorization()
-        
-    }
+
     //MARK: - 获取位置
     func requestLocation() {
         locationManager.requestLocation()
@@ -80,34 +42,62 @@ class LocationManager: NSObject {
         return true
     }
     
-}
-
-extension LocationManager: CLLocationManagerDelegate {
-   //MARK: - ios 14.0 之前，获取权限结果的方法
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        handleChangedAuthorization()
-    }
-    
-    //MARK: - ios 14.0，获取权限结果的方法
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        handleChangedAuthorization()
-    }
-    
-    private func handleChangedAuthorization() {
-        if let block = getAuthHandle, locationPermission() != .notDetermined {
-            if hasLocationPermission() {
-                block(true)
-            } else {
-                block(false)
+    // MARK: 反地理编码  经纬度->地址
+    private func getGeoLocation(_ latitude:Double, _ longitude:Double) {
+        let loc1 = CLLocation(latitude: latitude, longitude: longitude)
+        geoCoder.reverseGeocodeLocation(loc1) { [weak self] (pls: [CLPlacemark]?, error: Error?)  in
+            guard let `self` = self else { return }
+            if error == nil {
+                print("反地理编码成功")
+                guard let plsResult = pls else {return}
+                if let block = self.getCurrentCity {
+                    block(self.getLocationItem(plsResult))
+                }
+            }else {
+                if let block = self.getCurrentCity {
+                    block("")
+                }
             }
         }
     }
+    
+    private func getLocationItem(_ pls: [CLPlacemark]) -> String {
+        var cityName = ""
+        if let pl = pls.first {
+            var address = pl.name ?? "" // 详细地址
+            var country = pl.country ?? "" // 国家
+            var province = pl.administrativeArea ?? "" // 省
+            if province.isEmpty {
+                province = (pl.addressDictionary?["State"] ?? "") as! String
+            }
+            var city = pl.locality ?? "" // 市
+            if city.isEmpty {
+                city = (pl.addressDictionary?["City"] ?? "") as! String
+            }
+            if city.isEmpty { // 四大直辖市的城市信息无法通过CLPlacemark的locality属性获得，只能通过访问administrativeArea属性来获得（如果locality为空，则可知为直辖市）
+                city = pl.administrativeArea ?? ""
+            }
+            var area = pl.subLocality ?? ""
+            if area.isEmpty {
+                area = (pl.addressDictionary?["SubLocality"] ?? "") as! String
+            }
+            if area.isEmpty {
+                area = city
+            }
+            return city
+        }
+        return cityName
+    }
+}
+
+extension LocationManager: CLLocationManagerDelegate {
+
     //MARK: - 获取定位后的经纬度
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let loction = locations.last {
             
             print("latitude: \(loction.coordinate.latitude)   longitude:\(loction.coordinate.longitude)")
-            
+            self.getGeoLocation(loction.coordinate.latitude, loction.coordinate.longitude)
             if let block = getLocationHandle {
                 block(true, loction.coordinate.latitude, loction.coordinate.longitude)
             }

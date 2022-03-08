@@ -141,6 +141,11 @@
 		41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */; };
 		41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F4127D5B60E00E02A9A /* CommonSearchView.swift */; };
 		41AA41A027D5F76B007020AD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA419F27D5F76B007020AD /* LocationManager.swift */; };
+		41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A127D607BC007020AD /* CurrentLocationView.swift */; };
+		41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A427D6F067007020AD /* SectionIndexView.swift */; };
+		41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */; };
+		41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */; };
+		41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -312,6 +317,11 @@
 		41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCityViewController.swift; sourceTree = "<group>"; };
 		41985F4127D5B60E00E02A9A /* CommonSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchView.swift; sourceTree = "<group>"; };
 		41AA419F27D5F76B007020AD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		41AA41A127D607BC007020AD /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
+		41AA41A427D6F067007020AD /* SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexView.swift; sourceTree = "<group>"; };
+		41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+SectionIndexView.swift"; sourceTree = "<group>"; };
+		41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItemIndicator.swift; sourceTree = "<group>"; };
+		41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItem.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -690,6 +700,7 @@
 		416F2EAA27B60B85004E5AD9 /* Kit */ = {
 			isa = PBXGroup;
 			children = (
+				41AA41A327D6F051007020AD /* SectionIndexView */,
 				416F2EAB27B60BA4004E5AD9 /* MobileInputView.swift */,
 				416F2EAD27B60C6E004E5AD9 /* VerificationCodeInputView.swift */,
 				416F2EAF27B60C7F004E5AD9 /* PasswordInputView.swift */,
@@ -796,6 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				416F2ECD27BB7E0E004E5AD9 /* Cell */,
+				41AA41A127D607BC007020AD /* CurrentLocationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1232,6 +1244,17 @@
 			path = VisitorRecord;
 			sourceTree = "<group>";
 		};
+		41AA41A327D6F051007020AD /* SectionIndexView */ = {
+			isa = PBXGroup;
+			children = (
+				41AA41A427D6F067007020AD /* SectionIndexView.swift */,
+				41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */,
+				41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */,
+				41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */,
+			);
+			path = SectionIndexView;
+			sourceTree = "<group>";
+		};
 		41C3501827CC6B26006E440F /* Face */ = {
 			isa = PBXGroup;
 			children = (
@@ -1544,12 +1567,14 @@
 				416F2EC027BA5436004E5AD9 /* HomeNaviHeaderView.swift in Sources */,
 				416F2EF727BDE0C8004E5AD9 /* MobileCallElevatorView.swift in Sources */,
 				416F2E5727B0B691004E5AD9 /* BaseWebViewController.swift in Sources */,
+				41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */,
 				416F2E3927B0B427004E5AD9 /* ImportFile.swift in Sources */,
 				416F2F0B27BF4724004E5AD9 /* BLEAdvertisingManager.swift in Sources */,
 				416F2EB027B60C7F004E5AD9 /* PasswordInputView.swift in Sources */,
 				4173C20027C3521E00B8FBB8 /* RemoteIntercomViewController.swift in Sources */,
 				416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */,
 				416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */,
+				41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */,
 				416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */,
 				416F2EB627BA1E18004E5AD9 /* ResetPasswordViewController.swift in Sources */,
 				416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */,
@@ -1613,6 +1638,7 @@
 				416F2E5127B0B638004E5AD9 /* BaseTabBarViewController.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
+				41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */,
 				41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */,
 				41C3502427CDAC15006E440F /* ConfirmFaceImageViewController.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
@@ -1621,6 +1647,7 @@
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
 				41C3502A27CDB416006E440F /* SettingNoticeTableViewCell.swift in Sources */,
 				41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */,
+				41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,
@@ -1658,6 +1685,7 @@
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
 				4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */,
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
+				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
 				4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */,
