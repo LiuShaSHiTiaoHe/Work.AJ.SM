@@ -20,9 +20,12 @@ class SelectUnitBlockViewController: BaseViewController {
     private var locationManager: LocationManager!
 
     private var communityDataSource: [CommunityModel] = []
-    private var selectedCommunity: CommunityModel?
     private var blockDataSource: [BlockModel] = []
+    
+    private var selectedCommunity: CommunityModel?
     private var selectedBlock: BlockModel?
+    
+    private var isSelectCommunity = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,12 +104,23 @@ class SelectUnitBlockViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc
+    func intoCellSelectState() {
+        
+    }
+    
+    @objc
+    func backtoCommunitySelectState() {
+        
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         
         view.addSubview(headerView)
         view.addSubview(searchView)
         view.addSubview(tipsLabel)
+        view.addSubview(locationTips)
         view.addSubview(leftTableVeiw)
         view.addSubview(rightTableVeiw)
         
@@ -122,9 +136,15 @@ class SelectUnitBlockViewController: BaseViewController {
         }
         
         tipsLabel.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().offset(kMargin/2)
             make.top.equalTo(searchView.snp.bottom)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
+        }
+        
+        locationTips.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(tipsLabel.snp.bottom)
+            make.height.equalTo(50)
         }
         
         leftTableVeiw.snp.makeConstraints { make in
@@ -164,10 +184,19 @@ class SelectUnitBlockViewController: BaseViewController {
         return view
     }()
     
+    lazy var locationTips: UILabel = {
+        let view = UILabel()
+        view.backgroundColor = R.color.whiteColor()
+        view.textColor = R.color.maintextColor()
+        view.font = k20Font
+        return view
+    }()
+    
     lazy var leftTableVeiw: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(SelectUnitCell.self, forCellReuseIdentifier: SelectUnitCellIdentifier)
         view.separatorStyle = .none
+        view.backgroundColor = R.color.backgroundColor()
         return view
     }()
     
@@ -175,6 +204,7 @@ class SelectUnitBlockViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(SelectUnitCell.self, forCellReuseIdentifier: SelectUnitCellIdentifier)
         view.separatorStyle = .none
+        view.backgroundColor = R.color.backgroundColor()
         return view
     }()
 }
