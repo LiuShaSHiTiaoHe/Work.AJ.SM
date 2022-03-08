@@ -96,7 +96,7 @@ class HouseViewController: BaseViewController {
     
     @objc
     func addHouse(){
-        self.navigationController?.pushViewController(SelectUnitCityViewController(), animated: true)
+        self.navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
     }
 
 }

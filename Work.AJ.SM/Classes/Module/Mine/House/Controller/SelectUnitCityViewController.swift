@@ -26,6 +26,7 @@ class SelectUnitCityViewController: BaseViewController {
     
     override func initData() {
         locationManager = LocationManager.shared
+        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         currentLocation.locationButton.addTarget(self, action: #selector(reLocated), for: .touchUpInside)
         searchView.initViewType(true)
         tableVeiw.delegate = self
@@ -56,10 +57,6 @@ class SelectUnitCityViewController: BaseViewController {
         }else{
             let permissions: [SPPermissions.Permission] = [.locationWhenInUse]
             let controller = SPPermissions.dialog(permissions)
-            controller.titleText = "需要授权"
-            controller.headerText = "授权请求"
-            controller.footerText = "为了提供更好的服务, App 需要如下权限. 请参考每个权限的说明."
-            controller.dataSource = self
             controller.delegate = self
             controller.present(on: self)
         }
@@ -182,29 +179,14 @@ extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 
-extension SelectUnitCityViewController: SPPermissionsDelegate, SPPermissionsDataSource {
-    func deniedAlertTexts(for permission: SPPermissions.Permission) -> SPPermissionsDeniedAlertTexts? {
-        let texts = SPPermissionsDeniedAlertTexts()
-        texts.titleText = "已拒绝授权"
-        texts.descriptionText = "请跳转至设置并允许授权"
-        texts.actionText = "设置"
-        texts.cancelText = "取消"
-        return texts
-    }
-    
-    
-    func configure(_ cell: SPPermissionsTableViewCell, for permission: SPPermissions.Permission) {
-        // Here you can customise cell, like texts or colors.
-        cell.permissionTitleLabel.text = "使用 App 期间访问位置"
-        cell.permissionDescriptionLabel.text = "访问您的位置"
-    }
+extension SelectUnitCityViewController: SPPermissionsDelegate {
     
     func didHidePermissions(_ permissions: [SPPermissions.Permission]) { }
     
     func didAllowPermission(_ permission: SPPermissions.Permission) {
         switch permission {
         case .locationWhenInUse:
-            getAllCity()
+            judgePermission()
             break
         default:
             break

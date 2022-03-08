@@ -53,12 +53,12 @@ class CommonSearchView: UIView {
         contentView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalTo(40)
-            make.left.equalToSuperview().offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin/2)
             make.right.equalToSuperview().offset(-kMargin/2)
         }
         
         titleButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.height.equalTo(30)
             make.width.equalTo(80)
             make.left.equalToSuperview().offset(10)
@@ -96,6 +96,7 @@ class CommonSearchView: UIView {
         if isShowCancle {
             titleButton.isHidden = true
             separator.isHidden = true
+            cancleButton.isHidden = false
             contentView.snp.updateConstraints { make in
                 make.right.equalToSuperview().offset(-80)
             }
@@ -105,6 +106,7 @@ class CommonSearchView: UIView {
         }else{
             titleButton.isHidden = false
             separator.isHidden = false
+            cancleButton.isHidden = true
             contentView.snp.updateConstraints { make in
                 make.right.equalToSuperview().offset(-kMargin/2)
             }
@@ -124,6 +126,8 @@ class CommonSearchView: UIView {
     
     lazy var titleButton: UIButton = {
         let button = UIButton.init(type: .custom)
+        button.setTitleColor(R.color.maintextColor(), for: .normal)
+        button.titleLabel?.font = k14Font
         return button
     }()
     

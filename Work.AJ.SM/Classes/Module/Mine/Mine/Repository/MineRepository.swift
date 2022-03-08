@@ -16,6 +16,8 @@ typealias DeleteFaceCompletion = ((_ errorMsg: String) -> Void)
 typealias OwnerPasswordCompletion = ((_ errorMsg: String?) -> Void)
 
 typealias CityListCompletion = ((Dictionary<String, Array<String>>) -> Void)
+typealias CommunityListCompletion = (([CommunityModel]) -> Void)
+typealias BlockListCompletion = (([BlockModel]) -> Void)
 
 
 class MineRepository: NSObject {
@@ -174,6 +176,19 @@ extension MineRepository {
 }
 
 extension MineRepository {
+    
+    func getCommunityWithCityName(_ city: String, competion: @escaping CommunityListCompletion) {
+        MineAPI.communitiesInCity(city: city).request(modelType: [CommunityModel].self) { data, response in
+            competion(data)
+        }
+    }
+    
+    func getBlocksWithCommunityID(_ communityID: String, competion: @escaping BlockListCompletion) {
+        MineAPI.blockInCommunity(communityID: communityID).request(modelType: [BlockModel].self) { data, response in
+            competion(data)
+        }
+
+    }
     
     func getAllCity(competion: @escaping CityListCompletion) {
         MineAPI.allCity(encryptString: "").defaultRequest { jsonData in

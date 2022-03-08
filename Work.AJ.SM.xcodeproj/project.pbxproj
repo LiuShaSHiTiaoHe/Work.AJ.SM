@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		412FC54027D7314B001050E9 /* SelectUnitBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */; };
+		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
+		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
+		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
 		416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */; };
 		416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E02279BAF67004E5AD9 /* ViewController.swift */; };
 		416F2E06279BAF67004E5AD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416F2E04279BAF67004E5AD9 /* Main.storyboard */; };
@@ -179,6 +183,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitBlockViewController.swift; sourceTree = "<group>"; };
+		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
+		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
+		412FC54627D74529001050E9 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
 		416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Work.AJ.SM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		416F2E02279BAF67004E5AD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +373,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		412FC54327D73CEA001050E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				412FC54427D73D0B001050E9 /* CommunityModel.swift */,
+				412FC54627D74529001050E9 /* BlockModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		416F2DF2279BAF66004E5AD9 = {
 			isa = PBXGroup;
 			children = (
@@ -713,8 +730,6 @@
 				41C3501627CC5EFB006E440F /* CommonStatusView.swift */,
 				41985F3827CF6E8200E02A9A /* CodeTextField.swift */,
 				41985F3A27CF708700E02A9A /* StyleLabel.swift */,
-				41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */,
-				41985F4127D5B60E00E02A9A /* CommonSearchView.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -768,6 +783,7 @@
 		416F2EC227BB776D004E5AD9 /* House */ = {
 			isa = PBXGroup;
 			children = (
+				412FC54327D73CEA001050E9 /* Model */,
 				416F2ECA27BB78A8004E5AD9 /* View */,
 				416F2EC927BB7897004E5AD9 /* Controller */,
 			);
@@ -799,6 +815,8 @@
 			children = (
 				416F2EC327BB7787004E5AD9 /* HouseViewController.swift */,
 				4173C24427C75E0300B8FBB8 /* SelectHouseViewController.swift */,
+				412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */,
+				41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -808,6 +826,7 @@
 			children = (
 				416F2ECD27BB7E0E004E5AD9 /* Cell */,
 				41AA41A127D607BC007020AD /* CurrentLocationView.swift */,
+				41985F4127D5B60E00E02A9A /* CommonSearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -816,6 +835,7 @@
 			isa = PBXGroup;
 			children = (
 				416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */,
+				412FC54127D73260001050E9 /* SelectUnitCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1602,6 +1622,7 @@
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
 				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
+				412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */,
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
 				41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
@@ -1623,6 +1644,7 @@
 				41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */,
 				41985F2E27CF3B7100E02A9A /* OnBoardViewController.swift in Sources */,
 				416F2E6327B0BF95004E5AD9 /* HomeModuleCell.swift in Sources */,
+				412FC54727D74529001050E9 /* BlockModel.swift in Sources */,
 				416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */,
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
 				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
@@ -1658,6 +1680,7 @@
 				416F2EA327B5FE25004E5AD9 /* LoginViewController.swift in Sources */,
 				4173C25127C7883000B8FBB8 /* MemberListHeaderView.swift in Sources */,
 				416F2EF527BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift in Sources */,
+				412FC54027D7314B001050E9 /* SelectUnitBlockViewController.swift in Sources */,
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,
 				4173C22527C4E09E00B8FBB8 /* PasswordInvitationViewController.swift in Sources */,
@@ -1674,6 +1697,7 @@
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				4173C23A27C6192400B8FBB8 /* MineRepository.swift in Sources */,
 				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
+				412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */,
 				41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */,
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
