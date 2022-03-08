@@ -12,8 +12,13 @@ import SnapKit
 
 let UnitCityCellIdentifier = "UnitCityCellIdentifier"
 
+protocol SelectUnitCityViewControllerDelegate: NSObjectProtocol {
+    func selectCity(name: String)
+}
+
 class SelectUnitCityViewController: BaseViewController {
 
+    weak var delegate: SelectUnitCityViewControllerDelegate?
     private var dataSource = Dictionary<String, Array<String>>()
     private var keysArray  = Array<String>()
     private var locationManager: LocationManager!
@@ -174,6 +179,14 @@ extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return keysArray[section]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let values = dataSource[keysArray[indexPath.section]] {
+            let name = values[indexPath.row]
+            delegate?.selectCity(name: name)
+        }
     }
     
 }

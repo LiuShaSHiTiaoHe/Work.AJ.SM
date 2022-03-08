@@ -11,7 +11,12 @@ import SVProgressHUD
 
 class SelectUnitBlockViewController: BaseViewController {
 
-    private var cityName: String?
+    private var cityName: String? {
+        didSet {
+            searchView.title = cityName
+            getCityCommunitiesData()
+        }
+    }
     private var locationManager: LocationManager!
 
     private var communityDataSource: [CommunityModel] = []
@@ -29,7 +34,7 @@ class SelectUnitBlockViewController: BaseViewController {
         locationManager = LocationManager.shared
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         searchView.initViewType(false)
-//        searchView
+        searchView.titleButton.addTarget(self, action: #selector(moveToSelectCity), for: .touchUpInside)
         leftTableVeiw.delegate = self
         leftTableVeiw.dataSource = self
         rightTableVeiw.delegate = self
@@ -39,13 +44,18 @@ class SelectUnitBlockViewController: BaseViewController {
     
     func getCityCommunitiesData() {
         if let cityName = cityName {
+            SVProgressHUD.show()
             MineRepository.shared.getCommunityWithCityName(cityName) {[weak self] models in
+                SVProgressHUD.dismiss()
                 guard let `self` = self else { return }
                 if models.count > 0 {
                     self.communityDataSource = models
                     self.selectedCommunity = models[0]
                     self.leftTableVeiw.reloadData()
                     self.getBlocksData()
+                }else{
+                    self.blockDataSource.removeAll()
+                    self.rightTableVeiw.reloadData()
                 }
             }
         }
@@ -65,15 +75,16 @@ class SelectUnitBlockViewController: BaseViewController {
     
     func judgePermission() {
         if SPPermissions.Permission.locationWhenInUse.isPrecise {
+            SVProgressHUD.show()
             locationManager.requestLocation()
             locationManager.getCurrentCity = { [weak self] city in
+                SVProgressHUD.dismiss()
                 var tempCity = "南京"
                 if !city.isEmpty {
                     tempCity = city
                 }
                 self?.searchView.title = tempCity
                 self?.cityName = tempCity
-                self?.getCityCommunitiesData()
             }
         }else{
             let permissions: [SPPermissions.Permission] = [.locationWhenInUse]
@@ -81,6 +92,13 @@ class SelectUnitBlockViewController: BaseViewController {
             controller.delegate = self
             controller.present(on: self)
         }
+    }
+    
+    @objc
+    func moveToSelectCity() {
+        let vc = SelectUnitCityViewController()
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func initUI() {
@@ -236,5 +254,11 @@ extension SelectUnitBlockViewController: SPPermissionsDelegate {
         default:
             break
         }
+    }
+}
+
+extension SelectUnitBlockViewController: SelectUnitCityViewControllerDelegate {
+    func selectCity(name: String) {
+        cityName = name
     }
 }

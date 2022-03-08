@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import HanziPinyin
 
 typealias HouseUpdateUnitsCompletion = ((_ errorMsg: String) -> Void)
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
@@ -178,14 +177,18 @@ extension MineRepository {
 extension MineRepository {
     
     func getCommunityWithCityName(_ city: String, competion: @escaping CommunityListCompletion) {
-        MineAPI.communitiesInCity(city: city).request(modelType: [CommunityModel].self) { data, response in
+        MineAPI.communitiesInCity(city: city).request(modelType: [CommunityModel].self, showError: true) { data, response in
             competion(data)
+        } failureCallback: { response in
+            competion([])
         }
     }
     
     func getBlocksWithCommunityID(_ communityID: String, competion: @escaping BlockListCompletion) {
-        MineAPI.blockInCommunity(communityID: communityID).request(modelType: [BlockModel].self) { data, response in
+        MineAPI.blockInCommunity(communityID: communityID).request(modelType: [BlockModel].self, showError: true) { data, response in
             competion(data)
+        } failureCallback: { response in
+            competion([])
         }
 
     }

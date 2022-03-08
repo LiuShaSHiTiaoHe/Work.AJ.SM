@@ -30,7 +30,7 @@ target 'Work.AJ.SM' do
   pod 'JKSwiftExtension'
   pod 'Kingfisher'
   pod 'Siren'
-  pod 'HanziPinyin'
+#  pod 'HanziPinyin'
   
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'

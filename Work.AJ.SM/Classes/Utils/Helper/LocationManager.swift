@@ -84,6 +84,9 @@ class LocationManager: NSObject {
             if area.isEmpty {
                 area = city
             }
+            if city.jk.contains(find: "市") {
+                return city.jk.removeSomeStringUseSomeString(removeString: "市")
+            }
             return city
         }
         return cityName
