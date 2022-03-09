@@ -215,7 +215,7 @@ extension MineRepository {
             let firstLetter = self.findFirstLetterFromString(aString: name)
             if result.has(firstLetter), let values = result[firstLetter] {
                 var names = Array<String>()
-                names.append(values)
+                names.append(contentsOf: values)
                 names.append(name)
                 result.updateValue(names, forKey: firstLetter)
             }else{

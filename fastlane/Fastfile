@@ -1,0 +1,64 @@
+
+APP_NAME = "智慧社区"
+WORKSPACE = "Work.AJ.SM.xcworkspace"
+SCHEME = "Work.AJ.SM"
+IPA_TIME = Time.now.strftime("%Y%m%d_%H%M")
+OUTPUT_DIRECTORY = "Packages"
+APP_INFO_PLIST_PATH = './Work.AJ.SM/Info.plist'
+ENV_PREFIX=""
+IPA_NAME = ""
+default_platform(:ios)
+
+platform :ios do
+  
+  before_all do
+       xcode_select "/Applications/Xcode.app"
+       FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = "40"
+  end
+
+  #debug
+  lane :pgy do
+    ENV_PREFIX="Debug_"
+    EXPORT_METHOD = "development"
+    package(configuration: "Debug")
+    pgyer(api_key: "87c1082eb0e655043817ad9af99d08a5", user_key: "f0a0ba0ee6ac7844f0878e3e1e0326b1")#guguijun.yz@gmail.com
+    notification(subtitle: "上传完成", message: "最新测试包已经上传至蒲公英平台")
+  end
+
+  # #ad-hoc
+  # lane :iosRelease do
+  #   ENV_PREFIX="adhoc_"
+  #   EXPORT_METHOD = "ad-hoc"
+  #   package(configuration: "Release")
+  # end
+
+  # #AppStore
+  # lane :iosAppStore do
+  #   ENV_PREFIX="appstore_"
+  #   EXPORT_METHOD = "app-store"
+  #   package(configuration: "Release")
+  # end
+
+  #package
+  lane :package do |option|
+      cocoapods(repo_update: false, use_bundle_exec: false)
+      PLIST_INFO_VERSION = get_version_number(target: "#{SCHEME}")
+      IPA_NAME = "#{ENV_PREFIX}" + "#{APP_NAME}_"  +  "#{IPA_TIME}_" + "#{PLIST_INFO_VERSION}"+ ".ipa"
+      
+      gym(
+        scheme: "#{SCHEME}",
+        export_method: "#{EXPORT_METHOD}",
+        configuration: option[:configuration],
+        output_directory: "#{OUTPUT_DIRECTORY}",
+        include_symbols: true,
+        include_bitcode: false,
+        xcargs: 'DEBUG_INFORMATION_FORMAT="dwarf-with-dsym"',
+        output_name: "#{IPA_NAME}",
+        export_xcargs: "-allowProvisioningUpdates"
+      )
+      xcclean(
+       workspace: "#{WORKSPACE}",
+       scheme: "#{SCHEME}"
+      )
+  end
+end

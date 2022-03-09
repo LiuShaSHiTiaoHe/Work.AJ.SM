@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '12.0'
 
 target 'Work.AJ.SM' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -28,7 +28,7 @@ target 'Work.AJ.SM' do
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
   pod 'JKSwiftExtension'
-  pod 'Kingfisher'
+  pod 'Kingfisher','7.2.0'
   pod 'Siren'
 #  pod 'HanziPinyin'
   
@@ -49,7 +49,20 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/Bluetooth'
   pod 'SPPermissions/LocationWhenInUse'
   #  pod 'NIMSDK'
-
-
-
 end
+
+# pre_install do |installer|
+#   remove_swiftui()
+# end
+
+# def remove_swiftui
+# # 解决 xcode13 Release模式下SwiftUI报错问题
+# system("rm -rf ./Pods/Kingfisher/Sources/SwiftUI")
+# code_file = "./Pods/Kingfisher/Sources/General/KFOptionsSetter.swift"
+# code_text = File.read(code_file)
+# code_text.gsub!(/#if canImport\(SwiftUI\) \&\& canImport\(Combine\)(.|\n)+#endif/,'')
+# system("rm -rf " + code_file)
+# aFile = File.new(code_file, 'w+')
+# aFile.syswrite(code_text)
+# aFile.close()
+# end
