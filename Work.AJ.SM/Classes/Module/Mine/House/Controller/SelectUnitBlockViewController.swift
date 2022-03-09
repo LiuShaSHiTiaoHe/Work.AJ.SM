@@ -18,14 +18,19 @@ class SelectUnitBlockViewController: BaseViewController {
         }
     }
     private var locationManager: LocationManager!
-
     private var communityDataSource: [CommunityModel] = []
     private var blockDataSource: [BlockModel] = []
+    private var cellDataSource: [CellModel] = []
     
     private var selectedCommunity: CommunityModel?
     private var selectedBlock: BlockModel?
+    private var selectedCell: CellModel?
     
-    private var isSelectCommunity = true
+    private var isSelectCommunity = true {
+        didSet {
+            remakeConstraints()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +47,9 @@ class SelectUnitBlockViewController: BaseViewController {
         leftTableVeiw.dataSource = self
         rightTableVeiw.delegate = self
         rightTableVeiw.dataSource = self
-        judgePermission()
+        locationTips.isUserInteractionEnabled = true
+        locationTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
+        requestUserLocation()
     }
     
     func getCityCommunitiesData() {
@@ -76,7 +83,25 @@ class SelectUnitBlockViewController: BaseViewController {
         }
     }
     
-    func judgePermission() {
+    func getUserCellData(_ blockID: String) {
+        MineRepository.shared.getCellsWithBlockID(blockID){ [weak self] models in
+            guard let `self` = self else { return }
+            if models.count > 0 {
+                self.cellDataSource = models
+                self.selectedCell = models.first
+                self.leftTableVeiw.reloadData()
+                if let cellID = self.selectedCell?.cellID?.jk.intToString {
+                    self.getUserUnitInCell(blockID, cellID)
+                }
+            }
+        }
+    }
+    
+    func getUserUnitInCell(_ blockID: String, _ cellID: String) {
+        MineRepository.shared.getUnitWithBlockIDAndCellID(blockID, cellID)
+    }
+    
+    func requestUserLocation() {
         if SPPermissions.Permission.locationWhenInUse.isPrecise {
             SVProgressHUD.show()
             locationManager.requestLocation()
@@ -114,6 +139,36 @@ class SelectUnitBlockViewController: BaseViewController {
         
     }
     
+    func remakeConstraints() {
+        if isSelectCommunity {
+            locationTips.isHidden = true
+            locationTips.text = ""
+            tipsLabel.text = "请选择小区/楼栋"
+            leftTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom)
+            }
+            rightTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom)
+            }
+        }else{
+            locationTips.isHidden = false
+            tipsLabel.text = "当前已选择"
+            leftTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
+            }
+            rightTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
+            }
+        }
+    }
+    
+    @objc
+    func resetSelection() {
+        if !isSelectCommunity {
+            isSelectCommunity = true
+        }
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         
@@ -123,6 +178,8 @@ class SelectUnitBlockViewController: BaseViewController {
         view.addSubview(locationTips)
         view.addSubview(leftTableVeiw)
         view.addSubview(rightTableVeiw)
+        
+        locationTips.isHidden = true
         
         headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
@@ -188,7 +245,7 @@ class SelectUnitBlockViewController: BaseViewController {
         let view = UILabel()
         view.backgroundColor = R.color.whiteColor()
         view.textColor = R.color.maintextColor()
-        view.font = k20Font
+        view.font = k14Font
         return view
     }()
     
@@ -217,47 +274,83 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
     }
             
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == leftTableVeiw {
-            return communityDataSource.count
-        }else if tableView == rightTableVeiw {
-            return blockDataSource.count
+        if isSelectCommunity {
+            if tableView == leftTableVeiw {
+                return communityDataSource.count
+            }else if tableView == rightTableVeiw {
+                return blockDataSource.count
+            }
+        }else{
+            if tableView == leftTableVeiw {
+                return cellDataSource.count
+            }else{
+                
+            }
         }
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == leftTableVeiw {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SelectUnitCellIdentifier, for: indexPath) as! SelectUnitCell
-            let model = communityDataSource[indexPath.row]
-            if model.rid == selectedCommunity?.rid {
-                cell.backgroundColor = R.color.whiteColor()
-                cell.horizonLine.isHidden = false
-                cell.locationName.textColor = R.color.themeColor()
-            }else{
-                cell.backgroundColor = R.color.backgroundColor()
-                cell.horizonLine.isHidden = true
-                cell.locationName.textColor = R.color.maintextColor()
+        let cell = tableView.dequeueReusableCell(withIdentifier: SelectUnitCellIdentifier, for: indexPath) as! SelectUnitCell
+        cell.isCurrentCell = false
+        if isSelectCommunity {
+            if tableView == leftTableVeiw {
+                let model = communityDataSource[indexPath.row]
+                if model.rid == selectedCommunity?.rid {
+                    cell.isCurrentCell = true
+                }
+                cell.locationName.text = model.name
+            }else {
+                let model = blockDataSource[indexPath.row]
+                cell.locationName.text = model.blockName
             }
-            cell.locationName.text = model.name
-            return cell
-        }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SelectUnitCellIdentifier, for: indexPath) as! SelectUnitCell
-            let model = blockDataSource[indexPath.row]
-            cell.backgroundColor = R.color.backgroundColor()
-            cell.horizonLine.isHidden = true
-            cell.locationName.textColor = R.color.maintextColor()
-            cell.locationName.text = model.blockName
-            return cell
+        }else{
+            if tableView == leftTableVeiw {
+                let model = cellDataSource[indexPath.row]
+                if model.cellID == selectedCell?.cellID {
+                    cell.isCurrentCell = true
+                }
+                cell.locationName.text = model.cellName
+            }else{
+                
+            }
         }
+
+        
+        return cell
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        if tableView == leftTableVeiw {
-            self.selectedCommunity = communityDataSource[indexPath.row]
-            self.leftTableVeiw.reloadData()
-            getBlocksData()
+        if isSelectCommunity {
+            if tableView == leftTableVeiw {
+                let currentCommunity = communityDataSource[indexPath.row]
+                if selectedCommunity?.rid != currentCommunity.rid {
+                    selectedCommunity = currentCommunity
+                    leftTableVeiw.reloadData()
+                    getBlocksData()
+                }
+            }else{
+                let currentBlock = blockDataSource[indexPath.row]
+                if let community = selectedCommunity, let communityName = community.name, let blockName = currentBlock.blockName, let blockID = currentBlock.rid?.jk.intToString {
+                    selectedBlock = currentBlock
+                    isSelectCommunity = false
+                    locationTips.text = communityName + "   >   " + blockName + "   >   "
+                    getUserCellData(blockID)
+                }
+            }
+        }else{
+            let currentCell = cellDataSource[indexPath.row]
+            if selectedCell?.cellID != currentCell.cellID {
+                selectedCell = currentCell
+                self.leftTableVeiw.reloadData()
+                if let blockID = selectedBlock?.rid?.jk.intToString, let cellID = currentCell.cellID?.jk.intToString {
+                    getUserUnitInCell(blockID, cellID)
+                }
+
+            }
         }
+
     }
 }
 
@@ -269,7 +362,7 @@ extension SelectUnitBlockViewController: SPPermissionsDelegate {
     func didAllowPermission(_ permission: SPPermissions.Permission) {
         switch permission {
         case .locationWhenInUse:
-            judgePermission()
+            requestUserLocation()
             break
         default:
             break
@@ -289,6 +382,7 @@ extension SelectUnitBlockViewController: SPPermissionsDelegate {
 
 extension SelectUnitBlockViewController: SelectUnitCityViewControllerDelegate {
     func selectCity(name: String) {
+        isSelectCommunity = true
         cityName = name
     }
 }

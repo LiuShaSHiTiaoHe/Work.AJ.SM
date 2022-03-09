@@ -72,6 +72,24 @@ class SelectUnitCityViewController: BaseViewController {
         judgePermission()
     }
     
+    func sortAllCity() {
+        let items = self.items()
+        let configuration = SectionIndexViewConfiguration.init()
+        configuration.adjustedContentInset = UIApplication.shared.statusBarFrame.size.height + 44
+        self.tableVeiw.sectionIndexView(items: items, configuration: configuration)
+    }
+
+    private func items() -> [SectionIndexViewItemView] {
+        var items = [SectionIndexViewItemView]()
+        for title in self.keysArray {
+            let item = SectionIndexViewItemView.init()
+            item.title = title
+            item.indicator = SectionIndexViewItemIndicator.init(title: title)
+            items.append(item)
+        }
+        return items
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         
@@ -130,23 +148,6 @@ class SelectUnitCityViewController: BaseViewController {
         return view
     }()
     
-    func sortAllCity() {
-        let items = self.items()
-        let configuration = SectionIndexViewConfiguration.init()
-        configuration.adjustedContentInset = UIApplication.shared.statusBarFrame.size.height + 44
-        self.tableVeiw.sectionIndexView(items: items, configuration: configuration)
-    }
-
-    private func items() -> [SectionIndexViewItemView] {
-        var items = [SectionIndexViewItemView]()
-        for title in self.keysArray {
-            let item = SectionIndexViewItemView.init()
-            item.title = title
-            item.indicator = SectionIndexViewItemIndicator.init(title: title)
-            items.append(item)
-        }
-        return items
-    }
 }
 
 extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSource {
@@ -186,6 +187,7 @@ extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSour
         if let values = dataSource[keysArray[indexPath.section]] {
             let name = values[indexPath.row]
             delegate?.selectCity(name: name)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

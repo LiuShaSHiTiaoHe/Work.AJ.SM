@@ -11,6 +11,20 @@ let SelectUnitCellIdentifier = "SelectUnitCellIdentifier"
 
 class SelectUnitCell: UITableViewCell {
 
+    var isCurrentCell: Bool = false {
+        didSet {
+            if isCurrentCell {
+                self.backgroundColor = R.color.whiteColor()
+                horizonLine.isHidden = false
+                locationName.textColor = R.color.themeColor()
+            }else {
+                self.backgroundColor = R.color.backgroundColor()
+                horizonLine.isHidden = true
+                locationName.textColor = R.color.maintextColor()
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,6 +34,7 @@ class SelectUnitCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -33,7 +48,7 @@ class SelectUnitCell: UITableViewCell {
     
     private func initializeView() {
         self.backgroundColor = R.color.backgroundColor()
-        
+        self.selectionStyle = .none
         contentView.addSubview(horizonLine)
         contentView.addSubview(locationName)
         

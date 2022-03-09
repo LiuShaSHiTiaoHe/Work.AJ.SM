@@ -17,6 +17,7 @@ typealias OwnerPasswordCompletion = ((_ errorMsg: String?) -> Void)
 typealias CityListCompletion = ((Dictionary<String, Array<String>>) -> Void)
 typealias CommunityListCompletion = (([CommunityModel]) -> Void)
 typealias BlockListCompletion = (([BlockModel]) -> Void)
+typealias CellListCompletion = (([CellModel]) -> Void)
 
 
 class MineRepository: NSObject {
@@ -190,8 +191,25 @@ extension MineRepository {
         } failureCallback: { response in
             competion([])
         }
-
     }
+    
+    func getCellsWithBlockID(_ blockID: String, competion: @escaping CellListCompletion){
+        MineAPI.cellInBlock(blockID: blockID).request(modelType: [CellModel].self, showError: true) { data, response in
+            competion(data)
+        } failureCallback: { response in
+            competion([])
+        }
+    }
+    
+    func getUnitWithBlockIDAndCellID(_ blockID: String, _ cellID: String) {
+        MineAPI.unitInCell(blockID: blockID, cellID: cellID).defaultRequest { jsonData in
+            
+        } failureCallback: { response in
+            
+        }
+    }
+    
+    
     
     func getAllCity(competion: @escaping CityListCompletion) {
         MineAPI.allCity(encryptString: "").defaultRequest { jsonData in

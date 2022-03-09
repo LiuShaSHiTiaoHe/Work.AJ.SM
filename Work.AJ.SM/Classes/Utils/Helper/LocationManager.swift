@@ -45,20 +45,27 @@ class LocationManager: NSObject {
     // MARK: 反地理编码  经纬度->地址
     private func getGeoLocation(_ latitude:Double, _ longitude:Double) {
         let loc1 = CLLocation(latitude: latitude, longitude: longitude)
-        geoCoder.reverseGeocodeLocation(loc1) { [weak self] (pls: [CLPlacemark]?, error: Error?)  in
-            guard let `self` = self else { return }
-            if error == nil {
-                print("反地理编码成功")
-                guard let plsResult = pls else {return}
-                if let block = self.getCurrentCity {
-                    block(self.getLocationItem(plsResult))
-                }
-            }else {
-                if let block = self.getCurrentCity {
-                    block("")
+        if inTheRangeChina(latitude: latitude, longitude: longitude) {
+            geoCoder.reverseGeocodeLocation(loc1) { [weak self] (pls: [CLPlacemark]?, error: Error?)  in
+                guard let `self` = self else { return }
+                if error == nil {
+                    print("反地理编码成功")
+                    guard let plsResult = pls else {return}
+                    if let block = self.getCurrentCity {
+                        block(self.getLocationItem(plsResult))
+                    }
+                }else {
+                    if let block = self.getCurrentCity {
+                        block("")
+                    }
                 }
             }
+        }else{
+            if let block = self.getCurrentCity {
+                block("")
+            }
         }
+
     }
     
     private func getLocationItem(_ pls: [CLPlacemark]) -> String {

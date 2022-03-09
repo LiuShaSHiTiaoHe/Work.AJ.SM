@@ -144,6 +144,7 @@
 		41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */; };
 		41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */; };
 		41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F4127D5B60E00E02A9A /* CommonSearchView.swift */; };
+		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		41AA41A027D5F76B007020AD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA419F27D5F76B007020AD /* LocationManager.swift */; };
 		41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A127D607BC007020AD /* CurrentLocationView.swift */; };
 		41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A427D6F067007020AD /* SectionIndexView.swift */; };
@@ -324,6 +325,7 @@
 		41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorRecordViewController.swift; sourceTree = "<group>"; };
 		41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCityViewController.swift; sourceTree = "<group>"; };
 		41985F4127D5B60E00E02A9A /* CommonSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchView.swift; sourceTree = "<group>"; };
+		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		41AA419F27D5F76B007020AD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		41AA41A127D607BC007020AD /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
 		41AA41A427D6F067007020AD /* SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexView.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			children = (
 				412FC54427D73D0B001050E9 /* CommunityModel.swift */,
 				412FC54627D74529001050E9 /* BlockModel.swift */,
+				419E2DE127D8A63E00B60633 /* CellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1703,6 +1706,7 @@
 				41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */,
 				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
+				419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */,
 				416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */,
 				4173C23127C5D9A600B8FBB8 /* CommonInputCell.swift in Sources */,
 				4173C25C27C8999D00B8FBB8 /* ScanQRCodeSelectElevatorView.swift in Sources */,
