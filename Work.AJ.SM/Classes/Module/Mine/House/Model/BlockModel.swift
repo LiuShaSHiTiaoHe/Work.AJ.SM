@@ -22,13 +22,13 @@ class BlockModel: Mappable {
     required init?(map: ObjectMapper.Map) {}
     
     func mapping(map: ObjectMapper.Map) {
-        credate            <- map["CREDATE"]
+        credate             <- map["CREDATE"]
         communityID         <- map["COMMUNITYID"]
-        rid        <- map["RID"]
-        blockno           <- map["BLOCKNO"]
-        blockName             <- map["BLOCKNAME"]
-        creby             <- map["CREBY"]
-        districtID             <- map["DISTRICTID"]
+        rid                 <- map["RID"]
+        blockno             <- map["BLOCKNO"]
+        blockName           <- map["BLOCKNAME"]
+        creby               <- map["CREBY"]
+        districtID          <- map["DISTRICTID"]
         cellreqd            <- map["CELLREQD"]
     }
 }

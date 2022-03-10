@@ -6,12 +6,7 @@
 //
 
 import UIKit
-
-enum HouseCertificationRole {
-case owner
-    case family
-    case guset
-}
+import SVProgressHUD
 
 class HouseCertificationViewController: BaseViewController {
     
@@ -19,6 +14,8 @@ class HouseCertificationViewController: BaseViewController {
     var selectedBlock: BlockModel?
     var selectedCell: CellModel?
     var selectedUnit: UserUnitModel?
+
+    private var userType: String = ""//身份类别 F家属 O业主 R租客
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +36,78 @@ class HouseCertificationViewController: BaseViewController {
     
     @objc
     func confirm() {
+        let name = getMemberName()
+        if name.isEmpty {
+            SVProgressHUD.showInfo(withStatus: "姓名不能为空")
+            return
+        }
+        let phone = getMemberPhoneNumber()
+        if phone.isEmpty {
+            SVProgressHUD.showInfo(withStatus: "手机号码不能为空")
+            return
+        }else{
+            if !phone.jk.isValidMobile {
+                SVProgressHUD.showInfo(withStatus: "手机号码格式错误")
+                return
+            }
+        }
+        let identityNumber = getMemberIdentityCardNumber()
+        if identityNumber.isEmpty {
+            SVProgressHUD.showInfo(withStatus: "身份证号码不能为空")
+            return
+        }else{
+            if !identityNumber.jk.isValidIDCardNumStrict {
+                SVProgressHUD.showInfo(withStatus: "身份证号码格式错误")
+                return
+            }
+        }
         
+        if userType.isEmpty {
+            SVProgressHUD.showInfo(withStatus: "身份类别不能为空")
+            return
+        }
+        
+        if let userID = ud.userID, let communityID = selectedCommunity?.rid?.jk.intToString, let blockID = selectedBlock?.rid?.jk.intToString, let unitID = selectedUnit?.rid?.jk.intToString {
+            let model = HouseCertificationModel.init(name: name, phone: phone, userIdentityCardNumber: identityNumber, userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, userID: userID)
+            SVProgressHUD.show(withStatus: "正在提交")
+            MineAPI.houseAuthentication(data: model).defaultRequest { jsonData in
+                SVProgressHUD.showSuccess(withStatus: "提交验证信息成功，请等待审核")
+                SVProgressHUD.dismiss(withDelay: 2) {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            } failureCallback: { response in
+                SVProgressHUD.showError(withStatus: response.message)
+            }
+        }else{
+            SVProgressHUD.showInfo(withStatus: "参数错误")
+        }
+    }
+    
+    func getMemberName() -> String {
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! CommonInputCell
+        if let name = cell.commonInput.text {
+            return name
+        }else{
+            return ""
+        }
+    }
+    
+    func getMemberPhoneNumber() -> String {
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! CommonPhoneNumberCell
+        if let PhoneNumber = cell.phoneInput.text {
+            return PhoneNumber
+        }else{
+            return ""
+        }
+    }
+    
+    func getMemberIdentityCardNumber() -> String {
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! ComminIDNumberInpuCell
+        if let identityCardNumber = cell.IDNumberInput.text {
+            return identityCardNumber
+        }else{
+            return ""
+        }
     }
     
     override func initUI() {
@@ -106,15 +174,16 @@ extension HouseCertificationViewController: UITableViewDelegate, UITableViewData
 }
 
 extension HouseCertificationViewController: CommonSelectButtonCellDelegate {
+    
     func letfButtonSelected(_ isSelected: Bool) {
-        
+        userType = "O"
     }
     
     func centerButtonSelected(_ isSelected: Bool) {
-        
+        userType = "F"
     }
     
     func rightButtonSelected(_ isSelected: Bool) {
-        
+        userType = "R"
     }
 }

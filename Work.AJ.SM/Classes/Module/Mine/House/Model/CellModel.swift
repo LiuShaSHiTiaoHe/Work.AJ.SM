@@ -22,13 +22,13 @@ class CellModel: Mappable {
     required init?(map: ObjectMapper.Map) {}
     
     func mapping(map: ObjectMapper.Map) {
-        cellMM             <- map["CELLMM"]
+        cellMM              <- map["CELLMM"]
         communityID         <- map["COMMUNITYID"]
-        cellID                 <- map["CELLID"]
+        cellID              <- map["CELLID"]
         cretime             <- map["CRETIME"]
-        rid           <- map["RID"]
-        cellNO               <- map["CELLNO"]
-        cellName          <- map["CELLNAME"]
-        blockID            <- map["BLOCKID"]
+        rid                 <- map["RID"]
+        cellNO              <- map["CELLNO"]
+        cellName            <- map["CELLNAME"]
+        blockID             <- map["BLOCKID"]
     }
 }

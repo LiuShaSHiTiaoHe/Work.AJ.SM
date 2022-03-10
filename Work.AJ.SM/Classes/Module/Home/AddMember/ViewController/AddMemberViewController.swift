@@ -47,9 +47,6 @@ class AddMemberViewController: BaseViewController {
     
     @objc
     func confirm() {
-        
-   
-        
         let memberName = getMemberName()
         let memberPhone = getPhoneNumber()
         if memberName.isEmpty {
