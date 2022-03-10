@@ -20,6 +20,7 @@ enum MineAPI {
     case blockInCommunity(communityID: String)
     case cellInBlock(blockID: String)
     case unitInCell(blockID: String, cellID: String)
+    case houseAuthentication(data: HouseCertificationModel)
 }
 
 extension MineAPI: TargetType {
@@ -53,12 +54,14 @@ extension MineAPI: TargetType {
             return APIs.userCell
         case .unitInCell:
             return APIs.allUnit
+        case .houseAuthentication:
+            return APIs.houseAuthentication
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell:
+        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell, .houseAuthentication:
             return .post
         }
     }
@@ -89,6 +92,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["BLOCKID": blockID].ekey("BLOCKID"), encoding: URLEncoding.default)
         case let .unitInCell(blockID, cellID):
             return .requestParameters(parameters: ["BLOCKID": blockID, "CELLID": cellID].ekey("BLOCKID"), encoding: URLEncoding.default)
+        case let .houseAuthentication(data):
+            return .requestParameters(parameters: ["MOBILE": data.phone, "REALNAME": data.name, "IDCARD": data.userIdentityCardNumber, "USERTYPE": data.userType, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "UNITID": data.unitID, "USERID": data.userID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         }
     }
     

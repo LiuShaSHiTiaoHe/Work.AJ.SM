@@ -36,7 +36,7 @@ final class APIs {
     static let userCell = "appcity/getCell.do"
     static let allUnit = "appcity/getUnit.do"
     static let deleteUserUnit = "appcity/deleteMyUnit.do"
-    static let userAuthentication = "appcity/authentication.do"
+    static let houseAuthentication = "appcity/authentication.do"
     static let ownerOpenDoorPassword = "appcity/setMyUnitOpenDoorMM.do"
     static let findUnit = "appcity/findUnit.do"
     

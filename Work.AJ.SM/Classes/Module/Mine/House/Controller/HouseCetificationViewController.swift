@@ -7,7 +7,13 @@
 
 import UIKit
 
-class HouseCetificationViewController: BaseViewController {
+enum HouseCertificationRole {
+case owner
+    case family
+    case guset
+}
+
+class HouseCertificationViewController: BaseViewController {
     
     var selectedCommunity: CommunityModel?
     var selectedBlock: BlockModel?
@@ -50,7 +56,7 @@ class HouseCetificationViewController: BaseViewController {
     }()
 }
 
-extension HouseCetificationViewController: UITableViewDelegate, UITableViewDataSource {
+extension HouseCertificationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -70,7 +76,7 @@ extension HouseCetificationViewController: UITableViewDelegate, UITableViewDataS
             cell.placeholder = "请输入家人/成员手机号"
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CommonPhoneNumberCellIdentifier, for: indexPath) as! CommonPhoneNumberCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ComminIDNumberInpuCellIdentifier, for: indexPath) as! ComminIDNumberInpuCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份证"
             cell.placeholder = "请输入家人/成员身份证号"
@@ -99,7 +105,7 @@ extension HouseCetificationViewController: UITableViewDelegate, UITableViewDataS
 
 }
 
-extension HouseCetificationViewController: CommonSelectButtonCellDelegate {
+extension HouseCertificationViewController: CommonSelectButtonCellDelegate {
     func letfButtonSelected(_ isSelected: Bool) {
         
     }

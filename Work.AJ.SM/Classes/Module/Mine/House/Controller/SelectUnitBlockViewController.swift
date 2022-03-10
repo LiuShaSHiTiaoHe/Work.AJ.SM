@@ -154,8 +154,8 @@ class SelectUnitBlockViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func moveToCetification() {
-        let vc = HouseCetificationViewController()
+    func moveToCertification() {
+        let vc = HouseCertificationViewController()
         vc.selectedCommunity = selectedCommunity
         vc.selectedBlock = selectedBlock
         vc.selectedCell = selectedCell
@@ -354,7 +354,7 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 let currentUnit = unitDataSource[indexPath.row]
                 selectedUnit = currentUnit
                 rightTableVeiw.reloadData()
-                moveToCetification()
+                moveToCertification()
             }
         }
     }

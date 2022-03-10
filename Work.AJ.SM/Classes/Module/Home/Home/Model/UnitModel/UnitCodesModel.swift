@@ -16,14 +16,20 @@ class UnitCodesModel: Object, Mappable {
     @Persisted(originProperty: "codes") var assignee: LinkingObjects<UnitModel>
 
     ///reserved value
-    @Persisted var reservedString1: String?
-    @Persisted var reservedString2: String?
-    @Persisted var reservedString3: String?
-    @Persisted var reservedString4: String?
-    @Persisted var reservedBool1: Bool = false
-    @Persisted var reservedBool2: Bool = false
-    @Persisted var reservedInt1: Int
-    @Persisted var reservedInt2: Int
+    @Persisted var stringValue1: String?
+    @Persisted var stringValue2: String?
+    @Persisted var stringValue3: String?
+    @Persisted var stringValue4: String?
+    @Persisted var stringValue5: String?
+    @Persisted var stringValue6: String?
+    @Persisted var boolValue1: Bool?
+    @Persisted var boolValue2: Bool?
+    @Persisted var boolValue3: Bool?
+    @Persisted var boolValue4: Bool?
+    @Persisted var intValue1: Int?
+    @Persisted var intValue2: Int?
+    @Persisted var intValue3: Int?
+    @Persisted var intValue4: Int?
     
     required convenience init?(map: ObjectMapper.Map) {
       self.init()

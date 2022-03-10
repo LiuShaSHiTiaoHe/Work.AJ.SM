@@ -154,6 +154,8 @@
 		41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */; };
 		41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */; };
 		41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */; };
+		41B7DBCF27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */; };
+		41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -338,6 +340,8 @@
 		41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+SectionIndexView.swift"; sourceTree = "<group>"; };
 		41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItemIndicator.swift; sourceTree = "<group>"; };
 		41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItem.swift; sourceTree = "<group>"; };
+		41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComminIDNumberInpuCell.swift; sourceTree = "<group>"; };
+		41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCertificationModel.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 				412FC54627D74529001050E9 /* BlockModel.swift */,
 				419E2DE127D8A63E00B60633 /* CellModel.swift */,
 				419E2DE327D984E300B60633 /* UserUnitModel.swift */,
+				41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -738,6 +743,7 @@
 				4173C23027C5D9A600B8FBB8 /* CommonInputCell.swift */,
 				4173C23227C5DA9500B8FBB8 /* CommonSelectButtonCell.swift */,
 				4173C22627C4E37300B8FBB8 /* CommonPhoneNumberCell.swift */,
+				41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */,
 				41C3501627CC5EFB006E440F /* CommonStatusView.swift */,
 				41985F3827CF6E8200E02A9A /* CodeTextField.swift */,
 				41985F3A27CF708700E02A9A /* StyleLabel.swift */,
@@ -1625,6 +1631,7 @@
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
+				41B7DBCF27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift in Sources */,
 				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,
@@ -1665,6 +1672,7 @@
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
 				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
+				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
 				41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */,
 				4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */,

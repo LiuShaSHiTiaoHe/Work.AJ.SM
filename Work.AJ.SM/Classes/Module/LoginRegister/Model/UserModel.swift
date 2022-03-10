@@ -32,6 +32,22 @@ class UserModel: Object, Mappable  {
     @Persisted var userName: String?
     @Persisted var mobile: String?
     
+    
+    @Persisted var stringValue1: String?
+    @Persisted var stringValue2: String?
+    @Persisted var stringValue3: String?
+    @Persisted var stringValue4: String?
+    @Persisted var stringValue5: String?
+    @Persisted var stringValue6: String?
+    @Persisted var boolValue1: Bool?
+    @Persisted var boolValue2: Bool?
+    @Persisted var boolValue3: Bool?
+    @Persisted var boolValue4: Bool?
+    @Persisted var intValue1: Int?
+    @Persisted var intValue2: Int?
+    @Persisted var intValue3: Int?
+    @Persisted var intValue4: Int?
+    
     // Mappable
     func mapping(map: ObjectMapper.Map) {
         openID <- map["OPENID"]
