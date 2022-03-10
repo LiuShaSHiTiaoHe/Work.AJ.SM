@@ -133,7 +133,7 @@ class SetVisitorPasswordViewController: BaseViewController {
     }
 
     func getVisitorPhoneNumber() -> String {
-        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! InvitationPhoneNumberCell
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! CommonPhoneNumberCell
         if let number = cell.phoneInput.text {
             return number
         }else{
@@ -151,7 +151,7 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
         
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: InvitationPhoneNumberCellIdentifier, for: indexPath) as! InvitationPhoneNumberCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CommonPhoneNumberCellIdentifier, for: indexPath) as! CommonPhoneNumberCell
             cell.placeholder = "请输入访客手机号"
             return cell
         case 1:

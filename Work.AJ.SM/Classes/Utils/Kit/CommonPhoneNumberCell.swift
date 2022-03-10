@@ -1,5 +1,5 @@
 //
-//  InvitationPhoneNumberCell.swift
+//  CommonPhoneNumberCell.swift
 //  Work.AJ.SM
 //
 //  Created by Fairdesk on 2022/2/22.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-let InvitationPhoneNumberCellIdentifier = "InvitationPhoneNumberCellIdentifier"
+let CommonPhoneNumberCellIdentifier = "CommonPhoneNumberCellIdentifier"
 
-class InvitationPhoneNumberCell: UITableViewCell {
+class CommonPhoneNumberCell: UITableViewCell {
 
     var placeholder: String? {
         didSet {
@@ -23,7 +23,6 @@ class InvitationPhoneNumberCell: UITableViewCell {
         view.textColor = R.color.maintextColor()
         view.textAlignment = .left
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
-        view.text = "访客手机号"
         return view
     }()
     
@@ -31,7 +30,6 @@ class InvitationPhoneNumberCell: UITableViewCell {
         let view = UITextField.init()
         view.textColor = R.color.secondtextColor()
         view.font = k14Font
-//        view.placeholder = "请输入访客手机号"
         view.textAlignment = .right
         view.keyboardType = .phonePad
         return view

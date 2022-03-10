@@ -102,7 +102,7 @@ class SetVisitorPasswordView: UIView {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(TimeSelectCell.self, forCellReuseIdentifier: TimeSelectCellIdentifier)
         view.register(NumberOfUseCell.self, forCellReuseIdentifier: NumberOfUseCellIdentifier)
-        view.register(InvitationPhoneNumberCell.self, forCellReuseIdentifier: InvitationPhoneNumberCellIdentifier)
+        view.register(CommonPhoneNumberCell.self, forCellReuseIdentifier: CommonPhoneNumberCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
         return view

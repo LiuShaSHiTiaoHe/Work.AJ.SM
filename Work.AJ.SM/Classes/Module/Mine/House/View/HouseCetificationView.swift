@@ -1,59 +1,53 @@
 //
-//  AddMemberView.swift
+//  HouseCetificationView.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/23.
+//  Created by Fairdesk on 2022/3/10.
 //
 
 import UIKit
 
-class AddMemberView: UIView {
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeView()
-    }
-        
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+class HouseCetificationView: BaseView {
+    
+    override func initData() {
+     
     }
     
-    func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
+    override func initializeView() {
         self.addSubview(headerView)
-        self.addSubview(titleContentView)
-        titleContentView.addSubview(locationIcon)
-        titleContentView.addSubview(tipsLabel)
+        self.addSubview(locationConetntView)
+        locationConetntView.addSubview(locationIconImage)
+        locationConetntView.addSubview(locationName)
         self.addSubview(tableView)
         self.addSubview(confirmButton)
         
         headerView.snp.makeConstraints { make in
-            make.left.top.right.equalToSuperview()
+            make.left.right.top.equalToSuperview()
             make.height.equalTo(kTitleAndStateHeight)
         }
         
-        titleContentView.snp.makeConstraints { make in
+        locationConetntView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(headerView.snp.bottom)
             make.height.equalTo(50)
+            make.top.equalTo(headerView.snp.bottom)
         }
         
-        tipsLabel.snp.makeConstraints { make in
+        locationName.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
             make.height.equalTo(30)
+            make.centerY.equalToSuperview()
         }
         
-        locationIcon.snp.makeConstraints { make in
-            make.width.equalTo(12)
-            make.height.equalTo(15)
+        locationIconImage.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalTo(tipsLabel.snp.left).offset(-kMargin/2)
+            make.width.equalTo(12)
+            make.height.equalTo(17)
+            make.right.equalTo(locationName.snp.left).offset(-kMargin/2)
         }
         
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(titleContentView.snp.bottom).offset(kMargin)
+            make.top.equalTo(locationConetntView.snp.bottom).offset(kMargin/2)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
         }
         
@@ -63,40 +57,38 @@ class AddMemberView: UIView {
             make.height.equalTo(40)
             make.width.equalTo(250)
         }
-        
     }
-    
+
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.backgroundColor = R.color.whiteColor()
-        view.titleLabel.text = "添加家人/成员"
+        view.titleLabel.text = "房屋认证"
         view.titleLabel.textColor = R.color.blackColor()
         return view
     }()
     
-    lazy var titleContentView: UIView = {
+    lazy var locationConetntView: UIView = {
         let view = UIView()
         view.backgroundColor = R.color.whiteColor()
         return view
     }()
     
-    lazy var locationIcon: UIImageView = {
+    lazy var locationIconImage: UIImageView = {
         let view = UIImageView()
         view.image = R.image.base_image_location()
         return view
     }()
     
-    lazy var tipsLabel: UILabel = {
+    lazy var locationName: UILabel = {
         let view = UILabel()
-        view.font = k15Font
         view.textColor = R.color.maintextColor()
+        view.font = k14Font
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
     
- 
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
@@ -115,7 +107,4 @@ class AddMemberView: UIView {
         button.backgroundColor = R.color.themeColor()
         return button
     }()
-    
-
-
 }

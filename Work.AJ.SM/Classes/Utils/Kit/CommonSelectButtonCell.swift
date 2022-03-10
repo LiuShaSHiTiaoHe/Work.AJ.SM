@@ -8,8 +8,10 @@
 import UIKit
 
 protocol CommonSelectButtonCellDelegate: NSObjectProtocol {
-    func first(isSelected: Bool)
-    func second(isSelected: Bool)
+    func letfButtonSelected(_ isSelected: Bool)
+    func centerButtonSelected(_ isSelected: Bool)
+    func rightButtonSelected(_ isSelected: Bool)
+    
 }
 
 let CommonSelectButtonCellIdentifier = "CommonSelectButtonCellIdentifier"
@@ -22,15 +24,27 @@ class CommonSelectButtonCell: UITableViewCell {
         }
     }
     
-    var firstButtonName: String = ""{
+    var leftButtonName: String = ""{
         didSet {
-            leftButton.setTitle(firstButtonName, for: .normal)
+            if !leftButtonName.isEmpty {
+                leftButton.setTitle(leftButtonName, for: .normal)
+            }
         }
     }
     
-    var secondButtonName: String = ""{
+    var centerButtonName: String = "" {
         didSet {
-            rightButton.setTitle(secondButtonName, for: .normal)
+            if !centerButtonName.isEmpty {
+                centerButton.setTitle(centerButtonName, for: .normal)
+            }
+        }
+    }
+    
+    var rightButtonName: String = ""{
+        didSet {
+            if !rightButtonName.isEmpty{
+                rightButton.setTitle(rightButtonName, for: .normal)
+            }
         }
     }
     
@@ -46,10 +60,36 @@ class CommonSelectButtonCell: UITableViewCell {
                 rightButton.isSelected = false
                 rightButton.backgroundColor = R.color.whiteColor()
             }
+            if centerButton.isSelected {
+                centerButton.isSelected = false
+                centerButton.backgroundColor = R.color.whiteColor()
+            }
         }else{
             leftButton.backgroundColor = R.color.whiteColor()
         }
-        delegate?.first(isSelected: state)
+        delegate?.letfButtonSelected(state)
+    }
+    
+    @objc
+    func centerAction() {
+        centerButton.isSelected = !centerButton.isSelected
+        let state = centerButton.isSelected
+        if state {
+            centerButton.backgroundColor = R.color.themeColor()
+            if rightButton.isSelected {
+                rightButton.isSelected = false
+                rightButton.backgroundColor = R.color.whiteColor()
+            }
+            
+            if leftButton.isSelected {
+                leftButton.isSelected = false
+                leftButton.backgroundColor = R.color.whiteColor()
+            }
+            
+        }else{
+            centerButton.backgroundColor = R.color.whiteColor()
+        }
+        delegate?.centerButtonSelected(state)
     }
     
     @objc
@@ -62,10 +102,14 @@ class CommonSelectButtonCell: UITableViewCell {
                 leftButton.isSelected = false
                 leftButton.backgroundColor = R.color.whiteColor()
             }
+            if centerButton.isSelected {
+                centerButton.isSelected = false
+                centerButton.backgroundColor = R.color.whiteColor()
+            }
         }else{
             rightButton.backgroundColor = R.color.whiteColor()
         }
-        delegate?.second(isSelected: state)
+        delegate?.rightButtonSelected(state)
     }
     
     func initializeView() {
@@ -73,6 +117,7 @@ class CommonSelectButtonCell: UITableViewCell {
         
         contentView.addSubview(nameLabel)
         contentView.addSubview(leftButton)
+        contentView.addSubview(centerButton)
         contentView.addSubview(rightButton)
         
         nameLabel.snp.makeConstraints { make in
@@ -89,8 +134,15 @@ class CommonSelectButtonCell: UITableViewCell {
             make.height.equalTo(24)
         }
         
-        leftButton.snp.makeConstraints { make in
+        centerButton.snp.makeConstraints { make in
             make.right.equalTo(rightButton.snp.left).offset(-kMargin)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(60)
+            make.height.equalTo(24)
+        }
+        
+        leftButton.snp.makeConstraints { make in
+            make.right.equalTo(centerButton.snp.left).offset(-kMargin)
             make.centerY.equalToSuperview()
             make.width.equalTo(60)
             make.height.equalTo(24)
@@ -117,6 +169,17 @@ class CommonSelectButtonCell: UITableViewCell {
         return button
     }()
     
+    lazy var centerButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.titleLabel?.font = k12Font
+        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.whiteColor(), for: .selected)
+        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.layer.borderWidth = 1/kScale
+        button.layer.cornerRadius = 4
+        return button
+    }()
+    
     lazy var rightButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
@@ -128,11 +191,11 @@ class CommonSelectButtonCell: UITableViewCell {
         return button
     }()
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initializeView()
         leftButton.addTarget(self, action: #selector(leftAction), for: .touchUpInside)
+        centerButton.addTarget(self, action: #selector(centerAction), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(rightAction), for: .touchUpInside)
     }
     

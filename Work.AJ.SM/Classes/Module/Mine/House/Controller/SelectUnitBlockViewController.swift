@@ -23,10 +23,26 @@ class SelectUnitBlockViewController: BaseViewController {
     private var cellDataSource: [CellModel] = []
     private var unitDataSource: [UserUnitModel] = []
     
-    private var selectedCommunity: CommunityModel?
-    private var selectedBlock: BlockModel?
-    private var selectedCell: CellModel?
-    private var selectedUnit: UserUnitModel?
+    private var selectedCommunity: CommunityModel?{
+        didSet {
+            updateLocationTips()
+        }
+    }
+    private var selectedBlock: BlockModel?{
+        didSet {
+            updateLocationTips()
+        }
+    }
+    private var selectedCell: CellModel?{
+        didSet {
+            updateLocationTips()
+        }
+    }
+    private var selectedUnit: UserUnitModel?{
+        didSet {
+            updateLocationTips()
+        }
+    }
     
     private var isSelectCommunity = true {
         didSet {
@@ -66,7 +82,6 @@ class SelectUnitBlockViewController: BaseViewController {
                     self.leftTableVeiw.reloadData()
                     self.getBlocksData()
                 }else{
-                    self.blockDataSource.removeAll()
                     self.rightTableVeiw.reloadData()
                 }
             }
@@ -79,8 +94,8 @@ class SelectUnitBlockViewController: BaseViewController {
                 guard let `self` = self else { return }
                 if models.count > 0 {
                     self.blockDataSource = models
-                    self.rightTableVeiw.reloadData()
                 }
+                self.rightTableVeiw.reloadData()
             }
         }
     }
@@ -96,7 +111,6 @@ class SelectUnitBlockViewController: BaseViewController {
                     self.getUserUnitInCell(blockID, cellID)
                 }
             }else{
-                self.unitDataSource.removeAll()
                 self.rightTableVeiw.reloadData()
             }
         }
@@ -107,10 +121,8 @@ class SelectUnitBlockViewController: BaseViewController {
             guard let `self` = self else { return }
             if models.count > 0 {
                 self.unitDataSource = models
-                self.selectedUnit = models.first
-                self.rightTableVeiw.reloadData()
-                
             }
+            self.rightTableVeiw.reloadData()
         }
     }
     
@@ -142,48 +154,15 @@ class SelectUnitBlockViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc
-    func intoCellSelectState() {
+    func moveToCetification() {
+        let vc = HouseCetificationViewController()
+        vc.selectedCommunity = selectedCommunity
+        vc.selectedBlock = selectedBlock
+        vc.selectedCell = selectedCell
+        vc.selectedUnit = selectedUnit
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
         
-    }
-    
-    @objc
-    func backtoCommunitySelectState() {
-        
-    }
-    
-    func remakeConstraints() {
-        if isSelectCommunity {
-            locationTips.isHidden = true
-            locationTips.text = ""
-            tipsLabel.text = "请选择小区/楼栋"
-            leftTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom)
-            }
-            rightTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom)
-            }
-        }else{
-            locationTips.isHidden = false
-            tipsLabel.text = "当前已选择"
-            leftTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
-            }
-            rightTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
-            }
-        }
-    }
-    
-    @objc
-    func resetSelection() {
-        if !isSelectCommunity {
-            isSelectCommunity = true
-            leftTableVeiw.reloadData()
-            rightTableVeiw.reloadData()
-        }
-    }
-    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         
@@ -317,6 +296,9 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 cell.locationName.text = model.name
             }else {
                 let model = blockDataSource[indexPath.row]
+                if model.rid == selectedBlock?.rid {
+                    cell.isCurrentCell = true
+                }
                 cell.locationName.text = model.blockName
             }
         }else{
@@ -328,6 +310,9 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 cell.locationName.text = model.cellName
             }else{
                 let model = unitDataSource[indexPath.row]
+                if model.rid == selectedUnit?.rid{
+                    cell.isCurrentCell = true
+                }
                 cell.locationName.text = model.rid?.jk.intToString
             }
         }
@@ -342,14 +327,15 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 if selectedCommunity?.rid != currentCommunity.rid {
                     selectedCommunity = currentCommunity
                     leftTableVeiw.reloadData()
+                    clearBlockData()
                     getBlocksData()
                 }
             }else{
                 let currentBlock = blockDataSource[indexPath.row]
-                if let community = selectedCommunity, let communityName = community.name, let blockName = currentBlock.blockName, let blockID = currentBlock.rid?.jk.intToString {
+                if let blockID = currentBlock.rid?.jk.intToString {
                     selectedBlock = currentBlock
+                    clearCellData()
                     isSelectCommunity = false
-                    locationTips.text = communityName + "   >   " + blockName + "   >   "
                     getUserCellData(blockID)
                 }
             }
@@ -360,13 +346,96 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                     selectedCell = currentCell
                     self.leftTableVeiw.reloadData()
                     if let blockID = selectedBlock?.rid?.jk.intToString, let cellID = currentCell.cellID?.jk.intToString {
+                        clearUnitData()
                         getUserUnitInCell(blockID, cellID)
                     }
                 }
             }else{
-                
+                let currentUnit = unitDataSource[indexPath.row]
+                selectedUnit = currentUnit
+                rightTableVeiw.reloadData()
+                moveToCetification()
             }
         }
+    }
+}
+
+
+extension SelectUnitBlockViewController {
+    
+    func updateLocationTips() {
+        guard let selectedCommunity = selectedCommunity, let communityName = selectedCommunity.name else {
+            return
+        }
+        locationTips.text = communityName
+        guard let selectedBlock = selectedBlock, let blockName = selectedBlock.blockName else {
+            return
+        }
+        locationTips.text = communityName + ">" + blockName
+        guard let selectedCell = selectedCell, let cellName = selectedCell.cellName else {
+            return
+        }
+        locationTips.text = communityName + ">" + blockName + ">" + cellName
+        guard let selectedUnit = selectedUnit, let unitName = selectedUnit.rid?.jk.intToString else {
+            return
+        }
+        locationTips.text = communityName + ">" + blockName + ">" + cellName + ">" + unitName
+    }
+    
+    func remakeConstraints() {
+        if isSelectCommunity {
+            locationTips.isHidden = true
+            locationTips.text = ""
+            tipsLabel.text = "请选择小区/楼栋"
+            leftTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom)
+            }
+            rightTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom)
+            }
+        }else{
+            locationTips.isHidden = false
+            tipsLabel.text = "当前已选择"
+            leftTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
+            }
+            rightTableVeiw.snp.updateConstraints { make in
+                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
+            }
+        }
+    }
+    
+    @objc
+    func resetSelection() {
+        if !isSelectCommunity {
+            isSelectCommunity = true
+            clearCellData()
+            leftTableVeiw.reloadData()
+            rightTableVeiw.reloadData()
+        }
+    }
+    
+    func clearCommunityData() {
+        selectedCommunity = nil
+        communityDataSource.removeAll()
+        clearBlockData()
+    }
+    
+    func clearBlockData() {
+        selectedBlock = nil
+        blockDataSource.removeAll()
+        clearCellData()
+    }
+    
+    func clearCellData() {
+        selectedCell = nil
+        cellDataSource.removeAll()
+        clearUnitData()
+    }
+    
+    func clearUnitData() {
+        selectedUnit = nil
+        unitDataSource.removeAll()
     }
 }
 

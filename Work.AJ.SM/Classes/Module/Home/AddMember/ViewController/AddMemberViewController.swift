@@ -93,7 +93,7 @@ class AddMemberViewController: BaseViewController {
     }
     
     func getPhoneNumber() -> String {
-        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! InvitationPhoneNumberCell
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! CommonPhoneNumberCell
         if let number = cell.phoneInput.text {
             return number
         }else{
@@ -116,7 +116,7 @@ extension AddMemberViewController: UITableViewDelegate, UITableViewDataSource {
             cell.placeholder = "请输入家人/成员姓名"
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: InvitationPhoneNumberCellIdentifier, for: indexPath) as! InvitationPhoneNumberCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CommonPhoneNumberCellIdentifier, for: indexPath) as! CommonPhoneNumberCell
             cell.accessoryType = .none
             cell.nameLabel.text = "手机号"
             cell.placeholder = "请输入家人/成员手机号"
@@ -125,8 +125,8 @@ extension AddMemberViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: CommonSelectButtonCellIdentifier, for: indexPath) as! CommonSelectButtonCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份"
-            cell.firstButtonName = "家人"
-            cell.secondButtonName = "成员"
+            cell.centerButtonName = "家人"
+            cell.rightButtonName = "成员"
             cell.delegate = self
             return cell
         default:
@@ -145,7 +145,11 @@ extension AddMemberViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddMemberViewController: CommonSelectButtonCellDelegate {
-    func first(isSelected: Bool) {
+    func letfButtonSelected(_ isSelected: Bool) {
+        
+    }
+    
+    func centerButtonSelected(_ isSelected: Bool) {
         if isSelected {
             memberType = .family
         }else{
@@ -153,13 +157,11 @@ extension AddMemberViewController: CommonSelectButtonCellDelegate {
         }
     }
     
-    func second(isSelected: Bool) {
+    func rightButtonSelected(_ isSelected: Bool) {
         if isSelected {
             memberType = .member
         }else{
             memberType = .initial
         }
-    }
-    
-    
+    }    
 }
