@@ -21,10 +21,12 @@ class SelectUnitBlockViewController: BaseViewController {
     private var communityDataSource: [CommunityModel] = []
     private var blockDataSource: [BlockModel] = []
     private var cellDataSource: [CellModel] = []
+    private var unitDataSource: [UserUnitModel] = []
     
     private var selectedCommunity: CommunityModel?
     private var selectedBlock: BlockModel?
     private var selectedCell: CellModel?
+    private var selectedUnit: UserUnitModel?
     
     private var isSelectCommunity = true {
         didSet {
@@ -93,12 +95,23 @@ class SelectUnitBlockViewController: BaseViewController {
                 if let cellID = self.selectedCell?.cellID?.jk.intToString {
                     self.getUserUnitInCell(blockID, cellID)
                 }
+            }else{
+                self.unitDataSource.removeAll()
+                self.rightTableVeiw.reloadData()
             }
         }
     }
     
     func getUserUnitInCell(_ blockID: String, _ cellID: String) {
-        MineRepository.shared.getUnitWithBlockIDAndCellID(blockID, cellID)
+        MineRepository.shared.getUnitWithBlockIDAndCellID(blockID, cellID){ [weak self] models in
+            guard let `self` = self else { return }
+            if models.count > 0 {
+                self.unitDataSource = models
+                self.selectedUnit = models.first
+                self.rightTableVeiw.reloadData()
+                
+            }
+        }
     }
     
     func requestUserLocation() {
@@ -166,6 +179,8 @@ class SelectUnitBlockViewController: BaseViewController {
     func resetSelection() {
         if !isSelectCommunity {
             isSelectCommunity = true
+            leftTableVeiw.reloadData()
+            rightTableVeiw.reloadData()
         }
     }
     
@@ -284,7 +299,7 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
             if tableView == leftTableVeiw {
                 return cellDataSource.count
             }else{
-                
+                return unitDataSource.count
             }
         }
         return 1
@@ -312,11 +327,10 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 }
                 cell.locationName.text = model.cellName
             }else{
-                
+                let model = unitDataSource[indexPath.row]
+                cell.locationName.text = model.rid?.jk.intToString
             }
         }
-
-        
         return cell
     }
         
@@ -340,17 +354,19 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 }
             }
         }else{
-            let currentCell = cellDataSource[indexPath.row]
-            if selectedCell?.cellID != currentCell.cellID {
-                selectedCell = currentCell
-                self.leftTableVeiw.reloadData()
-                if let blockID = selectedBlock?.rid?.jk.intToString, let cellID = currentCell.cellID?.jk.intToString {
-                    getUserUnitInCell(blockID, cellID)
+            if tableView == leftTableVeiw {
+                let currentCell = cellDataSource[indexPath.row]
+                if selectedCell?.cellID != currentCell.cellID {
+                    selectedCell = currentCell
+                    self.leftTableVeiw.reloadData()
+                    if let blockID = selectedBlock?.rid?.jk.intToString, let cellID = currentCell.cellID?.jk.intToString {
+                        getUserUnitInCell(blockID, cellID)
+                    }
                 }
-
+            }else{
+                
             }
         }
-
     }
 }
 
