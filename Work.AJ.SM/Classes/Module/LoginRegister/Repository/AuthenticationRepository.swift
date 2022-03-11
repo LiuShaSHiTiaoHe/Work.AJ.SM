@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 
 typealias LoginCompletion = ((_ errorMsg: String?) -> Void)
 
@@ -47,6 +48,22 @@ class AuthenticationRepository: NSObject {
     
     func sendMessageCode(_ mobile: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.getMessageCode(mobile: mobile).defaultRequest { jsonData in
+            completion(nil)
+        } failureCallback: { response in
+            completion(response.message)
+        }
+    }
+    
+    func checkMessageCode(mobile: String, code: String, completion: @escaping LoginCompletion) {
+        AuthenticationAPI.checkMessageCode(mobile: mobile, code: code).defaultRequest { jsonData in
+            completion(nil)
+        } failureCallback: { response in
+            completion(response.message)
+        }
+    }
+    
+    func resetPassword(mobile: String, password: String, completion: @escaping LoginCompletion) {
+        AuthenticationAPI.resetPassword(mobile: mobile, password: password).defaultRequest { jsonData in
             completion(nil)
         } failureCallback: { response in
             completion(response.message)

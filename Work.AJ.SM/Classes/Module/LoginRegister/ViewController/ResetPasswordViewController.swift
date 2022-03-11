@@ -30,11 +30,36 @@ class ResetPasswordViewController: UIViewController {
         }
     }
 
+    func checkMsgCode(_ mobile: String, _ code: String, _ password: String) {
+        AuthenticationRepository.shared.checkMessageCode(mobile: mobile, code: code) {[weak self] errorMsg in
+            guard let `self` = self else { return }
+            if let errorMsg = errorMsg {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }else{
+                self.resetPassword(mobile, password)
+            }
+        }
+    }
+    
+    
+    func resetPassword(_ mobile: String, _ password: String) {
+        AuthenticationRepository.shared.resetPassword(mobile: mobile, password: password) {[weak self] errorMsg in
+            guard let `self` = self else { return }
+            if let errorMsg = errorMsg {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }else{
+                SVProgressHUD.showSuccess(withStatus: "重置密码成功")
+                DispatchQueue.main.asyncAfter(deadline: .now()+2 ){
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
 }
 
 extension ResetPasswordViewController: ResetPasswordViewDelegate {
     func resetPasswordComfirm(mobile: String, code: String, newPassword: String) {
-        
+        checkMsgCode(mobile, code, newPassword)
     }
     
     func resetPasswordClose() {

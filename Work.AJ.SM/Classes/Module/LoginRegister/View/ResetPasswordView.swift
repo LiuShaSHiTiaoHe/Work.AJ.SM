@@ -174,7 +174,7 @@ class ResetPasswordView: UIView {
             codeInput.errorMsg = "请输入验证码"
             return
         }
-        if let password = passwordInput.inputString, password.count > 6, password.count < 12 {
+        if let password = passwordInput.inputString, password.count >= 6, password.count <= 12 {
             newPassword = password
         }else{
             passwordInput.errorMsg = "请设置正确格式的密码"
