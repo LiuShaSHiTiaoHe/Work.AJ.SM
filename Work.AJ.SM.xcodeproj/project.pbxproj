@@ -156,6 +156,8 @@
 		41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */; };
 		41B7DBCF27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */; };
 		41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */; };
+		41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */; };
+		41B7DBD527DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD427DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -342,6 +344,8 @@
 		41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItem.swift; sourceTree = "<group>"; };
 		41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComminIDNumberInpuCell.swift; sourceTree = "<group>"; };
 		41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCertificationModel.swift; sourceTree = "<group>"; };
+		41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseIndexView.swift; sourceTree = "<group>"; };
+		41B7DBD427DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseLocationIndexCell.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -846,6 +850,7 @@
 				41AA41A127D607BC007020AD /* CurrentLocationView.swift */,
 				41985F4127D5B60E00E02A9A /* CommonSearchView.swift */,
 				419E2DE727D9977500B60633 /* HouseCetificationView.swift */,
+				41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -855,6 +860,7 @@
 			children = (
 				416F2ECE27BB7E29004E5AD9 /* HouseCell.swift */,
 				412FC54127D73260001050E9 /* SelectUnitCell.swift */,
+				41B7DBD427DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1630,6 +1636,7 @@
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
+				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
 				41B7DBCF27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift in Sources */,
 				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
@@ -1706,6 +1713,7 @@
 				416F2EF527BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift in Sources */,
 				412FC54027D7314B001050E9 /* SelectUnitBlockViewController.swift in Sources */,
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
+				41B7DBD527DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */,
 				4173C22527C4E09E00B8FBB8 /* PasswordInvitationViewController.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,

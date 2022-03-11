@@ -65,8 +65,8 @@ class SelectUnitBlockViewController: BaseViewController {
         leftTableVeiw.dataSource = self
         rightTableVeiw.delegate = self
         rightTableVeiw.dataSource = self
-        locationTips.isUserInteractionEnabled = true
-        locationTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
+        locationIndexTips.isUserInteractionEnabled = true
+        locationIndexTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
         requestUserLocation()
     }
     
@@ -169,11 +169,11 @@ class SelectUnitBlockViewController: BaseViewController {
         view.addSubview(headerView)
         view.addSubview(searchView)
         view.addSubview(tipsLabel)
-        view.addSubview(locationTips)
+        view.addSubview(locationIndexTips)
         view.addSubview(leftTableVeiw)
         view.addSubview(rightTableVeiw)
         
-        locationTips.isHidden = true
+        locationIndexTips.isHidden = true
         
         headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
@@ -189,13 +189,13 @@ class SelectUnitBlockViewController: BaseViewController {
         tipsLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().offset(kMargin/2)
             make.top.equalTo(searchView.snp.bottom)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
         }
         
-        locationTips.snp.makeConstraints { make in
+        locationIndexTips.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(tipsLabel.snp.bottom)
-            make.height.equalTo(50)
+            make.top.equalTo(searchView.snp.bottom)
+            make.height.equalTo(90)
         }
         
         leftTableVeiw.snp.makeConstraints { make in
@@ -235,11 +235,8 @@ class SelectUnitBlockViewController: BaseViewController {
         return view
     }()
     
-    lazy var locationTips: UILabel = {
-        let view = UILabel()
-        view.backgroundColor = R.color.whiteColor()
-        view.textColor = R.color.maintextColor()
-        view.font = k14Font
+    lazy var locationIndexTips: SelectHouseIndexView = {
+        let view = SelectHouseIndexView()
         return view
     }()
     
@@ -364,43 +361,42 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
 extension SelectUnitBlockViewController {
     
     func updateLocationTips() {
+        var locations: [String] = []
         guard let selectedCommunity = selectedCommunity, let communityName = selectedCommunity.name else {
             return
         }
-        locationTips.text = communityName
+        locations.append(communityName)
+        locationIndexTips.locations = locations
         guard let selectedBlock = selectedBlock, let blockName = selectedBlock.blockName else {
             return
         }
-        locationTips.text = communityName + ">" + blockName
+        locations.append(blockName)
+        locationIndexTips.locations = locations
+
         guard let selectedCell = selectedCell, let cellName = selectedCell.cellName else {
             return
         }
-        locationTips.text = communityName + ">" + blockName + ">" + cellName
+        locations.append(cellName)
+        locationIndexTips.locations = locations
+
         guard let selectedUnit = selectedUnit, let unitName = selectedUnit.rid?.jk.intToString else {
             return
         }
-        locationTips.text = communityName + ">" + blockName + ">" + cellName + ">" + unitName
+        locations.append(unitName)
+        locationIndexTips.locations = locations
+
     }
     
     func remakeConstraints() {
         if isSelectCommunity {
-            locationTips.isHidden = true
-            locationTips.text = ""
-            tipsLabel.text = "请选择小区/楼栋"
-            leftTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom)
-            }
-            rightTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom)
+            locationIndexTips.isHidden = true
+            tipsLabel.snp.updateConstraints { make in
+                make.top.equalTo(searchView.snp.bottom).offset(0)
             }
         }else{
-            locationTips.isHidden = false
-            tipsLabel.text = "当前已选择"
-            leftTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
-            }
-            rightTableVeiw.snp.updateConstraints { make in
-                make.top.equalTo(tipsLabel.snp.bottom).offset(50)
+            locationIndexTips.isHidden = false
+            tipsLabel.snp.updateConstraints { make in
+                make.top.equalTo(searchView.snp.bottom).offset(90)
             }
         }
     }
