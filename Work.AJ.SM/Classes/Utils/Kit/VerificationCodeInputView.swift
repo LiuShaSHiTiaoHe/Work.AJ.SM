@@ -58,7 +58,6 @@ class VerificationCodeInputView: UIView {
         button.setTitleColor(R.color.themeColor(), for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.textAlignment = .right
-        button.addTarget(self, action: #selector(sendCodeButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -90,6 +89,7 @@ class VerificationCodeInputView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeView()
+        sendCodeButton.addTarget(self, action: #selector(sendCodeButtonAction), for: .touchUpInside)
         textInput.addTarget(self, action: #selector(textInputEditingBegin(_:)), for: .editingDidBegin)
         textInput.addTarget(self, action: #selector(textInputEditingEnd(_:)), for: .editingDidEnd)
     }
@@ -150,14 +150,14 @@ class VerificationCodeInputView: UIView {
     }
     
     // MARK: -Actions
-    @objc func textInputEditingBegin(_ sender: UITextField) {
+    @objc private func textInputEditingBegin(_ sender: UITextField) {
         DispatchQueue.main.async {
             self.seperator.backgroundColor = R.color.themeColor()
             self.titleLabel.textColor = R.color.themeColor()
         }
     }
     
-    @objc func textInputEditingEnd(_ sender: UITextField) {
+    @objc private func textInputEditingEnd(_ sender: UITextField) {
         DispatchQueue.main.async {
             self.seperator.backgroundColor = R.color.separateColor()
             self.titleLabel.textColor = R.color.maintextColor()
@@ -167,23 +167,26 @@ class VerificationCodeInputView: UIView {
         }
     }
     
-    func cleanInput() {
+    private func cleanInput() {
         textInput.text = ""
     }
 
     ///发送验证码
     @objc
-    func sendCodeButtonAction() {
+    private func sendCodeButtonAction() {
         delegate?.sendCodeButtonPressed()
-        self.setupCountDownTime(59)
     }
     
-    func setupCountDownTime(_ minutes: TimeInterval) {
+    private func setupCountDownTime(_ minutes: TimeInterval) {
         sendCodeButton.isHidden = true
         countDownLabel.isHidden = false
         countDownLabel.dispose()
         countDownLabel.setCountDownTime(minutes: minutes)
         countDownLabel.start {}
+    }
+    
+    func startCountDown() {
+        self.setupCountDownTime(59)
     }
 }
 

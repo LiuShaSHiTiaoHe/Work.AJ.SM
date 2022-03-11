@@ -24,8 +24,10 @@ final class APIs {
     //MARK: 用户鉴权
     static let login = "appcity/login.do"
     static let regist = "appcity/register.do"
-    static let editPassword = "appcity/editPassword.do"
     static let msgCode = "appcity/getMessageCode.do"
+    static let checkMsgCode = "appcity/checkMessageCode.do"
+    static let resetPassword = "appcity/resetPassword.do"
+    static let editPassword = "appcity/editPassword.do"
     static let deleteAccount = "appcity/delMyself"
     
     //MARK: 房屋

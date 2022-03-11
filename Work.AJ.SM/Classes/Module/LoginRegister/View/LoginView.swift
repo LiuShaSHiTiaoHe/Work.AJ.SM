@@ -105,13 +105,13 @@ class LoginView: UIView {
             delegate?.login(mobile: loginMobile, password: loginPassword)
         case .register:
             if !registerCheckButton.isSelected {
-                SVProgressHUD.showInfo(withStatus: "服务以及隐私协议")
+                SVProgressHUD.showInfo(withStatus: "请同意服务以及隐私协议")
                 return
             }
             var registerMobile = ""
             var registerCode = ""
             var registerPassword = ""
-            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
+            if let mobile = registerMobileInputView.inputString, mobile.jk.isValidMobile {
                 registerMobile = mobile
             }else{
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
@@ -123,7 +123,7 @@ class LoginView: UIView {
                 registerCodeInputView.errorMsg = "请输入验证码"
                 return
             }
-            if let password = registerPasswordInputView.inputString, password.count > 6, password.count < 12 {
+            if let password = registerPasswordInputView.inputString, password.count >= 6, password.count <= 12 {
                 registerPassword = password
             }else{
                 registerPasswordInputView.errorMsg = "请设置正确格式的密码"
@@ -415,8 +415,9 @@ class LoginView: UIView {
     
 extension LoginView: VerificationCodeInputViewDelegate {
     func sendCodeButtonPressed() {
-        if let phoneNumber = registerMobileInputView.inputString {
+        if let phoneNumber = registerMobileInputView.inputString, !phoneNumber.isEmpty {
             if phoneNumber.jk.isValidMobile {
+                registerCodeInputView.startCountDown()
                 delegate?.sendCode(mobile: phoneNumber)
             }else{
                 SVProgressHUD.showInfo(withStatus: "请输入正确的手机号码")

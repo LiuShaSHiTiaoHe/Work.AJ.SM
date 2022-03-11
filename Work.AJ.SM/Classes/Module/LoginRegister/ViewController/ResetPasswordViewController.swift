@@ -40,4 +40,15 @@ extension ResetPasswordViewController: ResetPasswordViewDelegate {
     func resetPasswordClose() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func sendCode(mobile: String) {
+        SVProgressHUD.show()
+        AuthenticationRepository.shared.sendMessageCode(mobile) { errorMsg in
+            if let errorMsg = errorMsg {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }else{
+                SVProgressHUD.showSuccess(withStatus: "验证码已发送")
+            }
+        }
+    }
 }

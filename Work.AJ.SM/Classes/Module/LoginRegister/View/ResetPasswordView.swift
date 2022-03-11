@@ -11,6 +11,7 @@ import SnapKit
 protocol ResetPasswordViewDelegate: NSObjectProtocol {
     func resetPasswordComfirm(mobile: String, code: String, newPassword: String)
     func resetPasswordClose()
+    func sendCode(mobile: String)
 }
 
 class ResetPasswordView: UIView {
@@ -152,7 +153,9 @@ class ResetPasswordView: UIView {
         
     }
     
-    func initData() {}
+    func initData() {
+        codeInput.delegate = self
+    }
     
     @objc
     func comfirmButtonAction() {
@@ -185,4 +188,19 @@ class ResetPasswordView: UIView {
         delegate?.resetPasswordClose()
     }
     
+}
+
+extension ResetPasswordView: VerificationCodeInputViewDelegate {
+    func sendCodeButtonPressed() {
+        if let phoneNumber = mobileInput.inputString, !phoneNumber.isEmpty {
+            if phoneNumber.jk.isValidMobile {
+                codeInput.startCountDown()
+                delegate?.sendCode(mobile: phoneNumber)
+            }else{
+                SVProgressHUD.showInfo(withStatus: "请输入正确的手机号码")
+            }
+        }else{
+            SVProgressHUD.showInfo(withStatus: "请输入手机号码")
+        }
+    }
 }

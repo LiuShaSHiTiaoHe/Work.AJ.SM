@@ -6,11 +6,14 @@
 //
 
 import Moya
+import JKSwiftExtension
 
 enum AuthenticationAPI {
     case login(mobile: String, passWord: String)
     case regist(mobile: String, code: String, passWord: String)
     case getMessageCode(mobile: String)
+    case checkMessageCode(mobile: String, code: String)
+    case resetPassword(mobile: String, password: String)
 }
 
 extension AuthenticationAPI: TargetType {
@@ -27,24 +30,32 @@ extension AuthenticationAPI: TargetType {
             return APIs.regist
         case .getMessageCode:
             return APIs.msgCode
+        case .checkMessageCode:
+            return APIs.checkMsgCode
+        case .resetPassword:
+            return APIs.resetPassword
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login, .regist, .getMessageCode:
+        case .login, .regist, .getMessageCode, .checkMessageCode, .resetPassword:
             return .post
         }
     }
     
     var task: Task {
         switch self {
-        case .login(let mobile, let passWord):
+        case let .login(mobile, passWord):
             return .requestParameters(parameters: ["MOBILE": mobile, "PASSWORD": passWord].ekey("MOBILE"), encoding: URLEncoding.default)
-        case .regist(let mobile, let code, let passWord):
-            return .requestParameters(parameters: ["MOBILE": mobile,"CODE": code, "PASSWORD": passWord].ekey("MOBILE"), encoding: URLEncoding.default)
-        case .getMessageCode(let mobile):
+        case let .regist(mobile, code, passWord):
+            return .requestParameters(parameters: ["MOBILE": mobile,"CODE": code, "PASSWORD": passWord, "USERNAME": mobile.jk.sub(from: mobile.count - 4), "REALNAME": mobile.jk.sub(from: mobile.count - 4)].ekey("USERNAME"), encoding: URLEncoding.default)
+        case let .getMessageCode(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
+        case let .checkMessageCode(mobile, code):
+            return .requestParameters(parameters: ["MOBILE": mobile, "CODE": code].ekey("MOBILE"), encoding: URLEncoding.default)
+        case let .resetPassword(mobile, password):
+            return .requestParameters(parameters: ["MOBILE": mobile, "NEWPASSWORD": password].ekey("MOBILE"), encoding: URLEncoding.default)
         }
     }
     
