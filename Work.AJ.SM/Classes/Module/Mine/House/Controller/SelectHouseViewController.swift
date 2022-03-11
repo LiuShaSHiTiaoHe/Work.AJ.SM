@@ -18,7 +18,7 @@ class SelectHouseViewController: BaseViewController {
     }()
     
     lazy var tableView: UITableView = {
-        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
+        let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
         view.separatorStyle = .none
         view.backgroundColor = R.color.backgroundColor()
@@ -77,7 +77,7 @@ class SelectHouseViewController: BaseViewController {
     
     @objc
     func addHouse(){
-        
+        self.navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
     }
 
 

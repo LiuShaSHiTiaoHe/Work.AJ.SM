@@ -62,7 +62,7 @@ class SelectHouseIndexView: BaseView {
     
     lazy var locationIndexCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: kMargin/4, bottom: 0, right: kMargin/4)
+        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: kMargin/2, bottom: 0, right: kMargin/4)
         flowLayout.minimumLineSpacing = 5
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .horizontal

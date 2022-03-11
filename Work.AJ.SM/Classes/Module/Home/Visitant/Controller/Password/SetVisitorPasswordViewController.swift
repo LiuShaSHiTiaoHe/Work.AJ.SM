@@ -153,6 +153,7 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: CommonPhoneNumberCellIdentifier, for: indexPath) as! CommonPhoneNumberCell
             cell.placeholder = "请输入访客手机号"
+            cell.nameLabel.text = "手机号"
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell

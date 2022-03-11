@@ -27,6 +27,7 @@ class CommonSelectButtonCell: UITableViewCell {
     var leftButtonName: String = ""{
         didSet {
             if !leftButtonName.isEmpty {
+                leftButton.isHidden = false
                 leftButton.setTitle(leftButtonName, for: .normal)
             }
         }
@@ -35,6 +36,7 @@ class CommonSelectButtonCell: UITableViewCell {
     var centerButtonName: String = "" {
         didSet {
             if !centerButtonName.isEmpty {
+                centerButton.isHidden = false
                 centerButton.setTitle(centerButtonName, for: .normal)
             }
         }
@@ -43,6 +45,7 @@ class CommonSelectButtonCell: UITableViewCell {
     var rightButtonName: String = ""{
         didSet {
             if !rightButtonName.isEmpty{
+                rightButton.isHidden = false
                 rightButton.setTitle(rightButtonName, for: .normal)
             }
         }
@@ -119,6 +122,10 @@ class CommonSelectButtonCell: UITableViewCell {
         contentView.addSubview(leftButton)
         contentView.addSubview(centerButton)
         contentView.addSubview(rightButton)
+        
+        leftButton.isHidden = true
+        centerButton.isHidden = true
+        rightButton.isHidden = true
         
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)

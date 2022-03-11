@@ -19,7 +19,7 @@ class BleOpenDoorStyleCell: UITableViewCell {
     var status: Bool? {
         didSet {
             if let status = status {
-                checkBox.setOn(status, animated: true)
+                checkBox.setOn(status, animated: false)
                 checkBox.isUserInteractionEnabled = !status
             }
         }

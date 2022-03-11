@@ -19,7 +19,7 @@ class HouseViewController: BaseViewController {
     }()
     
     lazy var tableView: UITableView = {
-        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
+        let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
         view.separatorStyle = .none
         view.backgroundColor = R.color.backgroundColor()
