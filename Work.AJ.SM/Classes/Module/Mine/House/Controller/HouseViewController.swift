@@ -42,7 +42,21 @@ class HouseViewController: BaseViewController {
             initialUnitID = unitID
         }
     }
-        
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MineRepository.shared.getAllUnits { [weak self] errorMsg in
+            guard let `self` = self else { return }
+            if errorMsg.isEmpty {
+                self.units.removeAll()
+                self.units.append(contentsOf: RealmTools.objects(UnitModel()))
+                self.tableView.reloadData()
+            }else {
+                SVProgressHUD.showError(withStatus: errorMsg)
+            }
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let unitID = Defaults.currentUnitID, initialUnitID != unitID {
@@ -81,16 +95,6 @@ class HouseViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.dataSource = self
         tableView.delegate = self
-        MineRepository.shared.getAllUnits { [weak self] errorMsg in
-            guard let `self` = self else { return }
-            if errorMsg.isEmpty {
-                self.units.removeAll()
-                self.units.append(contentsOf: RealmTools.objects(UnitModel()))
-                self.tableView.reloadData()
-            }else {
-                SVProgressHUD.showError(withStatus: errorMsg)
-            }
-        }
     }
     
     

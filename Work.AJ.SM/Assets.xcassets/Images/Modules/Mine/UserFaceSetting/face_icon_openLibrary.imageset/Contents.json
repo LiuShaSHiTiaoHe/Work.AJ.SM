@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "cameraSwitch.png",
+      "filename" : "libraryButton.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "cameraSwitch (1).png",
+      "filename" : "libraryButton@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "cameraSwitch (2).png",
+      "filename" : "libraryButton@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

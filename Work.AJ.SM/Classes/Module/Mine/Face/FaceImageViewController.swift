@@ -11,9 +11,15 @@ import SVProgressHUD
 
 class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDelegate {
 
+    lazy var cancelButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(R.image.face_icon_cancel(), for: .normal)
+        return button
+    }()
+    
     lazy var swicthButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(R.image.icon_cameraSwitch(), for: .normal)
+        button.setImage(R.image.face_icon_switchCamera(), for: .normal)
         return button
     }()
     
@@ -25,7 +31,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     
     lazy var galleryButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(R.image.mine_icon_order(), for: .normal)
+        button.setImage(R.image.face_icon_openLibrary(), for: .normal)
         return button
     }()
     
@@ -36,6 +42,8 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         initUI()
         cameraDelegate = self
         videoGravity = .resizeAspectFill
+        doubleTapCameraSwitch = false
+        cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         swicthButton.addTarget(self, action: #selector(switchCameraAction), for: .touchUpInside)
         cameraButton.addTarget(self, action: #selector(takePhotoAction), for: .touchUpInside)
         galleryButton.addTarget(self, action: #selector(galleryAction), for: .touchUpInside)
@@ -44,27 +52,42 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     }
     
     private func initUI() {
+        view.backgroundColor = R.color.backgroundColor()
+        view.addSubview(cancelButton)
         view.addSubview(swicthButton)
         view.addSubview(cameraButton)
         view.addSubview(galleryButton)
+        view.bringSubviewToFront(cancelButton)
         view.bringSubviewToFront(swicthButton)
         view.bringSubviewToFront(cameraButton)
         view.bringSubviewToFront(galleryButton)
+        
+        cancelButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-kMargin)
+            make.width.height.equalTo(40)
+            make.top.equalToSuperview().offset(kTitleAndStateHeight)
+        }
+        
         swicthButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin*2)
-            make.width.height.equalTo(30)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.width.height.equalTo(40)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 2.5)
         }
         cameraButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
-            make.width.height.equalTo(60)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 2.5)
+            make.width.height.equalTo(70)
             make.centerX.equalToSuperview()
         }
         galleryButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin*2)
-            make.width.height.equalTo(30)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.width.height.equalTo(40)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 2.5)
         }
+    }
+    
+    @objc
+    func cancelAction() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc
