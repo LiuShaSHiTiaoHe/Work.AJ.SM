@@ -37,7 +37,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         initUI()
         cameraDelegate = self
@@ -113,8 +113,14 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     
     func confirmFaceImage(_ image: UIImage) {
         let vc = ConfirmFaceImageViewController()
-        vc.faceImage = image
-        self.navigationController?.pushViewController(vc, animated: true)
+        let fixImafe = image.jk.fixOrientation()
+        if let imageData = fixImafe.pngData() {
+            CacheManager.removeCacheWithKey(FaceImageCacheKey)
+            CacheManager.saveCacheWithDictionary([FaceImageCacheKey: imageData], key: FaceImageCacheKey)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            SVProgressHUD.showInfo(withStatus: "图片数据错误")
+        }
     }
 
 }
@@ -133,10 +139,13 @@ extension FaceImageViewController: SwiftyCamViewControllerDelegate {
 
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
-        if detect(photo){
-            confirmFaceImage(photo)
-        }else{
+        switch detect(photo) {
+        case 0:
             SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
+        case 1:
+            confirmFaceImage(photo)
+        default:
+            SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
         }
     }
     
@@ -146,10 +155,13 @@ extension FaceImageViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let type = info[.mediaType] as? String, type == UIImagePickerController.availableMediaTypes(for: .photoLibrary)?.first {
             if let image = info[.originalImage] as? UIImage {
-                if detect(image) {
-                    confirmFaceImage(image)
-                }else{
+                switch detect(image) {
+                case 0:
                     SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
+                case 1:
+                    confirmFaceImage(image)
+                default:
+                    SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
                 }
             }
         }
@@ -158,14 +170,15 @@ extension FaceImageViewController: UIImagePickerControllerDelegate {
 
 
 extension FaceImageViewController {
-    func detect(_ faceImage: UIImage) -> Bool {
+    func detect(_ faceImage: UIImage) -> Int {
         let accuracy = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
         if let faceCIImage = CIImage.init(image: faceImage), let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: accuracy), let imageOptions =  NSDictionary(object: NSNumber(value: 5) as NSNumber, forKey: CIDetectorImageOrientation as NSString) as? [String : Any] {
-            let faces = faceDetector.features(in: faceCIImage, options: imageOptions)
-            if let _ = faces.first as? CIFaceFeature {
-                return true
+            let features = faceDetector.features(in: faceCIImage, options: imageOptions)
+            let faceFeature = features.compactMap { feature in
+                return feature as? CIFaceFeature
             }
+            return faceFeature.count
         }
-        return false
+        return 0
     }
 }

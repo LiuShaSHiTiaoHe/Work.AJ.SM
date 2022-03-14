@@ -45,6 +45,12 @@ extension CacheManager {
         }
     }
     
+    public static func removeCacheWithKey(_ key: String) {
+        if let cache = YYCache.init(name: CacheManager.name) {
+            cache.diskCache.removeObject(forKey: key)
+        }
+    }
+    
     /// Cache data
     /// - Parameters:
     ///   - dict: The cached object
