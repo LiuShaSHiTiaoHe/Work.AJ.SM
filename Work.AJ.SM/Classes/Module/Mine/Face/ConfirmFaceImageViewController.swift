@@ -22,7 +22,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         if let faceImageCache = CacheManager.fetchCachedWithKey(FaceImageCacheKey), let imageData = faceImageCache[FaceImageCacheKey] as? Data, let faceImage = UIImage.init(data: imageData) {
-            faceImageView.image = faceImage.jk.fixOrientation()
+            faceImageView.image = faceImage
         }
     }
     

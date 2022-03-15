@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftyCam
 import SVProgressHUD
 
 class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDelegate {
@@ -65,23 +64,23 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         cancelButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
             make.width.height.equalTo(40)
-            make.top.equalToSuperview().offset(kTitleAndStateHeight)
+            make.top.equalToSuperview().offset(kStateHeight + kMargin)
         }
         
         swicthButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin*2)
             make.width.height.equalTo(40)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 2.5)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 1.5)
         }
         cameraButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 2.5)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 1.5)
             make.width.height.equalTo(70)
             make.centerX.equalToSuperview()
         }
         galleryButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin*2)
             make.width.height.equalTo(40)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 2.5)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 1.5)
         }
     }
     
@@ -113,8 +112,16 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     
     func confirmFaceImage(_ image: UIImage) {
         let vc = ConfirmFaceImageViewController()
-        let fixImafe = image.jk.fixOrientation()
-        if let imageData = fixImafe.pngData() {
+        var fixImage = image
+        if let cgImage = fixImage.cgImage {
+            if fixImage.imageOrientation == .leftMirrored {
+                fixImage = UIImage(cgImage: cgImage, scale: fixImage.scale, orientation: .right)
+            }
+        }else{
+            SVProgressHUD.showInfo(withStatus: "图片数据错误")
+        }
+   
+        if let imageData = fixImage.jk.fixOrientation().pngData() {
             CacheManager.removeCacheWithKey(FaceImageCacheKey)
             CacheManager.saveCacheWithDictionary([FaceImageCacheKey: imageData], key: FaceImageCacheKey)
             self.navigationController?.pushViewController(vc, animated: true)

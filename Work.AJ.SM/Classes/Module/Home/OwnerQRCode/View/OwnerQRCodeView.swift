@@ -118,7 +118,7 @@ class OwnerQRCodeView: UIView {
         
         backImage.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
-            make.height.equalTo(224)
+            make.height.equalTo(224*kHeightScale)
         }
         
         closeButton.snp.makeConstraints { make in
@@ -145,11 +145,11 @@ class OwnerQRCodeView: UIView {
             make.top.equalToSuperview().offset(166)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.bottom.equalToSuperview().offset(-kMargin*3)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin*2)
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            make.top.equalToSuperview().offset(kMargin)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(30)
@@ -163,9 +163,9 @@ class OwnerQRCodeView: UIView {
         }
         
         qrcodeView.snp.makeConstraints { make in
-            make.top.equalTo(tipsLabel.snp.bottom).offset(kMargin*2)
+            make.top.equalTo(tipsLabel.snp.bottom).offset(kMargin)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(290)
+            make.width.height.equalTo(277*kWidthScale)
         }
         
         refreshButton.snp.makeConstraints { make in

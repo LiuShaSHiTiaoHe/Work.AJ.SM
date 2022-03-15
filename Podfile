@@ -40,7 +40,7 @@ target 'Work.AJ.SM' do
   pod 'ActiveLabel'
   pod 'PGDatePicker'
   pod 'swiftScan'
-  pod "SwiftyCam"
+#  pod "SwiftyCam"
   pod 'BEMCheckBox'
   
   pod 'SPPermissions/Camera'

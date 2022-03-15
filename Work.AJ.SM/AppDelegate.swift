@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         logger.info("\(FileManager.jk.DocumnetsDirectory())")
+        logger.info("Main Scale == > \(kScale), Width Scale ==> \(kWidthScale), Height Scale ==> \(kHeightScale)")
         initUI()
         initService()
         return true
