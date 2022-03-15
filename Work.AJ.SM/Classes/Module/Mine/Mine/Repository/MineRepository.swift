@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 typealias HouseUpdateUnitsCompletion = ((_ errorMsg: String) -> Void)
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
 typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 typealias FaceListCompletion = (([FaceModel]) -> Void)
 typealias DeleteFaceCompletion = ((_ errorMsg: String) -> Void)
+typealias AddFaceCompletion = ((_ errorMsg: String) -> Void)
+
 typealias OwnerPasswordCompletion = ((_ errorMsg: String?) -> Void)
 
 typealias CityListCompletion = ((Dictionary<String, Array<String>>) -> Void)
@@ -148,6 +151,19 @@ extension MineRepository {
         }
     }
     
+
+    func addFace(_ data: AddFaceModel, completion: @escaping AddFaceCompletion) {
+        if data.faceData.isEmpty {
+            completion("人脸数据完整性错误")
+        }else{
+            SVProgressHUD.show(withStatus: "上传人脸数据中...")
+            MineAPI.addFace(data: data).defaultRequest { jsonData in
+                completion("")
+            } failureCallback: { response in
+                completion(response.message)
+            }
+        }
+    }
     func deleteFace(_ path: String, completion: @escaping DeleteFaceCompletion)  {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString{
             SVProgressHUD.show()

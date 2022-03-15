@@ -11,6 +11,7 @@ enum MineAPI {
     case getUnitMembers(unitID: String, userID: String)
     case addFamilyMember(communityID: String, unitID: String, userID: String, name: String, phone: String)
     case allFace(communityID: String, blockID: String, cellID: String, unitID: String)
+    case addFace(data: AddFaceModel)
     case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String)
     case versionCheck(type: String)
     case deleteAccount(userID: String)
@@ -36,6 +37,8 @@ extension MineAPI: TargetType {
             return APIs.addFamilyMember
         case .allFace:
             return APIs.faceFile
+        case .addFace:
+            return APIs.addFaceFile
         case .deleteFace:
             return APIs.deleteFaceFile
         case .versionCheck:
@@ -61,7 +64,7 @@ extension MineAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell, .houseAuthentication:
+        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell, .houseAuthentication, .addFace:
             return .post
         }
     }
@@ -74,6 +77,11 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["TARGETMOBILE": phone, "REALNAME": name, "USERID": userID, "UNITID": unitID, "COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .allFace(communityID, blockID, cellID, unitID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .addFace(data):
+            let faceData = MultipartFormData(provider: .data(data.faceData), name: "file", fileName: "\(data.phone).png", mimeType: "image/png")
+            let multipartData = [faceData]
+            let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version":"3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID].ekey("MOBILE")
+            return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
         case let .deleteFace(communityID, blockID, cellID, unitID, imagePath):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "IMAGE": imagePath].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .versionCheck(type):

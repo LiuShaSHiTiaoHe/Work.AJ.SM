@@ -163,6 +163,7 @@
 		41B7DBE627E044E8002A23D0 /* SwiftyCamButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBE127E044E8002A23D0 /* SwiftyCamButton.swift */; };
 		41B7DBE727E044E8002A23D0 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBE227E044E8002A23D0 /* Orientation.swift */; };
 		41B7DBE827E044E8002A23D0 /* SwiftyCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBE327E044E8002A23D0 /* SwiftyCamViewController.swift */; };
+		41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBE927E07912002A23D0 /* AddFaceModel.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -356,6 +357,7 @@
 		41B7DBE127E044E8002A23D0 /* SwiftyCamButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCamButton.swift; sourceTree = "<group>"; };
 		41B7DBE227E044E8002A23D0 /* Orientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		41B7DBE327E044E8002A23D0 /* SwiftyCamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCamViewController.swift; sourceTree = "<group>"; };
+		41B7DBE927E07912002A23D0 /* AddFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFaceModel.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -1338,6 +1340,7 @@
 			isa = PBXGroup;
 			children = (
 				41C3501C27CC6E71006E440F /* FaceModel.swift */,
+				41B7DBE927E07912002A23D0 /* AddFaceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1660,6 +1663,7 @@
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
+				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
 				41B7DBCF27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift in Sources */,
