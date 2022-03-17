@@ -13,6 +13,56 @@ class HouseViewController: BaseViewController {
     var units: [UnitModel] = []
     private var initialUnitID: Int = 0
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        if let unitID = Defaults.currentUnitID {
+            initialUnitID = unitID
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.mj_header?.beginRefreshing()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let unitID = Defaults.currentUnitID, initialUnitID != unitID {
+            NotificationCenter.default.post(name: .kCurrentUnitChanged, object: nil)
+        }
+    }
+    
+    override func initData() {
+        headerView.rightButton.isHidden = true
+        headerView.rightButton.addTarget(self, action: #selector(addHouse), for: .touchUpInside)
+        headerView.titleLabel.text = "我的房屋"
+        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+    
+    @objc
+    func addHouse(){
+        self.navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
+    }
+    
+    override func headerRefresh() {
+        MineRepository.shared.getAllUnits { [weak self] errorMsg in
+            guard let `self` = self else { return }
+            self.tableView.mj_header?.endRefreshing()
+            if errorMsg.isEmpty {
+                self.units.removeAll()
+                self.units.append(contentsOf: RealmTools.objects(UnitModel()))
+                self.tableView.reloadData()
+            }else {
+                SVProgressHUD.showError(withStatus: errorMsg)
+            }
+        }
+    }
+    
+    // MARK: - UI
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView.init()
         return view
@@ -23,6 +73,7 @@ class HouseViewController: BaseViewController {
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
         view.separatorStyle = .none
         view.backgroundColor = R.color.backgroundColor()
+        view.mj_header = refreshHeader(R.color.blackColor())
         return view
     }()
     
@@ -35,34 +86,6 @@ class HouseViewController: BaseViewController {
         button.layer.cornerRadius = 20.0
         return button
     }()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        if let unitID = Defaults.currentUnitID {
-            initialUnitID = unitID
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        MineRepository.shared.getAllUnits { [weak self] errorMsg in
-            guard let `self` = self else { return }
-            if errorMsg.isEmpty {
-                self.units.removeAll()
-                self.units.append(contentsOf: RealmTools.objects(UnitModel()))
-                self.tableView.reloadData()
-            }else {
-                SVProgressHUD.showError(withStatus: errorMsg)
-            }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let unitID = Defaults.currentUnitID, initialUnitID != unitID {
-            NotificationCenter.default.post(name: .kCurrentUnitChanged, object: nil)
-        }
-    }
     
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
@@ -88,20 +111,7 @@ class HouseViewController: BaseViewController {
         }
     }
     
-    override func initData() {
-        headerView.rightButton.isHidden = true
-        headerView.rightButton.addTarget(self, action: #selector(addHouse), for: .touchUpInside)
-        headerView.titleLabel.text = "我的房屋"
-        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
-    
-    @objc
-    func addHouse(){
-        self.navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
-    }
+
 
 }
 

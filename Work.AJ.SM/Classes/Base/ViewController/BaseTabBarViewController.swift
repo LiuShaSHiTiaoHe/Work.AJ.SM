@@ -30,11 +30,13 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         v2.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "服务", image: R.image.tab_icon_service_normal(), selectedImage: R.image.tab_icon_service_selected())
         v3.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "邻里圈", image: R.image.tab_icon_neighbourhood_normal(), selectedImage: R.image.tab_icon_neighbourhood_selected())
         v4.tabBarItem = ESTabBarItem.init(BouncesTabBarContentView(), title: "我的", image: R.image.tab_icon_mine_normal(), selectedImage: R.image.tab_icon_mine_selected())
-        self.viewControllers = [v1, v2, v3, v4]
+//        self.viewControllers = [v1, v2, v3, v4]
+        self.viewControllers = [v1, v4]
     }
 
     private func setupTabBar(){
         self.tabBar.isTranslucent = false
+        self.delegate = self
         self.tabBar.barTintColor = R.color.backgroundColor()
         if #available(iOS 15, *) {
             let bar = UITabBarAppearance.init()

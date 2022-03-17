@@ -268,7 +268,7 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
         if isSelectCommunity {
             if tableView == leftTableVeiw {
                 return communityDataSource.count
-            }else if tableView == rightTableVeiw {
+            }else {
                 return blockDataSource.count
             }
         }else{
@@ -278,7 +278,6 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 return unitDataSource.count
             }
         }
-        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

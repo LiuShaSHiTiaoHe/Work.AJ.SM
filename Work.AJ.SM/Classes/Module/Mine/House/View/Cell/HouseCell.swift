@@ -31,18 +31,6 @@ class HouseCell: UITableViewCell {
     
     var unit: UnitModel? {
         didSet {
-            if let defaultUnitID = Defaults.currentUnitID, let unitID = unit?.unitid {
-                if defaultUnitID != unitID {
-                    selectButton.isHidden = false
-                    currentStateLabel.isHidden = true
-                }else{
-                    selectButton.isHidden = true
-                    currentStateLabel.isHidden = false
-                    currentStateLabel.text = "当前房屋"
-                    currentStateLabel.textColor = R.color.secondtextColor()
-                }
-            }
-            
             if let state = unit?.state {
                 if state == "P" {
                     currentStateLabel.text = "未审核"
@@ -53,6 +41,21 @@ class HouseCell: UITableViewCell {
                 }else if state == "E" {
                     currentStateLabel.text = "已过期"
                     currentStateLabel.textColor = R.color.errorRedColor()
+                }else{
+                    currentStateLabel.text = ""
+                    currentStateLabel.isHidden = true
+                }
+            }
+            
+            if let defaultUnitID = ud.currentUnitID, let unitID = unit?.unitid {
+                if defaultUnitID != unitID {
+                    selectButton.isHidden = false
+                    currentStateLabel.isHidden = true
+                }else{
+                    selectButton.isHidden = true
+                    currentStateLabel.isHidden = false
+                    currentStateLabel.text = "当前房屋"
+                    currentStateLabel.textColor = R.color.secondtextColor()
                 }
             }
             

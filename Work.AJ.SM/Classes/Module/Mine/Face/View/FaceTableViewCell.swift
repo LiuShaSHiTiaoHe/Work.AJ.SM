@@ -34,7 +34,6 @@ class FaceTableViewCell: UITableViewCell {
         bgView.addSubview(nameLabel)
         bgView.addSubview(roleLabel)
         bgView.addSubview(deleteButton)
-//        deleteButton.isHidden = true
         
         bgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
@@ -45,7 +44,8 @@ class FaceTableViewCell: UITableViewCell {
         
         faceImage.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
-            make.width.height.equalTo(80)
+            make.width.equalTo(80)
+            make.height.equalTo(100)
             make.centerY.equalToSuperview()
         }
         

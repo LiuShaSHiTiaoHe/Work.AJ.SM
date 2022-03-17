@@ -10,12 +10,12 @@ import MJRefresh
 
 class BaseViewController: UIViewController {
 
-    open private(set) lazy var refreshHeader: MJRefreshStateHeader = {
-        let header = MJRefreshStateHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
-        header.stateLabel!.textColor = R.color.whiteColor()
-        header.lastUpdatedTimeLabel?.isHidden = true
-        return header
-    }()
+//    open private(set) lazy var refreshHeader: MJRefreshStateHeader = {
+//        let header = MJRefreshStateHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
+//        header.stateLabel!.textColor = R.color.whiteColor()
+//        header.lastUpdatedTimeLabel?.isHidden = true
+//        return header
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,17 @@ class BaseViewController: UIViewController {
         gradientLayer.endPoint  = CGPoint.init(x: 0, y: 1.0)
         gradientLayer.frame = CGRect.init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func refreshHeader(_ textColor: UIColor? = R.color.whiteColor()!) -> MJRefreshStateHeader {
+        let header = MJRefreshStateHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
+        if let textColor = textColor {
+            header.stateLabel!.textColor = textColor
+        }else {
+            header.stateLabel!.textColor = R.color.whiteColor()!
+        }
+        header.lastUpdatedTimeLabel?.isHidden = true
+        return header
     }
     
     @objc

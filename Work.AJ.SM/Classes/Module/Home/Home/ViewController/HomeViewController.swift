@@ -47,7 +47,7 @@ class HomeViewController: BaseViewController {
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.mj_header = refreshHeader
+        collectionView.mj_header = refreshHeader()
         
         
         headerView.snp.makeConstraints { make in
