@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ConfirmFaceImageViewController: BaseViewController {
         
@@ -27,8 +28,43 @@ class ConfirmFaceImageViewController: BaseViewController {
         confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
     }
     
+    // FIXME: - 身份证号还是手机号码？？
     @objc
     func confirm() {
+        let name = getMemberName()
+        if name.isEmpty {
+            SVProgressHUD.showInfo(withStatus: "请输入姓名")
+            return
+        }
+        
+        let identitfireNumber = getMemberIdentifierNumber()
+        if identitfireNumber.isEmpty{
+            SVProgressHUD.showInfo(withStatus: "请输入身份证号")
+            return
+        }
+        if !identitfireNumber.jk.isValidIDCardNumStrict {
+            SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
+            return
+        }
+        
+        if userType.isEmpty{
+            SVProgressHUD.showInfo(withStatus: "请选择类型")
+            return
+        }
+        
+        if let imageData = CacheManager.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile{
+            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID)
+            MineRepository.shared.addFace(model) { errorMsg in
+                if errorMsg.isEmpty {
+                    SVProgressHUD.showSuccess(withStatus: "添加成功")
+                    SVProgressHUD.dismiss(withDelay: 2) {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                }else{
+                    SVProgressHUD.showError(withStatus: errorMsg)
+                }
+            }
+        }
         
     }
     
@@ -41,7 +77,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         }
     }
     
-    func getMemberPhoneNumber() -> String {
+    func getMemberIdentifierNumber() -> String {
         let cell = tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! ComminIDNumberInpuCell
         if let PhoneNumber = cell.IDNumberInput.text {
             return PhoneNumber
