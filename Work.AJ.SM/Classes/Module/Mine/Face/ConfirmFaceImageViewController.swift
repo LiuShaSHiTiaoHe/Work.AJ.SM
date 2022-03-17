@@ -24,6 +24,30 @@ class ConfirmFaceImageViewController: BaseViewController {
         if let faceImageCache = CacheManager.fetchCachedWithKey(FaceImageCacheKey), let imageData = faceImageCache[FaceImageCacheKey] as? Data, let faceImage = UIImage.init(data: imageData) {
             faceImageView.image = faceImage
         }
+        confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
+    }
+    
+    @objc
+    func confirm() {
+        
+    }
+    
+    func getMemberName() -> String {
+        let cell = tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! CommonInputCell
+        if let name = cell.commonInput.text {
+            return name
+        }else{
+            return ""
+        }
+    }
+    
+    func getMemberPhoneNumber() -> String {
+        let cell = tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! ComminIDNumberInpuCell
+        if let PhoneNumber = cell.IDNumberInput.text {
+            return PhoneNumber
+        }else{
+            return ""
+        }
     }
     
     override func initUI() {
