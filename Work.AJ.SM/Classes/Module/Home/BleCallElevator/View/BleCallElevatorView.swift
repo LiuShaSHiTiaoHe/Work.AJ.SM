@@ -38,8 +38,8 @@ class BleCallElevatorView: UIView {
         return view
     }()
     
-    lazy var dashView: UIImageView = {
-        let view = UIImageView.init()
+    lazy var dashView: UIView = {
+        let view = UIView()
         return view
     }()
     
@@ -105,7 +105,7 @@ class BleCallElevatorView: UIView {
         dashView.snp.makeConstraints { make in
             make.left.equalTo(imageView1.snp.right)
             make.height.equalTo(2)
-            make.right.equalToSuperview().offset(78)
+            make.right.equalTo(imageView2.snp.left)
             make.centerY.equalTo(imageView1)
         }
         
@@ -133,6 +133,10 @@ class BleCallElevatorView: UIView {
     
     func initData() {
         
+    }
+    
+    override func layoutSubviews() {
+        dashView.jk.drawDashLine(strokeColor: R.color.themeColor()!)
     }
 
 }

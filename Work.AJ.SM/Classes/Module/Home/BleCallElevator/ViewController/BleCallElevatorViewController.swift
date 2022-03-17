@@ -9,7 +9,7 @@ import UIKit
 
 class BleCallElevatorViewController: BaseViewController {
 
-    lazy var bleCallElevator: BleCallElevatorView = {
+    lazy var contentView: BleCallElevatorView = {
         let view = BleCallElevatorView()
         return view
     }()
@@ -21,11 +21,12 @@ class BleCallElevatorViewController: BaseViewController {
     }
     
     override func initUI() {
-        view.addSubview(bleCallElevator)
+        view.addSubview(contentView)
         
-        bleCallElevator.snp.makeConstraints { make in
+        contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
     }
     
 }
