@@ -23,9 +23,12 @@ class MineViewController: BaseViewController {
     }
     
     override func initData() {
-        if let userID = ud.userID, let userInfo = HomeRepository.shared.getCurrentUser(), let name = userInfo.userName, let mobile = userInfo.mobile {
+        if let _ = ud.userID, let userInfo = HomeRepository.shared.getCurrentUser(), let name = userInfo.userName, let mobile = userInfo.mobile {
             contentView.nameLabel.text = name
             contentView.phoneLabel.text = mobile.jk.hidePhone()
+            if let folderPath = userInfo.folderPath, let avatarUrl = userInfo.HeadImageUrl {
+                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
+            }
         }
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self

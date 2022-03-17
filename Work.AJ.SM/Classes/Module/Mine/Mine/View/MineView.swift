@@ -11,13 +11,18 @@ class MineView: BaseView {
 
     lazy var headerView: UIImageView = {
         let view = UIImageView()
-        view.image = R.image.ming_image_bg()
+        if let image = UIImage.jk.image(color: R.color.themebackgroundColor()!) {
+            view.image = image
+        }else{
+            view.image = R.image.ming_image_bg()
+        }
         return view
     }()
     
     lazy var avatar: UIImageView = {
         let view = UIImageView()
         view.image = R.image.defaultavatar()
+        view.layer.corner(30)
         return view
     }()
     
@@ -57,7 +62,7 @@ class MineView: BaseView {
         headerView.addSubview(avatar)
         headerView.addSubview(nameLabel)
         headerView.addSubview(phoneLabel)
-        
+
         self.addSubview(tableView)
         
         headerView.snp.makeConstraints { make in
@@ -66,9 +71,9 @@ class MineView: BaseView {
         }
         
         avatar.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin*2)
             make.bottom.equalToSuperview().offset(-kMargin)
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(60)
         }
         
         nameLabel.snp.makeConstraints { make in
