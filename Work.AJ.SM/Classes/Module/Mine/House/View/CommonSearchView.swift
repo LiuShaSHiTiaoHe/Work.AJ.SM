@@ -7,6 +7,8 @@
 
 import UIKit
 
+let ConstSearhViewHeight: CGFloat = 70.0
+
 class CommonSearchView: UIView {
 
     var placeHolder: String? {
@@ -21,6 +23,7 @@ class CommonSearchView: UIView {
         didSet {
             if let title = title {
                 titleButton.setTitle(title, for: .normal)
+                titleButton.setImage(R.image.common_dowm_arrow_image(), for: .normal)
             }
         }
     }

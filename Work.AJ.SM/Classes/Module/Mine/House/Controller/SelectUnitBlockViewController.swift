@@ -61,6 +61,7 @@ class SelectUnitBlockViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         searchView.initViewType(false)
         searchView.titleButton.addTarget(self, action: #selector(moveToSelectCity), for: .touchUpInside)
+        searchView.searchView.addTarget(self, action: #selector(textInputEditingBegin(_:)), for: .editingDidBegin)
         leftTableVeiw.delegate = self
         leftTableVeiw.dataSource = self
         rightTableVeiw.delegate = self
@@ -163,6 +164,13 @@ class SelectUnitBlockViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
         
+    @objc func textInputEditingBegin(_ sender: UITextField) {
+        DispatchQueue.main.async {
+            sender.resignFirstResponder()
+            self.navigationController?.pushViewController(HouseSearchViewController(), animated: true)
+        }
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         
@@ -223,7 +231,7 @@ class SelectUnitBlockViewController: BaseViewController {
     
     lazy var searchView: CommonSearchView = {
         let view = CommonSearchView.init()
-        view.placeHolder = "请输入城市名或拼音"
+        view.placeHolder = "请输入关键字"
         return view
     }()
     

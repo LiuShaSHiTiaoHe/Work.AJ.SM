@@ -11,6 +11,7 @@
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
+		416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */; };
 		416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */; };
 		416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E02279BAF67004E5AD9 /* ViewController.swift */; };
 		416F2E06279BAF67004E5AD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416F2E04279BAF67004E5AD9 /* Main.storyboard */; };
@@ -201,6 +202,7 @@
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		412FC54627D74529001050E9 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
+		416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSearchViewController.swift; sourceTree = "<group>"; };
 		416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Work.AJ.SM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		416F2E02279BAF67004E5AD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -849,6 +851,7 @@
 			children = (
 				416F2EC327BB7787004E5AD9 /* HouseViewController.swift */,
 				4173C24427C75E0300B8FBB8 /* SelectHouseViewController.swift */,
+				416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */,
 				412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */,
 				41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */,
 				419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */,
@@ -1774,6 +1777,7 @@
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
 				4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */,
+				416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */,
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
 				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,

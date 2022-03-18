@@ -57,7 +57,11 @@ class SelectUnitCityViewController: BaseViewController {
             getAllCity()
             locationManager.requestLocation()
             locationManager.getCurrentCity = { [weak self] cityName in
-                self?.currentLocation.locationName.text = cityName
+                if cityName.isEmpty {
+                    self?.currentLocation.locationName.text = "未知"
+                }else{
+                    self?.currentLocation.locationName.text = cityName
+                }
             }
         }else{
             let permissions: [SPPermissions.Permission] = [.locationWhenInUse]

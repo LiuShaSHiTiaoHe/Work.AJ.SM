@@ -115,7 +115,16 @@ extension FaceListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension FaceListViewController: FaceTableViewCellDelegate {
+    
     func deleteFace(path: String) {
+        let alert = UIAlertController.init(title: "提示", message: "确认删除？", preferredStyle: .alert)
+        alert.addAction(action: .init(title: "确定", style: .destructive, handler: { action in
+            self.confirmDeleteFaceAction(path)
+        })).addAction(.init(title: "取消", style: .cancel, handler: nil))
+        alert.show()
+    }
+    
+    func confirmDeleteFaceAction(_ path: String) {
         MineRepository.shared.deleteFace(path) { errorMsg in
             if errorMsg.isEmpty {
                 SVProgressHUD.showSuccess(withStatus: "删除成功")

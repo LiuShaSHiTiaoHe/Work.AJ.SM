@@ -11,11 +11,7 @@ class MineView: BaseView {
 
     lazy var headerView: UIImageView = {
         let view = UIImageView()
-        if let image = UIImage.jk.image(color: R.color.themebackgroundColor()!) {
-            view.image = image
-        }else{
-            view.image = R.image.ming_image_bg()
-        }
+        view.backgroundColor = .clear
         return view
     }()
     

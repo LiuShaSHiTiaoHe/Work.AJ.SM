@@ -9,13 +9,6 @@ import UIKit
 import MJRefresh
 
 class BaseViewController: UIViewController {
-
-//    open private(set) lazy var refreshHeader: MJRefreshStateHeader = {
-//        let header = MJRefreshStateHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
-//        header.stateLabel!.textColor = R.color.whiteColor()
-//        header.lastUpdatedTimeLabel?.isHidden = true
-//        return header
-//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()

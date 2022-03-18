@@ -76,7 +76,7 @@ class MobileCallElevatorView: UIView {
         }
         downArrow.snp.makeConstraints { make in
             make.left.equalTo(elevatorLocation.snp.right)
-            make.width.height.equalTo(12)
+            make.width.height.equalTo(20)
             make.centerY.equalToSuperview()
         }
         
@@ -122,11 +122,13 @@ class MobileCallElevatorView: UIView {
         view.textColor = R.color.blackColor()
         view.font = k15Font
         view.textAlignment = .center
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
     
     lazy var downArrow: UIImageView = {
         let view = UIImageView()
+        view.image = R.image.common_dowm_arrow_image()
         return view
     }()
     

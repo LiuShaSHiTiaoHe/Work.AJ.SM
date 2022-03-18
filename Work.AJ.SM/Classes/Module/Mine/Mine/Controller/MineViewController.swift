@@ -38,6 +38,7 @@ class MineViewController: BaseViewController {
     }
     
     override func initUI() {
+        addlayer()
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
