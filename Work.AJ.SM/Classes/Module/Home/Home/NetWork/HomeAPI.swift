@@ -63,8 +63,9 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["BLOCKID": blockID, "COMMUNITYID": communityID, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getElevators(communityID, unitID, cellID, groupID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "CELLID": cellID, "UNITID": unitID, "GROUPID": groupID].ekey("CELLID"), encoding: URLEncoding.default)
-        case let .getLocks(communityID, blockID, cellID, unitID, userID, physicfloor):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID, "PHYSICALFLOOR": physicfloor].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getLocks(communityID, blockID, cellID, unitID, userID, _):
+//            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID, "PHYSICALFLOOR": physicfloor].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getUserOfflineQRCode(unitID):
             return .requestParameters(parameters: ["UNITID": unitID, "isVisitor": "0"].ekey("UNITID"), encoding: URLEncoding.default)
         case let .getInvitationQRCode(unitID, arriveTime, validTime):

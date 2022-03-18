@@ -38,6 +38,11 @@ class BleCallElevatorView: UIView {
         return view
     }()
     
+    lazy var statusImage: UIImageView = {
+        let view = UIImageView()
+        return view
+    }()
+    
     lazy var dashView: UIView = {
         let view = UIView()
         return view
@@ -78,10 +83,14 @@ class BleCallElevatorView: UIView {
         self.addSubview(closeButton)
         self.addSubview(tipsLabel)
         self.addSubview(imageView1)
+        self.addSubview(statusImage)
         self.addSubview(dashView)
         self.addSubview(imageView2)
         self.addSubview(tips2Label)
         self.addSubview(sendButton)
+
+        self.bringSubviewToFront(statusImage)
+        statusImage.isHidden = true
 
         closeButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin/2)
@@ -107,6 +116,13 @@ class BleCallElevatorView: UIView {
             make.height.equalTo(2)
             make.right.equalTo(imageView2.snp.left)
             make.centerY.equalTo(imageView1)
+        }
+        
+        statusImage.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(dashView)
+            make.width.equalTo(35)
+            make.height.equalTo(42)
         }
         
         imageView2.snp.makeConstraints { make in

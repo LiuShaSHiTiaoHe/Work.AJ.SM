@@ -11,7 +11,7 @@ class RemoteIntercomViewController: BaseViewController {
 
     private var dataSource: [UnitLockModel] = []
     
-    lazy var openDoorView: RemoteIntercomView = {
+    lazy var contentView: RemoteIntercomView = {
         let view = RemoteIntercomView()
         return view
     }()
@@ -23,22 +23,24 @@ class RemoteIntercomViewController: BaseViewController {
     }
     
     override func initUI() {
-        view.addSubview(openDoorView)
-        openDoorView.snp.makeConstraints { make in
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
     }
     
-    override func initData() {
-        dataSource = HomeRepository.shared.getCurrentLocks()
+    override func initData() {        
+        contentView.tableView.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)
+        contentView.tableView.delegate = self
+        contentView.tableView.dataSource = self
+        contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         
-        openDoorView.tableView.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)
-        openDoorView.tableView.delegate = self
-        openDoorView.tableView.dataSource = self
-        openDoorView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        
-        openDoorView.tableView.reloadData()
+        HomeRepository.shared.getAllLocks { [weak self] models in
+            guard let `self` = self else { return }
+            self.dataSource = models
+            self.contentView.tableView.reloadData()
+        }
     }
     
 }

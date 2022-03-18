@@ -70,6 +70,7 @@ class RemoteIntercomView: BaseView {
     
     lazy var offlineTipsLogo: UIImageView = {
         let view = UIImageView()
+        view.image = R.image.common_info_yellow()
         return view
     }()
     

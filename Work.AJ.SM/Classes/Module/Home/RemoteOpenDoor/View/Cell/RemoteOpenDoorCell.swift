@@ -17,6 +17,23 @@ class RemoteOpenDoorCell: UITableViewCell {
 
     weak var delegate: RemoteOpenDoorCellDelegate?
     
+    private var status: Bool? {
+        didSet {
+            if let status = status {
+                if status {
+                    statusLabel.text = "在线"
+                    statusLabel.textColor = R.color.owner_greenColor()
+                }else{
+                    statusLabel.text = "不在线"
+                    statusLabel.textColor = R.color.errorRedColor()
+                }
+            }else{
+                statusLabel.text = "未知"
+                statusLabel.textColor = R.color.secondtextColor()
+            }
+        }
+    }
+    
     lazy var bgView: UIView = {
         let view = UIView()
         view.backgroundColor = R.color.whiteColor()
@@ -139,7 +156,15 @@ class RemoteOpenDoorCell: UITableViewCell {
     func setUpData(model: UnitLockModel) {
         nameLabel.text = model.lockname
         typeLabel.text = ""
-        statusLabel.text = "不在线"
+        if let gap = model.gap {
+            if gap == "F" {
+                status = false
+            }else if gap == "T"{
+                status = true
+            }
+        }else{
+            status = nil
+        }
         typeImageView.image = R.image.rod_image_unit()
     }
     

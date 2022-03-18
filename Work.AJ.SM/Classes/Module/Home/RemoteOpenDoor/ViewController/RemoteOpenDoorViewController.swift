@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class RemoteOpenDoorViewController: BaseViewController {
 
     private var dataSource: [UnitLockModel] = []
     
-    lazy var openDoorView: RemoteOpenDoorView = {
+    lazy var contentView: RemoteOpenDoorView = {
         let view = RemoteOpenDoorView()
         return view
     }()
@@ -23,22 +24,27 @@ class RemoteOpenDoorViewController: BaseViewController {
     }
     
     override func initUI() {
-        view.addSubview(openDoorView)
-        openDoorView.snp.makeConstraints { make in
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
     }
     
     override func initData() {
-        dataSource = HomeRepository.shared.getCurrentLocks()
+        contentView.tableView.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)
+        contentView.tableView.delegate = self
+        contentView.tableView.dataSource = self
+        contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         
-        openDoorView.tableView.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)
-        openDoorView.tableView.delegate = self
-        openDoorView.tableView.dataSource = self
-        openDoorView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        SVProgressHUD.show()
+        HomeRepository.shared.getAllLocks { [weak self] models in
+            SVProgressHUD.dismiss()
+            guard let `self` = self else { return }
+            self.dataSource = models
+            self.contentView.tableView.reloadData()
+        }
         
-        openDoorView.tableView.reloadData()
     }
 }
 

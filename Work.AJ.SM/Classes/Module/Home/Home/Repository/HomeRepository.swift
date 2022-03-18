@@ -10,6 +10,7 @@ import SVProgressHUD
 
 typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
 typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
+typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -118,6 +119,16 @@ extension HomeRepository {
             }))
         }
         return result
+    }
+    
+    func getAllLocks(completion: @escaping HomeAllLocksCompletion) {
+        if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = ud.userID {
+            HomeAPI.getLocks(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, userID: userID, physicfloor: "").request(modelType: [UnitLockModel].self, cacheType: .networkElseCache, showError: true) { models, response in
+                completion(models)
+            } failureCallback: { response in
+                completion([])
+            }
+        }
     }
 }
 
