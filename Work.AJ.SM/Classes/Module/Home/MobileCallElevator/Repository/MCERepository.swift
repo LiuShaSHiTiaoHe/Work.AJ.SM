@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SVProgressHUD
 
 
 typealias ElevatorsCompletion = ((Dictionary<String, Array<FloorMapInfo>>, MobileCallElevatorModel) -> Void)
@@ -52,6 +53,50 @@ class MCERepository {
             }
         }
         return ""
+    }
+    
+    func sendCallElevatorData(_ elevatorID: String, _ showFloor: String, _ floorInfo: FloorMapInfo, _ origialData: MobileCallElevatorModel) {
+        let authorizeFlag = "1"
+        if let SNCode = getSNCodeString(elevatorID, origialData) {
+            if let doorType = floorInfo.doorType, let phisicalFloor = floorInfo.physicalFloor {
+                saveCallElevatorRecord()
+                BLEAdvertisingManager.shared.callElevator(SN: SNCode, authorizeFlag: authorizeFlag, side: doorType, floor: phisicalFloor)
+            }
+        }else{
+            SVProgressHUD.showError(withStatus: "SN数据错误")
+        }
+    }
+    
+    
+    
+    // MARK: - Private
+    
+    private func saveCallElevatorRecord(){
+        // FIXME: - 呼叫记录
+        
+    }
+    
+    private func getSNCodeString(_ elevatorID: String, _ data: MobileCallElevatorModel) -> String? {
+        if let elevator = data.lifts?.first(where: { element in
+            elevatorID == element.groupID?.jk.intToString
+        }) {
+            if let liftSN = elevator.liftSN {
+                let liftSNCodeSeparateArray = liftSN.components(separatedBy: "-")
+                if liftSNCodeSeparateArray.count == 3 {
+                    let tempSNCode = liftSNCodeSeparateArray[2]
+                    if !tempSNCode.isEmpty {
+                        var tenBitSNCode = ""
+                        if tempSNCode.count > 10 {
+                            tenBitSNCode = tempSNCode.jk.sub(to: 10)
+                        }else{
+                            tenBitSNCode = tempSNCode
+                        }
+                        return tenBitSNCode.isEmpty ? nil:tenBitSNCode
+                    }
+                }
+            }
+        }
+        return nil
     }
     
     private func processData(model: MobileCallElevatorModel) -> Dictionary<String, Array<FloorMapInfo>> {

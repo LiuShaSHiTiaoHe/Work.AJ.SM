@@ -82,6 +82,9 @@ class BLEAdvertisingManager: NSObject {
                 }
                 let advertisementData = SN + authorizeFlag + side + fullFloorNumber + "00000"
                 peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "B0B0"), CBAdvertisementDataLocalNameKey: advertisementData])
+                logger.shortLine()
+                logger.info("advertisementData ===>  \(advertisementData)")
+                logger.shortLine()
                 self.stopAdvertismentIn {
                     SVProgressHUD.showSuccess(withStatus: "发送成功")
                 }

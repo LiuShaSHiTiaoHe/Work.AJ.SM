@@ -66,6 +66,13 @@ class MobileCallElevatorViewController: BaseViewController {
         mobileCallElevator.elevatorLocation.text = HomeRepository.shared.getCurrentUnitName()
     }
     
+    private func callElevator(_ floorInfo: FloorMapInfo) {
+        guard let originalData = originalData else {
+            return
+        }
+        MCERepository.shared.sendCallElevatorData(currentFloorID, selectFloor, floorInfo, originalData)
+    }
+    
 }
 
 extension MobileCallElevatorViewController: MobileCallElevatorViewDelegate {
@@ -116,6 +123,7 @@ extension MobileCallElevatorViewController: UICollectionViewDelegate {
             let floor = floors[indexPath.row]
             if let showFloor = floor.showFloor {
                 selectFloor = showFloor
+                callElevator(floor)
                 collectionView.reloadItems(at: [indexPath])
             }
         }
@@ -133,6 +141,7 @@ extension MobileCallElevatorViewController: UICollectionViewDelegateFlowLayout {
 extension MobileCallElevatorViewController: SelectElevatorViewControllerDelegate {
     func updateSelectedElevator(_ elevatorID: String) {
         currentFloorID = elevatorID
-        mobileCallElevator.collectionView.reloadData()
+        selectFloor = ""
+        reloadDatas()
     }
 }
