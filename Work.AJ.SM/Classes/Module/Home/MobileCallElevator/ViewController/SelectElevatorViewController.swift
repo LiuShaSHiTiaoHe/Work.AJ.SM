@@ -41,7 +41,7 @@ class SelectElevatorViewController: BaseViewController {
     }
     
     override func closeAction() {
-        if let currentFloorID = currentFloorID {
+        if !currentFloorID.isEmpty {
             delegate?.updateSelectedElevator(currentFloorID)
         }
     }

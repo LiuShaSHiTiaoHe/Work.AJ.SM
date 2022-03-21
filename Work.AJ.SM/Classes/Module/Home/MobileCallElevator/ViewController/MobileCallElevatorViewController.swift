@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MobileCallElevatorViewController: BaseViewController {
 
@@ -43,6 +44,13 @@ class MobileCallElevatorViewController: BaseViewController {
         mobileCallElevator.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         MCERepository.shared.getElevators {[weak self] model, response in
             guard let `self` = self else { return }
+            if model.isEmpty {
+                SVProgressHUD.showInfo(withStatus: "电梯数据为空!")
+                SVProgressHUD.dismiss(withDelay: 2){
+                    self.navigationController?.popViewController(animated: true)
+                }
+                return
+            }
             self.dataSource = model
             self.originalData = response
             if self.currentFloorID.isEmpty, let floorName = model.allKeys().first {
