@@ -110,9 +110,7 @@ extension TargetType {
             case let .success(response):
                 do {
                     let jsonData = try JSON(data: response.data)
-                    #if DEBUG
-                    logger.info("\(self.baseURL)\(self.path) --- \(self.method.rawValue) ----> responseData：\(jsonData)")
-                    #endif
+                    logNetWorkInfo("\(jsonData)")
                     let respModel = ResponseModel()
                     respModel.code = jsonData[codeKey].intValue
                     respModel.message = jsonData[messageKey].stringValue
@@ -198,9 +196,7 @@ extension TargetType {
     private func processResponseData(successCallback:@escaping RequestFailureCallback, response: Moya.Response, showError: Bool = false,  failureCallback: RequestFailureCallback? = nil) {
         do {
             let jsonData = try JSON(data: response.data)
-            #if DEBUG
-            logger.info("\(self.baseURL)\(self.path) --- \(self.method.rawValue) ----> responseData：\(jsonData)")
-            #endif
+            logNetWorkInfo("\(jsonData)")
             let respModel = ResponseModel()
             respModel.code = jsonData[codeKey].intValue
             respModel.message = jsonData[messageKey].stringValue
@@ -243,6 +239,12 @@ extension TargetType {
             return
         }
     }
+    
+    private func logNetWorkInfo(_ response: String) {
+//        #if DEBUG
+//        logger.info("\(self.baseURL)\(self.path) --- \(self.method.rawValue) ----> responseData：\(response)")
+//        #endif
+    }
 
 }
 
@@ -252,7 +254,6 @@ extension TargetType {
         if let urlRequest = try? endpoint.urlRequest(),
             let data = urlRequest.httpBody,
             let parameters = String(data: data, encoding: .utf8) {
-//            return "\(method.rawValue):\(endpoint.url)?\(parameters)"
             return "\(method.rawValue):\(endpoint.url)"
         }
         return "\(method.rawValue):\(endpoint.url)"
