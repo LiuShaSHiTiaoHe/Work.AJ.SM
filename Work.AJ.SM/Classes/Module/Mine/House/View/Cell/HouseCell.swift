@@ -71,9 +71,9 @@ class HouseCell: UITableViewCell {
                 }
             }
             
-            if let cell = unit?.cellname, let community = unit?.communityname, let unitno = unit?.unitno {
-                cellName.text = cell + unitno
-                communityName.text = community
+            if let cell = unit?.cellname, let community = unit?.communityname, let unitno = unit?.unitno, let blockName = unit?.blockname {
+                cellName.text = cell + unitno + "室"
+                communityName.text = community + blockName
             }
             
         }

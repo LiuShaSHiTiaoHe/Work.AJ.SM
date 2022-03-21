@@ -74,8 +74,8 @@ class HomeRepository {
     }
     
     func getUnitName(unitID: Int) -> String {
-        if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname {
-            return communityname + cellname
+        if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname, let blockname = unit.blockname, let unitno = unit.unitno {
+            return communityname + blockname + cellname + unitno + "室"
         }
         return ""
     }
@@ -144,11 +144,17 @@ extension HomeRepository {
         if let otherused = unit.otherused, otherused == 1 {
             return allModules.filter {$0.tag == "OTHERUSED"}
         }else{
+            // FIXME: - 测试关闭过滤
             allModules.forEach { module in
-                if !module.tag.isEmpty, module.tag != "OTHERUSED", let moduleTag = unit.value(forKey: module.tag.lowercased()) as? String, moduleTag == "T", module.showinpage == .home {
+                if !module.tag.isEmpty, module.tag == "MOUDLE1", module.showinpage == .home {
                     result.append(module)
                 }
             }
+//            allModules.forEach { module in
+//                if !module.tag.isEmpty, module.tag != "OTHERUSED", let moduleTag = unit.value(forKey: module.tag.lowercased()) as? String, moduleTag == "T", module.showinpage == .home {
+//                    result.append(module)
+//                }
+//            }
         }
         return result
     }

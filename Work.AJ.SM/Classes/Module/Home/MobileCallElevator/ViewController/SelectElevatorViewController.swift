@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol SelectElevatorViewControllerDelegate: NSObjectProtocol {
+    func updateSelectedElevator(_ elevatorID: String)
+}
+
 class SelectElevatorViewController: BaseViewController {
     
     var dataSource: [ElevatorInfo] = []
     var currentFloorID = ""
+    weak var delegate: SelectElevatorViewControllerDelegate?
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView.init()
@@ -32,7 +37,13 @@ class SelectElevatorViewController: BaseViewController {
         
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
+    }
+    
+    override func closeAction() {
+        if let currentFloorID = currentFloorID {
+            delegate?.updateSelectedElevator(currentFloorID)
+        }
     }
     
     override func initUI() {
@@ -68,10 +79,17 @@ extension SelectElevatorViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectElevatorTableViewCell", for: indexPath) as! SelectElevatorTableViewCell
         let elevator = dataSource[indexPath.row]
-        if let groupID = elevator.groupID?.jk.intToString, groupID == currentFloorID {
-            cell.selectButton.isHidden = true
-            cell.currentStateLabel.isHidden = false
+        if let groupID = elevator.groupID?.jk.intToString {
+            cell.elevatorID = groupID
+            if groupID == currentFloorID {
+                cell.selectButton.isHidden = true
+                cell.currentStateLabel.isHidden = false
+            }else{
+                cell.selectButton.isHidden = false
+                cell.currentStateLabel.isHidden = true
+            }
         }
+        cell.delegate = self
         cell.cellName.text = elevator.remark
         return cell
     }
@@ -80,4 +98,11 @@ extension SelectElevatorViewController: UITableViewDataSource, UITableViewDelega
         return 100.0
     }
     
+}
+
+extension SelectElevatorViewController: SelectElevatorTableViewCellDelegate {
+    func selectElevator(_ elevatorID: String) {
+        currentFloorID = elevatorID
+        tableView.reloadData()
+    }
 }

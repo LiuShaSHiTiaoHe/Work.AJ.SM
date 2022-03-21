@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol SelectElevatorTableViewCellDelegate: NSObjectProtocol {
+    func selectElevator(_ elevatorID: String)
+}
+
 class SelectElevatorTableViewCell: UITableViewCell {
 
+    var elevatorID: String?
+    weak var delegate: SelectElevatorTableViewCellDelegate?
+    
     lazy var backGround: UIView = {
         let view = UIView()
         view.backgroundColor = R.color.whiteColor()
@@ -104,7 +111,9 @@ class SelectElevatorTableViewCell: UITableViewCell {
     
     @objc
     func chooseElevator() {
-
+        if let elevatorID = elevatorID {
+            delegate?.selectElevator(elevatorID)
+        }
     }
     
     required init?(coder: NSCoder) {

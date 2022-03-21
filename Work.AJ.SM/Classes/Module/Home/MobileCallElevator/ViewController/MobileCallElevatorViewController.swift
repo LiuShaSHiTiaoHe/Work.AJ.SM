@@ -64,6 +64,7 @@ extension MobileCallElevatorViewController: MobileCallElevatorViewDelegate {
     func chooseElevator() {
         if let lifts = originalData?.lifts, !currentFloorID.isEmpty {
             let vc = SelectElevatorViewController()
+            vc.delegate = self
             vc.currentFloorID = currentFloorID
             vc.dataSource = lifts
             self.navigationController?.pushViewController(vc, animated: true)
@@ -117,5 +118,13 @@ extension MobileCallElevatorViewController: UICollectionViewDelegate {
 extension MobileCallElevatorViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: (kScreenWidth - kMargin*5)/4, height: (kScreenWidth - kMargin*5)/4)
+    }
+}
+
+
+extension MobileCallElevatorViewController: SelectElevatorViewControllerDelegate {
+    func updateSelectedElevator(_ elevatorID: String) {
+        currentFloorID = elevatorID
+        mobileCallElevator.collectionView.reloadData()
     }
 }
