@@ -26,6 +26,7 @@ class BLEAdvertisingManager: NSObject {
 
     // MARK: - 发送蓝牙开门数据
     func openDoor() -> Bool {
+        SVProgressHUD.show()
         if let peripheralManager = peripheralManager, isBleOpen {
             if !peripheralManager.isAdvertising {
                 if let openDoorData = self.prepareOpenDoorData() {
@@ -54,7 +55,7 @@ class BLEAdvertisingManager: NSObject {
             let userIDString = String(format:"%05d", userID)
             let bleSignal = Defaults.bluetoothSignalStrength.jk.intToString
             let phsycalFloor = String(format:"%02d", phsycalFloorInt)
-            let partOfData = userIDString + sortbar + bleSignal + "M"
+            let partOfData = userIDString + sortbar + bleSignal + "M "
             let openDoorData = "AJ" + partOfData + cellMM + "11" + phsycalFloor
             return openDoorData
         }
