@@ -16,8 +16,7 @@ class BleCallElevatorViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        checkPermission([.bluetooth])
     }
     
     override func initUI() {

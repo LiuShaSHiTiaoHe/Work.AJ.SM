@@ -13,6 +13,7 @@
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
 		41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB327E95D8E002D7BD1 /* CacheManager.swift */; };
 		41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB727E972F0002D7BD1 /* PermissionManager.swift */; };
+		41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */; };
 		416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */; };
 		416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */; };
 		416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E02279BAF67004E5AD9 /* ViewController.swift */; };
@@ -207,6 +208,7 @@
 		41558FB527E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		41558FB627E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		41558FB727E972F0002D7BD1 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.Permission.swift; sourceTree = "<group>"; };
 		416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSearchViewController.swift; sourceTree = "<group>"; };
 		416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Work.AJ.SM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 				416F2E5227B0B64F004E5AD9 /* BaseNavigationController.swift */,
 				416F2E5427B0B66C004E5AD9 /* BaseViewController.swift */,
 				416F2E5627B0B691004E5AD9 /* BaseWebViewController.swift */,
+				41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1718,6 +1721,7 @@
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
 				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
+				41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */,
 				41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */,
 				41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */,
 				4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */,

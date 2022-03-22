@@ -12,17 +12,45 @@ class PermissionManager {
     static let shared = PermissionManager()
     
     func requestAllPermission() {
+        requset([.locationWhenInUse, .bluetooth, .camera, .photoLibrary])
+    }
+    
+    @discardableResult
+    func requestPermission(_ permission: SPPermissions.Permission) -> SPPermissions.PermissionStatus {
+        let status = permission.status
+        switch status {
+        case .authorized:
+            break
+        case .denied:
+            go2Setting(permission)
+        case .notDetermined:
+            requset([permission])
+        case .notSupported:
+            break
+        }
+        return status
+    }
+    
+    private func requset(_ permissions: [SPPermissions.Permission]) {
         if let topViewController = UIViewController.jk.topViewController() {
-            let permissions: [SPPermissions.Permission] = [.locationWhenInUse, .bluetooth, .camera, .photoLibrary]
             let controller = SPPermissions.dialog(permissions)
+            controller.showCloseButton = true
             controller.delegate = self
             controller.dataSource = self
             controller.present(on: topViewController)
         }
     }
     
-    
-    
+    private func go2Setting(_ permission: SPPermissions.Permission) {
+        let alert = UIAlertController.init(title: "\(permission.type.name)权限已被拒绝", message: "请前往系统设置页面打开相应权限", preferredStyle: .alert)
+        alert.addAction("取消", .cancel) {
+            
+        }
+        alert.addAction("设置", .default) {
+            permission.openSettingPage()
+        }
+        alert.show()
+    }
     
     private init() {}
 }
