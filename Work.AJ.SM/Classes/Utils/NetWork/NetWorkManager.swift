@@ -269,7 +269,7 @@ extension TargetType {
     
     private func readCacheResponse() -> Moya.Response? {
         let key = cachedKey
-        guard let dict = CacheManager.fetchCachedWithKey(key),
+        guard let dict = CacheManager.network.fetchCachedWithKey(key),
               let statusCode = dict.value(forKey: "statusCode") as? Int,
               let data = dict.value(forKey: "data") as? Data else {
                   return nil
@@ -287,7 +287,7 @@ extension TargetType {
             "statusCode": response.statusCode
         ]
         DispatchQueue.global().async {
-            CacheManager.saveCacheWithDictionary(storage, key: key)
+            CacheManager.network.saveCacheWithDictionary(storage, key: key)
         }
     }
     
