@@ -122,8 +122,8 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         }
    
         if let imageData = fixImage.jk.fixOrientation().pngData() {
-            CacheManager.removeCacheWithKey(FaceImageCacheKey)
-            CacheManager.saveCacheWithDictionary([FaceImageCacheKey: imageData], key: FaceImageCacheKey)
+            CacheManager.network.removeCacheWithKey(FaceImageCacheKey)
+            CacheManager.network.saveCacheWithDictionary([FaceImageCacheKey: imageData], key: FaceImageCacheKey)
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             SVProgressHUD.showInfo(withStatus: "图片数据错误")

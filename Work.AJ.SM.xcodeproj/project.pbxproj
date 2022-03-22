@@ -11,6 +11,7 @@
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
+		41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB327E95D8E002D7BD1 /* CacheManager.swift */; };
 		416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */; };
 		416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */; };
 		416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E02279BAF67004E5AD9 /* ViewController.swift */; };
@@ -60,7 +61,6 @@
 		416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */; };
 		416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9327B2141B004E5AD9 /* HomeRepository.swift */; };
 		416F2E9627B2426C004E5AD9 /* AppDelegate.Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9527B2426C004E5AD9 /* AppDelegate.Service.swift */; };
-		416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9727B259C0004E5AD9 /* CacheManager.swift */; };
 		416F2E9B27B3BA45004E5AD9 /* RealmTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9A27B3BA45004E5AD9 /* RealmTools.swift */; };
 		416F2EA327B5FE25004E5AD9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EA227B5FE25004E5AD9 /* LoginViewController.swift */; };
 		416F2EA727B5FE7C004E5AD9 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2EA627B5FE7C004E5AD9 /* AuthenticationAPI.swift */; };
@@ -202,6 +202,7 @@
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		412FC54627D74529001050E9 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
+		41558FB327E95D8E002D7BD1 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSearchViewController.swift; sourceTree = "<group>"; };
 		416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Work.AJ.SM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -255,7 +256,6 @@
 		416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.Extension.swift; sourceTree = "<group>"; };
 		416F2E9327B2141B004E5AD9 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		416F2E9527B2426C004E5AD9 /* AppDelegate.Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.Service.swift; sourceTree = "<group>"; };
-		416F2E9727B259C0004E5AD9 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		416F2E9A27B3BA45004E5AD9 /* RealmTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTools.swift; sourceTree = "<group>"; };
 		416F2EA227B5FE25004E5AD9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		416F2EA627B5FE7C004E5AD9 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
@@ -557,7 +557,7 @@
 			children = (
 				416F2E4227B0B4F6004E5AD9 /* Logger.swift */,
 				416F2E4427B0B514004E5AD9 /* GDataManager.swift */,
-				416F2E9727B259C0004E5AD9 /* CacheManager.swift */,
+				41558FB327E95D8E002D7BD1 /* CacheManager.swift */,
 				416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */,
 				41AA419F27D5F76B007020AD /* LocationManager.swift */,
 			);
@@ -1654,6 +1654,7 @@
 				416F2EB627BA1E18004E5AD9 /* ResetPasswordViewController.swift in Sources */,
 				416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */,
 				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
+				41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */,
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
 				41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */,
@@ -1766,7 +1767,6 @@
 				412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */,
 				419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */,
 				41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */,
-				416F2E9827B259C0004E5AD9 /* CacheManager.swift in Sources */,
 				41B7DBE527E044E8002A23D0 /* PreviewView.swift in Sources */,
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
 				419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */,

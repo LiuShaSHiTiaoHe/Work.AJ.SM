@@ -1,52 +1,43 @@
 //
-//  CacheManager.swift
+//  Cache.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/8.
+//  Created by Fairdesk on 2022/3/22.
 //
 
-import Foundation
+import UIKit
 import YYCache
 
-public struct CacheManager {
-    public static let name = "anjie.Network.cache"
-    /// The maximum number of objects the cache should hold. default 100
-    public static var maxCountLimit: UInt = 200
-    /// The maximum total cost that the cache can hold before it starts evicting objects. default 20kb
-    public static var maxCostLimit: UInt = 30 * 1024
-    /// The maximum expiry time of objects in cache.
-    public static var maxAgeLimit: TimeInterval = TimeInterval(MAXFLOAT)
-    /// The minimum free disk space (in bytes) which the cache should kept.
-    public static var freeDiskSpaceLimit: UInt = 0
-}
-
-extension CacheManager {
+enum CacheManager: String {
+    case network = "anjie.network.cache"
+    case liftrecord = "anjie.liftrecord.cache"
+    case normal = "anjie.normal.cache"
     
     /// Current cached size
-    public static var totalCost: Int {
-        if let cache = YYCache.init(name: CacheManager.name) {
+    var totalCost: Int {
+        if let cache = YYCache.init(name: self.rawValue) {
             return cache.diskCache.totalCost()
         }
         return 0
     }
     
     /// The current number of cached items
-    public static var totalCount: Int {
-        if let cache = YYCache.init(name: CacheManager.name) {
+    var totalCount: Int {
+        if let cache = YYCache.init(name: self.rawValue) {
             return cache.diskCache.totalCount()
         }
         return 0
     }
     
     /// Delete the disk cache
-    public static func removeAllCache() {
-        if let cache = YYCache.init(name: CacheManager.name) {
+    func removeAllCache() {
+        if let cache = YYCache.init(name: self.rawValue) {
             cache.diskCache.removeAllObjects()
         }
     }
     
-    public static func removeCacheWithKey(_ key: String) {
-        if let cache = YYCache.init(name: CacheManager.name) {
+    func removeCacheWithKey(_ key: String) {
+        if let cache = YYCache.init(name: self.rawValue) {
             cache.diskCache.removeObject(forKey: key)
         }
     }
@@ -55,12 +46,12 @@ extension CacheManager {
     /// - Parameters:
     ///   - dict: The cached object
     ///   - key: Cache key name
-    public static func saveCacheWithDictionary(_ dict: NSDictionary, key: String) {
-        if let cache = YYCache.init(name: CacheManager.name) {
-            cache.diskCache.countLimit = CacheManager.maxCountLimit
-            cache.diskCache.costLimit = CacheManager.maxCostLimit
-            cache.diskCache.ageLimit = CacheManager.maxAgeLimit
-            cache.diskCache.freeDiskSpaceLimit = CacheManager.freeDiskSpaceLimit
+    func saveCacheWithDictionary(_ dict: NSDictionary, key: String) {
+        if let cache = YYCache.init(name: self.rawValue) {
+            cache.diskCache.countLimit = self.maxCountLimit
+            cache.diskCache.costLimit = self.maxCostLimit
+            cache.diskCache.ageLimit = self.maxAgeLimit
+            cache.diskCache.freeDiskSpaceLimit = self.freeDiskSpaceLimit
             cache.setObject(dict, forKey: key)
         }
     }
@@ -68,10 +59,38 @@ extension CacheManager {
     /// Read cache data
     /// - Parameter key: Cache key name
     /// - Returns: Cache object
-    public static func fetchCachedWithKey(_ key: String) -> NSDictionary? {
-        if let cache = YYCache.init(name: CacheManager.name) {
+    func fetchCachedWithKey(_ key: String) -> NSDictionary? {
+        if let cache = YYCache.init(name: self.rawValue) {
             return cache.object(forKey: key) as? NSDictionary
         }
         return nil
+    }
+    
+    // MARK: - Private
+    /// The maximum number of objects the cache should hold. default 100
+    private var maxCountLimit: UInt {
+        switch self {
+        case .network:
+            return 200
+        case .liftrecord:
+            return 200
+        case .normal:
+            return 1000
+        }
+    }
+    
+    /// The maximum total cost that the cache can hold before it starts evicting objects. default 20kb
+    private var maxCostLimit: UInt {
+       return 30 * 1024
+    }
+    
+    /// The maximum expiry time of objects in cache.
+    private var maxAgeLimit: TimeInterval {
+        return TimeInterval(MAXFLOAT)
+    }
+    
+    /// The minimum free disk space (in bytes) which the cache should kept.
+    private var freeDiskSpaceLimit: UInt {
+        return 0
     }
 }

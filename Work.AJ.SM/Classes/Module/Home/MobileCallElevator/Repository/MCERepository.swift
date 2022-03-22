@@ -71,9 +71,12 @@ class MCERepository {
     
     // MARK: - Private
     
+    // MARK: - 呼叫记录
     private func saveCallElevatorRecord(){
-        // FIXME: - 呼叫记录
-        
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = ud.userID {
+            let dateString = Date().jk.toformatterTimeString()
+            CacheManager.liftrecord.saveCacheWithDictionary(["communityid": communityID, "cellid": cellID, "unitid": unitID, "userid": userID, "credate": dateString], key: dateString)
+        }
     }
     
     private func getSNCodeString(_ elevatorID: String, _ data: MobileCallElevatorModel) -> String? {
