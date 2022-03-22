@@ -58,6 +58,8 @@ extension AppDelegate {
 //            UITableView.appearance().sectionHeaderTopPadding = 0
 //        }
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true        
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        let _ = BLEAdvertisingManager.shared
     }
 }

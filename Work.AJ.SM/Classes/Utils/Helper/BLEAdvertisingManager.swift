@@ -24,15 +24,19 @@ class BLEAdvertisingManager: NSObject {
         peripheralManager = CBPeripheralManager.init(delegate: self, queue: .main)
     }
 
-    
-    func openDoor() {
+    // MARK: - 发送蓝牙开门数据
+    func openDoor() -> Bool {
         if let peripheralManager = peripheralManager, isBleOpen {
             if !peripheralManager.isAdvertising {
                 if let openDoorData = self.prepareOpenDoorData() {
-                    let openDoorStyle = ud.openDoorStyle
+                    logger.shortLine()
+                    logger.info("openDoorData ===>  \(openDoorData)")
+                    logger.shortLine()
+                    peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "B0B0"), CBAdvertisementDataLocalNameKey: openDoorData])
                     self.stopAdvertismentIn {
                         SVProgressHUD.showSuccess(withStatus: "发送成功")
                     }
+                    return true
                 }else{
                     SVProgressHUD.showError(withStatus: "数据错误")
                 }
@@ -42,6 +46,7 @@ class BLEAdvertisingManager: NSObject {
         }else{
             SVProgressHUD.showError(withStatus: "请确认蓝牙打开后再试")
         }
+        return false
     }
     
     private func prepareOpenDoorData() -> String? {
@@ -57,6 +62,7 @@ class BLEAdvertisingManager: NSObject {
     }
     
     
+    // MARK: - 发送手机呼梯
     /**
      data[0] - data[9]
      蓝牙 ID，支持“0000000000” - “9999999999”
