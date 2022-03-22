@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SPPermissions
 
 class OnBoardViewController: UIViewController {
     
@@ -22,9 +23,14 @@ class OnBoardViewController: UIViewController {
         swiftyOnboard.delegate = self
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        PermissionManager.shared.requestAllPermission()
     }
+    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     @objc func handleSkip() {
         endOnboard()
@@ -45,7 +51,6 @@ class OnBoardViewController: UIViewController {
         appDelegate.setupRootViewController()
     }
 }
-
 
 extension OnBoardViewController: SwiftyOnboardDelegate, SwiftyOnboardDataSource {
     

@@ -67,7 +67,9 @@ class MobileCallElevatorViewController: BaseViewController {
     }
     
     private func callElevator(_ floorInfo: FloorMapInfo) {
+        SVProgressHUD.show()
         guard let originalData = originalData else {
+            SVProgressHUD.showError(withStatus: "数据错误")
             return
         }
         MCERepository.shared.sendCallElevatorData(currentFloorID, selectFloor, floorInfo, originalData)

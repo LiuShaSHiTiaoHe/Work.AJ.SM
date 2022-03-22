@@ -12,6 +12,7 @@
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
 		41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB327E95D8E002D7BD1 /* CacheManager.swift */; };
+		41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB727E972F0002D7BD1 /* PermissionManager.swift */; };
 		416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */; };
 		416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */; };
 		416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E02279BAF67004E5AD9 /* ViewController.swift */; };
@@ -203,6 +204,9 @@
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		412FC54627D74529001050E9 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
 		41558FB327E95D8E002D7BD1 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		41558FB527E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		41558FB627E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		41558FB727E972F0002D7BD1 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSearchViewController.swift; sourceTree = "<group>"; };
 		416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Work.AJ.SM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -560,6 +564,7 @@
 				41558FB327E95D8E002D7BD1 /* CacheManager.swift */,
 				416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */,
 				41AA419F27D5F76B007020AD /* LocationManager.swift */,
+				41558FB727E972F0002D7BD1 /* PermissionManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1512,11 +1517,11 @@
 			};
 			buildConfigurationList = 416F2DF6279BAF66004E5AD9 /* Build configuration list for PBXProject "Work.AJ.SM" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 416F2DF2279BAF66004E5AD9;
 			productRefGroup = 416F2DFC279BAF67004E5AD9 /* Products */;
@@ -1714,6 +1719,7 @@
 				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
 				41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */,
+				41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */,
 				4173C25A27C8998B00B8FBB8 /* ScanQRCodeSelectElevatorViewController.swift in Sources */,
 				416F2E5327B0B64F004E5AD9 /* BaseNavigationController.swift in Sources */,
 				41985F3327CF456E00E02A9A /* SwiftyOnboard.swift in Sources */,
@@ -1827,6 +1833,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				416F2E05279BAF67004E5AD9 /* Base */,
+				41558FB527E970E1002D7BD1 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1835,6 +1842,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				416F2E0A279BAF67004E5AD9 /* Base */,
+				41558FB627E970E1002D7BD1 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1846,6 +1854,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1907,6 +1916,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
