@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class IndoorCallElevatorViewController: BaseViewController {
 
-    lazy var indoorCallElevatorView: IndoorCallElevatorView = {
+    lazy var contentView: IndoorCallElevatorView = {
         let view = IndoorCallElevatorView()
         return view
     }()
@@ -18,29 +19,44 @@ class IndoorCallElevatorViewController: BaseViewController {
         super.viewDidLoad()
         self.hidesBottomBarWhenPushed = true
         // Do any additional setup after loading the view.
-        indoorCallElevatorView.delegate = self
+    }
+    
+    override func initData() {
+        contentView.delegate = self
+        contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+    }
+    
+    // MARK: - refreshView
+    private func refreshView() {
+        contentView.refreshKit()
+    }
+    
+    private func updateResultView(_ flag: Bool) {
+        contentView.updateResultView(flag)
     }
     
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
-        
-        view.addSubview(indoorCallElevatorView)
-        indoorCallElevatorView.snp.makeConstraints { make in
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        indoorCallElevatorView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
     }
 }
 
 extension IndoorCallElevatorViewController: IndoorCallElevatorViewDelegate {
     
-    func callUpAction() {
-        
+    func callElevatorAction(_ isUp: Bool) {
+        let direction = isUp ? "2":"1"
+        SVProgressHUD.show()
+        HomeRepository.shared.callElevatorViaMobile(direction: direction) { errorMsg in
+            if errorMsg.isEmpty {
+                SVProgressHUD.showSuccess(withStatus: "呼梯成功")
+                self.updateResultView(true)
+            }else{
+                SVProgressHUD.showError(withStatus: errorMsg)
+                self.updateResultView(false)
+            }
+        }
     }
-    
-    func callDownAction() {
-        
-    }
-    
 }

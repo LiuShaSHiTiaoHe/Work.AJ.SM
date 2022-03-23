@@ -18,6 +18,7 @@ enum HomeAPI {
     case generateVisitorPassword(communityID: String, blockID: String, unitID: String, userID: String, phone: String, time: String, type: String)
     case getFloorsBySN(SNCode: String, phone: String, userID: String)
     case openDoor(lockMac: String, userID: String, communityID: String, blockID: String, unitID: String, cellID: String, physicalFloor: String)
+    case callElevatorViaMobile(cellID: String, direction: String, physicalFloor: String, unitNo: String)
 }
 
 extension HomeAPI: TargetType {
@@ -46,12 +47,14 @@ extension HomeAPI: TargetType {
             return APIs.floorsBySN
         case .openDoor:
             return APIs.openDoor
+        case .callElevatorViaMobile:
+            return APIs.indoorCallElevator
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN, .openDoor:
+        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN, .openDoor, .callElevatorViaMobile:
             return .post
         }
     }
@@ -78,7 +81,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["LIFTSN": SNCode, "MOBILE": phone, "USERID": userID].ekey("LIFTSN"), encoding: URLEncoding.default)
         case let .openDoor(lockMac, userID, communityID, blockID, unitID, cellID, physicalFloor):
             return .requestParameters(parameters: ["LOCKMAC": lockMac, "USERID": userID, "COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "CELLID": cellID, "PHYSICALFLOOR": physicalFloor].ekey("LOCKMAC"), encoding: URLEncoding.default)
-            
+        case let .callElevatorViaMobile(cellID, direction, physicalFloor, unitNo):
+            return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         }
     }
     

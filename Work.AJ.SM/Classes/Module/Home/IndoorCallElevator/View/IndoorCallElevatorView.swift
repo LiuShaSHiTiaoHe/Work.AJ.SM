@@ -8,8 +8,7 @@
 import UIKit
 
 protocol IndoorCallElevatorViewDelegate: NSObjectProtocol {
-    func callUpAction()
-    func callDownAction()
+    func callElevatorAction(_ isUp: Bool)
 }
 
 class IndoorCallElevatorView: UIView {
@@ -41,7 +40,7 @@ class IndoorCallElevatorView: UIView {
         button.setImage(R.image.ice_up_image(), for: .normal)
         button.setImage(R.image.ice_up_selected_image(), for: .selected)
         button.setImage(R.image.ice_up_selected_image(), for: .highlighted)
-        button.addTarget(self, action: #selector(callup), for: .touchUpInside)
+        button.addTarget(self, action: #selector(callElevatorButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -50,22 +49,37 @@ class IndoorCallElevatorView: UIView {
         button.setImage(R.image.ice_down_image(), for: .normal)
         button.setImage(R.image.ice_down_selected_image(), for: .selected)
         button.setImage(R.image.ice_down_selected_image(), for: .highlighted)
-        button.addTarget(self, action: #selector(calldown), for: .touchUpInside)
+        button.addTarget(self, action: #selector(callElevatorButton(_:)), for: .touchUpInside)
         return button
     }()
     
-    @objc
-    func callup() {
-        delegate?.callUpAction()
-        upButton.isSelected = true
+    @objc func callElevatorButton(_ sender: UIButton) {
+        if sender == upButton {
+            upButton.isSelected = true
+            downButton.isSelected = false
+            delegate?.callElevatorAction(true)
+        }else{
+            upButton.isSelected = false
+            downButton.isSelected = true
+            delegate?.callElevatorAction(false)
+        }
+    }
+        
+    func refreshKit() {
+        upButton.isSelected = false
+        downButton.isSelected = false
+        imageView.image = R.image.ice_back_image()
     }
     
-    @objc
-    func calldown() {
-        delegate?.callDownAction()
-        downButton.isSelected = true
+    func updateResultView(_ isSuccess: Bool) {
+        if isSuccess {
+            imageView.image = R.image.ice_back2_image()
+            tipsView.text = "呼梯成功！请移步至电梯…"
+        }else{
+            imageView.image = R.image.ice_back_image()
+            tipsView.text = "请选择电梯上行或下行"
+        }
     }
-    
     
     func initializeView() {
         self.backgroundColor = R.color.backgroundColor()

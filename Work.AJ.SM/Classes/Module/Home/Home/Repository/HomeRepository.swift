@@ -13,6 +13,7 @@ typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
 typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
 typealias HomeOpenDoorViaPushCompletion = ((_ errorMsg: String) -> Void)
+typealias HomeCallElevatorViaMobileCompletion = ((_ errorMsg: String) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -110,6 +111,7 @@ class HomeRepository {
     }
 }
 
+// MARK: - locks
 extension HomeRepository {
     
     func getCurrentLocks() -> [UnitLockModel] {
@@ -140,12 +142,28 @@ extension HomeRepository {
             } failureCallback: { response in
                 completion(response.message)
             }
-
+        }else {
+            completion("数据错误")
         }
     }
 }
 
+// MARK: - indoorCallElevator
+extension HomeRepository {
+    func callElevatorViaMobile(direction: String, completion: @escaping HomeCallElevatorViaMobileCompletion) {
+        if let unit = getCurrentUnit(), let cellID = unit.cellid?.jk.intToString, let physicalFloor = unit.physicalfloor, let unitNo = unit.unitno {
+            HomeAPI.callElevatorViaMobile(cellID: cellID, direction: direction, physicalFloor: physicalFloor, unitNo: unitNo).defaultRequest { jsonData in
+                completion("")
+            } failureCallback: { response in
+                completion(response.message)
+            }
+        }else {
+            completion("数据错误")
+        }
+    }
+}
 
+// MARK: - Private
 extension HomeRepository {
     
     private func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule]{

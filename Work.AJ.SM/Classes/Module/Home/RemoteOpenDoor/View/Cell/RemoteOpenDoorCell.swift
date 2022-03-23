@@ -71,14 +71,14 @@ class RemoteOpenDoorCell: UITableViewCell {
     lazy var cameraButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.rod_image_camera(), for: .normal)
-        button.addTarget(self, action: #selector(clickOpenDoor), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clickCamera), for: .touchUpInside)
         return button
     }()
     
     lazy var openDoorButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.rod_image_opendoor(), for: .normal)
-        button.addTarget(self, action: #selector(clickCamera), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clickOpenDoor), for: .touchUpInside)
         return button
     }()
     
@@ -89,9 +89,7 @@ class RemoteOpenDoorCell: UITableViewCell {
     
     private func initializeView() {
         contentView.backgroundColor = R.color.backgroundColor()
-        
         contentView.addSubview(bgView)
-        
         bgView.addSubview(typeImageView)
         bgView.addSubview(nameLabel)
         bgView.addSubview(typeLabel)
@@ -131,16 +129,16 @@ class RemoteOpenDoorCell: UITableViewCell {
             make.top.equalTo(typeLabel.snp.bottom)
         }
         
-        cameraButton.snp.makeConstraints { make in
-            make.width.height.equalTo(33)
-            make.centerY.equalToSuperview()
-            make.right.equalToSuperview().offset(-60)
-        }
-        
         openDoorButton.snp.makeConstraints { make in
             make.width.height.equalTo(33)
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(-kMargin*3.5)
+        }
+        
+        cameraButton.snp.makeConstraints { make in
+            make.width.height.equalTo(33)
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-kMargin)
         }
     }
     

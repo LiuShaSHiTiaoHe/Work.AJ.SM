@@ -112,9 +112,9 @@ class BleCallElevatorView: UIView {
         }
         
         dashView.snp.makeConstraints { make in
-            make.left.equalTo(imageView1.snp.right).offset(-kMargin/2)
+            make.left.equalTo(imageView1.snp.right).offset(kMargin/2)
             make.height.equalTo(2)
-            make.right.equalTo(imageView2.snp.left).offset(kMargin/2)
+            make.right.equalTo(imageView2.snp.left).offset(-kMargin/2)
             make.centerY.equalTo(imageView1)
         }
         

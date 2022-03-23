@@ -47,6 +47,7 @@ final class APIs {
     static let floorsBySN = "appcity/getFloorsByLiftsn.do"
     static let locks = "appcity/getLock.do"
     static let openDoor = "appcity/openDoorByAliyun.do"
+    static let indoorCallElevator = "appSend2device/landing.do"
     
     // MARK: - 获取二维码信息
     static let userQRCode = "appcity/createOfflineQrcode"
