@@ -9,13 +9,14 @@ import UIKit
 import SnapKit
 
 protocol RemoteOpenDoorCellDelegate: NSObjectProtocol {
-    func openDoor()
-    func camera()
+    func openDoor(_ lockModel: UnitLockModel)
+    func camera(_ lockModel: UnitLockModel)
 }
 
 class RemoteOpenDoorCell: UITableViewCell {
 
     weak var delegate: RemoteOpenDoorCellDelegate?
+    private var dataSource: UnitLockModel?
     
     private var status: Bool? {
         didSet {
@@ -145,15 +146,20 @@ class RemoteOpenDoorCell: UITableViewCell {
     
     @objc
     func clickOpenDoor() {
-        delegate?.openDoor()
+        if let dataSource = dataSource {
+            delegate?.openDoor(dataSource)
+        }
     }
     
     @objc
     func clickCamera() {
-        delegate?.camera()
+        if let dataSource = dataSource {
+            delegate?.camera(dataSource)
+        }
     }
     
     func setUpData(model: UnitLockModel) {
+        dataSource = model
         nameLabel.text = model.lockname
         typeLabel.text = ""
         if let gap = model.gap {

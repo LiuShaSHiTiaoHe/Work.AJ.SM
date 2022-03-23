@@ -59,12 +59,22 @@ extension RemoteIntercomViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: RemoteOpenDoorCellIdentifier, for: indexPath) as! RemoteOpenDoorCell
         let unitLock = dataSource[indexPath.row]
         cell.setUpData(model: unitLock)
+        cell.openDoorButton.isHidden = true
+        cell.delegate = self
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-    
+}
 
+extension RemoteIntercomViewController: RemoteOpenDoorCellDelegate{
+    func openDoor(_ lockModel: UnitLockModel) {
+        
+    }
+    
+    func camera(_ lockModel: UnitLockModel) {
+        
+    }
 }

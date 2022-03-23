@@ -42,29 +42,30 @@ final class APIs {
     static let ownerOpenDoorPassword = "appcity/setMyUnitOpenDoorMM.do"
     static let findUnit = "appcity/findUnit.do"
     
-    //根据单元电梯群组获取电梯
+    // MARK: - 根据单元电梯群组获取电梯
     static let cellGroupElevators = "appcity/getLiftByCellGroup"
     static let floorsBySN = "appcity/getFloorsByLiftsn.do"
     static let locks = "appcity/getLock.do"
+    static let openDoor = "appcity/openDoorByAliyun.do"
     
-    //获取二维码信息
+    // MARK: - 获取二维码信息
     static let userQRCode = "appcity/createOfflineQrcode"
     
-    //访客
+    // MARK: - 访客
     static let visitors = "appcity/getMyGuest.do"
     static let generateVisitorPassword = "appcity/reduceGuestPassword.do"
     static let updateVisitorPassword = "appcity/updateGuestStatus.do"
     static let inviteVisitor = "appcity/inviteUser.do"
-    //业主添加家属
+    // MARK: - 业主添加家属
     static let addFamilyMember = "appcity/addFamilyer"
     static let unitMembers = "appcity/getUnitUsers"
     static let deleteUnitMembers = "appcity/delUnitUser"
-    //人脸
+    // MARK: - 人脸
     static let faceFile = "appcity/getFaceFile.do"
     static let addFaceFile = "appcity/addFaceFile.do"
     static let deleteFaceFile = "appcity/delFaceFile.do"
     
-    //通话
+    // MARK: - 通话
     static let pushApp = "appDevice/pushApp.do"
     static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"
     

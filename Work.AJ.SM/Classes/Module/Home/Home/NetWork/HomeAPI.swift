@@ -17,6 +17,7 @@ enum HomeAPI {
     case getInvitationQRCode(unitID: String, arriveTime: String, validTime: String)
     case generateVisitorPassword(communityID: String, blockID: String, unitID: String, userID: String, phone: String, time: String, type: String)
     case getFloorsBySN(SNCode: String, phone: String, userID: String)
+    case openDoor(lockMac: String, userID: String, communityID: String, blockID: String, unitID: String, cellID: String, physicalFloor: String)
 }
 
 extension HomeAPI: TargetType {
@@ -43,12 +44,14 @@ extension HomeAPI: TargetType {
             return APIs.generateVisitorPassword
         case .getFloorsBySN:
             return APIs.floorsBySN
+        case .openDoor:
+            return APIs.openDoor
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN:
+        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN, .openDoor:
             return .post
         }
     }
@@ -64,7 +67,6 @@ extension HomeAPI: TargetType {
         case let .getElevators(communityID, unitID, cellID, groupID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "CELLID": cellID, "UNITID": unitID, "GROUPID": groupID].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getLocks(communityID, blockID, cellID, unitID, userID, _):
-//            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID, "PHYSICALFLOOR": physicfloor].ekey("COMMUNITYID"), encoding: URLEncoding.default)
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getUserOfflineQRCode(unitID):
             return .requestParameters(parameters: ["UNITID": unitID, "isVisitor": "0"].ekey("UNITID"), encoding: URLEncoding.default)
@@ -74,6 +76,9 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "USERID": userID, "PHONE": phone, "HOUR": time, "PASSTYPE": type].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getFloorsBySN(SNCode, phone, userID):
             return .requestParameters(parameters: ["LIFTSN": SNCode, "MOBILE": phone, "USERID": userID].ekey("LIFTSN"), encoding: URLEncoding.default)
+        case let .openDoor(lockMac, userID, communityID, blockID, unitID, cellID, physicalFloor):
+            return .requestParameters(parameters: ["LOCKMAC": lockMac, "USERID": userID, "COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "CELLID": cellID, "PHYSICALFLOOR": physicalFloor].ekey("LOCKMAC"), encoding: URLEncoding.default)
+            
         }
     }
     

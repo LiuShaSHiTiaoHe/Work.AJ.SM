@@ -7,10 +7,12 @@
 
 import Foundation
 import SVProgressHUD
+import JKSwiftExtension
 
 typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
 typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
+typealias HomeOpenDoorViaPushCompletion = ((_ errorMsg: String) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -130,6 +132,17 @@ extension HomeRepository {
             }
         }
     }
+    
+    func openDoorViaPush(_ lockModel: UnitLockModel, completion: @escaping HomeOpenDoorViaPushCompletion) {
+        if let userID = ud.userID, let unit = getCurrentUnit(), let physicalFloor = unit.physicalfloor, let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let lockMac = lockModel.lockmac {
+            HomeAPI.openDoor(lockMac: lockMac, userID: userID, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, physicalFloor: physicalFloor).defaultRequest { jsonData in
+                completion("")
+            } failureCallback: { response in
+                completion(response.message)
+            }
+
+        }
+    }
 }
 
 
@@ -158,5 +171,4 @@ extension HomeRepository {
         }
         return result
     }
-    
 }

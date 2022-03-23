@@ -60,6 +60,7 @@ extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: RemoteOpenDoorCellIdentifier, for: indexPath) as! RemoteOpenDoorCell
         let unitLock = dataSource[indexPath.row]
         cell.setUpData(model: unitLock)
+        cell.delegate = self
         return cell
     }
     
@@ -68,4 +69,20 @@ extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSour
     }
     
 
+}
+
+extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
+    func openDoor(_ lockModel: UnitLockModel) {
+        HomeRepository.shared.openDoorViaPush(lockModel) { errorMsg in
+            if errorMsg.isEmpty {
+                SVProgressHUD.showSuccess(withStatus: "开门成功")
+            }else{
+                SVProgressHUD.showInfo(withStatus: errorMsg)
+            }
+        }
+    }
+    
+    func camera(_ lockModel: UnitLockModel) {
+        
+    }
 }
