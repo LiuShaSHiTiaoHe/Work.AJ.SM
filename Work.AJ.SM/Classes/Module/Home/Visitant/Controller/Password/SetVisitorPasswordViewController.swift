@@ -95,6 +95,43 @@ class SetVisitorPasswordViewController: BaseViewController {
         contentView.tableView.reloadData()
     }
     
+    func getVisitorPhoneNumber() -> String {
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! CommonPhoneNumberCell
+        if let number = cell.phoneInput.text {
+            return number
+        }else{
+            return ""
+        }
+    }
+    
+    func go2InvitationView(_ validTime: Date, _ arriveTime: Date, _ phoneNumber: String) {
+        let vc = PasswordInvitationViewController()
+        vc.arriveTime = arriveTime
+        vc.validTime = validTime
+        vc.visitTimes = visitTimes
+        vc.phoneNumber = phoneNumber
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func generatePassword(_ validTime: Date, _ arriveTime: Date, _ phoneNumber: String) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString, let hours = validTime.jk.numberOfHours(from: arriveTime)?.jk.intToString{
+            
+            //T为多次有效，F为1次有效
+            var type = "F"
+            if visitTimes == .multy {
+                type = "T"
+            }
+            HomeAPI.generateVisitorPassword(communityID: communityID, blockID: blockID, unitID: unitID, userID: userID, phone: phoneNumber, time: hours, type: type).defaultRequest { jsonData in
+                SVProgressHUD.showSuccess(withStatus: "提交成功")
+                SVProgressHUD.dismiss(withDelay: 2) {
+                    self.go2InvitationView(validTime, arriveTime, phoneNumber)
+                }
+            } failureCallback: { response in
+                SVProgressHUD.showSuccess(withStatus: "\(response.message)")
+            }
+
+        }
+    }
     @objc
     func confirm() {
         if let validTime = validTime, let arriveTime = arriveTime {
@@ -116,12 +153,7 @@ class SetVisitorPasswordViewController: BaseViewController {
                     if visitTimes == .initial {
                         SVProgressHUD.showError(withStatus: "选择使用次数")
                     }else{
-                        let vc = PasswordInvitationViewController()
-                        vc.arriveTime = arriveTime
-                        vc.validTime = validTime
-                        vc.visitTimes = visitTimes
-                        vc.phoneNumber = phoneNumber
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        
                     }
                 }
             }else{
@@ -132,14 +164,7 @@ class SetVisitorPasswordViewController: BaseViewController {
         }
     }
 
-    func getVisitorPhoneNumber() -> String {
-        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! CommonPhoneNumberCell
-        if let number = cell.phoneInput.text {
-            return number
-        }else{
-            return ""
-        }
-    }
+    
 }
 
 extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewDataSource {

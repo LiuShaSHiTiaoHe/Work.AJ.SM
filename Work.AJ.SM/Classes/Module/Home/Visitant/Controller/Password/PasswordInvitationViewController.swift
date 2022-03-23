@@ -37,12 +37,11 @@ class PasswordInvitationViewController: BaseViewController {
         contentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
         contentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
         contentView.hearderView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-//        generatePassword()
+        setUpDataSource()
     }
     
-    func generatePassword() {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString, let phone = phoneNumber, let visitTimes = visitTimes, let validTime = validTime, let arriveTime = arriveTime, let hours = validTime.jk.numberOfHours(from: arriveTime)?.jk.intToString, let communityname = unit.communityname, let cellname = unit.cellname {
-            
+    private func setUpDataSource(){
+        if let unit = HomeRepository.shared.getCurrentUnit(), let visitTimes = visitTimes, let validTime = validTime, let arriveTime = arriveTime, let communityname = unit.communityname, let cellname = unit.cellname {
             contentView.locationLabel.text = communityname + cellname
             contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
             contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
@@ -51,21 +50,8 @@ class PasswordInvitationViewController: BaseViewController {
             }else{
                 contentView.visitTimes.text = "无限次"
             }
-            
-            //T为多次有效，F为1次有效
-            var type = "F"
-            if visitTimes == .multy {
-                type = "T"
-            }
-            HomeAPI.generateVisitorPassword(communityID: communityID, blockID: blockID, unitID: unitID, userID: userID, phone: phone, time: hours, type: type).defaultRequest { jsonData in
-                SVProgressHUD.showSuccess(withStatus: "提交成功")
-            } failureCallback: { response in
-                SVProgressHUD.showSuccess(withStatus: "\(response.message)")
-            }
-
         }
     }
-    
     
     
     @objc
