@@ -8,6 +8,7 @@
 import UIKit
 import NIMSDK
 import NIMAVChat
+import SVProgressHUD
 
 class BaseChatViewController: UIViewController {
 
@@ -21,6 +22,8 @@ class BaseChatViewController: UIViewController {
     var kCallType: NIMNetCallType!
     // MARK: - 呼叫ID
     var kCallID: UInt64!
+    // MARK: - 聊天室用户，一对一时，最多两个，被叫和主叫
+    var chatRoomUsers: [String] = []
     private var manager: NIMNetCallManager?
 
     
@@ -62,23 +65,37 @@ class BaseChatViewController: UIViewController {
     
     func response2Call(_ accept: Bool) {
         let option = setupNetCallOption()
-        NIMAVChatSDK.shared().netCallManager.response(kCallID, accept: accept, option: option) { error, callID in
+        NIMAVChatSDK.shared().netCallManager.response(kCallID, accept: accept, option: option) {[weak self] error, callID in
+            guard let self = self else { return }
             if accept {
                 if (error != nil) {
-                    
+                    logger.info(" =====> 接受")
+
                 }else{
-                    
+                    self.showErrorMessageAndDismiss("连接失败")
                 }
             }else{
-                
+                self.showErrorMessageAndDismiss("")
             }
         }
         
         
     }
     
+    // MARK: - Private
+    private func showErrorMessageAndDismiss(_ msg: String){
+        if msg.isEmpty{
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            SVProgressHUD.showError(withStatus: msg)
+            SVProgressHUD.dismiss(withDelay: 1) {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
     
-    func setupNetCallOption() -> NIMNetCallOption {
+    
+    private func setupNetCallOption() -> NIMNetCallOption {
         let option = NIMNetCallOption.init()
         option.autoRotateRemoteVideo = false
         option.preferredVideoEncoder = .default
