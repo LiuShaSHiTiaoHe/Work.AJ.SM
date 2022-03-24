@@ -26,6 +26,7 @@ extension AppDelegate {
         NetWorkManager.shared.initNetWork()
         GDataManager.shared.setupDataBase()
         setuplibs()
+        GDataManager.shared.loginNIMSDK()
     }
     
     func setupRootViewController() {
@@ -54,12 +55,16 @@ extension AppDelegate {
         SVProgressHUD.appearance().imageViewSize = CGSize(width: 30, height: 30)
         SVProgressHUD.setRingRadius(30)
         SVProgressHUD.setDefaultAnimationType(.native)
-//        if #available(iOS 15.0, *) {
-//            UITableView.appearance().sectionHeaderTopPadding = 0
-//        }
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = 0
+        }
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         let _ = BLEAdvertisingManager.shared
+        
+        GDataManager.shared.setupNIMSDK()
     }
+    
+    
 }

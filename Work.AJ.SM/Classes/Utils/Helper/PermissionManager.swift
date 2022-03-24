@@ -12,7 +12,7 @@ class PermissionManager {
     static let shared = PermissionManager()
     
     func requestAllPermission() {
-        requset([.locationWhenInUse, .bluetooth, .camera, .photoLibrary])
+        requset([.locationWhenInUse, .bluetooth, .camera, .photoLibrary, .microphone])
     }
     
     @discardableResult
@@ -76,6 +76,8 @@ extension PermissionManager: SPPermissionsDataSource {
             description = "使用蓝牙权限进行远程呼梯，远程开门等功能"
         case .locationWhenInUse:
             description = "使用位置信息能更好的定位您所在的小区信息"
+        case .microphone:
+            description = "使用麦克风进行音频通话"
         default :
             break
         }

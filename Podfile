@@ -30,7 +30,6 @@ target 'Work.AJ.SM' do
   pod 'JKSwiftExtension'
   pod 'Kingfisher','7.2.0'
   pod 'Siren'
-#  pod 'HanziPinyin'
   
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
@@ -40,7 +39,6 @@ target 'Work.AJ.SM' do
   pod 'ActiveLabel'
   pod 'PGDatePicker'
   pod 'swiftScan'
-#  pod "SwiftyCam"
   pod 'BEMCheckBox'
   
   pod 'SPPermissions/Camera'
@@ -48,6 +46,8 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/Notification'
   pod 'SPPermissions/Bluetooth'
   pod 'SPPermissions/LocationWhenInUse'
-  #  pod 'NIMSDK'
+  pod 'SPPermissions/Microphone'
+  
+  pod 'NIMSDK'
 end
 

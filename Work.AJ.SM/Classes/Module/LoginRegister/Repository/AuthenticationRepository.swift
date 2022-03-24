@@ -16,13 +16,15 @@ class AuthenticationRepository: NSObject {
     func login(mobile: String, passWord: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.login(mobile: mobile, passWord: passWord).defaultRequest { JsonData  in
             if let data = JsonData["data"].rawString(), let userInfo = JsonData["map"].rawString(), let units = [UnitModel](JSONString: data), let userModel = UserModel(JSONString: userInfo) {
-                Defaults.username = mobile
+                ud.username = mobile
                 ud.userMobile = mobile
-                Defaults.userRealName = userModel.realName
-                Defaults.userID = userModel.rid
+                ud.userRealName = userModel.realName
+                ud.userID = userModel.rid
+                ud.NIMToken = userModel.loginToken
                 GDataManager.shared.setupDataBase()
                 RealmTools.addList(units) {}
                 RealmTools.add(userModel) {}
+                GDataManager.shared.loginNIMSDK()
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

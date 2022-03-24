@@ -179,6 +179,9 @@
 		41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */; };
 		41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */; };
 		41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */; };
+		41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */; };
+		41E7D8C727EC4EDD00241706 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */; };
+		41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C827EC661300241706 /* ChatRingManager.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -378,6 +381,9 @@
 		41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorSettingViewController.swift; sourceTree = "<group>"; };
 		41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorPasswordViewController.swift; sourceTree = "<group>"; };
 		41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOpenDoorStyleCell.swift; sourceTree = "<group>"; };
+		41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatViewController.swift; sourceTree = "<group>"; };
+		41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		41E7D8C827EC661300241706 /* ChatRingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRingManager.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -512,6 +518,7 @@
 		416F2E31279D1E9F004E5AD9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				41E7D8C327EC4AD700241706 /* Chat */,
 				41B7DBD627E0331D002A23D0 /* Camera */,
 				4173C20327C36FB500B8FBB8 /* QRCode */,
 				416F2EAA27B60B85004E5AD9 /* Kit */,
@@ -567,6 +574,7 @@
 				416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */,
 				41AA419F27D5F76B007020AD /* LocationManager.swift */,
 				41558FB727E972F0002D7BD1 /* PermissionManager.swift */,
+				41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1417,6 +1425,15 @@
 			path = OnBoard;
 			sourceTree = "<group>";
 		};
+		41E7D8C327EC4AD700241706 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */,
+				41E7D8C827EC661300241706 /* ChatRingManager.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1447,6 +1464,7 @@
 				416F2DF8279BAF67004E5AD9 /* Frameworks */,
 				416F2DF9279BAF67004E5AD9 /* Resources */,
 				0F320F9032A01B6E81C14EE4 /* [CP] Embed Pods Frameworks */,
+				C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1607,6 +1625,23 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
+		C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D5999047F02A75C8986BF302 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1682,6 +1717,7 @@
 				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,
+				41E7D8C727EC4EDD00241706 /* AudioPlayer.swift in Sources */,
 				416F2F0027BE16C7004E5AD9 /* MobileCallElevatorModel.swift in Sources */,
 				416F2EC427BB7787004E5AD9 /* HouseViewController.swift in Sources */,
 				416F2E7327B0BFB5004E5AD9 /* UnitCodesModel.swift in Sources */,
@@ -1786,11 +1822,13 @@
 				416F2EFD27BDF812004E5AD9 /* MCERepository.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
+				41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */,
 				4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */,
 				416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */,
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
 				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
+				41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
 				4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */,
 				416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */,
