@@ -198,6 +198,9 @@ extension HomeViewController: UICollectionViewDelegate {
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             case .deviceConfiguration:
+                let vc = AudioChatViewController.init(startCall: "ajplus15295776453")
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
                 break
             default :
                 return

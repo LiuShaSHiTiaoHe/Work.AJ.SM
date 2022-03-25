@@ -26,7 +26,6 @@ extension AppDelegate {
         NetWorkManager.shared.initNetWork()
         GDataManager.shared.setupDataBase()
         setuplibs()
-        GDataManager.shared.loginNIMSDK()
     }
     
     func setupRootViewController() {
@@ -61,9 +60,9 @@ extension AppDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        let _ = BLEAdvertisingManager.shared
         
         GDataManager.shared.setupNIMSDK()
+        GDataManager.shared.loginNIMSDK()
     }
     
     

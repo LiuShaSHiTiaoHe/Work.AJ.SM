@@ -38,6 +38,7 @@ class GDataManager: NSObject {
         option.apnsCername = nil
         option.pkCername = nil
         NIMSDK.shared().register(with: option)
+//        NIMSDK.shared().enableConsoleLog()
     }
     
     // MARK: - 登陆云信

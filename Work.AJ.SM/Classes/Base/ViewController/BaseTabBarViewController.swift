@@ -8,20 +8,24 @@
 import Foundation
 import ESTabBarController_swift
 import Haptica
+import NIMAVChat
 
 class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTabBar()
         initUI()
+        initData()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    func initData() {
+        NIMAVChatSDK.shared().netCallManager.add(self)
+        let _ = BLEAdvertisingManager.shared
     }
     
     func initUI() {
+        setupTabBar()
+        
         let v1 = BaseNavigationController.init(rootViewController: HomeViewController())
         let v2 = BaseNavigationController.init(rootViewController: ServiceViewController())
         let v3 = BaseNavigationController.init(rootViewController: NeighbourhoodViewController())
@@ -48,5 +52,19 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         Haptic.impact(.medium).generate()
+    }
+}
+
+// MARK: - 云信通话
+extension BaseTabBarViewController: NIMNetCallManagerDelegate{
+    func onReceive(_ callID: UInt64, from caller: String, type: NIMNetCallMediaType, message extendMessage: String?) {
+        logger.info("收到通话请求。。。")
+        if type == .audio {
+            let vc = AudioChatViewController.init(responseCall: caller, callID: callID)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }else{
+            logger.info("receive vedio call")
+        }
     }
 }

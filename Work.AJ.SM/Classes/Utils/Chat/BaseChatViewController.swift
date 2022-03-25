@@ -10,7 +10,7 @@ import NIMSDK
 import NIMAVChat
 import SVProgressHUD
 
-class BaseChatViewController: UIViewController {
+class BaseChatViewController: BaseViewController {
 
     // MARK: - 被叫号码
     var kCallee: String!
@@ -26,31 +26,33 @@ class BaseChatViewController: UIViewController {
     var chatRoomUsers: [String] = []
     private var manager: NIMNetCallManager?
 
-    
-    init(callee: String, caller: String, calltype: NIMNetCallMediaType, callID: UInt64) {
+    init(startCall callee: String, callType: NIMNetCallMediaType) {
+        self.kCaller = NIMSDK.shared().loginManager.currentAccount()
         self.kCallee = callee
-        self.kCaller = caller
-        self.kCallType = calltype
-        self.kCallID = callID
-        let account = NIMSDK.shared().loginManager.currentAccount()
-        if account == caller {
-            isCalled = false
-        }else{
-            isCalled = true
-        }
+        self.isCalled = false
+        self.kCallType = callType
+        self.kCallID = 0
         super.init(nibName: nil, bundle: nil)
     }
     
+    init(responseCall caller: String, callID: UInt64, callType: NIMNetCallMediaType) {
+        self.kCallID = callID
+        self.kCallType = callType
+        self.kCallee = NIMSDK.shared().loginManager.currentAccount()
+        self.kCaller = caller
+        self.isCalled = true
+        super.init(nibName: nil, bundle: nil)
+    }
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        view.backgroundColor = R.color.backgroundColor()
+        NIMAVChatSDK.shared().netCallManager.add(self)
     }
+    
     
     
     func startCall() {
@@ -89,7 +91,7 @@ class BaseChatViewController: UIViewController {
         NIMAVChatSDK.shared().netCallManager.response(kCallID, accept: accept, option: option) {[weak self] error, callID in
             guard let self = self else { return }
             if accept {
-                if (error != nil) {
+                if (error == nil) {
                     logger.info(" =====> 接受")
                 }else{
                     self.showErrorMessageAndDismiss("连接失败")
@@ -104,6 +106,7 @@ class BaseChatViewController: UIViewController {
 
 extension BaseChatViewController: NIMNetCallManagerDelegate {
     func onControl(_ callID: UInt64, from user: String, type control: NIMNetCallControlType) {
+        logger.info("BaseChatViewController ================> onControl")
         //多端登录时，自己会收到自己发出的控制指令，这里忽略
         if user == NIMSDK.shared().loginManager.currentAccount() { return }
         if callID != kCallID { return }
@@ -114,6 +117,8 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
             break
         case .busyLine:
             logger.info("占线")
+            NIMAVChatSDK.shared().netCallManager.hangup(callID)
+            showErrorMessageAndDismiss("对方正在通话")
             break
         case .startRecord:
             logger.info("开始录制")
@@ -161,6 +166,7 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
     }
     
     func onResponse(_ callID: UInt64, from callee: String, accepted: Bool) {
+        logger.info("BaseChatViewController ================> onResponse")
         if kCallID == callID {
             if accepted {
                 chatRoomUsers.append(callee)
@@ -171,13 +177,14 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
     }
     
     func onCallDisconnected(_ callID: UInt64, withError error: Error?) {
+        logger.info("BaseChatViewController ================> onCallDisconnected")
         if kCallID == callID {
             showErrorMessageAndDismiss("已断开")
         }
     }
     
     func onCallEstablished(_ callID: UInt64) {
-        logger.info("callid ==> \(callID) , 通话建立")
+        logger.info("BaseChatViewController ================> onCallEstablished")
         if kCallID == callID {
             let result = NIMAVChatSDK.shared().netCallManager.setSpeaker(true)
             if result {
