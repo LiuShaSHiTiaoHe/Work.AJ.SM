@@ -182,6 +182,14 @@
 		41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */; };
 		41E7D8C727EC4EDD00241706 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */; };
 		41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C827EC661300241706 /* ChatRingManager.swift */; };
+		41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */; };
+		41E7D8D427ED50EB00241706 /* video_chat_tip_OnCall.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */; };
+		41E7D8D527ED50EB00241706 /* video_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */; };
+		41E7D8D627ED50EB00241706 /* video_chat_tip_HangUp.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CE27ED50EB00241706 /* video_chat_tip_HangUp.aac */; };
+		41E7D8D727ED50EB00241706 /* message.wav in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CF27ED50EB00241706 /* message.wav */; };
+		41E7D8D827ED50EB00241706 /* video_chat_tip_receiver.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */; };
+		41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */; };
+		41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -384,6 +392,14 @@
 		41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		41E7D8C827EC661300241706 /* ChatRingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRingManager.swift; sourceTree = "<group>"; };
+		41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_connect_chat_tip_sender.aac; sourceTree = "<group>"; };
+		41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_OnCall.aac; sourceTree = "<group>"; };
+		41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_sender.aac; sourceTree = "<group>"; };
+		41E7D8CE27ED50EB00241706 /* video_chat_tip_HangUp.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_HangUp.aac; sourceTree = "<group>"; };
+		41E7D8CF27ED50EB00241706 /* message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = message.wav; sourceTree = "<group>"; };
+		41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_receiver.aac; sourceTree = "<group>"; };
+		41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_onTimer.aac; sourceTree = "<group>"; };
+		41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = video_chat_push.mp3; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -677,6 +693,7 @@
 		416F2E7C27B0CA39004E5AD9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				41E7D8CA27ED50EB00241706 /* Sounds */,
 				416F2E7D27B0CA4A004E5AD9 /* SCFont */,
 			);
 			path = Resource;
@@ -1434,6 +1451,21 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		41E7D8CA27ED50EB00241706 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */,
+				41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */,
+				41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */,
+				41E7D8CE27ED50EB00241706 /* video_chat_tip_HangUp.aac */,
+				41E7D8CF27ED50EB00241706 /* message.wav */,
+				41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */,
+				41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */,
+				41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1561,11 +1593,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41E7D8D827ED50EB00241706 /* video_chat_tip_receiver.aac in Resources */,
 				416F2E8727B0CA4A004E5AD9 /* DINPro-Light.otf in Resources */,
+				41E7D8D527ED50EB00241706 /* video_chat_tip_sender.aac in Resources */,
+				41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */,
+				41E7D8D727ED50EB00241706 /* message.wav in Resources */,
 				416F2E0B279BAF67004E5AD9 /* LaunchScreen.storyboard in Resources */,
+				41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */,
+				41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */,
 				416F2E08279BAF67004E5AD9 /* Assets.xcassets in Resources */,
+				41E7D8D427ED50EB00241706 /* video_chat_tip_OnCall.aac in Resources */,
 				416F2E8327B0CA4A004E5AD9 /* DINPro-Medium.otf in Resources */,
 				416F2E06279BAF67004E5AD9 /* Main.storyboard in Resources */,
+				41E7D8D627ED50EB00241706 /* video_chat_tip_HangUp.aac in Resources */,
 				416F2E8427B0CA4A004E5AD9 /* DINPro-Bold.otf in Resources */,
 				416F2E8627B0CA4A004E5AD9 /* DINPro-Regular.otf in Resources */,
 				416F2E8527B0CA4A004E5AD9 /* DINPro-Black.otf in Resources */,
