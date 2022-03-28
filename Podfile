@@ -48,6 +48,6 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/LocationWhenInUse'
   pod 'SPPermissions/Microphone'
   
-  pod 'NIMSDK'
+  pod 'NIMSDK', '6.1.1'
 end
 

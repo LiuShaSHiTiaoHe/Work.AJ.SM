@@ -61,7 +61,7 @@ class BaseChatViewController: BaseViewController {
         option.extendMessage = "音视频请求扩展信息"
         option.apnsContent = kCallType == .audio ? "网络通话":"视频聊天"
         option.apnsSound = "video_chat_tip_receiver.aac"
-        option.videoCaptureParam?.startWithBackCamera = kCallType == .audio
+        option.videoCaptureParam?.startWithCameraOn = kCallType == .video
         
         NIMAVChatSDK.shared().netCallManager.start(callees, type: kCallType, option: option) { [weak self] error, callID in
             guard let self = self else {
@@ -81,18 +81,19 @@ class BaseChatViewController: BaseViewController {
     }
     
     func hangUp() {
-        logger.info(" =====> 挂断")
+        logger.info("BaseChatViewController =====> 挂断")
         NIMAVChatSDK.shared().netCallManager.hangup(kCallID)
         self.dismiss(animated: true) {}
     }
     
     func response2Call(_ accept: Bool) {
         let option = accept ? setupNetCallOption() : nil
+        option?.videoCaptureParam?.startWithCameraOn = kCallType == .video
         NIMAVChatSDK.shared().netCallManager.response(kCallID, accept: accept, option: option) {[weak self] error, callID in
             guard let self = self else { return }
             if accept {
                 if (error == nil) {
-                    logger.info(" =====> 接受")
+                    logger.info("BaseChatViewController =====> 接受")
                 }else{
                     self.showErrorMessageAndDismiss("连接失败")
                 }
@@ -192,6 +193,18 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
             }
         }
     }
+    
+    func onHangup(_ callID: UInt64, by user: String) {
+        logger.info("BaseChatViewController ================> onHangup")
+        if kCallID == callID {
+            showErrorMessageAndDismiss("对方已挂断")
+        }
+    }
+    
+    func onRemoteImageReady(_ image: CGImage) {
+        logger.info("BaseChatViewController ================> onRemoteImageReady")
+    }
+    
 }
 
 // MARK: - Private func
@@ -213,7 +226,7 @@ extension BaseChatViewController {
         option.autoRotateRemoteVideo = false
         option.preferredVideoEncoder = .default
         option.preferredVideoDecoder = .default
-        option.videoMaxEncodeBitrate = 0
+//        option.videoMaxEncodeBitrate = 0
         option.autoDeactivateAudioSession = true
         option.audioDenoise = true
         option.voiceDetect = true

@@ -64,7 +64,9 @@ extension BaseTabBarViewController: NIMNetCallManagerDelegate{
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }else{
-            logger.info("receive vedio call")
+            let vc = VideoChatViewController.init(responseCall: caller, callID: callID)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         }
     }
 }

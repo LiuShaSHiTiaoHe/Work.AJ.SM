@@ -192,6 +192,8 @@
 		41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */; };
 		41E7D8DC27ED70F700241706 /* AudioChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */; };
 		41E7D8DF27ED8AC200241706 /* AudioChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8DE27ED8AC200241706 /* AudioChatView.swift */; };
+		41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */; };
+		41E7D8E327EDB82C00241706 /* VideoChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E227EDB82C00241706 /* VideoChatView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -404,6 +406,8 @@
 		41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = video_chat_push.mp3; sourceTree = "<group>"; };
 		41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8DE27ED8AC200241706 /* AudioChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChatView.swift; sourceTree = "<group>"; };
+		41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
+		41E7D8E227EDB82C00241706 /* VideoChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -1453,6 +1457,7 @@
 				41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */,
 				41E7D8C827EC661300241706 /* ChatRingManager.swift */,
 				41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */,
+				41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1476,6 +1481,7 @@
 			isa = PBXGroup;
 			children = (
 				41E7D8DE27ED8AC200241706 /* AudioChatView.swift */,
+				41E7D8E227EDB82C00241706 /* VideoChatView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1789,6 +1795,7 @@
 				41E7D8DC27ED70F700241706 /* AudioChatViewController.swift in Sources */,
 				41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */,
 				41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */,
+				41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				41E7D8DF27ED8AC200241706 /* AudioChatView.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
@@ -1828,6 +1835,7 @@
 				41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */,
 				41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */,
 				41C3502427CDAC15006E440F /* ConfirmFaceImageViewController.swift in Sources */,
+				41E7D8E327EDB82C00241706 /* VideoChatView.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
 				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
