@@ -18,7 +18,6 @@ class AudioChatViewController: BaseChatViewController {
     
     override func initData() {
         contentView.delegate = self
-        contentView.isCalled = isCalled
     }
     
     

@@ -11,25 +11,73 @@ protocol BaseChatViewDelegate: NSObjectProtocol {
     func refuseAudioCall()
     func responseAudioCall()
     func hangupAudioCall()
+    func openDoor()
 }
 
 class BaseChatView: BaseView {
     weak var delegate: BaseChatViewDelegate?
     var isCalled: Bool? {
         didSet {
-            if let isCalled = isCalled {
-                if isCalled {
-                    refuseButton.isHidden = false
-                    responseButton.isHidden = false
-                    hangupButton.isHidden = true
-                }else{
-                    refuseButton.isHidden = true
-                    responseButton.isHidden = true
-                    hangupButton.isHidden = false
+            if let isVideoCall = isVideoCall {
+                if let isCalled = isCalled {
+                    updateButtons(isVideoCall, !isCalled)
+                }
+            }else{
+                fatalError("isVideo must set before isCalled")
+            }
+        }
+    }
+    
+    var isVideoCall: Bool?
+    
+    private func updateButtons(_ isVideo: Bool, _ isCaller: Bool) {
+        if isVideo {
+            if isCaller {
+                refuseButton.isHidden = true
+                responseButton.isHidden = true
+                hangupButton.isHidden = false
+                openDoorButton.isHidden = false
+            }else{
+                refuseButton.isHidden = false
+                responseButton.isHidden = false
+                hangupButton.isHidden = true
+                openDoorButton.isHidden = true
+            }
+        }else{
+            openDoorButton.isHidden = true
+            if isCaller {
+                refuseButton.isHidden = true
+                responseButton.isHidden = true
+                hangupButton.isHidden = false
+                hangupButton.snp.updateConstraints { make in
+                    make.centerX.equalToSuperview().offset(0)
+                }
+            }else{
+                refuseButton.isHidden = false
+                responseButton.isHidden = false
+                hangupButton.isHidden = true
+            }
+        }
+    }
+    
+    private func response2Call() {
+        if let isVideoCall = isVideoCall {
+            if isVideoCall{
+                refuseButton.isHidden = true
+                responseButton.isHidden = true
+                hangupButton.isHidden = false
+                openDoorButton.isHidden = false
+            }else{
+                refuseButton.isHidden = true
+                responseButton.isHidden = true
+                hangupButton.isHidden = false
+                hangupButton.snp.updateConstraints { make in
+                    make.centerX.equalToSuperview().offset(0)
                 }
             }
         }
     }
+    
     @objc
     private func refuseButtonAction() {
         delegate?.refuseAudioCall()
@@ -37,9 +85,7 @@ class BaseChatView: BaseView {
     
     @objc
     private func responseButtonAction() {
-        refuseButton.isHidden = true
-        responseButton.isHidden = true
-        hangupButton.isHidden = false
+        response2Call()
         delegate?.responseAudioCall()
     }
     
@@ -48,10 +94,21 @@ class BaseChatView: BaseView {
         delegate?.hangupAudioCall()
     }
     
+    @objc
+    private func openDoorAction() {
+        delegate?.openDoor()
+    }
+    
     override func initData() {
         refuseButton.addTarget(self, action: #selector(refuseButtonAction), for: .touchUpInside)
         responseButton.addTarget(self, action: #selector(responseButtonAction), for: .touchUpInside)
         hangupButton.addTarget(self, action: #selector(hangupButtonAction), for: .touchUpInside)
+        openDoorButton.addTarget(self, action: #selector(openDoorAction), for: .touchUpInside)
+        
+        refuseButton.isExclusiveTouch = true
+        responseButton.isExclusiveTouch = true
+        hangupButton.isExclusiveTouch = true
+        openDoorButton.isExclusiveTouch = true
     }
     
     override func initializeView() {
@@ -61,9 +118,8 @@ class BaseChatView: BaseView {
         self.addSubview(refuseButton)
         self.addSubview(responseButton)
         self.addSubview(hangupButton)
-        
-        hangupButton.isHidden = true
-        
+        self.addSubview(openDoorButton)
+                
         videoImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -97,7 +153,13 @@ class BaseChatView: BaseView {
         hangupButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.centerX.equalToSuperview()
+            make.centerX.equalToSuperview().offset(-80)
+        }
+        
+        openDoorButton.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.centerX.equalToSuperview().offset(80)
         }
     }
     
@@ -141,6 +203,13 @@ class BaseChatView: BaseView {
     lazy var hangupButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setBackgroundImage(R.image.chat_hangup_image(), for: .normal)
+        button.layer.corner(40.0)
+        return button
+    }()
+    
+    lazy var openDoorButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setBackgroundImage(R.image.chat_opendoor_image(), for: .normal)
         button.layer.corner(40.0)
         return button
     }()

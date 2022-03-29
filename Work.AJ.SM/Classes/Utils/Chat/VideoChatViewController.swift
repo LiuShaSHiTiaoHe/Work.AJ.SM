@@ -8,8 +8,11 @@
 import UIKit
 import NIMSDK
 import NIMAVChat
+import SVProgressHUD
 class VideoChatViewController: BaseChatViewController {
-
+    
+    private var isLockMac: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if !isCalled {
@@ -19,12 +22,16 @@ class VideoChatViewController: BaseChatViewController {
 
     override func initData() {
         contentView.delegate = self
-        contentView.isCalled = isCalled
+    }
+    
+    override func initUI() {
+        
     }
     
     // MARK: - init
-    init(startCall callee: String) {
+    init(startCall callee: String, isLock: Bool = false) {
         super.init(startCall: callee, callType: .video)
+        isLockMac = isLock
     }
     
     init(responseCall caller: String, callID: UInt64) {
@@ -54,6 +61,25 @@ class VideoChatViewController: BaseChatViewController {
         }
     }
 
+}
+
+// MARK: - OpenDoor
+extension VideoChatViewController {
+    @objc
+    func openDoor() {
+        if isLockMac{
+            let lockMac = kCallee.jk.removeCharacter(characterString: kNIMSDKPrefixString)
+            HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
+                if !errorMsg.isEmpty {
+                    SVProgressHUD.showError(withStatus: errorMsg)
+                }else{
+                    SVProgressHUD.showSuccess(withStatus: "开门成功")
+                }
+            }
+        }else{
+            
+        }
+    }
 }
 
 extension VideoChatViewController: BaseChatViewDelegate {

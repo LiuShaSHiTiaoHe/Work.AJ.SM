@@ -135,8 +135,8 @@ extension HomeRepository {
         }
     }
     
-    func openDoorViaPush(_ lockModel: UnitLockModel, completion: @escaping HomeOpenDoorViaPushCompletion) {
-        if let userID = ud.userID, let unit = getCurrentUnit(), let physicalFloor = unit.physicalfloor, let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let lockMac = lockModel.lockmac {
+    func openDoorViaPush(_ lockMac: String, completion: @escaping HomeOpenDoorViaPushCompletion) {
+        if let userID = ud.userID, let unit = getCurrentUnit(), let physicalFloor = unit.physicalfloor, let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
             HomeAPI.openDoor(lockMac: lockMac, userID: userID, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, physicalFloor: physicalFloor).defaultRequest { jsonData in
                 completion("")
             } failureCallback: { response in

@@ -73,16 +73,22 @@ extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSour
 
 extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
     func openDoor(_ lockModel: UnitLockModel) {
-        HomeRepository.shared.openDoorViaPush(lockModel) { errorMsg in
-            if errorMsg.isEmpty {
-                SVProgressHUD.showSuccess(withStatus: "开门成功")
-            }else{
-                SVProgressHUD.showInfo(withStatus: errorMsg)
+        if let lockMac = lockModel.lockmac {
+            HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
+                if errorMsg.isEmpty {
+                    SVProgressHUD.showSuccess(withStatus: "开门成功")
+                }else{
+                    SVProgressHUD.showInfo(withStatus: errorMsg)
+                }
             }
         }
     }
     
     func camera(_ lockModel: UnitLockModel) {
-        
+        if let lockMac = lockModel.lockmac {
+            let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }

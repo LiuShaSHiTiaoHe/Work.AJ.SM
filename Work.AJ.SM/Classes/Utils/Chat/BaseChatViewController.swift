@@ -53,6 +53,11 @@ class BaseChatViewController: BaseViewController {
         NIMAVChatSDK.shared().netCallManager.add(self)
     }
     
+    override func initData() {
+        contentView.isVideoCall = kCallType == .video
+        contentView.isCalled = isCalled
+    }
+    
     override func initUI() {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
@@ -251,4 +256,8 @@ extension BaseChatViewController {
         option.videoCaptureParam = param
         return option
     }
+}
+
+extension BaseChatViewController {
+    
 }

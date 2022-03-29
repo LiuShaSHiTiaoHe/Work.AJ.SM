@@ -34,7 +34,7 @@ class GDataManager: NSObject {
         config.maximumLogDays = 7
         config.shouldCountTeamNotification = false
         config.animatedImageThumbnailEnabled = false
-        let option = NIMSDKOption.init(appKey: kNIMSdkAppKey)
+        let option = NIMSDKOption.init(appKey: kNIMSDKAppKey)
         option.apnsCername = nil
         option.pkCername = nil
         NIMSDK.shared().register(with: option)
