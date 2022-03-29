@@ -9,6 +9,7 @@ import UIKit
 import NIMSDK
 import NIMAVChat
 import SVProgressHUD
+import JKSwiftExtension
 
 class BaseChatViewController: BaseViewController {
 
@@ -51,11 +52,15 @@ class BaseChatViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NIMAVChatSDK.shared().netCallManager.add(self)
+        if !isCalled {
+            startCall()
+        }
     }
     
     override func initData() {
         contentView.isVideoCall = kCallType == .video
         contentView.isCalled = isCalled
+        updateContactName((isCalled ? kCaller: kCallee))
     }
     
     override func initUI() {
@@ -71,6 +76,13 @@ class BaseChatViewController: BaseViewController {
         return view
     }()
     
+    func updateContactName(_ name: String) {
+        contentView.nameLabel.text = name
+    }
+    
+    func updateTips(_ tips: String) {
+        contentView.tipsLabel.text = tips
+    }
     
     // MARK: - function
     func startCall() {
@@ -80,7 +92,7 @@ class BaseChatViewController: BaseViewController {
         option.apnsContent = kCallType == .audio ? "网络通话":"视频聊天"
         option.apnsSound = "video_chat_tip_receiver.aac"
         option.videoCaptureParam?.startWithCameraOn = kCallType == .video
-        
+        updateTips("呼叫中...")
         NIMAVChatSDK.shared().netCallManager.start(callees, type: kCallType, option: option) { [weak self] error, callID in
             guard let self = self else {
                 NIMAVChatSDK.shared().netCallManager.hangup(callID)
@@ -101,7 +113,8 @@ class BaseChatViewController: BaseViewController {
     func hangUp() {
         logger.info("挂断")
         NIMAVChatSDK.shared().netCallManager.hangup(kCallID)
-        self.dismiss(animated: true) {}
+        updateTips("挂断中...")
+        self.showErrorMessageAndDismiss("挂断中...")
     }
     
     func response2Call(_ accept: Bool) {
@@ -112,7 +125,9 @@ class BaseChatViewController: BaseViewController {
             if accept {
                 if (error == nil) {
                     logger.info("接受")
+                    self.updateTips("连接中...")
                 }else{
+                    self.updateTips("连接失败")
                     self.showErrorMessageAndDismiss("连接失败")
                 }
             }else{
@@ -124,6 +139,59 @@ class BaseChatViewController: BaseViewController {
 }
 
 extension BaseChatViewController: NIMNetCallManagerDelegate {
+
+    func onSessionTimeDuration(_ timeDuration: UInt64) {
+        let seconds = Int(timeDuration/1000)
+        let timeString = Date.jk.getFormatPlayTime(seconds: seconds, type: .second)
+        updateTips(timeString)
+    }
+    
+    func onResponsed(byOther callID: UInt64, accepted: Bool) {
+        showErrorMessageAndDismiss("已在其他端处理")
+    }
+    
+    func onResponse(_ callID: UInt64, from callee: String, accepted: Bool) {
+        logger.info("onResponse")
+        if kCallID == callID {
+            if accepted {
+                chatRoomUsers.append(callee)
+                updateTips("对方已接受,连接中...")
+            }else{
+                showErrorMessageAndDismiss("对方拒绝接听")
+            }
+        }
+    }
+    
+    func onCallDisconnected(_ callID: UInt64, withError error: Error?) {
+        logger.info("onCallDisconnected")
+        if kCallID == callID {
+            updateTips("通话已断开")
+            showErrorMessageAndDismiss("已断开")
+        }
+    }
+    
+    func onCallEstablished(_ callID: UInt64) {
+        logger.info("onCallEstablished")
+        if kCallID == callID {
+            let result = NIMAVChatSDK.shared().netCallManager.setSpeaker(true)
+            if result {
+                logger.info("麦克风开启成功")
+            }
+        }
+    }
+    
+    func onHangup(_ callID: UInt64, by user: String) {
+        logger.info("onHangup")
+        if kCallID == callID {
+            updateTips("对方已挂断")
+            showErrorMessageAndDismiss("对方已挂断")
+        }
+    }
+    
+    func onRemoteImageReady(_ image: CGImage) {
+        logger.info("onRemoteImageReady")
+    }
+    
     func onControl(_ callID: UInt64, from user: String, type control: NIMNetCallControlType) {
         logger.info("onControl")
         //多端登录时，自己会收到自己发出的控制指令，这里忽略
@@ -180,49 +248,6 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
         }
     }
     
-    func onResponsed(byOther callID: UInt64, accepted: Bool) {
-        showErrorMessageAndDismiss("已在其他端处理")
-    }
-    
-    func onResponse(_ callID: UInt64, from callee: String, accepted: Bool) {
-        logger.info("onResponse")
-        if kCallID == callID {
-            if accepted {
-                chatRoomUsers.append(callee)
-            }else{
-                showErrorMessageAndDismiss("对方拒绝接听")
-            }
-        }
-    }
-    
-    func onCallDisconnected(_ callID: UInt64, withError error: Error?) {
-        logger.info("onCallDisconnected")
-        if kCallID == callID {
-            showErrorMessageAndDismiss("已断开")
-        }
-    }
-    
-    func onCallEstablished(_ callID: UInt64) {
-        logger.info("onCallEstablished")
-        if kCallID == callID {
-            let result = NIMAVChatSDK.shared().netCallManager.setSpeaker(true)
-            if result {
-                logger.info("麦克风开启成功")
-            }
-        }
-    }
-    
-    func onHangup(_ callID: UInt64, by user: String) {
-        logger.info("onHangup")
-        if kCallID == callID {
-            showErrorMessageAndDismiss("对方已挂断")
-        }
-    }
-    
-    func onRemoteImageReady(_ image: CGImage) {
-        logger.info("onRemoteImageReady")
-    }
-    
 }
 
 // MARK: - Private func
@@ -258,6 +283,11 @@ extension BaseChatViewController {
     }
 }
 
+// MARK: - State Function
 extension BaseChatViewController {
-    
+//    func callInit(){}
+//    func callConnecting(){}
+//    func callConnected(){}
+//    func callDisconnected(){}
+//    func callError(_ msg: String){}
 }

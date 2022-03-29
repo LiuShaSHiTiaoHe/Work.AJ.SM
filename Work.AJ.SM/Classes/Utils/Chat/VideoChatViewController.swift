@@ -15,9 +15,7 @@ class VideoChatViewController: BaseChatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !isCalled {
-            startCall()
-        }
+  
     }
 
     override func initData() {
