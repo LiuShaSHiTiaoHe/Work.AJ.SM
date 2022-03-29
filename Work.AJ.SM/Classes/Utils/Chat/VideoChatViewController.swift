@@ -12,18 +12,15 @@ class VideoChatViewController: BaseChatViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if !isCalled {
+            startCall()
+        }
     }
 
     override func initData() {
         contentView.delegate = self
         contentView.isCalled = isCalled
-        if !isCalled {
-            startCall()
-        }
     }
-    
-
     
     // MARK: - init
     init(startCall callee: String) {
@@ -38,6 +35,7 @@ class VideoChatViewController: BaseChatViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Delegate
     override func onRemoteImageReady(_ image: CGImage) {
         let videoImage = UIImage.init(cgImage: image)
         contentView.videoImageView.image = videoImage

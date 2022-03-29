@@ -11,7 +11,6 @@ class AudioChatViewController: BaseChatViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if !isCalled {
             startCall()
         }
