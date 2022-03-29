@@ -11,7 +11,7 @@ class PasswordInvitationView: BaseView {
     
     override func initializeView() {
         self.addSubview(bgImageView)
-        self.addSubview(hearderView)
+        self.addSubview(headerView)
         self.addSubview(bgContentView)
         
         bgContentView.addSubview(titleLabel)
@@ -32,7 +32,7 @@ class PasswordInvitationView: BaseView {
             make.edges.equalToSuperview()
         }
         
-        hearderView.snp.makeConstraints { make in
+        headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
             make.height.equalTo(kTitleAndStateHeight)
         }
@@ -40,7 +40,7 @@ class PasswordInvitationView: BaseView {
         bgContentView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin/2)
             make.right.equalToSuperview().offset(-kMargin/2)
-            make.top.equalTo(hearderView.snp.bottom).offset(kMargin)
+            make.top.equalTo(headerView.snp.bottom).offset(kMargin)
             make.bottom.equalToSuperview().offset(-90)
         }
         
@@ -128,7 +128,7 @@ class PasswordInvitationView: BaseView {
         
     }
     
-    lazy var hearderView: CommonHeaderView = {
+    lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "邀请函"
         view.lineView.isHidden = true
