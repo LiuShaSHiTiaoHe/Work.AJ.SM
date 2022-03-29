@@ -23,12 +23,7 @@ class VideoChatViewController: BaseChatViewController {
         }
     }
     
-    override func initUI() {
-        view.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
+
     
     // MARK: - init
     init(startCall callee: String) {
@@ -60,15 +55,10 @@ class VideoChatViewController: BaseChatViewController {
             break
         }
     }
-    
-    // MARK: - UI
-    lazy var contentView: VideoChatView = {
-        let view = VideoChatView()
-        return view
-    }()
+
 }
 
-extension VideoChatViewController: VideoChatViewDelegate {
+extension VideoChatViewController: BaseChatViewDelegate {
     func refuseAudioCall() {
         response2Call(false)
     }

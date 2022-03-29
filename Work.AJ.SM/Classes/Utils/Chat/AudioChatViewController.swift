@@ -19,14 +19,9 @@ class AudioChatViewController: BaseChatViewController {
     
     override func initData() {
         contentView.delegate = self
+        contentView.isCalled = isCalled
     }
     
-    override func initUI() {
-        view.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
     
     // MARK: - init
     init(startCall callee: String) {
@@ -41,14 +36,9 @@ class AudioChatViewController: BaseChatViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UI
-    lazy var contentView: AudioChatView = {
-        let view = AudioChatView()
-        return view
-    }()
 }
 
-extension AudioChatViewController: AudioChatViewDelegate {
+extension AudioChatViewController: BaseChatViewDelegate {
     func refuseAudioCall() {
         response2Call(false)
     }

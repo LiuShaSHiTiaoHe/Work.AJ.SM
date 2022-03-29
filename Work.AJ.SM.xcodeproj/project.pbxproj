@@ -194,6 +194,7 @@
 		41E7D8DF27ED8AC200241706 /* AudioChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8DE27ED8AC200241706 /* AudioChatView.swift */; };
 		41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */; };
 		41E7D8E327EDB82C00241706 /* VideoChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E227EDB82C00241706 /* VideoChatView.swift */; };
+		41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E427F2947A00241706 /* BaseChatView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
@@ -408,6 +409,7 @@
 		41E7D8DE27ED8AC200241706 /* AudioChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChatView.swift; sourceTree = "<group>"; };
 		41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8E227EDB82C00241706 /* VideoChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatView.swift; sourceTree = "<group>"; };
+		41E7D8E427F2947A00241706 /* BaseChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -1453,9 +1455,9 @@
 		41E7D8C327EC4AD700241706 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				41E7D8E627F294B700241706 /* Manager */,
 				41E7D8DD27ED8A7700241706 /* View */,
 				41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */,
-				41E7D8C827EC661300241706 /* ChatRingManager.swift */,
 				41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */,
 				41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */,
 			);
@@ -1482,8 +1484,17 @@
 			children = (
 				41E7D8DE27ED8AC200241706 /* AudioChatView.swift */,
 				41E7D8E227EDB82C00241706 /* VideoChatView.swift */,
+				41E7D8E427F2947A00241706 /* BaseChatView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		41E7D8E627F294B700241706 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				41E7D8C827EC661300241706 /* ChatRingManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -1770,6 +1781,7 @@
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
+				41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */,
 				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,

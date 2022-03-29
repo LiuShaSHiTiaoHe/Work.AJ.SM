@@ -53,8 +53,21 @@ class BaseChatViewController: BaseViewController {
         NIMAVChatSDK.shared().netCallManager.add(self)
     }
     
+    override func initUI() {
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    // MARK: - UI
+    lazy var contentView: BaseChatView = {
+        let view = BaseChatView()
+        return view
+    }()
     
     
+    // MARK: - function
     func startCall() {
         let callees = [kCallee!]
         let option = setupNetCallOption()
@@ -81,7 +94,7 @@ class BaseChatViewController: BaseViewController {
     }
     
     func hangUp() {
-        logger.info("BaseChatViewController =====> 挂断")
+        logger.info("挂断")
         NIMAVChatSDK.shared().netCallManager.hangup(kCallID)
         self.dismiss(animated: true) {}
     }
@@ -93,7 +106,7 @@ class BaseChatViewController: BaseViewController {
             guard let self = self else { return }
             if accept {
                 if (error == nil) {
-                    logger.info("BaseChatViewController =====> 接受")
+                    logger.info("接受")
                 }else{
                     self.showErrorMessageAndDismiss("连接失败")
                 }
@@ -107,7 +120,7 @@ class BaseChatViewController: BaseViewController {
 
 extension BaseChatViewController: NIMNetCallManagerDelegate {
     func onControl(_ callID: UInt64, from user: String, type control: NIMNetCallControlType) {
-        logger.info("BaseChatViewController ================> onControl")
+        logger.info("onControl")
         //多端登录时，自己会收到自己发出的控制指令，这里忽略
         if user == NIMSDK.shared().loginManager.currentAccount() { return }
         if callID != kCallID { return }
@@ -167,7 +180,7 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
     }
     
     func onResponse(_ callID: UInt64, from callee: String, accepted: Bool) {
-        logger.info("BaseChatViewController ================> onResponse")
+        logger.info("onResponse")
         if kCallID == callID {
             if accepted {
                 chatRoomUsers.append(callee)
@@ -178,14 +191,14 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
     }
     
     func onCallDisconnected(_ callID: UInt64, withError error: Error?) {
-        logger.info("BaseChatViewController ================> onCallDisconnected")
+        logger.info("onCallDisconnected")
         if kCallID == callID {
             showErrorMessageAndDismiss("已断开")
         }
     }
     
     func onCallEstablished(_ callID: UInt64) {
-        logger.info("BaseChatViewController ================> onCallEstablished")
+        logger.info("onCallEstablished")
         if kCallID == callID {
             let result = NIMAVChatSDK.shared().netCallManager.setSpeaker(true)
             if result {
@@ -195,14 +208,14 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
     }
     
     func onHangup(_ callID: UInt64, by user: String) {
-        logger.info("BaseChatViewController ================> onHangup")
+        logger.info("onHangup")
         if kCallID == callID {
             showErrorMessageAndDismiss("对方已挂断")
         }
     }
     
     func onRemoteImageReady(_ image: CGImage) {
-        logger.info("BaseChatViewController ================> onRemoteImageReady")
+        logger.info("onRemoteImageReady")
     }
     
 }
@@ -226,7 +239,6 @@ extension BaseChatViewController {
         option.autoRotateRemoteVideo = false
         option.preferredVideoEncoder = .default
         option.preferredVideoDecoder = .default
-//        option.videoMaxEncodeBitrate = 0
         option.autoDeactivateAudioSession = true
         option.audioDenoise = true
         option.voiceDetect = true
