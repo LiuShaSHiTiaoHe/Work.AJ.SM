@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410A108527F2E16E0059B2C3 /* VisitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108427F2E16E0059B2C3 /* VisitorModel.swift */; };
+		410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108627F2E4120059B2C3 /* MyVisitorCell.swift */; };
 		412FC54027D7314B001050E9 /* SelectUnitBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */; };
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
@@ -214,6 +216,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		410A108427F2E16E0059B2C3 /* VisitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorModel.swift; sourceTree = "<group>"; };
+		410A108627F2E4120059B2C3 /* MyVisitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVisitorCell.swift; sourceTree = "<group>"; };
 		412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitBlockViewController.swift; sourceTree = "<group>"; };
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
@@ -1338,6 +1342,9 @@
 		41985F3C27D08FA600E02A9A /* VisitorRecord */ = {
 			isa = PBXGroup;
 			children = (
+				41E7D8E927F2E10700241706 /* View */,
+				41E7D8E827F2E0FE00241706 /* ViewController */,
+				41E7D8E727F2E0F700241706 /* Model */,
 				41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */,
 			);
 			path = VisitorRecord;
@@ -1489,6 +1496,29 @@
 				41E7D8C827EC661300241706 /* ChatRingManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		41E7D8E727F2E0F700241706 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				410A108427F2E16E0059B2C3 /* VisitorModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		41E7D8E827F2E0FE00241706 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		41E7D8E927F2E10700241706 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				410A108627F2E4120059B2C3 /* MyVisitorCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D230459476043C9D855A19D9 /* Frameworks */ = {
@@ -1814,6 +1844,7 @@
 				41985F3B27CF708700E02A9A /* StyleLabel.swift in Sources */,
 				416F2EAE27B60C6E004E5AD9 /* VerificationCodeInputView.swift in Sources */,
 				41985F3527CF456E00E02A9A /* SwiftyOnboardPage.swift in Sources */,
+				410A108527F2E16E0059B2C3 /* VisitorModel.swift in Sources */,
 				416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */,
 				41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */,
 				41985F2E27CF3B7100E02A9A /* OnBoardViewController.swift in Sources */,
@@ -1901,6 +1932,7 @@
 				4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */,
 				416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */,
 				416F2EE227BCD0C8004E5AD9 /* OwnerQRCodeViewController.swift in Sources */,
+				410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */,
 				416F2EED27BCF98B004E5AD9 /* BleCallElevatorViewController.swift in Sources */,
 				416F2E4527B0B514004E5AD9 /* GDataManager.swift in Sources */,
 			);

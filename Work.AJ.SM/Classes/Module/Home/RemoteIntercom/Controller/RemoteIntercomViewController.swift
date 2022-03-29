@@ -71,10 +71,22 @@ extension RemoteIntercomViewController: UITableViewDelegate, UITableViewDataSour
 
 extension RemoteIntercomViewController: RemoteOpenDoorCellDelegate{
     func openDoor(_ lockModel: UnitLockModel) {
-        
+        if let lockMac = lockModel.lockmac {
+            HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
+                if errorMsg.isEmpty {
+                    SVProgressHUD.showSuccess(withStatus: "开门成功")
+                }else{
+                    SVProgressHUD.showInfo(withStatus: errorMsg)
+                }
+            }
+        }
     }
     
     func camera(_ lockModel: UnitLockModel) {
-        
+        if let lockMac = lockModel.lockmac {
+            let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }

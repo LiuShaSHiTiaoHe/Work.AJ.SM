@@ -38,13 +38,13 @@ class GDataManager: NSObject {
         option.apnsCername = nil
         option.pkCername = nil
         NIMSDK.shared().register(with: option)
-        NIMSDK.shared().enableConsoleLog()
+//        NIMSDK.shared().enableConsoleLog()
     }
     
     // MARK: - 登陆云信
     func loginNIMSDK() {
         if let mobile = ud.userMobile, let token = ud.NIMToken {
-            let account = "AJPLUS" + mobile
+            let account = kNIMSDKPrefixString + mobile
             NIMSDK.shared().loginManager.login(account, token: token) { error in
                 if let _ = error {
                     logger.info("云信登录失败")

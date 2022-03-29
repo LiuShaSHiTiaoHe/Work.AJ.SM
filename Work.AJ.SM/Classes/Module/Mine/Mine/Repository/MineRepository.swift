@@ -14,14 +14,14 @@ typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 typealias FaceListCompletion = (([FaceModel]) -> Void)
 typealias DeleteFaceCompletion = ((_ errorMsg: String) -> Void)
 typealias AddFaceCompletion = ((_ errorMsg: String) -> Void)
-
 typealias OwnerPasswordCompletion = ((_ errorMsg: String?) -> Void)
-
 typealias CityListCompletion = ((Dictionary<String, Array<String>>) -> Void)
 typealias CommunityListCompletion = (([CommunityModel]) -> Void)
 typealias BlockListCompletion = (([BlockModel]) -> Void)
 typealias CellListCompletion = (([CellModel]) -> Void)
 typealias UnitInCellListCompletion = (([UserUnitModel]) -> Void)
+
+typealias VisitorListCompletion = (([VisitorModel]) -> Void)
 
 
 class MineRepository: NSObject {
@@ -135,6 +135,20 @@ class MineRepository: NSObject {
     
 }
 
+// MARK: - 访客
+extension MineRepository {
+    func getMyVisitors(userID: String, unitID: String, completion: @escaping VisitorListCompletion) {
+        SVProgressHUD.show()
+        MineAPI.myVisitors(userID: userID, unitID: unitID).request(modelType: [VisitorModel].self) { models, response in
+            SVProgressHUD.dismiss()
+            completion(models)
+        } failureCallback: { response in
+            completion([])
+        }
+    }
+}
+
+// MARK: - 人脸识别
 extension MineRepository {
     func getFaceList(completion: @escaping FaceListCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString{
@@ -178,6 +192,7 @@ extension MineRepository {
     }
 }
 
+// MARK: - 用户二维码
 extension MineRepository {
     func setOwnerPassword(_ password: String, competion: @escaping OwnerPasswordCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let phone = ud.userMobile, let userID = ud.userID{
@@ -192,6 +207,7 @@ extension MineRepository {
     }
 }
 
+// MARK: - 房屋
 extension MineRepository {
     
     func getCommunityWithCityName(_ city: String, competion: @escaping CommunityListCompletion) {

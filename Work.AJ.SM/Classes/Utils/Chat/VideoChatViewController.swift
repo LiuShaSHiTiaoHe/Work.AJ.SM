@@ -92,4 +92,8 @@ extension VideoChatViewController: BaseChatViewDelegate {
     func hangupAudioCall() {
         hangUp()
     }
+    
+    func openDoorInCall() {
+        openDoor()
+    }
 }

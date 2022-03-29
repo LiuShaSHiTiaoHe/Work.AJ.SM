@@ -9,7 +9,7 @@ import UIKit
 
 class VisitorRecordViewController: BaseViewController {
 
-    private var dataSource: [MemberModel] = []
+    private var dataSource: [VisitorModel] = []
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
@@ -27,7 +27,7 @@ class VisitorRecordViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
-        view.register(MemberListCell.self, forCellReuseIdentifier: MemberListCellIdentifier)
+        view.register(MyVisitorCell.self, forCellReuseIdentifier: MyVisitorCellIdentifier)
         view.separatorStyle = .none
         view.backgroundColor = R.color.backgroundColor()
         return view
@@ -54,14 +54,13 @@ class VisitorRecordViewController: BaseViewController {
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname {
+        if let userID = ud.userID, let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityname = unit.communityname, let cellname = unit.cellname {
             titleView.locationLabel.text = communityname + cellname
-        }
-        
-        MineRepository.shared.getCurrentUnitMembers { [weak self] members in
-            guard let `self` = self else { return }
-            self.dataSource = members.filter{$0.userType == "R"}
-            self.tableView.reloadData()
+            MineRepository.shared.getMyVisitors(userID: userID, unitID: unitID) { [weak self] models in
+                guard let `self` = self else { return }
+                self.dataSource = models
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -126,14 +125,14 @@ extension VisitorRecordViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: MemberListCellIdentifier, for: indexPath) as! MemberListCell
-        let member = dataSource[indexPath.row]
-        cell.data = member
+        let cell = tableView.dequeueReusableCell(withIdentifier: MyVisitorCellIdentifier, for: indexPath) as! MyVisitorCell
+        let visitor = dataSource[indexPath.row]
+        cell.dataSource = visitor
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120.0
+        return 130.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

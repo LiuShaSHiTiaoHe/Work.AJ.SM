@@ -11,7 +11,7 @@ protocol BaseChatViewDelegate: NSObjectProtocol {
     func refuseAudioCall()
     func responseAudioCall()
     func hangupAudioCall()
-    func openDoor()
+    func openDoorInCall()
 }
 
 class BaseChatView: BaseView {
@@ -96,7 +96,7 @@ class BaseChatView: BaseView {
     
     @objc
     private func openDoorAction() {
-        delegate?.openDoor()
+        delegate?.openDoorInCall()
     }
     
     override func initData() {

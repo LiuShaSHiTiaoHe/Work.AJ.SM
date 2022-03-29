@@ -46,4 +46,8 @@ extension AudioChatViewController: BaseChatViewDelegate {
     func hangupAudioCall() {
         hangUp()
     }
+
+    func openDoorInCall() {
+        
+    }
 }
