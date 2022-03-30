@@ -1,5 +1,5 @@
 //
-//  ComminIDNumberInpuCell.swift
+//  CommonIDNumberInpuCell.swift
 //  Work.AJ.SM
 //
 //  Created by Fairdesk on 2022/3/10.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-let ComminIDNumberInpuCellIdentifier = "ComminIDNumberInpuCellIdentifier"
+let CommonIDNumberInpuCellIdentifier = "CommonIDNumberInpuCellIdentifier"
 
-class ComminIDNumberInpuCell: UITableViewCell {
+class CommonIDNumberInpuCell: UITableViewCell {
 
     var placeholder: String? {
         didSet {

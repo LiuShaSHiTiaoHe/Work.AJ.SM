@@ -94,7 +94,7 @@ class HouseCetificationView: BaseView {
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
         view.register(CommonSelectButtonCell.self, forCellReuseIdentifier: CommonSelectButtonCellIdentifier)
         view.register(CommonPhoneNumberCell.self, forCellReuseIdentifier: CommonPhoneNumberCellIdentifier)
-        view.register(ComminIDNumberInpuCell.self, forCellReuseIdentifier: ComminIDNumberInpuCellIdentifier)
+        view.register(CommonIDNumberInpuCell.self, forCellReuseIdentifier: CommonIDNumberInpuCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
         return view

@@ -11,6 +11,7 @@
 		410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108627F2E4120059B2C3 /* MyVisitorCell.swift */; };
 		410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */; };
 		410A108E27F302780059B2C3 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108D27F302780059B2C3 /* UserProfileView.swift */; };
+		410A109027F3ED570059B2C3 /* UserAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108F27F3ED570059B2C3 /* UserAvatarCell.swift */; };
 		412FC54027D7314B001050E9 /* SelectUnitBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */; };
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
@@ -161,7 +162,7 @@
 		41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */; };
 		41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */; };
 		41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */; };
-		41B7DBCF27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */; };
+		41B7DBCF27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBCE27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift */; };
 		41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */; };
 		41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */; };
 		41B7DBD527DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD427DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift */; };
@@ -222,6 +223,7 @@
 		410A108627F2E4120059B2C3 /* MyVisitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVisitorCell.swift; sourceTree = "<group>"; };
 		410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		410A108D27F302780059B2C3 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		410A108F27F3ED570059B2C3 /* UserAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarCell.swift; sourceTree = "<group>"; };
 		412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitBlockViewController.swift; sourceTree = "<group>"; };
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
@@ -378,7 +380,7 @@
 		41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+SectionIndexView.swift"; sourceTree = "<group>"; };
 		41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItemIndicator.swift; sourceTree = "<group>"; };
 		41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItem.swift; sourceTree = "<group>"; };
-		41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComminIDNumberInpuCell.swift; sourceTree = "<group>"; };
+		41B7DBCE27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonIDNumberInpuCell.swift; sourceTree = "<group>"; };
 		41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCertificationModel.swift; sourceTree = "<group>"; };
 		41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseIndexView.swift; sourceTree = "<group>"; };
 		41B7DBD427DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseLocationIndexCell.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				410A108D27F302780059B2C3 /* UserProfileView.swift */,
+				410A108F27F3ED570059B2C3 /* UserAvatarCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -834,7 +837,7 @@
 				4173C23027C5D9A600B8FBB8 /* CommonInputCell.swift */,
 				4173C23227C5DA9500B8FBB8 /* CommonSelectButtonCell.swift */,
 				4173C22627C4E37300B8FBB8 /* CommonPhoneNumberCell.swift */,
-				41B7DBCE27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift */,
+				41B7DBCE27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift */,
 				41C3501627CC5EFB006E440F /* CommonStatusView.swift */,
 				41985F3827CF6E8200E02A9A /* CodeTextField.swift */,
 				41985F3A27CF708700E02A9A /* StyleLabel.swift */,
@@ -1839,7 +1842,7 @@
 				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
-				41B7DBCF27D9E52F002A23D0 /* ComminIDNumberInpuCell.swift in Sources */,
+				41B7DBCF27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift in Sources */,
 				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
 				416F2EA927B609F2004E5AD9 /* LoginView.swift in Sources */,
@@ -1865,6 +1868,7 @@
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
 				416F2EA727B5FE7C004E5AD9 /* AuthenticationAPI.swift in Sources */,
+				410A109027F3ED570059B2C3 /* UserAvatarCell.swift in Sources */,
 				4173C22E27C5D97200B8FBB8 /* AddMemberView.swift in Sources */,
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,

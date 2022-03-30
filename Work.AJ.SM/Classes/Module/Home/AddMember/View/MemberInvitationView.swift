@@ -11,7 +11,7 @@ class MemberInvitationView: BaseView {
 
     override func initializeView() {
         self.addSubview(bgImageView)
-        self.addSubview(hearderView)
+        self.addSubview(headerView)
         self.addSubview(avatar)
         self.addSubview(bgContentView)
         bgContentView.addSubview(nameLabel)
@@ -28,7 +28,7 @@ class MemberInvitationView: BaseView {
             make.edges.equalToSuperview()
         }
         
-        hearderView.snp.makeConstraints { make in
+        headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
             make.height.equalTo(kTitleAndStateHeight)
         }
@@ -36,13 +36,13 @@ class MemberInvitationView: BaseView {
         avatar.snp.makeConstraints { make in
             make.width.height.equalTo(70)
             make.centerX.equalToSuperview()
-            make.top.equalTo(hearderView.snp.bottom)
+            make.top.equalTo(headerView.snp.bottom)
         }
         
         bgContentView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin/2)
             make.right.equalToSuperview().offset(-kMargin/2)
-            make.top.equalTo(hearderView.snp.bottom).offset(35)
+            make.top.equalTo(headerView.snp.bottom).offset(35)
             make.bottom.equalToSuperview().offset(-90)
         }
         
@@ -111,7 +111,7 @@ class MemberInvitationView: BaseView {
         self.bringSubviewToFront(avatar)
     }
     
-    lazy var hearderView: CommonHeaderView = {
+    lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "邀请函"
         view.titleLabel.textAlignment = .center

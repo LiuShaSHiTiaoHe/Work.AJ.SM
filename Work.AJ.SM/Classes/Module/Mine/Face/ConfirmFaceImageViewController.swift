@@ -78,7 +78,7 @@ class ConfirmFaceImageViewController: BaseViewController {
     }
     
     func getMemberIdentifierNumber() -> String {
-        let cell = tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! ComminIDNumberInpuCell
+        let cell = tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! CommonIDNumberInpuCell
         if let PhoneNumber = cell.IDNumberInput.text {
             return PhoneNumber
         }else{
@@ -154,7 +154,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
         view.register(CommonSelectButtonCell.self, forCellReuseIdentifier: CommonSelectButtonCellIdentifier)
-        view.register(ComminIDNumberInpuCell.self, forCellReuseIdentifier: ComminIDNumberInpuCellIdentifier)
+        view.register(CommonIDNumberInpuCell.self, forCellReuseIdentifier: CommonIDNumberInpuCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
         return view
@@ -186,7 +186,7 @@ extension ConfirmFaceImageViewController : UITableViewDelegate, UITableViewDataS
             cell.placeholder = "请输入家人/成员姓名"
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ComminIDNumberInpuCellIdentifier, for: indexPath) as! ComminIDNumberInpuCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CommonIDNumberInpuCellIdentifier, for: indexPath) as! CommonIDNumberInpuCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份证"
             cell.placeholder = "请输入家人/成员身份证号"

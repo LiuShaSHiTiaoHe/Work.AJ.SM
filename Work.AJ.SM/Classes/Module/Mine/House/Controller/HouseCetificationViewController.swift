@@ -102,7 +102,7 @@ class HouseCertificationViewController: BaseViewController {
     }
     
     func getMemberIdentityCardNumber() -> String {
-        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! ComminIDNumberInpuCell
+        let cell = contentView.tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! CommonIDNumberInpuCell
         if let identityCardNumber = cell.IDNumberInput.text {
             return identityCardNumber
         }else{
@@ -144,7 +144,7 @@ extension HouseCertificationViewController: UITableViewDelegate, UITableViewData
             cell.placeholder = "请输入家人/成员手机号"
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ComminIDNumberInpuCellIdentifier, for: indexPath) as! ComminIDNumberInpuCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CommonIDNumberInpuCellIdentifier, for: indexPath) as! CommonIDNumberInpuCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份证"
             cell.placeholder = "请输入家人/成员身份证号"

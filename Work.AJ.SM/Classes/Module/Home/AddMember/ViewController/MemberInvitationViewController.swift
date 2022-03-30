@@ -35,7 +35,7 @@ class MemberInvitationViewController: BaseViewController {
     override func initData() {
         contentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
         contentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
-        contentView.hearderView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         if let qrCodeString = qrCodeString, let qrcodeImage = QRCode.init(string: qrCodeString, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
             DispatchQueue.main.async {
                 self.contentView.qrCodeView.image = image

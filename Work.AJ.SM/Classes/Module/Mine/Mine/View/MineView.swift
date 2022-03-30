@@ -93,7 +93,7 @@ class MineView: BaseView {
     }
     
     override func initData() {
-        
+        headerView.isUserInteractionEnabled = true
     }
 
 }

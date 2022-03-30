@@ -23,6 +23,7 @@ class MineViewController: BaseViewController {
     }
     
     override func initData() {
+        contentView.headerView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(userProfileView)))
         if let _ = ud.userID, let userInfo = HomeRepository.shared.getCurrentUser(), let name = userInfo.userName, let mobile = userInfo.mobile {
             contentView.nameLabel.text = name
             contentView.phoneLabel.text = mobile.jk.hidePhone()
@@ -35,6 +36,14 @@ class MineViewController: BaseViewController {
         
         dataSource = MineRepository.shared.getMineModules()
         contentView.tableView.reloadData()
+        
+    }
+    
+    @objc
+    private func userProfileView(){
+        let vc = UserProfileViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func initUI() {

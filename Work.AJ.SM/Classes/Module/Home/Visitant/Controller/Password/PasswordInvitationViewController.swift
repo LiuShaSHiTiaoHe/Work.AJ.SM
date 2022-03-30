@@ -36,7 +36,7 @@ class PasswordInvitationViewController: BaseViewController {
     override func initData()  {
         contentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
         contentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
-        contentView.hearderView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         setUpDataSource()
     }
     
