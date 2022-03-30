@@ -16,7 +16,6 @@ let kAppID = "1444571864"
 let kJpushAppKey = "3e191e80c1475843e7204166"
 let kNIMSDKAppKey = "4b1a03db69454aa7ce178216237976e8"
 let kNIMSDKPrefixString = "AJPLUS"
-let FaceImageCacheKey = "FaceImageCacheKey"
 
 extension String {
     func ajImageUrl() -> String {

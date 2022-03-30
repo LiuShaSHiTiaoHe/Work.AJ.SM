@@ -8,6 +8,10 @@
 import UIKit
 import YYCache
 
+let FaceImageCacheKey = "FaceImageCacheKey"
+let UserAvatarCacheKey = "UserAvatarCacheKey"
+
+
 enum CacheManager: String {
     case network = "anjie.network.cache"
     case liftrecord = "anjie.liftrecord.cache"

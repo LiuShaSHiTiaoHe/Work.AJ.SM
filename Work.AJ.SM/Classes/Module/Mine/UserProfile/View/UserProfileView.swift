@@ -38,7 +38,7 @@ class UserProfileView: BaseView {
     }()
     
     lazy var tableView: UITableView = {
-        let view = UITableView.init(frame: CGRect.zero, style: .plain)
+        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)

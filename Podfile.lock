@@ -8,7 +8,6 @@ PODS:
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
   - JKSwiftExtension (2.0.6)
-  - KeychainAccess (4.2.2)
   - Kingfisher (7.2.0)
   - LTMorphingLabel (0.9.3)
   - MarqueeLabel (4.0.5)
@@ -31,6 +30,7 @@ PODS:
   - PGDatePicker (2.6.9):
     - PGPickerView
   - PGPickerView (1.3.8)
+  - PryntTrimmerView (4.0.2)
   - R.swift (6.1.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
@@ -61,6 +61,7 @@ PODS:
     - SPPermissions/Core
   - SPPermissions/PhotoLibrary (7.1.5):
     - SPPermissions/Core
+  - SteviaLayout (4.7.3)
   - SVProgressHUD (2.2.5)
   - SwiftEntryKit (2.0.0)
   - swiftScan (1.2.1)
@@ -70,6 +71,9 @@ PODS:
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
     - ObjcExceptionBridging
+  - YPImagePicker (5.2.1):
+    - PryntTrimmerView (= 4.0.2)
+    - SteviaLayout (= 4.7.3)
   - YYCache (1.0.4)
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
@@ -84,7 +88,6 @@ DEPENDENCIES:
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
   - JKSwiftExtension
-  - KeychainAccess (= 4.2.2)
   - Kingfisher (= 7.2.0)
   - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
@@ -112,6 +115,7 @@ DEPENDENCIES:
   - SwiftyJSON (= 5.0.1)
   - SwiftyUserDefaults (= 5.3.0)
   - XCGLogger (= 7.0.1)
+  - YPImagePicker
   - YYCache
   - YYCategories
 
@@ -126,7 +130,6 @@ SPEC REPOS:
     - Haptica
     - IQKeyboardManagerSwift
     - JKSwiftExtension
-    - KeychainAccess
     - Kingfisher
     - LTMorphingLabel
     - MarqueeLabel
@@ -139,6 +142,7 @@ SPEC REPOS:
     - "ObjectMapper+Realm"
     - PGDatePicker
     - PGPickerView
+    - PryntTrimmerView
     - R.swift
     - R.swift.Library
     - Realm
@@ -148,12 +152,14 @@ SPEC REPOS:
     - Siren
     - SnapKit
     - SPPermissions
+    - SteviaLayout
     - SVProgressHUD
     - SwiftEntryKit
     - swiftScan
     - SwiftyJSON
     - SwiftyUserDefaults
     - XCGLogger
+    - YPImagePicker
     - YYCache
     - YYCategories
 
@@ -167,7 +173,6 @@ SPEC CHECKSUMS:
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JKSwiftExtension: 97b82e66595a44389cb7ae43cdfccd7bf11de717
-  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   LTMorphingLabel: f2b256e4fe665aac27f0d0e8ccdcd79590f0cd70
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
@@ -180,6 +185,7 @@ SPEC CHECKSUMS:
   "ObjectMapper+Realm": 0f8d0ac5b0e87ba63d2d0bea76a111b4eae98b9a
   PGDatePicker: 88960f3760edac96219c10320f25536ad31d0f44
   PGPickerView: 037acfb132a4c8054fb43aaa59a5ff50c7f747f5
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Realm: 5d6f84e3f65d4efa204d46b461e5bbbbbbf84c6c
@@ -189,15 +195,17 @@ SPEC CHECKSUMS:
   Siren: 76ac728f4f2f4a3576c322272e94a0e37955664f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPPermissions: c63ac1132badad39917de03a3c9dc2429ace94be
+  SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
   swiftScan: 0849e7d7c1c641384767a573ee8cb90b88d1ddd9
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
+  YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 6afd79bdf52a5131ed69a24c82393d6cabad95e7
+PODFILE CHECKSUM: da3017562d518ba904b25e7d47587769063e154a
 
 COCOAPODS: 1.11.2

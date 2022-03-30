@@ -9,7 +9,6 @@ import Foundation
 
 @_exported import ObjectMapper
 @_exported import SnapKit
-@_exported import KeychainAccess
 @_exported import SwiftyUserDefaults
 @_exported import SwiftEntryKit
 @_exported import IQKeyboardManagerSwift

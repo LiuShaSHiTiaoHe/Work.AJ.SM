@@ -14,7 +14,6 @@ class UserAvatarCell: UITableViewCell {
     private func initializeView() {
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(avatar)
-        self.contentView.addSubview(arrowImageView)
         
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -23,16 +22,9 @@ class UserAvatarCell: UITableViewCell {
         }
         
         avatar.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin*3)
+            make.right.equalToSuperview().offset(-kMargin)
             make.centerY.equalToSuperview()
             make.width.height.equalTo(60)
-        }
-        
-        arrowImageView.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin/2)
-            make.width.equalTo(6)
-            make.height.equalTo(11)
-            make.centerY.equalToSuperview()
         }
     }
     
@@ -49,12 +41,6 @@ class UserAvatarCell: UITableViewCell {
         let view = UIImageView()
         view.layer.cornerRadius = 30
         view.clipsToBounds = true
-        return view
-    }()
-    
-    lazy var arrowImageView: UIImageView = {
-        let view = UIImageView.init()
-        view.image = R.image.base_icon_rightarrow()
         return view
     }()
     
