@@ -8,16 +8,53 @@
 import UIKit
 import SVProgressHUD
 import YPImagePicker
+import SwiftEntryKit
 
 enum userProfileViewState {
     case display
     case edit
 }
 
+enum userProfilePickerType {
+    case gender
+    case education
+    case profession
+}
+
 class UserProfileViewController: BaseViewController {
 
     private var viewState: userProfileViewState = .display
     private var userModel: UserModel?
+    private var pickerType: userProfilePickerType = .gender
+    private lazy var picker: UIPickerView = {
+        let view = UIPickerView.init()
+        return view
+    }()
+    
+    private var userGender: String? {
+        didSet {
+            if let userGender = userGender {
+                viewState = .edit
+                
+            }
+        }
+    }
+    
+    private var userEducation: String? {
+        didSet {
+            if let userEducation = userEducation {
+                viewState = .edit
+            }
+        }
+    }
+    
+    private var userProfession: String? {
+        didSet {
+            if let userProfession = userProfession {
+                viewState = .edit
+            }
+        }
+    }
     
     private var avatar: UIImage?{
         didSet{
@@ -42,6 +79,10 @@ class UserProfileViewController: BaseViewController {
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
+        
+        picker.dataSource = self
+        picker.delegate = self
+        
         if let model = HomeRepository.shared.getCurrentUser() {
             userModel = model
             contentView.tableView.reloadData()
@@ -188,6 +229,7 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
             case 0:
                 break
             case 1:
+                gernderPicker()
                 break
             case 2:
                 break
@@ -242,4 +284,64 @@ extension UserProfileViewController: YPImagePickerDelegate {
         }
         present(picker, animated: true, completion: nil)
     }
+}
+
+extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+
+    func gernderPicker() {
+        pickerType = .gender
+        PopViewManager.shared.display(picker, .bottom, .init(width: .fill, height: .constant(value: 250)))
+    }
+    
+    func birthDatePicker(){
+        pickerType = .education
+        PopViewManager.shared.display(picker, .bottom, .init(width: .fill, height: .constant(value: 250)))
+    }
+    
+    func professionPicker() {
+        pickerType = .profession
+        PopViewManager.shared.display(picker, .bottom, .init(width: .fill, height: .constant(value: 250)))
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30.0
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch pickerType {
+        case .gender:
+            userGender = UserProfileConstDefines.init().gender[row]
+        case .education:
+            userEducation = UserProfileConstDefines.init().education[row]
+        case .profession:
+            userProfession = UserProfileConstDefines.init().profession[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch pickerType {
+        case .gender:
+            return UserProfileConstDefines.init().gender[row]
+        case .education:
+            return UserProfileConstDefines.init().education[row]
+        case .profession:
+            return UserProfileConstDefines.init().profession[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch pickerType {
+        case .gender:
+            return UserProfileConstDefines.init().gender.count
+        case .education:
+            return UserProfileConstDefines.init().education.count
+        case .profession:
+            return UserProfileConstDefines.init().profession.count
+        }
+    }
+    
 }

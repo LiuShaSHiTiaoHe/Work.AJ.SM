@@ -12,6 +12,8 @@
 		410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */; };
 		410A108E27F302780059B2C3 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108D27F302780059B2C3 /* UserProfileView.swift */; };
 		410A109027F3ED570059B2C3 /* UserAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108F27F3ED570059B2C3 /* UserAvatarCell.swift */; };
+		410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A109227F4546B0059B2C3 /* UserProfileConstDefines.swift */; };
+		410A109527F4596D0059B2C3 /* CommonPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A109427F4596D0059B2C3 /* CommonPickerView.swift */; };
 		412FC54027D7314B001050E9 /* SelectUnitBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */; };
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
@@ -224,6 +226,8 @@
 		410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		410A108D27F302780059B2C3 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		410A108F27F3ED570059B2C3 /* UserAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarCell.swift; sourceTree = "<group>"; };
+		410A109227F4546B0059B2C3 /* UserProfileConstDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileConstDefines.swift; sourceTree = "<group>"; };
+		410A109427F4596D0059B2C3 /* CommonPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPickerView.swift; sourceTree = "<group>"; };
 		412FC53F27D7314B001050E9 /* SelectUnitBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitBlockViewController.swift; sourceTree = "<group>"; };
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
@@ -450,6 +454,7 @@
 		410A108827F2FF940059B2C3 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				410A109127F4543E0059B2C3 /* Model */,
 				410A108A27F2FFAC0059B2C3 /* Controller */,
 				410A108927F2FFA70059B2C3 /* View */,
 			);
@@ -471,6 +476,14 @@
 				410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		410A109127F4543E0059B2C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				410A109227F4546B0059B2C3 /* UserProfileConstDefines.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		412FC54327D73CEA001050E9 /* Model */ = {
@@ -841,6 +854,7 @@
 				41C3501627CC5EFB006E440F /* CommonStatusView.swift */,
 				41985F3827CF6E8200E02A9A /* CodeTextField.swift */,
 				41985F3A27CF708700E02A9A /* StyleLabel.swift */,
+				410A109427F4596D0059B2C3 /* CommonPickerView.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -1818,6 +1832,7 @@
 				416F2F0B27BF4724004E5AD9 /* BLEAdvertisingManager.swift in Sources */,
 				416F2EB027B60C7F004E5AD9 /* PasswordInputView.swift in Sources */,
 				4173C20027C3521E00B8FBB8 /* RemoteIntercomViewController.swift in Sources */,
+				410A109527F4596D0059B2C3 /* CommonPickerView.swift in Sources */,
 				416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */,
 				416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */,
 				41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */,
@@ -1827,6 +1842,7 @@
 				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
 				41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */,
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
+				410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
 				41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */,
 				416F2E4927B0B56D004E5AD9 /* Network.Configuration.swift in Sources */,
