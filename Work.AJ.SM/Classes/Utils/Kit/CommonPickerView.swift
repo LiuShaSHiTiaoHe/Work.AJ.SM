@@ -8,10 +8,32 @@
 import UIKit
 import SwiftUI
 
+protocol CommonPickerViewDelegate: NSObjectProtocol {
+    func pickerCancel()
+    func pickerConfirm()
+}
+
 class CommonPickerView: BaseView {
 
+    weak var delegate: CommonPickerViewDelegate?
+    
     override func initData() {
-        
+        leftButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
+        leftButton.setTitle("取消", for: .normal)
+        leftButton.setTitleColor(R.color.errorRedColor(), for: .normal)
+        rightButton.setTitle("确定", for: .normal)
+        rightButton.setTitleColor(R.color.themeColor(), for: .normal)
+    }
+    
+    @objc
+    private func cancel(){
+        delegate?.pickerCancel()
+    }
+    
+    @objc
+    private func confirm() {
+        delegate?.pickerConfirm()
     }
     
     override func initializeView() {
@@ -29,13 +51,13 @@ class CommonPickerView: BaseView {
         
         rightButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin/2)
-            make.centerY.equalTo(leftButton)
+            make.centerY.equalTo(leftButton.snp.centerY)
             make.height.equalTo(30)
             make.width.equalTo(80)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(leftButton)
+            make.centerY.equalTo(leftButton.snp.centerY)
             make.left.equalTo(leftButton.snp.right)
             make.right.equalTo(rightButton.snp.left)
             make.height.equalTo(30)

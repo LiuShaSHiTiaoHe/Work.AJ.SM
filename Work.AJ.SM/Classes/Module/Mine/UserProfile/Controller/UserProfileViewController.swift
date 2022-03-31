@@ -15,10 +15,10 @@ enum userProfileViewState {
     case edit
 }
 
-enum userProfilePickerType {
-    case gender
-    case education
-    case profession
+enum userProfilePickerType: String {
+    case gender = "性别"
+    case education = "学历"
+    case profession = "职业"
 }
 
 class UserProfileViewController: BaseViewController {
@@ -26,35 +26,17 @@ class UserProfileViewController: BaseViewController {
     private var viewState: userProfileViewState = .display
     private var userModel: UserModel?
     private var pickerType: userProfilePickerType = .gender
-    private lazy var picker: UIPickerView = {
-        let view = UIPickerView.init()
+    private var pickerIndex: Int = 0
+    private lazy var picker: CommonPickerView = {
+        let view = CommonPickerView.init()
         return view
     }()
-    
-    private var userGender: String? {
-        didSet {
-            if let userGender = userGender {
-                viewState = .edit
-                
-            }
-        }
-    }
-    
-    private var userEducation: String? {
-        didSet {
-            if let userEducation = userEducation {
-                viewState = .edit
-            }
-        }
-    }
-    
-    private var userProfession: String? {
-        didSet {
-            if let userProfession = userProfession {
-                viewState = .edit
-            }
-        }
-    }
+    private var userNickName: String = ""
+    private var userBirthDate: String = "暂无"
+    private var userGender: String = "暂无"
+    private var userEducation: String = "暂无"
+    private var userProfession: String = "暂无"
+    private var userRealName: String = "暂无"
     
     private var avatar: UIImage?{
         didSet{
@@ -80,11 +62,30 @@ class UserProfileViewController: BaseViewController {
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
         
-        picker.dataSource = self
+        picker.pickerView.dataSource = self
+        picker.pickerView.delegate = self
         picker.delegate = self
         
         if let model = HomeRepository.shared.getCurrentUser() {
             userModel = model
+            if let nickName = model.userName {
+                userNickName = nickName
+            }
+            if let gender = model.sex {
+                userGender = gender
+            }
+            if let birth = model.birthdate {
+                userBirthDate = birth
+            }
+            if let education = model.education {
+                userEducation = education
+            }
+            if let profession = model.job {
+                userProfession = profession
+            }
+            if let realname = model.realName {
+                userRealName = realname
+            }
             contentView.tableView.reloadData()
         }else{
             SVProgressHUD.showError(withStatus: "数据错误")
@@ -165,33 +166,23 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
                     cell.nameLabel.text = "昵称"
                     break
                 case 1:
-                    if let gender = userInfo.sex {
-                        cell.commonInput.text = gender
-                    }
+                    cell.commonInput.text = userGender
                     cell.nameLabel.text = "性别"
                     break
                 case 2:
-                    if let birthDate = userInfo.birthdate {
-                        cell.commonInput.text = birthDate
-                    }
+                    cell.commonInput.text = userBirthDate
                     cell.nameLabel.text = "生日"
                     break
                 case 3:
-                    if let education = userInfo.education {
-                        cell.commonInput.text = education
-                    }
+                    cell.commonInput.text = userEducation
                     cell.nameLabel.text = "学历"
                     break
                 case 4:
-                    if let profession = userInfo.job {
-                        cell.commonInput.text = profession
-                    }
+                    cell.commonInput.text = userProfession
                     cell.nameLabel.text = "职业"
                     break
                 case 5:
-                    if let realName = userInfo.realName {
-                        cell.commonInput.text = realName
-                    }
+                    cell.commonInput.text = userRealName
                     cell.nameLabel.text = "真实姓名"
                     break
                 case 6:
@@ -229,17 +220,17 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
             case 0:
                 break
             case 1:
-                gernderPicker()
-                break
+                showPicker(.gender)
             case 2:
                 break
             case 3:
-                break
+                showPicker(.education)
             case 4:
-                break
+                showPicker(.profession)
             case 5:
                 break
             case 6:
+                SVProgressHUD.showInfo(withStatus: "手机号码无法修改")
                 break
             default:
                 break
@@ -286,21 +277,31 @@ extension UserProfileViewController: YPImagePickerDelegate {
     }
 }
 
-extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource, CommonPickerViewDelegate {
 
-    func gernderPicker() {
-        pickerType = .gender
-        PopViewManager.shared.display(picker, .bottom, .init(width: .fill, height: .constant(value: 250)))
+    func pickerCancel() {
+        PopViewManager.shared.dissmiss {}
     }
     
-    func birthDatePicker(){
-        pickerType = .education
-        PopViewManager.shared.display(picker, .bottom, .init(width: .fill, height: .constant(value: 250)))
+    func pickerConfirm() {
+        viewState = .edit
+        switch pickerType {
+        case .gender:
+            userGender = UserProfileConstDefines.init().gender[pickerIndex]
+        case .education:
+            userEducation = UserProfileConstDefines.init().education[pickerIndex]
+        case .profession:
+            userProfession = UserProfileConstDefines.init().profession[pickerIndex]
+        }
+        PopViewManager.shared.dissmiss {}
     }
-    
-    func professionPicker() {
-        pickerType = .profession
-        PopViewManager.shared.display(picker, .bottom, .init(width: .fill, height: .constant(value: 250)))
+        
+    func showPicker(_ type: userProfilePickerType) {
+        pickerType = type
+        pickerIndex = 0
+        picker.titleLabel.text = type.rawValue
+        picker.pickerView.reloadAllComponents()
+        PopViewManager.shared.display(picker, .bottom, .init(width: .constant(value: kScreenWidth), height: .constant(value: 300)))
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -312,14 +313,7 @@ extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch pickerType {
-        case .gender:
-            userGender = UserProfileConstDefines.init().gender[row]
-        case .education:
-            userEducation = UserProfileConstDefines.init().education[row]
-        case .profession:
-            userProfession = UserProfileConstDefines.init().profession[row]
-        }
+        pickerIndex = row
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

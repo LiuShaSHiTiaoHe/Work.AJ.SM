@@ -32,6 +32,10 @@ class PopViewManager: NSObject {
         )
     )
     
+    func dissmiss(with completion: @escaping () -> Void) {
+        SwiftEntryKit.dismiss(.all, with: completion)
+    }
+    
     func display(_ displayView: Any, _ position: EKAttributes.Position, _ size: EKAttributes.PositionConstraints.Size, _ insideKeyWindow: Bool = false) {
         if let userInterfaceStyle = UIViewController.currentViewController()?.traitCollection.userInterfaceStyle {
             var displayMode: EKAttributes.DisplayMode = .light
