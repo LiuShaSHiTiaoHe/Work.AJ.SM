@@ -18,6 +18,7 @@
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
+		4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */; };
 		41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB327E95D8E002D7BD1 /* CacheManager.swift */; };
 		41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB727E972F0002D7BD1 /* PermissionManager.swift */; };
 		41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */; };
@@ -232,6 +233,7 @@
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		412FC54627D74529001050E9 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
+		4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInputViewController.swift; sourceTree = "<group>"; };
 		41558FB327E95D8E002D7BD1 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		41558FB527E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		41558FB627E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */,
+				4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1904,6 +1907,7 @@
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
 				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
+				4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */,
 				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
 				41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */,

@@ -9,6 +9,7 @@ import UIKit
 import SVProgressHUD
 import YPImagePicker
 import SwiftEntryKit
+import PGDatePicker
 
 enum userProfileViewState {
     case display
@@ -37,6 +38,7 @@ class UserProfileViewController: BaseViewController {
     private var userEducation: String = "暂无"
     private var userProfession: String = "暂无"
     private var userRealName: String = "暂无"
+    private var userMobile: String = ""
     
     private var avatar: UIImage?{
         didSet{
@@ -85,6 +87,9 @@ class UserProfileViewController: BaseViewController {
             }
             if let realname = model.realName {
                 userRealName = realname
+            }
+            if let mobile = model.mobile {
+                userMobile = mobile
             }
             contentView.tableView.reloadData()
         }else{
@@ -157,46 +162,39 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
             cell.commonInput.isUserInteractionEnabled = false
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
-            if let userInfo = userModel {                
-                switch indexPath.row {
-                case 0:
-                    if let nickName = userInfo.userName {
-                        cell.commonInput.text = nickName
-                    }
-                    cell.nameLabel.text = "昵称"
-                    break
-                case 1:
-                    cell.commonInput.text = userGender
-                    cell.nameLabel.text = "性别"
-                    break
-                case 2:
-                    cell.commonInput.text = userBirthDate
-                    cell.nameLabel.text = "生日"
-                    break
-                case 3:
-                    cell.commonInput.text = userEducation
-                    cell.nameLabel.text = "学历"
-                    break
-                case 4:
-                    cell.commonInput.text = userProfession
-                    cell.nameLabel.text = "职业"
-                    break
-                case 5:
-                    cell.commonInput.text = userRealName
-                    cell.nameLabel.text = "真实姓名"
-                    break
-                case 6:
-                    if let mobileNumber = userInfo.mobile {
-                        cell.commonInput.text = mobileNumber
-                    }
-                    cell.nameLabel.text = "手机号码"
-                    cell.accessoryType = .none
-                    break
-                default:
-                    break
-                }
+            switch indexPath.row {
+            case 0:
+                cell.commonInput.text = userNickName
+                cell.nameLabel.text = "昵称"
+                break
+            case 1:
+                cell.commonInput.text = userGender
+                cell.nameLabel.text = "性别"
+                break
+            case 2:
+                cell.commonInput.text = userBirthDate
+                cell.nameLabel.text = "生日"
+                break
+            case 3:
+                cell.commonInput.text = userEducation
+                cell.nameLabel.text = "学历"
+                break
+            case 4:
+                cell.commonInput.text = userProfession
+                cell.nameLabel.text = "职业"
+                break
+            case 5:
+                cell.commonInput.text = userRealName
+                cell.nameLabel.text = "真实姓名"
+                break
+            case 6:
+                cell.commonInput.text = userMobile
+                cell.nameLabel.text = "手机号码"
+                cell.accessoryType = .none
+                break
+            default:
+                break
             }
-            
             return cell
         default:
             fatalError("none cell index path")
@@ -218,20 +216,19 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
         case 1:
             switch indexPath.row {
             case 0:
-                break
+                userProfileInput(with: .nickName)
             case 1:
                 showPicker(.gender)
             case 2:
-                break
+                selectBirthDate()
             case 3:
                 showPicker(.education)
             case 4:
                 showPicker(.profession)
             case 5:
-                break
+                userProfileInput(with: .realName)
             case 6:
                 SVProgressHUD.showInfo(withStatus: "手机号码无法修改")
-                break
             default:
                 break
             }
@@ -293,6 +290,7 @@ extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         case .profession:
             userProfession = UserProfileConstDefines.init().profession[pickerIndex]
         }
+        contentView.tableView.reloadData()
         PopViewManager.shared.dissmiss {}
     }
         
@@ -301,6 +299,7 @@ extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         pickerIndex = 0
         picker.titleLabel.text = type.rawValue
         picker.pickerView.reloadAllComponents()
+        picker.pickerView.selectRow(0, inComponent: 0, animated: true)
         PopViewManager.shared.display(picker, .bottom, .init(width: .constant(value: kScreenWidth), height: .constant(value: 300)))
     }
     
@@ -338,4 +337,52 @@ extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         }
     }
     
+}
+
+extension UserProfileViewController {
+    func selectBirthDate() {
+        let datePickerManager = PGDatePickManager.init()
+        datePickerManager.isShadeBackground = true
+        datePickerManager.style = .sheet
+        datePickerManager.cancelButtonTextColor = R.color.errorRedColor()
+        datePickerManager.confirmButtonTextColor = R.color.themeColor()
+        let datePicker = datePickerManager.datePicker
+        datePicker?.datePickerType = .line
+        datePicker?.datePickerMode = .dateHourMinute
+        datePicker?.language = "zh-Hans"
+        datePickerManager.title = "生日"
+        datePicker?.textColorOfSelectedRow = R.color.themeColor()
+        datePicker?.textFontOfSelectedRow = k18Font
+        datePicker?.lineBackgroundColor = R.color.themeColor()
+        datePicker?.minimumDate = Date()
+        datePicker?.maximumDate = NSDate.init().addingMonths(13)
+        datePicker?.selectedDate = {[weak self] dateComponents in
+            guard let `self` = self else { return }
+            if let selectDate = dateComponents?.date {
+                self.userBirthDate = selectDate.jk.toformatterTimeString()
+                self.contentView.tableView.reloadData()
+            }
+        }
+        self.present(datePickerManager, animated: true) {}
+    }
+}
+
+extension UserProfileViewController: UserProfileInputViewControllerDelegate {
+    
+    func userProfileInput(with type: UserProfileInputType) {
+        let vc = UserProfileInputViewController()
+        vc.type = type
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func userProfileInput(_ value: String, _ type: UserProfileInputType) {
+        switch type {
+        case .nickName:
+            userNickName = value
+        case .realName:
+            userRealName = value
+        }
+        contentView.tableView.reloadData()
+    }
 }
