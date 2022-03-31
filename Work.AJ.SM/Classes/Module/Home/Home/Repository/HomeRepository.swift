@@ -12,8 +12,6 @@ import JKSwiftExtension
 typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
 typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
-typealias HomeOpenDoorViaPushCompletion = ((_ errorMsg: String) -> Void)
-typealias HomeCallElevatorViaMobileCompletion = ((_ errorMsg: String) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -135,7 +133,7 @@ extension HomeRepository {
         }
     }
     
-    func openDoorViaPush(_ lockMac: String, completion: @escaping HomeOpenDoorViaPushCompletion) {
+    func openDoorViaPush(_ lockMac: String, completion: @escaping DefaultCompletion) {
         if let userID = ud.userID, let unit = getCurrentUnit(), let physicalFloor = unit.physicalfloor, let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
             HomeAPI.openDoor(lockMac: lockMac, userID: userID, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, physicalFloor: physicalFloor).defaultRequest { jsonData in
                 completion("")
@@ -150,7 +148,7 @@ extension HomeRepository {
 
 // MARK: - indoorCallElevator
 extension HomeRepository {
-    func callElevatorViaMobile(direction: String, completion: @escaping HomeCallElevatorViaMobileCompletion) {
+    func callElevatorViaMobile(direction: String, completion: @escaping DefaultCompletion) {
         if let unit = getCurrentUnit(), let cellID = unit.cellid?.jk.intToString, let physicalFloor = unit.physicalfloor, let unitNo = unit.unitno {
             HomeAPI.callElevatorViaMobile(cellID: cellID, direction: direction, physicalFloor: physicalFloor, unitNo: unitNo).defaultRequest { jsonData in
                 completion("")

@@ -38,7 +38,7 @@ extension LoginViewController: LoginViewDelegate {
     
     func login(mobile: String, password: String) {
         SVProgressHUD.show()
-        AuthenticationRepository.shared.login(mobile: mobile, passWord: password) { errorMsg in
+        AuthenticationRepository.shared.login(mobile: mobile, password: password) { errorMsg in
             if let errorMsg = errorMsg {
                 SVProgressHUD.showInfo(withStatus: errorMsg)
             }else{

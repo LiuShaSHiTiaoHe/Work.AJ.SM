@@ -20,6 +20,7 @@ extension DefaultsKeys {
     var userMobile: DefaultsKey<String?> { .init("userMobile") }
     var userRealName: DefaultsKey<String?> { .init("userRealName") }
     var NIMToken: DefaultsKey<String?> { .init("NIMToken") }
+    var password: DefaultsKey<String?> { .init("password") }
     //Store Date
     var userLastLoginDate: DefaultsKey<Date?> { .init("userLastLoginDate") }
     

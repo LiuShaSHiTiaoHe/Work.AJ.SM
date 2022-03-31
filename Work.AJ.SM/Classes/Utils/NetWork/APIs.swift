@@ -14,14 +14,14 @@ let servicePath = "hxcloudplus/"
 final class APIs {
     
     static let baseUrl = host + servicePath
-    //MARK: 基础
+    // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"
     static let notice = "appcity/getNotice.do"
     static let advertisement = "appcity/getAdByPosition.do"
     static let notificationStatus = "appcity/getMyNoDisturbTime.do"
     static let updateNotificationStatus = "appcity/addMyNoDisturbTime.do"
     
-    //MARK: 用户鉴权
+    // MARK: - 用户鉴权
     static let login = "appcity/login.do"
     static let regist = "appcity/register.do"
     static let msgCode = "appcity/getMessageCode.do"
@@ -30,7 +30,11 @@ final class APIs {
     static let editPassword = "appcity/editPassword.do"
     static let deleteAccount = "appcity/delMyself"
     
-    //MARK: 房屋
+    // MARK: - 用户信息
+    static let updateUserInfo = "appcity/perfectAppUser"
+    static let updateAvatar = "appcity/addUserHeader.do"
+    
+    // MARK: - 房屋
     static let userUnit = "appcity/getMyUnit.do"
     static let allCity = "appcity/getCity.do"
     static let userCommunity = "appcity/getCommunity.do"
@@ -70,7 +74,8 @@ final class APIs {
     static let pushApp = "appDevice/pushApp.do"
     static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"
     
-    //记录
+    // MARK: - 记录
+    
     static let openDoorRecord = "appcity/findAccess.do"
 
 }

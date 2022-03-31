@@ -8,26 +8,21 @@
 import UIKit
 import SVProgressHUD
 
-typealias HouseUpdateUnitsCompletion = ((_ errorMsg: String) -> Void)
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
 typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 typealias FaceListCompletion = (([FaceModel]) -> Void)
-typealias DeleteFaceCompletion = ((_ errorMsg: String) -> Void)
-typealias AddFaceCompletion = ((_ errorMsg: String) -> Void)
-typealias OwnerPasswordCompletion = ((_ errorMsg: String?) -> Void)
 typealias CityListCompletion = ((Dictionary<String, Array<String>>) -> Void)
 typealias CommunityListCompletion = (([CommunityModel]) -> Void)
 typealias BlockListCompletion = (([BlockModel]) -> Void)
 typealias CellListCompletion = (([CellModel]) -> Void)
 typealias UnitInCellListCompletion = (([UserUnitModel]) -> Void)
-
 typealias VisitorListCompletion = (([VisitorModel]) -> Void)
 
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
 
-    func getAllUnits(completion: @escaping HouseUpdateUnitsCompletion) {
+    func getAllUnits(completion: @escaping DefaultCompletion) {
         SVProgressHUD.show()
         HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { models, response in
             SVProgressHUD.dismiss()
@@ -135,6 +130,30 @@ class MineRepository: NSObject {
     
 }
 
+// MARK: - 用户信息
+extension MineRepository {
+    func updateUserInfo(with userID: String,  infoValue: String, key: String, completion: @escaping DefaultCompletion) {
+        SVProgressHUD.show()
+        MineAPI.updateUserInfo(userID: userID, infoValue: infoValue, InfoKey: key).defaultRequest { jsonData in
+            SVProgressHUD.dismiss()
+            completion("")
+        } failureCallback: { response in
+            completion(response.message)
+        }
+    }
+    
+    func updateAvatar(with userID: String, avatar: Data, completion: @escaping DefaultCompletion) {
+        SVProgressHUD.show()
+        MineAPI.updateAvatar(userID: userID, avatarData: avatar).defaultRequest { jsonData in
+            SVProgressHUD.dismiss()
+            completion("")
+        } failureCallback: { response in
+            completion(response.message)
+        }
+    }
+}
+
+
 // MARK: - 访客
 extension MineRepository {
     func getMyVisitors(userID: String, unitID: String, completion: @escaping VisitorListCompletion) {
@@ -166,7 +185,7 @@ extension MineRepository {
     }
     
 
-    func addFace(_ data: AddFaceModel, completion: @escaping AddFaceCompletion) {
+    func addFace(_ data: AddFaceModel, completion: @escaping DefaultCompletion) {
         if data.faceData.isEmpty {
             completion("人脸数据完整性错误")
         }else{
@@ -178,7 +197,7 @@ extension MineRepository {
             }
         }
     }
-    func deleteFace(_ path: String, completion: @escaping DeleteFaceCompletion)  {
+    func deleteFace(_ path: String, completion: @escaping DefaultCompletion)  {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString{
             SVProgressHUD.show()
             MineAPI.deleteFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, imagePath: path).defaultRequest { jsonData in
@@ -194,10 +213,10 @@ extension MineRepository {
 
 // MARK: - 用户二维码
 extension MineRepository {
-    func setOwnerPassword(_ password: String, competion: @escaping OwnerPasswordCompletion) {
+    func setOwnerPassword(_ password: String, competion: @escaping DefaultCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let phone = ud.userMobile, let userID = ud.userID{
             MineAPI.ownerOpenDoorPassword(communityID: communityID, unitID: unitID, blockID: blockID, userID: userID, phone: phone, openDoorPassword: password).defaultRequest { jsonData in
-                competion(nil)
+                competion("")
             } failureCallback: { response in
                 competion(response.message)
             }

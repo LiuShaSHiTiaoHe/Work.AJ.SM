@@ -13,11 +13,12 @@ typealias LoginCompletion = ((_ errorMsg: String?) -> Void)
 class AuthenticationRepository: NSObject {
     static let shared = AuthenticationRepository()
     
-    func login(mobile: String, passWord: String, completion: @escaping LoginCompletion) {
-        AuthenticationAPI.login(mobile: mobile, passWord: passWord).defaultRequest { JsonData  in
+    func login(mobile: String, password: String, completion: @escaping LoginCompletion) {
+        AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData  in
             if let data = JsonData["data"].rawString(), let userInfo = JsonData["map"].rawString(), let units = [UnitModel](JSONString: data), let userModel = UserModel(JSONString: userInfo) {
                 ud.username = mobile
                 ud.userMobile = mobile
+                ud.password = password
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
                 ud.NIMToken = userModel.loginToken
@@ -37,6 +38,23 @@ class AuthenticationRepository: NSObject {
         } failureCallback: { response in
             completion(response.message)
         }
+    }
+    
+    func autoLogin(mobile: String, password: String) {
+        AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { jsonData in
+            if let userInfo = jsonData["map"].rawString(), let userModel = UserModel(JSONString: userInfo) {
+                ud.username = mobile
+                ud.userMobile = mobile
+                ud.password = password
+                ud.userRealName = userModel.realName
+                ud.userID = userModel.rid
+                ud.NIMToken = userModel.loginToken
+                RealmTools.add(userModel) {}
+            }
+        } failureCallback: { response in
+            
+        }
+
     }
     
     func register(mobile: String, passWord: String, code: String, completion: @escaping LoginCompletion) {

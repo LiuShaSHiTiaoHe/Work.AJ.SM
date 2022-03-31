@@ -118,7 +118,7 @@ class OpenDoorPasswordViewController: BaseViewController {
     
     func setOwnerPassword(_ password: String) {
         MineRepository.shared.setOwnerPassword(password) { errorMsg in
-            if let errorMsg = errorMsg {
+            if !errorMsg.isEmpty {
                 SVProgressHUD.showError(withStatus: errorMsg)
             }else{
                 ud.personalOpenDoorPasswordStatus = true

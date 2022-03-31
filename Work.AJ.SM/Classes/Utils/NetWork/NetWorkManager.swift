@@ -73,6 +73,7 @@ let successCode: Int = 101
 let JsonDecodeErrorCode: Int = 1000000
 let ConnectionFailureErrorCode: Int = 9999
 
+typealias DefaultCompletion = ((_ errorMsg: String) -> Void)
 typealias RequestModelSuccessCallback<T:Mappable> = ((T,ResponseModel?) -> Void)
 typealias RequestModelsSuccessCallback<T:Mappable> = (([T],ResponseModel?) -> Void)
 typealias RequestFailureCallback = ((ResponseModel) -> Void)

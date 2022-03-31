@@ -10,6 +10,7 @@ import SVProgressHUD
 import YPImagePicker
 import SwiftEntryKit
 import PGDatePicker
+import SwiftUI
 
 enum userProfileViewState {
     case display
@@ -53,13 +54,13 @@ class UserProfileViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
 
     override func initData() {
         contentView.headerView.titleLabel.text = "个人信息"
-        contentView.headerView.rightButton.setTitle("保存", for: .normal)
-        contentView.headerView.rightButton.titleLabel?.font = k16Font
-        contentView.headerView.rightButton.setTitleColor(R.color.whiteColor(), for: .normal)
-        contentView.headerView.rightButton.addTarget(self, action: #selector(save), for: .touchUpInside)
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
@@ -100,14 +101,6 @@ class UserProfileViewController: BaseViewController {
         }
     }
     
-    @objc
-    private func save(){
-        if viewState == .display {
-            closeAction()
-        }else{
-            
-        }
-    }
     
     // MARK: - UI
     override func initUI() {
@@ -268,7 +261,10 @@ extension UserProfileViewController: YPImagePickerDelegate {
         picker.imagePickerDelegate = self
         picker.didFinishPicking { items, _ in
             self.avatar = items.singlePhoto?.image
-            picker.dismiss(animated: true, completion: nil)
+//            picker.dismiss(animated: true, completion: nil)
+            picker.dismiss(animated: true) {
+                self.updateAvater()
+            }
         }
         present(picker, animated: true, completion: nil)
     }
@@ -282,13 +278,26 @@ extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     
     func pickerConfirm() {
         viewState = .edit
+        
         switch pickerType {
         case .gender:
-            userGender = UserProfileConstDefines.init().gender[pickerIndex]
+            let pickedItem = UserProfileConstDefines.init().gender[pickerIndex]
+            if pickedItem != userGender {
+                userGender = pickedItem
+                updateUserInfo(pickedItem, "SEX")
+            }
         case .education:
-            userEducation = UserProfileConstDefines.init().education[pickerIndex]
+            let pickedItem = UserProfileConstDefines.init().education[pickerIndex]
+            if pickedItem != userEducation {
+                userEducation = pickedItem
+                updateUserInfo(pickedItem, "EDUCATION")
+            }
         case .profession:
-            userProfession = UserProfileConstDefines.init().profession[pickerIndex]
+            let pickedItem = UserProfileConstDefines.init().profession[pickerIndex]
+            if pickedItem != userProfession {
+                userProfession = pickedItem
+                updateUserInfo(pickedItem, "JOB")
+            }
         }
         contentView.tableView.reloadData()
         PopViewManager.shared.dissmiss {}
@@ -348,18 +357,22 @@ extension UserProfileViewController {
         datePickerManager.confirmButtonTextColor = R.color.themeColor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line
-        datePicker?.datePickerMode = .dateHourMinute
+        datePicker?.datePickerMode = .date
         datePicker?.language = "zh-Hans"
         datePickerManager.title = "生日"
         datePicker?.textColorOfSelectedRow = R.color.themeColor()
         datePicker?.textFontOfSelectedRow = k18Font
         datePicker?.lineBackgroundColor = R.color.themeColor()
-        datePicker?.minimumDate = Date()
-        datePicker?.maximumDate = NSDate.init().addingMonths(13)
+        datePicker?.maximumDate = Date()
         datePicker?.selectedDate = {[weak self] dateComponents in
             guard let `self` = self else { return }
             if let selectDate = dateComponents?.date {
-                self.userBirthDate = selectDate.jk.toformatterTimeString()
+                let selectDateString = selectDate.jk.toformatterTimeString(formatter: "yyyy-MM-dd")
+                if selectDateString == self.userBirthDate {
+                    return
+                }
+                self.userBirthDate = selectDateString
+                self.updateUserInfo(selectDateString, "BIRTHDATE")
                 self.contentView.tableView.reloadData()
             }
         }
@@ -379,10 +392,47 @@ extension UserProfileViewController: UserProfileInputViewControllerDelegate {
     func userProfileInput(_ value: String, _ type: UserProfileInputType) {
         switch type {
         case .nickName:
+            if value == userNickName {
+                return
+            }
             userNickName = value
+            updateUserInfo(userNickName, "USERNAME")
         case .realName:
+            if value == userRealName {
+                return
+            }
             userRealName = value
+            updateUserInfo(userRealName, "REALNAME")
         }
         contentView.tableView.reloadData()
+    }
+}
+
+
+extension UserProfileViewController {
+    func updateUserInfo(_ infoValue: String, _ infoKey: String) {
+        if let userID = ud.userID {
+            MineRepository.shared.updateUserInfo(with: userID, infoValue: infoValue, key: infoKey) { [weak self] errorMsg in
+                guard let self = self else { return }
+                if errorMsg.isEmpty {
+                    self.contentView.tableView.reloadData()
+                }else{
+                    SVProgressHUD.showError(withStatus: errorMsg)
+                }
+            }
+        }
+    }
+    
+    func updateAvater() {
+        if let userID = ud.userID, let avatarData = avatar?.pngData() {
+            MineRepository.shared.updateAvatar(with: userID, avatar: avatarData) { [weak self] errorMsg in
+                guard let self = self else { return }
+                if errorMsg.isEmpty {
+                    self.contentView.tableView.reloadData()
+                }else{
+                    SVProgressHUD.showError(withStatus: errorMsg)
+                }
+            }
+        }
     }
 }

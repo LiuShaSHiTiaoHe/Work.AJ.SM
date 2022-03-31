@@ -23,6 +23,8 @@ enum MineAPI {
     case unitInCell(blockID: String, cellID: String)
     case houseAuthentication(data: HouseCertificationModel)
     case myVisitors(userID: String, unitID: String)
+    case updateUserInfo(userID: String, infoValue: String, InfoKey: String)
+    case updateAvatar(userID: String, avatarData: Data)
 }
 
 extension MineAPI: TargetType {
@@ -62,12 +64,16 @@ extension MineAPI: TargetType {
             return APIs.houseAuthentication
         case .myVisitors:
             return APIs.visitors
+        case .updateUserInfo:
+            return APIs.updateUserInfo
+        case .updateAvatar:
+            return APIs.updateAvatar
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell, .houseAuthentication, .addFace, .myVisitors:
+        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell, .houseAuthentication, .addFace, .myVisitors, .updateUserInfo, .updateAvatar:
             return .post
         }
     }
@@ -107,6 +113,13 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["MOBILE": data.phone, "REALNAME": data.name, "IDCARD": data.userIdentityCardNumber, "USERTYPE": data.userType, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "UNITID": data.unitID, "USERID": data.userID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .myVisitors(userID, unitID):
             return .requestParameters(parameters: ["USERID": userID, "UNITID": unitID].ekey("USERID"), encoding: URLEncoding.default)
+        case let .updateUserInfo(userID, infoValue, InfoKey):
+            return .requestParameters(parameters: ["USERID": userID, InfoKey: infoValue].ekey("USERID"), encoding: URLEncoding.default)
+        case let .updateAvatar(userID, avatarData):
+            let aData = MultipartFormData(provider: .data(avatarData), name: "file", fileName: "\(userID).png", mimeType: "image/png")
+            let multipartData = [aData]
+            let urlParameters = ["USERID": userID].ekey("USERID")
+            return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
         }
     }
     
