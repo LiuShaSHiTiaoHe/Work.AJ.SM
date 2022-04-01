@@ -24,13 +24,19 @@ class RemoteOpenDoorCell: UITableViewCell {
                 if status {
                     statusLabel.text = "在线"
                     statusLabel.textColor = R.color.owner_greenColor()
+                    cameraButton.isUserInteractionEnabled = true
+                    openDoorButton.isUserInteractionEnabled = true
                 }else{
                     statusLabel.text = "不在线"
                     statusLabel.textColor = R.color.errorRedColor()
+                    cameraButton.isUserInteractionEnabled = false
+                    openDoorButton.isUserInteractionEnabled = false
                 }
             }else{
                 statusLabel.text = "未知"
                 statusLabel.textColor = R.color.secondtextColor()
+                cameraButton.isUserInteractionEnabled = false
+                openDoorButton.isUserInteractionEnabled = false
             }
         }
     }

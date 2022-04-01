@@ -80,17 +80,15 @@ class SetVisitorPasswordViewController: BaseViewController {
                 if let dc = dateComponents, let selectDate = Calendar.current.date(from: dc) {
                     self.arriveTime = selectDate
                 }
-                self.contentView.tableView.reloadRow(at: IndexPath.init(row: 0, section: 0), with: .none)
+                self.contentView.tableView.reloadRow(at: IndexPath.init(row: 1, section: 0), with: .none)
             case .valid:
                 if let dc = dateComponents, let selectDate = Calendar.current.date(from: dc) {
                     self.validTime = selectDate
                 }
-                self.contentView.tableView.reloadRow(at: IndexPath.init(row: 1, section: 0), with: .none)
+                self.contentView.tableView.reloadRow(at: IndexPath.init(row: 2, section: 0), with: .none)
             }
         }
-        self.present(datePickerManager, animated: true) {
-            
-        }
+        self.present(datePickerManager, animated: true) {}
     }
     
     func defaultTime() {

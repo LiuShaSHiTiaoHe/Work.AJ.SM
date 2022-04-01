@@ -62,6 +62,11 @@ class OpenDoorSettingViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        NotificationCenter.default.addObserver(forName: .kUserUpdateOpenDoorPassword, object: nil, queue: nil) { [weak self] notification  in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
     }
 }
 

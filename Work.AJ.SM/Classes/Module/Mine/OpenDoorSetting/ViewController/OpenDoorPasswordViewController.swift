@@ -121,6 +121,7 @@ class OpenDoorPasswordViewController: BaseViewController {
             if !errorMsg.isEmpty {
                 SVProgressHUD.showError(withStatus: errorMsg)
             }else{
+                NotificationCenter.default.post(name: .kUserUpdateOpenDoorPassword, object: nil)
                 ud.personalOpenDoorPasswordStatus = true
                 SVProgressHUD.showSuccess(withStatus: "设置成功")
                 SVProgressHUD.dismiss(withDelay: 2) {
@@ -141,6 +142,7 @@ extension OpenDoorPasswordViewController :CodeTextFieldDelegate {
                 SVProgressHUD.showInfo(withStatus: "请再次输入")
             }else{
                 if firstPassword == valueChanged {
+                    self.codeTextField.resignFirstResponder()
                     setOwnerPassword(firstPassword)
                 }else{
                     SVProgressHUD.showError(withStatus: "两次输入不一致，请重新设置")

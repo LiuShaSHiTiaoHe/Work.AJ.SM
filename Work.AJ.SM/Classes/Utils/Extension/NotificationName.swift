@@ -14,5 +14,6 @@ extension Notification.Name {
     static let kSendAutoOpenDoor = Notification.Name("SendAutoOpenDoorNotification")
     
     static let kUserUpdateAvatar = Notification.Name("UserUpdateAvatar")
+    static let kUserUpdateOpenDoorPassword = Notification.Name("UserUpdateOpenDoorPassword")
 
 }
