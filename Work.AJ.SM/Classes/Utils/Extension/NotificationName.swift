@@ -12,5 +12,7 @@ extension Notification.Name {
     static let kCurrentUnitChanged = Notification.Name("kCurrentUnitChanged")
     
     static let kSendAutoOpenDoor = Notification.Name("SendAutoOpenDoorNotification")
+    
+    static let kUserUpdateAvatar = Notification.Name("UserUpdateAvatar")
 
 }

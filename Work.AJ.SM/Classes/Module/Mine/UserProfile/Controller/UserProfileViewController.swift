@@ -442,6 +442,8 @@ extension UserProfileViewController {
             MineRepository.shared.updateAvatar(with: userID, avatar: avatarData) { [weak self] errorMsg in
                 guard let self = self else { return }
                 if errorMsg.isEmpty {
+                    NotificationCenter.default.post(name: .kUserUpdateAvatar, object: nil)
+                    CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: avatarData], key: UserAvatarCacheKey)
                     self.contentView.tableView.reloadData()
                 }else{
                     SVProgressHUD.showError(withStatus: errorMsg)

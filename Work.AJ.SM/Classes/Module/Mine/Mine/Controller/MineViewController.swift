@@ -18,8 +18,6 @@ class MineViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func initData() {
@@ -28,7 +26,7 @@ class MineViewController: BaseViewController {
             contentView.nameLabel.text = name
             contentView.phoneLabel.text = mobile.jk.hidePhone()
             if let folderPath = userInfo.folderPath, let avatarUrl = userInfo.HeadImageUrl {
-                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: [.cacheOriginalImage]) { result in
+                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: [.forceRefresh]) { result in
                     switch result {
                     case .success(let value):
                         if let imageData = value.image.pngData() {
@@ -37,16 +35,19 @@ class MineViewController: BaseViewController {
                     case .failure(_):
                         break
                     }
-                    
                 }
             }
         }
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
-        
         dataSource = MineRepository.shared.getMineModules()
         contentView.tableView.reloadData()
-        
+        NotificationCenter.default.addObserver(forName: .kUserUpdateAvatar, object: nil, queue: nil) { [weak self] notification in
+            guard let self = self else { return }
+            if let avatarDic = CacheManager.normal.fetchCachedWithKey(UserAvatarCacheKey), let avatarData = avatarDic.value(forKey: UserAvatarCacheKey) as? Data, let image = UIImage.init(data: avatarData) {
+                self.contentView.avatar.image = image
+            }
+        }
     }
     
     @objc
