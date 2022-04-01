@@ -29,6 +29,11 @@ final class NetWorkManager {
                     let eParameters = GDataManager.shared.headerMD5(parameters, eValue)
                     task = .requestParameters(parameters: eParameters, encoding: encoding)
                 }
+            case .uploadCompositeMultipart(let datas, let parameters):
+                if parameters.has("ekey"), let eValue = parameters["ekey"] as? String {
+                    let eParameters = GDataManager.shared.headerMD5(parameters, eValue)
+                    task = .uploadCompositeMultipart(datas, urlParameters: eParameters)
+                }
             default:
                 break
             }

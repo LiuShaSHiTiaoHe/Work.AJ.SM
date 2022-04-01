@@ -44,7 +44,11 @@ class BaseViewController: UIViewController {
     
     @objc
     func closeAction() {
-        self.navigationController?.popViewController(animated: true)
+        if self.isBeingPresented {
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func initUI() {}

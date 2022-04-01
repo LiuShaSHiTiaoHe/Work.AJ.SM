@@ -17,6 +17,14 @@ class GDataManager: NSObject {
         return ud.loginState
     }
     
+    func showLoginView() {
+        if let currentVC = UIViewController.currentViewController() {
+            let vc = LoginViewController()
+            vc.modalPresentationStyle = .fullScreen
+            currentVC.present(vc, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - 初始化realm
     func setupDataBase() {
         if let username = ud.username {
@@ -80,7 +88,7 @@ class GDataManager: NSObject {
 extension GDataManager {
     func headerMD5(_ dic: Dictionary<String, Any>, _ key: String) -> [String: Any] {
         if dic.has(key), let evalue = dic[key] as? String {
-            let timestamp = NSDate().timeIntervalSince1970.jk.string//NSDate().timeIntervalSince1970.int.string
+            let timestamp = NSDate().timeIntervalSince1970.jk.string
             let encryptString = evalue + timestamp + "p!P2QklnjGGaZKlw"
             let fkey = encryptString.md5()
             var result = Dictionary().merging(dic){ (_, new) in new }

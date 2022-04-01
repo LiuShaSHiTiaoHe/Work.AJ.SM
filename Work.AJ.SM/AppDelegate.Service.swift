@@ -25,6 +25,7 @@ extension AppDelegate {
     func initService() {
         NetWorkManager.shared.initNetWork()
         GDataManager.shared.setupDataBase()
+        ud.openDoorStyle = 2
         setuplibs()
     }
     
@@ -63,7 +64,6 @@ extension AppDelegate {
         }
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        
         
         GDataManager.shared.setupNIMSDK()
         GDataManager.shared.loginNIMSDK()

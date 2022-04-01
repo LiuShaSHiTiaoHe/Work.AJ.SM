@@ -50,6 +50,20 @@ class BLEAdvertisingManager: NSObject {
         return false
     }
     
+    func noneStopSendOpenDoorData(){
+        guard let peripheralManager = self.peripheralManager else { return }
+        if let openDoorData = self.prepareOpenDoorData() {
+            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "B0B0"), CBAdvertisementDataLocalNameKey: openDoorData])
+        }
+    }
+    
+    func stopSendOpenDoorData() {
+        guard let peripheralManager = self.peripheralManager else { return }
+        if peripheralManager.isAdvertising {
+            peripheralManager.stopAdvertising()
+        }
+    }
+    
     private func prepareOpenDoorData() -> String? {
         if let unit = HomeRepository.shared.getCurrentUnit(), let cellMM = unit.cellmm, let userID = unit.userid, let phsycalFloorInt = unit.physicalfloor?.jk.toInt(), let sortbar = unit.sortbar {
             let userIDString = String(format:"%05d", userID)

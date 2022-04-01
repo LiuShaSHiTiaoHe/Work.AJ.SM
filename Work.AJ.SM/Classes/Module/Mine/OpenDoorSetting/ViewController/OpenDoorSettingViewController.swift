@@ -40,8 +40,6 @@ class OpenDoorSettingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func initUI() {
@@ -172,6 +170,16 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
 extension OpenDoorSettingViewController : BleOpenDoorStyleCellDelegate {
     func switchValueChanged(style: Int, status: Bool) {
         ud.openDoorStyle = style
+        switch style {
+        case 0:
+            BLEAdvertisingManager.shared.noneStopSendOpenDoorData()
+        case 1:
+            BLEAdvertisingManager.shared.stopSendOpenDoorData()
+        case 2:
+            BLEAdvertisingManager.shared.stopSendOpenDoorData()
+        default:
+            break
+        }
         tableView.reloadData()
     }
 }

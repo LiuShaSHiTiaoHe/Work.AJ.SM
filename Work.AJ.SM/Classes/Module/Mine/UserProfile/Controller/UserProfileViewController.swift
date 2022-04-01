@@ -60,10 +60,17 @@ class UserProfileViewController: BaseViewController {
         if let mobile = ud.userMobile, let password = ud.password {
             AuthenticationRepository.shared.autoLogin(mobile: mobile, password: password) { [weak self] errorMsg in
                 guard let self = self else { return }
-                self.loadData()
+                if errorMsg.isEmpty {
+                    self.loadData()
+                }else{
+                    GDataManager.shared.showLoginView()
+                }
             }
         }else{
-            loadData()
+            SVProgressHUD.showError(withStatus: "数据错误")
+            SVProgressHUD.dismiss(withDelay: 2){
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 
@@ -269,7 +276,6 @@ extension UserProfileViewController: YPImagePickerDelegate {
         picker.imagePickerDelegate = self
         picker.didFinishPicking { items, _ in
             self.avatar = items.singlePhoto?.image
-//            picker.dismiss(animated: true, completion: nil)
             picker.dismiss(animated: true) {
                 self.updateAvater()
             }
@@ -374,8 +380,8 @@ extension UserProfileViewController {
         datePicker?.maximumDate = Date()
         datePicker?.selectedDate = {[weak self] dateComponents in
             guard let `self` = self else { return }
-            if let selectDate = dateComponents?.date {
-                let selectDateString = selectDate.jk.toformatterTimeString(formatter: "yyyy-MM-dd")
+            if let dc = dateComponents, let selectDate = Calendar.current.date(from: dc) {
+                let selectDateString = selectDate.jk.toformatterTimeString(formatter: "yyyy年MM月dd日")
                 if selectDateString == self.userBirthDate {
                     return
                 }

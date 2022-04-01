@@ -56,10 +56,6 @@ class AuthenticationRepository: NSObject {
             }
         } failureCallback: { response in
             completion(response.message)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.presentLogin()
-            }
         }
 
     }

@@ -77,10 +77,14 @@ class SetVisitorPasswordViewController: BaseViewController {
             guard let `self` = self else { return }
             switch self.timeType {
             case .arrive:
-                self.arriveTime = dateComponents?.date
+                if let dc = dateComponents, let selectDate = Calendar.current.date(from: dc) {
+                    self.arriveTime = selectDate
+                }
                 self.contentView.tableView.reloadRow(at: IndexPath.init(row: 0, section: 0), with: .none)
             case .valid:
-                self.validTime = dateComponents?.date
+                if let dc = dateComponents, let selectDate = Calendar.current.date(from: dc) {
+                    self.validTime = selectDate
+                }
                 self.contentView.tableView.reloadRow(at: IndexPath.init(row: 1, section: 0), with: .none)
             }
         }
