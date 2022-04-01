@@ -21,6 +21,10 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     func initData() {
         NIMAVChatSDK.shared().netCallManager.add(self)
         let _ = BLEAdvertisingManager.shared
+        // MARK: - 自动登录
+        if let mobile = ud.userMobile, let password = ud.password, ud.loginState {
+            AuthenticationRepository.shared.autoLogin(mobile: mobile, password: password)
+        }
     }
     
     func initUI() {

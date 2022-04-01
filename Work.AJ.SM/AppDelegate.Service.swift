@@ -36,10 +36,14 @@ extension AppDelegate {
                 let mainTabBarVc = BaseTabBarViewController()
                 self.window?.rootViewController = mainTabBarVc
             }else{
-                let navi = BaseNavigationController.init(rootViewController: LoginViewController())
-                self.window?.rootViewController = navi
+                presentLogin()
             }
         }
+    }
+    
+    func presentLogin() {
+        let navi = BaseNavigationController.init(rootViewController: LoginViewController())
+        self.window?.rootViewController = navi
     }
     
     func resetRootViewController() {

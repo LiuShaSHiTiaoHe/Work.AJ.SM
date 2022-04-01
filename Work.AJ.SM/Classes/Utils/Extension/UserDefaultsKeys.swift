@@ -15,6 +15,7 @@ extension DefaultsKeys {
     var onboardStatus: DefaultsKey<Bool> { .init("onboardStatus", defaultValue: false) }
     
     //user
+    var loginState: DefaultsKey<Bool> { .init("userloginstate", defaultValue: false) }
     var username: DefaultsKey<String?> { .init("username") }
     var userID: DefaultsKey<String?> { .init("userid") }
     var userMobile: DefaultsKey<String?> { .init("userMobile") }

@@ -14,11 +14,9 @@ class GDataManager: NSObject {
     static let shared = GDataManager()
     
     func loginState() -> Bool {
-        if let _ = Defaults.username {
-            return true
-        }
-        return false
+        return ud.loginState
     }
+    
     // MARK: - 初始化realm
     func setupDataBase() {
         if let username = ud.username {

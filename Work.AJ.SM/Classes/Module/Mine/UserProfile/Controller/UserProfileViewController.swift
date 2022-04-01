@@ -54,9 +54,17 @@ class UserProfileViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // FIXME: - 更新用户信息，暂时没有接口，从登录接口获取
+        if let mobile = ud.userMobile, let password = ud.password {
+            AuthenticationRepository.shared.autoLogin(mobile: mobile, password: password) { [weak self] errorMsg in
+                guard let self = self else { return }
+                self.loadData()
+            }
+        }else{
+            loadData()
+        }
     }
 
     override func initData() {
@@ -64,11 +72,12 @@ class UserProfileViewController: BaseViewController {
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
-        
         picker.pickerView.dataSource = self
         picker.pickerView.delegate = self
         picker.delegate = self
-        
+    }
+    
+    private func loadData(){
         if let model = HomeRepository.shared.getCurrentUser() {
             userModel = model
             if let nickName = model.userName {
@@ -100,7 +109,6 @@ class UserProfileViewController: BaseViewController {
             }
         }
     }
-    
     
     // MARK: - UI
     override func initUI() {

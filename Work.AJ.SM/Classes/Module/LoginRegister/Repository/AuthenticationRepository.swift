@@ -16,6 +16,7 @@ class AuthenticationRepository: NSObject {
     func login(mobile: String, password: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData  in
             if let data = JsonData["data"].rawString(), let userInfo = JsonData["map"].rawString(), let units = [UnitModel](JSONString: data), let userModel = UserModel(JSONString: userInfo) {
+                ud.loginState = true
                 ud.username = mobile
                 ud.userMobile = mobile
                 ud.password = password
@@ -23,8 +24,8 @@ class AuthenticationRepository: NSObject {
                 ud.userID = userModel.rid
                 ud.NIMToken = userModel.loginToken
                 GDataManager.shared.setupDataBase()
-                RealmTools.addList(units) {}
-                RealmTools.add(userModel) {}
+                RealmTools.addList(units, update: .modified) {}
+                RealmTools.add(userModel, update: .modified) {}
                 GDataManager.shared.loginNIMSDK()
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -40,19 +41,25 @@ class AuthenticationRepository: NSObject {
         }
     }
     
-    func autoLogin(mobile: String, password: String) {
+    func autoLogin(mobile: String, password: String, completion: @escaping DefaultCompletion) {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { jsonData in
             if let userInfo = jsonData["map"].rawString(), let userModel = UserModel(JSONString: userInfo) {
+                ud.loginState = true
                 ud.username = mobile
                 ud.userMobile = mobile
                 ud.password = password
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
                 ud.NIMToken = userModel.loginToken
-                RealmTools.add(userModel) {}
+                RealmTools.add(userModel, update: .modified) {}
+                completion("")
             }
         } failureCallback: { response in
-            
+            completion(response.message)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.presentLogin()
+            }
         }
 
     }

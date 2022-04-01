@@ -48,7 +48,7 @@ class OnBoardViewController: UIViewController {
     func endOnboard() {
         ud.onboardStatus = true
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.setupRootViewController()
+        appDelegate.presentLogin()
     }
 }
 
