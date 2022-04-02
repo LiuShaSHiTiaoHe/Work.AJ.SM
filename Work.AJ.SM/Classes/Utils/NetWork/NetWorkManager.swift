@@ -16,10 +16,10 @@ import CryptoSwift
 
 // MARK: - Completion Callback Block Defines
 typealias DefaultCompletion = ((_ errorMsg: String) -> Void)
-typealias RequestModelSuccessCallback<T:Mappable> = ((T,ResponseModel?) -> Void)
-typealias RequestModelsSuccessCallback<T:Mappable> = (([T],ResponseModel?) -> Void)
+typealias RequestModelCallback<T:Mappable> = ((T,ResponseModel?) -> Void)
+typealias RequestModelsCallback<T:Mappable> = (([T],ResponseModel?) -> Void)
+typealias RequestBaseCallback = ((ResponseModel, JSON?) -> Void)
 typealias RequestFailureCallback = ((ResponseModel) -> Void)
-typealias errorCallback = (() -> Void)
 typealias DefaultSuccessCallback = ((JSON) -> Void)
 
 
@@ -39,64 +39,58 @@ class ResponseModel {
 
 // MARK: - NetWork Request
 extension TargetType {
+    
+    // MARK: - Single Model Response
     @discardableResult
-    func request<T: Mappable>(modelType: T.Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
-        return NetWorkRequest(successCallback: { responseModel in
+    func request<T: Mappable>(modelType: T.Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+        return NetWorkRequest(cacheType: cacheType, showError: showError, successCallback: { responseModel, jsonData in
             if let model = T(JSONString: responseModel.data) {
                 successCallback(model, responseModel)
             } else {
                 errorHandler(code: responseModel.code , message: "暂无数据", showError: showError, failure: failureCallback)
             }
-        }, cacheType: cacheType, failureCallback: failureCallback, showError: showError)
+        }, failureCallback: failureCallback)
     }
     
+    // MARK: - Array Model Response
     @discardableResult
-    func request<T: Mappable>(modelType: [T].Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
-        return NetWorkRequest(successCallback: { responseModel in
+    func request<T: Mappable>(modelType: [T].Type, cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping RequestModelsCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+        return NetWorkRequest(cacheType: cacheType, showError: showError, successCallback: { responseModel, jsonData in
             if let model = [T](JSONString: responseModel.data) {
                 successCallback(model, responseModel)
             } else {
                 errorHandler(code: responseModel.code , message: "暂无数据", showError: showError, failure: failureCallback)
             }
-        }, cacheType: cacheType, failureCallback: failureCallback, showError: showError)
+        }, failureCallback: failureCallback)
     }
     
+    // MARK: - Json Response
     @discardableResult
-    func defaultRequest(successCallback:@escaping DefaultSuccessCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
-        return Network.default.provider.request(MultiTarget(self)) { result in
-            switch result {
-            case let .success(response):
+    func defaultRequest(cacheType: NetworkCacheType = .ignoreCache, showError: Bool = false, successCallback:@escaping DefaultSuccessCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+        return NetWorkRequest(cacheType: cacheType, showError: showError, successCallback: { responseModel, jsonData in
+            if let jsonData = jsonData {
+                successCallback(jsonData)
+            }else{
+                errorHandler(code: responseModel.code , message: "暂无数据", showError: showError, failure: failureCallback)
+            }
+        }, failureCallback: failureCallback)
+    }
+    
+    private func readCache() -> JSON? {
+        if let response = self.readCacheResponse() {
+            if response.statusCode == successCode {
                 do {
                     let jsonData = try JSON(data: response.data)
-                    logNetWorkInfo("\(jsonData)")
-                    let respModel = ResponseModel()
-                    respModel.code = jsonData[codeKey].intValue
-                    respModel.message = jsonData[messageKey].stringValue
-                    if respModel.code == successCode {
-                        successCallback(jsonData)
-                    } else {
-                        let model = ResponseModel()
-                        model.code = respModel.code
-                        model.message = respModel.message
-                        failureCallback?(model)
-                    }
+                    return jsonData
                 } catch {
-                    let model = ResponseModel()
-                    model.code = JsonDecodeErrorCode
-                    model.message = String(data: response.data, encoding: String.Encoding.utf8)!
-                    failureCallback?(model)
+                    return nil
                 }
-            case let .failure(error):
-                let model = ResponseModel()
-                model.code = error.errorCode
-                model.message = error.localizedDescription
-                failureCallback?(model)
             }
         }
+        return nil
     }
     
-        
-    private func NetWorkRequest(successCallback:@escaping RequestFailureCallback,cacheType: NetworkCacheType , failureCallback: RequestFailureCallback? = nil, showError: Bool = false) -> Cancellable? {
+    private func NetWorkRequest(cacheType: NetworkCacheType, showError: Bool = false, successCallback:@escaping RequestBaseCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
         switch cacheType {
         case .ignoreCache:
             return Network.default.provider.request(MultiTarget(self)) { result in
@@ -151,17 +145,16 @@ extension TargetType {
     }
     
     
-    private func processResponseData(successCallback:@escaping RequestFailureCallback, response: Moya.Response, showError: Bool = false,  failureCallback: RequestFailureCallback? = nil) {
+    private func processResponseData(successCallback:@escaping RequestBaseCallback, response: Moya.Response, showError: Bool = false,  failureCallback: RequestFailureCallback? = nil) {
         do {
             let jsonData = try JSON(data: response.data)
             logNetWorkInfo("\(jsonData)")
             let respModel = ResponseModel()
             respModel.code = jsonData[codeKey].intValue
             respModel.message = jsonData[messageKey].stringValue
-
             if respModel.code == successCode {
                 respModel.data = jsonData[dataKey].rawString() ?? ""
-                successCallback(respModel)
+                successCallback(respModel, jsonData)
             } else {
                 errorHandler(code: respModel.code , message: respModel.message , showError: showError, failure: failureCallback)
             }
@@ -173,7 +166,6 @@ extension TargetType {
     /// 错误处理
     private func errorHandler(code: Int, message: String, showError: Bool, failure: RequestFailureCallback?) {
         logger.info("errorHandler：\(code)--\(message)")
-        judgeCondition("\(code)")
         let model = ResponseModel()
         model.code = code
         model.message = message
@@ -185,18 +177,6 @@ extension TargetType {
         failure?(model)
     }
     
-    private func judgeCondition(_ flag: String?) {
-        switch flag {
-        case "401", "403":
-//            if GLobalDataManager.shared.checkLoginState() {
-//                GLobalDataManager.shared.removeUserData()
-//                NotificationCenter.default.post(name: .kUserLogOut, object: nil)
-//            }
-            break // token失效
-        default:
-            return
-        }
-    }
     
     private func logNetWorkInfo(_ response: String) {
         #if DEBUG
@@ -242,8 +222,7 @@ extension TargetType {
     }
     
     private func readCacheResponse() -> Moya.Response? {
-        let key = cachedKey
-        guard let dict = CacheManager.network.fetchCachedWithKey(key),
+        guard let dict = CacheManager.network.fetchCachedWithKey(cachedKey),
               let statusCode = dict.value(forKey: "statusCode") as? Int,
               let data = dict.value(forKey: "data") as? Data else {
                   return nil
