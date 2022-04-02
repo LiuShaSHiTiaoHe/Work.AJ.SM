@@ -23,7 +23,7 @@ extension AppDelegate {
     }
     
     func initService() {
-        NetWorkManager.shared.initNetWork()
+//        NetWorkManager.shared.initNetWork()
         GDataManager.shared.setupDataBase()
         ud.openDoorStyle = 2
         setuplibs()
