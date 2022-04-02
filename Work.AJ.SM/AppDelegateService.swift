@@ -24,6 +24,7 @@ extension AppDelegate {
     
     func initService() {
 //        NetWorkManager.shared.initNetWork()
+        logger.info("\(FileManager.jk.DocumnetsDirectory())")
         GDataManager.shared.setupDataBase()
         ud.openDoorStyle = 2
         setuplibs()

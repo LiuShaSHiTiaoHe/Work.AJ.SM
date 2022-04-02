@@ -64,9 +64,11 @@ extension LoginViewController: LoginViewDelegate {
                 SVProgressHUD.showInfo(withStatus: errorMsg)
             }else{
                 SVProgressHUD.showSuccess(withStatus: "注册成功")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.resetRootViewController()
+                AuthenticationRepository.shared.autoLogin(mobile: mobile, password: password){ errorMsg in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.resetRootViewController()
+                    }
                 }
             }
         }

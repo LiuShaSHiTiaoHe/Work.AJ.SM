@@ -13,7 +13,7 @@ let kPrivacyPageURLString = "http://www.njanjar.com/smarthome_privacy_statement.
 let kDefaultDateFormatte = "yyyy-MM-dd HH:mm:ss"
 let kServiceSupportNumber = "025-52309399"
 let kAppID = "1444571864"
-let kJpushAppKey = "3e191e80c1475843e7204166"
+let kJPushAppKey = "3e191e80c1475843e7204166"
 let kNIMSDKAppKey = "4b1a03db69454aa7ce178216237976e8"
 let kNIMSDKPrefixString = "AJPLUS"
 

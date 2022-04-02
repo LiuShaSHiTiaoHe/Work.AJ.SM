@@ -7,7 +7,10 @@ PODS:
   - ESTabBarController-swift (2.8.0)
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
+  - JCore (2.1.4-noidfa)
   - JKSwiftExtension (2.0.6)
+  - JPush (3.2.4-noidfa):
+    - JCore (< 3.0.0, >= 2.0.0)
   - Kingfisher (7.2.0)
   - LTMorphingLabel (0.9.3)
   - MarqueeLabel (4.0.5)
@@ -87,7 +90,9 @@ DEPENDENCIES:
   - ESTabBarController-swift (= 2.8.0)
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
+  - JCore (= 2.1.4-noidfa)
   - JKSwiftExtension
+  - JPush (= 3.2.4-noidfa)
   - Kingfisher (= 7.2.0)
   - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
@@ -129,7 +134,9 @@ SPEC REPOS:
     - ESTabBarController-swift
     - Haptica
     - IQKeyboardManagerSwift
+    - JCore
     - JKSwiftExtension
+    - JPush
     - Kingfisher
     - LTMorphingLabel
     - MarqueeLabel
@@ -172,7 +179,9 @@ SPEC CHECKSUMS:
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  JCore: 2f15311e6889ab43ed5d629802ef793cac566465
   JKSwiftExtension: 97b82e66595a44389cb7ae43cdfccd7bf11de717
+  JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   LTMorphingLabel: f2b256e4fe665aac27f0d0e8ccdcd79590f0cd70
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
@@ -206,6 +215,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: da3017562d518ba904b25e7d47587769063e154a
+PODFILE CHECKSUM: 30b6b19f09c04cd668a226d27b77af2aa3080c75
 
 COCOAPODS: 1.11.2

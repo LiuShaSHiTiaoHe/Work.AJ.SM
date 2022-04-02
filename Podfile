@@ -49,5 +49,8 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/Microphone'
   
   pod 'NIMSDK', '6.1.1'
+  pod 'JCore', '2.1.4-noidfa'
+  pod 'JPush', '3.2.4-noidfa'
+
 end
 

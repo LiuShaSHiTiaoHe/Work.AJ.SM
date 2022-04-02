@@ -44,7 +44,6 @@ class GDataManager: NSObject {
         option.apnsCername = nil
         option.pkCername = nil
         NIMSDK.shared().register(with: option)
-//        NIMSDK.shared().enableConsoleLog()
     }
     
     // MARK: - 登陆云信
@@ -61,6 +60,28 @@ class GDataManager: NSObject {
         }
     }
     
+    // MARK: - JPUSH
+    func setupPush(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        // FIXME: - Production
+        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: !isProduction)
+        JPUSHService.registrationIDCompletionHandler { resCode, registrationID in
+            if let registrationID = registrationID {
+                logger.info("JPUSH registrationID ===> \(registrationID)")
+            }
+        }
+    }
+    
+    func pushSetAlias(_ alias: String) {
+        JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
+            logger.info("JPUSH setAlias ==> \(String(describing: iAlias))")
+        }, seq: 1)
+    }
+    
+    func registerDeviceToken(_ token: Data) {
+        JPUSHService.registerDeviceToken(token)
+    }
+    
+    // MARK: - 检查更新
     func checkAppStoreVersion(_ force: Bool, _ frequency: Rules.UpdatePromptFrequency) {
         let siren = Siren.shared
         siren.apiManager = APIManager.init(countryCode: "cn")

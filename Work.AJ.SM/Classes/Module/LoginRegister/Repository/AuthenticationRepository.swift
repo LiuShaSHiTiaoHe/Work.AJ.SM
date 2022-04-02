@@ -27,6 +27,7 @@ class AuthenticationRepository: NSObject {
                 RealmTools.addList(units, update: .modified) {}
                 RealmTools.add(userModel, update: .modified) {}
                 GDataManager.shared.loginNIMSDK()
+                GDataManager.shared.pushSetAlias(mobile)
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

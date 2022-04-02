@@ -12,14 +12,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        logger.info("\(FileManager.jk.DocumnetsDirectory())")
-        logger.info("Main Scale == > \(kScale), Width Scale ==> \(kWidthScale), Height Scale ==> \(kHeightScale)")
         initUI()
         initService()
+        registerNotification(application, launchOptions)
         return true
     }
-
-   
 
 }
 

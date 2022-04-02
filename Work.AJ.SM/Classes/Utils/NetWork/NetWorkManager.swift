@@ -180,6 +180,9 @@ extension TargetType {
     
     private func logNetWorkInfo(_ response: String) {
         #if DEBUG
+        if response.count > 1000 {
+            return
+        }
         logger.info("\(self.baseURL)\(self.path) --- \(self.method.rawValue) ----> responseData：\(response)")
         #endif
     }
