@@ -127,12 +127,4 @@ extension GDataManager: NIMSDKConfigDelegate {
     
 }
 
-extension Dictionary where Key: StringProtocol {
-    func ekey(_ key: String) -> Dictionary{
-        var result = Dictionary().merging(self){ (_ , new ) in
-            new
-        }
-        result.updateValue(key as! Value, forKey: "ekey" as! Key)
-        return result
-    }
-}
+

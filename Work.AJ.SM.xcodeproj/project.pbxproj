@@ -20,6 +20,7 @@
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
 		4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */; };
 		4143293327F8320300DA8D47 /* AppDelegateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143293227F8320300DA8D47 /* AppDelegateNotification.swift */; };
+		4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143293927F848A300DA8D47 /* Dictionary.Extension.swift */; };
 		41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB327E95D8E002D7BD1 /* CacheManager.swift */; };
 		41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB727E972F0002D7BD1 /* PermissionManager.swift */; };
 		41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */; };
@@ -239,6 +240,7 @@
 		4143293227F8320300DA8D47 /* AppDelegateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateNotification.swift; sourceTree = "<group>"; };
 		4143293427F8374600DA8D47 /* Work.AJ.SM-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Work.AJ.SM-Bridging-Header.h"; sourceTree = "<group>"; };
 		4143293827F83B0A00DA8D47 /* Work.AJ.SMDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Work.AJ.SMDebug.entitlements; sourceTree = "<group>"; };
+		4143293927F848A300DA8D47 /* Dictionary.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.Extension.swift; sourceTree = "<group>"; };
 		41558FB327E95D8E002D7BD1 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		41558FB527E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		41558FB627E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -642,6 +644,7 @@
 				416F2E3D27B0B483004E5AD9 /* NotificationName.swift */,
 				416F2E3F27B0B4D2004E5AD9 /* DynamicColor.swift */,
 				416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */,
+				4143293927F848A300DA8D47 /* Dictionary.Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1901,6 +1904,7 @@
 				410A109027F3ED570059B2C3 /* UserAvatarCell.swift in Sources */,
 				4173C22E27C5D97200B8FBB8 /* AddMemberView.swift in Sources */,
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
+				4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
 				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
