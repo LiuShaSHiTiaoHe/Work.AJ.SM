@@ -159,6 +159,7 @@
 		41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F4127D5B60E00E02A9A /* CommonSearchView.swift */; };
 		419AD69C27FD382100C902B8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD69B27FD382100C902B8 /* CustomButton.swift */; };
 		419AD69E27FD3EB400C902B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD69D27FD3EB400C902B8 /* HomeView.swift */; };
+		419AD6A027FD747600C902B8 /* NetWork.Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD69F27FD747600C902B8 /* NetWork.Cache.swift */; };
 		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
@@ -387,6 +388,7 @@
 		41985F4127D5B60E00E02A9A /* CommonSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchView.swift; sourceTree = "<group>"; };
 		419AD69B27FD382100C902B8 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		419AD69D27FD3EB400C902B8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		419AD69F27FD747600C902B8 /* NetWork.Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWork.Cache.swift; sourceTree = "<group>"; };
 		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				416F2E3327B0B3DD004E5AD9 /* APIs.swift */,
 				416F2E4627B0B544004E5AD9 /* Network.swift */,
 				416F2E4827B0B56D004E5AD9 /* Network.Configuration.swift */,
+				419AD69F27FD747600C902B8 /* NetWork.Cache.swift */,
 				416F2E4A27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift */,
 				416F2E5827B0BC14004E5AD9 /* NetWorkManager.swift */,
 			);
@@ -1857,6 +1860,7 @@
 				410A109527F4596D0059B2C3 /* CommonPickerView.swift in Sources */,
 				416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */,
 				416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */,
+				419AD6A027FD747600C902B8 /* NetWork.Cache.swift in Sources */,
 				41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */,
 				416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */,
 				416F2EB627BA1E18004E5AD9 /* ResetPasswordViewController.swift in Sources */,
