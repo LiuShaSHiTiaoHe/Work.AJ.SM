@@ -53,8 +53,16 @@ class BaseChatViewController: BaseViewController {
         super.viewDidLoad()
         NIMAVChatSDK.shared().netCallManager.add(self)
         if !isCalled {
+            ChatRingManager.shared.calling()
             startCall()
+        }else{
+            ChatRingManager.shared.onCalledRing()
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ChatRingManager.shared.stopRing()
     }
     
     override func initData() {
@@ -156,14 +164,17 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
             if accepted {
                 chatRoomUsers.append(callee)
                 updateTips("对方已接受,连接中...")
+                ChatRingManager.shared.onCalledRing()
             }else{
                 showErrorMessageAndDismiss("对方拒绝接听")
+                ChatRingManager.shared.hangup()
             }
         }
     }
     
     func onCallDisconnected(_ callID: UInt64, withError error: Error?) {
         logger.info("onCallDisconnected")
+        ChatRingManager.shared.stopRing()
         if kCallID == callID {
             updateTips("通话已断开")
             showErrorMessageAndDismiss("已断开")
@@ -172,6 +183,7 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
     
     func onCallEstablished(_ callID: UInt64) {
         logger.info("onCallEstablished")
+        ChatRingManager.shared.stopRing()
         if kCallID == callID {
             let result = NIMAVChatSDK.shared().netCallManager.setSpeaker(true)
             if result {
@@ -185,6 +197,7 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
         if kCallID == callID {
             updateTips("对方已挂断")
             showErrorMessageAndDismiss("对方已挂断")
+            ChatRingManager.shared.stopRing()
         }
     }
     
@@ -201,11 +214,13 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
         switch control {
         case .feedabck:
             logger.info("收到呼叫请求的反馈，通常用于被叫告诉主叫可以播放回铃音了")
+            ChatRingManager.shared.connecting()
             break
         case .busyLine:
             logger.info("占线")
             NIMAVChatSDK.shared().netCallManager.hangup(callID)
             showErrorMessageAndDismiss("对方正在通话")
+            ChatRingManager.shared.busyRing()
             break
         case .startRecord:
             logger.info("开始录制")

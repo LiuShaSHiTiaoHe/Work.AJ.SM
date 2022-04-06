@@ -13,28 +13,13 @@ import swiftScan
 
 class HomeViewController: BaseViewController {
 
-    private let cellIdentifier = "HomeModuleCell"
-    private let sectionHeaderIdentifier = "HomeHeaderView"
     private var functionModules: [HomePageFunctionModule] = []
     private var advertisements: [AdsModel] = []
     private var notices: [NoticeModel] = []
     
-    lazy var headerView: HomeNaviHeaderView = {
-        let view = HomeNaviHeaderView.init()
+    lazy var contentView: HomeView = {
+        let view = HomeView()
         return view
-    }()
-    
-    lazy var collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.sectionInset = UIEdgeInsets.init(top: kMargin/2, left: kMargin/2, bottom: kMargin/2, right: kMargin/2)
-        flowLayout.minimumLineSpacing = 10
-        flowLayout.minimumInteritemSpacing = 0
-        let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        c.alwaysBounceVertical = true
-        c.backgroundColor = UIColor.clear
-        c.register(HomeModuleCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        c.register(HomeHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderIdentifier)
-        return c
     }()
     
     override func viewDidLoad() {
@@ -42,57 +27,37 @@ class HomeViewController: BaseViewController {
     }
     
     override func initUI() {
-        addlayer()
-        view.addSubview(headerView)
-        view.addSubview(collectionView)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.mj_header = refreshHeader()
-        
-        
-        headerView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.right.equalToSuperview()
-            make.height.equalTo(kOriginTitleAndStateHeight)
-        }
-        
-        collectionView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(1)
-            make.top.equalTo(headerView.snp.bottom)
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
     override func initData() {
+        contentView.collectionView.delegate = self
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.mj_header = refreshHeader()
         NotificationCenter.default.addObserver(self, selector: #selector(currentUnitChanged), name: .kCurrentUnitChanged, object: nil)
-        headerView.delegate = self
-        getData()
+        loadUnitData()
     }
     
-    func getData() {
+    func loadUnitData() {
         HomeRepository.shared.allUnits { [weak self] modules in
             guard let `self` = self else { return }
             self.functionModules.removeAll()
             self.functionModules.append(contentsOf: modules)
-            self.updateTitle()
+            self.contentView.updateTitle()
             self.getAdsAndNotices()
         }
-   
     }
     
     override func headerRefresh() {
-        getData()
+        loadUnitData()
     }
     
     @objc
     func currentUnitChanged() {
-        getData()
-    }
-    
-    func updateTitle() {
-        if let unitID = Defaults.currentUnitID {
-            headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
-        }
+        loadUnitData()
     }
     
     func getAdsAndNotices() {
@@ -102,28 +67,17 @@ class HomeViewController: BaseViewController {
             self.notices.removeAll()
             self.advertisements.append(contentsOf: ads)
             self.notices.append(contentsOf: notice)
-            self.reloadView()
+            self.contentView.reloadView()
         }
     }
     
-    func reloadView() {
-        collectionView.reloadData()
-        collectionView.mj_header?.endRefreshing()
-    }
-
 }
 
-extension HomeViewController: HomeNaviHeaderViewDelegate {
-    func chooseUnit() {
-        let vc = SelectHouseViewController()
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-}
+
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as? HomeModuleCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeModuleCellIdentifier, for: indexPath) as? HomeModuleCell else { return UICollectionViewCell() }
         cell.initData(functionModules[indexPath.row])
         return cell
     }
@@ -137,7 +91,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.sectionHeaderIdentifier, for: indexPath) as? HomeHeaderView else { return UICollectionReusableView() }
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeViewSectionHeaderIdentifier, for: indexPath) as? HomeHeaderView else { return UICollectionReusableView() }
         header.initData(ads: [], notice: [])
         return header
     }
@@ -179,8 +133,7 @@ extension HomeViewController: UICollectionViewDelegate {
                 if let device = AVCaptureDevice.default(for: .video) {
                     do {
                         let _ = try AVCaptureDeviceInput.init(device: device)
-                        let vc = ScanQRCodeCallElevatorViewController()//ScanQRCodeCallElevatorManager.manager.setUpScanManager()
-//                        vc.scanResultDelegate = self
+                        let vc = ScanQRCodeCallElevatorViewController()
                         vc.hidesBottomBarWhenPushed = true
                         self.navigationController?.pushViewController(vc, animated: true)
                     } catch {
@@ -198,11 +151,10 @@ extension HomeViewController: UICollectionViewDelegate {
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             case .deviceConfiguration:
-//                let vc = AudioChatViewController.init(startCall: "ajplus15295776453")
 //                let vc = VideoChatViewController.init(startCall: "AJPLUS000ec6b6d90c")
-                let vc = VideoChatViewController.init(startCall: "ajplus15295776453")
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
+//                let vc = VideoChatViewController.init(startCall: "ajplus15295776453")
+//                vc.modalPresentationStyle = .fullScreen
+//                self.present(vc, animated: true, completion: nil)
                 break
             default :
                 return

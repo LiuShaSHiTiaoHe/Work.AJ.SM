@@ -157,6 +157,8 @@
 		41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */; };
 		41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */; };
 		41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41985F4127D5B60E00E02A9A /* CommonSearchView.swift */; };
+		419AD69C27FD382100C902B8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD69B27FD382100C902B8 /* CustomButton.swift */; };
+		419AD69E27FD3EB400C902B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD69D27FD3EB400C902B8 /* HomeView.swift */; };
 		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
@@ -383,6 +385,8 @@
 		41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorRecordViewController.swift; sourceTree = "<group>"; };
 		41985F3F27D0B62F00E02A9A /* SelectUnitCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCityViewController.swift; sourceTree = "<group>"; };
 		41985F4127D5B60E00E02A9A /* CommonSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchView.swift; sourceTree = "<group>"; };
+		419AD69B27FD382100C902B8 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		419AD69D27FD3EB400C902B8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
@@ -734,6 +738,7 @@
 				416F2E6027B0BF95004E5AD9 /* Cell */,
 				416F2E5F27B0BF95004E5AD9 /* HomeHeaderView.swift */,
 				416F2EBF27BA5436004E5AD9 /* HomeNaviHeaderView.swift */,
+				419AD69D27FD3EB400C902B8 /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -870,6 +875,7 @@
 				41985F3827CF6E8200E02A9A /* CodeTextField.swift */,
 				41985F3A27CF708700E02A9A /* StyleLabel.swift */,
 				410A109427F4596D0059B2C3 /* CommonPickerView.swift */,
+				419AD69B27FD382100C902B8 /* CustomButton.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -1899,6 +1905,7 @@
 				41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */,
 				41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
+				419AD69E27FD3EB400C902B8 /* HomeView.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
 				416F2EA727B5FE7C004E5AD9 /* AuthenticationAPI.swift in Sources */,
 				410A109027F3ED570059B2C3 /* UserAvatarCell.swift in Sources */,
@@ -1947,6 +1954,7 @@
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
 				41C3502A27CDB416006E440F /* SettingNoticeTableViewCell.swift in Sources */,
 				41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */,
+				419AD69C27FD382100C902B8 /* CustomButton.swift in Sources */,
 				41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,

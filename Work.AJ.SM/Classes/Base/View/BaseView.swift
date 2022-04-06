@@ -23,4 +23,13 @@ class BaseView: UIView {
     
     func initData() {}
 
+    func addlayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor,UIColor.white.cgColor]
+        gradientLayer.locations = [0.0,0.4,1.0]
+        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+        gradientLayer.endPoint  = CGPoint.init(x: 0, y: 1.0)
+        gradientLayer.frame = CGRect.init(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
 }

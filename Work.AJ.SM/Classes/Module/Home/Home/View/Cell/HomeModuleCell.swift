@@ -7,6 +7,8 @@
 
 import UIKit
 
+let HomeModuleCellIdentifier = "HomeModuleCellIdentifier"
+
 class HomeModuleCell: UICollectionViewCell {
     
     let iconImage: UIImageView = {
