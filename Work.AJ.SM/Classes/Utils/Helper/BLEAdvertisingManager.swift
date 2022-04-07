@@ -33,8 +33,7 @@ class BLEAdvertisingManager: NSObject {
                     logger.shortLine()
                     logger.info("openDoorData ===>  \(openDoorData)")
                     logger.shortLine()
-                    peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "B0B0"), CBAdvertisementDataLocalNameKey: openDoorData])
-//                    peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "0000B0B0-0000-1000-8000-00805f9b34fb"), CBAdvertisementDataLocalNameKey: "B@b4efc11"])
+                    peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
                     self.stopAdvertismentIn {
                         SVProgressHUD.showSuccess(withStatus: "发送成功")
                     }
@@ -54,7 +53,7 @@ class BLEAdvertisingManager: NSObject {
     func noneStopSendOpenDoorData(){
         guard let peripheralManager = self.peripheralManager else { return }
         if let openDoorData = self.prepareOpenDoorData() {
-            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "B0B0"), CBAdvertisementDataLocalNameKey: openDoorData])
+            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
         }
     }
     
@@ -103,7 +102,7 @@ class BLEAdvertisingManager: NSObject {
                     fullFloorNumber = String(format:"%03d", floorInt)
                 }
                 let advertisementData = SN + authorizeFlag + side + fullFloorNumber + "00000"
-                peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "B0B0"), CBAdvertisementDataLocalNameKey: advertisementData])
+                peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: advertisementData])
                 logger.shortLine()
                 logger.info("advertisementData ===>  \(advertisementData)")
                 logger.shortLine()
@@ -143,5 +142,8 @@ extension BLEAdvertisingManager: CBPeripheralManagerDelegate {
         }
     }
     
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        logger.info("peripheralManagerDidStartAdvertising")
+    }
     
 }

@@ -63,7 +63,8 @@ class BaseViewController: UIViewController {
     
     // MARK: - PushAction
     func pushTo(viewController vc: UIViewController, isHideBottomBar: Bool = true, isAnimated: Bool = true) {
-        
+        vc.hidesBottomBarWhenPushed = isHideBottomBar
+        self.navigationController?.pushViewController(vc, animated: isAnimated)
     }
 
 }
