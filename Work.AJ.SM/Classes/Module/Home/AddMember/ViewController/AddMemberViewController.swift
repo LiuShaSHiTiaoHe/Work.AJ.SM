@@ -63,6 +63,7 @@ class AddMemberViewController: BaseViewController {
             return
         }
         
+        // FIXME: - 添加家人，成员接口返回
         let vc = MemberInvitationViewController()
         vc.phone = memberPhone
         vc.qrCodeString = "anjiezhihuishequ"

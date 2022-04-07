@@ -85,13 +85,8 @@ extension HomeViewController: HomeViewDelegate {
         case .cloudIntercom:
             pushTo(viewController: RemoteIntercomViewController())
         case .scanElevatorQRCode:
-            if let device = AVCaptureDevice.default(for: .video) {
-                do {
-                    let _ = try AVCaptureDeviceInput.init(device: device)
-                    pushTo(viewController: ScanQRCodeCallElevatorViewController())
-                } catch {
-                    SVProgressHUD.showError(withStatus: "没有可使用的相机")
-                }
+            if GDataManager.shared.checkAvailableCamera() {
+                pushTo(viewController: ScanQRCodeCallElevatorViewController())
             }else{
                 SVProgressHUD.showError(withStatus: "没有可使用的相机")
             }
@@ -107,6 +102,8 @@ extension HomeViewController: HomeViewDelegate {
 //                vc.modalPresentationStyle = .fullScreen
 //                self.present(vc, animated: true, completion: nil)
             break
+        case .elevatorConfiguration:
+            pushTo(viewController: ElevatorConfigurationViewController())
         default :
             return
             

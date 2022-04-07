@@ -9,6 +9,7 @@ import Foundation
 import CryptoSwift
 import Siren
 import NIMSDK
+import AVFoundation
 
 class GDataManager: NSObject {
     static let shared = GDataManager()
@@ -119,6 +120,21 @@ extension GDataManager {
             return result
         }
         return dic
+    }
+}
+
+extension GDataManager {
+    func checkAvailableCamera() -> Bool {
+        if let device = AVCaptureDevice.default(for: .video) {
+            do {
+                let _ = try AVCaptureDeviceInput.init(device: device)
+                return true
+            } catch {
+                return false
+            }
+        }else{
+            return false
+        }
     }
 }
 

@@ -19,6 +19,7 @@ enum HomeAPI {
     case getFloorsBySN(SNCode: String, phone: String, userID: String)
     case openDoor(lockMac: String, userID: String, communityID: String, blockID: String, unitID: String, cellID: String, physicalFloor: String)
     case callElevatorViaMobile(cellID: String, direction: String, physicalFloor: String, unitNo: String)
+    case getElevatorConfiguration(communityID: String)
 }
 
 extension HomeAPI: TargetType {
@@ -49,12 +50,14 @@ extension HomeAPI: TargetType {
             return APIs.openDoor
         case .callElevatorViaMobile:
             return APIs.indoorCallElevator
+        case .getElevatorConfiguration:
+            return APIs.elevatorConfiguration
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN, .openDoor, .callElevatorViaMobile:
+        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN, .openDoor, .callElevatorViaMobile, .getElevatorConfiguration:
             return .post
         }
     }
@@ -83,6 +86,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["LOCKMAC": lockMac, "USERID": userID, "COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "CELLID": cellID, "PHYSICALFLOOR": physicalFloor].ekey("LOCKMAC"), encoding: URLEncoding.default)
         case let .callElevatorViaMobile(cellID, direction, physicalFloor, unitNo):
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
+        case let .getElevatorConfiguration(communityID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         }
     }
     

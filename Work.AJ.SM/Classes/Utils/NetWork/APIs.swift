@@ -77,7 +77,9 @@ final class APIs {
     static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"
     
     // MARK: - 记录
-    
     static let openDoorRecord = "appcity/findAccess.do"
+    
+    // MARK: - 电梯配置
+    static let elevatorConfiguration = "appcity/getLiftConfigByCellGroup"
 
 }

@@ -12,6 +12,7 @@ import JKSwiftExtension
 typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
 typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
+typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -161,6 +162,19 @@ extension HomeRepository {
     }
 }
 
+// MARK: - 配置
+extension HomeRepository {
+    func getElevatorConffiguration(completion: @escaping ElevatorConfigurationCompletion) {
+        if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
+            HomeAPI.getElevatorConfiguration(communityID: communityID).request(modelType: ElevatorConfiguration.self, cacheType: .ignoreCache, showError: true) { model, response in
+                completion(model)
+            } failureCallback: { response in
+                completion(nil)
+            }
+        }
+    }
+}
+
 // MARK: - Private
 extension HomeRepository {
     
@@ -173,17 +187,25 @@ extension HomeRepository {
         if let otherused = unit.otherused, otherused == 1 {
             return allModules.filter {$0.tag == "OTHERUSED"}
         }else{
-            // FIXME: - 测试关闭过滤
             allModules.forEach { module in
-                if !module.tag.isEmpty, module.tag == "MOUDLE1", module.showinpage == .home {
-                    result.append(module)
+                if module.showinpage == .home, !module.tag.isEmpty {
+                    if module.tag == "MOUDLE10" {
+                        if let module10 = unit.moudle10, let mobile = unit.mobile, module10.contains(mobile) {
+                            result.append(module)
+                        }
+                    } else if module.tag == "MOUDLE13" {
+                        if let module13 = unit.moudle13, let mobile = unit.mobile, module13.contains(mobile) {
+                            result.append(module)
+                        }
+                    } else {
+                        result.append(module)
+                    }
                 }
             }
-//            allModules.forEach { module in
-//                if !module.tag.isEmpty, module.tag != "OTHERUSED", let moduleTag = unit.value(forKey: module.tag.lowercased()) as? String, moduleTag == "T", module.showinpage == .home {
-//                    result.append(module)
-//                }
-//            }
+            // MARK: - 当前用户在当前房屋的角色是业主，有添加成员的功能
+            if let userType = unit.usertype, userType == "O" {
+                result.append(HomePageModule.addFamilyMember.model)
+            }
         }
         return result
     }
