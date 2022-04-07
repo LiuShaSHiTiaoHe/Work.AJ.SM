@@ -21,6 +21,9 @@ class BaseViewController: UIViewController {
         print("\(type(of: self)): Deinited")
     }
     
+    // MARK: - Functions
+    
+    // MARK: - GradientLayer
     func addlayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor,UIColor.white.cgColor]
@@ -42,6 +45,7 @@ class BaseViewController: UIViewController {
         return header
     }
     
+    // MARK: - Backbutton Action
     @objc
     func closeAction() {
         if self.isBeingPresented {
@@ -54,6 +58,12 @@ class BaseViewController: UIViewController {
     func initUI() {}
     func initData() {}
     
+    // MARK: - HearderRefresh
     @objc func headerRefresh() {}
+    
+    // MARK: - PushAction
+    func pushTo(viewController vc: UIViewController, isHideBottomBar: Bool = true, isAnimated: Bool = true) {
+        
+    }
 
 }

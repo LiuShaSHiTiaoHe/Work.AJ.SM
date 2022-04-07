@@ -10,7 +10,7 @@ import UIKit
 class ChatRingManager {
 
     static let shared = ChatRingManager()
-    var player: AudioPlayer?
+    private var player: AudioPlayer?
 
     // MARK: - 呼叫
     func calling() {
@@ -59,7 +59,7 @@ class ChatRingManager {
     }
     
     @objc
-    func handleCompletion(_ notification: Notification) {
+    private func handleCompletion(_ notification: Notification) {
         if let audioPlayer = notification.object as? AudioPlayer,
             let name = audioPlayer.name,
             let success = notification.userInfo?[AudioPlayer.SoundDidFinishPlayingSuccessfully] {

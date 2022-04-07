@@ -77,7 +77,7 @@ extension TargetType {
     }
     
 
-    
+    // MARK: - Private Functions
     private func NetWorkRequest(cacheType: NetworkCacheType, showError: Bool = false, successCallback:@escaping RequestBaseCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
         switch cacheType {
         case .ignoreCache:

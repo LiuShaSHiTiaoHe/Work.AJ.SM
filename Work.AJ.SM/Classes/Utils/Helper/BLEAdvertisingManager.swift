@@ -34,6 +34,7 @@ class BLEAdvertisingManager: NSObject {
                     logger.info("openDoorData ===>  \(openDoorData)")
                     logger.shortLine()
                     peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "B0B0"), CBAdvertisementDataLocalNameKey: openDoorData])
+//                    peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: CBUUID.init(string: "0000B0B0-0000-1000-8000-00805f9b34fb"), CBAdvertisementDataLocalNameKey: "B@b4efc11"])
                     self.stopAdvertismentIn {
                         SVProgressHUD.showSuccess(withStatus: "发送成功")
                     }
