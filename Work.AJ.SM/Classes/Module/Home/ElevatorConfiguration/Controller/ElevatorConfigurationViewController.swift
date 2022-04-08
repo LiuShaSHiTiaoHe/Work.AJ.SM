@@ -21,7 +21,7 @@ class ElevatorConfigurationViewController: BaseViewController {
 
     private var block: ConfigurationBlock? {
         didSet {
-            if let block = block {
+            if let _ = block {
                 cell = nil
                 group = nil
                 elevator = nil
@@ -30,7 +30,7 @@ class ElevatorConfigurationViewController: BaseViewController {
     }
     private var cell: ConfigurationCell?{
         didSet {
-            if let cell = cell {
+            if let _ = cell {
                 group = nil
                 elevator = nil
             }
@@ -38,7 +38,7 @@ class ElevatorConfigurationViewController: BaseViewController {
     }
     private var group: ConfigurationCellLiftGroup?{
         didSet{
-            if let group = group {
+            if let _ = group {
                 elevator = nil
             }
         }
@@ -57,8 +57,13 @@ class ElevatorConfigurationViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-
     override func initData() {
+        contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        contentView.tableView.delegate = self
+        contentView.tableView.dataSource = self
+        picker.delegate = self
+        picker.pickerView.delegate = self
+        picker.pickerView.dataSource = self
         loadData()
     }
     
@@ -97,23 +102,38 @@ extension ElevatorConfigurationViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CommonInputCellIdentifier, for: indexPath) as! CommonInputCell
-        cell.accessoryType = .none
+        cell.accessoryType = .disclosureIndicator
         cell.commonInput.isUserInteractionEnabled = false
+        cell.selectionStyle = .none
         switch indexPath.row {
         case 0:
             if let block = block,  let blockName = block.blockname{
                 cell.commonInput.text = blockName
+            }else{
+                cell.commonInput.placeholder = "请选择" + ElevatorConfigurationPickerType.block.rawValue
             }
+            cell.nameLabel.text = ElevatorConfigurationPickerType.block.rawValue
         case 1:
             if let ecell = self.cell, let cellName = ecell.cellname {
                 cell.commonInput.text = cellName
+            }else{
+                cell.commonInput.placeholder = "请选择" + ElevatorConfigurationPickerType.cell.rawValue
             }
+            cell.nameLabel.text = ElevatorConfigurationPickerType.cell.rawValue
         case 2:
             if let group = self.group, let groupName = group.groupname {
                 cell.commonInput.text = groupName
+            }else{
+                cell.commonInput.placeholder = "请选择" + ElevatorConfigurationPickerType.group.rawValue
             }
+            cell.nameLabel.text = ElevatorConfigurationPickerType.group.rawValue
         case 3:
-            showPicker(.elevator)
+            if let elevator = self.elevator, let elevatorName = elevator.remark {
+                cell.commonInput.text = elevatorName
+            }else{
+                cell.commonInput.placeholder = "请选择" + ElevatorConfigurationPickerType.elevator.rawValue
+            }
+            cell.nameLabel.text = ElevatorConfigurationPickerType.elevator.rawValue
         default:
             fatalError()
         }
@@ -173,6 +193,9 @@ extension ElevatorConfigurationViewController: UIPickerViewDelegate, UIPickerVie
     }
         
     func showPicker(_ type: ElevatorConfigurationPickerType) {
+        if showErrorTips(type) {
+            return
+        }
         pickerType = type
         pickerIndex = 0
         picker.titleLabel.text = type.rawValue
@@ -237,4 +260,35 @@ extension ElevatorConfigurationViewController: UIPickerViewDelegate, UIPickerVie
         return 0
     }
     
+    func showErrorTips(_ type: ElevatorConfigurationPickerType) -> Bool {
+        switch pickerType {
+        case .block:
+            break
+        case .cell:
+            if block == nil {
+                SVProgressHUD.showError(withStatus: "请先选择楼栋")
+                return true
+            }
+        case .group:
+            if block == nil {
+                SVProgressHUD.showError(withStatus: "请先选择楼栋")
+                return true
+            }else if cell == nil {
+                SVProgressHUD.showError(withStatus: "请先选择单元")
+                return true
+            }
+        case .elevator:
+            if block == nil {
+                SVProgressHUD.showError(withStatus: "请先选择楼栋")
+                return true
+            }else if cell == nil {
+                SVProgressHUD.showError(withStatus: "请先选择单元")
+                return true
+            }else if group == nil {
+                SVProgressHUD.showError(withStatus: "请先选择电梯群组")
+                return true
+            }
+        }
+        return false
+    }
 }
