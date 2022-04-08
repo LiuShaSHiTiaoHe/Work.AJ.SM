@@ -39,7 +39,7 @@ class QRCodeInvitationView: BaseView {
             make.left.equalToSuperview().offset(kMargin/2)
             make.right.equalToSuperview().offset(-kMargin/2)
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
-            make.bottom.equalToSuperview().offset(-90)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-100)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -83,16 +83,17 @@ class QRCodeInvitationView: BaseView {
         }
         
         qrCodeView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-kMargin*1.5)
-            make.width.height.equalTo(290)
+            make.top.equalTo(validLabel.snp.bottom).offset(kMargin*2)
+            make.left.equalToSuperview().offset(kMargin*2)
+            make.right.equalToSuperview().offset(-kMargin*2)
+            make.height.equalTo(qrCodeView.snp.width)
         }
         
         saveButton.snp.makeConstraints { make in
             make.width.equalTo(160)
             make.height.equalTo(50)
             make.centerX.equalToSuperview().dividedBy(2)
-            make.bottom.equalToSuperview().offset(-kMargin)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
         }
         
         shareButton.snp.makeConstraints { make in
@@ -101,8 +102,6 @@ class QRCodeInvitationView: BaseView {
             make.centerX.equalToSuperview().multipliedBy(1.5)
             make.centerY.equalTo(saveButton)
         }
-        
-        
     }
     
     lazy var headerView: CommonHeaderView = {

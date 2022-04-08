@@ -41,7 +41,7 @@ class PasswordInvitationView: BaseView {
             make.left.equalToSuperview().offset(kMargin/2)
             make.right.equalToSuperview().offset(-kMargin/2)
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
-            make.bottom.equalToSuperview().offset(-90)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-100)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -115,7 +115,7 @@ class PasswordInvitationView: BaseView {
             make.width.equalTo(160)
             make.height.equalTo(50)
             make.centerX.equalToSuperview().dividedBy(2)
-            make.bottom.equalToSuperview().offset(-kMargin)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
         }
         
         shareButton.snp.makeConstraints { make in

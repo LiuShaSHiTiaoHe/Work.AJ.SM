@@ -10,10 +10,10 @@ import PGDatePicker
 import YYCategories
 import SVProgressHUD
 
-enum VisitTimes {
-    case single
-    case multy
-    case initial
+enum VisitTimes: String {//T为多次有效，F为1次有效
+    case single = "F"
+    case multy = "T"
+    case initial = ""
 }
 
 class SetVisitorPasswordViewController: BaseViewController {
@@ -30,8 +30,6 @@ class SetVisitorPasswordViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func initUI() {
@@ -39,7 +37,6 @@ class SetVisitorPasswordViewController: BaseViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
     
     override func initData() {
@@ -106,27 +103,25 @@ class SetVisitorPasswordViewController: BaseViewController {
         }
     }
     
-    func go2InvitationView(_ validTime: Date, _ arriveTime: Date, _ phoneNumber: String) {
+    func go2InvitationView(_ validTime: Date, _ arriveTime: Date, _ phoneNumber: String, _ password: String) {
         let vc = PasswordInvitationViewController()
         vc.arriveTime = arriveTime
         vc.validTime = validTime
         vc.visitTimes = visitTimes
         vc.phoneNumber = phoneNumber
+        vc.password = password
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func generatePassword(_ validTime: Date, _ arriveTime: Date, _ phoneNumber: String) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString, let hours = validTime.jk.numberOfHours(from: arriveTime)?.jk.intToString{
             
-            //T为多次有效，F为1次有效
-            var type = "F"
-            if visitTimes == .multy {
-                type = "T"
-            }
-            HomeAPI.generateVisitorPassword(communityID: communityID, blockID: blockID, unitID: unitID, userID: userID, phone: phoneNumber, time: hours, type: type).defaultRequest { jsonData in
-                SVProgressHUD.showSuccess(withStatus: "提交成功")
-                SVProgressHUD.dismiss(withDelay: 2) {
-                    self.go2InvitationView(validTime, arriveTime, phoneNumber)
+            HomeAPI.generateVisitorPassword(communityID: communityID, blockID: blockID, unitID: unitID, userID: userID, phone: phoneNumber, time: hours, type: visitTimes.rawValue).defaultRequest { jsonData in
+                if let data = jsonData["data"].dictionary, let password = data["PASSWORD"]?.string {
+                    SVProgressHUD.showSuccess(withStatus: "提交成功")
+                    SVProgressHUD.dismiss(withDelay: 2) {
+                        self.go2InvitationView(validTime, arriveTime, phoneNumber, password)
+                    }
                 }
             } failureCallback: { response in
                 SVProgressHUD.showSuccess(withStatus: "\(response.message)")
@@ -155,7 +150,7 @@ class SetVisitorPasswordViewController: BaseViewController {
                     if visitTimes == .initial {
                         SVProgressHUD.showError(withStatus: "选择使用次数")
                     }else{
-                        
+                        generatePassword(validTime, arriveTime, phoneNumber)
                     }
                 }
             }else{

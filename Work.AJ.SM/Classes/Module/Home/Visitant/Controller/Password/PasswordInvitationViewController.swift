@@ -14,18 +14,17 @@ class PasswordInvitationViewController: BaseViewController {
     var validTime: Date?
     var visitTimes: VisitTimes?
     var phoneNumber: String?
+    var password: String?
     
     lazy var contentView: PasswordInvitationView = {
         let view = PasswordInvitationView()
         return view
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
     override func initUI() {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
@@ -41,7 +40,8 @@ class PasswordInvitationViewController: BaseViewController {
     }
     
     private func setUpDataSource(){
-        if let unit = HomeRepository.shared.getCurrentUnit(), let visitTimes = visitTimes, let validTime = validTime, let arriveTime = arriveTime, let communityname = unit.communityname, let cellname = unit.cellname {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let visitTimes = visitTimes, let validTime = validTime, let arriveTime = arriveTime, let communityname = unit.communityname, let cellname = unit.cellname, let password = password {
+            contentView.passwordLabel.text = password
             contentView.locationLabel.text = communityname + cellname
             contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
             contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")

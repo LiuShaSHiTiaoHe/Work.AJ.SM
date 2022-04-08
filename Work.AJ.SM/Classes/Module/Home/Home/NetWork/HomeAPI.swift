@@ -79,7 +79,7 @@ extension HomeAPI: TargetType {
         case let .getInvitationQRCode(unitID, arriveTime, validTime):
             return .requestParameters(parameters: ["UNITID": unitID, "isVisitor": "1", "startTime": arriveTime, "endTime": validTime].ekey("UNITID"), encoding: URLEncoding.default)
         case let .generateVisitorPassword(communityID, blockID, unitID, userID, phone, time, type):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "USERID": userID, "PHONE": phone, "HOUR": time, "PASSTYPE": type].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "USERID": userID, "PHONE": phone, "HOUR": time, "PASSTYPE": type, "needPwd": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getFloorsBySN(SNCode, phone, userID):
             return .requestParameters(parameters: ["LIFTSN": SNCode, "MOBILE": phone, "USERID": userID].ekey("LIFTSN"), encoding: URLEncoding.default)
         case let .openDoor(lockMac, userID, communityID, blockID, unitID, cellID, physicalFloor):

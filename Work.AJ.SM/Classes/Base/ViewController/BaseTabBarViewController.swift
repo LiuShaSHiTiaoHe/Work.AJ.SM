@@ -20,6 +20,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 
     func initData() {
         NIMAVChatSDK.shared().netCallManager.add(self)
+        NIMSDK.shared().loginManager.add(self)
         let _ = BLEAdvertisingManager.shared
     }
     
@@ -66,6 +67,15 @@ extension BaseTabBarViewController: NIMNetCallManagerDelegate{
             let vc = VideoChatViewController.init(responseCall: caller, callID: callID)
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
+        }
+    }
+}
+
+extension BaseTabBarViewController: NIMLoginManagerDelegate {
+    func onKicked() {
+        SVProgressHUD.showInfo(withStatus: "账号在其他终端登录")
+        SVProgressHUD.dismiss(withDelay: 2) {
+            GDataManager.shared.showLoginView()
         }
     }
 }

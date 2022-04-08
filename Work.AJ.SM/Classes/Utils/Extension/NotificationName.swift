@@ -7,13 +7,15 @@
 
 import Foundation
 extension Notification.Name {
+    // MARK: - 生物识别
     static let kUserBioMetricesStateChanged = Notification.Name("userBioMetricesStateChanged")
-    
+    // MARK: - 当前小区切换
     static let kCurrentUnitChanged = Notification.Name("kCurrentUnitChanged")
-    
+    // MARK: - 切换到蓝牙自动开门
     static let kSendAutoOpenDoor = Notification.Name("SendAutoOpenDoorNotification")
-    
+    // MARK: - 用户更新头像
     static let kUserUpdateAvatar = Notification.Name("UserUpdateAvatar")
+    // MARK: - 用户更新开门密码
     static let kUserUpdateOpenDoorPassword = Notification.Name("UserUpdateOpenDoorPassword")
 
 }
