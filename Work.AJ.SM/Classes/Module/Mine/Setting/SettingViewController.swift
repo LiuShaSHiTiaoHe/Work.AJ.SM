@@ -116,7 +116,7 @@ class SettingViewController: BaseViewController {
         alert.addAction("确定", .destructive) {
             SVProgressHUD.show(withStatus: "正在登出...")
             RealmTools.deleteRealmFiles()
-            ud.removeAll()
+            GDataManager.shared.removeUserData()
             SVProgressHUD.dismiss(withDelay: 2) {
                 let vc = LoginViewController()
                 vc.modalPresentationStyle = .fullScreen

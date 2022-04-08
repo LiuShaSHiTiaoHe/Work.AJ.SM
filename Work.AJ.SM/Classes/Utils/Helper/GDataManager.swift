@@ -10,6 +10,7 @@ import CryptoSwift
 import Siren
 import NIMSDK
 import AVFoundation
+import SwiftyUserDefaults
 
 class GDataManager: NSObject {
     static let shared = GDataManager()
@@ -104,6 +105,19 @@ class GDataManager: NSObject {
                 logger.info(error.localizedDescription)
             }
         }
+    }
+    // MARK: - 删除用户数据
+    func removeUserData() {
+        ud.remove(\.loginState)
+        ud.remove(\.username)
+        ud.remove(\.userID)
+        ud.remove(\.userMobile)
+        ud.remove(\.userRealName)
+        ud.remove(\.password)
+        ud.remove(\.userLastLoginDate)
+        ud.remove(\.currentUnitID)
+        ud.remove(\.openDoorStyle)
+        ud.remove(\.personalOpenDoorPasswordStatus)
     }
 }
 

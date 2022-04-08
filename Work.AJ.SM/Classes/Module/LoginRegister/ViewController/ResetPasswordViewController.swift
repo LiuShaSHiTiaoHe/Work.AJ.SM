@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ResetPasswordViewController: UIViewController {
+class ResetPasswordViewController: BaseViewController {
 
     lazy var resetPasswordView: ResetPasswordView = {
         let view = ResetPasswordView()
@@ -16,20 +16,19 @@ class ResetPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        initUI()
+    }
+    
+    override func initData() {
         resetPasswordView.delegate = self
     }
     
-    func initUI() {
+    override func initUI() {
         view.addSubview(resetPasswordView)
-        
         resetPasswordView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
-
+    
     func checkMsgCode(_ mobile: String, _ code: String, _ password: String) {
         AuthenticationRepository.shared.checkMessageCode(mobile: mobile, code: code) {[weak self] errorMsg in
             guard let `self` = self else { return }
