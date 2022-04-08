@@ -163,6 +163,9 @@
 		419AD6A327FEB68900C902B8 /* ElevatorConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6A227FEB68900C902B8 /* ElevatorConfigurationViewController.swift */; };
 		419AD6A527FEC58F00C902B8 /* ElevatorConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6A427FEC58F00C902B8 /* ElevatorConfigurationView.swift */; };
 		419AD6AA27FED04300C902B8 /* ElevatorConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6A927FED04300C902B8 /* ElevatorConfiguration.swift */; };
+		419AD6AC27FFFB9900C902B8 /* ElevatorConfigurationDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6AB27FFFB9900C902B8 /* ElevatorConfigurationDefines.swift */; };
+		419AD6AE27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6AD27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift */; };
+		419AD6B027FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */; };
 		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
@@ -395,6 +398,9 @@
 		419AD6A227FEB68900C902B8 /* ElevatorConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationViewController.swift; sourceTree = "<group>"; };
 		419AD6A427FEC58F00C902B8 /* ElevatorConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationView.swift; sourceTree = "<group>"; };
 		419AD6A927FED04300C902B8 /* ElevatorConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfiguration.swift; sourceTree = "<group>"; };
+		419AD6AB27FFFB9900C902B8 /* ElevatorConfigurationDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationDefines.swift; sourceTree = "<group>"; };
+		419AD6AD27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationSendDataViewController.swift; sourceTree = "<group>"; };
+		419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationSendDataView.swift; sourceTree = "<group>"; };
 		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
@@ -1442,6 +1448,7 @@
 			isa = PBXGroup;
 			children = (
 				419AD6A927FED04300C902B8 /* ElevatorConfiguration.swift */,
+				419AD6AB27FFFB9900C902B8 /* ElevatorConfigurationDefines.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1450,6 +1457,7 @@
 			isa = PBXGroup;
 			children = (
 				419AD6A227FEB68900C902B8 /* ElevatorConfigurationViewController.swift */,
+				419AD6AD27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1458,6 +1466,7 @@
 			isa = PBXGroup;
 			children = (
 				419AD6A427FEC58F00C902B8 /* ElevatorConfigurationView.swift */,
+				419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1914,6 +1923,7 @@
 				41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */,
 				416F2E4927B0B56D004E5AD9 /* Network.Configuration.swift in Sources */,
 				41B7DBE827E044E8002A23D0 /* SwiftyCamViewController.swift in Sources */,
+				419AD6AE27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift in Sources */,
 				416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */,
 				419E2DE827D9977500B60633 /* HouseCetificationView.swift in Sources */,
 				416F2EDB27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift in Sources */,
@@ -2025,6 +2035,7 @@
 				416F2EAC27B60BA4004E5AD9 /* MobileInputView.swift in Sources */,
 				41AA41A027D5F76B007020AD /* LocationManager.swift in Sources */,
 				4173C21727C38BA200B8FBB8 /* TimeSelectCell.swift in Sources */,
+				419AD6B027FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
 				416F2F0F27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift in Sources */,
 				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
@@ -2048,6 +2059,7 @@
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
 				41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */,
+				419AD6AC27FFFB9900C902B8 /* ElevatorConfigurationDefines.swift in Sources */,
 				4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */,
 				416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */,
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,

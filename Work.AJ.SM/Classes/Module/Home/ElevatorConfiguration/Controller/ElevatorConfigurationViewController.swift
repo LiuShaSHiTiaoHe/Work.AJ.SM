@@ -18,7 +18,6 @@ enum ElevatorConfigurationPickerType: String {
 class ElevatorConfigurationViewController: BaseViewController {
     
     private var ec: ElevatorConfiguration?
-
     private var block: ConfigurationBlock? {
         didSet {
             if let _ = block {
@@ -44,7 +43,6 @@ class ElevatorConfigurationViewController: BaseViewController {
         }
     }
     private var elevator: ConfigurationLifts?
-    
     private var pickerType: ElevatorConfigurationPickerType = .block
     private var pickerIndex: Int = 0
     
@@ -55,10 +53,12 @@ class ElevatorConfigurationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func initData() {
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        contentView.confirmButton.addTarget(self, action: #selector(confirmAction), for: .touchUpInside)
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         picker.delegate = self
@@ -78,6 +78,15 @@ class ElevatorConfigurationViewController: BaseViewController {
                     self.navigationController?.popViewController(animated: true)
                 }
             }
+        }
+    }
+    
+    @objc private func confirmAction() {
+        if let elevator = elevator, let configurationData = ec?.communityConfig {
+            let vc = ElevatorConfigurationSendDataViewController()
+            vc.elevator = elevator
+            vc.configurationData = configurationData
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
