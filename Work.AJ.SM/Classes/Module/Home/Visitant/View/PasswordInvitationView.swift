@@ -124,8 +124,6 @@ class PasswordInvitationView: BaseView {
             make.centerX.equalToSuperview().multipliedBy(1.5)
             make.centerY.equalTo(saveButton)
         }
-        
-        
     }
     
     lazy var headerView: CommonHeaderView = {
