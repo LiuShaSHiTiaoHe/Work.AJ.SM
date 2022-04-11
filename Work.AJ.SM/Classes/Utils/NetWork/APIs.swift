@@ -81,5 +81,12 @@ final class APIs {
     
     // MARK: - 电梯配置
     static let elevatorConfiguration = "appcity/getLiftConfigByCellGroup"
+    
+    // MARK: - N方对讲
+    static let checkNCallSupport = "apphxUnitAuthorities/judgeNcomUtil"
+    static let allDeviceInfo = "appajNcomUser/getsame"
+    static let allDTUInfo = "appajNcomUser/appFindDtus.do"
+    static let sendNCallStatus = "appajNcomUser/addNcomCallLog.do"
+    static let allNCallRecord = "appajNcomUser/findNcomCallLog.do"
 
 }

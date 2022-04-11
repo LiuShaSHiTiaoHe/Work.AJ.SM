@@ -708,6 +708,7 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				419AD6B528041E7700C902B8 /* NCall */,
 				419AD6A127FEB66000C902B8 /* ElevatorConfiguration */,
 				4173C25227C86E6600B8FBB8 /* ScanQRCodeForElevator */,
 				4173C22827C5D93A00B8FBB8 /* AddMember */,
@@ -1472,6 +1473,13 @@
 				419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		419AD6B528041E7700C902B8 /* NCall */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NCall;
 			sourceTree = "<group>";
 		};
 		41AA41A327D6F051007020AD /* SectionIndexView */ = {

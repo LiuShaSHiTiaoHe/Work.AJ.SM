@@ -51,6 +51,7 @@ class HomeViewController: BaseViewController {
             if modules.isEmpty {
                 self.showNoDataView(.nohouse)
             }else{
+                self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.getAdsAndNotices()
             }
