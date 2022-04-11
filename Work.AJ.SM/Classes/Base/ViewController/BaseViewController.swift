@@ -51,10 +51,10 @@ class BaseViewController: UIViewController {
     // MARK: - Backbutton Action
     @objc
     func closeAction() {
-        if self.isBeingPresented {
-            self.dismiss(animated: true, completion: nil)
+        if let navigation = self.navigationController {
+            navigation.popViewController(animated: true)
         }else{
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -70,12 +70,25 @@ class BaseViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: isAnimated)
     }
 
+    // MARK: - 添加房屋
+    @objc func go2AddNewHouseView(){
+        let vc = SelectUnitBlockViewController()
+        if let navigation = self.navigationController {
+            vc.hidesBottomBarWhenPushed = true
+            navigation.pushViewController(vc, animated: true)
+        }else{
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+
+    }
 }
 
+// MARK: - EmptyView
 extension BaseViewController {
-    // MARK: - EmptyView
     func showNoDataView(_ type: EmptyDataType = .nodata, _ constraintView: UIView? = nil)  {
         let noDataView = NoDataView()
+        noDataView.button.addTarget(self, action: #selector(go2AddNewHouseView), for: .touchUpInside)
         noDataView.viewType = type
         noDataView.tag = noDataViewTag
         view.addSubview(noDataView)

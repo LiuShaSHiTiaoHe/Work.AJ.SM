@@ -59,6 +59,7 @@ extension AppDelegate {
         SVProgressHUD.appearance().imageViewSize = CGSize(width: 30, height: 30)
         SVProgressHUD.setRingRadius(30)
         SVProgressHUD.setDefaultAnimationType(.native)
+        SVProgressHUD.setDefaultMaskType(.clear)
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0
         }

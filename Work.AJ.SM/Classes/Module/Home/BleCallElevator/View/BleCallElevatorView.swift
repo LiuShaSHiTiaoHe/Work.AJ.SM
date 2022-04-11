@@ -8,7 +8,7 @@
 import UIKit
 import SwiftEntryKit
 
-class BleCallElevatorView: UIView {
+class BleCallElevatorView: BaseView {
     
     @objc
     func closeAction() {
@@ -43,8 +43,12 @@ class BleCallElevatorView: UIView {
         return view
     }()
     
-    lazy var dashView: UIView = {
-        let view = UIView()
+    // FIXME: - .....
+    lazy var dashView: UILabel = {
+        let view = UILabel()
+        view.text = "-------------------------"
+        view.font = k14Font
+        view.textColor = R.color.themeColor()
         return view
     }()
     
@@ -69,17 +73,7 @@ class BleCallElevatorView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeView()
-        initData()
-    }
-        
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func initializeView() {
+    override func initializeView() {
         self.addSubview(closeButton)
         self.addSubview(tipsLabel)
         self.addSubview(imageView1)
@@ -113,7 +107,7 @@ class BleCallElevatorView: UIView {
         
         dashView.snp.makeConstraints { make in
             make.left.equalTo(imageView1.snp.right).offset(kMargin/2)
-            make.height.equalTo(2)
+            make.height.equalTo(5)
             make.right.equalTo(imageView2.snp.left).offset(-kMargin/2)
             make.centerY.equalTo(imageView1)
         }
@@ -147,12 +141,9 @@ class BleCallElevatorView: UIView {
         
     }
     
-    func initData() {
-        
-    }
     
-    override func layoutSubviews() {
-        dashView.jk.drawDashLine(strokeColor: R.color.themeColor()!)
-    }
+//    override func layoutSubviews() {
+//        dashView.jk.drawDashLine(strokeColor: R.color.themeColor()!)
+//    }
 
 }

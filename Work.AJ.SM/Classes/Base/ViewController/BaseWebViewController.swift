@@ -183,22 +183,22 @@ extension BaseWebViewController{
         if (self.wkWebview.canGoBack){
             self.wkWebview.goBack()
         }else{
-            if self.isBeingPresented {
-                self.dismiss(animated: true, completion: nil)
+            if let navigation = self.navigationController {
+                navigation.setNavigationBarHidden(true, animated: false)
+                navigation.popViewController(animated: true)
             }else{
-                self.navigationController?.setNavigationBarHidden(true, animated: false)
-                self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
 
     //MARK: - 关闭按钮执行事件
     fileprivate func selectedToClose(){
-        if self.isBeingPresented {
-            self.dismiss(animated: true, completion: nil)
+        if let navigation = self.navigationController {
+            navigation.setNavigationBarHidden(true, animated: false)
+            navigation.popViewController(animated: true)
         }else{
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 protocol SelectElevatorViewControllerDelegate: NSObjectProtocol {
     func updateSelectedElevator(_ elevatorID: String)
@@ -16,36 +17,27 @@ class SelectElevatorViewController: BaseViewController {
     var dataSource: [ElevatorInfo] = []
     var currentFloorID = ""
     weak var delegate: SelectElevatorViewControllerDelegate?
-
-    lazy var headerView: CommonHeaderView = {
-        let view = CommonHeaderView.init()
-        return view
-    }()
-    
-    lazy var tableView: UITableView = {
-        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
-        view.register(SelectElevatorTableViewCell.self, forCellReuseIdentifier: "SelectElevatorTableViewCell")
-        view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
-        return view
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.        
     }
         
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
+    override func initData() {
+        headerView.rightButton.isHidden = true
+        headerView.titleLabel.text = "请选择电梯"
+        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     override func closeAction() {
         if !currentFloorID.isEmpty {
             delegate?.updateSelectedElevator(currentFloorID)
         }
+        self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - UI
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(headerView)
@@ -61,13 +53,18 @@ class SelectElevatorViewController: BaseViewController {
         }
     }
     
-    override func initData() {
-        headerView.rightButton.isHidden = true
-        headerView.titleLabel.text = "请选择电梯"
-        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
+    lazy var headerView: CommonHeaderView = {
+        let view = CommonHeaderView.init()
+        return view
+    }()
+    
+    lazy var tableView: UITableView = {
+        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
+        view.register(SelectElevatorTableViewCell.self, forCellReuseIdentifier: "SelectElevatorTableViewCell")
+        view.separatorStyle = .none
+        view.backgroundColor = R.color.backgroundColor()
+        return view
+    }()
     
 }
 
@@ -104,5 +101,9 @@ extension SelectElevatorViewController: SelectElevatorTableViewCellDelegate {
     func selectElevator(_ elevatorID: String) {
         currentFloorID = elevatorID
         tableView.reloadData()
+        SVProgressHUD.show()
+        SVProgressHUD.dismiss(withDelay: 1) {
+            self.closeAction()
+        }
     }
 }

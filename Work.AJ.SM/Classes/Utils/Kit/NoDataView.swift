@@ -28,13 +28,13 @@ class NoDataView: BaseView {
         }
     }
     
-    override func initData() {
-        button.addTarget(self, action: #selector(emptyViewAddHouse), for: .touchUpInside)
-    }
-    
-    @objc private func emptyViewAddHouse() {
-        NotificationCenter.default.post(name: .kUserAddNewHouse, object: nil)
-    }
+//    override func initData() {
+//        button.addTarget(self, action: #selector(emptyViewAddHouse), for: .touchUpInside)
+//    }
+//
+//    @objc private func emptyViewAddHouse() {
+//        NotificationCenter.default.post(name: .kUserAddNewHouse, object: nil)
+//    }
     
     override func initializeView() {
         self.backgroundColor = R.color.backgroundColor()

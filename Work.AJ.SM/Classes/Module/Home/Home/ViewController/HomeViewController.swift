@@ -21,8 +21,6 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(currentUnitChanged), name: .kCurrentUnitChanged, object: nil)
-        // MARK: - 添加房屋的通知
-        NotificationCenter.default.addObserver(self, selector: #selector(go2AddNewHouseView), name: .kUserAddNewHouse, object: nil)
     }
     
     override func initUI() {
@@ -64,13 +62,6 @@ class HomeViewController: BaseViewController {
             guard let `self` = self else { return }
             self.contentView.updateAdsAndNotices(ads, notices)
         }
-    }
-    
-    @objc
-    func go2AddNewHouseView(){
-        let vc = SelectUnitBlockViewController()
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
