@@ -17,9 +17,8 @@ class LoginViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
     override func initUI() {
         view.addSubview(loginView)
         loginView.snp.makeConstraints { make in

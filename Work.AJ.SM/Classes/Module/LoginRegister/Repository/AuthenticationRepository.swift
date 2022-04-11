@@ -15,7 +15,7 @@ class AuthenticationRepository: NSObject {
     
     func login(mobile: String, password: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData  in
-            if let data = JsonData["data"].rawString(), let userInfo = JsonData["map"].rawString(), let units = [UnitModel](JSONString: data), let userModel = UserModel(JSONString: userInfo) {
+            if let userData = JsonData["map"].rawString(), let userModel = UserModel(JSONString: userData) {
                 ud.loginState = true
                 ud.username = mobile
                 ud.userMobile = mobile
@@ -24,10 +24,12 @@ class AuthenticationRepository: NSObject {
                 ud.userID = userModel.rid
                 ud.NIMToken = userModel.loginToken
                 GDataManager.shared.setupDataBase()
-                RealmTools.addList(units, update: .modified) {}
-                RealmTools.add(userModel, update: .modified) {}
                 GDataManager.shared.loginNIMSDK()
                 GDataManager.shared.pushSetAlias(mobile)
+                RealmTools.add(userModel, update: .modified) {}
+                if let data = JsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
+                    RealmTools.addList(units, update: .modified) {}
+                }
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -37,6 +39,7 @@ class AuthenticationRepository: NSObject {
             }else{
                 completion("数据解析错误")
             }
+            
         } failureCallback: { response in
             completion(response.message)
         }

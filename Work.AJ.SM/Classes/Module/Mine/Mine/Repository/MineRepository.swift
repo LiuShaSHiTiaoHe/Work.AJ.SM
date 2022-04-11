@@ -95,7 +95,7 @@ class MineRepository: NSObject {
                 return allModules.filter {$0.tag == mineModuleType}
             }
         }
-        return []
+        return [MineModuleType.house.model, MineModuleType.setting.model]
     }
     
     func getSectionCount(_ modules: [MineModule]) -> Int {

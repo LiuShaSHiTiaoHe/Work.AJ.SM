@@ -25,6 +25,7 @@ class BLEAdvertisingManager: NSObject {
     }
 
     // MARK: - 发送蓝牙开门数据
+    @discardableResult
     func openDoor() -> Bool {
         SVProgressHUD.show()
         if let peripheralManager = peripheralManager, isBleOpen {
@@ -118,7 +119,7 @@ class BLEAdvertisingManager: NSObject {
     }
     
     
-    func stopAdvertismentIn(seconds: Double = 3, completion: @escaping (() -> Void)) {
+    func stopAdvertismentIn(seconds: Double = 2, completion: @escaping (() -> Void)) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
             guard let `self` = self else { return }
             guard let peripheralManager = self.peripheralManager else { return }

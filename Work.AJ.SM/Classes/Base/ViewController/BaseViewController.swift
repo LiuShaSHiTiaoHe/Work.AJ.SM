@@ -9,6 +9,8 @@ import UIKit
 import MJRefresh
 
 class BaseViewController: UIViewController {
+
+    private let noDataViewTag: Int = 404
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,7 @@ class BaseViewController: UIViewController {
         gradientLayer.frame = CGRect.init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
+    
     
     func refreshHeader(_ textColor: UIColor? = R.color.whiteColor()!) -> MJRefreshStateHeader {
         let header = MJRefreshStateHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
@@ -67,4 +70,26 @@ class BaseViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: isAnimated)
     }
 
+}
+
+extension BaseViewController {
+    // MARK: - EmptyView
+    func showNoDataView(_ type: EmptyDataType = .nodata) {
+        let noDataView = NoDataView()
+        noDataView.viewType = type
+        noDataView.tag = noDataViewTag
+        view.addSubview(noDataView)
+        view.bringSubviewToFront(noDataView)
+        noDataView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func hideNoDataView() {
+        if let noDataView = view.subviews.first(where: { v in
+            v.tag == noDataViewTag
+        }) {
+            noDataView.removeFromSuperview()
+        }
+    }
 }

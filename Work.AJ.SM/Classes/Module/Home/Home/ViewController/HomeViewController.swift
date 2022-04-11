@@ -48,8 +48,12 @@ class HomeViewController: BaseViewController {
     func loadUnitData() {
         HomeRepository.shared.allUnits { [weak self] modules in
             guard let `self` = self else { return }
-            self.contentView.updateHomeFunctions(modules)
-            self.getAdsAndNotices()
+            if modules.isEmpty {
+                self.showNoDataView(.nohouse)
+            }else{
+                self.contentView.updateHomeFunctions(modules)
+                self.getAdsAndNotices()
+            }
         }
     }
     

@@ -19,6 +19,8 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     }
 
     func initData() {
+        // MARK: - 添加房屋的通知
+        NotificationCenter.default.addObserver(self, selector: #selector(go2AddNewHouseView), name: .kUserAddNewHouse, object: nil)
         NIMAVChatSDK.shared().netCallManager.add(self)
         NIMSDK.shared().loginManager.add(self)
         let _ = BLEAdvertisingManager.shared
@@ -53,6 +55,11 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         Haptic.impact(.medium).generate()
     }
+    
+    @objc
+    func go2AddNewHouseView(){
+        self.navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
+    }
 }
 
 // MARK: - 云信通话
@@ -76,6 +83,33 @@ extension BaseTabBarViewController: NIMLoginManagerDelegate {
         SVProgressHUD.showInfo(withStatus: "账号在其他终端登录")
         SVProgressHUD.dismiss(withDelay: 2) {
             GDataManager.shared.showLoginView()
+        }
+    }
+}
+
+extension BaseTabBarViewController {
+    func observeOpenDoorStyle() {
+        let _ = ud.observe(\.openDoorStyle) { update in
+            if update.newValue == 1 {
+                UIApplication.shared.applicationSupportsShakeToEdit = true
+                self.becomeFirstResponder()
+            }
+        }
+    }
+    
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if event?.subtype == .motionShake {
+            if ud.openDoorStyle == 1 {
+                Haptic.impact(.heavy).generate()
+            }
+        }
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if event?.subtype == .motionShake {
+            if ud.openDoorStyle == 1 {
+                BLEAdvertisingManager.shared.openDoor()
+            }
         }
     }
 }

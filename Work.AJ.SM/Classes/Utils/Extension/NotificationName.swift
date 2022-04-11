@@ -17,5 +17,7 @@ extension Notification.Name {
     static let kUserUpdateAvatar = Notification.Name("UserUpdateAvatar")
     // MARK: - 用户更新开门密码
     static let kUserUpdateOpenDoorPassword = Notification.Name("UserUpdateOpenDoorPassword")
+    // MARK: - 添加房屋
+    static let kUserAddNewHouse = Notification.Name("EmptyViewAddNewHouse")
 
 }
