@@ -74,14 +74,21 @@ class BaseViewController: UIViewController {
 
 extension BaseViewController {
     // MARK: - EmptyView
-    func showNoDataView(_ type: EmptyDataType = .nodata) {
+    func showNoDataView(_ type: EmptyDataType = .nodata, _ constraintView: UIView? = nil)  {
         let noDataView = NoDataView()
         noDataView.viewType = type
         noDataView.tag = noDataViewTag
         view.addSubview(noDataView)
         view.bringSubviewToFront(noDataView)
-        noDataView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        if let view = constraintView {
+            noDataView.snp.makeConstraints { make in
+                make.left.right.bottom.equalToSuperview()
+                make.top.equalTo(view.snp.bottom)
+            }
+        }else{
+            noDataView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
         }
     }
     

@@ -19,8 +19,6 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     }
 
     func initData() {
-        // MARK: - 添加房屋的通知
-        NotificationCenter.default.addObserver(self, selector: #selector(go2AddNewHouseView), name: .kUserAddNewHouse, object: nil)
         NIMAVChatSDK.shared().netCallManager.add(self)
         NIMSDK.shared().loginManager.add(self)
         let _ = BLEAdvertisingManager.shared
@@ -56,10 +54,6 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         Haptic.impact(.medium).generate()
     }
     
-    @objc
-    func go2AddNewHouseView(){
-        self.navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
-    }
 }
 
 // MARK: - 云信通话

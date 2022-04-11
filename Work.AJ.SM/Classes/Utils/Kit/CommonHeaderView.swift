@@ -45,7 +45,7 @@ class CommonHeaderView: UIView {
         
         closeButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin/2)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(30)
             make.bottom.equalToSuperview().offset((20 + kStateHeight - kOriginTitleAndStateHeight)/2)
         }
         

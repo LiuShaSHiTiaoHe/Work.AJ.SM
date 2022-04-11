@@ -58,6 +58,7 @@ class HouseViewController: BaseViewController {
                 self.tableView.reloadData()
             }else {
                 SVProgressHUD.showError(withStatus: errorMsg)
+                self.showNoDataView(.nohouse, self.headerView)
             }
         }
     }
