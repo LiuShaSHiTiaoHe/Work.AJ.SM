@@ -157,4 +157,26 @@ extension GDataManager: NIMSDKConfigDelegate {
     
 }
 
-
+extension GDataManager {
+    func timeDuration(withInterval time: Int) -> String {
+        var result = ""
+        let seconds = time%60
+        var minutes = time/60
+        var hours: Int = 0
+        if minutes > 60 {
+            hours = minutes/60
+            minutes = minutes%60
+        }
+        if hours > 0 {
+            result = hours.jk.intToString + "小时" + minutes.jk.intToString + "分钟" + seconds.jk.intToString + "秒"
+        }else{
+            if minutes > 0 {
+                result = minutes.jk.intToString + "分种" + seconds.jk.intToString + "秒"
+            }else{
+                result = seconds.jk.intToString + "秒"
+            }
+        }
+        
+        return result
+    }
+}

@@ -29,8 +29,8 @@ class NComRecordCell: UITableViewCell {
                 if let callStatus = record.callStatus {
                     if callStatus == 2 {
                         durationLabel.text = "未接通"
-                    }else if callStatus == 4, let duration = record.callAllTime?.jk.intToString {
-                        durationLabel.text = Date.jk.timestampToFormatterTimeString(timestamp: duration)
+                    }else if callStatus == 4, let duration = record.callAllTime {
+                        durationLabel.text = GDataManager.shared.timeDuration(withInterval: duration)
                     }else{
                         durationLabel.text = "未知"
                     }
