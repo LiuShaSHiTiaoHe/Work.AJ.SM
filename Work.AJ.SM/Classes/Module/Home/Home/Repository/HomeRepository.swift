@@ -14,7 +14,8 @@ typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
 typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
 // MARK: - NCom
-typealias NComAllDeviceInfoCompletion = (([NComDevice]) -> Void)
+typealias NComAllDeviceInfoCompletion = (([NComDTU]) -> Void)
+typealias NComCallRecordCompletion = (([NComRecordInfo], Int) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -181,7 +182,19 @@ extension HomeRepository {
 extension HomeRepository {
     func allNComDeviceInfo(completion: @escaping NComAllDeviceInfoCompletion) {
         if let unit = getCurrentUnit(), let unitID = unit.unitid?.jk.intToString {
-            
+            HomeAPI.ncomAllDevice(unitID: unitID).request(modelType: [NComDTU].self, cacheType: .ignoreCache, showError: true) { models, response in
+                completion(models)
+            } failureCallback: { response in
+                completion([])
+            }
+        }
+    }
+    
+    func loadNComRecord(_ sTime: String = "", _ eTime: String = "", _ page: String, _ count: String = "15", completion: @escaping NComCallRecordCompletion) {
+        if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
+            HomeAPI.ncomRecord(communityID: communityID, startTime: sTime, endTime: eTime, page: page, count: count).defaultRequest { jsonData in
+                
+            }
         }
     }
 }

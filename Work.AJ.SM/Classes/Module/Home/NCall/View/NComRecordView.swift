@@ -1,5 +1,5 @@
 //
-//  NComView.swift
+//  NComRecordView.swift
 //  Work.AJ.SM
 //
 //  Created by Fairdesk on 2022/4/12.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class NComView: BaseView {
-
+class NComRecordView: BaseView {
     override func initData() {
         
     }
@@ -30,9 +29,10 @@ class NComView: BaseView {
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.titleLabel.text = "N方对讲"
-        view.rightButton.isHidden = false
-        view.rightButton.setTitle("通话记录", for: .normal)
+        view.titleLabel.text = "通话记录"
+        view.titleLabel.textColor = R.color.whiteColor()
+        view.backgroundColor = R.color.themeColor()
+        view.closeButton.setImage(R.image.common_back_white(), for: .normal)
         return view
     }()
     

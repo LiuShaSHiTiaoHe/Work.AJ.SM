@@ -9,20 +9,51 @@ import UIKit
 
 class NComViewController: BaseViewController {
 
+    private var dataSource:[NComDTU] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        contentView.tableView.mj_header?.beginRefreshing()
     }
     
     override func initData() {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
+        contentView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ncomdevicecell")
         contentView.headerView.rightButton.addTarget(self, action: #selector(go2RecordView), for: .touchUpInside)
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        contentView.tableView.mj_header = refreshHeader()
+    }
+
+    override func headerRefresh() {
+        loadAllDevice()
     }
     
     // MARK: - Functions
-    @objc func go2RecordView(){
+    func loadAllDevice() {
+        HomeRepository.shared.allNComDeviceInfo { [weak self] devices in
+            guard let self = self else { return }
+            if devices.isEmpty {
+                self.showNoDataView(.nodata, self.contentView.headerView)
+            }else{
+                self.hideNoDataView()
+                self.dataSource = devices
+                self.reloadTableView()
+            }
+        }
+    }
         
+    
+    @objc func go2RecordView(){
+        self.navigationController?.pushViewController(NComRecordViewController(), animated: true)
+    }
+    
+    func reloadTableView() {
+        contentView.tableView.reloadData()
     }
     
     // MARK: - UI

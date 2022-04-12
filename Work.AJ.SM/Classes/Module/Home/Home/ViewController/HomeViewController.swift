@@ -109,6 +109,8 @@ extension HomeViewController: HomeViewDelegate {
             break
         case .elevatorConfiguration:
             pushTo(viewController: ElevatorConfigurationViewController())
+        case .ncall:
+            pushTo(viewController: NComViewController())
         default :
             return
             

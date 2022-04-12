@@ -97,7 +97,7 @@ extension HomeAPI: TargetType {
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .ncomAllDevice(unitID):
-            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["UNITID": unitID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .ncomRecord(communityID, startTime, endTime, page, count):
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         case let .ncomSendStatus(communityID, unitID, callSource, callTarget, callType, callStatus, uniqueCode):

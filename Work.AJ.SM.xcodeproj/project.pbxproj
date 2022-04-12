@@ -173,6 +173,8 @@
 		419AD6C028050F4B00C902B8 /* NComViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6BF28050F4B00C902B8 /* NComViewController.swift */; };
 		419AD6C228050FA500C902B8 /* NComView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C128050FA500C902B8 /* NComView.swift */; };
 		419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C3280514E900C902B8 /* NComRecordCell.swift */; };
+		419AD6C62805453400C902B8 /* NComRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C52805453400C902B8 /* NComRecordView.swift */; };
+		419AD6C82805456C00C902B8 /* NComRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C72805456C00C902B8 /* NComRecordViewController.swift */; };
 		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
@@ -415,6 +417,8 @@
 		419AD6BF28050F4B00C902B8 /* NComViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComViewController.swift; sourceTree = "<group>"; };
 		419AD6C128050FA500C902B8 /* NComView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComView.swift; sourceTree = "<group>"; };
 		419AD6C3280514E900C902B8 /* NComRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordCell.swift; sourceTree = "<group>"; };
+		419AD6C52805453400C902B8 /* NComRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordView.swift; sourceTree = "<group>"; };
+		419AD6C72805456C00C902B8 /* NComRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordViewController.swift; sourceTree = "<group>"; };
 		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
@@ -1511,6 +1515,7 @@
 			isa = PBXGroup;
 			children = (
 				419AD6BF28050F4B00C902B8 /* NComViewController.swift */,
+				419AD6C72805456C00C902B8 /* NComRecordViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1518,10 +1523,19 @@
 		419AD6B82805081500C902B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				419AD6C928054D3F00C902B8 /* Cell */,
 				419AD6C128050FA500C902B8 /* NComView.swift */,
-				419AD6C3280514E900C902B8 /* NComRecordCell.swift */,
+				419AD6C52805453400C902B8 /* NComRecordView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		419AD6C928054D3F00C902B8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				419AD6C3280514E900C902B8 /* NComRecordCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		41AA41A327D6F051007020AD /* SectionIndexView */ = {
@@ -2045,6 +2059,7 @@
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
 				419AD6AA27FED04300C902B8 /* ElevatorConfiguration.swift in Sources */,
 				4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */,
+				419AD6C62805453400C902B8 /* NComRecordView.swift in Sources */,
 				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
 				41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */,
@@ -2076,6 +2091,7 @@
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,
+				419AD6C82805456C00C902B8 /* NComRecordViewController.swift in Sources */,
 				416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */,
 				41B7DBE427E044E8002A23D0 /* SwiftyCamViewControllerDelegate.swift in Sources */,
 				416F2E7227B0BFB5004E5AD9 /* UnitBcardModel.swift in Sources */,
