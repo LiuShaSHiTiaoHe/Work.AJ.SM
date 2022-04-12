@@ -13,6 +13,8 @@ typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
 typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
 typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
+// MARK: - NCom
+typealias NComAllDeviceInfoCompletion = (([NComDevice]) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -171,6 +173,15 @@ extension HomeRepository {
             } failureCallback: { response in
                 completion(nil)
             }
+        }
+    }
+}
+
+// MARK: - N方对讲
+extension HomeRepository {
+    func allNComDeviceInfo(completion: @escaping NComAllDeviceInfoCompletion) {
+        if let unit = getCurrentUnit(), let unitID = unit.unitid?.jk.intToString {
+            
         }
     }
 }

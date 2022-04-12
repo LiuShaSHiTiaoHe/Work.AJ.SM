@@ -20,6 +20,11 @@ enum HomeAPI {
     case openDoor(lockMac: String, userID: String, communityID: String, blockID: String, unitID: String, cellID: String, physicalFloor: String)
     case callElevatorViaMobile(cellID: String, direction: String, physicalFloor: String, unitNo: String)
     case getElevatorConfiguration(communityID: String)
+    
+    // MARK: - NCOM
+    case ncomAllDevice(unitID: String)
+    case ncomRecord(communityID: String, startTime: String, endTime: String, page: String, count: String)
+    case ncomSendStatus(communityID: String, unitID: String, callSource: String, callTarget: String, callType: Int, callStatus: Int, uniqueCode: String)
 }
 
 extension HomeAPI: TargetType {
@@ -52,14 +57,17 @@ extension HomeAPI: TargetType {
             return APIs.indoorCallElevator
         case .getElevatorConfiguration:
             return APIs.elevatorConfiguration
+        case .ncomAllDevice:
+            return APIs.allDTUInfo
+        case .ncomRecord:
+            return APIs.allNCallRecord
+        case .ncomSendStatus:
+            return APIs.sendNCallStatus
         }
     }
     
     var method: Moya.Method {
-        switch self {
-        case .getMyUnit, .getNotice, .getAdvertisement, .getElevators, .getLocks, .getUserOfflineQRCode, .getInvitationQRCode, .generateVisitorPassword, .getFloorsBySN, .openDoor, .callElevatorViaMobile, .getElevatorConfiguration:
-            return .post
-        }
+        return .post
     }
     
     var task: Task {
@@ -88,6 +96,12 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .ncomAllDevice(unitID):
+            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
+        case let .ncomRecord(communityID, startTime, endTime, page, count):
+            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
+        case let .ncomSendStatus(communityID, unitID, callSource, callTarget, callType, callStatus, uniqueCode):
+            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         }
     }
     

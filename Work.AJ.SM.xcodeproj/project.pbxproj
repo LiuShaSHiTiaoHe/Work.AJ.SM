@@ -167,6 +167,12 @@
 		419AD6AE27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6AD27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift */; };
 		419AD6B027FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */; };
 		419AD6B22803B6DA00C902B8 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6B12803B6DA00C902B8 /* NoDataView.swift */; };
+		419AD6BA2805082E00C902B8 /* NComDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6B92805082E00C902B8 /* NComDevice.swift */; };
+		419AD6BC2805084E00C902B8 /* NComDTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6BB2805084E00C902B8 /* NComDTU.swift */; };
+		419AD6BE2805086800C902B8 /* NComRecordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6BD2805086800C902B8 /* NComRecordInfo.swift */; };
+		419AD6C028050F4B00C902B8 /* NComViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6BF28050F4B00C902B8 /* NComViewController.swift */; };
+		419AD6C228050FA500C902B8 /* NComView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C128050FA500C902B8 /* NComView.swift */; };
+		419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C3280514E900C902B8 /* NComRecordCell.swift */; };
 		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
@@ -403,6 +409,12 @@
 		419AD6AD27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationSendDataViewController.swift; sourceTree = "<group>"; };
 		419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationSendDataView.swift; sourceTree = "<group>"; };
 		419AD6B12803B6DA00C902B8 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		419AD6B92805082E00C902B8 /* NComDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComDevice.swift; sourceTree = "<group>"; };
+		419AD6BB2805084E00C902B8 /* NComDTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComDTU.swift; sourceTree = "<group>"; };
+		419AD6BD2805086800C902B8 /* NComRecordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordInfo.swift; sourceTree = "<group>"; };
+		419AD6BF28050F4B00C902B8 /* NComViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComViewController.swift; sourceTree = "<group>"; };
+		419AD6C128050FA500C902B8 /* NComView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComView.swift; sourceTree = "<group>"; };
+		419AD6C3280514E900C902B8 /* NComRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordCell.swift; sourceTree = "<group>"; };
 		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
@@ -1478,8 +1490,38 @@
 		419AD6B528041E7700C902B8 /* NCall */ = {
 			isa = PBXGroup;
 			children = (
+				419AD6B82805081500C902B8 /* View */,
+				419AD6B72805080800C902B8 /* Controller */,
+				419AD6B62805080400C902B8 /* Model */,
 			);
 			path = NCall;
+			sourceTree = "<group>";
+		};
+		419AD6B62805080400C902B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				419AD6B92805082E00C902B8 /* NComDevice.swift */,
+				419AD6BB2805084E00C902B8 /* NComDTU.swift */,
+				419AD6BD2805086800C902B8 /* NComRecordInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		419AD6B72805080800C902B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				419AD6BF28050F4B00C902B8 /* NComViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		419AD6B82805081500C902B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				419AD6C128050FA500C902B8 /* NComView.swift */,
+				419AD6C3280514E900C902B8 /* NComRecordCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		41AA41A327D6F051007020AD /* SectionIndexView */ = {
@@ -1928,6 +1970,7 @@
 				416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */,
 				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
 				41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */,
+				419AD6BC2805084E00C902B8 /* NComDTU.swift in Sources */,
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
 				410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
@@ -1942,11 +1985,13 @@
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
+				419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */,
 				41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */,
 				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
 				41B7DBCF27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift in Sources */,
+				419AD6C228050FA500C902B8 /* NComView.swift in Sources */,
 				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
 				419AD6B22803B6DA00C902B8 /* NoDataView.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
@@ -1979,7 +2024,9 @@
 				4173C22E27C5D97200B8FBB8 /* AddMemberView.swift in Sources */,
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
 				4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */,
+				419AD6BE2805086800C902B8 /* NComRecordInfo.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
+				419AD6C028050F4B00C902B8 /* NComViewController.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
 				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
 				4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */,
@@ -2015,6 +2062,7 @@
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
 				41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */,
+				419AD6BA2805082E00C902B8 /* NComDevice.swift in Sources */,
 				41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */,
 				41C3502427CDAC15006E440F /* ConfirmFaceImageViewController.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
