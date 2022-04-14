@@ -119,6 +119,11 @@ class GDataManager: NSObject {
         ud.remove(\.openDoorStyle)
         ud.remove(\.personalOpenDoorPasswordStatus)
     }
+    
+    // MARK: - 删除网络请求缓存
+    func removeNetCache() {
+        CacheManager.network.removeAllCache()
+    }
 }
 
 extension GDataManager {
