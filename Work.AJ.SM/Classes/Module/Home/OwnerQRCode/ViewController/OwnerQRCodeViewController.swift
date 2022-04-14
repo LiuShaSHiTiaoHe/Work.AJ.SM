@@ -35,8 +35,8 @@ class OwnerQRCodeViewController: BaseViewController {
     }
     
     func updateImageData() {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString {
-            HomeAPI.getUserOfflineQRCode(unitID: unitID).defaultRequest { JsonData in
+        if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let userID = ud.userID {            
+            HomeAPI.getUserOfflineQRCode(unitID: unitID, communityID: communityID, blockID: blockID, userID: userID).defaultRequest { JsonData in
                 if let data = JsonData["data"].dictionary, let qrcode = data["qrcode"]?.string {
                     if let qrcodeImage = QRCode.init(string: qrcode, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
                         DispatchQueue.main.async {

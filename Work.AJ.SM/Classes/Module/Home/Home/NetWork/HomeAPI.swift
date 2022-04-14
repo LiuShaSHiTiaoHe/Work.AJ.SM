@@ -13,8 +13,8 @@ enum HomeAPI {
     case getNotice(communityID:String, blockID: String, cellID: String)
     case getElevators(communityID:String, unitID: String, cellID: String, groupID: String)
     case getLocks(communityID: String, blockID: String, cellID: String, unitID: String, userID: String, physicfloor: String)
-    case getUserOfflineQRCode(unitID: String)
-    case getInvitationQRCode(unitID: String, arriveTime: String, validTime: String)
+    case getUserOfflineQRCode(unitID: String, communityID: String, blockID: String, userID: String)
+    case getInvitationQRCode(unitID: String, arriveTime: String, validTime: String, communityID: String, blockID: String, userID: String)
     case generateVisitorPassword(communityID: String, blockID: String, unitID: String, userID: String, phone: String, time: String, type: String)
     case getFloorsBySN(SNCode: String, phone: String, userID: String)
     case openDoor(lockMac: String, userID: String, communityID: String, blockID: String, unitID: String, cellID: String, physicalFloor: String)
@@ -82,10 +82,10 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "CELLID": cellID, "UNITID": unitID, "GROUPID": groupID].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getLocks(communityID, blockID, cellID, unitID, userID, _):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-        case let .getUserOfflineQRCode(unitID):
-            return .requestParameters(parameters: ["UNITID": unitID, "isVisitor": "0"].ekey("UNITID"), encoding: URLEncoding.default)
-        case let .getInvitationQRCode(unitID, arriveTime, validTime):
-            return .requestParameters(parameters: ["UNITID": unitID, "isVisitor": "1", "startTime": arriveTime, "endTime": validTime].ekey("UNITID"), encoding: URLEncoding.default)
+        case let .getUserOfflineQRCode(unitID, communityID, blockID, userID):
+            return .requestParameters(parameters: ["UNITID": unitID, "COMMUNITYID":communityID, "BLOCKID": blockID, "USERID": userID, "isVisitor": "0"].ekey("UNITID"), encoding: URLEncoding.default)
+        case let .getInvitationQRCode(unitID, arriveTime, validTime, communityID, blockID, userID):
+            return .requestParameters(parameters: ["UNITID": unitID, "COMMUNITYID":communityID, "BLOCKID": blockID, "USERID": userID, "isVisitor": "1", "startTime": arriveTime, "endTime": validTime].ekey("UNITID"), encoding: URLEncoding.default)
         case let .generateVisitorPassword(communityID, blockID, unitID, userID, phone, time, type):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "USERID": userID, "PHONE": phone, "HOUR": time, "PASSTYPE": type, "needPwd": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getFloorsBySN(SNCode, phone, userID):
