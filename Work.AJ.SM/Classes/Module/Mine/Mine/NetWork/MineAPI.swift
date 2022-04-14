@@ -83,7 +83,7 @@ extension MineAPI: TargetType {
         case let .getUnitMembers(unitID, userID):
             return .requestParameters(parameters: ["UNITID": unitID, "USERID": userID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .addFamilyMember(communityID, unitID, userID, name, phone):
-            return .requestParameters(parameters: ["TARGETMOBILE": phone, "REALNAME": name, "USERID": userID, "UNITID": unitID, "COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["TARGETMOBILE": phone, "REALNAME": name, "USERID": userID, "UNITID": unitID, "COMMUNITYID": communityID].ekey("USERID"), encoding: URLEncoding.default)
         case let .allFace(communityID, blockID, cellID, unitID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .addFace(data):

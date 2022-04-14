@@ -58,8 +58,12 @@ class AddMemberViewController: BaseViewController {
             SVProgressHUD.showError(withStatus: "请输入成员的手机号码")
             return
         }
-        if memberPhone.jk.isValidMobile {
+        if !memberPhone.jk.isValidMobile {
             SVProgressHUD.showError(withStatus: "手机号码格式不正确")
+            return
+        }
+        if memberType == .initial {
+            SVProgressHUD.showError(withStatus: "请选择添加的角色")
             return
         }
         
@@ -72,8 +76,12 @@ class AddMemberViewController: BaseViewController {
         
         
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString {
-            MineAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone).defaultRequest { jsonData in
-                
+            MineAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone).defaultRequest { [weak self] jsonData in
+                guard let self = self else { return }
+                let vc = MemberInvitationViewController()
+                vc.phone = memberPhone
+                vc.qrCodeString = "anjiezhihuishequ"
+                self.navigationController?.pushViewController(vc, animated: true)
             } failureCallback: { response in
                 SVProgressHUD.showError(withStatus: "\(response.message)")
             }

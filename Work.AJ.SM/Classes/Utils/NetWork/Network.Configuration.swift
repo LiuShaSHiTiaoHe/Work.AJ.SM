@@ -14,7 +14,7 @@ public extension Network {
 
         public static var `default`: Configuration = {
             let cofig = Configuration()
-            cofig.timeoutInterval = 10
+            cofig.timeoutInterval = 20
             cofig.plugins = []//[NetworkIndicatorPlugin()]
             cofig.replacingTask = { (target: TargetType) -> Task in
                 let url = target.baseURL.absoluteString + target.path
@@ -46,7 +46,7 @@ public extension Network {
         
         public var replacingTask: (TargetType) -> Task = { $0.task }
         
-        public var timeoutInterval: TimeInterval = 60
+        public var timeoutInterval: TimeInterval = 20
         
         public var plugins: [PluginType] = []
         

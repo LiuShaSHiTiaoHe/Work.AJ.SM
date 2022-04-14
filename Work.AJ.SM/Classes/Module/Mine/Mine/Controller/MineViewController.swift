@@ -26,7 +26,7 @@ class MineViewController: BaseViewController {
             contentView.nameLabel.text = name
             contentView.phoneLabel.text = mobile.jk.hidePhone()
             if let folderPath = userInfo.folderPath, let avatarUrl = userInfo.HeadImageUrl {
-                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: [.forceRefresh]) { result in
+                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil) { result in
                     switch result {
                     case .success(let value):
                         if let imageData = value.image.pngData() {

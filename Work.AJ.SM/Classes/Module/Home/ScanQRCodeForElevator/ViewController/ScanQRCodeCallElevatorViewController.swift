@@ -62,10 +62,9 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
         if let qrString = result.strScanned {
             if qrString.contains(symbolSeperator) {
                 let StrArray = qrString.components(separatedBy: symbolSeperator)
-                if StrArray.count > 1 {
-                    let infoStr = StrArray.last!
+                if StrArray.count > 1, let SNCode = StrArray.last {
                     let vc = ScanQRCodeSelectElevatorViewController()
-                    vc.SNCode = infoStr
+                    vc.SNCode = SNCode
                     self.navigationController?.pushViewController(vc, animated: true)
                 }else{
                     SVProgressHUD.showInfo(withStatus: "数据格式未按要求设定")

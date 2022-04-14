@@ -33,15 +33,6 @@ class ScanQRCodeSelectElevatorViewController: BaseViewController {
         contentView.collectionView.dataSource = self
         contentView.delegate = self
         if let SNCode = SNCode {
-//            MCERepository.shared.getFloorsBySNCode(code: SNCode) { [weak self] model, response in
-//                guard let `self` = self else { return }
-//                self.dataSource = model
-//                self.originalData = response
-//                if self.currentFloorID.isEmpty, let floorName = model.allKeys().first {
-//                    self.currentFloorID = floorName
-//                }
-//                self.reloadDatas()
-//            }
             MCERepository.shared.getFloorsBySNCode(code: SNCode) {[weak self] models in
                 guard let `self` = self else { return }
                 self.dataSource = models
@@ -52,7 +43,6 @@ class ScanQRCodeSelectElevatorViewController: BaseViewController {
     
     private func reloadDatas() {
         contentView.collectionView.reloadData()
-//        contentView.elevatorTitle.text = MCERepository.shared.getFloorName(floorID: currentFloorID, model: originalData)
     }
     
     @objc

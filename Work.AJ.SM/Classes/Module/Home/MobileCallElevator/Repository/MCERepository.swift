@@ -8,9 +8,7 @@
 import Foundation
 import SVProgressHUD
 
-
 typealias ElevatorsCompletion = ((Dictionary<String, Array<FloorMapInfo>>, MobileCallElevatorModel) -> Void)
-
 typealias FloorsCompletion = (([FloorInfoMappable]) -> Void)
 
 class MCERepository {
@@ -28,7 +26,6 @@ class MCERepository {
             } failureCallback: { response in
                 completion([])
             }
-
         }
     }
 

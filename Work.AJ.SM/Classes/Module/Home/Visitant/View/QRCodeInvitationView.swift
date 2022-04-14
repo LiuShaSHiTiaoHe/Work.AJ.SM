@@ -21,6 +21,7 @@ class QRCodeInvitationView: BaseView {
         bgContentView.addSubview(arriveTime)
         bgContentView.addSubview(validLabel)
         bgContentView.addSubview(validTime)
+        bgContentView.addSubview(dashLine)
         bgContentView.addSubview(qrCodeView)
         
         self.addSubview(saveButton)
@@ -58,7 +59,8 @@ class QRCodeInvitationView: BaseView {
         
         arriveLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
-            make.top.equalToSuperview().offset(130)
+//            make.top.equalToSuperview().offset(130)
+            make.top.equalTo(locationLabel.snp.bottom).offset(kMargin*2)
             make.height.equalTo(20)
         }
         
@@ -71,7 +73,7 @@ class QRCodeInvitationView: BaseView {
         
         validLabel.snp.makeConstraints { make in
             make.left.equalTo(arriveLabel)
-            make.top.equalTo(arriveLabel.snp.bottom).offset(30)
+            make.top.equalTo(arriveLabel.snp.bottom).offset(kMargin)
             make.height.equalTo(20)
         }
         
@@ -82,11 +84,18 @@ class QRCodeInvitationView: BaseView {
             make.top.equalTo(validLabel)
         }
         
+        dashLine.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(kMargin)
+            make.right.equalToSuperview().offset(-kMargin)
+            make.height.equalTo(1)
+            make.top.equalTo(validTime.snp.bottom).offset(kMargin)
+        }
+        
         qrCodeView.snp.makeConstraints { make in
             make.top.equalTo(validLabel.snp.bottom).offset(kMargin*2)
-            make.left.equalToSuperview().offset(kMargin*2)
-            make.right.equalToSuperview().offset(-kMargin*2)
-            make.height.equalTo(qrCodeView.snp.width)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(qrCodeView.snp.height)
+            make.bottom.lessThanOrEqualToSuperview().offset(-kMargin)
         }
         
         saveButton.snp.makeConstraints { make in
@@ -102,6 +111,10 @@ class QRCodeInvitationView: BaseView {
             make.centerX.equalToSuperview().multipliedBy(1.5)
             make.centerY.equalTo(saveButton)
         }
+    }
+    
+    override func layoutSubviews() {
+        dashLine.jk.drawDashLine(strokeColor: R.color.themeColor()!)
     }
     
     lazy var headerView: CommonHeaderView = {
@@ -120,7 +133,9 @@ class QRCodeInvitationView: BaseView {
     
     lazy var bgContentView: UIImageView = {
         let view = UIImageView()
-        view.image = R.image.invitation_image_contentbg()
+        view.backgroundColor = R.color.whiteColor()
+        view.layer.cornerRadius = 15.0
+        view.clipsToBounds = true
         return view
     }()
     
@@ -136,7 +151,7 @@ class QRCodeInvitationView: BaseView {
     lazy var locationLabel: UILabel = {
         let view = UILabel.init()
         view.textColor = R.color.maintextColor()
-        view.font = k18Font
+        view.font = k20Font
         view.textAlignment = .center
         return view
     }()

@@ -34,7 +34,7 @@ class MemberInvitationView: BaseView {
         }
         
         avatar.snp.makeConstraints { make in
-            make.width.height.equalTo(70)
+            make.width.height.equalTo(60)
             make.centerX.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
         }
@@ -70,28 +70,29 @@ class MemberInvitationView: BaseView {
         qrCodeView.snp.makeConstraints { make in
             make.top.equalTo(locationLabel.snp.bottom).offset(kMargin)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(290)
+            make.width.equalTo(qrCodeView.snp.height)
+            make.bottom.equalTo(tipsLabel.snp.top).offset(-kMargin)
         }
 
         tipsLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.equalTo(30)
-            make.top.equalTo(qrCodeView.snp.bottom).offset(kMargin)
+            make.height.equalTo(20)
+            make.bottom.equalTo(tips1Label.snp.top)
         }
         
         tips1Label.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.equalTo(30)
-            make.top.equalTo(tipsLabel.snp.bottom).offset(kMargin)
+            make.height.equalTo(20)
+            make.bottom.equalTo(tips2Label.snp.top)
         }
         
         tips2Label.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.equalTo(30)
-            make.top.equalTo(tips1Label.snp.bottom)
+            make.height.equalTo(40)
+            make.bottom.equalToSuperview().offset(-kMargin/2)
         }
         
         saveButton.snp.makeConstraints { make in
@@ -128,13 +129,17 @@ class MemberInvitationView: BaseView {
     
     lazy var bgContentView: UIImageView = {
         let view = UIImageView()
-        view.image = R.image.invitation_image_contentbg()
+        view.backgroundColor = R.color.whiteColor()
+        view.layer.cornerRadius = 15
+        view.clipsToBounds = true
         return view
     }()
     
     lazy var avatar: UIImageView = {
         let view = UIImageView()
         view.image = R.image.defaultavatar()
+        view.layer.cornerRadius = 30
+        view.clipsToBounds = true
         return view
     }()
     

@@ -99,7 +99,8 @@ extension HomeAPI: TargetType {
         case let .ncomAllDevice(unitID):
             return .requestParameters(parameters: ["UNITID": unitID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .ncomRecord(communityID, startTime, endTime, page, count):
-            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
+            let parameters = ["COMMUNITYID": communityID, "STARTTIME": startTime, "ENDTIME": endTime, "currentPage": page, "showCount": count].ekey("COMMUNITYID")
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case let .ncomSendStatus(communityID, unitID, callSource, callTarget, callType, callStatus, uniqueCode):
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         }
