@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import MJRefresh
 
 class NComRecordViewController: BaseViewController {
 
+    private var dataSource: [NComRecordInfo] = []
+    private var page: Int = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -17,6 +21,38 @@ class NComRecordViewController: BaseViewController {
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
+        contentView.tableView.mj_header = refreshHeader()
+        contentView.tableView.mj_footer = MJRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
+        
+        loadNComRecord()
+    }
+    
+    override func headerRefresh() {
+        page = 1
+        loadNComRecord()
+    }
+    
+    @objc func footerLoadMore(){
+        page += 1
+        loadNComRecord()
+    }
+    
+    private func loadNComRecord() {
+        HomeRepository.shared.loadNComRecord("", "", page.jk.intToString, "15") {[weak self] (records, totalPage) in
+            guard let self = self else { return }
+            if self.page == 1{
+                self.contentView.tableView.mj_header?.endRefreshing()
+            }else{
+                self.contentView.tableView.mj_header?.endRefreshing()
+                self.contentView.tableView.mj_footer?.endRefreshing()
+            }
+            if totalPage != -1 {
+                if !records.isEmpty {
+                    self.dataSource.append(contentsOf: records)
+                }
+            }
+            self.contentView.tableView.reloadData()
+        }
     }
     
     // MARK: - UI
@@ -40,7 +76,9 @@ extension NComRecordViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ncomrecordCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: NComRecordCellIdentifier, for: indexPath) as! NComRecordCell
+        let data = dataSource[indexPath.row]
+        cell.record = data
         return cell
     }
     

@@ -78,6 +78,33 @@ extension NComViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ncomdevicecell", for: indexPath)
+        let device = dataSource[indexPath.row]
+        let signalImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
+        if let sig = device.signalIntensity {
+            switch sig {
+            case "0":
+                signalImageView.image = R.image.cell_icon_wifi_0()
+            case "1":
+                signalImageView.image = R.image.cell_icon_wifi_1()
+            case "2":
+                signalImageView.image = R.image.cell_icon_wifi_2()
+            case "3":
+                signalImageView.image = R.image.cell_icon_wifi_3()
+            case "4":
+                signalImageView.image = R.image.cell_icon_wifi_4()
+            default:
+                signalImageView.image = R.image.cell_icon_wifi_0()
+            }
+        }else{
+            signalImageView.image = R.image.cell_icon_wifi_0()
+        }
+        if let gap = device.gap, gap == 1 {
+            cell.textLabel?.textColor = UIColor.init(hex: "409EFF")
+        }else{
+            cell.textLabel?.textColor = UIColor.init(hex: "F56C6C")
+        }
+        cell.accessoryView = signalImageView
+        cell.textLabel?.text = device.lockName
         return cell
     }
     

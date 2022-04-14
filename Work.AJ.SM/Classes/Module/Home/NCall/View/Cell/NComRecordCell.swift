@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 
+let NComRecordCellIdentifier = "NComRecordCellIdentifier"
+
 class NComRecordCell: UITableViewCell {
     
     var record: NComRecordInfo? {

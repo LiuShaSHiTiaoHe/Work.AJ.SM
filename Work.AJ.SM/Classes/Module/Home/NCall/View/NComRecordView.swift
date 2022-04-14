@@ -40,6 +40,7 @@ class NComRecordView: BaseView {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
+        view.register(NComRecordCell.self, forCellReuseIdentifier: NComRecordCellIdentifier)
         return view
     }()
 }

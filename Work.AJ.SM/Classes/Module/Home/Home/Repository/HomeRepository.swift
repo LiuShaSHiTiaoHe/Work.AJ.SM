@@ -193,7 +193,19 @@ extension HomeRepository {
     func loadNComRecord(_ sTime: String = "", _ eTime: String = "", _ page: String, _ count: String = "15", completion: @escaping NComCallRecordCompletion) {
         if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
             HomeAPI.ncomRecord(communityID: communityID, startTime: sTime, endTime: eTime, page: page, count: count).defaultRequest { jsonData in
-                
+                if let recordsData = jsonData["data"].rawString(), let records = [NComRecordInfo](JSONString: recordsData) {
+                    if let pageData = jsonData["page"].dictionaryObject, let tPage = pageData["totalPage"] as? Int {
+                        completion(records, tPage)
+                    }else{
+                        completion([], -1)
+                    }
+                }else{
+                    if let pageData = jsonData["page"].dictionaryObject, let tPage = pageData["totalPage"] as? Int  {
+                        completion([], tPage)
+                    }else{
+                        completion([], -1)
+                    }
+                }
             }
         }
     }
