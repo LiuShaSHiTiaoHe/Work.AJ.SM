@@ -34,7 +34,7 @@ class UserProfileInputViewController: BaseViewController {
         case .realName:
             headerView.titleLabel.text = "真实姓名"
         }
-        textfield.text = value
+        textfield.placeholder = value
     }
     
     @objc

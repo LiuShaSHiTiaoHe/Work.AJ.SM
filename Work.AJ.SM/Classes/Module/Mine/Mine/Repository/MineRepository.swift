@@ -68,16 +68,16 @@ class MineRepository: NSObject {
     func getCurrentUnitMembers(completion: @escaping UnitMembersCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let userID = unit.userid?.jk.intToString, let unitID = unit.unitid?.jk.intToString {
             SVProgressHUD.show()
-            MineAPI.getUnitMembers(unitID: unitID, userID: userID).defaultRequest { jsonData in
+            MineAPI.getUnitMembers(unitID: unitID, userID: userID).defaultRequest(cacheType: .ignoreCache, showError: true, successCallback: { jsonData in
                 SVProgressHUD.dismiss()
                 if let memberJsonString = jsonData["data"]["users"].rawString(), let members = [MemberModel](JSONString: memberJsonString) {
                     guard members.count > 0 else { return  }
                     completion(members)
                 }
-            } failureCallback: { response in
+            }, failureCallback: { response in
                 logger.info("\(response.message)")
                 completion([])
-            }
+            })
         }else{
             completion([])
         }
@@ -86,8 +86,12 @@ class MineRepository: NSObject {
     func getMineModules() -> [MineModule] {
         if let unit = HomeRepository.shared.getCurrentUnit() {
             let allKeys = MineModuleType.allCases
-            let allModules = allKeys.compactMap {  moduleEnum in
+            var allModules = allKeys.compactMap {  moduleEnum in
                 return moduleEnum.model
+            }
+            // MARK: - 业主有权限查看房屋成员
+            if !GDataManager.shared.isOwner() {
+                allModules = allModules.filter { $0.name != MineModuleType.memeberManager.rawValue }
             }
             if let otherUsed = unit.otherused, otherUsed == 1 {
                 return allModules.filter{$0.isOtherUsed}

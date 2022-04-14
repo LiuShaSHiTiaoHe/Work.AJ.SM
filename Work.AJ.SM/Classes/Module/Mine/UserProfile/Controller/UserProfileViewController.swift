@@ -400,6 +400,12 @@ extension UserProfileViewController: UserProfileInputViewControllerDelegate {
         let vc = UserProfileInputViewController()
         vc.type = type
         vc.delegate = self
+        switch type {
+        case .nickName:
+            vc.value = userNickName
+        case .realName:
+            vc.value = userRealName
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -442,9 +448,11 @@ extension UserProfileViewController {
             MineRepository.shared.updateAvatar(with: userID, avatar: avatarData) { [weak self] errorMsg in
                 guard let self = self else { return }
                 if errorMsg.isEmpty {
-                    NotificationCenter.default.post(name: .kUserUpdateAvatar, object: nil)
                     CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: avatarData], key: UserAvatarCacheKey)
                     self.contentView.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .kUserUpdateAvatar, object: nil)
+                    }
                 }else{
                     SVProgressHUD.showError(withStatus: errorMsg)
                 }

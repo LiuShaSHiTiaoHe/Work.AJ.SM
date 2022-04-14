@@ -125,6 +125,14 @@ class GDataManager: NSObject {
     func removeNetCache() {
         CacheManager.network.removeAllCache()
     }
+    
+    func isOwner() -> Bool {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let userType = unit.usertype, userType == "O" {
+            return true
+        }else{
+            return false
+        }
+    }
 }
 
 extension GDataManager {
