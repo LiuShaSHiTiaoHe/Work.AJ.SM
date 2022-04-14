@@ -51,13 +51,11 @@ class BaseChatViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NIMAVChatSDK.shared().netCallManager.add(self)
-        if !isCalled {
-            ChatRingManager.shared.calling()
-            startCall()
-        }else{
-            ChatRingManager.shared.onCalledRing()
-        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+  
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -66,11 +64,18 @@ class BaseChatViewController: BaseViewController {
     }
     
     override func initData() {
+        NIMAVChatSDK.shared().netCallManager.add(self)
         contentView.isVideoCall = kCallType == .video
         contentView.isCalled = isCalled
         updateContactName((isCalled ? kCaller: kCallee))
+        if !isCalled {
+            ChatRingManager.shared.calling()
+            startCall()
+        }else{
+            ChatRingManager.shared.onCalledRing()
+        }
     }
-    
+        
     override func initUI() {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in

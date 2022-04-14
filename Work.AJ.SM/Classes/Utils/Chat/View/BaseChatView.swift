@@ -125,7 +125,7 @@ class BaseChatView: BaseView {
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(-kTitleAndStateHeight)
+            make.top.equalToSuperview().offset(kTitleAndStateHeight)
             make.width.equalTo(200)
             make.height.equalTo(40)
             make.centerX.equalToSuperview()
@@ -141,13 +141,13 @@ class BaseChatView: BaseView {
         refuseButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.right.equalTo(self.snp.centerX).offset(-60)
+            make.right.equalTo(self.snp.centerX).offset(-80)
         }
         
         responseButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.left.equalTo(self.snp.centerX).offset(60)
+            make.left.equalTo(self.snp.centerX).offset(80)
         }
         
         hangupButton.snp.makeConstraints { make in
@@ -174,7 +174,7 @@ class BaseChatView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k18Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.maintextColor()
         return view
     }()
     

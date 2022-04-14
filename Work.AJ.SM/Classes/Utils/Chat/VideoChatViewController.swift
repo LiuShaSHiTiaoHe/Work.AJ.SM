@@ -13,22 +13,14 @@ class VideoChatViewController: BaseChatViewController {
     
     private var isLockMac: Bool = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-  
-    }
-
     override func initData() {
+        super.initData()
         contentView.delegate = self
-    }
-    
-    override func initUI() {
-        
     }
     
     // MARK: - init
     init(startCall callee: String, isLock: Bool = false) {
-        super.init(startCall: callee, callType: .video)
+        super.init(startCall: kNIMSDKPrefixString + callee, callType: .video)
         isLockMac = isLock
     }
     

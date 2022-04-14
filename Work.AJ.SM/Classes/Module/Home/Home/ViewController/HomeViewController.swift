@@ -102,10 +102,6 @@ extension HomeViewController: HomeViewDelegate {
         case .addFamilyMember:
             pushTo(viewController: AddMemberViewController())
         case .deviceConfiguration:
-//                let vc = VideoChatViewController.init(startCall: "AJPLUS000ec6b6d90c")
-//                let vc = VideoChatViewController.init(startCall: "ajplus15295776453")
-//                vc.modalPresentationStyle = .fullScreen
-//                self.present(vc, animated: true, completion: nil)
             break
         case .elevatorConfiguration:
             pushTo(viewController: ElevatorConfigurationViewController())

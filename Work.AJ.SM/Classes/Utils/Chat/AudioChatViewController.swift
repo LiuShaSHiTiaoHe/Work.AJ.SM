@@ -9,15 +9,11 @@ import UIKit
 
 class AudioChatViewController: BaseChatViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-    
     override func initData() {
+        super.initData()
         contentView.delegate = self
     }
-    
+  
     
     // MARK: - init
     init(startCall callee: String) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFAudio
 
 class ChatRingManager {
 
@@ -45,13 +46,27 @@ class ChatRingManager {
 
     private func playSound(_ soundName: String){
         do {
-            player = try AudioPlayer(fileName: soundName)
+            if let soundURL = Bundle.main.url(forResource: soundName, withExtension: "aac") {
+                player = try AudioPlayer.init(contentsOf: soundURL)
+            }
         } catch {
             print("Sound initialization failed")
         }
+        if let player = player {
+            player.numberOfLoops = 20
+            player.volume = 0.2
+            player.play()
+        }
+        
     }
     
     private init(){
+        do {
+            try  AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, policy: .default, options: .defaultToSpeaker)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("AVAudioSession initialization failed")
+        }
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleCompletion(_:)),
                                                name: .SoundDidFinishPlayingNotification,
