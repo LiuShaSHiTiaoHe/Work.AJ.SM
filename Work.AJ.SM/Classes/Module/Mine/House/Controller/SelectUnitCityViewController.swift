@@ -20,60 +20,41 @@ class SelectUnitCityViewController: BaseViewController {
 
     weak var delegate: SelectUnitCityViewControllerDelegate?
     private var dataSource = Dictionary<String, Array<String>>()
-    private var keysArray  = Array<String>()
+    private var cityNames = Array<String>()
+    private var keysArray = Array<String>()
+    private var searchResult = Array<String>()
     private var locationManager: LocationManager!
+    
+    private var isSearch: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func initData() {
         locationManager = LocationManager.shared
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        currentLocation.locationButton.addTarget(self, action: #selector(reLocated), for: .touchUpInside)
         searchView.initViewType(true)
+        searchView.delegate = self
+        searchView.searchView.delegate = self
         tableVeiw.delegate = self
         tableVeiw.dataSource = self
-        judgePermission()
+        getAllCity()
     }
     
     func getAllCity() {
-        MineRepository.shared.getAllCity {[weak self] cityArray in
+        MineRepository.shared.getAllCity {[weak self] cityArray, names in
+            guard let self = self else { return }
             if cityArray.isEmpty {
                 SVProgressHUD.showInfo(withStatus: "数据为空")
             }else{
-                self?.dataSource = cityArray
-                self?.keysArray = cityArray.allKeys().sorted{$0 < $1}
-                self?.sortAllCity()
-                self?.tableVeiw.reloadData()
+                self.cityNames = names
+                self.dataSource = cityArray
+                self.keysArray = cityArray.allKeys().sorted{$0 < $1}
+                self.sortAllCity()
+                self.tableVeiw.reloadData()
             }
         }
-    }
-    
-    func judgePermission() {
-        if SPPermissions.Permission.locationWhenInUse.isPrecise {
-            getAllCity()
-            locationManager.requestLocation()
-            locationManager.getCurrentCity = { [weak self] cityName in
-                if cityName.isEmpty {
-                    self?.currentLocation.locationName.text = "未知"
-                }else{
-                    self?.currentLocation.locationName.text = cityName
-                }
-            }
-        }else{
-            let permissions: [SPPermissions.Permission] = [.locationWhenInUse]
-            let controller = SPPermissions.dialog(permissions)
-            controller.delegate = self
-            controller.present(on: self)
-        }
-    }
-    
-    @objc
-    func reLocated() {
-        judgePermission()
     }
     
     func sortAllCity() {
@@ -99,7 +80,6 @@ class SelectUnitCityViewController: BaseViewController {
         
         view.addSubview(headerView)
         view.addSubview(searchView)
-        view.addSubview(currentLocation)
         view.addSubview(tableVeiw)
         
         headerView.snp.makeConstraints { make in
@@ -113,16 +93,11 @@ class SelectUnitCityViewController: BaseViewController {
             make.height.equalTo(60)
         }
         
-        currentLocation.snp.makeConstraints { make in
-            make.top.equalTo(searchView.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(80)
-        }
-        
         tableVeiw.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(currentLocation.snp.bottom)
+            make.top.equalTo(searchView.snp.bottom)
         }
+
     }
     
     lazy var headerView: CommonHeaderView = {
@@ -140,10 +115,6 @@ class SelectUnitCityViewController: BaseViewController {
         return view
     }()
     
-    lazy var currentLocation: CurrentLocationView = {
-        let view = CurrentLocationView()
-        return view
-    }()
     
     lazy var tableVeiw: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .grouped)
@@ -161,64 +132,95 @@ extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-         return 25
+        if isSearch {
+            return 0
+        }
+        return 25
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if isSearch {
+            return 1
+        }
         return keysArray.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let values = dataSource[keysArray[section]]
-        return values?.count ?? 0
+        if isSearch {
+            return searchResult.count
+        }else{
+            let values = dataSource[keysArray[section]]
+            return values?.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UnitCityCellIdentifier, for: indexPath)
-        if let values = dataSource[keysArray[indexPath.section]] {
-            let name = values[indexPath.row]
+        if isSearch {
+            let name = searchResult[indexPath.row]
             cell.textLabel?.text = name
+        }else{
+            if let values = dataSource[keysArray[indexPath.section]] {
+                let name = values[indexPath.row]
+                cell.textLabel?.text = name
+            }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return keysArray[section]
+        if isSearch {
+            return ""
+        }else{
+            return keysArray[section]
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let values = dataSource[keysArray[indexPath.section]] {
-            let name = values[indexPath.row]
+        if isSearch {
+            let name = searchResult[indexPath.row]
             delegate?.selectCity(name: name)
             self.navigationController?.popViewController(animated: true)
+        }else{
+            if let values = dataSource[keysArray[indexPath.section]] {
+                let name = values[indexPath.row]
+                delegate?.selectCity(name: name)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
 }
 
+extension SelectUnitCityViewController: CommonSearchViewDelegate {
+    func cancelSearchAction() {
+        isSearch = false
+        tableVeiw.reloadData()
+    }
+}
 
-extension SelectUnitCityViewController: SPPermissionsDelegate {
-    
-    func didHidePermissions(_ permissions: [SPPermissions.Permission]) { }
-    
-    func didAllowPermission(_ permission: SPPermissions.Permission) {
-        switch permission {
-        case .locationWhenInUse:
-            judgePermission()
-            break
-        default:
-            break
-        }
+extension SelectUnitCityViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        isSearch = true
     }
     
-    func didDeniedPermission(_ permission: SPPermissions.Permission) {
-        switch permission {
-        case .locationWhenInUse:
-            SVProgressHUD.showInfo(withStatus: "需要您的位置信息")
-            break
-        default:
-            break
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        isSearch = false
+        tableVeiw.reloadData()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let searchString = textField.text, !searchString.isEmpty {
+            let searchStringPY = searchString.jk.toPinyin()
+            searchResult = cityNames.filter { name in
+                let namePY = name.jk.toPinyin()
+                return namePY.contains(searchStringPY)
+            }
+            isSearch = true
+            tableVeiw.reloadData()
+            return true
         }
+        return false
     }
 }

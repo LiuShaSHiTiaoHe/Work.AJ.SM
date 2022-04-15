@@ -9,8 +9,18 @@ import UIKit
 
 let ConstSearhViewHeight: CGFloat = 70.0
 
+protocol CommonSearchViewDelegate: NSObjectProtocol {
+    func cancelSearchAction()
+}
+
+extension CommonSearchViewDelegate {
+    func cancelSearchAction() {}
+}
+
 class CommonSearchView: UIView {
 
+    weak var delegate: CommonSearchViewDelegate?
+    
     var placeHolder: String? {
         didSet {
             if let placeHolder = placeHolder {
@@ -32,6 +42,7 @@ class CommonSearchView: UIView {
     func cancleAction() {
         searchView.resignFirstResponder()
         searchView.text = ""
+        delegate?.cancelSearchAction()
     }
     
     override init(frame: CGRect) {
@@ -150,6 +161,7 @@ class CommonSearchView: UIView {
         let view = UITextField.init()
         view.font = k14Font
         view.textColor = R.color.blackColor()
+        view.returnKeyType = .search
         return view
     }()
     

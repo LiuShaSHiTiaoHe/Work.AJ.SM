@@ -20,24 +20,13 @@ class MineViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadUserProfile()
+    }
+    
     override func initData() {
         contentView.headerView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(userProfileView)))
-        if let _ = ud.userID, let userInfo = HomeRepository.shared.getCurrentUser(), let name = userInfo.userName, let mobile = userInfo.mobile {
-            contentView.nameLabel.text = name
-            contentView.phoneLabel.text = mobile.jk.hidePhone()
-            if let folderPath = userInfo.folderPath, let avatarUrl = userInfo.HeadImageUrl {
-                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil) { result in
-                    switch result {
-                    case .success(let value):
-                        if let imageData = value.image.pngData() {
-                            CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: imageData], key: UserAvatarCacheKey)
-                        }
-                    case .failure(_):
-                        break
-                    }
-                }
-            }
-        }
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         dataSource = MineRepository.shared.getMineModules()
@@ -62,6 +51,16 @@ class MineViewController: BaseViewController {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    func loadUserProfile() {
+        if let userInfo = HomeRepository.shared.getCurrentUser(), let name = userInfo.userName, let mobile = userInfo.mobile {
+            contentView.nameLabel.text = name
+            contentView.phoneLabel.text = mobile.jk.hidePhone()
+            if let folderPath = userInfo.folderPath, let avatarUrl = userInfo.HeadImageUrl {
+                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
+            }
         }
     }
 

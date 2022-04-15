@@ -23,6 +23,16 @@ enum userProfilePickerType: String {
     case profession = "职业"
 }
 
+enum userProfileInfoType: String {
+    case nickName = "USERNAME"
+    case birthDate = "BIRTHDATE"
+    case gender = "SEX"
+    case education = "EDUCATION"
+    case profession = "JOB"
+    case realName = "REALNAME"
+//    case mobile = ""
+}
+
 class UserProfileViewController: BaseViewController {
 
     private var viewState: userProfileViewState = .display
@@ -298,19 +308,19 @@ extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             let pickedItem = UserProfileConstDefines.init().gender[pickerIndex]
             if pickedItem != userGender {
                 userGender = pickedItem
-                updateUserInfo(pickedItem, "SEX")
+                updateUserInfo(pickedItem, .gender)
             }
         case .education:
             let pickedItem = UserProfileConstDefines.init().education[pickerIndex]
             if pickedItem != userEducation {
                 userEducation = pickedItem
-                updateUserInfo(pickedItem, "EDUCATION")
+                updateUserInfo(pickedItem, .education)
             }
         case .profession:
             let pickedItem = UserProfileConstDefines.init().profession[pickerIndex]
             if pickedItem != userProfession {
                 userProfession = pickedItem
-                updateUserInfo(pickedItem, "JOB")
+                updateUserInfo(pickedItem, .profession)
             }
         }
         contentView.tableView.reloadData()
@@ -386,7 +396,7 @@ extension UserProfileViewController {
                     return
                 }
                 self.userBirthDate = selectDateString
-                self.updateUserInfo(selectDateString, "BIRTHDATE")
+                self.updateUserInfo(selectDateString, .birthDate)
                 self.contentView.tableView.reloadData()
             }
         }
@@ -416,13 +426,13 @@ extension UserProfileViewController: UserProfileInputViewControllerDelegate {
                 return
             }
             userNickName = value
-            updateUserInfo(userNickName, "USERNAME")
+            updateUserInfo(userNickName, .nickName)
         case .realName:
             if value == userRealName {
                 return
             }
             userRealName = value
-            updateUserInfo(userRealName, "REALNAME")
+            updateUserInfo(userRealName, .realName)
         }
         contentView.tableView.reloadData()
     }
@@ -430,11 +440,29 @@ extension UserProfileViewController: UserProfileInputViewControllerDelegate {
 
 
 extension UserProfileViewController {
-    func updateUserInfo(_ infoValue: String, _ infoKey: String) {
+    func updateUserInfo(_ infoValue: String, _ infoKey: userProfileInfoType) {
         if let userID = ud.userID {
-            MineRepository.shared.updateUserInfo(with: userID, infoValue: infoValue, key: infoKey) { [weak self] errorMsg in
+            MineRepository.shared.updateUserInfo(with: userID, infoValue: infoValue, key: infoKey.rawValue) { [weak self] errorMsg in
                 guard let self = self else { return }
                 if errorMsg.isEmpty {
+                    if let userInfo = HomeRepository.shared.getCurrentUser() {
+                        RealmTools.updateWithTranstion { flag in
+                            switch infoKey {
+                            case .nickName:
+                                userInfo.userName = infoValue
+                            case .birthDate:
+                                userInfo.birthdate = infoValue
+                            case .gender:
+                                userInfo.sex = infoValue
+                            case .education:
+                                userInfo.education = infoValue
+                            case .profession:
+                                userInfo.job = infoValue
+                            case .realName:
+                                userInfo.realName = infoValue
+                            }
+                        }
+                    }
                     self.contentView.tableView.reloadData()
                 }else{
                     SVProgressHUD.showError(withStatus: errorMsg)

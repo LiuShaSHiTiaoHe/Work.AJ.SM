@@ -11,7 +11,7 @@ import SVProgressHUD
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
 typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 typealias FaceListCompletion = (([FaceModel]) -> Void)
-typealias CityListCompletion = ((Dictionary<String, Array<String>>) -> Void)
+typealias CityListCompletion = ((Dictionary<String, Array<String>>, Array<String>) -> Void)
 typealias CommunityListCompletion = (([CommunityModel]) -> Void)
 typealias BlockListCompletion = (([BlockModel]) -> Void)
 typealias CellListCompletion = (([CellModel]) -> Void)
@@ -270,12 +270,14 @@ extension MineRepository {
     func getAllCity(competion: @escaping CityListCompletion) {
         MineAPI.allCity(encryptString: "").defaultRequest { jsonData in
             if let cityArray = jsonData["data"].arrayObject as? Array<Dictionary<String, String>> {
-                competion(self.sortCityWithPY(cityArray))
+                competion(self.sortCityWithPY(cityArray), cityArray.compactMap({ item in
+                    item["CITY"]
+                }))
             }else{
-                competion([:])
+                competion([:], [])
             }
         } failureCallback: { response in
-            competion([:])
+            competion([:], [])
         }
     }
     
