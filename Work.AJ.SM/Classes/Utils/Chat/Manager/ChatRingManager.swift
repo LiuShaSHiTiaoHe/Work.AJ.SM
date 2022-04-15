@@ -45,6 +45,7 @@ class ChatRingManager {
     }
 
     private func playSound(_ soundName: String){
+        stopRing()
         do {
             if let soundURL = Bundle.main.url(forResource: soundName, withExtension: "aac") {
                 player = try AudioPlayer.init(contentsOf: soundURL)
@@ -53,7 +54,7 @@ class ChatRingManager {
             print("Sound initialization failed")
         }
         if let player = player {
-            player.numberOfLoops = 20
+            player.numberOfLoops = 10
             player.volume = 0.2
             player.play()
         }

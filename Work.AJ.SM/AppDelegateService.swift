@@ -60,12 +60,8 @@ extension AppDelegate {
         SVProgressHUD.setRingRadius(30)
         SVProgressHUD.setDefaultAnimationType(.native)
         SVProgressHUD.setDefaultMaskType(.clear)
-        if #available(iOS 15.0, *) {
-            UITableView.appearance().sectionHeaderTopPadding = 0
-        }
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        
         GDataManager.shared.setupNIMSDK()
         GDataManager.shared.loginNIMSDK()
     }

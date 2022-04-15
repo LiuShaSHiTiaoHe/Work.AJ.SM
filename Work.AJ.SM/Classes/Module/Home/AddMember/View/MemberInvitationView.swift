@@ -78,7 +78,7 @@ class MemberInvitationView: BaseView {
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(20)
-            make.bottom.equalTo(tips1Label.snp.top)
+            make.bottom.equalTo(tips1Label.snp.top).offset(-kMargin)
         }
         
         tips1Label.snp.makeConstraints { make in

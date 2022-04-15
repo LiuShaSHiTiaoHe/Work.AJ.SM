@@ -49,8 +49,8 @@ class MemberInvitationViewController: BaseViewController {
         }
         if let userModel = HomeRepository.shared.getCurrentUser(), let name = userModel.realName {
             contentView.nameLabel.text = name
-            if let avatarDic = CacheManager.normal.fetchCachedWithKey(UserAvatarCacheKey), let avatarData = avatarDic.value(forKey: UserAvatarCacheKey) as? Data, let image = UIImage.init(data: avatarData) {
-                self.contentView.avatar.image = image
+            if let folderPath = userModel.folderPath, let avatarUrl = userModel.HeadImageUrl {
+                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
             }
         }
     }

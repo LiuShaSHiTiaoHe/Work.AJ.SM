@@ -9,7 +9,12 @@ import UIKit
 
 class PasswordInvitationView: BaseView {
     
+    private let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
+    private let topPartHeight = 240.0
+    private let separateSpaceHight = 70
+    
     override func initializeView() {
+        
         self.addSubview(bgImageView)
         self.addSubview(headerView)
         self.addSubview(bgContentView)
@@ -22,6 +27,7 @@ class PasswordInvitationView: BaseView {
         bgContentView.addSubview(validTime)
         bgContentView.addSubview(timesLabel)
         bgContentView.addSubview(visitTimes)
+        bgContentView.addSubview(dashLine)
         bgContentView.addSubview(passwordTipsLabel)
         bgContentView.addSubview(passwordLabel)
 
@@ -97,10 +103,18 @@ class PasswordInvitationView: BaseView {
             make.top.equalTo(timesLabel)
         }
 
+        dashLine.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(kMargin)
+            make.right.equalToSuperview().offset(-kMargin)
+            make.height.equalTo(1)
+            make.top.equalToSuperview().offset(topPartHeight + 30)
+        }
+        
         passwordTipsLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(-kMargin)
             make.right.equalToSuperview().offset(kMargin)
-            make.top.equalToSuperview().offset(340)
+//            make.top.equalToSuperview().offset(340)
+            make.top.equalTo(dashLine.snp.bottom).offset(30)
             make.height.equalTo(30)
         }
         
@@ -126,6 +140,10 @@ class PasswordInvitationView: BaseView {
         }
     }
     
+    override func layoutSubviews() {
+        dashLine.jk.drawDashLine(strokeColor: R.color.themeColor()!)
+    }
+    
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "邀请函"
@@ -142,7 +160,9 @@ class PasswordInvitationView: BaseView {
     
     lazy var bgContentView: UIImageView = {
         let view = UIImageView()
-        view.image = R.image.invitation_image_contentbg()
+        view.backgroundColor = R.color.whiteColor()
+        view.layer.cornerRadius = 15.0
+        view.clipsToBounds = true
         return view
     }()
     

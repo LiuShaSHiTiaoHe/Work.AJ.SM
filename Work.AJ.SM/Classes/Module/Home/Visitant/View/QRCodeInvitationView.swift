@@ -10,7 +10,13 @@ import SnapKit
 
 class QRCodeInvitationView: BaseView {
     
+    private let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
+    private let topPartHeight = 190.0
+    private let qrCodeWidth = kScreenWidth - kMargin*2
+    
     override func initializeView() {
+        let qrCodeHeight = contentImageHeight - topPartHeight - 70 - 20
+        
         self.addSubview(bgImageView)
         self.addSubview(headerView)
         self.addSubview(bgContentView)
@@ -40,7 +46,7 @@ class QRCodeInvitationView: BaseView {
             make.left.equalToSuperview().offset(kMargin/2)
             make.right.equalToSuperview().offset(-kMargin/2)
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-100)
+            make.bottom.equalToSuperview().offset(-100)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -51,7 +57,7 @@ class QRCodeInvitationView: BaseView {
         }
         
         locationLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin/2)
+            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin)
             make.height.equalTo(30)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
@@ -59,7 +65,6 @@ class QRCodeInvitationView: BaseView {
         
         arriveLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
-//            make.top.equalToSuperview().offset(130)
             make.top.equalTo(locationLabel.snp.bottom).offset(kMargin*2)
             make.height.equalTo(20)
         }
@@ -88,21 +93,20 @@ class QRCodeInvitationView: BaseView {
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(1)
-            make.top.equalTo(validTime.snp.bottom).offset(kMargin)
+            make.top.equalToSuperview().offset(topPartHeight + 30)
         }
         
         qrCodeView.snp.makeConstraints { make in
-            make.top.equalTo(validLabel.snp.bottom).offset(kMargin*2)
             make.centerX.equalToSuperview()
-            make.width.equalTo(qrCodeView.snp.height)
-            make.bottom.lessThanOrEqualToSuperview().offset(-kMargin)
+            make.width.height.equalTo(min(qrCodeWidth, qrCodeHeight))
+            make.bottom.equalToSuperview().offset(-kMargin)
         }
         
         saveButton.snp.makeConstraints { make in
             make.width.equalTo(160)
             make.height.equalTo(50)
             make.centerX.equalToSuperview().dividedBy(2)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.bottom.equalToSuperview().offset(-kMargin*1.5)
         }
         
         shareButton.snp.makeConstraints { make in

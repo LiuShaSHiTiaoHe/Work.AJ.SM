@@ -138,7 +138,7 @@ class RemoteOpenDoorCell: UITableViewCell {
         openDoorButton.snp.makeConstraints { make in
             make.width.height.equalTo(33)
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().offset(-kMargin*3.5)
+            make.right.equalToSuperview().offset(-kMargin*4)
         }
         
         cameraButton.snp.makeConstraints { make in
