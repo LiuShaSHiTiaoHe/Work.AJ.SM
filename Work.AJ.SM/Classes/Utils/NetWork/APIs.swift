@@ -64,10 +64,12 @@ final class APIs {
     static let updateVisitorPassword = "appcity/updateGuestStatus.do"
     static let inviteVisitor = "appcity/inviteUser.do"
     static let myUnitGuest = "/appcity/getMyUnitGuest"
+    
     // MARK: - 业主添加家属
     static let addFamilyMember = "appcity/addFamilyer"
     static let unitMembers = "appcity/getUnitUsers"
     static let deleteUnitMembers = "appcity/delUnitUser"
+    
     // MARK: - 人脸
     static let faceFile = "appcity/getFaceFile.do"
     static let addFaceFile = "appcity/addFaceFile.do"

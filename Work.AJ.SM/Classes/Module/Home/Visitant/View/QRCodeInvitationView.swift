@@ -10,11 +10,37 @@ import SnapKit
 
 class QRCodeInvitationView: BaseView {
     
-    private let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
-    private let topPartHeight = 190.0
-    private let qrCodeWidth = kScreenWidth - kMargin*2
+    var isvalid: Bool? {
+        didSet {
+            if let isvalid = isvalid {
+                statusLabel.isHidden = false
+                if isvalid {
+                    statusLabel.text = "有效"
+                    statusLabel.backgroundColor = R.color.owner_greenColor()
+                    invalidTips.isHidden = true
+                    invalidIcon.isHidden = true
+                    qrCodeView.isHidden = false
+                }else{
+                    statusLabel.text = "已过期"
+                    statusLabel.backgroundColor = R.color.secondtextColor()
+                    invalidTips.isHidden = false
+                    invalidIcon.isHidden = false
+                    qrCodeView.isHidden = true
+                }
+            }else{
+                statusLabel.isHidden = true
+                invalidTips.isHidden = true
+                invalidIcon.isHidden = true
+                qrCodeView.isHidden = false
+            }
+        }
+    }
     
+
     override func initializeView() {
+        let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
+        let topPartHeight = 190.0
+        let qrCodeWidth = kScreenWidth - kMargin*2
         let qrCodeHeight = contentImageHeight - topPartHeight - 70 - 20
         
         self.addSubview(bgImageView)
@@ -22,6 +48,7 @@ class QRCodeInvitationView: BaseView {
         self.addSubview(bgContentView)
         
         bgContentView.addSubview(titleLabel)
+        bgContentView.addSubview(statusLabel)
         bgContentView.addSubview(locationLabel)
         bgContentView.addSubview(arriveLabel)
         bgContentView.addSubview(arriveTime)
@@ -29,6 +56,8 @@ class QRCodeInvitationView: BaseView {
         bgContentView.addSubview(validTime)
         bgContentView.addSubview(dashLine)
         bgContentView.addSubview(qrCodeView)
+        bgContentView.addSubview(invalidIcon)
+        bgContentView.addSubview(invalidTips)
         
         self.addSubview(saveButton)
         self.addSubview(shareButton)
@@ -47,6 +76,13 @@ class QRCodeInvitationView: BaseView {
             make.right.equalToSuperview().offset(-kMargin/2)
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
             make.bottom.equalToSuperview().offset(-100)
+        }
+        
+        statusLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+            make.top.equalToSuperview().offset(kMargin/2)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -102,6 +138,18 @@ class QRCodeInvitationView: BaseView {
             make.bottom.equalToSuperview().offset(-kMargin)
         }
         
+        invalidIcon.snp.makeConstraints { make in
+            make.right.equalTo(invalidTips.snp.left).offset(-kMargin/2)
+            make.width.height.equalTo(20)
+            make.centerY.equalTo(invalidTips)
+        }
+        
+        invalidTips.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(30)
+            make.top.equalTo(qrCodeView.snp.centerY)
+        }
+        
         saveButton.snp.makeConstraints { make in
             make.width.equalTo(160)
             make.height.equalTo(50)
@@ -152,6 +200,16 @@ class QRCodeInvitationView: BaseView {
         return view
     }()
     
+    //状态标签
+    lazy var statusLabel: UILabel = {
+        let view = UILabel()
+        view.textColor = R.color.whiteColor()
+        view.font = k14Font
+        view.jk.addCorner(conrners: UIRectCorner.topRight, radius: 15.0)
+        view.jk.addCorner(conrners: UIRectCorner.bottomRight, radius: 15.0)
+        return view
+    }()
+    
     lazy var locationLabel: UILabel = {
         let view = UILabel.init()
         view.textColor = R.color.maintextColor()
@@ -198,6 +256,20 @@ class QRCodeInvitationView: BaseView {
     
     lazy var dashLine: UIImageView = {
         let view = UIImageView()
+        return view
+    }()
+    
+    lazy var invalidIcon: UIImageView = {
+        let view = UIImageView.init(image: R.image.common_error_red())
+        return view
+    }()
+    
+    lazy var invalidTips: UILabel = {
+        let view = UILabel()
+        view.text = "访客二维码已过期"
+        view.font = k18Font
+        view.textColor = R.color.maintextColor()
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
     

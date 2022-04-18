@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "提醒,感叹号_jurassic.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "提醒,感叹号_jurassic@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "提醒,感叹号_jurassic@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

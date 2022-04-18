@@ -110,5 +110,12 @@ extension NComViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        let deviceInfo = dataSource[indexPath.row]
+        if let lockMac = deviceInfo.lockMac {
+            let macString = lockMac.components(separatedBy: ":").joined(separator: "")
+            let vc = AudioChatViewController.init(startCall: macString)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
     }
 }

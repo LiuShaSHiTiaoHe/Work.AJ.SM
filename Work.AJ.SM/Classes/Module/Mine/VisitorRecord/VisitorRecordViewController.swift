@@ -10,11 +10,9 @@ import MJRefresh
 
 class VisitorRecordViewController: BaseViewController {
 
-    private var dataSource: [UnitGuestModel] = []
-    
+    private var dataSource: [UnitGuestModel] = []    
     private let pageSize: Int = 20
     private var currentPage: Int = 1
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +36,7 @@ class VisitorRecordViewController: BaseViewController {
                 guard let self = self else { return }
                 if datas.isEmpty {
                     if self.currentPage == 1{
-                        // MARK: - show empty view
+                        self.showNoDataView(.nodata, self.headerView)
                     }else{
                         self.endLoading(true)
                     }

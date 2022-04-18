@@ -9,17 +9,49 @@ import UIKit
 
 class PasswordInvitationView: BaseView {
     
-    private let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
-    private let topPartHeight = 240.0
-    private let separateSpaceHight = 70
+    var isvalid: Bool? {
+        didSet {
+            if let isvalid = isvalid {
+                statusLabel.isHidden = false
+                if isvalid {
+                    statusLabel.text = "有效"
+                    statusLabel.backgroundColor = R.color.owner_greenColor()
+                    invalidTips.isHidden = true
+                    invalidIcon.isHidden = true
+                    passwordTipsLabel.isHidden = false
+                    passwordLabel.isHidden = false
+                }else{
+                    statusLabel.text = "已过期"
+                    statusLabel.backgroundColor = R.color.secondtextColor()
+                    invalidTips.isHidden = false
+                    invalidIcon.isHidden = false
+                    passwordTipsLabel.isHidden = true
+                    passwordLabel.isHidden = true
+                }
+            }else{
+                statusLabel.isHidden = true
+                invalidTips.isHidden = true
+                invalidIcon.isHidden = true
+                passwordTipsLabel.isHidden = false
+                passwordLabel.isHidden = false
+            }
+        }
+    }
+    
+    override func initData() {
+        
+    }
     
     override func initializeView() {
+        
+        let topPartHeight = 240.0
         
         self.addSubview(bgImageView)
         self.addSubview(headerView)
         self.addSubview(bgContentView)
         
         bgContentView.addSubview(titleLabel)
+        bgContentView.addSubview(statusLabel)
         bgContentView.addSubview(locationLabel)
         bgContentView.addSubview(arriveLabel)
         bgContentView.addSubview(arriveTime)
@@ -30,7 +62,9 @@ class PasswordInvitationView: BaseView {
         bgContentView.addSubview(dashLine)
         bgContentView.addSubview(passwordTipsLabel)
         bgContentView.addSubview(passwordLabel)
-
+        bgContentView.addSubview(invalidIcon)
+        bgContentView.addSubview(invalidTips)
+        
         self.addSubview(saveButton)
         self.addSubview(shareButton)
         
@@ -48,6 +82,13 @@ class PasswordInvitationView: BaseView {
             make.right.equalToSuperview().offset(-kMargin/2)
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-100)
+        }
+        
+        statusLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+            make.top.equalToSuperview().offset(kMargin/2)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -113,7 +154,6 @@ class PasswordInvitationView: BaseView {
         passwordTipsLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(-kMargin)
             make.right.equalToSuperview().offset(kMargin)
-//            make.top.equalToSuperview().offset(340)
             make.top.equalTo(dashLine.snp.bottom).offset(30)
             make.height.equalTo(30)
         }
@@ -123,6 +163,18 @@ class PasswordInvitationView: BaseView {
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(60)
             make.top.equalTo(passwordTipsLabel.snp.bottom).offset(kMargin*2)
+        }
+        
+        invalidIcon.snp.makeConstraints { make in
+            make.right.equalTo(invalidTips.snp.left).offset(-kMargin/2)
+            make.width.height.equalTo(20)
+            make.centerY.equalTo(invalidTips)
+        }
+        
+        invalidTips.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(30)
+            make.top.equalTo(passwordLabel.snp.centerY)
         }
         
         saveButton.snp.makeConstraints { make in
@@ -172,6 +224,16 @@ class PasswordInvitationView: BaseView {
         view.textColor = R.color.maintextColor()
         view.textAlignment = .center
         view.font = k15Font
+        return view
+    }()
+    
+    //状态标签
+    lazy var statusLabel: UILabel = {
+        let view = UILabel()
+        view.textColor = R.color.whiteColor()
+        view.font = k14Font
+        view.jk.addCorner(conrners: UIRectCorner.topRight, radius: 15.0)
+        view.jk.addCorner(conrners: UIRectCorner.bottomRight, radius: 15.0)
         return view
     }()
     
@@ -257,6 +319,21 @@ class PasswordInvitationView: BaseView {
         view.textColor = R.color.themeColor()
         return view
     }()
+    
+    lazy var invalidIcon: UIImageView = {
+        let view = UIImageView.init(image: R.image.common_error_red())
+        return view
+    }()
+    
+    lazy var invalidTips: UILabel = {
+        let view = UILabel()
+        view.text = "访客密码已过期"
+        view.font = k18Font
+        view.textColor = R.color.maintextColor()
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        return view
+    }()
+    
     
     lazy var saveButton: UIButton = {
         let button = UIButton.init(type: .custom)
