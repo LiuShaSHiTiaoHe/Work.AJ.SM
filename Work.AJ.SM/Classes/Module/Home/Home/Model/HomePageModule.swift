@@ -19,8 +19,9 @@ enum HomePageModule: String {
     case deviceConfiguration = "设备配置"
     case addFamilyMember = "添加成员"
     case elevatorConfiguration = "电梯配置"
-    
     case ncall = "N方对讲"
+
+    // MARK: - 暂时不需要的模块
     case bleOpenDoor = "蓝牙开门"
     case propertyBill = "物业账单"
     case contactProperty = "联系物业"
