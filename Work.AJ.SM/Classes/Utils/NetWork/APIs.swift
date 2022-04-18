@@ -63,6 +63,7 @@ final class APIs {
     static let generateVisitorPassword = "appcity/reduceGuestPassword.do"
     static let updateVisitorPassword = "appcity/updateGuestStatus.do"
     static let inviteVisitor = "appcity/inviteUser.do"
+    static let myUnitGuest = "/appcity/getMyUnitGuest"
     // MARK: - 业主添加家属
     static let addFamilyMember = "appcity/addFamilyer"
     static let unitMembers = "appcity/getUnitUsers"

@@ -6,10 +6,103 @@
 //
 
 import UIKit
+import MJRefresh
 
 class VisitorRecordViewController: BaseViewController {
 
-    private var dataSource: [VisitorModel] = []
+    private var dataSource: [UnitGuestModel] = []
+    
+    private let pageSize: Int = 20
+    private var currentPage: Int = 1
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func initData() {
+        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.mj_header = refreshHeader()
+        tableView.mj_footer = MJRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
+    
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname {
+            titleView.locationLabel.text = communityname + cellname
+        }
+    }
+    
+    func loadData() {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let userID = ud.userID {
+            MineRepository.shared.getMyUnitGuset(userID: userID, unitID: unitID, page: currentPage.jk.intToString, size: pageSize.jk.intToString) { [weak self] datas in
+                guard let self = self else { return }
+                if datas.isEmpty {
+                    if self.currentPage == 1{
+                        // MARK: - show empty view
+                    }else{
+                        self.endLoading(true)
+                    }
+                }else{
+                    if self.currentPage == 1 {
+                        self.dataSource.removeAll()
+                        self.dataSource = datas
+                    }else{
+                        self.dataSource.append(contentsOf: datas)
+                    }
+                    self.endLoading()
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    @objc func footerLoadMore(){
+        currentPage += 1
+        loadData()
+    }
+    
+    override func headerRefresh() {
+        currentPage = 1
+        loadData()
+    }
+    
+    func endLoading(_ isNoMoreData: Bool = false) {
+        tableView.mj_header?.endRefreshing()
+        tableView.mj_footer?.endRefreshing()
+        if isNoMoreData {
+            tableView.mj_footer?.endRefreshingWithNoMoreData()
+        }
+    }
+    
+    @objc
+    func addMemberAction() {
+        let view = ChooseVisitorModeView()
+        view.delegate = self
+        PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
+    }
+    
+    override func initUI() {
+        view.backgroundColor = R.color.backgroundColor()
+        view.addSubview(headerView)
+        view.addSubview(tableView)
+        view.addSubview(addButton)
+        view.bringSubviewToFront(addButton)
+        headerView.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(kTitleAndStateHeight)
+        }
+        tableView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(headerView.snp.bottom)
+            make.bottom.equalToSuperview()
+        }
+        addButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(40)
+            make.width.equalTo(250)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+        }
+    }
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
@@ -42,57 +135,6 @@ class VisitorRecordViewController: BaseViewController {
         button.layer.cornerRadius = 20.0
         return button
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-    override func initData() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        
-        if let userID = ud.userID, let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityname = unit.communityname, let cellname = unit.cellname {
-            titleView.locationLabel.text = communityname + cellname
-            MineRepository.shared.getMyVisitors(userID: userID, unitID: unitID) { [weak self] models in
-                guard let `self` = self else { return }
-                self.dataSource = models
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
-        view.addSubview(headerView)
-        view.addSubview(tableView)
-        view.addSubview(addButton)
-        view.bringSubviewToFront(addButton)
-        headerView.snp.makeConstraints { make in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(kTitleAndStateHeight)
-        }
-        tableView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(headerView.snp.bottom)
-            make.bottom.equalToSuperview()
-        }
-        addButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.height.equalTo(40)
-            make.width.equalTo(250)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
-        }
-    }
-
-    @objc
-    func addMemberAction() {
-        let view = ChooseVisitorModeView()
-        view.delegate = self
-        PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
-    }
 
 }
 extension VisitorRecordViewController: ChooseVisitorModeDelegate {
@@ -124,10 +166,9 @@ extension VisitorRecordViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: MyVisitorCellIdentifier, for: indexPath) as! MyVisitorCell
-        let visitor = dataSource[indexPath.row]
-        cell.dataSource = visitor
+        let model = dataSource[indexPath.row]
+        cell.dataSource = model
         return cell
     }
     

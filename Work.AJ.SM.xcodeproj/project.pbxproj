@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */; };
 		410A108527F2E16E0059B2C3 /* VisitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108427F2E16E0059B2C3 /* VisitorModel.swift */; };
 		410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108627F2E4120059B2C3 /* MyVisitorCell.swift */; };
 		410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */; };
@@ -242,6 +243,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitGuestModel.swift; sourceTree = "<group>"; };
 		410A108427F2E16E0059B2C3 /* VisitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorModel.swift; sourceTree = "<group>"; };
 		410A108627F2E4120059B2C3 /* MyVisitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVisitorCell.swift; sourceTree = "<group>"; };
 		410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -1690,6 +1692,7 @@
 			isa = PBXGroup;
 			children = (
 				410A108427F2E16E0059B2C3 /* VisitorModel.swift */,
+				4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2059,6 +2062,7 @@
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
 				419AD6AA27FED04300C902B8 /* ElevatorConfiguration.swift in Sources */,
 				4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */,
+				4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */,
 				419AD6C62805453400C902B8 /* NComRecordView.swift in Sources */,
 				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,

@@ -17,6 +17,7 @@ typealias BlockListCompletion = (([BlockModel]) -> Void)
 typealias CellListCompletion = (([CellModel]) -> Void)
 typealias UnitInCellListCompletion = (([UserUnitModel]) -> Void)
 typealias VisitorListCompletion = (([VisitorModel]) -> Void)
+typealias MyUnitGuestCompletion = (([UnitGuestModel]) -> Void)
 
 
 class MineRepository: NSObject {
@@ -163,6 +164,16 @@ extension MineRepository {
     func getMyVisitors(userID: String, unitID: String, completion: @escaping VisitorListCompletion) {
         SVProgressHUD.show()
         MineAPI.myVisitors(userID: userID, unitID: unitID).request(modelType: [VisitorModel].self) { models, response in
+            SVProgressHUD.dismiss()
+            completion(models)
+        } failureCallback: { response in
+            completion([])
+        }
+    }
+    
+    func getMyUnitGuset(userID: String, unitID: String, page: String, size: String, completion: @escaping MyUnitGuestCompletion) {
+        SVProgressHUD.show()
+        MineAPI.getMyUnitGuest(userID: userID, unitID: unitID, currentPage: page, showCount: size).request(modelType: [UnitGuestModel].self , cacheType: .ignoreCache, showError: true) { models, response in
             SVProgressHUD.dismiss()
             completion(models)
         } failureCallback: { response in

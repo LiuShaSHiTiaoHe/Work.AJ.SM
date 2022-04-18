@@ -67,25 +67,26 @@ class AddMemberViewController: BaseViewController {
             return
         }
         
-        // FIXME: - 添加家人，成员接口返回
-        let vc = MemberInvitationViewController()
-        vc.phone = memberPhone
-        vc.qrCodeString = "anjiezhihuishequ"
-        self.navigationController?.pushViewController(vc, animated: true)
-        return
-        
-        
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString {
-            MineAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone).defaultRequest { [weak self] jsonData in
+            var type = "F"
+            if memberType == .family {
+                type = "F"
+            }else{
+                type = "R"
+            }
+            MineAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone, type: type).defaultRequest { [weak self] jsonData in
                 guard let self = self else { return }
-                let vc = MemberInvitationViewController()
-                vc.phone = memberPhone
-                vc.qrCodeString = "anjiezhihuishequ"
-                self.navigationController?.pushViewController(vc, animated: true)
+                if let qrCodeString = jsonData["data"]["download"].string {
+                    let vc = MemberInvitationViewController()
+                    vc.phone = memberPhone
+                    vc.qrCodeString = qrCodeString
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    SVProgressHUD.showError(withStatus: "返回数据错误")
+                }
             } failureCallback: { response in
                 SVProgressHUD.showError(withStatus: "\(response.message)")
             }
-
         }
     }
     

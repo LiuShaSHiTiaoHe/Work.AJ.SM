@@ -12,9 +12,9 @@ let MyVisitorCellIdentifier = "MyVisitorCellIdentifier"
 
 class MyVisitorCell: UITableViewCell {
 
-    var dataSource: VisitorModel? {
+    var dataSource: UnitGuestModel? {
         didSet {
-            if let dataSource = dataSource, let name = dataSource.phone, let sTime = dataSource.credate, let eTime = dataSource.enddate, let status = dataSource.status {
+            if let dataSource = dataSource, let name = dataSource.phone, let sTime = dataSource.credate?.jk.intToString, let eTime = dataSource.enddate?.jk.intToString, let status = dataSource.status {
                 nameLabel.text = name
                 startTime.text = Date.jk.timestampToFormatterTimeString(timestamp: sTime)
                 endTime.text = Date.jk.timestampToFormatterTimeString(timestamp: eTime)
