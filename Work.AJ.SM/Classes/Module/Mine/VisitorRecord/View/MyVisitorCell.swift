@@ -14,14 +14,37 @@ class MyVisitorCell: UITableViewCell {
 
     var dataSource: UnitGuestModel? {
         didSet {
-            if let dataSource = dataSource, let name = dataSource.phone, let sTime = dataSource.credate?.jk.intToString, let eTime = dataSource.enddate?.jk.intToString, let status = dataSource.status {
-                nameLabel.text = name
-                startTime.text = Date.jk.timestampToFormatterTimeString(timestamp: sTime)
-                endTime.text = Date.jk.timestampToFormatterTimeString(timestamp: eTime)
-                if status == "O" {
-                    statusImageView.image = R.image.visitor_image_valid()
-                }else{
-                    statusImageView.image = R.image.visitor_image_Expired()
+            if let dataSource = dataSource {
+                if let name = dataSource.phone {
+                    nameLabel.text = name
+                }
+                if let sTime = dataSource.startdate {
+                    startTime.text = sTime
+                }
+                if let eTime = dataSource.enddate {
+                    endTime.text = eTime
+                }
+                if let status = dataSource.status, let valid = dataSource.valid {
+                    if status == "O" {
+                        if valid == 1 {
+                            statusImageView.image = R.image.visitor_image_valid()
+                        }else{
+                            statusImageView.image = R.image.visitor_image_Expired()
+                        }
+                    }else{
+                        statusImageView.image = R.image.visitor_image_Expired()
+                    }
+                }
+                
+                if let gusetType = dataSource.guesttype {
+                    if gusetType == "1" {
+                        typeNameLabel.text = "访客密码"
+                    } else if gusetType == "2" {
+                        typeNameLabel.text = "访客二维码"
+                    }else{
+                        typeNameLabel.text = "未知"
+                    }
+                    
                 }
             }
         }

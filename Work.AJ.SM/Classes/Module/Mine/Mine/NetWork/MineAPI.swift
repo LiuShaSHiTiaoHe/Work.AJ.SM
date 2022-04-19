@@ -122,7 +122,6 @@ extension MineAPI: TargetType {
             let aData = MultipartFormData(provider: .data(avatarData), name: "file", fileName: "\(userID).png", mimeType: "image/png")
             let multipartData = [aData]
             let urlParameters = ["USERID": userID].ekey("USERID")
-            logger.info("urlParameters ===> \(urlParameters)")
             return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
         case let .getMyUnitGuest(userID, unitID, currentPage, showCount):
             return .requestParameters(parameters: ["USERID": userID, "UNITID": unitID, "currentPage": currentPage, "showCount": showCount].ekey("USERID"), encoding: URLEncoding.default)

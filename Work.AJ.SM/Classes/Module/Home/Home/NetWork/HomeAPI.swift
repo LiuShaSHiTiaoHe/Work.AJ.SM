@@ -96,6 +96,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+            
+        // MARK: - N方对讲
         case let .ncomAllDevice(unitID):
             return .requestParameters(parameters: ["UNITID": unitID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .ncomRecord(communityID, startTime, endTime, page, count):
