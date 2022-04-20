@@ -16,7 +16,7 @@ enum VisitorInvitationType {
 class VisitorInvitationRecordViewController: BaseViewController {
 
     var record: UnitGuestModel?{
-        didSet {
+        didSet { 
             if let record = record, let typeValue = record.guesttype {
                 type = typeValue == "1" ? .qrcode : .password
                 if let status = record.status, let valid = record.valid, status == "O", valid == 1 {
