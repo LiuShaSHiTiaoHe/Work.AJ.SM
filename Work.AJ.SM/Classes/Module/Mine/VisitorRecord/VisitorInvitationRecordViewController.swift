@@ -18,19 +18,9 @@ class VisitorInvitationRecordViewController: BaseViewController {
     var record: UnitGuestModel?{
         didSet {
             if let record = record, let typeValue = record.guesttype {
-                if typeValue == "1"{
-                    type = .qrcode
-                    
-                }else{
-                    type = .password
-                }
-                
-                if let status = record.status, let valid = record.valid {
-                    if status == "O"{
-                        if valid == 1 {
-                            isValid = true
-                        }
-                    }
+                type = typeValue == "1" ? .qrcode : .password
+                if let status = record.status, let valid = record.valid, status == "O", valid == 1 {
+                    isValid = true
                 }
             }
         }
@@ -59,6 +49,7 @@ class VisitorInvitationRecordViewController: BaseViewController {
             break
         }
     }
+    
     
     @objc
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
