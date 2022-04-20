@@ -38,10 +38,11 @@ class PasswordInvitationView: BaseView {
         }
     }
     
-    override func initData() {
-        
+    func hideShareButtons() {
+        saveButton.isHidden = true
+        shareButton.isHidden = true
     }
-    
+        
     override func initializeView() {
         
         let topPartHeight = 240.0

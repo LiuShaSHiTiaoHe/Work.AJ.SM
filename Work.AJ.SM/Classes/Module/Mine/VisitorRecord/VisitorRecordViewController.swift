@@ -10,7 +10,7 @@ import MJRefresh
 
 class VisitorRecordViewController: BaseViewController {
 
-    private var dataSource: [UnitGuestModel] = []    
+    private var dataSource: [UnitGuestModel] = []
     private let pageSize: Int = 20
     private var currentPage: Int = 1
 
@@ -28,6 +28,8 @@ class VisitorRecordViewController: BaseViewController {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname {
             titleView.locationLabel.text = communityname + cellname
         }
+        
+        loadData()
     }
     
     func loadData() {
@@ -184,6 +186,10 @@ extension VisitorRecordViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
+        let model = dataSource[indexPath.row]
+        let vc = VisitorInvitationRecordViewController()
+        vc.record = model
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

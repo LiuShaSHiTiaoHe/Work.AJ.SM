@@ -36,6 +36,11 @@ class QRCodeInvitationView: BaseView {
         }
     }
     
+    func hideShareButtons() {
+        saveButton.isHidden = true
+        shareButton.isHidden = true
+    }
+    
 
     override func initializeView() {
         let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
