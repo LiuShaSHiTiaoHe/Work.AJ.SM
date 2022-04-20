@@ -76,7 +76,7 @@ class AddMemberViewController: BaseViewController {
             }
             MineAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone, type: type).defaultRequest { [weak self] jsonData in
                 guard let self = self else { return }
-                if let qrCodeString = jsonData["data"]["download"].string {
+                if let qrCodeString = jsonData["data"]["iosDownload"].string {
                     let vc = MemberInvitationViewController()
                     vc.phone = memberPhone
                     vc.qrCodeString = qrCodeString

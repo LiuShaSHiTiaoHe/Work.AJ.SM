@@ -7,36 +7,37 @@
 
 import UIKit
 
+protocol HouseSearchViewControllerDelegate: NSObjectProtocol {
+    func searchResultOfCommunity(_ data: CommunityModel)
+}
+
 class HouseSearchViewController: BaseViewController {
 
+    weak var delegate: HouseSearchViewControllerDelegate?
+    
+    private var dataSource: [CommunityModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "搜索"
-        
         searchView.initViewType(true)
-        searchView.searchView.addTarget(self, action: #selector(textInputEditingBegin(_:)), for: .editingDidBegin)
-        searchView.searchView.addTarget(self, action: #selector(textInputEditingEnd(_:)), for: .editingDidEnd)
+        searchView.searchView.delegate = self
+        tableVeiw.delegate = self
+        tableVeiw.dataSource = self
     }
     
     // MARK: - Action
-    @objc func textInputEditingBegin(_ sender: UITextField) {
-        DispatchQueue.main.async {
-            
+    func loadDatas(_ name: String) {
+        MineRepository.shared.searchCommunity(with: name) { [weak self] models in
+            guard let self = self else { return }
+            self.dataSource = models
+            self.tableVeiw.reloadData()
         }
     }
-    
-    @objc func textInputEditingEnd(_ sender: UITextField) {
-        DispatchQueue.main.async {
-            
-        }
-    }
-
     
     // MARK: - UI
     override func initUI() {
@@ -100,4 +101,53 @@ class HouseSearchViewController: BaseViewController {
         view.separatorStyle = .singleLine
         return view
     }()
+}
+
+extension HouseSearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: UnitCityCellIdentifier, for: indexPath)
+        let model = dataSource[indexPath.row]
+        cell.textLabel?.text = model.name
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let model = dataSource[indexPath.row]
+        delegate?.searchResultOfCommunity(model)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    
+}
+
+extension HouseSearchViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let searchString = textField.text, !searchString.isEmpty {
+            loadDatas(searchString)
+//            let searchStringPY = searchString.jk.toPinyin()
+//            searchResult = cityNames.filter { name in
+//                let namePY = name.jk.toPinyin()
+//                return namePY.contains(searchStringPY)
+//            }
+//            isSearch = true
+//            tableVeiw.reloadData()
+            return true
+        }
+        return false
+    }
 }

@@ -35,6 +35,7 @@ final class APIs {
     // MARK: - 用户信息
     static let updateUserInfo = "appcity/perfectAppUser"
     static let updateAvatar = "appcity/addUserHeader.do"
+    static let getUserInfo = "/appcity/getUserInfo"
     
     // MARK: - 房屋
     static let userUnit = "appcity/getMyUnit.do"
@@ -47,6 +48,7 @@ final class APIs {
     static let houseAuthentication = "appcity/authentication.do"
     static let ownerOpenDoorPassword = "appcity/setMyUnitOpenDoorMM.do"
     static let findUnit = "appcity/findUnit.do"
+    static let searchUnitWithName = "/appcity/getCommunityByName"
     
     // MARK: - 根据单元电梯群组获取电梯
     static let cellGroupElevators = "appcity/getLiftByCellGroup"

@@ -84,6 +84,17 @@ class MineRepository: NSObject {
         }
     }
     
+    func deleteUnitMember(memberID: String, completion: @escaping DefaultCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let userID = unit.userid?.jk.intToString, let unitID = unit.unitid?.jk.intToString {
+            MineAPI.deleteMember(unitID: unitID, userID: userID, memberUserID: memberID).defaultRequest(cacheType: .ignoreCache, showError: false, successCallback:{ jsonData in
+                completion("")
+            }, failureCallback: { response in
+                logger.info("\(response.message)")
+                completion(response.message)
+            })
+        }
+    }
+    
     func getMineModules() -> [MineModule] {
         if let unit = HomeRepository.shared.getCurrentUnit() {
             let allKeys = MineModuleType.allCases
@@ -137,6 +148,22 @@ class MineRepository: NSObject {
 
 // MARK: - 用户信息
 extension MineRepository {
+    
+    func getUserInfo(with userID: String, completion: @escaping DefaultCompletion) {
+        SVProgressHUD.show()
+        MineAPI.getUserInfo(userID: userID).defaultRequest(cacheType: .ignoreCache, showError: false) { jsonData in
+            if let userInfo = jsonData["map"].rawString(), let userModel = UserModel(JSONString: userInfo) {
+                ud.userRealName = userModel.realName
+                ud.userID = userModel.rid
+                RealmTools.add(userModel, update: .modified) {}
+                completion("")
+            }
+        } failureCallback: { response in
+            completion(response.message)
+        }
+    }
+    
+    
     func updateUserInfo(with userID: String,  infoValue: String, key: String, completion: @escaping DefaultCompletion) {
         SVProgressHUD.show()
         MineAPI.updateUserInfo(userID: userID, infoValue: infoValue, InfoKey: key).defaultRequest { jsonData in
@@ -243,6 +270,14 @@ extension MineRepository {
 
 // MARK: - 房屋
 extension MineRepository {
+    
+    func searchCommunity(with name: String, competion: @escaping CommunityListCompletion) {
+        MineAPI.searchUnit(name: name).request(modelType: [CommunityModel].self, cacheType: .ignoreCache, showError: true) { datas, response in
+            competion(datas)
+        } failureCallback: { response in
+            competion([])
+        }
+    }
     
     func getCommunityWithCityName(_ city: String, competion: @escaping CommunityListCompletion) {
         MineAPI.communitiesInCity(city: city).request(modelType: [CommunityModel].self, showError: true) { data, response in

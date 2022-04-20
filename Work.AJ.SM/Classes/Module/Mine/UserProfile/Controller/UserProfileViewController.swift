@@ -30,7 +30,6 @@ enum userProfileInfoType: String {
     case education = "EDUCATION"
     case profession = "JOB"
     case realName = "REALNAME"
-//    case mobile = ""
 }
 
 class UserProfileViewController: BaseViewController {
@@ -66,9 +65,9 @@ class UserProfileViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // FIXME: - 更新用户信息，暂时没有接口，从登录接口获取
-        if let mobile = ud.userMobile, let password = ud.password {
-            AuthenticationRepository.shared.autoLogin(mobile: mobile, password: password) { [weak self] errorMsg in
+        
+        if let userID = ud.userID {
+            MineRepository.shared.getUserInfo(with: userID) { [weak self] errorMsg in
                 guard let self = self else { return }
                 if errorMsg.isEmpty {
                     self.loadData()

@@ -10,6 +10,7 @@ import Moya
 enum MineAPI {
     case getUnitMembers(unitID: String, userID: String)
     case addFamilyMember(communityID: String, unitID: String, userID: String, name: String, phone: String, type: String)
+    case deleteMember(unitID: String, userID: String, memberUserID: String)
     case allFace(communityID: String, blockID: String, cellID: String, unitID: String)
     case addFace(data: AddFaceModel)
     case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String)
@@ -23,9 +24,11 @@ enum MineAPI {
     case unitInCell(blockID: String, cellID: String)
     case houseAuthentication(data: HouseCertificationModel)
     case myVisitors(userID: String, unitID: String)
+    case getUserInfo(userID: String)
     case updateUserInfo(userID: String, infoValue: String, InfoKey: String)
     case updateAvatar(userID: String, avatarData: Data)
     case getMyUnitGuest(userID: String, unitID: String, currentPage: String, showCount: String)
+    case searchUnit(name: String)
 }
 
 extension MineAPI: TargetType {
@@ -39,6 +42,8 @@ extension MineAPI: TargetType {
             return APIs.unitMembers
         case .addFamilyMember:
             return APIs.addFamilyMember
+        case .deleteMember:
+            return APIs.deleteUnitMembers
         case .allFace:
             return APIs.faceFile
         case .addFace:
@@ -65,20 +70,21 @@ extension MineAPI: TargetType {
             return APIs.houseAuthentication
         case .myVisitors:
             return APIs.visitors
+        case .getUserInfo:
+            return APIs.getUserInfo
         case .updateUserInfo:
             return APIs.updateUserInfo
         case .updateAvatar:
             return APIs.updateAvatar
         case .getMyUnitGuest:
             return APIs.myUnitGuest
+        case .searchUnit:
+            return APIs.searchUnitWithName
         }
     }
     
     var method: Moya.Method {
-        switch self {
-        case .getUnitMembers, .addFamilyMember, .allFace, .deleteFace, .versionCheck, .deleteAccount, .ownerOpenDoorPassword, .allCity, .communitiesInCity, .blockInCommunity, .cellInBlock, .unitInCell, .houseAuthentication, .addFace, .myVisitors, .updateUserInfo, .updateAvatar, .getMyUnitGuest:
-            return .post
-        }
+        return .post
     }
     
     var task: Task {
@@ -87,6 +93,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["UNITID": unitID, "USERID": userID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .addFamilyMember(communityID, unitID, userID, name, phone, type):
             return .requestParameters(parameters: ["TARGETMOBILE": phone, "REALNAME": name, "USERID": userID, "UNITID": unitID, "COMMUNITYID": communityID, "USERTYPE": type].ekey("USERID"), encoding: URLEncoding.default)
+        case let .deleteMember(unitID, userID, memberUserID):
+            return .requestParameters(parameters: ["UNITID": unitID, "USERID": userID, "TARGETUSERID": memberUserID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .allFace(communityID, blockID, cellID, unitID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .addFace(data):
@@ -116,6 +124,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["MOBILE": data.phone, "REALNAME": data.name, "IDCARD": data.userIdentityCardNumber, "USERTYPE": data.userType, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "UNITID": data.unitID, "USERID": data.userID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .myVisitors(userID, unitID):
             return .requestParameters(parameters: ["USERID": userID, "UNITID": unitID].ekey("USERID"), encoding: URLEncoding.default)
+        case let .getUserInfo(userID):
+            return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
         case let .updateUserInfo(userID, infoValue, InfoKey):
             return .requestParameters(parameters: ["USERID": userID, InfoKey: infoValue].ekey("USERID"), encoding: URLEncoding.default)
         case let .updateAvatar(userID, avatarData):
@@ -125,6 +135,8 @@ extension MineAPI: TargetType {
             return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
         case let .getMyUnitGuest(userID, unitID, currentPage, showCount):
             return .requestParameters(parameters: ["USERID": userID, "UNITID": unitID, "currentPage": currentPage, "showCount": showCount].ekey("USERID"), encoding: URLEncoding.default)
+        case let .searchUnit(name):
+            return .requestParameters(parameters: ["COMMUNITYNAME_SER": name, "currentPage": "1", "showCount": "20"], encoding: URLEncoding.default)
         }
     }
     

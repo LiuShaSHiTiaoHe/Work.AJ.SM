@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MemberListViewController: BaseViewController {
 
@@ -110,6 +111,7 @@ extension MemberListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: MemberListCellIdentifier, for: indexPath) as! MemberListCell
         let member = dataSource[indexPath.row]
         cell.data = member
+        cell.delegate = self
         return cell
     }
     
@@ -130,4 +132,25 @@ extension MemberListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension MemberListViewController: MemberListCellDelegate {
+    func deleteMember(_ memberUserID: String) {
+        let alert = UIAlertController.init(title: "确认删除", message: "", preferredStyle: .alert)
+        alert.addAction("取消", .cancel) { }
+        alert.addAction("确定", .destructive) {
+            MineRepository.shared.deleteUnitMember(memberID: memberUserID) { errorMsg in
+                if errorMsg.isEmpty {
+                    SVProgressHUD.showSuccess(withStatus: "删除成功")
+                    SVProgressHUD.dismiss(withDelay: 1) {
+                        self.
+                        tableView.reloadData()
+                    }
+                }else{
+                    SVProgressHUD.showInfo(withStatus: errorMsg)
+                }
+            }
+        }
+        alert.show()
+    }
 }

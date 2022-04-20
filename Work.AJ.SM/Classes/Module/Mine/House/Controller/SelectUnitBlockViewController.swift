@@ -49,6 +49,9 @@ class SelectUnitBlockViewController: BaseViewController {
             remakeConstraints()
         }
     }
+    
+    private var searchResultCommunityRID = ""
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +82,17 @@ class SelectUnitBlockViewController: BaseViewController {
                 guard let `self` = self else { return }
                 if models.count > 0 {
                     self.communityDataSource = models
-                    self.selectedCommunity = models[0]
+                    if !self.searchResultCommunityRID.isEmpty {
+                        self.selectedCommunity = self.communityDataSource.first(where: { element in
+                            if let ridStringValue = element.rid?.jk.intToString {
+                                return ridStringValue == self.searchResultCommunityRID
+                            }else{
+                                return false
+                            }
+                        })
+                    }else{
+                        self.selectedCommunity = models[0]
+                    }
                     self.leftTableVeiw.reloadData()
                     self.getBlocksData()
                 }else{
@@ -167,7 +180,9 @@ class SelectUnitBlockViewController: BaseViewController {
     @objc func textInputEditingBegin(_ sender: UITextField) {
         DispatchQueue.main.async {
             sender.resignFirstResponder()
-            self.navigationController?.pushViewController(HouseSearchViewController(), animated: true)
+            let vc = HouseSearchViewController()
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -472,5 +487,16 @@ extension SelectUnitBlockViewController: SelectUnitCityViewControllerDelegate {
     func selectCity(name: String) {
         isSelectCommunity = true
         cityName = name
+    }
+}
+
+
+extension SelectUnitBlockViewController: HouseSearchViewControllerDelegate {
+    func searchResultOfCommunity(_ data: CommunityModel) {
+        resetSelection()
+        if let ridString = data.rid?.jk.intToString {
+            searchResultCommunityRID = ridString
+            cityName = data.city
+        }
     }
 }
