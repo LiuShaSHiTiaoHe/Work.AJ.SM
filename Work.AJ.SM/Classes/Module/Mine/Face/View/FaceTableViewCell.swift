@@ -52,7 +52,7 @@ class FaceTableViewCell: UITableViewCell {
         faceImage.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.width.equalTo(80)
-            make.height.equalTo(110)
+            make.height.equalTo(80)
             make.centerY.equalToSuperview()
         }
         

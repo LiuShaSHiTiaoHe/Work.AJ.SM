@@ -143,8 +143,7 @@ extension MemberListViewController: MemberListCellDelegate {
                 if errorMsg.isEmpty {
                     SVProgressHUD.showSuccess(withStatus: "删除成功")
                     SVProgressHUD.dismiss(withDelay: 1) {
-                        self.
-                        tableView.reloadData()
+                        self.tableView.reloadData()
                     }
                 }else{
                     SVProgressHUD.showInfo(withStatus: errorMsg)

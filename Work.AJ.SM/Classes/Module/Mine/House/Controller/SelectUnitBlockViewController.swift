@@ -332,7 +332,7 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 if model.rid == selectedUnit?.rid{
                     cell.isCurrentCell = true
                 }
-                cell.locationName.text = model.rid?.jk.intToString
+                cell.locationName.text = model.unitNO
             }
         }
         return cell
