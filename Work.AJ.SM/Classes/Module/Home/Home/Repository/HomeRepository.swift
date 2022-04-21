@@ -43,6 +43,8 @@ class HomeRepository {
                 }), let unitID = firstUnit.unitid {
                     Defaults.currentUnitID = unitID
                     completion(self.filterHomePageModules(firstUnit))
+                }else{
+                    completion([])
                 }
             }
         } failureCallback: { response in

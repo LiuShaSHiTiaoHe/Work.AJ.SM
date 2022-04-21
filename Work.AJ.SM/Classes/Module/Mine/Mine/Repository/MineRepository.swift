@@ -31,6 +31,16 @@ class MineRepository: NSObject {
                 completion("数据为空")
                 return
             }
+            if let _ = Defaults.currentUnitID {
+            
+            }else{
+                if let firstUnit = models.first(where: { model in
+                    model.state == "N"
+                }), let unitID = firstUnit.unitid {
+                    Defaults.currentUnitID = unitID
+                }
+            }
+            
             RealmTools.addList(models, update: .modified) {
                 logger.info("update done")
             }
@@ -152,7 +162,8 @@ extension MineRepository {
     func getUserInfo(with userID: String, completion: @escaping DefaultCompletion) {
         SVProgressHUD.show()
         MineAPI.getUserInfo(userID: userID).defaultRequest(cacheType: .ignoreCache, showError: false) { jsonData in
-            if let userInfo = jsonData["map"].rawString(), let userModel = UserModel(JSONString: userInfo) {
+            SVProgressHUD.dismiss()
+            if let userInfo = jsonData["data"].rawString(), let userModel = UserModel(JSONString: userInfo) {
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
                 RealmTools.add(userModel, update: .modified) {}

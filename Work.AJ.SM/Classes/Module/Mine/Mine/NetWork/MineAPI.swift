@@ -84,7 +84,12 @@ extension MineAPI: TargetType {
     }
     
     var method: Moya.Method {
-        return .post
+        switch self {
+        case .getUserInfo, .getMyUnitGuest, .searchUnit:
+            return .get
+        default:
+            return .post
+        }
     }
     
     var task: Task {

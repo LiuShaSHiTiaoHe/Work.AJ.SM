@@ -74,14 +74,14 @@ class MineView: BaseView {
         
         nameLabel.snp.makeConstraints { make in
             make.left.equalTo(avatar.snp.right).offset(kMargin)
-            make.height.equalTo(20)
+            make.height.equalTo(30)
             make.right.equalToSuperview().offset(-kMargin)
-            make.top.equalTo(avatar).offset(kMargin/4)
+            make.top.equalTo(avatar)
         }
         
         phoneLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel)
-            make.height.equalTo(20)
+            make.height.equalTo(30)
             make.right.equalToSuperview().offset(-kMargin)
             make.bottom.equalTo(avatar.snp.bottom)
         }
