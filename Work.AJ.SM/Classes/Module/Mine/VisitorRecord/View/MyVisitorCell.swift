@@ -51,6 +51,7 @@ class MyVisitorCell: UITableViewCell {
     }
     
     func initializeView() {
+        self.backgroundColor = R.color.backgroundColor()
         self.addSubview(backContentView)
         backContentView.addSubview(nameLabel)
         backContentView.addSubview(startLabel)
@@ -76,7 +77,7 @@ class MyVisitorCell: UITableViewCell {
         
         startLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
-            make.top.equalTo(nameLabel.snp.bottom)
+            make.top.equalTo(nameLabel.snp.bottom).offset(kMargin/2)
             make.height.equalTo(20)
         }
         
@@ -88,7 +89,7 @@ class MyVisitorCell: UITableViewCell {
         
         endLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
-            make.top.equalTo(startLabel.snp.bottom)
+            make.top.equalTo(startLabel.snp.bottom).offset(kMargin/2)
             make.height.equalTo(20)
         }
         
@@ -101,7 +102,7 @@ class MyVisitorCell: UITableViewCell {
         typeLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.height.equalTo(20)
-            make.top.equalTo(endLabel.snp.bottom)
+            make.top.equalTo(endLabel.snp.bottom).offset(kMargin/2)
         }
         
         typeNameLabel.snp.makeConstraints { make in
@@ -131,6 +132,7 @@ class MyVisitorCell: UITableViewCell {
         let view = UILabel()
         view.font = k20Font
         view.textColor = R.color.maintextColor()
+        view.text = "访客"
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()

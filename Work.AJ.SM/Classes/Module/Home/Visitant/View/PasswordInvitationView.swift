@@ -69,6 +69,10 @@ class PasswordInvitationView: BaseView {
         self.addSubview(saveButton)
         self.addSubview(shareButton)
         
+        statusLabel.isHidden = true
+        invalidTips.isHidden = true
+        invalidIcon.isHidden = true
+        
         bgImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

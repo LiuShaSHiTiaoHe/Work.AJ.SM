@@ -18,7 +18,7 @@ class VisitorInvitationRecordViewController: BaseViewController {
     var record: UnitGuestModel?{
         didSet {
             if let record = record, let typeValue = record.guesttype {
-                type = typeValue == "1" ? .qrcode : .password
+                type = typeValue == "2" ? .qrcode : .password
                 if let status = record.status, let valid = record.valid, status == "O", valid == 1 {
                     isValid = true
                 }
@@ -47,6 +47,26 @@ class VisitorInvitationRecordViewController: BaseViewController {
             qrCodeContentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
             qrCodeContentView.isvalid = isValid
             break
+        }
+    }
+    
+    private func setUpDataSource(){
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname,let record = record, let password = record.password {
+            switch type {
+            case .password:
+                passwordContentView.passwordLabel.text = password
+                passwordContentView.locationLabel.text = communityname + cellname
+//                contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
+//                contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
+//                if visitTimes == .single {
+//                    contentView.visitTimes.text = "单次"
+//                }else{
+//                    contentView.visitTimes.text = "无限次"
+//                }
+            case .qrcode:
+                break
+            }
+
         }
     }
     

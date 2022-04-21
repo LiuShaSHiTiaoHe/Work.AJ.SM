@@ -1462,8 +1462,6 @@
 				41E7D8E927F2E10700241706 /* View */,
 				41E7D8E827F2E0FE00241706 /* ViewController */,
 				41E7D8E727F2E0F700241706 /* Model */,
-				41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */,
-				4106766D280FD5010011AA40 /* VisitorInvitationRecordViewController.swift */,
 			);
 			path = VisitorRecord;
 			sourceTree = "<group>";
@@ -1712,6 +1710,8 @@
 		41E7D8E827F2E0FE00241706 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				41985F3D27D08FBD00E02A9A /* VisitorRecordViewController.swift */,
+				4106766D280FD5010011AA40 /* VisitorInvitationRecordViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
