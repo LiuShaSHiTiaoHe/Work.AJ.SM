@@ -43,7 +43,6 @@ class BleCallElevatorView: BaseView {
         return view
     }()
     
-    // FIXME: - .....
     lazy var dashView: UILabel = {
         let view = UILabel()
         view.text = "-------------------------"

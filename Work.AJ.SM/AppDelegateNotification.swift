@@ -54,7 +54,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
                 Haptic.impact(.medium).generate()
             }
         }else{
-            completionHandler()
+            completionHandler([])
         }
     }
 
