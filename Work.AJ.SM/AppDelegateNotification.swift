@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Haptica
 
 extension AppDelegate: UNUserNotificationCenterDelegate{
     
@@ -47,7 +48,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
       
         let userInfo = notification.request.content.userInfo
         logger.info(userInfo)
-        completionHandler([[.alert, .sound]])
+        if ud.inAppNotification {
+            completionHandler([[.alert, .sound]])
+            if ud.vibrationAvailable {
+                Haptic.impact(.medium).generate()
+            }
+        }else{
+            completionHandler()
+        }
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,

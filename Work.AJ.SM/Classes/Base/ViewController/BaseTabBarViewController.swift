@@ -60,14 +60,16 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 extension BaseTabBarViewController: NIMNetCallManagerDelegate{
     func onReceive(_ callID: UInt64, from caller: String, type: NIMNetCallMediaType, message extendMessage: String?) {
         logger.info("收到通话请求。。。")
-        if type == .audio {
-            let vc = AudioChatViewController.init(responseCall: caller, callID: callID)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
-        }else{
-            let vc = VideoChatViewController.init(responseCall: caller, callID: callID)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+        if ud.allowVisitorCall {
+            if type == .audio {
+                let vc = AudioChatViewController.init(responseCall: caller, callID: callID)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }else{
+                let vc = VideoChatViewController.init(responseCall: caller, callID: callID)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
         }
     }
 }

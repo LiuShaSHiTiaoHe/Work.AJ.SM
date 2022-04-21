@@ -37,5 +37,5 @@ extension DefaultsKeys {
     var inAppNotification: DefaultsKey<Bool> { .init("inAppNotification", defaultValue: false) }//通知栏显示
     var vibrationAvailable: DefaultsKey<Bool> { .init("vibrationAvailable", defaultValue: false) }//震动
     var ringtoneAvailable: DefaultsKey<Bool> { .init("ringtoneAvailable", defaultValue: false) }//响铃
-    var allowVisitorCall: DefaultsKey<Bool> { .init("allowVisitorCall", defaultValue: false) }//允许访客呼叫手机
+    var allowVisitorCall: DefaultsKey<Bool> { .init("allowVisitorCall", defaultValue: true) }//允许访客呼叫手机
 }
