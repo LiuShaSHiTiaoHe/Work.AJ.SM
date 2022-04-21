@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */; };
 		4106766E280FD5010011AA40 /* VisitorInvitationRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106766D280FD5010011AA40 /* VisitorInvitationRecordViewController.swift */; };
+		41067670281138B70011AA40 /* StringProtocol.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106766F281138B70011AA40 /* StringProtocol.Extension.swift */; };
+		41067672281138F10011AA40 /* Sequence.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41067671281138F10011AA40 /* Sequence.Extension.swift */; };
 		410A108527F2E16E0059B2C3 /* VisitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108427F2E16E0059B2C3 /* VisitorModel.swift */; };
 		410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108627F2E4120059B2C3 /* MyVisitorCell.swift */; };
 		410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */; };
@@ -246,6 +248,8 @@
 /* Begin PBXFileReference section */
 		4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitGuestModel.swift; sourceTree = "<group>"; };
 		4106766D280FD5010011AA40 /* VisitorInvitationRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorInvitationRecordViewController.swift; sourceTree = "<group>"; };
+		4106766F281138B70011AA40 /* StringProtocol.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.Extension.swift; sourceTree = "<group>"; };
+		41067671281138F10011AA40 /* Sequence.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.Extension.swift; sourceTree = "<group>"; };
 		410A108427F2E16E0059B2C3 /* VisitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorModel.swift; sourceTree = "<group>"; };
 		410A108627F2E4120059B2C3 /* MyVisitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVisitorCell.swift; sourceTree = "<group>"; };
 		410A108B27F2FFCA0059B2C3 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -686,6 +690,8 @@
 				416F2E3F27B0B4D2004E5AD9 /* DynamicColor.swift */,
 				416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */,
 				4143293927F848A300DA8D47 /* Dictionary.Extension.swift */,
+				4106766F281138B70011AA40 /* StringProtocol.Extension.swift */,
+				41067671281138F10011AA40 /* Sequence.Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1994,6 +2000,7 @@
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
 				410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
+				41067670281138B70011AA40 /* StringProtocol.Extension.swift in Sources */,
 				41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */,
 				416F2E4927B0B56D004E5AD9 /* Network.Configuration.swift in Sources */,
 				41B7DBE827E044E8002A23D0 /* SwiftyCamViewController.swift in Sources */,
@@ -2026,6 +2033,7 @@
 				4173C20E27C3722800B8FBB8 /* ChooseVisitorModeView.swift in Sources */,
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
 				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
+				41067672281138F10011AA40 /* Sequence.Extension.swift in Sources */,
 				4143293327F8320300DA8D47 /* AppDelegateNotification.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */,

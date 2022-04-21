@@ -9,8 +9,12 @@ import UIKit
 
 class ElevatorConfigurationSendDataView: BaseView {
 
-    override func initData() {
-        
+    var dataString: String? {
+        didSet{
+            if let dataString = dataString {
+                tipsLabel.text = dataString
+            }
+        }
     }
     
     override func initializeView() {

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+import JKSwiftExtension
 
 class ElevatorConfigurationSendDataViewController: BaseViewController {
 
@@ -58,12 +60,44 @@ extension ElevatorConfigurationSendDataViewController: UITableViewDataSource, UI
         let functionName = ElevatorConfigurationDefines.shared.functions[indexPath.row]
         switch functionName {
         case "写密码":
-            break
+            if let password = configurationData?.blockSecret, !password.isEmpty {
+                let data = "510BB6*5A"
+                writeData(data, password)
+            }else{
+                SVProgressHUD.showInfo(withStatus: "未获取到密码数据")
+            }
+    
         case "写卡片扇区":
-            break
+            if let cardSector = configurationData?.useBlocks, !cardSector.isEmpty {
+                let data = "5106B8*5A"
+                let sector = cardSector.count%2 == 0 ? cardSector : "0" + cardSector
+                writeData(data, sector)
+            }else{
+                SVProgressHUD.showInfo(withStatus: "未获取到扇区数据")
+            }
+    
         case "写群组号":
-            break
+            if let groupNum = elevator?.cellGroupID?.jk.intToString, !groupNum.isEmpty {
+                let data = "5106B4*5A"
+                let gnum = groupNum.count%2 == 0 ? groupNum : "0" + groupNum
+                writeData(data, gnum)
+            }else{
+                SVProgressHUD.showInfo(withStatus: "未获取到群组数据")
+            }
+    
         case "写入SN码":
+            if let snNumber = elevator?.liftSN, !snNumber.isEmpty {
+                if snNumber.count < 15 {
+                    SVProgressHUD.showInfo(withStatus: "获取到错误的SN数据")
+                }else{
+                    let data = "510FD1*5A"
+                    let snLength = snNumber.count
+                    let sn = snNumber.jk.sub(start: snLength - 10, length: 10)
+                    writeData(data, sn.bytes.toHexString())
+                }
+            }else{
+                SVProgressHUD.showInfo(withStatus: "未获取到SN数据")
+            }
             break
         case "写楼层配置":
             break
@@ -72,4 +106,12 @@ extension ElevatorConfigurationSendDataViewController: UITableViewDataSource, UI
         }
     }
 
+    private func writeData(_ data: String, _ para: String){
+        updateTips(para)
+        BLEAdvertisingManager.shared.sendElevatorConfigData(data, para)
+    }
+    
+    private func updateTips(_ tips: String){
+        contentView.tipsLabel.text = tips
+    }
 }
