@@ -27,6 +27,7 @@ class PasswordInvitationView: BaseView {
                     invalidIcon.isHidden = false
                     passwordTipsLabel.isHidden = true
                     passwordLabel.isHidden = true
+                    hideShareButtons()
                 }
             }else{
                 statusLabel.isHidden = true
@@ -179,7 +180,7 @@ class PasswordInvitationView: BaseView {
         invalidTips.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
-            make.top.equalTo(passwordLabel.snp.centerY)
+            make.top.equalTo(passwordLabel.snp.centerY).offset(-kMargin)
         }
         
         saveButton.snp.makeConstraints { make in

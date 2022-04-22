@@ -94,13 +94,14 @@ class VisitorRecordViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-            make.bottom.equalToSuperview()
+//            make.bottom.equalToSuperview()
+            make.bottom.equalTo(addButton.snp.top).offset(-kMargin/2)
         }
         addButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(40)
             make.width.equalTo(250)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin/2)
         }
     }
 

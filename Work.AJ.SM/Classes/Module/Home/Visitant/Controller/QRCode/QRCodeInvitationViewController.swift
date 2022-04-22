@@ -12,6 +12,7 @@ class QRCodeInvitationViewController: BaseViewController {
 
     var arriveTime: Date?
     var validTime: Date?
+    var qrCodeString: String?
     
     lazy var contentView: QRCodeInvitationView = {
         let view = QRCodeInvitationView()
@@ -72,27 +73,17 @@ class QRCodeInvitationViewController: BaseViewController {
     }
     
     func generateQRCode() {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityname = unit.communityname, let cellname = unit.cellname, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let userID = ud.userID {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString {
             contentView.locationLabel.text = communityname + cellname
-            if let arriveTime = arriveTime, let validTime = validTime {
+            if let arriveTime = arriveTime, let validTime = validTime, let qrCodeString = qrCodeString {
                 contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
                 contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
 
-                let arriveTimeString = arriveTime.jk.toformatterTimeString()
-                let validTimeString = validTime.jk.toformatterTimeString()
-
-                HomeAPI.getInvitationQRCode(unitID: unitID, arriveTime: arriveTimeString, validTime: validTimeString, communityID: communityID, blockID: blockID, userID: userID).defaultRequest { JsonData in
-                    if let data = JsonData["data"].dictionary, let qrcode = data["qrcode"]?.string {
-                        if let qrcodeImage = QRCode.init(string: qrcode, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
-                            DispatchQueue.main.async {
-                                self.contentView.qrCodeView.image = image
-                            }
-                        }
+                if let qrcodeImage = QRCode.init(string: qrCodeString, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
+                    DispatchQueue.main.async {
+                        self.contentView.qrCodeView.image = image
                     }
-                } failureCallback: { response in
-                    logger.info("\(response.message)")
                 }
-                
             }
         }
     }

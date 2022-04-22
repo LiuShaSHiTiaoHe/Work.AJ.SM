@@ -31,6 +31,7 @@ class VisitorInvitationRecordViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpDataSource()
     }
     
     override func initData() {
@@ -56,14 +57,23 @@ class VisitorInvitationRecordViewController: BaseViewController {
             case .password:
                 passwordContentView.passwordLabel.text = password
                 passwordContentView.locationLabel.text = communityname + cellname
-//                contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-//                contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-//                if visitTimes == .single {
-//                    contentView.visitTimes.text = "单次"
-//                }else{
-//                    contentView.visitTimes.text = "无限次"
-//                }
+                
+                passwordContentView.arriveTime.text = record.startdate
+                passwordContentView.validTime.text = record.enddate
+                if let passtype = record.passtype, passtype == "T" {
+                    passwordContentView.visitTimes.text = "无限次"
+                }else{
+                    passwordContentView.visitTimes.text = "单次"
+                }
             case .qrcode:
+                if let qrcodeImage = QRCode.init(string: password, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
+                    DispatchQueue.main.async {
+                        self.qrCodeContentView.qrCodeView.image = image
+                    }
+                }
+                qrCodeContentView.locationLabel.text = communityname + cellname
+                qrCodeContentView.arriveTime.text = record.startdate
+                qrCodeContentView.validTime.text = record.enddate
                 break
             }
 

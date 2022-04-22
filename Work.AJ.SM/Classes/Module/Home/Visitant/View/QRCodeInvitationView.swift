@@ -26,6 +26,7 @@ class QRCodeInvitationView: BaseView {
                     invalidTips.isHidden = false
                     invalidIcon.isHidden = false
                     qrCodeView.isHidden = true
+                    hideShareButtons()
                 }
             }else{
                 statusLabel.isHidden = true
@@ -156,7 +157,7 @@ class QRCodeInvitationView: BaseView {
         invalidTips.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
-            make.top.equalTo(qrCodeView.snp.centerY)
+            make.top.equalTo(qrCodeView.snp.centerY).offset(-kMargin)
         }
         
         saveButton.snp.makeConstraints { make in

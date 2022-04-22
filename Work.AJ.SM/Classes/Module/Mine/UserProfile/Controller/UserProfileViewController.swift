@@ -478,6 +478,7 @@ extension UserProfileViewController {
                     CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: avatarData], key: UserAvatarCacheKey)
                     self.contentView.tableView.reloadData()
                     DispatchQueue.main.async {
+                        SVProgressHUD.showInfo(withStatus: "上传用户头像成功")
                         NotificationCenter.default.post(name: .kUserUpdateAvatar, object: nil)
                     }
                 }else{

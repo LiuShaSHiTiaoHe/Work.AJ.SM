@@ -50,6 +50,15 @@ class MemberListViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MineRepository.shared.getCurrentUnitMembers { [weak self] members in
+            guard let `self` = self else { return }
+            self.dataSource = members.filter{$0.userType != "R"}
+            self.tableView.reloadData()
+        }
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(headerView)
@@ -63,13 +72,13 @@ class MemberListViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(addButton.snp.top).offset(-kMargin/2)
         }
         addButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(40)
             make.width.equalTo(250)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin/2)
         }
     }
     
@@ -82,11 +91,7 @@ class MemberListViewController: BaseViewController {
             titleView.locationLabel.text = communityname + cellname
         }
         
-        MineRepository.shared.getCurrentUnitMembers { [weak self] members in
-            guard let `self` = self else { return }
-            self.dataSource = members.filter{$0.userType != "R"}
-            self.tableView.reloadData()
-        }
+
     }
     
     @objc

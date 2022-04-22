@@ -70,7 +70,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
         datePicker?.textFontOfSelectedRow = k18Font
         datePicker?.lineBackgroundColor = R.color.themeColor()
         datePicker?.minimumDate = Date()
-        datePicker?.maximumDate = NSDate.init().addingMonths(13)
+        datePicker?.maximumDate = NSDate.init().addingHours(12)//addingMonths(13)
         datePicker?.selectedDate = {[weak self] dateComponents in
             guard let `self` = self else { return }
             switch self.timeType {
@@ -99,15 +99,34 @@ class SetVisitorQRCodeViewController: BaseViewController {
     
     @objc
     func confirm() {
+        SVProgressHUD.show()
         if let validTime = validTime, let arriveTime = arriveTime {
             if let interval = validTime.jk.numberOfMinutes(from: arriveTime), interval >= 30 {
-                if interval > 12*60*60 {
-                    SVProgressHUD.showError(withStatus: "有效期超出限值")
+                if interval > 12*60 {
+                    SVProgressHUD.showError(withStatus: "有效期超过限制")
                 }else{
-                    let vc = QRCodeInvitationViewController()
-                    vc.arriveTime = arriveTime
-                    vc.validTime = validTime
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let userID = ud.userID {
+                        let arriveTimeString = arriveTime.jk.toformatterTimeString()
+                        let validTimeString = validTime.jk.toformatterTimeString()
+                        HomeAPI.getInvitationQRCode(unitID: unitID, arriveTime: arriveTimeString, validTime: validTimeString, communityID: communityID, blockID: blockID, userID: userID).defaultRequest { JsonData in
+                            SVProgressHUD.dismiss()
+                            if let data = JsonData["data"].dictionary, let qrcode = data["qrcode"]?.string {
+                                DispatchQueue.main.async {
+                                    let vc = QRCodeInvitationViewController()
+                                    vc.arriveTime = arriveTime
+                                    vc.validTime = validTime
+                                    vc.qrCodeString = qrcode
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                            }
+                        } failureCallback: { response in
+                            logger.info("\(response.message)")
+                            SVProgressHUD.showError(withStatus: "\(response.message)")
+                        }
+                    }else{
+                        SVProgressHUD.showError(withStatus: "数据错误")
+                    }
+                    
                 }
             }else{
                 SVProgressHUD.showError(withStatus: "有效期早于来访时间")

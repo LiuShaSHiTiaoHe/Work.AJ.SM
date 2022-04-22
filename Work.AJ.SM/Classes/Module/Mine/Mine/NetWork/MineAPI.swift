@@ -141,7 +141,7 @@ extension MineAPI: TargetType {
         case let .getMyUnitGuest(userID, unitID, currentPage, showCount):
             return .requestParameters(parameters: ["USERID": userID, "UNITID": unitID, "currentPage": currentPage, "showCount": showCount].ekey("USERID"), encoding: URLEncoding.default)
         case let .searchUnit(name):
-            return .requestParameters(parameters: ["COMMUNITYNAME_SER": name, "currentPage": "1", "showCount": "20"], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["COMMUNITYNAME_SER": name, "currentPage": "1", "showCount": "20"].ekey("currentPage"), encoding: URLEncoding.default)
         }
     }
     
