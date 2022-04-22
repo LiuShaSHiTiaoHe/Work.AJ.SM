@@ -115,9 +115,7 @@ class SettingViewController: BaseViewController {
         alert.addAction("取消", .cancel) { }
         alert.addAction("确定", .destructive) {
             SVProgressHUD.show(withStatus: "正在登出...")
-            RealmTools.deleteRealmFiles()
-            GDataManager.shared.removeUserData()
-            GDataManager.shared.removeNetCache()
+            GDataManager.shared.clearAccount()
             SVProgressHUD.dismiss(withDelay: 2) {
                 let vc = LoginViewController()
                 vc.modalPresentationStyle = .fullScreen
@@ -135,9 +133,7 @@ class SettingViewController: BaseViewController {
                 SVProgressHUD.show(withStatus: "正在注销...")
                 MineAPI.deleteAccount(userID: userID).defaultRequest { jsonData in
                     SVProgressHUD.showInfo(withStatus: "注销成功")
-                    RealmTools.deleteRealmFiles()
-                    GDataManager.shared.removeUserData()
-                    GDataManager.shared.removeNetCache()
+                    GDataManager.shared.clearAccount()
                     SVProgressHUD.dismiss(withDelay: 2) {
                         let vc = LoginViewController()
                         vc.modalPresentationStyle = .fullScreen

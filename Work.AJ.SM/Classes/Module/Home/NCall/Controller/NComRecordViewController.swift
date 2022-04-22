@@ -22,7 +22,10 @@ class NComRecordViewController: BaseViewController {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         contentView.tableView.mj_header = refreshHeader()
-        contentView.tableView.mj_footer = MJRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
+        contentView.tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {[weak self] in
+            guard let self = self else { return }
+            self.footerLoadMore()
+        })//MJRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
         
         loadNComRecord()
     }
@@ -50,6 +53,9 @@ class NComRecordViewController: BaseViewController {
                 if !records.isEmpty {
                     self.dataSource.append(contentsOf: records)
                 }
+            }
+            if records.count < 15 {
+                self.contentView.tableView.mj_footer?.endRefreshingWithNoMoreData()
             }
             self.contentView.tableView.reloadData()
         }

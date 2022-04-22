@@ -22,8 +22,11 @@ class VisitorRecordViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.mj_header = refreshHeader()
-        tableView.mj_footer = MJRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
+        tableView.mj_header = refreshHeader(R.color.maintextColor()!)
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            self.footerLoadMore()
+        })//MJRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
     
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname {
             titleView.locationLabel.text = communityname + cellname
@@ -49,7 +52,11 @@ class VisitorRecordViewController: BaseViewController {
                     }else{
                         self.dataSource.append(contentsOf: datas)
                     }
-                    self.endLoading()
+                    if datas.count < self.pageSize {
+                        self.endLoading(true)
+                    }else{
+                        self.endLoading()
+                    }
                     self.tableView.reloadData()
                 }
             }
@@ -94,7 +101,6 @@ class VisitorRecordViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-//            make.bottom.equalToSuperview()
             make.bottom.equalTo(addButton.snp.top).offset(-kMargin/2)
         }
         addButton.snp.makeConstraints { make in

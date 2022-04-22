@@ -106,6 +106,14 @@ class GDataManager: NSObject {
             }
         }
     }
+    
+    // MARK: - 清除数据
+    func clearAccount() {
+        RealmTools.deleteRealmFiles()
+        self.removeUserData()
+        self.removeNetCache()
+        self.removeNomalCache()
+    }
     // MARK: - 删除用户数据
     func removeUserData() {
         ud.remove(\.loginState)
@@ -123,6 +131,11 @@ class GDataManager: NSObject {
     // MARK: - 删除网络请求缓存
     func removeNetCache() {
         CacheManager.network.removeAllCache()
+    }
+    
+    // MARK: - 删除用户日常缓存
+    func removeNomalCache() {
+        CacheManager.normal.removeAllCache()
     }
     
     func isOwner() -> Bool {
