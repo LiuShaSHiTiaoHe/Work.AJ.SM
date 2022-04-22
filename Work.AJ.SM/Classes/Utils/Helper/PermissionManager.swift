@@ -15,6 +15,10 @@ class PermissionManager {
         requset([.locationWhenInUse, .bluetooth, .camera, .photoLibrary, .microphone])
     }
     
+    func PermissionRequest(_ permisson: SPPermissions.Permission, _ completion: @escaping () -> ()) {
+        
+    }
+    
     @discardableResult
     func requestPermission(_ permission: SPPermissions.Permission) -> SPPermissions.PermissionStatus {
         let status = permission.status

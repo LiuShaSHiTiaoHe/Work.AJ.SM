@@ -48,6 +48,13 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/LocationWhenInUse'
   pod 'SPPermissions/Microphone'
   
+#  pod 'PermissionsKit/CameraPermission'
+#  pod 'PermissionsKit/PhotoLibraryPermission'
+#  pod 'PermissionsKit/NotificationPermission'
+#  pod 'PermissionsKit/MicrophonePermission'
+#  pod 'PermissionsKit/LocationWhenInUsePermission'
+#  pod 'PermissionsKit/BluetoothPermission'
+  
   pod 'NIMSDK', '6.1.1'
   pod 'JCore', '2.1.4-noidfa'
   pod 'JPush', '3.2.4-noidfa'
