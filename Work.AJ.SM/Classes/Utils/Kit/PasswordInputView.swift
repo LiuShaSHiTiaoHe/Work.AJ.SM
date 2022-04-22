@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PasswordInputView: UIView {
+class PasswordInputView: BaseView {
 
     var errorMsg: String? {
         didSet {
@@ -42,6 +42,7 @@ class PasswordInputView: UIView {
         input.clearButtonMode = .never
         input.autocorrectionType = .no
         input.isSecureTextEntry = true
+        input.returnKeyType = .go
         return input
     }()
     
@@ -49,7 +50,6 @@ class PasswordInputView: UIView {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.password_eye_close(), for: .normal)
         button.setImage(R.image.password_eye_open(), for: .selected)
-        button.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
         return button
     }()
     
@@ -66,19 +66,14 @@ class PasswordInputView: UIView {
         label.textColor = R.color.errorRedColor()
         return label
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeView()
+        
+    override func initData() {
+        eyeButton.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
         textInput.addTarget(self, action: #selector(textInputEditingBegin(_:)), for: .editingDidBegin)
         textInput.addTarget(self, action: #selector(textInputEditingEnd(_:)), for: .editingDidEnd)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func initializeView() {
+    override func initializeView() {
         self.backgroundColor = .clear
         
         self.addSubview(titleLabel)

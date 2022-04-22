@@ -25,7 +25,7 @@ enum loginOrRegisterType {
     case register
 }
 
-class LoginView: UIView {
+class LoginView: BaseView {
     
     private let inputHeight: CGFloat = 56.0
     weak var delegate: LoginViewDelegate?
@@ -86,6 +86,7 @@ class LoginView: UIView {
     
     @objc
     func comfirmButtonAction() {
+        hideKeyboard()
         switch viewType {
         case .login:
             var loginMobile = ""
@@ -96,7 +97,7 @@ class LoginView: UIView {
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
                 return
             }
-            if let password = loginPasswordInputView.inputString {
+            if let password = loginPasswordInputView.inputString, !password.isEmpty {
                 loginPassword = password
             }else{
                 loginPasswordInputView.errorMsg = "密码格式错误"
@@ -134,22 +135,15 @@ class LoginView: UIView {
             }
         }
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeView()
-        initData()
-    }
-    
-    func initData() {
+        
+    override func initData() {
         configurePolicyLabel()
         registerCodeInputView.delegate = self
+        loginPasswordInputView.textInput.delegate = self
+        registerPasswordInputView.textInput.delegate = self
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     lazy var backgroundImage: UIImageView = {
         let view = UIImageView()
         view.image = R.image.login_content_image()
@@ -200,7 +194,7 @@ class LoginView: UIView {
         return seg
     }()
     
-    ///login
+    // MARK: - LoginView
     lazy var loginInputContentView: UIView = {
         let view = UIView()
         return view
@@ -226,7 +220,7 @@ class LoginView: UIView {
         return button
     }()
     
-    //register
+    // MARK: - RegisterView
     lazy var registerInputContentView: UIView = {
         let view = UIView.init()
         return view
@@ -258,7 +252,7 @@ class LoginView: UIView {
     
     private let policyLabel = ActiveLabel()
     
-    //comfirm button
+    // MARK: - Comfirm Button
     lazy var comfirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("登录", for: .normal)
@@ -270,7 +264,7 @@ class LoginView: UIView {
         return button
     }()
     
-    func initializeView() {
+    override func initializeView() {
         self.backgroundColor = R.color.whiteColor()
         addSubview(backgroundImage)
         addSubview(tipsLabel)
@@ -425,5 +419,18 @@ extension LoginView: VerificationCodeInputViewDelegate {
         }else{
             SVProgressHUD.showInfo(withStatus: "请输入手机号码")
         }
+    }
+}
+
+extension LoginView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.isEqual(loginPasswordInputView.textInput){
+            comfirmButtonAction()
+            return true
+        }else if textField.isEqual(registerPasswordInputView.textInput) {
+            comfirmButtonAction()
+            return true
+        }
+        return false
     }
 }

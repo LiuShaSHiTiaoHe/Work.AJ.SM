@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class BaseView: UIView {
 
@@ -23,6 +24,10 @@ class BaseView: UIView {
     
     func initData() {}
 
+    func hideKeyboard() {
+        IQKeyboardManager.shared.resignFirstResponder()
+    }
+    
     func addlayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor,UIColor.white.cgColor]
