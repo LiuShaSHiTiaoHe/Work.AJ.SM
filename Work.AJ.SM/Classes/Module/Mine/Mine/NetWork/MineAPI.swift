@@ -29,6 +29,7 @@ enum MineAPI {
     case updateAvatar(userID: String, avatarData: Data)
     case getMyUnitGuest(userID: String, unitID: String, currentPage: String, showCount: String)
     case searchUnit(name: String)
+    case updateNotificationStatus(userID: String, status: String)
 }
 
 extension MineAPI: TargetType {
@@ -80,12 +81,14 @@ extension MineAPI: TargetType {
             return APIs.myUnitGuest
         case .searchUnit:
             return APIs.searchUnitWithName
+        case .updateNotificationStatus:
+            return APIs.updateNotificationStatus
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUserInfo, .getMyUnitGuest, .searchUnit:
+        case .getUserInfo, .getMyUnitGuest:
             return .get
         default:
             return .post
@@ -142,6 +145,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["USERID": userID, "UNITID": unitID, "currentPage": currentPage, "showCount": showCount].ekey("USERID"), encoding: URLEncoding.default)
         case let .searchUnit(name):
             return .requestParameters(parameters: ["COMMUNITYNAME_SER": name, "currentPage": "1", "showCount": "20"].ekey("currentPage"), encoding: URLEncoding.default)
+        case let .updateNotificationStatus(userID, status):
+            return .requestParameters(parameters: ["USERID": userID, "STATUS": status].ekey("USERID"), encoding: URLEncoding.default)
         }
     }
     

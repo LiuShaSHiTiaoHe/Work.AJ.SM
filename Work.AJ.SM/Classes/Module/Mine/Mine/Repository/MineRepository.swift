@@ -156,6 +156,21 @@ class MineRepository: NSObject {
     
 }
 
+// MARK: - User Setting
+extension MineRepository {
+    func updateNotificationStatus(_ state: String, completion: @escaping DefaultCompletion) {
+        if let userID = ud.userID {
+            MineAPI.updateNotificationStatus(userID: userID, status: state).defaultRequest { jsonData in
+                completion("")
+            } failureCallback: { response in
+                completion(response.message)
+            }
+        }else{
+            completion("数据错误")
+        }
+    }
+}
+
 // MARK: - 用户信息
 extension MineRepository {
     
