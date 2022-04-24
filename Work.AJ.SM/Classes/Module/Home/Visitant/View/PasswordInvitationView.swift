@@ -320,7 +320,7 @@ class PasswordInvitationView: BaseView {
     
     lazy var passwordLabel: UILabel = {
         let view = UILabel()
-        view.font = k34SysFont
+        view.font = k34Font
         view.textAlignment = .center
         view.textColor = R.color.themeColor()
         return view

@@ -29,7 +29,7 @@ class MobileInputView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel.init()
-        label.font = k16SysFont
+        label.font = k16Font
         label.textColor = R.color.maintextColor()
         label.text = "手机号"
         label.textAlignment = .left

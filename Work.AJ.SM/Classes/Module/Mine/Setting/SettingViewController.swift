@@ -126,7 +126,7 @@ class SettingViewController: BaseViewController {
     }
     
     func deleteAccount() {
-        let alert = UIAlertController.init(title: "注销", message: "注销之后，无法再使用此帐号登录，需要重新注册帐号，请谨慎操作。", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: "注销", message: "注销之后，无法再使用此账号登录，需要重新注册账号，请谨慎操作。", preferredStyle: .alert)
         let cancleAction = UIAlertAction.init(title: "取消", style: .cancel) { action in }
         let confirmAction = UIAlertAction.init(title: "注销", style: .destructive) { action in
             if let userID = ud.userID {
@@ -212,7 +212,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.tipsLabel.text = ""
                 break
             case 5:
-                cell.nameLabel.text = "注销帐号"
+                cell.nameLabel.text = "注销账号"
                 cell.tipsLabel.text = "注销后无法恢复"
                 break
             default:

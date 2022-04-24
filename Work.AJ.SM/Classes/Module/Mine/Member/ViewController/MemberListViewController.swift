@@ -140,21 +140,26 @@ extension MemberListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MemberListViewController: MemberListCellDelegate {
-    func deleteMember(_ memberUserID: String) {
-        let alert = UIAlertController.init(title: "确认删除", message: "", preferredStyle: .alert)
-        alert.addAction("取消", .cancel) { }
-        alert.addAction("确定", .destructive) {
-            MineRepository.shared.deleteUnitMember(memberID: memberUserID) { errorMsg in
-                if errorMsg.isEmpty {
-                    SVProgressHUD.showSuccess(withStatus: "删除成功")
-                    SVProgressHUD.dismiss(withDelay: 1) {
-                        self.tableView.reloadData()
+    func deleteMember(_ member: MemberModel) {
+        if let memberID = member.userID?.jk.intToString, let memberName = member.realName {
+            let alert = UIAlertController.init(title: "确认删除  \(memberName)", message: "", preferredStyle: .alert)
+            alert.addAction("取消", .cancel) { }
+            alert.addAction("确定", .destructive) {
+                MineRepository.shared.deleteUnitMember(memberID: memberID) { errorMsg in
+                    if errorMsg.isEmpty {
+                        SVProgressHUD.showSuccess(withStatus: "删除成功")
+                        SVProgressHUD.dismiss(withDelay: 1) {
+                            self.tableView.reloadData()
+                        }
+                    }else{
+                        SVProgressHUD.showInfo(withStatus: errorMsg)
                     }
-                }else{
-                    SVProgressHUD.showInfo(withStatus: errorMsg)
                 }
             }
+            alert.show()
+        }else{
+            SVProgressHUD.showInfo(withStatus: "数据错误")
         }
-        alert.show()
+       
     }
 }

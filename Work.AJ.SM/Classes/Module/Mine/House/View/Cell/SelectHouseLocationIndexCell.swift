@@ -15,7 +15,7 @@ class SelectHouseLocationIndexCell: UICollectionViewCell {
         view.textColor = R.color.maintextColor()
         view.textAlignment = .center
         view.backgroundColor = .clear
-        view.font = k14SysFont
+        view.font = k14Font
         view.adjustsFontSizeToFitWidth = true
         return view
     }()

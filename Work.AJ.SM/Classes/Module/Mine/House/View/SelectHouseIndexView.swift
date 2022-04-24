@@ -113,7 +113,7 @@ extension SelectHouseIndexView: UICollectionViewDelegateFlowLayout {
             return .init(width: 20, height: 30)
         }
         let location = locations[indexPath.row/2]
-        let width = location.jk.singleLineSize(font: k14SysFont)
+        let width = location.jk.singleLineSize(font: k14Font)
         return .init(width: width.width, height: 30)
     }
 }

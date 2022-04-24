@@ -155,7 +155,7 @@ class LoginView: BaseView {
         label.text = "欢迎使用"
         label.textColor = R.color.whiteColor()
         label.textAlignment = .left
-        label.font = k34SysFont
+        label.font = k34Font
         return label
     }()
     
@@ -164,7 +164,7 @@ class LoginView: BaseView {
         label.text = "安杰智慧社区"
         label.textColor = R.color.whiteColor()
         label.textAlignment = .left
-        label.font = k20SysFont
+        label.font = k20Font
         return label
     }()
     
@@ -184,7 +184,7 @@ class LoginView: BaseView {
     
     lazy var segment: BetterSegmentedControl = {
         let seg = BetterSegmentedControl.init()
-        seg.segments = LabelSegment.segments(withTitles: ["帐号登录", "帐号注册"],
+        seg.segments = LabelSegment.segments(withTitles: ["账号登录", "账号注册"],
                                              normalFont: k18Font,
                                              normalTextColor: R.color.secondtextColor(),
                                              selectedFont: k18Font,

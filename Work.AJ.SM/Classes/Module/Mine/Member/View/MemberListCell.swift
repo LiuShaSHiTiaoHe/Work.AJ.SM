@@ -11,7 +11,7 @@ import SnapKit
 let MemberListCellIdentifier = "MemberListCell"
 
 protocol MemberListCellDelegate: NSObjectProtocol {
-    func deleteMember(_ memberUserID: String)
+    func deleteMember(_ member: MemberModel)
 }
 
 class MemberListCell: UITableViewCell {
@@ -202,8 +202,8 @@ class MemberListCell: UITableViewCell {
     
     @objc
     func deleteAction() {
-        if let member = data, let memberUserID = member.userID?.jk.intToString {
-            
+        if let member = data {
+            delegate?.deleteMember(member)
         }
     }
     

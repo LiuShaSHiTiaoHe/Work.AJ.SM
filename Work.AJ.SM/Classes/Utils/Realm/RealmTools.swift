@@ -36,7 +36,7 @@ class RealmTools: NSObject {
 // MARK:- Realm数据库配置和版本差异化配置
 /**
  通过调用 Realm() 来初始化以及访问我们的 realm 变量。其指向的是应用的 Documents 文件夹下的一个名为“default.realm”的文件。
- 通过对默认配置进行更改，我们可以使用不同的数据库。比如给每个用户帐号创建一个特有的 Realm 文件，通过切换配置，就可以直接使用默认的 Realm 数据库来直接访问各自数据库
+ 通过对默认配置进行更改，我们可以使用不同的数据库。比如给每个用户账号创建一个特有的 Realm 文件，通过切换配置，就可以直接使用默认的 Realm 数据库来直接访问各自数据库
  */
 // 在(application:didFinishLaunchingWithOptions:)中进行配置
 extension RealmTools {

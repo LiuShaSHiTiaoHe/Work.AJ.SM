@@ -28,7 +28,7 @@ class PasswordInputView: BaseView {
     }
     private let titleLabel: UILabel = {
         let label = UILabel.init()
-        label.font = k16SysFont
+        label.font = k16Font
         label.textColor = R.color.maintextColor()
         label.text = "密码"
         label.textAlignment = .left

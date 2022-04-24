@@ -27,11 +27,7 @@ class OnBoardViewController: UIViewController {
         super.viewDidAppear(animated)
         PermissionManager.shared.requestAllPermission()
     }
-    
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
-    
+        
     @objc func handleSkip() {
         endOnboard()
     }
@@ -71,7 +67,7 @@ extension OnBoardViewController: SwiftyOnboardDelegate, SwiftyOnboardDataSource 
         view.imageView.image = UIImage(named: "image_onboard_\(index)")
         
         //Set the font and color for the labels:
-        view.title.font = k34SysFont
+        view.title.font = k34Font
         view.subTitle.font = k16Font
         
         //Set the text in the page:
