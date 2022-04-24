@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class BleCallElevatorViewController: BaseViewController {
 
@@ -16,7 +17,6 @@ class BleCallElevatorViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkPermission([.bluetooth])
     }
     
     override func initData() {
@@ -25,15 +25,24 @@ class BleCallElevatorViewController: BaseViewController {
     
     @objc
     func sendBleData(){
-        let sendStatus = BLEAdvertisingManager.shared.openDoor()
-        contentView.statusImage.isHidden = false
-        if sendStatus {
-            contentView.statusImage.image = R.image.bce_success_image()
-            contentView.tips2Label.text = "已呼梯！请稍候…"
-        }else{
-            contentView.statusImage.image = R.image.bce_failed_image()
-            contentView.tips2Label.text = "呼梯失败，请重试！"
+        PermissionManager.PermissionRequest(.bluetooth) {[weak self] authorized in
+            guard let self = self else { return }
+            if authorized {
+                let manager = BLEAdvertisingManager.shared
+                let sendStatus = manager.openDoor()
+                self.contentView.statusImage.isHidden = false
+                if sendStatus {
+                    self.contentView.statusImage.image = R.image.bce_success_image()
+                    self.contentView.tips2Label.text = "已呼梯！请稍候…"
+                }else{
+                    self.contentView.statusImage.image = R.image.bce_failed_image()
+                    self.contentView.tips2Label.text = "呼梯失败，请重试！"
+                }
+            }else{
+                SVProgressHUD.showInfo(withStatus: "请打开蓝牙权限")
+            }
         }
+
     }
     
     // MARK: - UI

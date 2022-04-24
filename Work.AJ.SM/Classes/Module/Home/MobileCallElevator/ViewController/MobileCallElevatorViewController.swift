@@ -22,7 +22,6 @@ class MobileCallElevatorViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkPermission([.bluetooth])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,12 +71,20 @@ class MobileCallElevatorViewController: BaseViewController {
     }
     
     private func callElevator(_ floorInfo: FloorMapInfo) {
-        SVProgressHUD.show()
-        guard let originalData = originalData else {
-            SVProgressHUD.showError(withStatus: "数据错误")
-            return
+        PermissionManager.PermissionRequest(.bluetooth) { [weak self] authorized in
+            guard let self = self else { return }
+            if authorized {
+                SVProgressHUD.show()
+                guard let originalData = self.originalData else {
+                    SVProgressHUD.showError(withStatus: "数据错误")
+                    return
+                }
+                MCERepository.shared.sendCallElevatorData(self.currentFloorID, self.selectFloor, floorInfo, originalData)
+            }else{
+                SVProgressHUD.showInfo(withStatus: "请打开蓝牙权限")
+            }
         }
-        MCERepository.shared.sendCallElevatorData(currentFloorID, selectFloor, floorInfo, originalData)
+
     }
     
 }

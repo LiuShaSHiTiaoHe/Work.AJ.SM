@@ -141,23 +141,25 @@ class SelectUnitBlockViewController: BaseViewController {
     }
     
     func requestUserLocation() {
-        if SPPermissions.Permission.locationWhenInUse.isPrecise {
-            SVProgressHUD.show()
-            locationManager.requestLocation()
-            locationManager.getCurrentCity = { [weak self] city in
-                SVProgressHUD.dismiss()
-                var tempCity = "南京"
-                if !city.isEmpty {
-                    tempCity = city
+        PermissionManager.PermissionRequest(.locationWhenInUse) { [weak self] authorized in
+            guard let self = self else { return }
+            if authorized {
+                SVProgressHUD.show()
+                self.locationManager.requestLocation()
+                self.locationManager.getCurrentCity = { city in
+                    SVProgressHUD.dismiss()
+                    var tempCity = "南京"
+                    if !city.isEmpty {
+                        tempCity = city
+                    }
+                    self.searchView.title = tempCity
+                    self.cityName = tempCity
                 }
-                self?.searchView.title = tempCity
-                self?.cityName = tempCity
+            }else{
+                let city = "南京"
+                self.searchView.title = city
+                self.cityName = city
             }
-        }else{
-            let permissions: [SPPermissions.Permission] = [.locationWhenInUse]
-            let controller = SPPermissions.dialog(permissions)
-            controller.delegate = self
-            controller.present(on: self)
         }
     }
     
@@ -457,31 +459,6 @@ extension SelectUnitBlockViewController {
     }
 }
 
-
-extension SelectUnitBlockViewController: SPPermissionsDelegate {
-    
-    func didHidePermissions(_ permissions: [SPPermissions.Permission]) { }
-    
-    func didAllowPermission(_ permission: SPPermissions.Permission) {
-        switch permission {
-        case .locationWhenInUse:
-            requestUserLocation()
-            break
-        default:
-            break
-        }
-    }
-    
-    func didDeniedPermission(_ permission: SPPermissions.Permission) {
-        switch permission {
-        case .locationWhenInUse:
-            SVProgressHUD.showInfo(withStatus: "需要您的位置信息")
-            break
-        default:
-            break
-        }
-    }
-}
 
 extension SelectUnitBlockViewController: SelectUnitCityViewControllerDelegate {
     func selectCity(name: String) {

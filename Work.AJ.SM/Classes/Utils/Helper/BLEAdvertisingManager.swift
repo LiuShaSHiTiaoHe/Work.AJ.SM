@@ -47,6 +47,7 @@ class BLEAdvertisingManager: NSObject {
         if let peripheralManager = peripheralManager, isBleOpen {
             if !peripheralManager.isAdvertising {
                 if let openDoorData = self.prepareOpenDoorData() {
+                    logger.info("openDoorData===> \(openDoorData)")
                     peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
                     self.stopAdvertismentIn {
                         SVProgressHUD.showSuccess(withStatus: "发送成功")

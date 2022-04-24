@@ -17,11 +17,11 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         initUI()
         initData()
     }
-
+    
     func initData() {
         NIMAVChatSDK.shared().netCallManager.add(self)
         NIMSDK.shared().loginManager.add(self)
-        let _ = BLEAdvertisingManager.shared
+//        let _ = BLEAdvertisingManager.shared
     }
     
     func initUI() {

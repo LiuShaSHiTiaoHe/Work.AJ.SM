@@ -12,11 +12,15 @@ class PermissionManager {
     static let shared = PermissionManager()
     
     func requestAllPermission() {
-        requset([.locationWhenInUse, .bluetooth, .camera, .photoLibrary, .microphone])
+//        requset([.locationWhenInUse, .bluetooth, .camera, .photoLibrary, .microphone])
+        requset([.notification, .bluetooth, .camera, .microphone])
     }
     
-    func PermissionRequest(_ permisson: SPPermissions.Permission, _ completion: @escaping () -> ()) {
-        
+    static func PermissionRequest(_ permisson: SPPermissions.Permission, _ completion: @escaping (Bool) -> Void) {
+        permisson.request {
+            let authorized = permisson.authorized
+            completion(authorized)
+        }
     }
     
     @discardableResult
@@ -36,13 +40,23 @@ class PermissionManager {
     }
     
     private func requset(_ permissions: [SPPermissions.Permission]) {
-        if let topViewController = UIViewController.jk.topViewController() {
-            let controller = SPPermissions.dialog(permissions)
-            controller.showCloseButton = true
-            controller.delegate = self
-            controller.dataSource = self
-            controller.present(on: topViewController)
+        if permissions.count == 1 {
+            if let topViewController = UIViewController.jk.topViewController() {
+                let controller = SPPermissions.native(permissions)
+                controller.delegate = self
+                controller.dataSource = self
+                controller.present(on: topViewController)
+            }
+        }else{
+            if let topViewController = UIViewController.jk.topViewController() {
+                let controller = SPPermissions.dialog(permissions)
+                controller.showCloseButton = true
+                controller.delegate = self
+                controller.dataSource = self
+                controller.present(on: topViewController)
+            }
         }
+
     }
     
     private func go2Setting(_ permission: SPPermissions.Permission) {
@@ -63,7 +77,16 @@ extension PermissionManager: SPPermissionsDelegate {
     
     func didHidePermissions(_ permissions: [SPPermissions.Permission]) { }
     
-    func didAllowPermission(_ permission: SPPermissions.Permission) { }
+    func didAllowPermission(_ permission: SPPermissions.Permission) {
+        switch permission {
+        case .notification:
+            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.registerNotification(UIApplication.shared, nil)
+            break
+        default:
+            break
+        }
+    }
     
     func didDeniedPermission(_ permission: SPPermissions.Permission) { }
 }
@@ -82,6 +105,8 @@ extension PermissionManager: SPPermissionsDataSource {
             description = "使用位置信息能更好的定位您所在的小区信息"
         case .microphone:
             description = "使用麦克风进行音频通话"
+        case .notification:
+            description = "及时收到来自小区的通知和其他信息"
         default :
             break
         }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SPPermissions
+//import SPPermissions
 
 class OnBoardViewController: UIViewController {
     

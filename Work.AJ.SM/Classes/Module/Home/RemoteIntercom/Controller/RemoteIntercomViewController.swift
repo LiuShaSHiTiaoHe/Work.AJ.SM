@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class RemoteIntercomViewController: BaseViewController {
 
@@ -18,21 +19,13 @@ class RemoteIntercomViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkPermission([.camera])
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
     
     override func initUI() {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
     
     override func initData() {        
@@ -84,9 +77,16 @@ extension RemoteIntercomViewController: RemoteOpenDoorCellDelegate{
     
     func camera(_ lockModel: UnitLockModel) {
         if let lockMac = lockModel.lockmac {
-            let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+            PermissionManager.PermissionRequest(.microphone) { authorized in
+                if authorized {
+                    let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    SVProgressHUD.showInfo(withStatus: "请打开系统麦克风权限")
+                }
+            }
+            
         }
     }
 }
