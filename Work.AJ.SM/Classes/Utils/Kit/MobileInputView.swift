@@ -38,7 +38,7 @@ class MobileInputView: UIView {
     
     private(set) var textInput: UITextField = {
         let input = UITextField()
-        input.font = k16Font
+        input.font = k14Font
         input.placeholder = "请输入手机号码"
         input.clearButtonMode = .whileEditing
         input.autocorrectionType = .no
@@ -87,7 +87,7 @@ class MobileInputView: UIView {
         }
         
         textInput.snp.makeConstraints { make in
-            make.left.equalTo(titleLabel.snp.right)
+            make.left.equalTo(titleLabel.snp.right).offset(kMargin/2)
             make.right.equalToSuperview()
             make.centerY.equalTo(titleLabel)
         }
@@ -102,7 +102,7 @@ class MobileInputView: UIView {
         tipLabel.snp.makeConstraints { make in
             make.left.equalTo(textInput)
             make.right.equalToSuperview()
-            make.height.equalTo(10)
+            make.height.equalTo(20)
             make.top.equalTo(seperator.snp.bottom).offset(kMargin/4)
         }
         

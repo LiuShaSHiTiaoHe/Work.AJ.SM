@@ -37,7 +37,7 @@ class PasswordInputView: BaseView {
     
     private(set) var textInput: UITextField = {
         let input = UITextField()
-        input.font = k16Font
+        input.font = k14Font
         input.placeholder = "请输入密码（长度6-12位）"
         input.clearButtonMode = .never
         input.autocorrectionType = .no
@@ -81,7 +81,7 @@ class PasswordInputView: BaseView {
         self.addSubview(eyeButton)
         self.addSubview(seperator)
         self.addSubview(tipLabel)
-        //5 + 30 + 5 + 1 + 5 + 10  56
+
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.width.equalTo(60)
@@ -90,7 +90,7 @@ class PasswordInputView: BaseView {
         }
         
         textInput.snp.makeConstraints { make in
-            make.left.equalTo(titleLabel.snp.right)
+            make.left.equalTo(titleLabel.snp.right).offset(kMargin/2)
             make.right.equalToSuperview().offset(-50)
             make.centerY.equalTo(titleLabel)
         }
@@ -111,7 +111,7 @@ class PasswordInputView: BaseView {
         tipLabel.snp.makeConstraints { make in
             make.left.equalTo(textInput)
             make.right.equalToSuperview()
-            make.height.equalTo(10)
+            make.height.equalTo(20)
             make.top.equalTo(seperator.snp.bottom).offset(kMargin/4)
         }
         

@@ -27,7 +27,7 @@ enum loginOrRegisterType {
 
 class LoginView: BaseView {
     
-    private let inputHeight: CGFloat = 56.0
+    private let inputHeight: CGFloat = 66.0
     weak var delegate: LoginViewDelegate?
     private var viewType: loginOrRegisterType = .login
     
@@ -61,7 +61,7 @@ class LoginView: BaseView {
             registerInputContentView.isHidden = true
             comfirmButton.setTitle("登录", for: .normal)
             inputContentView.snp.updateConstraints { make in
-                make.height.equalTo(325)
+                make.height.equalTo(345)
             }
         } else {
             viewType = .register
@@ -69,7 +69,7 @@ class LoginView: BaseView {
             registerInputContentView.isHidden = false
             comfirmButton.setTitle("注册", for: .normal)
             inputContentView.snp.updateConstraints { make in
-                make.height.equalTo(375)
+                make.height.equalTo(405)
             }
         }
     }
@@ -317,7 +317,7 @@ class LoginView: BaseView {
             make.top.equalToSuperview().offset(192)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.equalTo(325)
+            make.height.equalTo(345)
         }
         
         segment.snp.makeConstraints { make in

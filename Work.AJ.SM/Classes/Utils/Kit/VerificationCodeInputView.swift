@@ -44,7 +44,7 @@ class VerificationCodeInputView: UIView {
     
     private(set) var textInput: UITextField = {
         let input = UITextField()
-        input.font = k16Font
+        input.font = k14Font
         input.placeholder = "请输入密码"
         input.clearButtonMode = .never
         input.autocorrectionType = .no
@@ -117,7 +117,7 @@ class VerificationCodeInputView: UIView {
         }
         
         textInput.snp.makeConstraints { make in
-            make.left.equalTo(titleLabel.snp.right)
+            make.left.equalTo(titleLabel.snp.right).offset(kMargin/2)
             make.right.equalToSuperview().offset(-100)
             make.centerY.equalTo(titleLabel)
         }
@@ -143,7 +143,7 @@ class VerificationCodeInputView: UIView {
         tipLabel.snp.makeConstraints { make in
             make.left.equalTo(textInput)
             make.right.equalToSuperview()
-            make.height.equalTo(10)
+            make.height.equalTo(20)
             make.top.equalTo(seperator.snp.bottom).offset(kMargin/4)
         }
         
