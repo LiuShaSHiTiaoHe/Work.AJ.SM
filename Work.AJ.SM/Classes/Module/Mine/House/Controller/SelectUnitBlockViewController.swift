@@ -13,7 +13,8 @@ class SelectUnitBlockViewController: BaseViewController {
 
     private var cityName: String? {
         didSet {
-            searchView.title = cityName
+//            searchView.title = cityName
+            cityTipsView.cityName.text = cityName
             getCityCommunitiesData()
         }
     }
@@ -62,9 +63,10 @@ class SelectUnitBlockViewController: BaseViewController {
     override func initData() {
         locationManager = LocationManager.shared
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        searchView.initViewType(false)
-        searchView.titleButton.addTarget(self, action: #selector(moveToSelectCity), for: .touchUpInside)
-        searchView.searchView.addTarget(self, action: #selector(textInputEditingBegin(_:)), for: .editingDidBegin)
+        headerView.rightButton.setImage(R.image.common_search_image(), for: .normal)
+        headerView.rightButton.isHidden = false
+        headerView.rightButton.addTarget(self, action: #selector(move2HouseSearchVC), for: .touchUpInside)
+        cityTipsView.delegate = self
         leftTableVeiw.delegate = self
         leftTableVeiw.dataSource = self
         rightTableVeiw.delegate = self
@@ -152,12 +154,10 @@ class SelectUnitBlockViewController: BaseViewController {
                     if !city.isEmpty {
                         tempCity = city
                     }
-                    self.searchView.title = tempCity
                     self.cityName = tempCity
                 }
             }else{
                 let city = "南京"
-                self.searchView.title = city
                 self.cityName = city
             }
         }
@@ -178,21 +178,19 @@ class SelectUnitBlockViewController: BaseViewController {
         vc.selectedUnit = selectedUnit
         self.navigationController?.pushViewController(vc, animated: true)
     }
-        
-    @objc func textInputEditingBegin(_ sender: UITextField) {
-        DispatchQueue.main.async {
-            sender.resignFirstResponder()
-            let vc = HouseSearchViewController()
-            vc.delegate = self
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+    
+    @objc
+    func move2HouseSearchVC() {
+        let vc = HouseSearchViewController()
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         
         view.addSubview(headerView)
-        view.addSubview(searchView)
+        view.addSubview(cityTipsView)
         view.addSubview(tipsLabel)
         view.addSubview(locationIndexTips)
         view.addSubview(leftTableVeiw)
@@ -205,21 +203,21 @@ class SelectUnitBlockViewController: BaseViewController {
             make.height.equalTo(kTitleAndStateHeight)
         }
         
-        searchView.snp.makeConstraints { make in
+        cityTipsView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(70)
             make.top.equalTo(headerView.snp.bottom)
         }
-        
+
         tipsLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().offset(kMargin/2)
-            make.top.equalTo(searchView.snp.bottom)
+            make.top.equalTo(cityTipsView.snp.bottom)
             make.height.equalTo(40)
         }
         
         locationIndexTips.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(searchView.snp.bottom)
+            make.top.equalTo(cityTipsView.snp.bottom)
             make.height.equalTo(90)
         }
         
@@ -245,10 +243,9 @@ class SelectUnitBlockViewController: BaseViewController {
         view.titleLabel.textColor = R.color.maintextColor()
         return view
     }()
-    
-    lazy var searchView: CommonSearchView = {
-        let view = CommonSearchView.init()
-        view.placeHolder = "请输入关键字"
+  
+    lazy var cityTipsView: CityTipsView = {
+        let view = CityTipsView()
         return view
     }()
     
@@ -415,12 +412,12 @@ extension SelectUnitBlockViewController {
         if isSelectCommunity {
             locationIndexTips.isHidden = true
             tipsLabel.snp.updateConstraints { make in
-                make.top.equalTo(searchView.snp.bottom).offset(0)
+                make.top.equalTo(cityTipsView.snp.bottom).offset(0)
             }
         }else{
             locationIndexTips.isHidden = false
             tipsLabel.snp.updateConstraints { make in
-                make.top.equalTo(searchView.snp.bottom).offset(90)
+                make.top.equalTo(cityTipsView.snp.bottom).offset(90)
             }
         }
     }
@@ -475,5 +472,11 @@ extension SelectUnitBlockViewController: HouseSearchViewControllerDelegate {
             searchResultCommunityRID = ridString
             cityName = data.city
         }
+    }
+}
+
+extension SelectUnitBlockViewController: CityTipsViewDelegate {
+    func chooseCity() {
+        moveToSelectCity()
     }
 }

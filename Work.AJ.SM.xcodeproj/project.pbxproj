@@ -179,6 +179,7 @@
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
 		419E2DE827D9977500B60633 /* HouseCetificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE727D9977500B60633 /* HouseCetificationView.swift */; };
+		41A6202E2816723300DE3B54 /* CityTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6202D2816723300DE3B54 /* CityTipsView.swift */; };
 		41AA41A027D5F76B007020AD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA419F27D5F76B007020AD /* LocationManager.swift */; };
 		41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A127D607BC007020AD /* CurrentLocationView.swift */; };
 		41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A427D6F067007020AD /* SectionIndexView.swift */; };
@@ -423,6 +424,7 @@
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
 		419E2DE727D9977500B60633 /* HouseCetificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationView.swift; sourceTree = "<group>"; };
+		41A6202D2816723300DE3B54 /* CityTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTipsView.swift; sourceTree = "<group>"; };
 		41AA419F27D5F76B007020AD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		41AA41A127D607BC007020AD /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
 		41AA41A427D6F067007020AD /* SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexView.swift; sourceTree = "<group>"; };
@@ -1004,6 +1006,7 @@
 				41985F4127D5B60E00E02A9A /* CommonSearchView.swift */,
 				419E2DE727D9977500B60633 /* HouseCetificationView.swift */,
 				41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */,
+				41A6202D2816723300DE3B54 /* CityTipsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1958,6 +1961,7 @@
 				416F2F0627BE4597004E5AD9 /* BaseView.swift in Sources */,
 				4173C21D27C4C8C800B8FBB8 /* SetVisitorPasswordViewController.swift in Sources */,
 				416F2EC027BA5436004E5AD9 /* HomeNaviHeaderView.swift in Sources */,
+				41A6202E2816723300DE3B54 /* CityTipsView.swift in Sources */,
 				416F2EF727BDE0C8004E5AD9 /* MobileCallElevatorView.swift in Sources */,
 				416F2E5727B0B691004E5AD9 /* BaseWebViewController.swift in Sources */,
 				41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */,
