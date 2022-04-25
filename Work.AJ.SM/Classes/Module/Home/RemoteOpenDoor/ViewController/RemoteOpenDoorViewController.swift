@@ -84,13 +84,12 @@ extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
     }
     
     func camera(_ lockModel: UnitLockModel) {
-
         if let lockMac = lockModel.lockmac {
             PermissionManager.PermissionRequest(.microphone) { authorized in
                 if authorized {
-                    let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+//                    let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
+//                    vc.modalPresentationStyle = .fullScreen
+//                    self.present(vc, animated: true, completion: nil)
                 }else{
                     SVProgressHUD.showInfo(withStatus: "请打开系统麦克风权限")
                 }

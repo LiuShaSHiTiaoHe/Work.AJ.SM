@@ -8,7 +8,6 @@
 import Foundation
 import ESTabBarController_swift
 import Haptica
-import NIMAVChat
 
 class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 
@@ -19,8 +18,8 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     }
     
     func initData() {
-        NIMAVChatSDK.shared().netCallManager.add(self)
-        NIMSDK.shared().loginManager.add(self)
+//        NIMAVChatSDK.shared().netCallManager.add(self)
+//        NIMSDK.shared().loginManager.add(self)
 //        let _ = BLEAdvertisingManager.shared
     }
     
@@ -56,32 +55,6 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     
 }
 
-// MARK: - 云信通话
-extension BaseTabBarViewController: NIMNetCallManagerDelegate{
-    func onReceive(_ callID: UInt64, from caller: String, type: NIMNetCallMediaType, message extendMessage: String?) {
-        logger.info("收到通话请求。。。")
-        if ud.allowVisitorCall {
-            if type == .audio {
-                let vc = AudioChatViewController.init(responseCall: caller, callID: callID)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
-            }else{
-                let vc = VideoChatViewController.init(responseCall: caller, callID: callID)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
-            }
-        }
-    }
-}
-
-extension BaseTabBarViewController: NIMLoginManagerDelegate {
-    func onKicked() {
-        SVProgressHUD.showInfo(withStatus: "账号在其他终端登录")
-        SVProgressHUD.dismiss(withDelay: 2) {
-            GDataManager.shared.showLoginView()
-        }
-    }
-}
 
 extension BaseTabBarViewController {
     func observeOpenDoorStyle() {

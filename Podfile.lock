@@ -19,7 +19,6 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - NIMSDK (6.1.1)
   - NotificationBannerSwift (2.5.0):
     - MarqueeLabel (~> 4.0.0)
     - SnapKit (~> 5.0.0)
@@ -97,7 +96,6 @@ DEPENDENCIES:
   - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
   - Moya
-  - NIMSDK (= 6.1.1)
   - NotificationBannerSwift (= 2.5.0)
   - ObjectMapper (= 4.2.0)
   - "ObjectMapper+Realm"
@@ -142,7 +140,6 @@ SPEC REPOS:
     - MarqueeLabel
     - MJRefresh
     - Moya
-    - NIMSDK
     - NotificationBannerSwift
     - ObjcExceptionBridging
     - ObjectMapper
@@ -187,7 +184,6 @@ SPEC CHECKSUMS:
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  NIMSDK: d007a6ea3497867733bb05e21fa059e6960f24bb
   NotificationBannerSwift: 684966fa934c48b70eff8bbec93fccf8db603365
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
@@ -215,6 +211,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: ad3ed8c949d14b5164ea16bb9ded642776a414a4
+PODFILE CHECKSUM: fa9ebf95171b134b7934f533a47e7b4b974b6811
 
 COCOAPODS: 1.11.2

@@ -208,7 +208,6 @@
 		41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */; };
 		41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */; };
 		41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */; };
-		41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */; };
 		41E7D8C727EC4EDD00241706 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */; };
 		41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C827EC661300241706 /* ChatRingManager.swift */; };
 		41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */; };
@@ -219,8 +218,6 @@
 		41E7D8D827ED50EB00241706 /* video_chat_tip_receiver.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */; };
 		41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */; };
 		41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */; };
-		41E7D8DC27ED70F700241706 /* AudioChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */; };
-		41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */; };
 		41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E427F2947A00241706 /* BaseChatView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
@@ -453,7 +450,6 @@
 		41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorSettingViewController.swift; sourceTree = "<group>"; };
 		41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorPasswordViewController.swift; sourceTree = "<group>"; };
 		41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOpenDoorStyleCell.swift; sourceTree = "<group>"; };
-		41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		41E7D8C827EC661300241706 /* ChatRingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRingManager.swift; sourceTree = "<group>"; };
 		41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_connect_chat_tip_sender.aac; sourceTree = "<group>"; };
@@ -464,8 +460,6 @@
 		41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_receiver.aac; sourceTree = "<group>"; };
 		41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_onTimer.aac; sourceTree = "<group>"; };
 		41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = video_chat_push.mp3; sourceTree = "<group>"; };
-		41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChatViewController.swift; sourceTree = "<group>"; };
-		41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8E427F2947A00241706 /* BaseChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatView.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1640,9 +1634,6 @@
 			children = (
 				41E7D8E627F294B700241706 /* Manager */,
 				41E7D8DD27ED8A7700241706 /* View */,
-				41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */,
-				41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */,
-				41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1734,15 +1725,12 @@
 				416F2DF8279BAF67004E5AD9 /* Frameworks */,
 				416F2DF9279BAF67004E5AD9 /* Resources */,
 				0F320F9032A01B6E81C14EE4 /* [CP] Embed Pods Frameworks */,
-				C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Work.AJ.SM;
-			packageProductDependencies = (
-			);
 			productName = Work.AJ.SM;
 			productReference = 416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */;
 			productType = "com.apple.product-type.application";
@@ -1818,8 +1806,6 @@
 				"zh-Hans",
 			);
 			mainGroup = 416F2DF2279BAF66004E5AD9;
-			packageReferences = (
-			);
 			productRefGroup = 416F2DFC279BAF67004E5AD9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1897,28 +1883,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
-		};
-		C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D5999047F02A75C8986BF302 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2024,10 +1993,8 @@
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
 				41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
-				41E7D8DC27ED70F700241706 /* AudioChatViewController.swift in Sources */,
 				41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */,
 				41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */,
-				41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				419AD69E27FD3EB400C902B8 /* HomeView.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
@@ -2141,7 +2108,6 @@
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
 				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
-				41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
 				419AD6A527FEC58F00C902B8 /* ElevatorConfigurationView.swift in Sources */,
 				4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */,
