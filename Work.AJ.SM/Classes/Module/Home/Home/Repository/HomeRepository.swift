@@ -17,6 +17,8 @@ typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
 typealias NComAllDeviceInfoCompletion = (([NComDTU]) -> Void)
 typealias NComCallRecordCompletion = (([NComRecordInfo], Int) -> Void)
 
+typealias AgoraTokenCompletion = ((String) -> Void)
+
 class HomeRepository {
     static let shared = HomeRepository()
     
@@ -210,6 +212,21 @@ extension HomeRepository {
                 }
             }
         }
+    }
+}
+
+extension HomeRepository {
+    // FIXME: - 获取最新的声网RTM Token
+    func agoraRTMToken(completion: @escaping AgoraTokenCompletion) {
+        // MARK: - 15295776453
+        completion("006b0969a21e1fb48bb89069c86f4788eabIAAr07TDNcwirrdyc9Tq/cBtF5ma4rT/7j2EDsmmnTDpfqlcGo0AAAAAEABXGuB4B/xoYgEA6AMH/Ghi")
+        // MARK: - 17834736453
+//        completion("006b0969a21e1fb48bb89069c86f4788eabIAAk60VV4mS+iSbCUy62lUQJ2y9ddHy48gqOt989AsAE5ba39t4AAAAAEABXGuB4KfxoYgEA6AMp/Ghi")
+    }
+    
+    func agoraRTCToken(completion: @escaping AgoraTokenCompletion) {
+        // MARK: - iOSRoom
+        completion("006b0969a21e1fb48bb89069c86f4788eabIADG2raxFAZ9hrmFo+hgE9NGy2KOydWG11QvFHwXcWYpf7a39t4AAAAAEABXGuB49ftoYgEA6AP1+2hi")
     }
 }
 

@@ -1,5 +1,7 @@
 PODS:
   - ActiveLabel (1.1.0)
+  - AgoraRtcEngine_iOS/RtcBasic (3.7.0)
+  - AgoraRtm_iOS (1.4.10)
   - Alamofire (5.6.1)
   - BEMCheckBox (1.4.1)
   - BetterSegmentedControl (2.0.1)
@@ -83,6 +85,8 @@ PODS:
 
 DEPENDENCIES:
   - ActiveLabel
+  - AgoraRtcEngine_iOS/RtcBasic (= 3.7.0)
+  - AgoraRtm_iOS
   - BEMCheckBox
   - BetterSegmentedControl
   - CryptoSwift (= 1.4.2)
@@ -125,6 +129,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - ActiveLabel
+    - AgoraRtcEngine_iOS
+    - AgoraRtm_iOS
     - Alamofire
     - BEMCheckBox
     - BetterSegmentedControl
@@ -169,6 +175,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
+  AgoraRtcEngine_iOS: e6bc354af9b8b883926382b5034f18822b5303df
+  AgoraRtm_iOS: 95e7070466f42a6494435a7f39fd2b13fc143cbf
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
@@ -211,6 +219,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: fa9ebf95171b134b7934f533a47e7b4b974b6811
+PODFILE CHECKSUM: c735228daf0f2af80ac593837822aa38e53512a3
 
 COCOAPODS: 1.11.2

@@ -9,7 +9,13 @@ import Foundation
 import ESTabBarController_swift
 import Haptica
 
+import AgoraRtmKit
+import AgoraRtcKit
+
 class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
+
+//    private lazy var appleCallKit = CallCenter(delegate: self)
+//    var prepareToVideoChat: (() -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +24,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     }
     
     func initData() {
-//        NIMAVChatSDK.shared().netCallManager.add(self)
-//        NIMSDK.shared().loginManager.add(self)
-//        let _ = BLEAdvertisingManager.shared
+//        loginAgoraRtm()
     }
     
     func initUI() {
@@ -53,8 +57,28 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         Haptic.impact(.medium).generate()
     }
     
+    private func loginAgoraRtm(){
+        let rtm = AgoraRtm.shared()
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/rtm.log"
+        rtm.setLogPath(path)
+        rtm.inviterDelegate = self
+                
+        // rtm login
+        guard let kit = AgoraRtm.shared().kit else {
+            SVProgressHUD.showError(withStatus: "AgoraRtmKit nil")
+            return
+        }
+        if let account = ud.userMobile {
+            HomeRepository.shared.agoraRTMToken { token in
+                kit.login(account: account, token: token, fail:  { (error) in
+                    logger.error("AgoraRtm ====> \(error.localizedDescription)")
+                    SVProgressHUD.showError(withStatus: "error.localizedDescription")
+                })
+            }
+      
+        }
+    }
 }
-
 
 extension BaseTabBarViewController {
     func observeOpenDoorStyle() {
@@ -82,3 +106,18 @@ extension BaseTabBarViewController {
         }
     }
 }
+
+
+extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
+    func inviter(_ inviter: AgoraRtmCallKit, didReceivedIncoming invitation: AgoraRtmInvitation) {
+        if AgoraRtm.shared().status == .online {
+//            let vc = BaseVideoChatViewController()
+//            appleCallKit.showIncomingCall(of: invitation.caller)
+        }
+    }
+    
+    func inviter(_ inviter: AgoraRtmCallKit, remoteDidCancelIncoming invitation: AgoraRtmInvitation) {
+        
+    }
+}
+
