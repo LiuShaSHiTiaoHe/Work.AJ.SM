@@ -170,6 +170,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingNoticeTableViewCellIdentifier, for: indexPath) as! SettingNoticeTableViewCell
+            cell.selectionStyle = .none
+            cell.row = indexPath.row
             switch indexPath.row {
             case 0:
                 cell.iconImageView.image = R.image.setting_icon_notification()
