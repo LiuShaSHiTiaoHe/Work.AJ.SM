@@ -72,9 +72,9 @@ class CallingViewController: BaseViewController {
     override func initData() {
         try? AVAudioSession.sharedInstance().setMode(.videoChat)
         try? AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.allowBluetooth, .allowBluetoothA2DP])
-        hangupButton.addTarget(self, action: #selector(doHungUpPressed(_:)), for: .touchUpInside)
-        acceptButton.addTarget(self, action: #selector(acceptPressed(_:)), for: .touchUpInside)
-        declineButton.addTarget(self, action: #selector(declinePressed(_:)), for: .touchUpInside)
+        contentView.hangupButton.addTarget(self, action: #selector(doHungUpPressed(_:)), for: .touchUpInside)
+        contentView.acceptButton.addTarget(self, action: #selector(acceptPressed(_:)), for: .touchUpInside)
+        contentView.declineButton.addTarget(self, action: #selector(declinePressed(_:)), for: .touchUpInside)
     }
     
     
@@ -83,7 +83,7 @@ class CallingViewController: BaseViewController {
             fatalError("rtm kit nil")
         }
         
-        guard let localNumber = localNumber else {
+        guard let _ = localNumber else {
             fatalError("localNumber nil")
         }
         guard let remoteNumber = remoteNumber else {
@@ -126,10 +126,7 @@ class CallingViewController: BaseViewController {
                 self.close(.error(error))
             }
         }
-       
     }
-    
-
     
     @objc
     func doHungUpPressed(_ sender: UIButton) {
@@ -164,95 +161,29 @@ class CallingViewController: BaseViewController {
         delegate?.callingVC(self, didHungup: reason)
     }
     
+    // MARK: - UI
     override func initUI() {
-        view.backgroundColor = .systemBlue
-        view.addSubview(headImageView)
-        view.addSubview(numberLabel)
-        view.addSubview(declineButton)
-        view.addSubview(acceptButton)
-        view.addSubview(hangupButton)
-        
-        hangupButton.isHidden = !isOutgoing
-        declineButton.isHidden = isOutgoing
-        acceptButton.isHidden = isOutgoing
-        
-        headImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(80)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(kTitleAndStateHeight + 50)
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        
-        numberLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(headImageView.snp.bottom).offset(kMargin)
-            make.width.equalTo(300)
-            make.height.equalTo(30)
-        }
-        
-        declineButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.bottom.equalToSuperview().offset(-100)
-            make.right.equalTo(view.snp.centerX).offset(-50)
-        }
-        
-        acceptButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.bottom.equalTo(declineButton)
-            make.left.equalTo(view.snp.centerX).offset(50)
-        }
-        
-        hangupButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.bottom.equalTo(declineButton)
-            make.centerX.equalToSuperview()
-        }
-        
+        contentView.hangupButton.isHidden = !isOutgoing
+        contentView.declineButton.isHidden = isOutgoing
+        contentView.acceptButton.isHidden = isOutgoing
     }
     
-    lazy var headImageView: UIImageView = {
-        let view = UIImageView()
-        view.image = R.image.defaultavatar()
-        view.layer.cornerRadius = 40
-        view.clipsToBounds = true
+    lazy var contentView: AgoraCallingView = {
+        let view = AgoraCallingView()
         return view
     }()
     
-    lazy var numberLabel: UILabel = {
-        let view = UILabel()
-        view.textAlignment = .center
-        view.font = k16Font
-        view.textColor = R.color.themeColor()
-        return view
-    }()
-    
-    lazy var declineButton: UIButton = {
-        let button = UIButton.init(type: .custom)
-        button.setImage(R.image.chat_refuse_image(), for: .normal)
-        return button
-    }()
-    
-    lazy var acceptButton: UIButton = {
-        let button = UIButton.init(type: .custom)
-        button.setImage(R.image.chat_response_image(), for: .normal)
-        return button
-    }()
-    
-    lazy var hangupButton: UIButton = {
-        let button = UIButton.init(type: .custom)
-        button.setImage(R.image.chat_hangup_image(), for: .normal)
-        return button
-    }()
-    
-    private let aureolaView = AureolaView(color: UIColor(red: 173.0 / 255.0,
-                                                         green: 211.0 / 255.0,
-                                                         blue: 252.0 / 255.0, alpha: 1))
 }
 
 
 
 private extension CallingViewController {
     @objc func animation() {
-        aureolaView.startLayerAnimation(aboveView: headImageView,
+        contentView.aureolaView.startLayerAnimation(aboveView: contentView.headImageView,
                                         layerWidth: 2)
     }
     
@@ -270,7 +201,7 @@ private extension CallingViewController {
     func stopAnimationg() {
         timer?.invalidate()
         timer = nil
-        aureolaView.removeAnimation()
+        contentView.aureolaView.removeAnimation()
     }
     
     func startPlayRing() {

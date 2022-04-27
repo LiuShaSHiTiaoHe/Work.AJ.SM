@@ -188,6 +188,8 @@
 		41A6203F2817F32E00DE3B54 /* CallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6203E2817F32E00DE3B54 /* CallingViewController.swift */; };
 		41A620422817F41900DE3B54 /* AureolaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620412817F41900DE3B54 /* AureolaView.swift */; };
 		41A62044281908E600DE3B54 /* ring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41A62043281908E600DE3B54 /* ring.mp3 */; };
+		41A6204628191B2A00DE3B54 /* AgoraVideoChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6204528191B2A00DE3B54 /* AgoraVideoChatView.swift */; };
+		41A6204828191CBA00DE3B54 /* AgoraCallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6204728191CBA00DE3B54 /* AgoraCallingView.swift */; };
 		41AA41A027D5F76B007020AD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA419F27D5F76B007020AD /* LocationManager.swift */; };
 		41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A127D607BC007020AD /* CurrentLocationView.swift */; };
 		41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A427D6F067007020AD /* SectionIndexView.swift */; };
@@ -438,6 +440,8 @@
 		41A6203E2817F32E00DE3B54 /* CallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingViewController.swift; sourceTree = "<group>"; };
 		41A620412817F41900DE3B54 /* AureolaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AureolaView.swift; sourceTree = "<group>"; };
 		41A62043281908E600DE3B54 /* ring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ring.mp3; sourceTree = "<group>"; };
+		41A6204528191B2A00DE3B54 /* AgoraVideoChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraVideoChatView.swift; sourceTree = "<group>"; };
+		41A6204728191CBA00DE3B54 /* AgoraCallingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraCallingView.swift; sourceTree = "<group>"; };
 		41AA419F27D5F76B007020AD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		41AA41A127D607BC007020AD /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
 		41AA41A427D6F067007020AD /* SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexView.swift; sourceTree = "<group>"; };
@@ -1567,6 +1571,8 @@
 			isa = PBXGroup;
 			children = (
 				41A620412817F41900DE3B54 /* AureolaView.swift */,
+				41A6204528191B2A00DE3B54 /* AgoraVideoChatView.swift */,
+				41A6204728191CBA00DE3B54 /* AgoraCallingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2017,6 +2023,7 @@
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
 				419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */,
+				41A6204828191CBA00DE3B54 /* AgoraCallingView.swift in Sources */,
 				41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */,
 				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
@@ -2172,6 +2179,7 @@
 				410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */,
 				416F2EED27BCF98B004E5AD9 /* BleCallElevatorViewController.swift in Sources */,
 				416F2E4527B0B514004E5AD9 /* GDataManager.swift in Sources */,
+				41A6204628191B2A00DE3B54 /* AgoraVideoChatView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

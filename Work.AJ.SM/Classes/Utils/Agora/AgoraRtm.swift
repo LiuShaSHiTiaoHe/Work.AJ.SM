@@ -107,7 +107,7 @@ extension AgoraRtm: AgoraRtmCallDelegate {
     }
     
     func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationRefused localInvitation: AgoraRtmLocalInvitation, withResponse response: String?) {
-        logger.info("rtmCallKit localInvitationRefused")
+        logger.info("rtmCallKit localInvitationRefused \(localInvitation.description)")
         
         let rtm = AgoraRtm.shared()
         if let refused = rtm.callKitRefusedBlock {
@@ -119,7 +119,7 @@ extension AgoraRtm: AgoraRtmCallDelegate {
     }
     
     func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationReceived remoteInvitation: AgoraRtmRemoteInvitation) {
-        logger.info("rtmCallKit remoteInvitationReceived")
+        logger.info("rtmCallKit remoteInvitationReceived \(remoteInvitation.description)")
         
         let rtm = AgoraRtm.shared()
         
