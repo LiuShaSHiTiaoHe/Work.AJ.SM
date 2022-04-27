@@ -115,6 +115,17 @@ class MineRepository: NSObject {
             if !GDataManager.shared.isOwner() {
                 allModules = allModules.filter { $0.name != MineModuleType.memeberManager.rawValue }
             }
+            // MARK: - 没有邀请访客模块。隐藏访客记录
+            if let unit = HomeRepository.shared.getCurrentUnit() {
+                let homeModules = HomeRepository.shared.filterHomePageModules(unit)
+                if let _ = homeModules.first(where: { module in
+                    module.tag == "MODULE17"
+                }){
+                    
+                }else{
+                    allModules = allModules.filter { $0.name != MineModuleType.visitorRecord.rawValue}
+                }
+            }
             if let otherUsed = unit.otherused, otherUsed == 1 {
                 return allModules.filter{$0.isOtherUsed}
             }else{

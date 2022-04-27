@@ -111,6 +111,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     }
     
     func confirmFaceImage(_ image: UIImage) {
+        SVProgressHUD.show()
         let vc = ConfirmFaceImageViewController()
         var fixImage = image
         if let cgImage = fixImage.cgImage {
@@ -122,6 +123,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         }
    
         if let imageData = fixImage.jk.fixOrientation().pngData() {
+            SVProgressHUD.dismiss()
             CacheManager.network.removeCacheWithKey(FaceImageCacheKey)
             CacheManager.network.saveCacheWithDictionary([FaceImageCacheKey: imageData], key: FaceImageCacheKey)
             self.navigationController?.pushViewController(vc, animated: true)
@@ -160,15 +162,18 @@ extension FaceImageViewController: SwiftyCamViewControllerDelegate {
 
 extension FaceImageViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let type = info[.mediaType] as? String, type == UIImagePickerController.availableMediaTypes(for: .photoLibrary)?.first {
-            if let image = info[.originalImage] as? UIImage {
-                switch detect(image) {
-                case 0:
-                    SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
-                case 1:
-                    confirmFaceImage(image)
-                default:
-                    SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
+        picker.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            if let type = info[.mediaType] as? String, type == UIImagePickerController.availableMediaTypes(for: .photoLibrary)?.first {
+                if let image = info[.originalImage] as? UIImage {
+                    switch self.detect(image) {
+                    case 0:
+                        SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
+                    case 1:
+                        self.confirmFaceImage(image)
+                    default:
+                        SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
+                    }
                 }
             }
         }

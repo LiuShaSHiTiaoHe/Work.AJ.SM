@@ -216,7 +216,7 @@ extension HomeRepository {
 // MARK: - Private
 extension HomeRepository {
     
-    private func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule]{
+    func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule]{
         var result = [HomePageFunctionModule]()
         let allkeys = HomePageModule.allCases
         let allModules = allkeys.compactMap { moduleEnum in

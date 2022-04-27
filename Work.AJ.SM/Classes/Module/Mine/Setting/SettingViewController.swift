@@ -83,13 +83,6 @@ class SettingViewController: BaseViewController {
                 self.tableView.reloadRow(at: IndexPath.init(row: 0, section: 1), with: .none)
             }
         }
-//        let result = FileManager.jk.removefile(filePath: FileManager.jk.CachesDirectory())
-//        if result.isSuccess {
-//            SVProgressHUD.showSuccess(withStatus: "清理成功")
-//            tableView.reloadRow(at: IndexPath.init(row: 0, section: 1), with: .none)
-//        }else{
-//            SVProgressHUD.showError(withStatus: result.error)
-//        }
     }
     
     func checkUpdate() {
