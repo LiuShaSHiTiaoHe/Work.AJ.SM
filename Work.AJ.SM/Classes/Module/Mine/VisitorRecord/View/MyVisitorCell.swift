@@ -17,6 +17,8 @@ class MyVisitorCell: UITableViewCell {
             if let dataSource = dataSource {
                 if let name = dataSource.phone {
                     nameLabel.text = name
+                }else{
+                    nameLabel.text = "访客"
                 }
                 if let sTime = dataSource.startdate {
                     startTime.text = sTime

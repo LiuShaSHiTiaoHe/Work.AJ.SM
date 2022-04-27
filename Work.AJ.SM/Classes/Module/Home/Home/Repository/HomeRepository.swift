@@ -225,17 +225,10 @@ extension HomeRepository {
         if let otherused = unit.otherused, otherused == 1 {
             return allModules.filter {$0.tag == "OTHERUSED"}
         }else{
+            let validModules = allValidModules(unit)
             allModules.forEach { module in
                 if module.showinpage == .home, !module.tag.isEmpty {
-                    if module.tag == "MOUDLE10" {
-                        if let module10 = unit.moudle10, let mobile = unit.mobile, module10.contains(mobile) {
-                            result.append(module)
-                        }
-                    } else if module.tag == "MOUDLE13" {
-                        if let module13 = unit.moudle13, let mobile = unit.mobile, module13.contains(mobile) {
-                            result.append(module)
-                        }
-                    } else {
+                    if validModules.contains(module.tag) {
                         result.append(module)
                     }
                 }
@@ -244,6 +237,62 @@ extension HomeRepository {
             if let userType = unit.usertype, userType == "O" {
                 result.append(HomePageModule.addFamilyMember.model)
             }
+        }
+        return result
+    }
+    
+    private func allValidModules(_ unit: UnitModel) -> [String] {
+        var result: Array<String> = []
+        if unit.moudle1 == "T" {
+            result.append("MOUDLE1")
+        }
+        if unit.moudle2 == "T" {
+            result.append("MOUDLE2")
+        }
+        if unit.moudle3 == "T" {
+            result.append("MOUDLE3")
+        }
+        if unit.moudle4 == "T" {
+            result.append("MOUDLE4")
+        }
+        if unit.moudle5 == "T" {
+            result.append("MOUDLE5")
+        }
+        if unit.moudle6 == "T" {
+            result.append("MOUDLE6")
+        }
+        if unit.moudle7 == "T" {
+            result.append("MOUDLE7")
+        }
+        if unit.moudle8 == "T" {
+            result.append("MOUDLE8")
+        }
+        if unit.moudle9 == "T" {
+            result.append("MOUDLE9")
+        }
+        if let module10 = unit.moudle10, let mobile = unit.mobile, module10.contains(mobile) {
+            result.append("MOUDLE10")
+        }
+        if unit.moudle11 == "T" {
+            result.append("MOUDLE11")
+        }
+        if unit.moudle12 == "T" {
+            result.append("MOUDLE12")
+        }
+        if let module13 = unit.moudle13, let mobile = unit.mobile, module13.contains(mobile) {
+            result.append("MOUDLE13")
+        }
+        if unit.moudle14 == "T" {
+            result.append("MOUDLE14")
+        }
+        if unit.moudle15 == "T" {
+            result.append("MOUDLE15")
+        }
+        if unit.moudle16 == "T" {
+            result.append("MOUDLE16")
+        }
+        if unit.moudle17 == "T" {
+            result.append("MOUDLE17")
         }
         return result
     }
