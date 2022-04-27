@@ -26,6 +26,7 @@ class MemberListCell: UITableViewCell {
                         memberType.text = "业主"
                         memberType.textColor = R.color.owner_greenColor()
                         memberType.backgroundColor = R.color.ownerB_greenColor()
+                        deleteButton.isHidden = true
                     }
                     if userType == "F" {
                         memberType.text = "家属"
@@ -58,11 +59,7 @@ class MemberListCell: UITableViewCell {
                         roleLabel.text = "本人"
                     }else{
                         roleLabel.isHidden = true
-                        deleteButton.isHidden = false
                     }
-                }else{
-                    roleLabel.isHidden = true
-                    deleteButton.isHidden = true
                 }
                 
                 if let status = member.state {
@@ -94,7 +91,8 @@ class MemberListCell: UITableViewCell {
         bgView.addSubview(roleLabel)
         bgView.addSubview(deleteButton)
         roleLabel.isHidden = true
-        
+        deleteButton.isHidden = false
+
         bgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(5)
             make.right.equalToSuperview().offset(-5)

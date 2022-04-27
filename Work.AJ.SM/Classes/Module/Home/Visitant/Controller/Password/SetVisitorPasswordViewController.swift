@@ -42,7 +42,7 @@ class SetVisitorPasswordViewController: BaseViewController {
     override func initData() {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
-        let location = HomeRepository.shared.getCurrentUnitName()
+        let location = HomeRepository.shared.getCurrentHouseName()
         contentView.tipsLabel.text = location
         contentView.confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)

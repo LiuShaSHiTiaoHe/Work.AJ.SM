@@ -40,16 +40,20 @@ class PasswordInvitationViewController: BaseViewController {
     }
     
     private func setUpDataSource(){
-        if let unit = HomeRepository.shared.getCurrentUnit(), let visitTimes = visitTimes, let validTime = validTime, let arriveTime = arriveTime, let communityname = unit.communityname, let cellname = unit.cellname, let password = password {
+        contentView.locationLabel.text = HomeRepository.shared.getCurrentHouseName()
+        if let password = password {
             contentView.passwordLabel.text = password
-            contentView.locationLabel.text = communityname + cellname
-            contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-            contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
+        }
+        if let visitTimes = visitTimes {
             if visitTimes == .single {
                 contentView.visitTimes.text = "单次"
             }else{
                 contentView.visitTimes.text = "无限次"
             }
+        }
+        if let validTime = validTime, let arriveTime = arriveTime {
+            contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
+            contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
         }
     }
     

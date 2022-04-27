@@ -73,16 +73,14 @@ class QRCodeInvitationViewController: BaseViewController {
     }
     
     func generateQRCode() {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString {
-            contentView.locationLabel.text = communityname + cellname
-            if let arriveTime = arriveTime, let validTime = validTime, let qrCodeString = qrCodeString {
-                contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
-                contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
+        contentView.locationLabel.text = HomeRepository.shared.getCurrentHouseName()
+        if let arriveTime = arriveTime, let validTime = validTime, let qrCodeString = qrCodeString {
+            contentView.arriveTime.text = arriveTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
+            contentView.validTime.text = validTime.jk.toformatterTimeString(formatter: "yyyy年MM月dd日 HH:mm")
 
-                if let qrcodeImage = QRCode.init(string: qrCodeString, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
-                    DispatchQueue.main.async {
-                        self.contentView.qrCodeView.image = image
-                    }
+            if let qrcodeImage = QRCode.init(string: qrCodeString, color: .black, backgroundColor: .white, size: CGSize.init(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
+                DispatchQueue.main.async {
+                    self.contentView.qrCodeView.image = image
                 }
             }
         }

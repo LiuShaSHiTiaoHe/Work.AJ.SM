@@ -105,6 +105,15 @@ class HomeRepository {
         return ""
     }
     
+    func getCurrentHouseName() -> String {
+        if let unitID = Defaults.currentUnitID {
+            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let cell = unit.cellname, let community = unit.communityname, let unitno = unit.unitno, let blockName = unit.blockname {
+                return community + blockName + cell + unitno
+            }
+        }
+        return ""
+    }
+    
     func getCurrentUser() -> UserModel? {
         if let userID = ud.userID, let _ = userID.jk.toInt() {
             if let user = RealmTools.objectsWithPredicate(object: UserModel(), predicate: NSPredicate.init(format: "rid == %@", userID)).first {

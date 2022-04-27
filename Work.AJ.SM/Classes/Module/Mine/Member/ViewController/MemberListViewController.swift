@@ -87,11 +87,9 @@ class MemberListViewController: BaseViewController {
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname {
-            titleView.locationLabel.text = communityname + cellname
+        if let unit = HomeRepository.shared.getCurrentUnit(), let cell = unit.cellname, let community = unit.communityname, let unitno = unit.unitno, let blockName = unit.blockname {
+            titleView.locationLabel.text = community + blockName + cell + unitno + "室"
         }
-        
-
     }
     
     @objc
