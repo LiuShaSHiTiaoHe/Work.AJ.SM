@@ -8,6 +8,7 @@
 import UIKit
 import AgoraRtmKit
 import AudioToolbox
+import AVFoundation
 
 protocol CallingViewControllerDelegate: NSObjectProtocol {
     func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason)
@@ -17,6 +18,12 @@ class CallingViewController: BaseViewController {
     enum Operation {
         case on, off
     }
+    
+    weak var delegate: CallingViewControllerDelegate?
+    var localNumber: String?
+    var remoteNumber: String?
+    var channel: String?
+    var isOutgoing: Bool = true
     
     private var ringStatus: Operation = .off {
         didSet {
@@ -44,36 +51,110 @@ class CallingViewController: BaseViewController {
         }
     }
     
-    private let aureolaView = AureolaView(color: UIColor(red: 173.0 / 255.0,
-                                                         green: 211.0 / 255.0,
-                                                         blue: 252.0 / 255.0, alpha: 1))
     private var timer: Timer?
     private var soundId = SystemSoundID()
-    
-    weak var delegate: CallingViewControllerDelegate?
-    
-    var localNumber: String?
-    var remoteNumber: String?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-    override func initData() {
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         animationStatus = .on
         ringStatus = .on
+        if isOutgoing {
+            startCall()
+        }
     }
+    
+    
+    override func initData() {
+        try? AVAudioSession.sharedInstance().setMode(.videoChat)
+        try? AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.allowBluetooth, .allowBluetoothA2DP])
+        hangupButton.addTarget(self, action: #selector(doHungUpPressed(_:)), for: .touchUpInside)
+        acceptButton.addTarget(self, action: #selector(acceptPressed(_:)), for: .touchUpInside)
+        declineButton.addTarget(self, action: #selector(declinePressed(_:)), for: .touchUpInside)
+    }
+    
+    
+    func startCall() {
+        guard let kit = AgoraRtm.shared().kit else {
+            fatalError("rtm kit nil")
+        }
+        
+        guard let localNumber = localNumber else {
+            fatalError("localNumber nil")
+        }
+        guard let remoteNumber = remoteNumber else {
+            fatalError("remoteNumber nil")
+        }
+
+        guard let inviter = AgoraRtm.shared().inviter else {
+            fatalError("rtm inviter nil")
+        }
+                
+        // rtm query online status
+        kit.queryPeerOnline(remoteNumber, success: {[weak self] (onlineStatus) in
+            guard let self = self else { return }
+            switch onlineStatus {
+            case .online:      sendInvitation(remote: remoteNumber)
+            case .offline:     self.close(.remoteReject(remoteNumber))
+            case .unreachable: self.close(.remoteReject(remoteNumber))
+            @unknown default:  fatalError("queryPeerOnline")
+            }
+        }) { [weak self] (error) in
+            guard let self = self else { return }
+            self.close(.error(error))
+        }
+        
+        // rtm send invitation
+        func sendInvitation(remote: String) {
+            let channel = "iOSTestChannel"
+            inviter.sendInvitation(peer: remoteNumber, extraContent: channel, accepted: { [weak self] in
+                guard let self = self else { return }
+                if let remote = UInt(remoteNumber){
+                    self.close(.toVideoChat(channel, remote))
+                }else{
+                    self.close(.normaly("channel或remoteNumber数据错误"))
+                }
+            }, refused: { [weak self] in
+                guard let self = self else { return }
+                self.close(.remoteReject(remoteNumber))
+            }) { [weak self] (error) in
+                guard let self = self else { return }
+                self.close(.error(error))
+            }
+        }
+       
+    }
+    
+
     
     @objc
     func doHungUpPressed(_ sender: UIButton) {
+        close(.normaly(remoteNumber!))
+    }
+    
+    @objc
+    func acceptPressed(_ sender: UIButton) {
+        if let channel = channel, let remoteNumber = remoteNumber, let remote = UInt(remoteNumber) {
+            guard let inviter = AgoraRtm.shared().inviter else {
+                fatalError("rtm inviter nil")
+            }
+            inviter.accpetLastIncomingInvitation()
+            close(.toVideoChat(channel, remote))
+        }else{
+            close(.normaly("channel或remoteNumber数据错误"))
+        }
+    }
+    
+    @objc
+    func declinePressed(_ sender: UIButton) {
+        guard let inviter = AgoraRtm.shared().inviter else {
+            fatalError("rtm inviter nil")
+        }
+        inviter.refuseLastIncomingInvitation()
         close(.normaly(remoteNumber!))
     }
     
@@ -84,11 +165,55 @@ class CallingViewController: BaseViewController {
     }
     
     override func initUI() {
+        view.backgroundColor = .systemBlue
+        view.addSubview(headImageView)
+        view.addSubview(numberLabel)
+        view.addSubview(declineButton)
+        view.addSubview(acceptButton)
+        view.addSubview(hangupButton)
+        
+        hangupButton.isHidden = !isOutgoing
+        declineButton.isHidden = isOutgoing
+        acceptButton.isHidden = isOutgoing
+        
+        headImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(kTitleAndStateHeight + 50)
+        }
+        
+        numberLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(headImageView.snp.bottom).offset(kMargin)
+            make.width.equalTo(300)
+            make.height.equalTo(30)
+        }
+        
+        declineButton.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+            make.bottom.equalToSuperview().offset(-100)
+            make.right.equalTo(view.snp.centerX).offset(-50)
+        }
+        
+        acceptButton.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+            make.bottom.equalTo(declineButton)
+            make.left.equalTo(view.snp.centerX).offset(50)
+        }
+        
+        hangupButton.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+            make.bottom.equalTo(declineButton)
+            make.centerX.equalToSuperview()
+        }
         
     }
     
     lazy var headImageView: UIImageView = {
         let view = UIImageView()
+        view.image = R.image.defaultavatar()
+        view.layer.cornerRadius = 40
+        view.clipsToBounds = true
         return view
     }()
     
@@ -100,6 +225,27 @@ class CallingViewController: BaseViewController {
         return view
     }()
     
+    lazy var declineButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(R.image.chat_refuse_image(), for: .normal)
+        return button
+    }()
+    
+    lazy var acceptButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(R.image.chat_response_image(), for: .normal)
+        return button
+    }()
+    
+    lazy var hangupButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(R.image.chat_hangup_image(), for: .normal)
+        return button
+    }()
+    
+    private let aureolaView = AureolaView(color: UIColor(red: 173.0 / 255.0,
+                                                         green: 211.0 / 255.0,
+                                                         blue: 252.0 / 255.0, alpha: 1))
 }
 
 

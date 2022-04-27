@@ -52,9 +52,9 @@ struct AgoraRtmInvitation {
 }
 
 enum HungupReason {
-    case remoteReject(String), toVideoChat, normaly(String), error(Error)
+    case remoteReject(String), toVideoChat(String, UInt), normaly(String), error(Error)
     
-    fileprivate var rawValue: Int {
+    var rawValue: Int {
         switch self {
         case .remoteReject: return 0
         case .toVideoChat:  return 1

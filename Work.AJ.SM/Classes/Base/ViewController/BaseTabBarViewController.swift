@@ -8,14 +8,12 @@
 import Foundation
 import ESTabBarController_swift
 import Haptica
+import SVProgressHUD
 
 import AgoraRtmKit
 import AgoraRtcKit
 
 class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
-
-//    private lazy var appleCallKit = CallCenter(delegate: self)
-//    var prepareToVideoChat: (() -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +22,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     }
     
     func initData() {
-//        loginAgoraRtm()
+        loginAgoraRtm()
     }
     
     func initUI() {
@@ -111,13 +109,66 @@ extension BaseTabBarViewController {
 extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
     func inviter(_ inviter: AgoraRtmCallKit, didReceivedIncoming invitation: AgoraRtmInvitation) {
         if AgoraRtm.shared().status == .online {
-//            let vc = BaseVideoChatViewController()
-//            appleCallKit.showIncomingCall(of: invitation.caller)
+            let vc = CallingViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.delegate = self
+            vc.isOutgoing = false
+            vc.localNumber = invitation.callee
+            vc.remoteNumber = invitation.caller
+            vc.channel = invitation.content
+            self.present(vc, animated: true)
         }
     }
     
     func inviter(_ inviter: AgoraRtmCallKit, remoteDidCancelIncoming invitation: AgoraRtmInvitation) {
-        
+        if let vc = self.presentedViewController as? BaseVideoChatViewController {
+            vc.leaveChannel()
+            vc.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension BaseTabBarViewController: CallingViewControllerDelegate {
+    func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason) {
+        vc.dismiss(animated: reason.rawValue == 1 ? false : true) { [weak self] in
+            guard let self = self else { return }
+            switch reason {
+            case .error:
+                SVProgressHUD.showError(withStatus: "\(reason.description)")
+            case .remoteReject(let remote):
+                SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
+            case .normaly(let remote):
+                guard let inviter = AgoraRtm.shared().inviter else {
+                    fatalError("rtm inviter nil")
+                }
+                let errorHandle: ErrorCompletion = { (error: AGEError) in
+                    SVProgressHUD.showError(withStatus: "\(error.localizedDescription)")
+                }
+                switch inviter.status {
+                case .outgoing:
+                    inviter.cancelLastOutgoingInvitation(fail: errorHandle)
+                default:
+                    break
+                }
+            case .toVideoChat(let channel , let remote):
+                let vc = BaseVideoChatViewController()
+                vc.modalPresentationStyle = .fullScreen
+                vc.delegate = self
+                vc.channel = channel
+                vc.remoteUid = remote
+                vc.localUid = UInt(AgoraRtm.shared().account!)!
+                self.present(vc, animated: true)
+                break
+            }
+        }
+    }
+}
+
+extension BaseTabBarViewController: BaseVideoChatVCDelegate {
+    func videoChat(_ vc: BaseVideoChatViewController, didEndChatWith uid: UInt) {
+        vc.dismiss(animated: true) {
+            SVProgressHUD.showInfo(withStatus: "挂断-\(uid)")
+        }
     }
 }
 

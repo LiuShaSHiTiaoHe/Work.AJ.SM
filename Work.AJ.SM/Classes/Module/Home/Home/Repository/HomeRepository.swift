@@ -219,14 +219,14 @@ extension HomeRepository {
     // FIXME: - 获取最新的声网RTM Token
     func agoraRTMToken(completion: @escaping AgoraTokenCompletion) {
         // MARK: - 15295776453
-        completion("006b0969a21e1fb48bb89069c86f4788eabIAAr07TDNcwirrdyc9Tq/cBtF5ma4rT/7j2EDsmmnTDpfqlcGo0AAAAAEABXGuB4B/xoYgEA6AMH/Ghi")
+        completion("006b0969a21e1fb48bb89069c86f4788eabIADwMEySIP4YE3XcNt7sU6Pr3YKh16SiAsS3ez7FiuueR6lcGo0AAAAAEAApNZrsOgtqYgEA6AM6C2pi")
         // MARK: - 17834736453
-//        completion("006b0969a21e1fb48bb89069c86f4788eabIAAk60VV4mS+iSbCUy62lUQJ2y9ddHy48gqOt989AsAE5ba39t4AAAAAEABXGuB4KfxoYgEA6AMp/Ghi")
+//        completion("006b0969a21e1fb48bb89069c86f4788eabIAAAcjHmsIGaf5VfFPaCvdbPlEX5/yo/RJdx9MmuTmQH27a39t4AAAAAEAApNZrsRAtqYgEA6ANEC2pi")
     }
     
     func agoraRTCToken(completion: @escaping AgoraTokenCompletion) {
-        // MARK: - iOSRoom
-        completion("006b0969a21e1fb48bb89069c86f4788eabIADG2raxFAZ9hrmFo+hgE9NGy2KOydWG11QvFHwXcWYpf7a39t4AAAAAEABXGuB49ftoYgEA6AP1+2hi")
+        // MARK: - iOSTestChannel
+        completion("006b0969a21e1fb48bb89069c86f4788eabIABWXdJyTjrnb/AQYnRaalvLYPXJ35q9GDENisp4EpGJaIGsncwAAAAAEADseIvM1gpqYgEAAQDVCmpi")
     }
 }
 

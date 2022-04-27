@@ -7,6 +7,7 @@
 
 import UIKit
 import AgoraRtcKit
+import SnapKit
 
 protocol BaseVideoChatVCDelegate: NSObjectProtocol {
     func videoChat(_ vc: BaseVideoChatViewController, didEndChatWith uid: UInt)
@@ -37,6 +38,11 @@ class BaseVideoChatViewController: BaseViewController {
     }
     
     override func initData() {
+        
+        hangupButton.addTarget(self, action: #selector(didClickHangUpButton(_ :)), for: .touchUpInside)
+        micButton.addTarget(self, action: #selector(didClickMuteButton(_ :)), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(didClickSwitchCameraButton(_ :)), for: .touchUpInside)
+        
         initializeAgoraEngine()
         setupVideo()
         setupLocalVideo()
@@ -81,7 +87,7 @@ class BaseVideoChatViewController: BaseViewController {
     func joinChannel() {
         // Set audio route to speaker
         // For videocalling, we don't suggest letting sdk handel audio routing
-//        agoraKit.setDefaultAudioRouteToSpeakerphone(true)
+        agoraKit.setDefaultAudioRouteToSpeakerphone(true)
         
         guard let channel = channel else {
             fatalError("rtc channel id nil")
@@ -132,6 +138,11 @@ class BaseVideoChatViewController: BaseViewController {
     }
     
     @objc
+    func didClickHangUpButton(_ sender: UIButton) {
+        leaveChannel()
+    }
+    
+    @objc
     func didClickMuteButton(_ sender: UIButton) {
         sender.isSelected.toggle()
         // mute local audio
@@ -145,6 +156,41 @@ class BaseVideoChatViewController: BaseViewController {
     
     // MARK: - UI
     override func initUI() {
+        view.backgroundColor = R.color.themeColor()
+        view.addSubview(remoteVideo)
+        view.addSubview(localVideo)
+        view.addSubview(micButton)
+        view.addSubview(hangupButton)
+        view.addSubview(cameraButton)
+        
+        remoteVideo.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        localVideo.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(200)
+            make.top.equalToSuperview().offset(kTitleAndStateHeight + 50)
+            make.right.equalToSuperview().offset(-kMargin * 3)
+        }
+        
+        hangupButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.width.height.equalTo(60)
+        }
+        
+        micButton.snp.makeConstraints { make in
+            make.centerY.equalTo(hangupButton)
+            make.width.height.equalTo(40)
+            make.right.equalTo(hangupButton.snp.left).offset(-kMargin*2)
+        }
+        
+        cameraButton.snp.makeConstraints { make in
+            make.centerY.equalTo(hangupButton)
+            make.width.height.equalTo(40)
+            make.left.equalTo(hangupButton.snp.right).offset(kMargin*2)
+        }
         
     }
     
@@ -160,16 +206,21 @@ class BaseVideoChatViewController: BaseViewController {
     
     lazy var micButton: UIButton = {
         let button = UIButton.init(type: .custom)
+        button.setImage(R.image.chat_mute_image(), for: .normal)
+        button.setImage(R.image.chat_mute_pressed_image(), for: .selected)
         return button
     }()
     
     lazy var hangupButton: UIButton = {
         let button = UIButton.init(type: .custom)
+        button.setImage(R.image.chat_hangup_image(), for: .normal)
         return button
     }()
 
     lazy var cameraButton: UIButton = {
         let button = UIButton.init(type: .custom)
+        button.setImage(R.image.chat_camera_switch_image(), for: .normal)
+        button.setImage(R.image.chat_camera_switch_pressed_image(), for: .selected)
         return button
     }()
     
@@ -190,6 +241,7 @@ extension BaseVideoChatViewController: AgoraRtcEngineDelegate{
         agoraKit.setupRemoteVideo(videoCanvas)
     }
     
+    // FIXME: - uid 跟remote ID 不一样？
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOfflineOfUid uid: UInt, reason: AgoraUserOfflineReason) {
 //        isRemoteVideoRender = false
         
@@ -197,9 +249,10 @@ extension BaseVideoChatViewController: AgoraRtcEngineDelegate{
             fatalError("remoteUid nil")
         }
         print("didOfflineOfUid: \(uid)")
-        if uid == remoteUid {
-            leaveChannel()
-        }
+//        if uid == remoteUid {
+//            leaveChannel()
+//        }
+        leaveChannel()
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, didVideoMuted muted: Bool, byUid: UInt) {

@@ -75,7 +75,8 @@ extension HomeViewController: HomeViewDelegate {
     func selectModule(_ module: HomePageModule) {
         switch module {
         case .mobileCallElevator:
-            pushTo(viewController: MobileCallElevatorViewController())
+//            pushTo(viewController: MobileCallElevatorViewController())
+            agoraCallTest()
         case .ownerQRCode:
             pushTo(viewController: OwnerQRCodeViewController())
         case .indoorCallElevator:
@@ -133,3 +134,57 @@ extension HomeViewController: ChooseVisitorModeDelegate {
     }
 }
 
+extension HomeViewController: CallingViewControllerDelegate, BaseVideoChatVCDelegate {
+    
+    func agoraCallTest() {
+        let vc = CallingViewController()
+        vc.modalPresentationStyle = .fullScreen
+        if let remote = UInt("17834736453") {
+            vc.remoteNumber = "17834736453"
+            vc.localNumber = "15295776453"
+            vc.delegate = self
+            self.present(vc, animated: true)
+        }
+
+    }
+    
+    func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason) {
+        vc.dismiss(animated: reason.rawValue == 1 ? false : true) { [weak self] in
+            guard let self = self else { return }
+            switch reason {
+            case .error:
+                SVProgressHUD.showError(withStatus: "\(reason.description)")
+            case .remoteReject(let remote):
+                SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
+            case .normaly(let remote):
+                guard let inviter = AgoraRtm.shared().inviter else {
+                    fatalError("rtm inviter nil")
+                }
+                let errorHandle: ErrorCompletion = { (error: AGEError) in
+                    SVProgressHUD.showError(withStatus: "\(error.localizedDescription)")
+                }
+                switch inviter.status {
+                case .outgoing:
+                    inviter.cancelLastOutgoingInvitation(fail: errorHandle)
+                default:
+                    break
+                }
+            case .toVideoChat(let channel , let remote):
+                let vc = BaseVideoChatViewController()
+                vc.modalPresentationStyle = .fullScreen
+                vc.delegate = self
+                vc.channel = channel
+                vc.remoteUid = remote
+                vc.localUid = UInt(AgoraRtm.shared().account!)!
+                self.present(vc, animated: true)
+                break
+            }
+        }
+    }
+    
+    func videoChat(_ vc: BaseVideoChatViewController, didEndChatWith uid: UInt) {
+        vc.dismiss(animated: true) {
+            SVProgressHUD.showInfo(withStatus: "挂断-\(uid)")
+        }
+    }
+}
