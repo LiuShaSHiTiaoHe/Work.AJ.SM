@@ -133,7 +133,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (self.frame.width - kMargin*2)/2, height: (self.frame.width - kMargin*2)/4 )
+        return .init(width: (self.frame.width - kMargin*2)/2, height: (self.frame.width - kMargin*2)/4.5 )
     }
 }
 
