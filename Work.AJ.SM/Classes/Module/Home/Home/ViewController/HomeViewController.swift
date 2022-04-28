@@ -143,12 +143,14 @@ extension HomeViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
             if mobile == "15295776453" {
                 vc.remoteNumber = "17834736453"
                 vc.localNumber = mobile
+                vc.channel = mobile
                 vc.delegate = self
                 self.present(vc, animated: true)
 
             }else if mobile == "17834736453"{
                 vc.remoteNumber = "15295776453"
                 vc.localNumber = mobile
+                vc.channel = mobile
                 vc.delegate = self
                 self.present(vc, animated: true)
             }

@@ -110,20 +110,23 @@ class CallingViewController: BaseViewController {
         
         // rtm send invitation
         func sendInvitation(remote: String) {
-            let channel = "iOSTestChannel"
-            inviter.sendInvitation(peer: remoteNumber, extraContent: channel, accepted: { [weak self] in
-                guard let self = self else { return }
-                if let remote = UInt(remoteNumber){
-                    self.close(.toVideoChat(channel, remote))
-                }else{
-                    self.close(.normaly("channel或remoteNumber数据错误"))
+            if let channel = channel {
+                inviter.sendInvitation(peer: remoteNumber, extraContent: channel, accepted: { [weak self] in
+                    guard let self = self else { return }
+                    if let remote = UInt(remoteNumber){
+                        self.close(.toVideoChat(channel, remote))
+                    }else{
+                        self.close(.normaly("channel或remoteNumber数据错误"))
+                    }
+                }, refused: { [weak self] in
+                    guard let self = self else { return }
+                    self.close(.remoteReject(remoteNumber))
+                }) { [weak self] (error) in
+                    guard let self = self else { return }
+                    self.close(.error(error))
                 }
-            }, refused: { [weak self] in
-                guard let self = self else { return }
-                self.close(.remoteReject(remoteNumber))
-            }) { [weak self] (error) in
-                guard let self = self else { return }
-                self.close(.error(error))
+            }else{
+                self.close(.normaly("channel数据错误"))
             }
         }
     }

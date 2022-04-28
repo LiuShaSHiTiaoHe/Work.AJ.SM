@@ -21,7 +21,7 @@ enum HomeAPI {
     case callElevatorViaMobile(cellID: String, direction: String, physicalFloor: String, unitNo: String)
     case getElevatorConfiguration(communityID: String)
     case getAgoraRtmToken(account: String)
-    case getAgoraRtcToken(account: String)
+    case getAgoraRtcToken(channel: String)
     // MARK: - NCOM
     case ncomAllDevice(unitID: String)
     case ncomRecord(communityID: String, startTime: String, endTime: String, page: String, count: String)
@@ -107,9 +107,10 @@ extension HomeAPI: TargetType {
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getAgoraRtmToken(account):
-            return .requestParameters(parameters: ["userAccount": account, "expirationTimeInSeconds": 0].ekey("userAccount"), encoding: URLEncoding.default)
-        case let .getAgoraRtcToken(account):
-            return .requestParameters(parameters: ["userAccount": account, "channelName": account, "expirationTimeInSeconds": 0].ekey("userAccount"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["userAccount": account, "expirationTimeInSeconds": 36000].ekey("userAccount"), encoding: URLEncoding.default)
+        case let .getAgoraRtcToken(channel):
+            // MARK: - 主要是根据channel获取token
+            return .requestParameters(parameters: ["userAccount": "0", "channelName": channel, "expirationTimeInSeconds": 36000].ekey("userAccount"), encoding: URLEncoding.default)
             
         // MARK: - N方对讲
         case let .ncomAllDevice(unitID):

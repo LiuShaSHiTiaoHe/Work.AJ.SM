@@ -78,7 +78,8 @@ class BaseVideoChatViewController: BaseViewController {
         }
         agoraKit.setDefaultAudioRouteToSpeakerphone(true)
         agoraKit.setAudioSessionOperationRestriction(.all)
-        HomeRepository.shared.agoraRTCToken {[weak self] token in
+        
+        HomeRepository.shared.agoraRTCToken(channel: channel) { [weak self] token in
             guard let self = self else { return }
             if token.isEmpty {
                 self.dismiss(animated: true) {
@@ -167,5 +168,15 @@ extension BaseVideoChatViewController: AgoraRtcEngineDelegate{
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
         logger.info("did occur error, code: \(errorCode.rawValue)")
+        SVProgressHUD.showError(withStatus: "呼叫错误 - \(errorCode.rawValue)")
+        SVProgressHUD.dismiss(withDelay: 2) {
+            if errorCode.rawValue != 18 {
+                self.leaveChannel()
+            }
+        }
+    }
+    
+    func rtcEngine(_ engine: AgoraRtcEngineKit, connectionChangedTo state: AgoraConnectionStateType, reason: AgoraConnectionChangedReason) {
+        logger.info("did occur AgoraConnectionChangedReason, code: \(reason.rawValue)")
     }
 }
