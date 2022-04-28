@@ -13,7 +13,6 @@ class SelectUnitBlockViewController: BaseViewController {
 
     private var cityName: String? {
         didSet {
-//            searchView.title = cityName
             cityTipsView.cityName.text = cityName
             getCityCommunitiesData()
         }
@@ -56,8 +55,6 @@ class SelectUnitBlockViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func initData() {
@@ -400,7 +397,7 @@ extension SelectUnitBlockViewController {
         locations.append(cellName)
         locationIndexTips.locations = locations
 
-        guard let selectedUnit = selectedUnit, let unitName = selectedUnit.rid?.jk.intToString else {
+        guard let selectedUnit = selectedUnit, let unitName = selectedUnit.unitNO else {
             return
         }
         locations.append(unitName)

@@ -26,11 +26,9 @@ class VisitorRecordViewController: BaseViewController {
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             self.footerLoadMore()
-        })//MJRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
+        })
     
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname {
-            titleView.locationLabel.text = communityname + cellname
-        }
+        titleView.locationLabel.text = HomeRepository.shared.getCurrentHouseName()
         
         loadData()
     }

@@ -46,11 +46,17 @@ class ConfirmFaceImageViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
             return
         }
-        
-        if userType.isEmpty{
-            SVProgressHUD.showInfo(withStatus: "请选择类型")
+       
+        userType = HomeRepository.shared.currentUserType()
+        if userType.isEmpty {
+            SVProgressHUD.showError(withStatus: "用户类型错误")
             return
         }
+        
+//        if userType.isEmpty{
+//            SVProgressHUD.showInfo(withStatus: "请选择类型")
+//            return
+//        }
         
         if let imageData = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile{
             let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID)
@@ -174,7 +180,7 @@ class ConfirmFaceImageViewController: BaseViewController {
 
 extension ConfirmFaceImageViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

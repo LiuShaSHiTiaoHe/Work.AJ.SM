@@ -11,6 +11,8 @@ import UIKit
 let SettingNoticeTableViewCellIdentifier = "SettingNoticeTableViewCellIdentifier"
 
 class SettingNoticeTableViewCell: UITableViewCell {
+    
+    var row: Int?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -61,9 +63,31 @@ class SettingNoticeTableViewCell: UITableViewCell {
     lazy var switchView: UISwitch = {
         let view = UISwitch.init()
         view.tintColor = R.color.owner_greenColor()
+        view.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
         return view
     }()
     
+    @objc
+    private func switchChanged(_ sender: UISwitch) {
+        if let row = row {
+            switch row {
+            case 0:
+                ud.inAppNotification = sender.isOn
+                break
+            case 1:
+                ud.vibrationAvailable = sender.isOn
+                break
+            case 2:
+                ud.ringtoneAvailable = sender.isOn
+                break
+            case 3:
+                ud.allowVisitorCall = sender.isOn
+                break
+            default:
+                break
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

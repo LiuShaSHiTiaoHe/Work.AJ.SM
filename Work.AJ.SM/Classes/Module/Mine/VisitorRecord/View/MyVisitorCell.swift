@@ -17,6 +17,8 @@ class MyVisitorCell: UITableViewCell {
             if let dataSource = dataSource {
                 if let name = dataSource.phone {
                     nameLabel.text = name
+                }else{
+                    nameLabel.text = "访客"
                 }
                 if let sTime = dataSource.startdate {
                     startTime.text = sTime
@@ -140,7 +142,7 @@ class MyVisitorCell: UITableViewCell {
     lazy var startLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .right
-        view.font = k16Font
+        view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.text = "访客时间"
@@ -150,7 +152,7 @@ class MyVisitorCell: UITableViewCell {
     lazy var startTime: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.font = k16Font
+        view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -159,7 +161,7 @@ class MyVisitorCell: UITableViewCell {
     lazy var endLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .right
-        view.font = k16Font
+        view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.text = "有效期至"
@@ -169,7 +171,7 @@ class MyVisitorCell: UITableViewCell {
     lazy var endTime: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.font = k16Font
+        view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -178,7 +180,7 @@ class MyVisitorCell: UITableViewCell {
     lazy var typeLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .right
-        view.font = k16Font
+        view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.text = "访问权限"
@@ -188,7 +190,7 @@ class MyVisitorCell: UITableViewCell {
     lazy var typeNameLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.font = k16Font
+        view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

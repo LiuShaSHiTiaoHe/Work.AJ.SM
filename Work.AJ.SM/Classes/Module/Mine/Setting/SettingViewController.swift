@@ -73,12 +73,15 @@ class SettingViewController: BaseViewController {
     }
     
     func cleanCache() {
-        let result = FileManager.jk.removefile(filePath: FileManager.jk.CachesDirectory())
-        if result.isSuccess {
-            SVProgressHUD.showSuccess(withStatus: "清理成功")
-            tableView.reloadRow(at: IndexPath.init(row: 0, section: 1), with: .none)
-        }else{
-            SVProgressHUD.showError(withStatus: result.error)
+        CacheManager.normal.removeAllCache()
+        CacheManager.liftrecord.removeAllCache()
+        CacheManager.network.removeAllCache()
+        SVProgressHUD.show(withStatus: "正在清理...")
+        SVProgressHUD.dismiss(withDelay: 1) {
+            DispatchQueue.main.async {
+                SVProgressHUD.showSuccess(withStatus: "清理成功")
+                self.tableView.reloadRow(at: IndexPath.init(row: 0, section: 1), with: .none)
+            }
         }
     }
     
@@ -167,6 +170,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingNoticeTableViewCellIdentifier, for: indexPath) as! SettingNoticeTableViewCell
+            cell.selectionStyle = .none
+            cell.row = indexPath.row
             switch indexPath.row {
             case 0:
                 cell.iconImageView.image = R.image.setting_icon_notification()
@@ -193,7 +198,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.nameLabel.text = "清除缓存"
-                cell.tipsLabel.text = FileManager.jk.fileOrDirectorySize(path: FileManager.jk.CachesDirectory())
+                let size = CacheManager.normal.totalCost + CacheManager.network.totalCost + CacheManager.liftrecord.totalCost
+                cell.tipsLabel.text = FileManager.jk.covertUInt64ToString(with: UInt64(size))
                 break
             case 1:
                 cell.nameLabel.text = "检查新版本"

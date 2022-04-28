@@ -21,6 +21,7 @@ class HomeModuleCell: UICollectionViewCell {
         label.textAlignment = .left
         label.font = k16Font
         label.textColor = R.color.blackColor()
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -40,14 +41,14 @@ class HomeModuleCell: UICollectionViewCell {
         iconImage.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(20)
         }
         
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalTo(iconImage.snp.right).offset(kMargin)
             make.height.equalTo(30)
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().offset(-kMargin/2)
             
         }
         self.layer.cornerRadius = 10

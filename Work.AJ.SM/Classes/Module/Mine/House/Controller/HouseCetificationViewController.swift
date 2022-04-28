@@ -26,7 +26,7 @@ class HouseCertificationViewController: BaseViewController {
     override func initData() {
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         contentView.confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
-        if let communityName = selectedCommunity?.name, let blockName = selectedBlock?.blockName, let cellName = selectedCell?.cellName, let unitName = selectedUnit?.rid?.jk.intToString {
+        if let communityName = selectedCommunity?.name, let blockName = selectedBlock?.blockName, let cellName = selectedCell?.cellName, let unitName = selectedUnit?.unitNO {
             contentView.locationName.text = communityName + blockName + cellName + unitName
         }
         
@@ -135,13 +135,25 @@ extension HouseCertificationViewController: UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: CommonInputCellIdentifier, for: indexPath) as! CommonInputCell
             cell.accessoryType = .none
             cell.nameLabel.text = "姓名"
-            cell.placeholder = "请输入家人/成员姓名"
+            if let name = ud.userRealName {
+                cell.commonInput.text = name
+                cell.commonInput.isEnabled = false
+            }else{
+                cell.placeholder = "请输入家人/成员姓名"
+                cell.commonInput.isEnabled = true
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: CommonPhoneNumberCellIdentifier, for: indexPath) as! CommonPhoneNumberCell
             cell.accessoryType = .none
             cell.nameLabel.text = "手机"
-            cell.placeholder = "请输入家人/成员手机号"
+            if let mobile = ud.userMobile {
+                cell.phoneInput.text = mobile
+                cell.phoneInput.isEnabled = false
+            }else{
+                cell.placeholder = "请输入家人/成员手机号"
+                cell.phoneInput.isEnabled = true
+            }
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: CommonIDNumberInpuCellIdentifier, for: indexPath) as! CommonIDNumberInpuCell
@@ -157,6 +169,7 @@ extension HouseCertificationViewController: UITableViewDelegate, UITableViewData
             cell.centerButtonName = "家人"
             cell.rightButtonName = "成员"
             cell.delegate = self
+            cell.defaultValue = 0
             return cell
         default:
             fatalError()

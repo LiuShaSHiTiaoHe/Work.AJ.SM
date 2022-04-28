@@ -51,6 +51,20 @@ class CommonSelectButtonCell: UITableViewCell {
         }
     }
     
+    var defaultValue: Int = -1 {
+        didSet {
+            switch defaultValue {
+            case 0:
+                leftAction()
+            case 1:
+                centerAction()
+            case 2:
+                rightAction()
+            default:
+                break
+            }
+        }
+    }
     weak var delegate: CommonSelectButtonCellDelegate?
     
     @objc
@@ -117,7 +131,7 @@ class CommonSelectButtonCell: UITableViewCell {
     
     func initializeView() {
         self.contentView.backgroundColor = R.color.whiteColor()
-        
+        self.selectionStyle = .none
         contentView.addSubview(nameLabel)
         contentView.addSubview(leftButton)
         contentView.addSubview(centerButton)
