@@ -139,13 +139,20 @@ extension HomeViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
     func agoraCallTest() {
         let vc = CallingViewController()
         vc.modalPresentationStyle = .fullScreen
-        if let remote = UInt("17834736453") {
-            vc.remoteNumber = "17834736453"
-            vc.localNumber = "15295776453"
-            vc.delegate = self
-            self.present(vc, animated: true)
-        }
+        if let mobile = ud.userMobile {
+            if mobile == "15295776453" {
+                vc.remoteNumber = "17834736453"
+                vc.localNumber = mobile
+                vc.delegate = self
+                self.present(vc, animated: true)
 
+            }else if mobile == "17834736453"{
+                vc.remoteNumber = "15295776453"
+                vc.localNumber = mobile
+                vc.delegate = self
+                self.present(vc, animated: true)
+            }
+        }
     }
     
     func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason) {

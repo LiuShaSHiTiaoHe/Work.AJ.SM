@@ -234,10 +234,15 @@ extension HomeRepository {
 extension HomeRepository {
     // FIXME: - 获取最新的声网RTM Token
     func agoraRTMToken(completion: @escaping AgoraTokenCompletion) {
-        // MARK: - 15295776453
-        completion("006b0969a21e1fb48bb89069c86f4788eabIACy7R3KDcne1NazRyvovLJcJ6VnbJypnflDqxG8YoJfuqlcGo0AAAAAEAApNZrsx0JrYgEA6APHQmti")
-        // MARK: - 17834736453
-//        completion("006b0969a21e1fb48bb89069c86f4788eabIACbangmidzZ3Gm74kdyI23uFsYHL2QGbJTp1mocByTBdra39t4AAAAAEAApNZrs1kJrYgEA6APWQmti")
+        if let mobile = ud.userMobile {
+            if mobile == "15295776453" {
+                // MARK: - 15295776453
+                completion("006b0969a21e1fb48bb89069c86f4788eabIACy7R3KDcne1NazRyvovLJcJ6VnbJypnflDqxG8YoJfuqlcGo0AAAAAEAApNZrsx0JrYgEA6APHQmti")
+            }else if mobile == "17834736453" {
+                // MARK: - 17834736453
+                completion("006b0969a21e1fb48bb89069c86f4788eabIACbangmidzZ3Gm74kdyI23uFsYHL2QGbJTp1mocByTBdra39t4AAAAAEAApNZrs1kJrYgEA6APWQmti")
+            }
+        }
     }
     
     func agoraRTCToken(completion: @escaping AgoraTokenCompletion) {
