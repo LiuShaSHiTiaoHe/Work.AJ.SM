@@ -106,9 +106,9 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-        case let .getAgoraRtcToken(account):
-            return .requestParameters(parameters: ["userAccount": account, "expirationTimeInSeconds": 0].ekey("userAccount"), encoding: URLEncoding.default)
         case let .getAgoraRtmToken(account):
+            return .requestParameters(parameters: ["userAccount": account, "expirationTimeInSeconds": 0].ekey("userAccount"), encoding: URLEncoding.default)
+        case let .getAgoraRtcToken(account):
             return .requestParameters(parameters: ["userAccount": account, "channelName": account, "expirationTimeInSeconds": 0].ekey("userAccount"), encoding: URLEncoding.default)
             
         // MARK: - N方对讲
