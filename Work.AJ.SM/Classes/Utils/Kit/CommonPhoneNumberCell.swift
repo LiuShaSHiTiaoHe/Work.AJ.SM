@@ -53,6 +53,7 @@ class CommonPhoneNumberCell: UITableViewCell {
     }
     
     private func initializeView() {
+        self.selectionStyle = .none
         contentView.backgroundColor = R.color.whiteColor()
         contentView.addSubview(nameLabel)
         contentView.addSubview(phoneInput)
@@ -70,7 +71,7 @@ class CommonPhoneNumberCell: UITableViewCell {
         phoneInput.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(30)
-            make.left.equalTo(contentView.snp.centerX)
+            make.left.equalTo(contentView.snp.centerX).offset(-kMargin)
             make.centerY.equalToSuperview()
         }
         

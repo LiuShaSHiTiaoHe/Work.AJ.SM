@@ -22,6 +22,7 @@ class MemberListCell: UITableViewCell {
         didSet {
             if let member = data {
                 if let userType = member.userType {
+                    deleteButton.isHidden = false
                     if userType == "O" {
                         memberType.text = "业主"
                         memberType.textColor = R.color.owner_greenColor()
