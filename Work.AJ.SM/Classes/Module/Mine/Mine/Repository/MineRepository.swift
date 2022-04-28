@@ -119,7 +119,7 @@ class MineRepository: NSObject {
             if let unit = HomeRepository.shared.getCurrentUnit() {
                 let homeModules = HomeRepository.shared.filterHomePageModules(unit)
                 if let _ = homeModules.first(where: { module in
-                    module.tag == "MODULE17"
+                    module.tag == "MOUDLE17"
                 }){
                     
                 }else{

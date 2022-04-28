@@ -23,14 +23,15 @@ class MineViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadUserProfile()
+        dataSource = MineRepository.shared.getMineModules()
+        contentView.tableView.reloadData()
     }
     
     override func initData() {
         contentView.headerView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(userProfileView)))
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
-        dataSource = MineRepository.shared.getMineModules()
-        contentView.tableView.reloadData()
+
         NotificationCenter.default.addObserver(forName: .kUserUpdateAvatar, object: nil, queue: nil) { [weak self] notification in
             guard let self = self else { return }
             if let avatarDic = CacheManager.normal.fetchCachedWithKey(UserAvatarCacheKey), let avatarData = avatarDic.value(forKey: UserAvatarCacheKey) as? Data, let image = UIImage.init(data: avatarData) {
