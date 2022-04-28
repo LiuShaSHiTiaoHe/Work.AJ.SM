@@ -52,11 +52,7 @@ class MemberListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MineRepository.shared.getCurrentUnitMembers { [weak self] members in
-            guard let `self` = self else { return }
-            self.dataSource = members.filter{$0.userType != "R"}
-            self.tableView.reloadData()
-        }
+        loadMemberData()
     }
     
     override func initUI() {
@@ -86,9 +82,18 @@ class MemberListViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        
         if let unit = HomeRepository.shared.getCurrentUnit(), let cell = unit.cellname, let community = unit.communityname, let unitno = unit.unitno, let blockName = unit.blockname {
             titleView.locationLabel.text = community + blockName + cell + unitno + "室"
+        }
+    }
+    
+    func loadMemberData() {
+        MineRepository.shared.getCurrentUnitMembers { [weak self] members in
+            guard let `self` = self else { return }
+            // FIXME: - 这个过滤暂时不需要
+//            self.dataSource = members.filter{$0.userType != "R"}
+            self.dataSource = members
+            self.tableView.reloadData()
         }
     }
     
@@ -147,7 +152,7 @@ extension MemberListViewController: MemberListCellDelegate {
                     if errorMsg.isEmpty {
                         SVProgressHUD.showSuccess(withStatus: "删除成功")
                         SVProgressHUD.dismiss(withDelay: 1) {
-                            self.tableView.reloadData()
+                            self.loadMemberData()
                         }
                     }else{
                         SVProgressHUD.showInfo(withStatus: errorMsg)
