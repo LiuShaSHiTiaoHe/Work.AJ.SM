@@ -9,7 +9,7 @@ import Foundation
 
 enum HomePageModule: String {
     case mobileCallElevator = "乘梯选层"
-    case ownerQRCode = "业主一码通"
+    case ownerQRCode = "一码通"
     case indoorCallElevator = "室内呼梯"
     case bleCallElevator = "蓝牙呼梯"
     case cloudOpneGate = "远程开门"
@@ -17,7 +17,7 @@ enum HomePageModule: String {
     case scanElevatorQRCode = "扫码乘梯"
     case inviteVisitors = "访客邀请"
     case deviceConfiguration = "设备配置"
-    case addFamilyMember = "添加成员"
+    case addFamilyMember = "添加家人/成员"
     case elevatorConfiguration = "电梯配置"
     case ncall = "N方对讲"
 

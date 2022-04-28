@@ -122,6 +122,13 @@ class HomeRepository {
         }
         return nil
     }
+    
+    func currentUserType() -> String {
+        if let unit = getCurrentUnit(), let type = unit.usertype {
+            return type
+        }
+        return ""
+    }
 }
 
 // MARK: - locks

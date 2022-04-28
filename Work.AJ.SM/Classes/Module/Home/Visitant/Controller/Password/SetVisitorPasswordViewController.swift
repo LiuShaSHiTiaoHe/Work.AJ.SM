@@ -115,8 +115,8 @@ class SetVisitorPasswordViewController: BaseViewController {
     
     func generatePassword(_ validTime: Date, _ arriveTime: Date, _ phoneNumber: String) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString{
-            let sDate = validTime.jk.toformatterTimeString()
-            let eDate = arriveTime.jk.toformatterTimeString()
+            let sDate = arriveTime.jk.toformatterTimeString()
+            let eDate = validTime.jk.toformatterTimeString()
             HomeAPI.generateVisitorPassword(communityID: communityID, blockID: blockID, unitID: unitID, userID: userID, phone: phoneNumber, sDate: sDate, eDate: eDate, type: visitTimes.rawValue).defaultRequest { jsonData in
                 if let data = jsonData["data"].dictionary, let password = data["PASSWORD"]?.string {
                     SVProgressHUD.showSuccess(withStatus: "提交成功")
