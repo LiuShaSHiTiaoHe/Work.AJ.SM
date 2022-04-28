@@ -80,11 +80,17 @@ class BaseVideoChatViewController: BaseViewController {
         agoraKit.setAudioSessionOperationRestriction(.all)
         HomeRepository.shared.agoraRTCToken {[weak self] token in
             guard let self = self else { return }
-            self.agoraKit.joinChannel(byToken: token,
-                                 channelId: channel,
-                                 info: nil,
-                                 uid: uid) {(channel, uid, elapsed) -> Void in
-                logger.info("did join channer \(channel)")
+            if token.isEmpty {
+                self.dismiss(animated: true) {
+                    SVProgressHUD.showError(withStatus: "agoraRTCToken 获取失败")
+                }
+            }else{
+                self.agoraKit.joinChannel(byToken: token,
+                                     channelId: channel,
+                                     info: nil,
+                                     uid: uid) {(channel, uid, elapsed) -> Void in
+                    logger.info("did join channer \(channel)")
+                }
             }
         }
         

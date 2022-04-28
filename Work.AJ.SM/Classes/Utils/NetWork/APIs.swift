@@ -92,5 +92,9 @@ final class APIs {
     static let allDTUInfo = "appajNcomUser/appFindDtus.do"
     static let sendNCallStatus = "appajNcomUser/addNcomCallLog.do"
     static let allNCallRecord = "appajNcomUser/findNcomCallLog.do"
+    
+    // MARK: - Agora
+    static let getAgoraRtmToken = "/agora/getRtmToken"
+    static let getAgoraRtcToken = "/agora/getRtcToken"
 
 }
