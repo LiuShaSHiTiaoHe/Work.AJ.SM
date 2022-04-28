@@ -21,8 +21,8 @@ class FaceTableViewCell: UITableViewCell {
         didSet {
             if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name, let type = faceData.type {
                 nameLabel.text = name
-                roleLabel.text = type
                 faceImage.kf.setImage(with: URL.init(string: url), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
+                roleLabel.text = type
                 if type == "业主"{
                     roleLabel.backgroundColor = R.color.ownerB_greenColor()
                     roleLabel.textColor = R.color.owner_greenColor()
@@ -41,7 +41,8 @@ class FaceTableViewCell: UITableViewCell {
         bgView.addSubview(nameLabel)
         bgView.addSubview(roleLabel)
         bgView.addSubview(deleteButton)
-        
+        // FIXME: - 暂时隐藏类型
+        roleLabel.isHidden = true
         bgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
