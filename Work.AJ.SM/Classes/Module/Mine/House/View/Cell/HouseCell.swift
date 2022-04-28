@@ -33,7 +33,7 @@ class HouseCell: UITableViewCell {
         didSet {
             if let state = unit?.state {
                 if state == "P" {
-                    currentStateLabel.text = "未审核"
+                    currentStateLabel.text = "待审核"
                     currentStateLabel.textColor = R.color.family_yellowColor()
                 }else if state == "H" {
                     currentStateLabel.text = "已失效"
