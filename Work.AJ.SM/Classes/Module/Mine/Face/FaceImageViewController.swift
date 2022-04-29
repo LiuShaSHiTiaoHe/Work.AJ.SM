@@ -7,6 +7,7 @@
 
 import UIKit
 import SVProgressHUD
+import YPImagePicker
 
 class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDelegate {
 
@@ -101,13 +102,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     
     @objc
     func galleryAction() {
-        let imagePicker = UIImagePickerController.init()
-        imagePicker.delegate = self 
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary), let mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
-            imagePicker.mediaTypes = mediaTypes
-            imagePicker.modalPresentationStyle = .fullScreen
-            present(imagePicker, animated: true, completion: nil)
-        }
+        showImagePicker()
     }
     
     func confirmFaceImage(_ image: UIImage) {
@@ -160,26 +155,6 @@ extension FaceImageViewController: SwiftyCamViewControllerDelegate {
     
 }
 
-extension FaceImageViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            if let type = info[.mediaType] as? String, type == UIImagePickerController.availableMediaTypes(for: .photoLibrary)?.first {
-                if let image = info[.originalImage] as? UIImage {
-                    switch self.detect(image) {
-                    case 0:
-                        SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
-                    case 1:
-                        self.confirmFaceImage(image)
-                    default:
-                        SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 extension FaceImageViewController {
     func detect(_ faceImage: UIImage) -> Int {
@@ -192,5 +167,53 @@ extension FaceImageViewController {
             return faceFeature.count
         }
         return 0
+    }
+}
+
+
+extension FaceImageViewController: YPImagePickerDelegate {
+    func imagePickerHasNoItemsInLibrary(_ picker: YPImagePicker) {}
+    
+    func shouldAddToSelection(indexPath: IndexPath, numSelections: Int) -> Bool {
+        return true
+    }
+    
+    func showImagePicker() {
+        var config = YPImagePickerConfiguration()
+        config.library.mediaType = .photo
+        config.library.itemOverlayType = .grid
+        config.library.minWidthForItem = UIScreen.main.bounds.width * 0.8
+        config.gallery.hidesRemoveButton = false
+        config.shouldSaveNewPicturesToAlbum = false
+        config.startOnScreen = .library
+        config.screens = [.library]
+        config.hidesStatusBar = false
+        config.hidesBottomBar = false
+        config.maxCameraZoomFactor = 2.0
+        config.showsPhotoFilters = false
+        //colors
+        config.colors.tintColor = R.color.whiteColor()!
+        config.colors.defaultNavigationBarColor = R.color.themeColor()!
+        config.colors.bottomMenuItemSelectedTextColor = R.color.themeColor()!
+        config.colors.bottomMenuItemUnselectedTextColor = R.color.blackColor()!
+        
+        let picker = YPImagePicker(configuration: config)
+        picker.imagePickerDelegate = self
+        picker.didFinishPicking { [weak self] items, _ in
+            guard let self = self else { return }
+            if let image = items.singlePhoto?.image {
+                switch self.detect(image) {
+                case 0:
+                    SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
+                case 1:
+                    picker.dismiss(animated: true) {
+                        self.confirmFaceImage(image)
+                    }
+                default:
+                    SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
+                }
+            }
+        }
+        present(picker, animated: true, completion: nil)
     }
 }
