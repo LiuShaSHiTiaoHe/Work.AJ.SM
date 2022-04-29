@@ -66,17 +66,23 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
             SVProgressHUD.showError(withStatus: "AgoraRtmKit nil")
             return
         }
+        
         if let account = ud.userMobile {
-            HomeRepository.shared.agoraRTMToken { token in
-                if token.isEmpty {
-                    logger.error("AgoraRtm ====> RTM token 获取失败")
-                }else{
-                    kit.login(account: account, token: token, fail:  { (error) in
-                        logger.error("AgoraRtm ====> \(error.localizedDescription)")
-                        SVProgressHUD.showError(withStatus: "error.localizedDescription")
-                    })
-                }
-            }
+            // MARK: - Agora Remove Token
+            kit.login(account: account, token: nil, fail:  { (error) in
+                logger.error("AgoraRtm ====> \(error.localizedDescription)")
+                SVProgressHUD.showError(withStatus: "error.localizedDescription")
+            })
+//            HomeRepository.shared.agoraRTMToken { token in
+//                if token.isEmpty {
+//                    logger.error("AgoraRtm ====> RTM token 获取失败")
+//                }else{
+//                    kit.login(account: account, token: token, fail:  { (error) in
+//                        logger.error("AgoraRtm ====> \(error.localizedDescription)")
+//                        SVProgressHUD.showError(withStatus: "error.localizedDescription")
+//                    })
+//                }
+//            }
         }
     }
 }

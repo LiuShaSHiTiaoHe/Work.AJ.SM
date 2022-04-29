@@ -18,4 +18,6 @@ let kNIMSDKAppKey = "4b1a03db69454aa7ce178216237976e8"
 let kNIMSDKPrefixString = "AJPLUS"
 
 // FIXME: - 测试声网APPID
-let kAgoraAppID = "b0969a21e1fb48bb89069c86f4788eab"
+//let kAgoraAppID = "b0969a21e1fb48bb89069c86f4788eab"
+// MARK: - None token
+let kAgoraAppID = "31c87e63d50446baba06c0da8a0c99d9"

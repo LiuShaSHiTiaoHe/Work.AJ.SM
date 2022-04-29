@@ -59,9 +59,7 @@ extension AgoraRtmKit {
                 }
                 return
             }
-            
             AgoraRtm.shared().status = .online
-            
             if let success = success {
                 success()
             }
