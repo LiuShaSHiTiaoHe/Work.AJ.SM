@@ -33,6 +33,7 @@ class UnitLockModel: Object, Mappable {
     @Persisted var blockid: Int?
     @Persisted var ifon: String?
     @Persisted var gap: String?// T在线  F不在线
+    @Persisted var lockLocation: String?//G:大门 B:楼栋 C:单元
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted(originProperty: "locks") var assignee: LinkingObjects<UnitModel>
 
@@ -81,5 +82,6 @@ class UnitLockModel: Object, Mappable {
         blockid <- map["BLOCKID"]
         ifon <- map["IFON"]
         gap <- map["GAP"]
+        lockLocation <- map["LOCKPOSITION"]
     }
 }

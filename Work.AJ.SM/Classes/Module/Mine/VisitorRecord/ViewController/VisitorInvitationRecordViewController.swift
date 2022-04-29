@@ -52,11 +52,11 @@ class VisitorInvitationRecordViewController: BaseViewController {
     }
     
     private func setUpDataSource(){
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityname = unit.communityname, let cellname = unit.cellname,let record = record, let password = record.password {
+        if let record = record, let password = record.password {
             switch type {
             case .password:
                 passwordContentView.passwordLabel.text = password
-                passwordContentView.locationLabel.text = communityname + cellname
+                passwordContentView.locationLabel.text = HomeRepository.shared.getCurrentHouseName()
                 
                 passwordContentView.arriveTime.text = record.startdate
                 passwordContentView.validTime.text = record.enddate
@@ -71,7 +71,7 @@ class VisitorInvitationRecordViewController: BaseViewController {
                         self.qrCodeContentView.qrCodeView.image = image
                     }
                 }
-                qrCodeContentView.locationLabel.text = communityname + cellname
+                qrCodeContentView.locationLabel.text = HomeRepository.shared.getCurrentHouseName()
                 qrCodeContentView.arriveTime.text = record.startdate
                 qrCodeContentView.validTime.text = record.enddate
                 break

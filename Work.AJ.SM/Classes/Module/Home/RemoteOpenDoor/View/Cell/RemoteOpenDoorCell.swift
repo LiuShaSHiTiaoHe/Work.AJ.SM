@@ -165,7 +165,6 @@ class RemoteOpenDoorCell: UITableViewCell {
     func setUpData(model: UnitLockModel) {
         dataSource = model
         nameLabel.text = model.lockname
-        typeLabel.text = ""
         if let gap = model.gap {
             if gap == "F" {
                 status = false
@@ -175,7 +174,22 @@ class RemoteOpenDoorCell: UITableViewCell {
         }else{
             status = nil
         }
-        typeImageView.image = R.image.rod_image_unit()
+        if let lockLocation = model.lockLocation {
+            //G:大门 B:楼栋 C:单元
+            switch lockLocation {
+            case "G":
+                typeImageView.image = R.image.rod_image_block()
+                typeLabel.text = "小区门"
+            case "B":
+                typeImageView.image = R.image.rod_image_unit()
+                typeLabel.text = "楼栋门"
+            case "C":
+                typeImageView.image = R.image.rod_image_cell()
+                typeLabel.text = "单元门"
+            default:
+                break
+            }
+        }
     }
     
     required init?(coder: NSCoder) {

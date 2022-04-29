@@ -275,8 +275,9 @@ extension UserProfileViewController: YPImagePickerDelegate {
         config.hidesBottomBar = false
         config.maxCameraZoomFactor = 2.0
         config.showsPhotoFilters = false
+        config.wordings.next = "完成"
         //colors
-        config.colors.tintColor = R.color.whiteColor()!
+        config.colors.tintColor = R.color.blackColor()!
         config.colors.defaultNavigationBarColor = R.color.themeColor()!
         config.colors.bottomMenuItemSelectedTextColor = R.color.themeColor()!
         config.colors.bottomMenuItemUnselectedTextColor = R.color.blackColor()!

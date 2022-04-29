@@ -181,38 +181,39 @@ extension FaceImageViewController: YPImagePickerDelegate {
     func showImagePicker() {
         var config = YPImagePickerConfiguration()
         config.library.mediaType = .photo
-        config.library.itemOverlayType = .grid
         config.library.minWidthForItem = UIScreen.main.bounds.width * 0.8
-        config.gallery.hidesRemoveButton = false
-        config.shouldSaveNewPicturesToAlbum = false
         config.startOnScreen = .library
         config.screens = [.library]
         config.hidesStatusBar = false
         config.hidesBottomBar = false
-        config.maxCameraZoomFactor = 2.0
         config.showsPhotoFilters = false
+        config.wordings.next = "完成"
         //colors
-        config.colors.tintColor = R.color.whiteColor()!
-        config.colors.defaultNavigationBarColor = R.color.themeColor()!
-        config.colors.bottomMenuItemSelectedTextColor = R.color.themeColor()!
-        config.colors.bottomMenuItemUnselectedTextColor = R.color.blackColor()!
+        config.colors.tintColor = R.color.blackColor()!
+//        config.colors.defaultNavigationBarColor = R.color.themeColor()!
+//        config.colors.coverSelectorBorderColor = R.color.themeColor()!
         
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self
-        picker.didFinishPicking { [weak self] items, _ in
+        picker.didFinishPicking { [weak self] items, cancelled in
             guard let self = self else { return }
-            if let image = items.singlePhoto?.image {
-                switch self.detect(image) {
-                case 0:
-                    SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
-                case 1:
-                    picker.dismiss(animated: true) {
-                        self.confirmFaceImage(image)
+            if cancelled {
+                picker.dismiss(animated: true)
+            }else{
+                if let image = items.singlePhoto?.image {
+                    switch self.detect(image) {
+                    case 0:
+                        SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
+                    case 1:
+                        picker.dismiss(animated: true) {
+                            self.confirmFaceImage(image)
+                        }
+                    default:
+                        SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
                     }
-                default:
-                    SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
                 }
             }
+
         }
         present(picker, animated: true, completion: nil)
     }
