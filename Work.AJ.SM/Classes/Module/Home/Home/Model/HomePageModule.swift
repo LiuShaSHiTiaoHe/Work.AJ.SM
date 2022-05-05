@@ -11,7 +11,7 @@ enum HomePageModule: String {
     case mobileCallElevator = "乘梯选层"
     case ownerQRCode = "一码通"
     case indoorCallElevator = "室内呼梯"
-    case bleCallElevator = "蓝牙呼梯"
+    case bleCallElevator = "蓝牙开门"
     case cloudOpneGate = "远程开门"
     case cloudIntercom = "门禁对讲"
     case scanElevatorQRCode = "扫码乘梯"
@@ -22,7 +22,7 @@ enum HomePageModule: String {
     case ncall = "N方对讲"
 
     // MARK: - 暂时不需要的模块
-    case bleOpenDoor = "蓝牙开门"
+    case bleOpenDoor = "蓝牙开门2"
     case propertyBill = "物业账单"
     case contactProperty = "联系物业"
     case declareRepairs = "维修申报"
