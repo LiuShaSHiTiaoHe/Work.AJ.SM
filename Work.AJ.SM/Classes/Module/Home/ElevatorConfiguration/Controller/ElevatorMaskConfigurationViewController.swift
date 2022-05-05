@@ -49,7 +49,7 @@ class ElevatorMaskConfigurationViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
-        view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
+        view.register(ElevatorMaskConfigurationCell.self, forCellReuseIdentifier: ElevatorMaskConfigurationCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
         return view
