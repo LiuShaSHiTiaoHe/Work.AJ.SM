@@ -52,6 +52,7 @@ class ElevatorConfigurationSendDataView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k16Font
+        view.backgroundColor = R.color.backgroundColor()
         view.textColor = R.color.maintextColor()
         return view
     }()
@@ -60,6 +61,7 @@ class ElevatorConfigurationSendDataView: BaseView {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
+        view.register(UITableViewCell.self, forCellReuseIdentifier: "configurationSendDataCellIdentifier")
         return view
     }()
 

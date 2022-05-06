@@ -29,10 +29,12 @@ class BLEAdvertisingManager: NSObject {
         SVProgressHUD.show()
         if let peripheralManager = peripheralManager, isBleOpen {
             if !peripheralManager.isAdvertising {
-                
+                // FIXME: - Need Send Data
+                self.stopAdvertismentIn {
+                    SVProgressHUD.showSuccess(withStatus: "发送成功")
+                }
             }else{
                 SVProgressHUD.showError(withStatus: "正在发送数据,稍后再试")
-                self.stopAdvertismentIn {}
             }
         }else{
             SVProgressHUD.showError(withStatus: "请确认蓝牙打开后再试")

@@ -53,7 +53,7 @@ class ElevatorConfigurationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let _ = BLEAdvertisingManager.shared
     }
     
     override func initData() {
