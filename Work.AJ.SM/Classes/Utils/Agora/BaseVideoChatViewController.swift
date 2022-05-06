@@ -18,6 +18,8 @@ class BaseVideoChatViewController: BaseViewController {
     var localUid: UInt?
     var remoteUid: UInt?
     var channel: String?
+    // MARK: - 门口机设备Mac地址，用于远程开门
+    var lockMac: String = ""
     weak var delegate: BaseVideoChatVCDelegate?
     private var agoraKit: AgoraRtcEngineKit!
 
@@ -134,7 +136,21 @@ class BaseVideoChatViewController: BaseViewController {
     
     @objc
     func didClickOpenDoorButton() {
-        
+//        func openDoor() {
+//                if isLockMac{
+//                    let lockMac = kCallee.jk.removeCharacter(characterString: kNIMSDKPrefixString)
+//                    HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
+//                        if !errorMsg.isEmpty {
+//                            SVProgressHUD.showError(withStatus: errorMsg)
+//                        }else{
+//                            SVProgressHUD.showSuccess(withStatus: "开门成功")
+//                        }
+//                    }
+//                }else{
+//
+//                }
+//            }
+
     }
     
     @objc

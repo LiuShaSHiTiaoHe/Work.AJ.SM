@@ -61,8 +61,6 @@ extension AppDelegate {
         SVProgressHUD.setDefaultMaskType(.clear)
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        GDataManager.shared.setupNIMSDK()
-        GDataManager.shared.loginNIMSDK()
     }
     
     

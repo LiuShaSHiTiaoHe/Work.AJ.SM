@@ -24,6 +24,8 @@ class CallingViewController: BaseViewController {
     var remoteNumber: String?
     var channel: String?
     var isOutgoing: Bool = true
+    // MARK: - 门口机设备Mac地址，用于远程开门
+    var lockMac: String = ""
     
     private var ringStatus: Operation = .off {
         didSet {
@@ -114,7 +116,7 @@ class CallingViewController: BaseViewController {
                 inviter.sendInvitation(peer: remoteNumber, extraContent: channel, accepted: { [weak self] in
                     guard let self = self else { return }
                     if let remote = UInt(remoteNumber){
-                        self.close(.toVideoChat(channel, remote))
+                        self.close(.toVideoChat(channel, remote, self.lockMac))
                     }else{
                         self.close(.normaly("channel或remoteNumber数据错误"))
                     }
@@ -143,7 +145,7 @@ class CallingViewController: BaseViewController {
                 fatalError("rtm inviter nil")
             }
             inviter.accpetLastIncomingInvitation()
-            close(.toVideoChat(channel, remote))
+            close(.toVideoChat(channel, remote, lockMac))
         }else{
             close(.normaly("channel或remoteNumber数据错误"))
         }

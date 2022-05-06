@@ -67,7 +67,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
             return
         }
         
-        if let account = ud.userMobile {
+        if let account = ud.userID {
             // MARK: - Agora Remove Token
             kit.login(account: account, token: nil, fail:  { (error) in
                 logger.error("AgoraRtm ====> \(error.localizedDescription)")
@@ -124,7 +124,10 @@ extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
             vc.isOutgoing = false
             vc.localNumber = invitation.callee
             vc.remoteNumber = invitation.caller
-            vc.channel = invitation.content
+            vc.channel = invitation.caller
+            if let content = invitation.content {
+                vc.lockMac = content
+            }
             self.present(vc, animated: true)
         }
     }
@@ -146,7 +149,7 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
                 SVProgressHUD.showError(withStatus: "\(reason.description)")
             case .remoteReject(let remote):
                 SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
-            case .normaly(let remote):
+            case .normaly(_):
                 guard let inviter = AgoraRtm.shared().inviter else {
                     fatalError("rtm inviter nil")
                 }
@@ -159,12 +162,13 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
                 default:
                     break
                 }
-            case .toVideoChat(let channel , let remote):
+            case .toVideoChat(let channel , let remote, let lockMac):
                 let vc = BaseVideoChatViewController()
                 vc.modalPresentationStyle = .fullScreen
                 vc.delegate = self
                 vc.channel = channel
                 vc.remoteUid = remote
+                vc.lockMac = lockMac
                 vc.localUid = UInt(AgoraRtm.shared().account!)!
                 self.present(vc, animated: true)
                 break
