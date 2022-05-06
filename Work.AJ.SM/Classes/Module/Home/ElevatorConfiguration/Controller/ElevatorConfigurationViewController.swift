@@ -114,6 +114,7 @@ extension ElevatorConfigurationViewController: UITableViewDelegate, UITableViewD
         cell.accessoryType = .disclosureIndicator
         cell.commonInput.isUserInteractionEnabled = false
         cell.selectionStyle = .none
+        cell.commonInput.text = ""
         switch indexPath.row {
         case 0:
             if let block = block,  let blockName = block.blockname{

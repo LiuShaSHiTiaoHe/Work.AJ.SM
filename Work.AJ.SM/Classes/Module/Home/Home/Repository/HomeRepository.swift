@@ -317,8 +317,9 @@ extension HomeRepository {
         if unit.moudle9 == "T" {
             result.append("MOUDLE9")
         }
+        // FIXME: - 暂时隐藏蓝牙配置
         if let module10 = unit.moudle10, let mobile = unit.mobile, module10.contains(mobile) {
-            result.append("MOUDLE10")
+//            result.append("MOUDLE10")
         }
         if unit.moudle11 == "T" {
             result.append("MOUDLE11")

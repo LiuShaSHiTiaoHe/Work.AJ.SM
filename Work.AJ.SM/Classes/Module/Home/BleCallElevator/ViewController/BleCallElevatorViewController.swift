@@ -21,6 +21,7 @@ class BleCallElevatorViewController: BaseViewController {
     
     override func initData() {
         contentView.sendButton.addTarget(self, action: #selector(sendBleData), for: .touchUpInside)
+        let _ = BLEAdvertisingManager.shared
     }
     
     @objc

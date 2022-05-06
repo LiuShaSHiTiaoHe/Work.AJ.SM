@@ -28,7 +28,7 @@ class BleCallElevatorView: BaseView {
         view.textColor = R.color.family_yellowColor()
         view.font = k12Font
         view.textAlignment = .center
-        view.text = "在2米范围内,才能使用蓝牙呼梯哦"
+        view.text = "在2米范围内，才能使用蓝牙操作哦"
         return view
     }()
     
@@ -62,7 +62,7 @@ class BleCallElevatorView: BaseView {
         view.textColor = R.color.maintextColor()
         view.textAlignment = .center
         view.font = k12Font
-        view.text = "请靠近电梯/门禁设备后再呼梯"
+        view.text = "请靠近电梯/门禁设备后再操作"
         return view
     }()
     
