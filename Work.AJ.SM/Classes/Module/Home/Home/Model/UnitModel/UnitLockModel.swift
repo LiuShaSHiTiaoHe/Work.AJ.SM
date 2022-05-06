@@ -11,6 +11,7 @@ import RealmSwift
 class UnitLockModel: Object, Mappable {
     
     @Persisted var lockcom: String?
+    @Persisted var lockID: Int?
     @Persisted var credate: Int?
     @Persisted var locktype: String?//W门口机 B蓝牙
     @Persisted var lockmac: String?//门口机mac值（开门用到）
@@ -60,6 +61,7 @@ class UnitLockModel: Object, Mappable {
     // Mappable
     func mapping(map: ObjectMapper.Map) {
         lockcom <- map["LOCKCOM"]
+        lockID <- map["LOCKID"]
         credate <- map["CREDATE"]
         locktype <- map["LOCKTYPE"]
         lockmac <- map["LOCKMAC"]

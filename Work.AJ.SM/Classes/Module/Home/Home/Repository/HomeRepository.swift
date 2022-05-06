@@ -24,7 +24,7 @@ class HomeRepository {
     
     func allUnits(completion: @escaping HomeModulesCompletion) {
         SVProgressHUD.show()
-        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheThenNetwork, showError: true) { [weak self] models, response in
+        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             SVProgressHUD.dismiss()
             guard let `self` = self else { return }
             guard models.count > 0 else {

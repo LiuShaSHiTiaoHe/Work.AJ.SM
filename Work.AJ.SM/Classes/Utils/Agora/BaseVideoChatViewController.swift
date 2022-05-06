@@ -8,6 +8,7 @@
 import UIKit
 import AgoraRtcKit
 import SnapKit
+import SVProgressHUD
 
 protocol BaseVideoChatVCDelegate: NSObjectProtocol {
     func videoChat(_ vc: BaseVideoChatViewController, didEndChatWith uid: UInt)
@@ -80,9 +81,10 @@ class BaseVideoChatViewController: BaseViewController {
         guard let uid = localUid else {
             fatalError("rtc uid nil")
         }
-        agoraKit.setDefaultAudioRouteToSpeakerphone(true)
-        agoraKit.setAudioSessionOperationRestriction(.all)
         
+        agoraKit.setEnableSpeakerphone(true)
+        agoraKit.setAudioSessionOperationRestriction(.all)
+        agoraKit.setAudioProfile(.speechStandard, scenario: .communication)
         // MARK: - Agora Remove Token
         self.agoraKit.joinChannel(byToken: nil,
                              channelId: channel,
@@ -136,21 +138,17 @@ class BaseVideoChatViewController: BaseViewController {
     
     @objc
     func didClickOpenDoorButton() {
-//        func openDoor() {
-//                if isLockMac{
-//                    let lockMac = kCallee.jk.removeCharacter(characterString: kNIMSDKPrefixString)
-//                    HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
-//                        if !errorMsg.isEmpty {
-//                            SVProgressHUD.showError(withStatus: errorMsg)
-//                        }else{
-//                            SVProgressHUD.showSuccess(withStatus: "开门成功")
-//                        }
-//                    }
-//                }else{
-//
-//                }
-//            }
-
+        if lockMac.isEmpty {
+            SVProgressHUD.showError(withStatus: "开门数据错误")
+        }else{
+            HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
+                if !errorMsg.isEmpty {
+                    SVProgressHUD.showError(withStatus: errorMsg)
+                }else{
+                    SVProgressHUD.showSuccess(withStatus: "开门成功")
+                }
+            }
+        }
     }
     
     @objc
