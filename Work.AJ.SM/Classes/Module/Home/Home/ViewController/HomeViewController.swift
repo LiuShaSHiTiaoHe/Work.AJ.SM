@@ -75,8 +75,8 @@ extension HomeViewController: HomeViewDelegate {
     func selectModule(_ module: HomePageModule) {
         switch module {
         case .mobileCallElevator:
-//            pushTo(viewController: MobileCallElevatorViewController())
-            agoraCallTest()
+            pushTo(viewController: MobileCallElevatorViewController())
+//            agoraCallTest()
         case .ownerQRCode:
             pushTo(viewController: OwnerQRCodeViewController())
         case .indoorCallElevator:

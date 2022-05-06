@@ -27,7 +27,7 @@ class BaseVideoChatViewController: BaseViewController {
                 contentView.micButton.isSelected = false
             }
             contentView.micButton.isHidden = !isStartCalling
-            contentView.cameraButton.isHidden = !isStartCalling
+            contentView.openDoorButton.isHidden = !isStartCalling
         }
     }
     
@@ -36,7 +36,9 @@ class BaseVideoChatViewController: BaseViewController {
         
         initializeAgoraEngine()
         setupVideo()
-        setupLocalVideo()
+        // MARK: - hide local video view
+        contentView.localVideo.isHidden = true
+        agoraKit.enableLocalVideo(false)
         joinChannel()
     }
     
@@ -44,7 +46,7 @@ class BaseVideoChatViewController: BaseViewController {
     override func initData() {
         contentView.hangupButton.addTarget(self, action: #selector(didClickHangUpButton(_ :)), for: .touchUpInside)
         contentView.micButton.addTarget(self, action: #selector(didClickMuteButton(_ :)), for: .touchUpInside)
-        contentView.cameraButton.addTarget(self, action: #selector(didClickSwitchCameraButton(_ :)), for: .touchUpInside)
+        contentView.openDoorButton.addTarget(self, action: #selector(didClickOpenDoorButton), for: .touchUpInside)
     }
     
     
@@ -129,6 +131,12 @@ class BaseVideoChatViewController: BaseViewController {
         // mute local audio
         agoraKit.muteLocalAudioStream(sender.isSelected)
     }
+    
+    @objc
+    func didClickOpenDoorButton() {
+        
+    }
+    
     @objc
     func didClickSwitchCameraButton(_ sender: UIButton) {
         sender.isSelected.toggle()

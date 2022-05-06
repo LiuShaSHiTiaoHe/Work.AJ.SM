@@ -19,7 +19,7 @@ class AgoraVideoChatView: BaseView {
         self.addSubview(localVideo)
         self.addSubview(micButton)
         self.addSubview(hangupButton)
-        self.addSubview(cameraButton)
+        self.addSubview(openDoorButton)
         
         remoteVideo.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -44,7 +44,7 @@ class AgoraVideoChatView: BaseView {
             make.right.equalTo(hangupButton.snp.left).offset(-kMargin*2)
         }
         
-        cameraButton.snp.makeConstraints { make in
+        openDoorButton.snp.makeConstraints { make in
             make.centerY.equalTo(hangupButton)
             make.width.height.equalTo(40)
             make.left.equalTo(hangupButton.snp.right).offset(kMargin*2)
@@ -73,11 +73,10 @@ class AgoraVideoChatView: BaseView {
         button.setImage(R.image.chat_hangup_image(), for: .normal)
         return button
     }()
-
-    lazy var cameraButton: UIButton = {
+    
+    lazy var openDoorButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(R.image.chat_camera_switch_image(), for: .normal)
-        button.setImage(R.image.chat_camera_switch_pressed_image(), for: .selected)
+        button.setImage(R.image.chat_opendoor_image(), for: .normal)
         return button
     }()
 }
