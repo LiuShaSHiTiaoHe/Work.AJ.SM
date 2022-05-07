@@ -296,8 +296,9 @@ extension HomeRepository {
         if unit.moudle12 == "T" {
             result.append("MOUDLE12")
         }
+        // FIXME: - 暂时隐藏电梯配置
         if let module13 = unit.moudle13, let mobile = unit.mobile, module13.contains(mobile) {
-            result.append("MOUDLE13")
+//            result.append("MOUDLE13")
         }
         if unit.moudle14 == "T" {
             result.append("MOUDLE14")
