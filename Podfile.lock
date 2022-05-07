@@ -7,10 +7,7 @@ PODS:
   - ESTabBarController-swift (2.8.0)
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
-  - JCore (2.1.4-noidfa)
   - JKSwiftExtension (2.1.0)
-  - JPush (3.2.4-noidfa):
-    - JCore (< 3.0.0, >= 2.0.0)
   - Kingfisher (7.2.0)
   - LTMorphingLabel (0.9.3)
   - MarqueeLabel (4.0.5)
@@ -19,7 +16,6 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - NIMSDK (6.1.1)
   - NotificationBannerSwift (2.5.0):
     - MarqueeLabel (~> 4.0.0)
     - SnapKit (~> 5.0.0)
@@ -90,14 +86,11 @@ DEPENDENCIES:
   - ESTabBarController-swift (= 2.8.0)
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
-  - JCore (= 2.1.4-noidfa)
   - JKSwiftExtension
-  - JPush (= 3.2.4-noidfa)
   - Kingfisher (= 7.2.0)
   - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
   - Moya
-  - NIMSDK (= 6.1.1)
   - NotificationBannerSwift (= 2.5.0)
   - ObjectMapper (= 4.2.0)
   - "ObjectMapper+Realm"
@@ -134,15 +127,12 @@ SPEC REPOS:
     - ESTabBarController-swift
     - Haptica
     - IQKeyboardManagerSwift
-    - JCore
     - JKSwiftExtension
-    - JPush
     - Kingfisher
     - LTMorphingLabel
     - MarqueeLabel
     - MJRefresh
     - Moya
-    - NIMSDK
     - NotificationBannerSwift
     - ObjcExceptionBridging
     - ObjectMapper
@@ -179,15 +169,12 @@ SPEC CHECKSUMS:
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
-  JCore: 2f15311e6889ab43ed5d629802ef793cac566465
   JKSwiftExtension: 1ae63dabde89608f8d6b63ffc482cc9b57c44873
-  JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   LTMorphingLabel: f2b256e4fe665aac27f0d0e8ccdcd79590f0cd70
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  NIMSDK: d007a6ea3497867733bb05e21fa059e6960f24bb
   NotificationBannerSwift: 684966fa934c48b70eff8bbec93fccf8db603365
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
@@ -215,6 +202,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: ad3ed8c949d14b5164ea16bb9ded642776a414a4
+PODFILE CHECKSUM: 22587b2d74de675b03c7e0761a59f9e98a888cbb
 
 COCOAPODS: 1.11.2

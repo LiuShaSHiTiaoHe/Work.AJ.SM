@@ -1740,15 +1740,12 @@
 				416F2DF8279BAF67004E5AD9 /* Frameworks */,
 				416F2DF9279BAF67004E5AD9 /* Resources */,
 				0F320F9032A01B6E81C14EE4 /* [CP] Embed Pods Frameworks */,
-				C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Work.AJ.SM;
-			packageProductDependencies = (
-			);
 			productName = Work.AJ.SM;
 			productReference = 416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */;
 			productType = "com.apple.product-type.application";
@@ -1824,8 +1821,6 @@
 				"zh-Hans",
 			);
 			mainGroup = 416F2DF2279BAF66004E5AD9;
-			packageReferences = (
-			);
 			productRefGroup = 416F2DFC279BAF67004E5AD9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1903,28 +1898,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
-		};
-		C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D5999047F02A75C8986BF302 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
