@@ -7,16 +7,19 @@
 
 import Foundation
 import Moya
+import DeviceKit
+import JKSwiftExtension
+import KeychainAccess
 
 public extension Network {
     
     class Configuration {
 
         public static var `default`: Configuration = {
-            let cofig = Configuration()
-            cofig.timeoutInterval = 20
-            cofig.plugins = []//[NetworkIndicatorPlugin()]
-            cofig.replacingTask = { (target: TargetType) -> Task in
+            let configuration = Configuration()
+            configuration.timeoutInterval = 20
+            configuration.plugins = []//[NetworkIndicatorPlugin()]
+            configuration.replacingTask = { (target: TargetType) -> Task in
                 let url = target.baseURL.absoluteString + target.path
                 var task = target.task
                 switch task {
@@ -39,7 +42,14 @@ public extension Network {
                 logger.shortLine()
                 return task
             }
-            return cofig
+            configuration.addingHeaders = { (target: TargetType) -> [String: String] in
+                let version = Bundle.jk.appVersion
+                let identifierID = Keychain.init(service: kKeyChainServiceKey)["xbid"] ?? ""
+                let header: Dictionary<String, String> = ["version-code": version,"client-type": kDeviceType, "x-bid": identifierID,"x-device": DeviceManager.shared.requestHeaderXDeviceString()]
+                return header
+            }
+            
+            return configuration
         }()//Configuration()
         
         public var addingHeaders: (TargetType) -> [String: String] = { _ in [:] }

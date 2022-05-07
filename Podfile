@@ -21,6 +21,7 @@ target 'Work.AJ.SM' do
   pod 'SwiftyJSON', '5.0.1'
   pod 'ObjectMapper', '4.2.0'
   pod 'CryptoSwift', '1.4.2'
+  pod 'KeychainAccess', '~> 4.2.2'
   pod 'SwiftyUserDefaults', '5.3.0'
   pod 'YYCache'
   pod 'YYCategories'
@@ -29,6 +30,8 @@ target 'Work.AJ.SM' do
   pod 'JKSwiftExtension'
   pod 'Kingfisher','7.2.0'
   pod 'Siren'
+  pod 'DeviceKit', '~> 4.4.0'
+
   
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'

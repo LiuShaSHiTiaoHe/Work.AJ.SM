@@ -4,6 +4,7 @@ PODS:
   - BEMCheckBox (1.4.1)
   - BetterSegmentedControl (2.0.1)
   - CryptoSwift (1.4.2)
+  - DeviceKit (4.4.0)
   - ESTabBarController-swift (2.8.0)
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
@@ -11,6 +12,7 @@ PODS:
   - JKSwiftExtension (2.1.0)
   - JPush (3.2.4-noidfa):
     - JCore (< 3.0.0, >= 2.0.0)
+  - KeychainAccess (4.2.2)
   - Kingfisher (7.2.0)
   - LTMorphingLabel (0.9.3)
   - MarqueeLabel (4.0.5)
@@ -87,12 +89,14 @@ DEPENDENCIES:
   - BEMCheckBox
   - BetterSegmentedControl
   - CryptoSwift (= 1.4.2)
+  - DeviceKit (~> 4.4.0)
   - ESTabBarController-swift (= 2.8.0)
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
   - JCore (= 2.1.4-noidfa)
   - JKSwiftExtension
   - JPush (= 3.2.4-noidfa)
+  - KeychainAccess (~> 4.2.2)
   - Kingfisher (= 7.2.0)
   - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
@@ -131,12 +135,14 @@ SPEC REPOS:
     - BEMCheckBox
     - BetterSegmentedControl
     - CryptoSwift
+    - DeviceKit
     - ESTabBarController-swift
     - Haptica
     - IQKeyboardManagerSwift
     - JCore
     - JKSwiftExtension
     - JPush
+    - KeychainAccess
     - Kingfisher
     - LTMorphingLabel
     - MarqueeLabel
@@ -176,12 +182,14 @@ SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
+  DeviceKit: 2c5d7485a2fa10b65c0091b2952d30843a6ba06d
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JCore: 2f15311e6889ab43ed5d629802ef793cac566465
   JKSwiftExtension: 1ae63dabde89608f8d6b63ffc482cc9b57c44873
   JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   LTMorphingLabel: f2b256e4fe665aac27f0d0e8ccdcd79590f0cd70
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
@@ -215,6 +223,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: ad3ed8c949d14b5164ea16bb9ded642776a414a4
+PODFILE CHECKSUM: c0ca37d62fb7c5a8c01f00a75c32cd19625c9b23
 
 COCOAPODS: 1.11.2

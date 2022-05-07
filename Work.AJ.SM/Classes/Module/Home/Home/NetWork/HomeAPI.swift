@@ -103,8 +103,9 @@ extension HomeAPI: TargetType {
         case let .ncomRecord(communityID, startTime, endTime, page, count):
             let parameters = ["COMMUNITYID": communityID, "STARTTIME": startTime, "ENDTIME": endTime, "currentPage": page, "showCount": count].ekey("COMMUNITYID")
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case let .ncomSendStatus(communityID, unitID, callSource, callTarget, callType, callStatus, uniqueCode):
-            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
+            // FIXME: - 待完善
+        case .ncomSendStatus:
+            return .requestPlain
         }
     }
     

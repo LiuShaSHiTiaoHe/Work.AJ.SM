@@ -24,6 +24,7 @@ extension AppDelegate {
     
     func initService() {
         logger.info("\(FileManager.jk.DocumnetsDirectory())")
+        GDataManager.shared.setupKeyChain()
         GDataManager.shared.setupDataBase()
         setuplibs()
     }

@@ -145,9 +145,15 @@ extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-        
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "如需加快房屋审核，请联系物业"
+  
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 60))
+        view.backgroundColor = R.color.backgroundColor()
+        view.text = "如需加快房屋审核，请联系物业"
+        view.textAlignment = .center
+        view.font = k12Font
+        view.textColor = R.color.secondtextColor()
+        return view
     }
 }
 

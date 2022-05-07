@@ -148,7 +148,7 @@ class BaseWebViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.backgroundColor()
         self.navigationItem.title = titleString
         self.navigationController?.navigationBar.tintColor = R.color.whiteColor()
         self.setupUI()
@@ -161,8 +161,9 @@ class BaseWebViewController: UIViewController{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
+
     
     func messageToJs(_ type: WebViewScriptMessageHandlerName) {
         switch type {

@@ -11,6 +11,7 @@ import Siren
 import NIMSDK
 import AVFoundation
 import SwiftyUserDefaults
+import KeychainAccess
 
 class GDataManager: NSObject {
     static let shared = GDataManager()
@@ -24,6 +25,14 @@ class GDataManager: NSObject {
             let vc = LoginViewController()
             vc.modalPresentationStyle = .fullScreen
             currentVC.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func setupKeyChain() {
+        let keychain = Keychain(service: kKeyChainServiceKey)
+        let xbid = keychain["xbid"]
+        if  xbid == nil{
+            keychain["xbid"] = UUID().uuidString
         }
     }
     
@@ -102,7 +111,12 @@ class GDataManager: NSObject {
             case .success(let updateResults):
                 logger.info(updateResults.localization)
             case .failure(let error):
-                logger.info(error.localizedDescription)
+                switch error{
+                case .noUpdateAvailable:
+                    SVProgressHUD.showInfo(withStatus: "已经是最新版本!")
+                default:
+                    logger.info(error.localizedDescription)
+                }
             }
         }
     }

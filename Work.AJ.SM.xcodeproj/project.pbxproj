@@ -187,6 +187,8 @@
 		41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */; };
 		41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */; };
 		41B4D84E2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D84D2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift */; };
+		41B4D85228266042004DFCFC /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D85128266042004DFCFC /* DeviceManager.swift */; };
+		41B4D8542826750A004DFCFC /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D8532826750A004DFCFC /* Throttler.swift */; };
 		41B7DBCF27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBCE27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift */; };
 		41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */; };
 		41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */; };
@@ -434,6 +436,8 @@
 		41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItemIndicator.swift; sourceTree = "<group>"; };
 		41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItem.swift; sourceTree = "<group>"; };
 		41B4D84D2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorMaskConfigurationCell.swift; sourceTree = "<group>"; };
+		41B4D85128266042004DFCFC /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		41B4D8532826750A004DFCFC /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		41B7DBCE27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonIDNumberInpuCell.swift; sourceTree = "<group>"; };
 		41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCertificationModel.swift; sourceTree = "<group>"; };
 		41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseIndexView.swift; sourceTree = "<group>"; };
@@ -705,6 +709,8 @@
 				41AA419F27D5F76B007020AD /* LocationManager.swift */,
 				41558FB727E972F0002D7BD1 /* PermissionManager.swift */,
 				41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */,
+				41B4D85128266042004DFCFC /* DeviceManager.swift */,
+				41B4D8532826750A004DFCFC /* Throttler.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2112,6 +2118,7 @@
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				41B7DBD527DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegateService.swift in Sources */,
+				41B4D85228266042004DFCFC /* DeviceManager.swift in Sources */,
 				4173C22527C4E09E00B8FBB8 /* PasswordInvitationViewController.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
 				4173C21927C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift in Sources */,
@@ -2150,6 +2157,7 @@
 				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
 				41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */,
+				41B4D8542826750A004DFCFC /* Throttler.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
 				419AD6A527FEC58F00C902B8 /* ElevatorConfigurationView.swift in Sources */,
 				4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */,
