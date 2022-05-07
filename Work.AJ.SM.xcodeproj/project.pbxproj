@@ -2380,7 +2380,7 @@
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区(测试)";
+				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区(Agora)";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "我们需要在呼梯和开门等使用蓝牙的时候使用蓝牙做连接硬件";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "是否允许使用进行蓝牙开门";
 				INFOPLIST_KEY_NSCameraUsageDescription = "是否允许使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能";
@@ -2425,7 +2425,7 @@
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区(测试)";
+				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区(Agora)";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "我们需要在呼梯和开门等使用蓝牙的时候使用蓝牙做连接硬件";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "是否允许使用进行蓝牙开门";
 				INFOPLIST_KEY_NSCameraUsageDescription = "是否允许使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能";
