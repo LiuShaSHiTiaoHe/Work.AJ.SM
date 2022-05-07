@@ -9,11 +9,12 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
     func startAgoraCall(_ remote: String, _ lockMac: String) {
         let vc = CallingViewController()
         vc.modalPresentationStyle = .fullScreen
-        if let localUser = HomeRepository.shared.getCurrentUser(), let localUserRID = localUser.rid {
-            vc.remoteNumber = "1272"//remote
-            vc.localNumber = localUserRID
-            vc.channel = localUserRID
-            vc.lockMac = "00606ebea4f4"//lockMac
+        if let userID = ud.userID {
+            let account = userID.ajAgoraAccount()
+            vc.remoteNumber = remote
+            vc.localNumber = account
+            vc.channel = remote
+            vc.lockMac = lockMac
             vc.delegate = self
             self.present(vc, animated: true)
         }

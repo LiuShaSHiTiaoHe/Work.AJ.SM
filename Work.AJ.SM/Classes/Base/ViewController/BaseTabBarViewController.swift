@@ -67,12 +67,14 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
             return
         }
         
-        if let account = ud.userID {
-            // MARK: - Agora Remove Token
+        if let userID = ud.userID {
+            // MARK: - Agora Device Account 默认加41前缀，跟门口机设备区分
+            let account = userID.ajAgoraAccount()
             kit.login(account: account, token: nil, fail:  { (error) in
                 logger.error("AgoraRtm ====> \(error.localizedDescription)")
                 SVProgressHUD.showError(withStatus: "error.localizedDescription")
             })
+            // MARK: - Agora Remove Token
 //            HomeRepository.shared.agoraRTMToken { token in
 //                if token.isEmpty {
 //                    logger.error("AgoraRtm ====> RTM token 获取失败")
