@@ -26,6 +26,13 @@ class CallingViewController: BaseViewController {
     var isOutgoing: Bool = true
     // MARK: - 门口机设备Mac地址，用于远程开门
     var lockMac: String = ""
+    var remoteName: String? {
+        didSet {
+            if let remoteName = remoteName {
+                contentView.numberLabel.text = remoteName
+            }
+        }
+    }
     
     private var ringStatus: Operation = .off {
         didSet {
@@ -113,7 +120,8 @@ class CallingViewController: BaseViewController {
         // rtm send invitation
         func sendInvitation(remote: String) {
             if let channel = channel {
-                inviter.sendInvitation(peer: remoteNumber, extraContent: channel, accepted: { [weak self] in
+                let name = HomeRepository.shared.getCurrentHouseName()
+                inviter.sendInvitation(peer: remoteNumber, extraContent: channel + name, accepted: { [weak self] in
                     guard let self = self else { return }
                     if let remote = UInt(remoteNumber){
                         self.close(.toVideoChat(channel, remote, self.lockMac))

@@ -127,8 +127,15 @@ extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
             vc.localNumber = invitation.callee
             vc.remoteNumber = invitation.caller
             vc.channel = invitation.caller
-            if let content = invitation.content {
-                vc.lockMac = content
+            // MARK: - content 放入两个参数，用','隔开:门口机的mac地址和名称
+            if let content = invitation.content{
+                let datas = content.components(separatedBy: ",")
+                if datas.count == 2 {
+                    vc.lockMac = datas[0]
+                    vc.remoteName = datas[1]
+                }else{
+                    vc.lockMac = content
+                }
             }
             self.present(vc, animated: true)
         }

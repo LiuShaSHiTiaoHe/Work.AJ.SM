@@ -6,7 +6,7 @@
 //
 
 extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDelegate {
-    func startAgoraCall(_ remote: String, _ lockMac: String) {
+    func startAgoraCall(_ remote: String, _ lockMac: String, _ lockName: String) {
         let vc = CallingViewController()
         vc.modalPresentationStyle = .fullScreen
         if let userID = ud.userID {
@@ -15,6 +15,7 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
             vc.localNumber = account
             vc.channel = remote
             vc.lockMac = lockMac
+            vc.remoteName = lockName
             vc.delegate = self
             self.present(vc, animated: true)
         }

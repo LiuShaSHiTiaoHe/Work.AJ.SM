@@ -84,11 +84,11 @@ extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
     }
     
     func camera(_ lockModel: UnitLockModel) {
-        if let lockMac = lockModel.lockmac, let lockID = lockModel.lockID?.jk.intToString {
+        if let lockMac = lockModel.lockmac, let lockID = lockModel.lockID?.jk.intToString, let lockName = lockModel.lockname {
             PermissionManager.PermissionRequest(.microphone) {[weak self] authorized in
                 guard let self = self else { return }
                 if authorized {
-                    self.startAgoraCall(lockID, lockMac)
+                    self.startAgoraCall(lockID, lockMac, lockName)
                 }else{
                     SVProgressHUD.showInfo(withStatus: "请打开系统麦克风权限")
                 }
