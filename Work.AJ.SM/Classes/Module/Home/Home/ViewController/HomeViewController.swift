@@ -39,32 +39,24 @@ class HomeViewController: BaseViewController {
     override func headerRefresh() {
         loadUnitData()
     }
-    
+
     @objc
     func currentUnitChanged() {
         loadUnitData()
     }
     
     func loadUnitData() {
-        HomeRepository.shared.allUnits { [weak self] modules in
+        HomeRepository.shared.homeData { [weak self] modules, ads, notices in
             guard let `self` = self else { return }
             if modules.isEmpty {
                 self.showNoDataView(.nohouse)
             }else{
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
-                self.getAdsAndNotices()
+                self.contentView.updateAdsAndNotices(ads, notices)
             }
         }
     }
-    
-    func getAdsAndNotices() {
-        HomeRepository.shared.adsAndNotice { [weak self] ads, notices in
-            guard let `self` = self else { return }
-            self.contentView.updateAdsAndNotices(ads, notices)
-        }
-    }
-    
 }
 
 extension HomeViewController: HomeViewDelegate {

@@ -11,6 +11,8 @@ import JKSwiftExtension
 
 typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
 typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
+typealias HomeDataCompletion = (([HomePageFunctionModule], [AdsModel], [NoticeModel]) -> Void)
+
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
 typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
 // MARK: - NCom
@@ -19,6 +21,59 @@ typealias NComCallRecordCompletion = (([NComRecordInfo], Int) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
+    
+    func homeData(completion: @escaping HomeDataCompletion) {
+        SVProgressHUD.show()
+        var homeModuleArray: Array<HomePageFunctionModule> = []
+        var adsArray: Array<AdsModel> = []
+        var noticeArray: Array<NoticeModel> = []
+        var currentUnit: UnitModel?
+        guard let userMobile = ud.userMobile else {
+            SVProgressHUD.dismiss()
+            completion(homeModuleArray, adsArray, noticeArray)
+            return
+        }
+        HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .ignoreCache, showError: true) { [weak self] models, response in
+            guard let `self` = self else { return }
+            guard models.count > 0 else { return }
+            RealmTools.addList(models, update: .all) {
+                logger.info("update done")
+            }
+            if let currentUnitID = Defaults.currentUnitID {
+                currentUnit = models.first(where: { model in
+                    model.unitid == currentUnitID
+                })
+                if let unit = currentUnit {
+                    homeModuleArray = self.filterHomePageModules(unit)
+                    self.adsAndNotice { ads, notices in
+                        adsArray = ads
+                        noticeArray = notices
+                        completion(homeModuleArray, adsArray, noticeArray)
+                    }
+                }else{
+                    completion(homeModuleArray, adsArray, noticeArray)
+                }
+            }else{
+                currentUnit = models.first(where: { model in
+                    model.state == "N"
+                })
+                if let firstUnit = currentUnit, let unitID = firstUnit.unitid {
+                    Defaults.currentUnitID = unitID
+                    homeModuleArray = self.filterHomePageModules(firstUnit)
+                    self.adsAndNotice { ads, notices in
+                        adsArray = ads
+                        noticeArray = notices
+                        completion(homeModuleArray, adsArray, noticeArray)
+                    }
+                }else{
+                    completion(homeModuleArray, adsArray, noticeArray)
+                }
+            }
+        } failureCallback: { response in
+            logger.info("\(response.message)")
+            completion(homeModuleArray, adsArray, noticeArray)
+        }
+    }
     
     func allUnits(completion: @escaping HomeModulesCompletion) {
         SVProgressHUD.show()
