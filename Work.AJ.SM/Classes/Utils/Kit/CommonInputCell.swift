@@ -78,7 +78,7 @@ class CommonInputCell: UITableViewCell {
             make.right.equalTo(commonInput)
             make.top.equalTo(commonInput.snp.bottom)
             make.bottom.equalToSuperview()
-            make.width.equalTo(100)
+            make.width.equalTo(200)
         }
         
         errorMsg.isHidden = true

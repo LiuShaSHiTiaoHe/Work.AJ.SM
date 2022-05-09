@@ -103,6 +103,7 @@ class SetVisitorQRCodeView: UIView {
         view.register(TimeSelectCell.self, forCellReuseIdentifier: TimeSelectCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
+        view.tableFooterView = UIView()
         return view
     }()
     

@@ -105,6 +105,7 @@ class SetVisitorPasswordView: UIView {
         view.register(CommonPhoneNumberCell.self, forCellReuseIdentifier: CommonPhoneNumberCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
+        view.tableFooterView = UIView()
         return view
     }()
     
