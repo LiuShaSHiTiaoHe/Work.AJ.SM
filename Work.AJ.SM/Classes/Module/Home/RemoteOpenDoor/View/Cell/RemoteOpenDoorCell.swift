@@ -187,10 +187,11 @@ class RemoteOpenDoorCell: UITableViewCell {
                 typeImageView.image = R.image.rod_image_cell()
                 typeLabel.text = "单元门"
             default:
-                typeImageView.image = R.image.rod_image_cell()
-                typeLabel.text = "未知"
                 break
             }
+        }else{
+            typeImageView.image = R.image.rod_image_cell()
+            typeLabel.text = "未知位置"
         }
     }
     

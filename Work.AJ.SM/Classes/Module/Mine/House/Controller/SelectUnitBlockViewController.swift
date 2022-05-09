@@ -73,7 +73,7 @@ class SelectUnitBlockViewController: BaseViewController {
         requestUserLocation()
         
 //        OtherAPI.AmapLocation(key: "359d74c1fda0ceb00f5c446de2d36ce8").defaultRequest { jsonData in
-//            
+//
 //        }
     }
     

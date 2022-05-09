@@ -112,7 +112,7 @@ extension HomeView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeViewSectionHeaderIdentifier, for: indexPath) as? HomeHeaderView else { return UICollectionReusableView() }
-        header.initData(ads: [], notice: [])
+        header.initData(ads: advertisement, notice: notice)
         return header
     }
 }
