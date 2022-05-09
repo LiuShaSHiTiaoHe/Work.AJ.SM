@@ -55,5 +55,6 @@ target 'Work.AJ.SM' do
   pod 'JCore', '2.1.4-noidfa'
   pod 'JPush', '3.2.4-noidfa'
 
+  pod 'WoodPeckeriOS', :configurations => ['Debug']
 end
 
