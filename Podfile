@@ -48,7 +48,7 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/PhotoLibrary'
   pod 'SPPermissions/Notification'
   pod 'SPPermissions/Bluetooth'
-  pod 'SPPermissions/LocationWhenInUse'
+#  pod 'SPPermissions/LocationWhenInUse'
   pod 'SPPermissions/Microphone'
     
   pod 'NIMSDK', '6.1.1'
