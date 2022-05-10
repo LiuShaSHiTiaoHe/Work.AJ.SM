@@ -1,37 +1,62 @@
 //
-//  PropertyContactTableViewCell.swift
+//  MessageTableViewCell.swift
 //  Work.AJ.SM
 //
 //  Created by Fairdesk on 2022/5/10.
 //
 
 import UIKit
+import SnapKit
 
-let PropertyContactTableViewCellIdentifier = "PropertyContactTableViewCellIdentifier"
+let MessageTableViewCellIdentifier = "MessageTableViewCellIdentifier"
 
-class PropertyContactTableViewCell: UITableViewCell {
+class MessageTableViewCell: UITableViewCell {
 
+    var data: MessageModel? {
+        didSet {
+            if let data = data {
+                if let title = data.title {
+                    nameLabel.text = title
+                }
+                if let time = data.createTime {
+                    timeLabel.text = time
+                }
+                if let content = data.text {
+                    messageLabel.text = content
+                }
+            }
+        }
+    }
+    
     private func initializeView() {
         contentView.backgroundColor = R.color.backgroundColor()
         self.contentView.addSubview(backgrdView)
-        backgrdView.addSubview(name)
-        backgrdView.addSubview(mobile)
+        backgrdView.addSubview(nameLabel)
+        backgrdView.addSubview(timeLabel)
+        backgrdView.addSubview(messageLabel)
         
         backgrdView.snp.makeConstraints { make in
             make.left.top.equalToSuperview().offset(kMargin/2)
             make.right.bottom.equalToSuperview().offset(-kMargin/2)
         }
         
-        name.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(kMargin/2)
             make.left.equalToSuperview().offset(kMargin/2)
             make.height.equalTo(30)
         }
         
-        mobile.snp.makeConstraints { make in
+        timeLabel.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(nameLabel)
             make.height.equalTo(30)
+        }
+        
+        messageLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin/2)
+            make.right.equalToSuperview().offset(-kMargin)
+            make.bottom.equalToSuperview().offset(-kMargin)
         }
     }
     
@@ -43,20 +68,29 @@ class PropertyContactTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var name: UILabel = {
+    lazy var nameLabel: UILabel = {
         let view = UILabel.init()
-        view.font = k16Font
+        view.font = k14Font
         view.textColor = R.color.secondtextColor()
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
     
-    lazy var mobile: UILabel = {
+    lazy var timeLabel: UILabel = {
         let view = UILabel.init()
-        view.font = k16Font
-        view.textColor = R.color.maintextColor()
+        view.font = k12Font
+        view.textColor = R.color.secondtextColor()
         view.textAlignment = .right
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        return view
+    }()
+    
+    lazy var messageLabel: UILabel = {
+        let view = UILabel.init()
+        view.font = k20Font
+        view.textColor = R.color.maintextColor()
+        view.textAlignment = .left
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()

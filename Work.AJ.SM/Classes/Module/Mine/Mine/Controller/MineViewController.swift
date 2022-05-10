@@ -68,7 +68,9 @@ class MineViewController: BaseViewController {
     
     @objc
     func showMessageView() {
-        
+        let vc = MessageViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

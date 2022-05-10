@@ -20,6 +20,7 @@ typealias VisitorListCompletion = (([VisitorModel]) -> Void)
 typealias MyUnitGuestCompletion = (([UnitGuestModel]) -> Void)
 
 typealias PropertyContactCompletion = (([PropertyContactModel]) -> Void)
+typealias MessagesCompletion = (([MessageModel]) -> Void)
 
 
 class MineRepository: NSObject {
@@ -429,6 +430,8 @@ extension MineRepository {
 }
 
 extension MineRepository {
+    
+    // MARK: - 获取物业联系方式
     func getPropertyContact(completion: @escaping PropertyContactCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
             MineAPI.propertyContactList(communityID: communityID).request(modelType: [PropertyContactModel].self, cacheType: .ignoreCache, showError: true) { models, response in
@@ -438,4 +441,14 @@ extension MineRepository {
             }
         }
     }
+
+    // MARK: - 获取消息列表
+    func getMessages(userID: String, page: String, size: String, completion: @escaping MessagesCompletion) {
+        MineAPI.getUserMessageList(userID: userID, currentPage: page, showCount: size).request(modelType: [MessageModel].self, cacheType: .ignoreCache, showError: true) { models, response in
+            completion(models)
+        } failureCallback: { response in
+            completion([])
+        }
+    }
+    
 }
