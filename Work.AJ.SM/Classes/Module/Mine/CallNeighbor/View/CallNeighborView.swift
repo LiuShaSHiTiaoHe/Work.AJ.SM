@@ -10,13 +10,22 @@ import SnapKit
 
 class CallNeighborView: BaseView {
     
-    private let dialButtons: [String] = ["1","2","3","4","5","6","7","8","9","*","0","#"]
+    private let dialButtonsStr: [String] = ["1","2","3","4","5","6","7","8","9","*","0","#"]
     private let dialButtonHeight: CGFloat = 80.0
     
     
     override func initData() {
         dialPad.delegate = self
         dialPad.dataSource = self
+        deleteButton.addTarget(self, action: #selector(deleteStr), for: .touchUpInside)
+    }
+    
+    @objc
+    func deleteStr() {
+        if let inputStr = inputFiled.text, !inputStr.isEmpty {
+            let tempString = String(inputStr.dropLast())
+            inputFiled.text = tempString
+        }
     }
     
     override func initializeView() {
@@ -128,7 +137,7 @@ class CallNeighborView: BaseView {
 extension CallNeighborView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DialCollectionViewCellCellIdentifier, for: indexPath) as? DialCollectionViewCell else { return UICollectionViewCell() }
-        let str = dialButtons[indexPath.row]
+        let str = dialButtonsStr[indexPath.row]
         cell.nameLabel.text = str
         return cell
     }
@@ -138,21 +147,27 @@ extension CallNeighborView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dialButtons.count
+        return dialButtonsStr.count
     }
     
 }
 
 extension CallNeighborView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-
+        let str = dialButtonsStr[indexPath.row]
+        var text = ""
+        if let inputStr = inputFiled.text {
+            text = inputStr + str
+            inputFiled.text = text
+        }else{
+            inputFiled.text = str
+        }
     }
 }
 
 extension CallNeighborView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (self.frame.width - kMargin*2)/3, height: dialButtonHeight)
+        return .init(width: floor((self.frame.width - kMargin*2)/3), height: dialButtonHeight)
     }
 }
