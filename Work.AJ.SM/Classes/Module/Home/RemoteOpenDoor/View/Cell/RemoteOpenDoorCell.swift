@@ -189,6 +189,9 @@ class RemoteOpenDoorCell: UITableViewCell {
             default:
                 break
             }
+        }else{
+            typeImageView.image = R.image.rod_image_cell()
+            typeLabel.text = "未知位置"
         }
     }
     

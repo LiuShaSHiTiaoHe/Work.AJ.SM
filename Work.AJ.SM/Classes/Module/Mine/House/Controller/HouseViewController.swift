@@ -155,5 +155,6 @@ extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
         view.textColor = R.color.secondtextColor()
         return view
     }
+
 }
 

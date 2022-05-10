@@ -87,7 +87,8 @@ extension SelectHouseViewController: HouseCellDelegate {
     func chooseCurrentUnit(unitID: Int) {
         Defaults.currentUnitID = unitID
         tableView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+        SVProgressHUD.show()
+        SVProgressHUD.dismiss(withDelay: 1) {
             self.navigationController?.popViewController(animated: true)
         }
     }

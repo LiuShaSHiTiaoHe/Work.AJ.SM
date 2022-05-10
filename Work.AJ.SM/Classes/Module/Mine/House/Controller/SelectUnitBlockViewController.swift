@@ -71,6 +71,10 @@ class SelectUnitBlockViewController: BaseViewController {
         locationIndexTips.isUserInteractionEnabled = true
         locationIndexTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
         requestUserLocation()
+        
+//        OtherAPI.AmapLocation(key: "359d74c1fda0ceb00f5c446de2d36ce8").defaultRequest { jsonData in
+//
+//        }
     }
     
     func getCityCommunitiesData() {

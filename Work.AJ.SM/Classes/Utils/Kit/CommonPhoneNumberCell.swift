@@ -79,7 +79,7 @@ class CommonPhoneNumberCell: UITableViewCell {
             make.right.equalTo(phoneInput)
             make.top.equalTo(phoneInput.snp.bottom)
             make.bottom.equalToSuperview()
-            make.width.equalTo(100)
+            make.width.equalTo(200)
         }
         
         errorMsg.isHidden = true

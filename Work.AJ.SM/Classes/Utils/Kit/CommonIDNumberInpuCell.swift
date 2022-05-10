@@ -78,7 +78,7 @@ class CommonIDNumberInpuCell: UITableViewCell {
             make.right.equalTo(IDNumberInput)
             make.top.equalTo(IDNumberInput.snp.bottom)
             make.bottom.equalToSuperview()
-            make.width.equalTo(100)
+            make.width.equalTo(200)
         }
         
         errorMsg.isHidden = true

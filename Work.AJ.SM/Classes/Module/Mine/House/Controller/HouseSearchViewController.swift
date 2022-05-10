@@ -139,13 +139,6 @@ extension HouseSearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let searchString = textField.text, !searchString.isEmpty {
             loadDatas(searchString)
-//            let searchStringPY = searchString.jk.toPinyin()
-//            searchResult = cityNames.filter { name in
-//                let namePY = name.jk.toPinyin()
-//                return namePY.contains(searchStringPY)
-//            }
-//            isSearch = true
-//            tableVeiw.reloadData()
             return true
         }
         return false

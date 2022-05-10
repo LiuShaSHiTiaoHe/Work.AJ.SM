@@ -187,6 +187,7 @@
 		41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */; };
 		41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */; };
 		41B4D84E2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D84D2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift */; };
+		41B4D8572828FF4F004DFCFC /* OtherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D8562828FF4F004DFCFC /* OtherAPI.swift */; };
 		41B4D85228266042004DFCFC /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D85128266042004DFCFC /* DeviceManager.swift */; };
 		41B4D8542826750A004DFCFC /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D8532826750A004DFCFC /* Throttler.swift */; };
 		41B7DBCF27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBCE27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift */; };
@@ -436,6 +437,7 @@
 		41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItemIndicator.swift; sourceTree = "<group>"; };
 		41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItem.swift; sourceTree = "<group>"; };
 		41B4D84D2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorMaskConfigurationCell.swift; sourceTree = "<group>"; };
+		41B4D8562828FF4F004DFCFC /* OtherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAPI.swift; sourceTree = "<group>"; };
 		41B4D85128266042004DFCFC /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		41B4D8532826750A004DFCFC /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		41B7DBCE27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonIDNumberInpuCell.swift; sourceTree = "<group>"; };
@@ -625,6 +627,7 @@
 		416F2E2F279D1E84004E5AD9 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				41B4D8552828FF3B004DFCFC /* NetWork */,
 				416F2E4F27B0B61E004E5AD9 /* ViewController */,
 				416F2E4C27B0B604004E5AD9 /* View */,
 			);
@@ -1553,6 +1556,14 @@
 			path = SectionIndexView;
 			sourceTree = "<group>";
 		};
+		41B4D8552828FF3B004DFCFC /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				41B4D8562828FF4F004DFCFC /* OtherAPI.swift */,
+			);
+			path = NetWork;
+			sourceTree = "<group>";
+		};
 		41B7DBD627E0331D002A23D0 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -2114,6 +2125,7 @@
 				4173C25127C7883000B8FBB8 /* MemberListHeaderView.swift in Sources */,
 				41B7DBE727E044E8002A23D0 /* Orientation.swift in Sources */,
 				416F2EF527BDE0B7004E5AD9 /* MobileCallElevatorViewController.swift in Sources */,
+				41B4D8572828FF4F004DFCFC /* OtherAPI.swift in Sources */,
 				412FC54027D7314B001050E9 /* SelectUnitBlockViewController.swift in Sources */,
 				416F2EC827BB77C8004E5AD9 /* MineAPI.swift in Sources */,
 				41B7DBD527DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift in Sources */,

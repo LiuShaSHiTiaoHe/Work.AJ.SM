@@ -72,7 +72,8 @@ class UserProfileViewController: BaseViewController {
                 if errorMsg.isEmpty {
                     self.loadData()
                 }else{
-                    GDataManager.shared.showLoginView()
+                    SVProgressHUD.showError(withStatus: "数据错误")
+//                    GDataManager.shared.showLoginView()
                 }
             }
         }else{
