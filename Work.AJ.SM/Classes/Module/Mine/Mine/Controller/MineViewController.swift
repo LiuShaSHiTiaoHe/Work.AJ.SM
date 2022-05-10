@@ -28,7 +28,8 @@ class MineViewController: BaseViewController {
     }
     
     override func initData() {
-        contentView.headerView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(userProfileView)))
+        contentView.avatar.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(userProfileView)))
+        contentView.messageButton.addTarget(self, action: #selector(showMessageView), for: .touchUpInside)
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
 
@@ -63,6 +64,11 @@ class MineViewController: BaseViewController {
                 contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
             }
         }
+    }
+    
+    @objc
+    func showMessageView() {
+        
     }
 
 }
@@ -102,7 +108,6 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     let vc = FaceListViewController()
                     vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
-                    break
                 case .memeberManager:                    
                     let vc = MemberListViewController()
                     vc.hidesBottomBarWhenPushed = true
@@ -111,7 +116,6 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     let vc = VisitorRecordViewController()
                     vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
-                    break
                 case .setting:
                     let vc = SettingViewController()
                     vc.hidesBottomBarWhenPushed = true
@@ -120,14 +124,15 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     let vc = OpenDoorSettingViewController()
                     vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
-                    break
-                case .passRecord:
-                    break
-                case .opendoorPassword:
-                    break
                 case .videoCall:
-                    break
+                    let vc = CallNeighborViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
                 case .activateCard:
+                    break
+                case .contactProperty:
+                    break
+                default:
                     break
                 }
             }

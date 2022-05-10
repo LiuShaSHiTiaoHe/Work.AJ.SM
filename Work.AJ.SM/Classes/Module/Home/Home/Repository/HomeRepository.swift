@@ -418,4 +418,28 @@ extension HomeRepository {
         }
         return false
     }
+    
+    // MARK: - 户户通是否支持
+    func isCallOtherUserEnable(_ unit: UnitModel) -> Bool {
+        if let myset2 = unit.myset2, myset2 == "T" {
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 联系物业是否支持
+    func isContactPropertyEnable(_ unit: UnitModel) -> Bool {
+        if let myset9 = unit.myset9, myset9 == "T" {
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 消息是否支持
+    func isNoticeMessageEnable(_ unit: UnitModel) -> Bool {
+        if let myset4 = unit.myset4, myset4 == "T" {
+            return true
+        }
+        return false
+    }
 }

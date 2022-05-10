@@ -123,6 +123,18 @@ class MineRepository: NSObject {
             if !HomeRepository.shared.isFaceCertificationEnable(unit){
                 allModules = allModules.filter {$0.name != MineModuleType.faceCertification.rawValue}
             }
+            // MARK: - 是否支持户户通
+            if !HomeRepository.shared.isCallOtherUserEnable(unit) {
+                allModules = allModules.filter { $0.name != MineModuleType.videoCall.rawValue}
+            }
+            // MARK: - 是否支持呼叫物业
+            if !HomeRepository.shared.isContactPropertyEnable(unit) {
+                allModules = allModules.filter { $0.name != MineModuleType.contactProperty.rawValue}
+            }
+            // MARK: - 暂时不支持激活蓝牙卡
+            allModules = allModules.filter { $0.name != MineModuleType.activateCard.rawValue}
+
+            
             if let otherUsed = unit.otherused, otherUsed == 1 {
                 return allModules.filter{$0.isOtherUsed}
             }else{
@@ -146,6 +158,8 @@ class MineRepository: NSObject {
             return modules.filter{$0.destination == .mine_0}.count
         case 1:
             return modules.filter{$0.destination == .mine_1}.count
+        case 2:
+            return modules.filter{$0.destination == .mine_2}.count
         default:
             return 0
         }
@@ -157,6 +171,8 @@ class MineRepository: NSObject {
             return modules.filter{$0.destination == .mine_0}.sorted { $0.index < $1.index}[indexPath.row]
         case 1:
             return modules.filter{$0.destination == .mine_1}.sorted { $0.index < $1.index}[indexPath.row]
+        case 2:
+            return modules.filter{$0.destination == .mine_2}.sorted { $0.index < $1.index}[indexPath.row]
         default:
             return nil
         }

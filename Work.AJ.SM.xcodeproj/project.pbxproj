@@ -23,6 +23,9 @@
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
+		4136256C282A2BD300186188 /* CallNeighborView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136256B282A2BD300186188 /* CallNeighborView.swift */; };
+		4136256E282A3B2700186188 /* CallNeighborViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136256D282A3B2700186188 /* CallNeighborViewController.swift */; };
+		41362570282A3DAF00186188 /* DialCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136256F282A3DAF00186188 /* DialCollectionViewCell.swift */; };
 		4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */; };
 		4143293327F8320300DA8D47 /* AppDelegateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143293227F8320300DA8D47 /* AppDelegateNotification.swift */; };
 		4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143293927F848A300DA8D47 /* Dictionary.Extension.swift */; };
@@ -262,6 +265,9 @@
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		412FC54627D74529001050E9 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
+		4136256B282A2BD300186188 /* CallNeighborView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallNeighborView.swift; sourceTree = "<group>"; };
+		4136256D282A3B2700186188 /* CallNeighborViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallNeighborViewController.swift; sourceTree = "<group>"; };
+		4136256F282A3DAF00186188 /* DialCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialCollectionViewCell.swift; sourceTree = "<group>"; };
 		4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInputViewController.swift; sourceTree = "<group>"; };
 		4143293127F82AEA00DA8D47 /* Work.AJ.SMRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Work.AJ.SMRelease.entitlements; sourceTree = "<group>"; };
 		4143293227F8320300DA8D47 /* AppDelegateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateNotification.swift; sourceTree = "<group>"; };
@@ -550,6 +556,39 @@
 				41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		41362567282A2B7300186188 /* CallNeighbor */ = {
+			isa = PBXGroup;
+			children = (
+				4136256A282A2BB000186188 /* Controller */,
+				41362568282A2BA400186188 /* View */,
+			);
+			path = CallNeighbor;
+			sourceTree = "<group>";
+		};
+		41362568282A2BA400186188 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4136256B282A2BD300186188 /* CallNeighborView.swift */,
+				4136256F282A3DAF00186188 /* DialCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4136256A282A2BB000186188 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4136256D282A3B2700186188 /* CallNeighborViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		41362571282A5EBD00186188 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notice;
 			sourceTree = "<group>";
 		};
 		416F2DF2279BAF66004E5AD9 = {
@@ -934,6 +973,8 @@
 		416F2EBB27BA46F1004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				41362571282A5EBD00186188 /* Notice */,
+				41362567282A2B7300186188 /* CallNeighbor */,
 				410A108827F2FF940059B2C3 /* UserProfile */,
 				41985F3C27D08FA600E02A9A /* VisitorRecord */,
 				41C3502D27CEF8CC006E440F /* OpenDoorSetting */,
@@ -1998,6 +2039,7 @@
 				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
 				41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */,
 				419AD6BC2805084E00C902B8 /* NComDTU.swift in Sources */,
+				4136256C282A2BD300186188 /* CallNeighborView.swift in Sources */,
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
 				410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
@@ -2036,6 +2078,7 @@
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
 				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
 				41067672281138F10011AA40 /* Sequence.Extension.swift in Sources */,
+				41362570282A3DAF00186188 /* DialCollectionViewCell.swift in Sources */,
 				4143293327F8320300DA8D47 /* AppDelegateNotification.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */,
@@ -2073,6 +2116,7 @@
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
 				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
+				4136256E282A3B2700186188 /* CallNeighborViewController.swift in Sources */,
 				419AD6AA27FED04300C902B8 /* ElevatorConfiguration.swift in Sources */,
 				4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */,
 				4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */,
