@@ -108,7 +108,7 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     let vc = FaceListViewController()
                     vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
-                case .memeberManager:                    
+                case .memeberManager:
                     let vc = MemberListViewController()
                     vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -131,6 +131,9 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                 case .activateCard:
                     break
                 case .contactProperty:
+                    let vc = PropertyContactViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
                     break
                 default:
                     break

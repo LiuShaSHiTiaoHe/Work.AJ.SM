@@ -19,6 +19,8 @@ typealias UnitInCellListCompletion = (([UserUnitModel]) -> Void)
 typealias VisitorListCompletion = (([VisitorModel]) -> Void)
 typealias MyUnitGuestCompletion = (([UnitGuestModel]) -> Void)
 
+typealias PropertyContactCompletion = (([PropertyContactModel]) -> Void)
+
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
@@ -423,5 +425,17 @@ extension MineRepository {
         if nameString.hasPrefix("地") {return "di"}
         if nameString.hasPrefix("重") {return "chong"}
         return pinyinString
+    }
+}
+
+extension MineRepository {
+    func getPropertyContact(completion: @escaping PropertyContactCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
+            MineAPI.propertyContactList(communityID: communityID).request(modelType: [PropertyContactModel].self, cacheType: .ignoreCache, showError: true) { models, response in
+                completion(models)
+            } failureCallback: { response in
+                completion([])
+            }
+        }
     }
 }
