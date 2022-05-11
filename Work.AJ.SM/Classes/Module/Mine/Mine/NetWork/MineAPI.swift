@@ -30,6 +30,10 @@ enum MineAPI {
     case getMyUnitGuest(userID: String, unitID: String, currentPage: String, showCount: String)
     case searchUnit(name: String)
     case updateNotificationStatus(userID: String, status: String)
+    case findUnitAvliable(communityID: String, blockNo: String, unitNo: String, cellID: String)
+    case videoCallNotificationPush(mobile: String)
+    case propertyContactList(communityID: String)
+    case getUserMessageList(userID: String, currentPage: String, showCount: String)
 }
 
 extension MineAPI: TargetType {
@@ -83,6 +87,14 @@ extension MineAPI: TargetType {
             return APIs.searchUnitWithName
         case .updateNotificationStatus:
             return APIs.updateNotificationStatus
+        case .findUnitAvliable:
+            return APIs.findUnit
+        case .videoCallNotificationPush:
+            return APIs.videoCallPushNotice
+        case .propertyContactList:
+            return APIs.propertyContactList
+        case .getUserMessageList:
+            return APIs.messageList
         }
     }
     
@@ -147,6 +159,14 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYNAME_SER": name, "currentPage": "1", "showCount": "20"].ekey("currentPage"), encoding: URLEncoding.default)
         case let .updateNotificationStatus(userID, status):
             return .requestParameters(parameters: ["USERID": userID, "STATUS": status].ekey("USERID"), encoding: URLEncoding.default)
+        case let .findUnitAvliable(communityID, blockNo, unitNo, cellID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKNO": blockNo, "UNITNO": unitNo, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .videoCallNotificationPush(mobile):
+            return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
+        case let .propertyContactList(communityID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getUserMessageList(userID, currentPage, showCount):
+            return .requestParameters(parameters: ["USERID": userID, "appPage": currentPage, "appPageNum": showCount, "ifApp": "1"].ekey("USERID"), encoding: URLEncoding.default)
         }
     }
     

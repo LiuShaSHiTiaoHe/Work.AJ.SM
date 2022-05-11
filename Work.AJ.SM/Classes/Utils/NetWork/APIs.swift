@@ -22,7 +22,8 @@ final class APIs {
     static let advertisement = "appcity/getAdByPosition.do"
     static let notificationStatus = "appcity/getMyNoDisturbTime.do"
     static let updateNotificationStatus = "appcity/addMyNoDisturbTime.do"
-    
+    static let propertyContactList = "appcity/getContact.do"
+    static let messageList = "appcity/getMyMessage.do"
     // MARK: - 用户鉴权
     static let login = "appcity/login.do"
     static let regist = "appcity/register.do"

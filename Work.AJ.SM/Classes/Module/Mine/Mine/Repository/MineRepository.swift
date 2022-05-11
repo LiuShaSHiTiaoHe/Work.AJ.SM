@@ -19,6 +19,10 @@ typealias UnitInCellListCompletion = (([UserUnitModel]) -> Void)
 typealias VisitorListCompletion = (([VisitorModel]) -> Void)
 typealias MyUnitGuestCompletion = (([UnitGuestModel]) -> Void)
 
+typealias PropertyContactCompletion = (([PropertyContactModel]) -> Void)
+typealias MessagesCompletion = (([MessageModel]) -> Void)
+typealias CallNeighborFindUnitCompletion = (([String], String) -> Void)
+
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
@@ -116,16 +120,25 @@ class MineRepository: NSObject {
                 allModules = allModules.filter { $0.name != MineModuleType.memeberManager.rawValue }
             }
             // MARK: - 没有邀请访客模块。隐藏访客记录
-            if let unit = HomeRepository.shared.getCurrentUnit() {
-                let homeModules = HomeRepository.shared.filterHomePageModules(unit)
-                if let _ = homeModules.first(where: { module in
-                    module.tag == "MOUDLE17"
-                }){
-                    
-                }else{
-                    allModules = allModules.filter { $0.name != MineModuleType.visitorRecord.rawValue}
-                }
+            if !HomeRepository.shared.isVisitorRecordEnable(unit){
+                allModules = allModules.filter { $0.name != MineModuleType.visitorRecord.rawValue}
             }
+            // MARK: - 判断是否支持人脸认证
+            if !HomeRepository.shared.isFaceCertificationEnable(unit){
+                allModules = allModules.filter {$0.name != MineModuleType.faceCertification.rawValue}
+            }
+            // MARK: - 是否支持户户通
+            if !HomeRepository.shared.isCallOtherUserEnable(unit) {
+                allModules = allModules.filter { $0.name != MineModuleType.videoCall.rawValue}
+            }
+            // MARK: - 是否支持呼叫物业
+            if !HomeRepository.shared.isContactPropertyEnable(unit) {
+                allModules = allModules.filter { $0.name != MineModuleType.contactProperty.rawValue}
+            }
+            // MARK: - 暂时不支持激活蓝牙卡
+            allModules = allModules.filter { $0.name != MineModuleType.activateCard.rawValue}
+
+            
             if let otherUsed = unit.otherused, otherUsed == 1 {
                 return allModules.filter{$0.isOtherUsed}
             }else{
@@ -149,6 +162,8 @@ class MineRepository: NSObject {
             return modules.filter{$0.destination == .mine_0}.count
         case 1:
             return modules.filter{$0.destination == .mine_1}.count
+        case 2:
+            return modules.filter{$0.destination == .mine_2}.count
         default:
             return 0
         }
@@ -160,6 +175,8 @@ class MineRepository: NSObject {
             return modules.filter{$0.destination == .mine_0}.sorted { $0.index < $1.index}[indexPath.row]
         case 1:
             return modules.filter{$0.destination == .mine_1}.sorted { $0.index < $1.index}[indexPath.row]
+        case 2:
+            return modules.filter{$0.destination == .mine_2}.sorted { $0.index < $1.index}[indexPath.row]
         default:
             return nil
         }
@@ -411,4 +428,57 @@ extension MineRepository {
         if nameString.hasPrefix("重") {return "chong"}
         return pinyinString
     }
+}
+
+extension MineRepository {
+    
+    // MARK: - 获取物业联系方式
+    func getPropertyContact(completion: @escaping PropertyContactCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
+            MineAPI.propertyContactList(communityID: communityID).request(modelType: [PropertyContactModel].self, cacheType: .ignoreCache, showError: true) { models, response in
+                completion(models)
+            } failureCallback: { response in
+                completion([])
+            }
+        }
+    }
+
+    // MARK: - 获取消息列表
+    func getMessages(userID: String, page: String, size: String, completion: @escaping MessagesCompletion) {
+        MineAPI.getUserMessageList(userID: userID, currentPage: page, showCount: size).request(modelType: [MessageModel].self, cacheType: .ignoreCache, showError: true) { models, response in
+            completion(models)
+        } failureCallback: { response in
+            completion([])
+        }
+    }
+    
+}
+
+extension MineRepository {
+    // MARK: - 户户通
+    func validationNumber(completion: @escaping CallNeighborFindUnitCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockNo = unit.blockno, let unitNo = unit.unitno, let cellID = unit.cellid?.jk.intToString {
+            MineAPI.findUnitAvliable(communityID: communityID, blockNo: blockNo, unitNo: unitNo, cellID: cellID).defaultRequest(cacheType: .ignoreCache, showError: true) { jsonData in
+                if let dataDic = jsonData["data"].dictionaryObject{
+                    var macString = ""
+                    var mobiles: [String] = []
+                    if let locks = dataDic["LOCKS"] as? Array<Dictionary<String, Any>> {
+                        if locks.count > 0 {
+                            let macDic = locks[0]
+                            if let lockMac = macDic["LOCKMAC"] as? String {
+                                macString = lockMac
+                            }
+                        }
+                    }
+                    if let mobilesString = dataDic["CALLORDERMOBILE"] as? String{
+                        mobiles = mobilesString.components(separatedBy: "|")
+                    }
+                    completion(mobiles, macString)
+                }
+            } failureCallback: { response in
+                completion([], "")
+            }
+        }
+    }
+    
 }

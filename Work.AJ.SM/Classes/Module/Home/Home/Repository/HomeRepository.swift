@@ -364,9 +364,82 @@ extension HomeRepository {
         if unit.moudle16 == "T" {
             result.append("MOUDLE16")
         }
+        // MARK: - module17访客二维码，myset7 开门密码,根据这两个判断是否显示邀请访客功能。若只有一个开启，则点击邀请访客后，只有二维码或者密码一个对应选项。
         if unit.moudle17 == "T" {
             result.append("MOUDLE17")
+        }else {
+            if isVisitorPasswordEnable(unit) {
+                result.append("MOUDLE17")
+            }
         }
         return result
+    }
+}
+
+extension HomeRepository {
+    // MARK: - 访客密码功能是否支持
+    func isVisitorPasswordEnable(_ unit: UnitModel) -> Bool {
+        if let myset7 = unit.myset7, myset7 == "T" {
+            return true
+        }
+        return false
+    }
+    // MARK: - 访客二维码是否支持
+    func isVisitorQrCodeEnable(_ unit: UnitModel) -> Bool {
+        if let module17 = unit.moudle17, module17 == "T"{
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 是否允许访客呼叫到手机
+    func isVisitorCallUserMobileEnable(_ unit: UnitModel) -> Bool {
+        if let myset8 = unit.myset8, myset8 == "T" {
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 人脸认证是否支持
+    func isFaceCertificationEnable(_ unit: UnitModel) -> Bool {
+        if let myset1 = unit.myset1, myset1 == "T" {
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 访客记录是否支持
+    func isVisitorRecordEnable(_ unit: UnitModel) -> Bool {
+        if isVisitorPasswordEnable(unit){
+            return true
+        }
+        if isVisitorQrCodeEnable(unit){
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 户户通是否支持
+    func isCallOtherUserEnable(_ unit: UnitModel) -> Bool {
+        if let myset2 = unit.myset2, myset2 == "T" {
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 联系物业是否支持
+    func isContactPropertyEnable(_ unit: UnitModel) -> Bool {
+        if let myset9 = unit.myset9, myset9 == "T" {
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - 消息是否支持
+    func isNoticeMessageEnable(_ unit: UnitModel) -> Bool {
+        if let myset4 = unit.myset4, myset4 == "T" {
+            return true
+        }
+        return false
     }
 }

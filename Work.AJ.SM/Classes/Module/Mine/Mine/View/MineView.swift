@@ -19,6 +19,7 @@ class MineView: BaseView {
         let view = UIImageView()
         view.image = R.image.defaultavatar()
         view.layer.corner(30)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -34,6 +35,12 @@ class MineView: BaseView {
         view.font = k18Font
         view.textColor = R.color.whiteColor()
         return view
+    }()
+    
+    lazy var messageButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(R.image.mine_notice_icon()!, for: .normal)
+        return button
     }()
     
     lazy var tableView: UITableView = {
@@ -58,7 +65,7 @@ class MineView: BaseView {
         headerView.addSubview(avatar)
         headerView.addSubview(nameLabel)
         headerView.addSubview(phoneLabel)
-
+        headerView.addSubview(messageButton)
         self.addSubview(tableView)
         
         headerView.snp.makeConstraints { make in
@@ -84,6 +91,13 @@ class MineView: BaseView {
             make.height.equalTo(30)
             make.right.equalToSuperview().offset(-kMargin)
             make.bottom.equalTo(avatar.snp.bottom)
+        }
+        
+        messageButton.snp.makeConstraints { make in
+            make.width.equalTo(30)
+            make.height.equalTo(30)
+            make.right.equalToSuperview().offset(-kMargin)
+            make.centerY.equalTo(avatar)
         }
         
         tableView.snp.makeConstraints { make in

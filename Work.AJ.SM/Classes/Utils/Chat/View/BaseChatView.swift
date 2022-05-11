@@ -141,25 +141,25 @@ class BaseChatView: BaseView {
         refuseButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.right.equalTo(self.snp.centerX).offset(-80)
+            make.right.equalTo(self.snp.centerX).offset(-50)
         }
         
         responseButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.left.equalTo(self.snp.centerX).offset(80)
+            make.left.equalTo(self.snp.centerX).offset(50)
         }
         
         hangupButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.centerX.equalToSuperview().offset(-80)
+            make.centerX.equalToSuperview().offset(-50)
         }
         
         openDoorButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.centerX.equalToSuperview().offset(80)
+            make.centerX.equalToSuperview().offset(50)
         }
     }
     

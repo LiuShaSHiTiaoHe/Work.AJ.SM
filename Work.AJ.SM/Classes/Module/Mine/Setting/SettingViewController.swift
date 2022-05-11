@@ -67,7 +67,10 @@ class SettingViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "通用设置"
         headerView.titleLabel.textColor = R.color.maintextColor()
-        
+        // MARK: - 允许访客呼叫到手机
+        if let unit = HomeRepository.shared.getCurrentUnit() {
+            ud.allowVisitorCall = HomeRepository.shared.isVisitorCallUserMobileEnable(unit)
+        }
         tableView.delegate = self
         tableView.dataSource = self
     }

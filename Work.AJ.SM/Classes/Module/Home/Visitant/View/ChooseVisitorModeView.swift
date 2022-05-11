@@ -7,16 +7,123 @@
 
 import UIKit
 import SwiftEntryKit
+import SnapKit
 
 protocol ChooseVisitorModeDelegate: NSObjectProtocol {
     func qrcode()
     func password()
 }
 
-class ChooseVisitorModeView: UIView {
+class ChooseVisitorModeView: BaseView {
 
     weak var delegate: ChooseVisitorModeDelegate?
+    private var isPasswordEnable: Bool = false
+    private var isQRCodeEnable: Bool = false
     
+    @objc
+    func closeAction() {
+        SwiftEntryKit.dismiss()
+    }
+    
+    @objc
+    func chooseQrcode() {
+        delegate?.qrcode()
+    }
+    
+    @objc
+    func choosePassword() {
+        delegate?.password()
+    }
+    
+    override func initializeView() {
+
+        if let unit = HomeRepository.shared.getCurrentUnit() {
+            isPasswordEnable = HomeRepository.shared.isVisitorPasswordEnable(unit)
+            isQRCodeEnable = HomeRepository.shared.isVisitorQrCodeEnable(unit)
+        }
+        if !isPasswordEnable && !isQRCodeEnable {
+            return
+        }
+        self.addSubview(closeButton)
+        self.addSubview(titleLabel)
+        self.addSubview(qrcodeButton)
+        self.addSubview(qrcodeTitle)
+        self.addSubview(passwordButton)
+        self.addSubview(passwordTitle)
+        
+        closeButton.snp.makeConstraints { make in
+            make.width.height.equalTo(30)
+            make.top.equalToSuperview().offset(kMargin/2)
+            make.right.equalToSuperview().offset(-kMargin/2)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(kMargin)
+            make.right.equalToSuperview().offset(-kMargin)
+            make.top.equalTo(closeButton.snp.bottom)
+            make.height.equalTo(20)
+        }
+        
+        if isPasswordEnable && isQRCodeEnable {
+            qrcodeButton.snp.makeConstraints { make in
+                make.width.height.equalTo(65)
+                make.centerX.equalTo(self.snp.centerX).dividedBy(2)
+                make.centerY.equalToSuperview()
+            }
+            
+            qrcodeTitle.snp.makeConstraints { make in
+                make.centerX.equalTo(qrcodeButton)
+                make.top.equalTo(qrcodeButton.snp.bottom).offset(kMargin/2)
+                make.height.equalTo(30)
+            }
+            
+            passwordButton.snp.makeConstraints { make in
+                make.centerX.equalTo(self.snp.centerX).multipliedBy(1.5)
+                make.width.height.equalTo(65)
+                make.top.equalTo(qrcodeButton)
+            }
+            
+            passwordTitle.snp.makeConstraints { make in
+                make.centerX.equalTo(passwordButton)
+                make.top.equalTo(passwordButton.snp.bottom).offset(kMargin/2)
+                make.height.equalTo(30)
+            }
+        }else{
+            if !isPasswordEnable {
+                passwordButton.isHidden = true
+                passwordTitle.isHidden = true
+                qrcodeButton.snp.makeConstraints { make in
+                    make.width.height.equalTo(65)
+                    make.centerX.equalTo(self.snp.centerX)
+                    make.centerY.equalToSuperview()
+                }
+                
+                qrcodeTitle.snp.makeConstraints { make in
+                    make.centerX.equalTo(qrcodeButton)
+                    make.top.equalTo(qrcodeButton.snp.bottom).offset(kMargin/2)
+                    make.height.equalTo(30)
+                }
+                
+            }else if !isQRCodeEnable {
+                qrcodeButton.isHidden = true
+                qrcodeTitle.isHidden = true
+                
+                passwordButton.snp.makeConstraints { make in
+                    make.width.height.equalTo(65)
+                    make.centerX.equalTo(self.snp.centerX)
+                    make.centerY.equalToSuperview()
+                }
+                
+                passwordTitle.snp.makeConstraints { make in
+                    make.centerX.equalTo(passwordButton)
+                    make.top.equalTo(passwordButton.snp.bottom).offset(kMargin/2)
+                    make.height.equalTo(30)
+                }
+            }
+        }
+        
+    }
+
     lazy var closeButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.common_close_black(), for: .normal)
@@ -46,6 +153,7 @@ class ChooseVisitorModeView: UIView {
         view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.textAlignment = .center
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
     
@@ -62,81 +170,8 @@ class ChooseVisitorModeView: UIView {
         view.font = k14Font
         view.textColor = R.color.maintextColor()
         view.textAlignment = .center
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeView()
-    }
-    
-    @objc
-    func closeAction() {
-        SwiftEntryKit.dismiss()
-    }
-    
-    @objc
-    func chooseQrcode() {
-        delegate?.qrcode()
-    }
-    
-    @objc
-    func choosePassword() {
-        delegate?.password()
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func initializeView() {
-
-        self.addSubview(closeButton)
-        self.addSubview(titleLabel)
-        self.addSubview(qrcodeButton)
-        self.addSubview(qrcodeTitle)
-        self.addSubview(passwordButton)
-        self.addSubview(passwordTitle)
         
-        closeButton.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
-            make.top.equalToSuperview().offset(kMargin/2)
-            make.right.equalToSuperview().offset(-kMargin/2)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin)
-            make.right.equalToSuperview().offset(-kMargin)
-            make.top.equalTo(closeButton.snp.bottom)
-            make.height.equalTo(20)
-        }
-        
-        qrcodeButton.snp.makeConstraints { make in
-            make.width.height.equalTo(65)
-            make.centerX.equalTo(self.snp.centerX).dividedBy(2)
-            make.centerY.equalToSuperview()
-        }
-        
-        qrcodeTitle.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.right.equalTo(self.snp.centerX)
-            make.top.equalTo(qrcodeButton.snp.bottom).offset(kMargin/2)
-            make.height.equalTo(30)
-        }
-        
-        passwordButton.snp.makeConstraints { make in
-            make.centerX.equalTo(self.snp.centerX).multipliedBy(1.5)
-            make.width.height.equalTo(65)
-            make.top.equalTo(qrcodeButton)
-        }
-        
-        passwordTitle.snp.makeConstraints { make in
-            make.left.equalTo(self.snp.centerX)
-            make.right.equalToSuperview()
-            make.top.equalTo(passwordButton.snp.bottom).offset(kMargin/2)
-            make.height.equalTo(30)
-        }
-    }
-
 }

@@ -23,6 +23,15 @@
 		412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54127D73260001050E9 /* SelectUnitCell.swift */; };
 		412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54427D73D0B001050E9 /* CommunityModel.swift */; };
 		412FC54727D74529001050E9 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412FC54627D74529001050E9 /* BlockModel.swift */; };
+		4136256C282A2BD300186188 /* CallNeighborView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136256B282A2BD300186188 /* CallNeighborView.swift */; };
+		4136256E282A3B2700186188 /* CallNeighborViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136256D282A3B2700186188 /* CallNeighborViewController.swift */; };
+		41362570282A3DAF00186188 /* DialCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136256F282A3DAF00186188 /* DialCollectionViewCell.swift */; };
+		41362574282A65A100186188 /* PropertyContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41362573282A65A100186188 /* PropertyContactViewController.swift */; };
+		41362577282A672C00186188 /* PropertyContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41362576282A672C00186188 /* PropertyContactModel.swift */; };
+		4136257A282A6FB100186188 /* PropertyContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41362579282A6FB100186188 /* PropertyContactTableViewCell.swift */; };
+		4136257D282A769200186188 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136257C282A769200186188 /* MessageModel.swift */; };
+		41362580282A782C00186188 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4136257F282A782C00186188 /* MessageViewController.swift */; };
+		41362582282A78DF00186188 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41362581282A78DF00186188 /* MessageTableViewCell.swift */; };
 		4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */; };
 		4143293327F8320300DA8D47 /* AppDelegateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143293227F8320300DA8D47 /* AppDelegateNotification.swift */; };
 		4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143293927F848A300DA8D47 /* Dictionary.Extension.swift */; };
@@ -264,6 +273,15 @@
 		412FC54127D73260001050E9 /* SelectUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUnitCell.swift; sourceTree = "<group>"; };
 		412FC54427D73D0B001050E9 /* CommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModel.swift; sourceTree = "<group>"; };
 		412FC54627D74529001050E9 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
+		4136256B282A2BD300186188 /* CallNeighborView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallNeighborView.swift; sourceTree = "<group>"; };
+		4136256D282A3B2700186188 /* CallNeighborViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallNeighborViewController.swift; sourceTree = "<group>"; };
+		4136256F282A3DAF00186188 /* DialCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialCollectionViewCell.swift; sourceTree = "<group>"; };
+		41362573282A65A100186188 /* PropertyContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyContactViewController.swift; sourceTree = "<group>"; };
+		41362576282A672C00186188 /* PropertyContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyContactModel.swift; sourceTree = "<group>"; };
+		41362579282A6FB100186188 /* PropertyContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyContactTableViewCell.swift; sourceTree = "<group>"; };
+		4136257C282A769200186188 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		4136257F282A782C00186188 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		41362581282A78DF00186188 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		4143292F27F5485F00DA8D47 /* UserProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInputViewController.swift; sourceTree = "<group>"; };
 		4143293127F82AEA00DA8D47 /* Work.AJ.SMRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Work.AJ.SMRelease.entitlements; sourceTree = "<group>"; };
 		4143293227F8320300DA8D47 /* AppDelegateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateNotification.swift; sourceTree = "<group>"; };
@@ -552,6 +570,84 @@
 				419E2DE127D8A63E00B60633 /* CellModel.swift */,
 				419E2DE327D984E300B60633 /* UserUnitModel.swift */,
 				41B7DBD027D9E88F002A23D0 /* HouseCertificationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		41362567282A2B7300186188 /* CallNeighbor */ = {
+			isa = PBXGroup;
+			children = (
+				4136256A282A2BB000186188 /* Controller */,
+				41362568282A2BA400186188 /* View */,
+			);
+			path = CallNeighbor;
+			sourceTree = "<group>";
+		};
+		41362568282A2BA400186188 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4136256B282A2BD300186188 /* CallNeighborView.swift */,
+				4136256F282A3DAF00186188 /* DialCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4136256A282A2BB000186188 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4136256D282A3B2700186188 /* CallNeighborViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		41362571282A5EBD00186188 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				4136257E282A769500186188 /* Model */,
+				4136257B282A767A00186188 /* View */,
+				4136257F282A782C00186188 /* MessageViewController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		41362572282A658500186188 /* PropertyContact */ = {
+			isa = PBXGroup;
+			children = (
+				41362578282A6F9C00186188 /* View */,
+				41362575282A671300186188 /* Model */,
+				41362573282A65A100186188 /* PropertyContactViewController.swift */,
+			);
+			path = PropertyContact;
+			sourceTree = "<group>";
+		};
+		41362575282A671300186188 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41362576282A672C00186188 /* PropertyContactModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		41362578282A6F9C00186188 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41362579282A6FB100186188 /* PropertyContactTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4136257B282A767A00186188 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41362581282A78DF00186188 /* MessageTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4136257E282A769500186188 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4136257C282A769200186188 /* MessageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -940,6 +1036,9 @@
 		416F2EBB27BA46F1004E5AD9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				41362572282A658500186188 /* PropertyContact */,
+				41362571282A5EBD00186188 /* Message */,
+				41362567282A2B7300186188 /* CallNeighbor */,
 				410A108827F2FF940059B2C3 /* UserProfile */,
 				41985F3C27D08FA600E02A9A /* VisitorRecord */,
 				41C3502D27CEF8CC006E440F /* OpenDoorSetting */,
@@ -2002,8 +2101,10 @@
 				416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */,
 				4106767428114BD10011AA40 /* String.Extension.swift in Sources */,
 				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
+				41362574282A65A100186188 /* PropertyContactViewController.swift in Sources */,
 				41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */,
 				419AD6BC2805084E00C902B8 /* NComDTU.swift in Sources */,
+				4136256C282A2BD300186188 /* CallNeighborView.swift in Sources */,
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
 				410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
@@ -2014,6 +2115,7 @@
 				419AD6AE27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift in Sources */,
 				416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */,
 				419E2DE827D9977500B60633 /* HouseCetificationView.swift in Sources */,
+				41362582282A78DF00186188 /* MessageTableViewCell.swift in Sources */,
 				416F2EDB27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift in Sources */,
 				416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */,
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
@@ -2042,6 +2144,7 @@
 				416F2E7127B0BFB5004E5AD9 /* HomePageModule.swift in Sources */,
 				416F2EF927BDE39E004E5AD9 /* MCECollectionViewCell.swift in Sources */,
 				41067672281138F10011AA40 /* Sequence.Extension.swift in Sources */,
+				41362570282A3DAF00186188 /* DialCollectionViewCell.swift in Sources */,
 				4143293327F8320300DA8D47 /* AppDelegateNotification.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */,
@@ -2079,6 +2182,7 @@
 				416F2E4727B0B544004E5AD9 /* Network.swift in Sources */,
 				416F2ED127BCA210004E5AD9 /* ServiceViewController.swift in Sources */,
 				416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */,
+				4136256E282A3B2700186188 /* CallNeighborViewController.swift in Sources */,
 				419AD6AA27FED04300C902B8 /* ElevatorConfiguration.swift in Sources */,
 				4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */,
 				4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */,
@@ -2140,11 +2244,13 @@
 				419AD6B027FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
 				416F2F0F27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift in Sources */,
+				4136257D282A769200186188 /* MessageModel.swift in Sources */,
 				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
 				4173C24027C61DD000B8FBB8 /* MineTableViewCell.swift in Sources */,
 				4173C20927C36FD400B8FBB8 /* QRCodeImageGenerator.swift in Sources */,
 				41B7DBE627E044E8002A23D0 /* SwiftyCamButton.swift in Sources */,
 				4106766E280FD5010011AA40 /* VisitorInvitationRecordViewController.swift in Sources */,
+				41362577282A672C00186188 /* PropertyContactModel.swift in Sources */,
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */,
 				4173C23A27C6192400B8FBB8 /* MineRepository.swift in Sources */,
@@ -2153,6 +2259,7 @@
 				419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */,
 				41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */,
 				41B7DBE527E044E8002A23D0 /* PreviewView.swift in Sources */,
+				41362580282A782C00186188 /* MessageViewController.swift in Sources */,
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
 				419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */,
 				416F2F0827BE46A7004E5AD9 /* SelectElevatorTableViewCell.swift in Sources */,
@@ -2167,6 +2274,7 @@
 				416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */,
 				416F2ED627BCA24F004E5AD9 /* MineViewController.swift in Sources */,
 				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
+				4136257A282A6FB100186188 /* PropertyContactTableViewCell.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
 				41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */,
 				41B4D8542826750A004DFCFC /* Throttler.swift in Sources */,
