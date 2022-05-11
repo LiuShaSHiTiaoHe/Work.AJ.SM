@@ -13,6 +13,7 @@ import JKSwiftExtension
 
 class BaseChatViewController: BaseViewController {
 
+    var name: String?
     // MARK: - 被叫号码
     var kCallee: String!
     // MARK: - 主叫号码
@@ -67,7 +68,11 @@ class BaseChatViewController: BaseViewController {
         NIMAVChatSDK.shared().netCallManager.add(self)
         contentView.isVideoCall = kCallType == .video
         contentView.isCalled = isCalled
-        updateContactName((isCalled ? kCaller: kCallee))
+        if let name = name, !name.isEmpty {
+            updateContactName(name)
+        }else{
+            updateContactName((isCalled ? kCaller: kCallee))
+        }
         if !isCalled {
             ChatRingManager.shared.calling()
             startCall()
@@ -303,11 +308,3 @@ extension BaseChatViewController {
     }
 }
 
-// MARK: - State Function
-extension BaseChatViewController {
-//    func callInit(){}
-//    func callConnecting(){}
-//    func callConnected(){}
-//    func callDisconnected(){}
-//    func callError(_ msg: String){}
-}

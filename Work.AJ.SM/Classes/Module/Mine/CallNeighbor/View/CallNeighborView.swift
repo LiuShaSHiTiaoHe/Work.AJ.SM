@@ -8,16 +8,22 @@
 import UIKit
 import SnapKit
 
+protocol CallNeighborViewDelegate: NSObjectProtocol {
+    func callNeighborWithAddress(_ address: String)
+}
+
 class CallNeighborView: BaseView {
     
     private let dialButtonsStr: [String] = ["1","2","3","4","5","6","7","8","9","*","0","#"]
     private let dialButtonHeight: CGFloat = 80.0
     
+    weak var delegate: CallNeighborViewDelegate?
     
     override func initData() {
         dialPad.delegate = self
         dialPad.dataSource = self
         deleteButton.addTarget(self, action: #selector(deleteStr), for: .touchUpInside)
+        dialButton.addTarget(self, action: #selector(callButtonAction), for: .touchUpInside)
     }
     
     @objc
@@ -25,6 +31,13 @@ class CallNeighborView: BaseView {
         if let inputStr = inputFiled.text, !inputStr.isEmpty {
             let tempString = String(inputStr.dropLast())
             inputFiled.text = tempString
+        }
+    }
+    
+    @objc
+    func callButtonAction() {
+        if let inputStr = inputFiled.text{
+            delegate?.callNeighborWithAddress(inputStr)
         }
     }
     

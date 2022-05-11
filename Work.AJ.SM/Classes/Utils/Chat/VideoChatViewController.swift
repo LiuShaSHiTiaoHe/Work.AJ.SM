@@ -11,6 +11,7 @@ import NIMAVChat
 import SVProgressHUD
 class VideoChatViewController: BaseChatViewController {
     
+    var lockMac: String?
     private var isLockMac: Bool = false
     
     override func initData() {
@@ -67,7 +68,17 @@ extension VideoChatViewController {
                 }
             }
         }else{
-            
+            if let lockMac = lockMac {
+                HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
+                    if !errorMsg.isEmpty {
+                        SVProgressHUD.showError(withStatus: errorMsg)
+                    }else{
+                        SVProgressHUD.showSuccess(withStatus: "开门成功")
+                    }
+                }
+            }else{
+                SVProgressHUD.showInfo(withStatus: "开门数据错误")
+            }
         }
     }
 }

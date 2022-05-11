@@ -21,6 +21,7 @@ typealias MyUnitGuestCompletion = (([UnitGuestModel]) -> Void)
 
 typealias PropertyContactCompletion = (([PropertyContactModel]) -> Void)
 typealias MessagesCompletion = (([MessageModel]) -> Void)
+typealias CallNeighborFindUnitCompletion = (([String], String) -> Void)
 
 
 class MineRepository: NSObject {
@@ -448,6 +449,35 @@ extension MineRepository {
             completion(models)
         } failureCallback: { response in
             completion([])
+        }
+    }
+    
+}
+
+extension MineRepository {
+    // MARK: - 户户通
+    func validationNumber(completion: @escaping CallNeighborFindUnitCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockNo = unit.blockno, let unitNo = unit.unitno, let cellID = unit.cellid?.jk.intToString {
+            MineAPI.findUnitAvliable(communityID: communityID, blockNo: blockNo, unitNo: unitNo, cellID: cellID).defaultRequest(cacheType: .ignoreCache, showError: true) { jsonData in
+                if let dataDic = jsonData["data"].dictionaryObject{
+                    var macString = ""
+                    var mobiles: [String] = []
+                    if let locks = dataDic["LOCKS"] as? Array<Dictionary<String, Any>> {
+                        if locks.count > 0 {
+                            let macDic = locks[0]
+                            if let lockMac = macDic["LOCKMAC"] as? String {
+                                macString = lockMac
+                            }
+                        }
+                    }
+                    if let mobilesString = dataDic["CALLORDERMOBILE"] as? String{
+                        mobiles = mobilesString.components(separatedBy: "|")
+                    }
+                    completion(mobiles, macString)
+                }
+            } failureCallback: { response in
+                completion([], "")
+            }
         }
     }
     
