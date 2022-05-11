@@ -65,8 +65,6 @@ class ChooseVisitorModeView: BaseView {
         }
         
         if isPasswordEnable && isQRCodeEnable {
-
-            
             qrcodeButton.snp.makeConstraints { make in
                 make.width.height.equalTo(65)
                 make.centerX.equalTo(self.snp.centerX).dividedBy(2)

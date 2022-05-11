@@ -78,7 +78,7 @@ class MobileInputView: UIView {
         self.addSubview(textInput)
         self.addSubview(seperator)
         self.addSubview(tipLabel)
-        //5 + 30 + 5 + 1 + 5 + 10  56
+        
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.width.equalTo(60)
