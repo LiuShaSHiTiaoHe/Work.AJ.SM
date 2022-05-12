@@ -12,7 +12,6 @@ class PermissionManager {
     static let shared = PermissionManager()
     
     func requestAllPermission() {
-//        requset([.locationWhenInUse, .bluetooth, .camera, .photoLibrary, .microphone])
         requset([.notification, .bluetooth, .camera, .microphone])
     }
     
@@ -101,8 +100,8 @@ extension PermissionManager: SPPermissionsDataSource {
             description = "使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能"
         case .bluetooth:
             description = "使用蓝牙权限进行远程呼梯，远程开门等功能"
-        case .locationWhenInUse:
-            description = "使用位置信息能更好的定位您所在的小区信息"
+//        case .locationWhenInUse:
+//            description = "使用位置信息能更好的定位您所在的小区信息"
         case .microphone:
             description = "使用麦克风进行音频通话"
         case .notification:

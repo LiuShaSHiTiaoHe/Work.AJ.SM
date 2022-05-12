@@ -26,9 +26,6 @@ let logger: XCGLogger = {
     log.dateFormatter = dateFormatter
     // 开始启用
     log.logAppDetails()
-//    let urls = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-//    let url = urls[urls.endIndex - 1]
-//    let logPath: URL = url.appendingPathComponent(UIApplication.shared.displayName ?? "sm" + "Log.txt")
     let logPath: URL = URL.init(string: FileManager.jk.CachesDirectory() + "Log.txt")!
     log.setup(level: .info, showLogIdentifier: false, showFunctionName: true, showThreadName: false, showLevel: true, showFileNames: true, showLineNumbers: true, showDate: true, writeToFile: logPath, fileLevel: .error)
     return log
