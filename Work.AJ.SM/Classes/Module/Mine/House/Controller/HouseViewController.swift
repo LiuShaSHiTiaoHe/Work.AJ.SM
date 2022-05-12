@@ -152,6 +152,7 @@ extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
         view.font = k12Font
         view.textAlignment = .center
         view.textColor = R.color.secondtextColor()
+        view.backgroundColor = R.color.backgroundColor()
         return view
     }
 

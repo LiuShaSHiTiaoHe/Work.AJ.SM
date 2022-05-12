@@ -23,6 +23,8 @@ typealias PropertyContactCompletion = (([PropertyContactModel]) -> Void)
 typealias MessagesCompletion = (([MessageModel]) -> Void)
 typealias CallNeighborFindUnitCompletion = (([String], String) -> Void)
 
+typealias UserDoNotDisturbStatusCompletion = ((Bool) -> Void)
+
 
 class MineRepository: NSObject {
     static let shared = MineRepository()
@@ -184,20 +186,7 @@ class MineRepository: NSObject {
     
 }
 
-// MARK: - User Setting
-extension MineRepository {
-    func updateNotificationStatus(_ state: String, completion: @escaping DefaultCompletion) {
-        if let userID = ud.userID {
-            MineAPI.updateNotificationStatus(userID: userID, status: state).defaultRequest { jsonData in
-                completion("")
-            } failureCallback: { response in
-                completion(response.message)
-            }
-        }else{
-            completion("数据错误")
-        }
-    }
-}
+
 
 // MARK: - 用户信息
 extension MineRepository {
@@ -481,4 +470,37 @@ extension MineRepository {
         }
     }
     
+    // MARK: - 获取勿扰状态，也就是允许访客呼叫到手机设置的状态
+    func getUserDoNotDisturbStatus(completion: @escaping UserDoNotDisturbStatusCompletion) {
+        if let userID = ud.userID {
+            MineAPI.getUserDoNotDisturbStatus(userID: userID).defaultRequest(cacheType: .ignoreCache, showError: false) { jsonData in
+                if let dataArray = jsonData["data"].array {
+                    if !dataArray.isEmpty {
+                        if let dataDic = dataArray[0].dictionaryObject, let status = dataDic["STATUS"] as? String {
+                            if status == "T"{
+                                completion(true)
+                            }else{
+                                completion(false)
+                            }
+                        }
+                    }
+                }
+            } failureCallback: { response in
+                completion(false)
+            }
+
+        }
+    }
+
+    func updateUserDoNotDisturbStatus(_ state: String, completion: @escaping DefaultCompletion) {
+        if let userID = ud.userID {
+            MineAPI.updateNotificationStatus(userID: userID, status: state).defaultRequest { jsonData in
+                completion("")
+            } failureCallback: { response in
+                completion(response.message)
+            }
+        }else{
+            completion("数据错误")
+        }
+    }
 }

@@ -22,6 +22,7 @@ class MemberListHeaderView: BaseView {
         view.textAlignment = .center
         view.font = k20Font
         view.textColor = R.color.whiteColor()
+        view.numberOfLines = 0
         return view
     }()
     
@@ -39,8 +40,8 @@ class MemberListHeaderView: BaseView {
         locationLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.equalTo(40)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(kMargin/2)
+            make.bottom.equalToSuperview().offset(-kMargin/2)
         }
     }
     

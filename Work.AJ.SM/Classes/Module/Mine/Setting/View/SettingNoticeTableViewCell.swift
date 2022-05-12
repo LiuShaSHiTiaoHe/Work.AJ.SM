@@ -10,10 +10,15 @@ import UIKit
 
 let SettingNoticeTableViewCellIdentifier = "SettingNoticeTableViewCellIdentifier"
 
+protocol SettingNoticeTableViewCellDelegate: NSObjectProtocol {
+    func settingSwitchChanged(_ row: Int, _ status: Bool)
+}
+
 class SettingNoticeTableViewCell: UITableViewCell {
     
     var row: Int?
-
+    var delegate: SettingNoticeTableViewCellDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initializeView()
@@ -70,6 +75,7 @@ class SettingNoticeTableViewCell: UITableViewCell {
     @objc
     private func switchChanged(_ sender: UISwitch) {
         if let row = row {
+            delegate?.settingSwitchChanged(row, sender.isOn)
             switch row {
             case 0:
                 ud.inAppNotification = sender.isOn
@@ -81,7 +87,7 @@ class SettingNoticeTableViewCell: UITableViewCell {
                 ud.ringtoneAvailable = sender.isOn
                 break
             case 3:
-                ud.allowVisitorCall = sender.isOn
+//                ud.allowVisitorCall = sender.isOn
                 break
             default:
                 break

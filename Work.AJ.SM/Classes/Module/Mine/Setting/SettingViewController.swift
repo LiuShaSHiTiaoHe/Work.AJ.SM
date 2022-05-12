@@ -12,67 +12,47 @@ import Siren
 
 class SettingViewController: BaseViewController {
 
-    lazy var headerView: CommonHeaderView = {
-        let view = CommonHeaderView()
-        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
-        view.backgroundColor = R.color.whiteColor()
-        view.titleLabel.text = "通用设置"
-        return view
-    }()
-    
-    lazy var tableView: UITableView = {
-        if #available(iOS 13.0, *) {
-            let view = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-            view.register(SettingNoticeTableViewCell.self, forCellReuseIdentifier: SettingNoticeTableViewCellIdentifier)
-            view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
-            view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
-            view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
-            return view
-        }else{
-            let view = UITableView.init(frame: CGRect.zero, style: .grouped)
-            view.register(SettingNoticeTableViewCell.self, forCellReuseIdentifier: SettingNoticeTableViewCellIdentifier)
-            view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
-            view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
-            view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
-            return view
-        }
-    }()
+    // MARK: - 允许访客呼叫的状态记录
+    private var isAllowVisitorCall: Bool  = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-    
-    override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
-        view.addSubview(headerView)
-        view.addSubview(tableView)
         
-        headerView.snp.makeConstraints { make in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(kTitleAndStateHeight)
-        }
-        
-        tableView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(headerView.snp.bottom)
-        }
-    }
-    
     override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "通用设置"
         headerView.titleLabel.textColor = R.color.maintextColor()
-        // MARK: - 允许访客呼叫到手机
+        // MARK: - 允许访客呼叫到手机 这个选项是否显示
         if let unit = HomeRepository.shared.getCurrentUnit() {
             ud.allowVisitorCall = HomeRepository.shared.isVisitorCallUserMobileEnable(unit)
+            if ud.allowVisitorCall {
+                readAllowVisitorCallStatus()
+            }
         }
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func readAllowVisitorCallStatus() {
+        MineRepository.shared.getUserDoNotDisturbStatus { [weak self] status in
+            guard let self = self else { return }
+            self.isAllowVisitorCall = status
+            self.tableView.reloadData()
+        }
+    }
+    
+    func updateAllowVisitorCallStatus(_ status: Bool) {
+        MineRepository.shared.updateUserDoNotDisturbStatus(status ? "T":"F") { [weak self] errorMsg in
+            guard let self = self else { return }
+            if errorMsg.isEmpty {
+                self.isAllowVisitorCall = status
+                SVProgressHUD.showSuccess(withStatus: "操作成功")
+            }else{
+                SVProgressHUD.showError(withStatus: errorMsg)
+            }
+            self.tableView.reloadData()
+        }
     }
     
     func cleanCache() {
@@ -89,19 +69,7 @@ class SettingViewController: BaseViewController {
     }
     
     func checkUpdate() {
-        MineAPI.versionCheck(type: "ios").defaultRequest { jsonData in
-            if let updateStr = jsonData["data"]["IFFORCE"].string, let effectiveStr = jsonData["data"]["EFFECTIVESTATUS"].string {
-                if effectiveStr == "T" {
-                    if updateStr == "T" {
-                        GDataManager.shared.checkAppStoreVersion(true, .immediately)
-                    }else if updateStr == "F" {
-                        GDataManager.shared.checkAppStoreVersion(false, .immediately)
-                    }
-                }
-            }
-        } failureCallback: { response in
-            SVProgressHUD.showError(withStatus: response.message)
-        }
+        GDataManager.shared.checkAppUpdate()
     }
     
     func supportCall() {
@@ -154,6 +122,64 @@ class SettingViewController: BaseViewController {
         alert.addAction(action: confirmAction)
         alert.show()
     }
+    
+    // MARK: - UI
+    override func initUI() {
+        view.backgroundColor = R.color.backgroundColor()
+        view.addSubview(headerView)
+        view.addSubview(tableView)
+        
+        headerView.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(kTitleAndStateHeight)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(headerView.snp.bottom)
+        }
+    }
+    
+    lazy var headerView: CommonHeaderView = {
+        let view = CommonHeaderView()
+        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
+        view.titleLabel.textColor = R.color.maintextColor()
+        view.backgroundColor = R.color.whiteColor()
+        view.titleLabel.text = "通用设置"
+        return view
+    }()
+    
+    lazy var tableView: UITableView = {
+        if #available(iOS 13.0, *) {
+            let view = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+            view.register(SettingNoticeTableViewCell.self, forCellReuseIdentifier: SettingNoticeTableViewCellIdentifier)
+            view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
+            view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
+            view.separatorStyle = .singleLine
+            view.backgroundColor = R.color.backgroundColor()
+            return view
+        }else{
+            let view = UITableView.init(frame: CGRect.zero, style: .grouped)
+            view.register(SettingNoticeTableViewCell.self, forCellReuseIdentifier: SettingNoticeTableViewCellIdentifier)
+            view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
+            view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
+            view.separatorStyle = .singleLine
+            view.backgroundColor = R.color.backgroundColor()
+            return view
+        }
+    }()
+}
+
+extension SettingViewController: SettingNoticeTableViewCellDelegate {
+    func settingSwitchChanged(_ row: Int, _ status: Bool) {
+        switch row {
+        case 3:
+            updateAllowVisitorCallStatus(status)
+            break
+        default:
+            break
+        }
+    }
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -163,7 +189,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 4
+            if ud.allowVisitorCall {
+                return 4
+            }else{
+                return 3
+            }
         } else if section == 1 {
             return 6
         }
@@ -175,6 +205,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingNoticeTableViewCellIdentifier, for: indexPath) as! SettingNoticeTableViewCell
             cell.selectionStyle = .none
             cell.row = indexPath.row
+            cell.delegate = self
             switch indexPath.row {
             case 0:
                 cell.iconImageView.image = R.image.setting_icon_notification()
@@ -191,7 +222,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             case 3:
                 cell.iconImageView.image = R.image.setting_icon_phone()
                 cell.nameLabel.text = "允许访客呼叫您手机"
-                cell.switchView.isOn = ud.allowVisitorCall
+                cell.switchView.isOn = isAllowVisitorCall
             default:
                 break
             }
