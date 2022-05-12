@@ -42,6 +42,11 @@ class OpenDoorSettingViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(headerView)
@@ -93,6 +98,8 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
                 cell.nameLabel.text = "个人开门密码"
                 if !ud.personalOpenDoorPasswordStatus {
                     cell.tipsLabel.text = "密码还未设置"
+                }else{
+                    cell.tipsLabel.text = ""
                 }
             default:
                 break

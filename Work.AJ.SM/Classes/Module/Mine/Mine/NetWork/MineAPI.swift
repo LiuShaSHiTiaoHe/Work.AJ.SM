@@ -121,7 +121,8 @@ extension MineAPI: TargetType {
         case let .allFace(communityID, blockID, cellID, unitID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .addFace(data):
-            let faceData = MultipartFormData(provider: .data(data.faceData), name: "file", fileName: "\(data.phone).png", mimeType: "image/png")
+            let fileName = "\(data.phone).png"
+            let faceData = MultipartFormData(provider: .data(data.faceData), name: "file", fileName: fileName, mimeType: "image/png")
             let multipartData = [faceData]
             let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version":"3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID].ekey("MOBILE")
             return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
