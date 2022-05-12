@@ -61,7 +61,16 @@ class MineViewController: BaseViewController {
             contentView.nameLabel.text = name
             contentView.phoneLabel.text = mobile.jk.hidePhone()
             if let folderPath = userInfo.folderPath, let avatarUrl = userInfo.HeadImageUrl {
-                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
+                contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil) { result in
+                    switch result {
+                       case .success(let value):
+                        if let imageData = value.image.pngData() {
+                            CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: imageData], key: UserAvatarCacheKey)
+                        }
+                       case .failure(let error):
+                           print("Job failed: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
