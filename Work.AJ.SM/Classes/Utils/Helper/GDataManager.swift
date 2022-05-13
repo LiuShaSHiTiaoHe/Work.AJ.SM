@@ -11,6 +11,7 @@ import Siren
 import NIMSDK
 import AVFoundation
 import SwiftyUserDefaults
+import SVProgressHUD
 import KeychainAccess
 
 class GDataManager: NSObject {
@@ -93,7 +94,24 @@ class GDataManager: NSObject {
     }
     
     // MARK: - 检查更新
-    func checkAppStoreVersion(_ force: Bool, _ frequency: Rules.UpdatePromptFrequency) {
+    func checkAppUpdate() {
+        MineAPI.versionCheck(type: "ios").defaultRequest { jsonData in
+            if let updateStr = jsonData["data"]["IFFORCE"].string, let effectiveStr = jsonData["data"]["EFFECTIVESTATUS"].string {
+                if effectiveStr == "T" {
+                    if updateStr == "T" {
+                        GDataManager.shared.checkAppStoreVersion(true, .immediately)
+                    }else if updateStr == "F" {
+                        GDataManager.shared.checkAppStoreVersion(false, .immediately)
+                    }
+                }
+            }
+        } failureCallback: { response in
+            SVProgressHUD.showError(withStatus: response.message)
+        }
+    }
+    
+    
+    private func checkAppStoreVersion(_ force: Bool, _ frequency: Rules.UpdatePromptFrequency) {
         let siren = Siren.shared
         siren.apiManager = APIManager.init(countryCode: "cn")
         if force {
@@ -111,12 +129,15 @@ class GDataManager: NSObject {
             case .success(let updateResults):
                 logger.info(updateResults.localization)
             case .failure(let error):
-                switch error{
+                switch error {
+                case .appStoreOSVersionUnsupported:
+                    SVProgressHUD.showError(withStatus: "当前手机系统不支持最新版本。")
                 case .noUpdateAvailable:
-                    SVProgressHUD.showInfo(withStatus: "已经是最新版本!")
+                    SVProgressHUD.showSuccess(withStatus: "当前已是最新版本。")
                 default:
-                    logger.info(error.localizedDescription)
+                    SVProgressHUD.showError(withStatus: "检查更新失败。")
                 }
+                logger.info(error.localizedDescription)
             }
         }
     }

@@ -78,7 +78,12 @@ class FaceListViewController: BaseViewController {
     private func reloadData() {
         MineRepository.shared.getFaceList { [weak self] faces in
             guard let `self` = self else { return }
-            self.dataSource = faces
+            if faces.isEmpty {
+                self.dataSource.removeAll()
+                SVProgressHUD.showInfo(withStatus: "暂无数据")
+            }else{
+                self.dataSource = faces
+            }
             self.tableView.reloadData()
         }
     }

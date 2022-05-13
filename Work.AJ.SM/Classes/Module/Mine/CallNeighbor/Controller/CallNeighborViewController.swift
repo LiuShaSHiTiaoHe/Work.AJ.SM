@@ -15,6 +15,7 @@ class CallNeighborViewController: BaseViewController {
     }
     
     override func initData() {
+        contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         contentView.delegate = self
     }
     

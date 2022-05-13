@@ -30,6 +30,7 @@ enum MineAPI {
     case getMyUnitGuest(userID: String, unitID: String, currentPage: String, showCount: String)
     case searchUnit(name: String)
     case updateNotificationStatus(userID: String, status: String)
+    case getUserDoNotDisturbStatus(userID: String)
     case findUnitAvliable(communityID: String, blockNo: String, unitNo: String, cellID: String)
     case videoCallNotificationPush(mobile: String)
     case propertyContactList(communityID: String)
@@ -87,6 +88,8 @@ extension MineAPI: TargetType {
             return APIs.searchUnitWithName
         case .updateNotificationStatus:
             return APIs.updateNotificationStatus
+        case .getUserDoNotDisturbStatus:
+            return APIs.notificationStatus
         case .findUnitAvliable:
             return APIs.findUnit
         case .videoCallNotificationPush:
@@ -118,7 +121,8 @@ extension MineAPI: TargetType {
         case let .allFace(communityID, blockID, cellID, unitID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .addFace(data):
-            let faceData = MultipartFormData(provider: .data(data.faceData), name: "file", fileName: "\(data.phone).png", mimeType: "image/png")
+            let fileName = "\(data.phone).png"
+            let faceData = MultipartFormData(provider: .data(data.faceData), name: "file", fileName: fileName, mimeType: "image/png")
             let multipartData = [faceData]
             let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version":"3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID].ekey("MOBILE")
             return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
@@ -159,6 +163,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYNAME_SER": name, "currentPage": "1", "showCount": "20"].ekey("currentPage"), encoding: URLEncoding.default)
         case let .updateNotificationStatus(userID, status):
             return .requestParameters(parameters: ["USERID": userID, "STATUS": status].ekey("USERID"), encoding: URLEncoding.default)
+        case let .getUserDoNotDisturbStatus(userID):
+            return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
         case let .findUnitAvliable(communityID, blockNo, unitNo, cellID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKNO": blockNo, "UNITNO": unitNo, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .videoCallNotificationPush(mobile):
