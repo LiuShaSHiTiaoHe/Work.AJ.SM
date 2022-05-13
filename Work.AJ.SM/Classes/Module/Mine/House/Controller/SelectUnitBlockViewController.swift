@@ -17,7 +17,6 @@ class SelectUnitBlockViewController: BaseViewController {
             getCityCommunitiesData()
         }
     }
-    private var locationManager: LocationManager!
     private var communityDataSource: [CommunityModel] = []
     private var blockDataSource: [BlockModel] = []
     private var cellDataSource: [CellModel] = []
@@ -58,7 +57,6 @@ class SelectUnitBlockViewController: BaseViewController {
     }
     
     override func initData() {
-        locationManager = LocationManager.shared
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.rightButton.setImage(R.image.common_search_image(), for: .normal)
         headerView.rightButton.isHidden = false
@@ -70,7 +68,6 @@ class SelectUnitBlockViewController: BaseViewController {
         rightTableVeiw.dataSource = self
         locationIndexTips.isUserInteractionEnabled = true
         locationIndexTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
-//        requestUserLocation()
         
         OtherAPI.AmapLocation(key: kAmapKey).defaultRequest { jsonData in
             self.cityName = "南京"
@@ -145,26 +142,6 @@ class SelectUnitBlockViewController: BaseViewController {
         }
     }
     
-    func requestUserLocation() {
-//        PermissionManager.PermissionRequest(.locationWhenInUse) { [weak self] authorized in
-//            guard let self = self else { return }
-//            if authorized {
-//                SVProgressHUD.show()
-//                self.locationManager.requestLocation()
-//                self.locationManager.getCurrentCity = { city in
-//                    SVProgressHUD.dismiss()
-//                    var tempCity = "南京"
-//                    if !city.isEmpty {
-//                        tempCity = city
-//                    }
-//                    self.cityName = tempCity
-//                }
-//            }else{
-//                let city = "南京"
-//                self.cityName = city
-//            }
-//        }
-    }
     
     @objc
     func moveToSelectCity() {

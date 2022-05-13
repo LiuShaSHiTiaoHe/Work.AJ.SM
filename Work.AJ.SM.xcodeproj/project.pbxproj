@@ -189,7 +189,6 @@
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
 		419E2DE827D9977500B60633 /* HouseCetificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE727D9977500B60633 /* HouseCetificationView.swift */; };
 		41A6202E2816723300DE3B54 /* CityTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6202D2816723300DE3B54 /* CityTipsView.swift */; };
-		41AA41A027D5F76B007020AD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA419F27D5F76B007020AD /* LocationManager.swift */; };
 		41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A127D607BC007020AD /* CurrentLocationView.swift */; };
 		41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A427D6F067007020AD /* SectionIndexView.swift */; };
 		41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */; };
@@ -210,6 +209,7 @@
 		41B7DBE827E044E8002A23D0 /* SwiftyCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBE327E044E8002A23D0 /* SwiftyCamViewController.swift */; };
 		41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7DBE927E07912002A23D0 /* AddFaceModel.swift */; };
 		41B8E2DE2823A4CB00F98877 /* ElevatorMaskConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B8E2DD2823A4CB00F98877 /* ElevatorMaskConfigurationViewController.swift */; };
+		41B9CA83282E3098004F87C0 /* ExtralFaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B9CA82282E3098004F87C0 /* ExtralFaceModel.swift */; };
 		41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501627CC5EFB006E440F /* CommonStatusView.swift */; };
 		41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501927CC6B48006E440F /* FaceListViewController.swift */; };
 		41C3501D27CC6E71006E440F /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3501C27CC6E71006E440F /* FaceModel.swift */; };
@@ -448,7 +448,6 @@
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
 		419E2DE727D9977500B60633 /* HouseCetificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationView.swift; sourceTree = "<group>"; };
 		41A6202D2816723300DE3B54 /* CityTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTipsView.swift; sourceTree = "<group>"; };
-		41AA419F27D5F76B007020AD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		41AA41A127D607BC007020AD /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
 		41AA41A427D6F067007020AD /* SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexView.swift; sourceTree = "<group>"; };
 		41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+SectionIndexView.swift"; sourceTree = "<group>"; };
@@ -469,6 +468,7 @@
 		41B7DBE327E044E8002A23D0 /* SwiftyCamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCamViewController.swift; sourceTree = "<group>"; };
 		41B7DBE927E07912002A23D0 /* AddFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFaceModel.swift; sourceTree = "<group>"; };
 		41B8E2DD2823A4CB00F98877 /* ElevatorMaskConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorMaskConfigurationViewController.swift; sourceTree = "<group>"; };
+		41B9CA82282E3098004F87C0 /* ExtralFaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtralFaceModel.swift; sourceTree = "<group>"; };
 		41C3501627CC5EFB006E440F /* CommonStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStatusView.swift; sourceTree = "<group>"; };
 		41C3501927CC6B48006E440F /* FaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceListViewController.swift; sourceTree = "<group>"; };
 		41C3501C27CC6E71006E440F /* FaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -805,7 +805,6 @@
 				416F2E4427B0B514004E5AD9 /* GDataManager.swift */,
 				41558FB327E95D8E002D7BD1 /* CacheManager.swift */,
 				416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */,
-				41AA419F27D5F76B007020AD /* LocationManager.swift */,
 				41558FB727E972F0002D7BD1 /* PermissionManager.swift */,
 				41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */,
 				41B4D85128266042004DFCFC /* DeviceManager.swift */,
@@ -1692,6 +1691,7 @@
 			children = (
 				41C3501C27CC6E71006E440F /* FaceModel.swift */,
 				41B7DBE927E07912002A23D0 /* AddFaceModel.swift */,
+				41B9CA82282E3098004F87C0 /* ExtralFaceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2213,6 +2213,7 @@
 				4173C21B27C4A88500B8FBB8 /* QRCodeInvitationView.swift in Sources */,
 				4173C21F27C4C8D800B8FBB8 /* SetVisitorPasswordView.swift in Sources */,
 				41C3502A27CDB416006E440F /* SettingNoticeTableViewCell.swift in Sources */,
+				41B9CA83282E3098004F87C0 /* ExtralFaceModel.swift in Sources */,
 				41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */,
 				419AD69C27FD382100C902B8 /* CustomButton.swift in Sources */,
 				41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */,
@@ -2239,7 +2240,6 @@
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
 				4173C21927C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift in Sources */,
 				416F2EAC27B60BA4004E5AD9 /* MobileInputView.swift in Sources */,
-				41AA41A027D5F76B007020AD /* LocationManager.swift in Sources */,
 				4173C21727C38BA200B8FBB8 /* TimeSelectCell.swift in Sources */,
 				419AD6B027FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,

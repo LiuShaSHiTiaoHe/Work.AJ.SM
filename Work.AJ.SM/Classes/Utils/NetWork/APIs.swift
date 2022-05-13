@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - 标记是否是生产环境。服务器地址，JPush等
-let isProduction = true
+let isProduction = false
 
 let host = isProduction ? "http://120.27.237.7:9393/": "http://47.111.8.231:9091/"
 let servicePath = "hxcloudplus/"
@@ -77,7 +77,8 @@ final class APIs {
     static let faceFile = "appcity/getFaceFile.do"
     static let addFaceFile = "appcity/addFaceFile.do"
     static let deleteFaceFile = "appcity/delFaceFile.do"
-    
+    static let extralFaceFile = "appcity/getExtraFaceFile"
+    static let syncExtralFaceFile = "appcity/synExtraFaceFile"
     // MARK: - 通话
     static let pushApp = "appDevice/pushApp.do"
     static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"

@@ -32,7 +32,6 @@ target 'Work.AJ.SM' do
   pod 'Siren'
   pod 'DeviceKit', '~> 4.4.0'
 
-  
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
   pod 'SDCycleScrollView', '1.82'
@@ -48,13 +47,11 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/PhotoLibrary'
   pod 'SPPermissions/Notification'
   pod 'SPPermissions/Bluetooth'
-#  pod 'SPPermissions/LocationWhenInUse'
   pod 'SPPermissions/Microphone'
     
   pod 'NIMSDK', '6.1.1'
   pod 'JCore', '2.1.4-noidfa'
   pod 'JPush', '3.2.4-noidfa'
 
-  pod 'WoodPeckeriOS', :configurations => ['Debug']
 end
 

@@ -73,7 +73,6 @@ class UserProfileViewController: BaseViewController {
                     self.loadData()
                 }else{
                     SVProgressHUD.showError(withStatus: "数据错误")
-//                    GDataManager.shared.showLoginView()
                 }
             }
         }else{

@@ -23,7 +23,6 @@ class SelectUnitCityViewController: BaseViewController {
     private var cityNames = Array<String>()
     private var keysArray = Array<String>()
     private var searchResult = Array<String>()
-    private var locationManager: LocationManager!
     
     private var isSearch: Bool = false
 
@@ -32,7 +31,6 @@ class SelectUnitCityViewController: BaseViewController {
     }
     
     override func initData() {
-        locationManager = LocationManager.shared
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         searchView.initViewType(true)
         searchView.delegate = self

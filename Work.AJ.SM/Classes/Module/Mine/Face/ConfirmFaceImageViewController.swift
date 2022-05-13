@@ -10,12 +10,11 @@ import SVProgressHUD
 
 class ConfirmFaceImageViewController: BaseViewController {
         
-    private var userType: String = ""//身份类别 F家属 O业主 R租客
-
+    private var faceType: String = ""//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func initData() {
@@ -46,25 +45,19 @@ class ConfirmFaceImageViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
             return
         }
-       
-        userType = HomeRepository.shared.currentUserType()
-        if userType.isEmpty {
-            SVProgressHUD.showError(withStatus: "用户类型错误")
+               
+        if faceType.isEmpty{
+            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
             return
         }
         
-//        if userType.isEmpty{
-//            SVProgressHUD.showInfo(withStatus: "请选择类型")
-//            return
-//        }
-        
         if let imageData = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile{
-            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID)
+            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
             MineRepository.shared.addFace(model) { errorMsg in
                 if errorMsg.isEmpty {
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
                     SVProgressHUD.dismiss(withDelay: 2) {
-                        self.navigationController?.popToRootViewController(animated: true)
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }else{
                     SVProgressHUD.showError(withStatus: errorMsg)
@@ -108,8 +101,8 @@ class ConfirmFaceImageViewController: BaseViewController {
         faceImageView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
             make.centerX.equalToSuperview()
-            make.width.equalTo(150)
-            make.height.equalTo(200)
+            make.width.equalTo(80)
+            make.height.equalTo(120)
         }
 
         tipsLabel.snp.makeConstraints { make in
@@ -180,7 +173,7 @@ class ConfirmFaceImageViewController: BaseViewController {
 
 extension ConfirmFaceImageViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,14 +216,14 @@ extension ConfirmFaceImageViewController : UITableViewDelegate, UITableViewDataS
 extension ConfirmFaceImageViewController: CommonSelectButtonCellDelegate {
     
     func letfButtonSelected(_ isSelected: Bool) {
-        userType = "O"
+        faceType = "0"
     }
     
     func centerButtonSelected(_ isSelected: Bool) {
-        userType = "F"
+        faceType = "1"
     }
     
     func rightButtonSelected(_ isSelected: Bool) {
-        userType = "R"
+        faceType = "2"
     }
 }

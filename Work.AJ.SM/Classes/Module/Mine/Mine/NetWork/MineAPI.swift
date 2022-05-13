@@ -13,7 +13,9 @@ enum MineAPI {
     case deleteMember(unitID: String, userID: String, memberUserID: String)
     case allFace(communityID: String, blockID: String, cellID: String, unitID: String)
     case addFace(data: AddFaceModel)
-    case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String)
+    case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String, faceID: String)
+    case extralFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
+    case syncExtralFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
     case versionCheck(type: String)
     case deleteAccount(userID: String)
     case ownerOpenDoorPassword(communityID: String, unitID: String, blockID: String, userID: String, phone: String, openDoorPassword: String)
@@ -56,6 +58,10 @@ extension MineAPI: TargetType {
             return APIs.addFaceFile
         case .deleteFace:
             return APIs.deleteFaceFile
+        case .extralFace:
+            return APIs.extralFaceFile
+        case .syncExtralFace:
+            return APIs.syncExtralFaceFile
         case .versionCheck:
             return APIs.versionCheck
         case .deleteAccount:
@@ -119,15 +125,19 @@ extension MineAPI: TargetType {
         case let .deleteMember(unitID, userID, memberUserID):
             return .requestParameters(parameters: ["UNITID": unitID, "USERID": userID, "TARGETUSERID": memberUserID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .allFace(communityID, blockID, cellID, unitID):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "apiVersion": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .addFace(data):
             let fileName = "\(data.phone).png"
             let faceData = MultipartFormData(provider: .data(data.faceData), name: "file", fileName: fileName, mimeType: "image/png")
             let multipartData = [faceData]
-            let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version":"3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID].ekey("MOBILE")
+            let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version":"3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID, "apiVersion": "1", "FACETYPE": data.faceType].ekey("MOBILE")
             return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
-        case let .deleteFace(communityID, blockID, cellID, unitID, imagePath):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "IMAGE": imagePath].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .deleteFace(communityID, blockID, cellID, unitID, imagePath, faceID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "IMAGE": imagePath,"ID": faceID, "apiVersion": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .extralFace(communityID, blockID, cellID, unitID, mobile):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .syncExtralFace(communityID, blockID, cellID, unitID, mobile):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .versionCheck(type):
             return .requestParameters(parameters: ["TYPE": type].ekey("TYPE"), encoding: URLEncoding.default)
         case let .deleteAccount(userID):

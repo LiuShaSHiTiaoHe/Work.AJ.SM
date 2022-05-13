@@ -190,8 +190,6 @@ extension FaceImageViewController: YPImagePickerDelegate {
         config.wordings.next = "完成"
         //colors
         config.colors.tintColor = R.color.blackColor()!
-//        config.colors.defaultNavigationBarColor = R.color.themeColor()!
-//        config.colors.coverSelectorBorderColor = R.color.themeColor()!
         
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self
@@ -200,11 +198,13 @@ extension FaceImageViewController: YPImagePickerDelegate {
             if cancelled {
                 picker.dismiss(animated: true)
             }else{
+                SVProgressHUD.show()
                 if let image = items.singlePhoto?.image {
                     switch self.detect(image) {
                     case 0:
                         SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
                     case 1:
+                        SVProgressHUD.dismiss()
                         picker.dismiss(animated: true) {
                             self.confirmFaceImage(image)
                         }

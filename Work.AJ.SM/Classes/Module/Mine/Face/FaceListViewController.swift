@@ -64,7 +64,6 @@ class FaceListViewController: BaseViewController {
             make.width.equalTo(250)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
         }
-        
     }
     
     override func initData() {
@@ -90,8 +89,46 @@ class FaceListViewController: BaseViewController {
     
     @objc
     func addFaceImage() {
-        let vc = FaceImageViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        getExtralFaceFile()
+    }
+    
+    func getExtralFaceFile() {
+        SVProgressHUD.show()
+        MineRepository.shared.getExtralFace { [weak self] models in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            let data = models.filter{ $0.isValid == "1"}
+            if data.count > 0 {
+                let unitName = HomeRepository.shared.getCurrentHouseName()
+                let alert = UIAlertController.init(title: "人脸图片同步提醒", message: "您在其他小区已上传\(data.count)张人脸图片，是否同步至\(unitName)", preferredStyle: .alert)
+                alert.addAction(action: .init(title: "确定", style: .destructive, handler: { action in
+                    self.syncExtralFaceFile()
+                })).addAction("取消", .cancel) {
+                    let vc = FaceImageViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                alert.show()
+            }else{
+                let vc = FaceImageViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    func syncExtralFaceFile() {
+        SVProgressHUD.show()
+        MineRepository.shared.syncExtralFace { [weak self] errorMsg in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            if errorMsg.isEmpty {
+                SVProgressHUD.showSuccess(withStatus: "同步成功")
+                SVProgressHUD.dismiss(withDelay: 2) {
+                    self.reloadData()
+                }
+            }else{
+                SVProgressHUD.showError(withStatus: errorMsg)
+            }
+        }
     }
     
 }
@@ -121,16 +158,16 @@ extension FaceListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FaceListViewController: FaceTableViewCellDelegate {
     
-    func deleteFace(path: String) {
+    func deleteFace(path: String, faceID: String) {
         let alert = UIAlertController.init(title: "提示", message: "确认删除？", preferredStyle: .alert)
         alert.addAction(action: .init(title: "确定", style: .destructive, handler: { action in
-            self.confirmDeleteFaceAction(path)
+            self.confirmDeleteFaceAction(path, faceID)
         })).addAction(.init(title: "取消", style: .cancel, handler: nil))
         alert.show()
     }
     
-    func confirmDeleteFaceAction(_ path: String) {
-        MineRepository.shared.deleteFace(path) { errorMsg in
+    func confirmDeleteFaceAction(_ path: String, _ faceID: String) {
+        MineRepository.shared.deleteFace(path, faceID) { errorMsg in
             if errorMsg.isEmpty {
                 SVProgressHUD.showSuccess(withStatus: "删除成功")
                 self.reloadData()

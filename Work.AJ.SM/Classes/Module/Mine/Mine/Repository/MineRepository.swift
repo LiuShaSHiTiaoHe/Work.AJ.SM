@@ -11,6 +11,7 @@ import SVProgressHUD
 typealias UnitMembersCompletion = (([MemberModel]) -> Void)
 typealias HouseChooseCompletion = (([UnitModel]) -> Void)
 typealias FaceListCompletion = (([FaceModel]) -> Void)
+typealias ExtralFaceFileCompletion = (([ExtralFaceModel]) -> Void)
 typealias CityListCompletion = ((Dictionary<String, Array<String>>, Array<String>) -> Void)
 typealias CommunityListCompletion = (([CommunityModel]) -> Void)
 typealias BlockListCompletion = (([BlockModel]) -> Void)
@@ -192,9 +193,7 @@ class MineRepository: NSObject {
 extension MineRepository {
     
     func getUserInfo(with userID: String, completion: @escaping DefaultCompletion) {
-        SVProgressHUD.show()
         MineAPI.getUserInfo(userID: userID).defaultRequest(cacheType: .ignoreCache, showError: false) { jsonData in
-            SVProgressHUD.dismiss()
             if let userInfo = jsonData["data"].rawString(), let userModel = UserModel(JSONString: userInfo) {
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
@@ -282,16 +281,40 @@ extension MineRepository {
             }
         }
     }
-    func deleteFace(_ path: String, completion: @escaping DefaultCompletion)  {
+    func deleteFace(_ path: String, _ faceID: String, completion: @escaping DefaultCompletion)  {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString{
             SVProgressHUD.show()
-            MineAPI.deleteFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, imagePath: path).defaultRequest { jsonData in
+            MineAPI.deleteFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, imagePath: path, faceID: faceID).defaultRequest { jsonData in
                 completion("")
             } failureCallback: { response in
                 completion(response.message)
             }
         }else {
             completion("数据完整性错误")
+        }
+    }
+    
+    func getExtralFace(completion: @escaping ExtralFaceFileCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = ud.userMobile {
+            MineAPI.extralFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).request(modelType: [ExtralFaceModel].self, cacheType: .ignoreCache, showError: true) { models, response in
+                completion(models)
+            } failureCallback: { response in
+                completion([])
+            }
+        }else{
+            completion([])
+        }
+    }
+    
+    func syncExtralFace(completion: @escaping DefaultCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = ud.userMobile {
+            MineAPI.syncExtralFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).defaultRequest(cacheType: .ignoreCache, showError: true) { jasonData in
+                completion("")
+            } failureCallback: { response in
+                completion(response.message)
+            }
+        }else{
+            completion("数据错误")
         }
     }
 }

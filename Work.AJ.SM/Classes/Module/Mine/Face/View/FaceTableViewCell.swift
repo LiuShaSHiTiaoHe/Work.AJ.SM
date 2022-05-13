@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FaceTableViewCellDelegate: NSObjectProtocol {
-    func deleteFace(path: String)
+    func deleteFace(path: String, faceID: String)
 }
 
 let FaceTableViewCellIdentifier = "FaceTableViewCellIdentifier"
@@ -19,16 +19,30 @@ class FaceTableViewCell: UITableViewCell {
     
     var faceData: FaceModel? {
         didSet {
-            if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name, let type = faceData.type {
+            if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name, let type = faceData.faceType {
                 nameLabel.text = name
                 faceImage.kf.setImage(with: URL.init(string: url), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
-                roleLabel.text = type
-                if type == "业主"{
-                    roleLabel.backgroundColor = R.color.ownerB_greenColor()
-                    roleLabel.textColor = R.color.owner_greenColor()
+                if type.isEmpty {
+                    roleLabel.isHidden = true
                 }else{
+                    roleLabel.isHidden = false
                     roleLabel.backgroundColor = R.color.familyB_yellowColor()
                     roleLabel.textColor = R.color.family_yellowColor()
+                    switch type {//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
+                    case "0":
+                        roleLabel.text = "本人"
+                        roleLabel.backgroundColor = R.color.ownerB_greenColor()
+                        roleLabel.textColor = R.color.owner_greenColor()
+                    case "1":
+                        roleLabel.text = "父母"
+                    case "2":
+                        roleLabel.text = "子女"
+                    case "3":
+                        roleLabel.text = "亲属"
+                    default:
+                        roleLabel.isHidden = true
+                        break
+                    }
                 }
             }
         }
@@ -41,8 +55,6 @@ class FaceTableViewCell: UITableViewCell {
         bgView.addSubview(nameLabel)
         bgView.addSubview(roleLabel)
         bgView.addSubview(deleteButton)
-        // FIXME: - 暂时隐藏类型
-        roleLabel.isHidden = true
         bgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
@@ -129,6 +141,7 @@ class FaceTableViewCell: UITableViewCell {
         view.textAlignment = .center
         view.clipsToBounds = true
         view.backgroundColor = R.color.ownerB_greenColor()
+        view.text = ""
 //        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -145,8 +158,8 @@ class FaceTableViewCell: UITableViewCell {
     
     @objc
     func deleteAction() {
-        if let faceData = faceData, let image = faceData.image {
-            delegate?.deleteFace(path: image)
+        if let faceData = faceData, let image = faceData.image, let faceID = faceData.faceID?.jk.intToString {
+            delegate?.deleteFace(path: image, faceID: faceID)
         }
     }
 

@@ -22,7 +22,6 @@ class MineViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadUserProfile()
         dataSource = MineRepository.shared.getMineModules()
         contentView.tableView.reloadData()
     }
@@ -32,7 +31,7 @@ class MineViewController: BaseViewController {
         contentView.messageButton.addTarget(self, action: #selector(showMessageView), for: .touchUpInside)
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
-
+        loadUserProfile()
         NotificationCenter.default.addObserver(forName: .kUserUpdateAvatar, object: nil, queue: nil) { [weak self] notification in
             guard let self = self else { return }
             if let avatarDic = CacheManager.normal.fetchCachedWithKey(UserAvatarCacheKey), let avatarData = avatarDic.value(forKey: UserAvatarCacheKey) as? Data, let image = UIImage.init(data: avatarData) {
@@ -65,7 +64,9 @@ class MineViewController: BaseViewController {
                     switch result {
                        case .success(let value):
                         if let imageData = value.image.pngData() {
-                            CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: imageData], key: UserAvatarCacheKey)
+                            DispatchQueue.main.async {
+                                CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: imageData], key: UserAvatarCacheKey)
+                            }
                         }
                        case .failure(let error):
                            print("Job failed: \(error.localizedDescription)")

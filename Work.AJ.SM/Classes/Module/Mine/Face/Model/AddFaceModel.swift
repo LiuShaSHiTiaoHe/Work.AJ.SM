@@ -16,4 +16,5 @@ struct AddFaceModel {
     var blockID: String = ""
     var unitID: String = ""
     var cellID: String = ""
+    var faceType: String = ""
 }
