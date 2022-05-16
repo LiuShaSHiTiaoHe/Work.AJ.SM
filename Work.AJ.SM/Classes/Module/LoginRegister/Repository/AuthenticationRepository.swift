@@ -12,9 +12,9 @@ typealias LoginCompletion = ((_ errorMsg: String?) -> Void)
 
 class AuthenticationRepository: NSObject {
     static let shared = AuthenticationRepository()
-    
+
     func login(mobile: String, password: String, completion: @escaping LoginCompletion) {
-        AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData  in
+        AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData in
             if let userData = JsonData["map"].rawString(), let userModel = UserModel(JSONString: userData) {
                 ud.loginState = true
                 ud.username = mobile
@@ -26,9 +26,11 @@ class AuthenticationRepository: NSObject {
                 GDataManager.shared.setupDataBase()
                 GDataManager.shared.loginNIMSDK()
                 GDataManager.shared.pushSetAlias(mobile)
-                RealmTools.add(userModel, update: .modified) {}
+                RealmTools.add(userModel, update: .modified) {
+                }
                 if let data = JsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
-                    RealmTools.addList(units, update: .modified) {}
+                    RealmTools.addList(units, update: .modified) {
+                    }
                 }
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -36,15 +38,15 @@ class AuthenticationRepository: NSObject {
                     appDelegate.resetRootViewController()
                 }
                 completion(nil)
-            }else{
+            } else {
                 completion("数据解析错误")
             }
-            
+
         } failureCallback: { response in
             completion(response.message)
         }
     }
-    
+
     func autoLogin(mobile: String, password: String, completion: @escaping DefaultCompletion) {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { jsonData in
             if let userInfo = jsonData["map"].rawString(), let userModel = UserModel(JSONString: userInfo) {
@@ -55,7 +57,8 @@ class AuthenticationRepository: NSObject {
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
                 ud.NIMToken = userModel.loginToken
-                RealmTools.add(userModel, update: .modified) {}
+                RealmTools.add(userModel, update: .modified) {
+                }
                 completion("")
             }
         } failureCallback: { response in
@@ -63,7 +66,7 @@ class AuthenticationRepository: NSObject {
         }
 
     }
-    
+
     func register(mobile: String, passWord: String, code: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.regist(mobile: mobile, code: code, passWord: passWord).defaultRequest { jsonData in
             completion(nil)
@@ -71,8 +74,8 @@ class AuthenticationRepository: NSObject {
             completion(response.message)
         }
     }
-    
-    
+
+
     func sendMessageCode(_ mobile: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.getMessageCode(mobile: mobile).defaultRequest { jsonData in
             completion(nil)
@@ -80,7 +83,7 @@ class AuthenticationRepository: NSObject {
             completion(response.message)
         }
     }
-    
+
     func checkMessageCode(mobile: String, code: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.checkMessageCode(mobile: mobile, code: code).defaultRequest { jsonData in
             completion(nil)
@@ -88,7 +91,7 @@ class AuthenticationRepository: NSObject {
             completion(response.message)
         }
     }
-    
+
     func resetPassword(mobile: String, password: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.resetPassword(mobile: mobile, password: password).defaultRequest { jsonData in
             completion(nil)
@@ -96,6 +99,6 @@ class AuthenticationRepository: NSObject {
             completion(response.message)
         }
     }
-    
-    
+
+
 }

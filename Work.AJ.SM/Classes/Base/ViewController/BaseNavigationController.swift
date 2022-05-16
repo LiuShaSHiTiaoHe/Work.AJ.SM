@@ -12,12 +12,12 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.interactivePopGestureRecognizer?.delegate = self
-        self.isNavigationBarHidden = true
+        interactivePopGestureRecognizer?.delegate = self
+        isNavigationBarHidden = true
         let navigationBarAppearence = UINavigationBar.appearance()
-        let nBar = self.navigationBar
+        let nBar = navigationBar
         nBar.isTranslucent = false
-        
+
         if #available(iOS 15.0, *) {
             let barAppearance = UINavigationBarAppearance.init()
             barAppearance.backgroundColor = R.color.themeColor()
@@ -36,7 +36,7 @@ class BaseNavigationController: UINavigationController {
 
 extension BaseNavigationController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if self.viewControllers.count == 1 {
+        if viewControllers.count == 1 {
             return false
         }
         return true

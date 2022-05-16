@@ -49,7 +49,7 @@ class NComViewController: BaseViewController {
         
     
     @objc func go2RecordView(){
-        self.navigationController?.pushViewController(NComRecordViewController(), animated: true)
+        navigationController?.pushViewController(NComRecordViewController(), animated: true)
     }
     
     func reloadTableView() {
@@ -115,7 +115,7 @@ extension NComViewController: UITableViewDelegate, UITableViewDataSource {
             let macString = lockMac.components(separatedBy: ":").joined(separator: "")
             let vc = AudioChatViewController.init(startCall: macString)
             vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            present(vc, animated: true)
         }
     }
 }

@@ -61,12 +61,12 @@ class MineView: BaseView {
     }()
     
     override func initializeView(){
-        self.addSubview(headerView)
+        addSubview(headerView)
         headerView.addSubview(avatar)
         headerView.addSubview(nameLabel)
         headerView.addSubview(phoneLabel)
         headerView.addSubview(messageButton)
-        self.addSubview(tableView)
+        addSubview(tableView)
         
         headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()

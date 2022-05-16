@@ -45,7 +45,7 @@ class MineViewController: BaseViewController {
     private func userProfileView(){
         let vc = UserProfileViewController()
         vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func initUI() {
@@ -79,7 +79,7 @@ class MineViewController: BaseViewController {
     func showMessageView() {
         let vc = MessageViewController()
         vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }
@@ -114,37 +114,37 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                 case .house:
                     let vc = HouseViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 case .faceCertification:
                     let vc = FaceListViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 case .memeberManager:
                     let vc = MemberListViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 case .visitorRecord:
                     let vc = VisitorRecordViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 case .setting:
                     let vc = SettingViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 case .opendoorSetting:
                     let vc = OpenDoorSettingViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 case .videoCall:
                     let vc = CallNeighborViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 case .activateCard:
                     break
                 case .contactProperty:
                     let vc = PropertyContactViewController()
                     vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    navigationController?.pushViewController(vc, animated: true)
                     break
                 default:
                     break

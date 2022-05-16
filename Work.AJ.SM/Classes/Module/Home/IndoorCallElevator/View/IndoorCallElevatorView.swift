@@ -82,13 +82,13 @@ class IndoorCallElevatorView: UIView {
     }
     
     func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.backgroundColor()
         
-        self.addSubview(headerView)
-        self.addSubview(imageView)
-        self.addSubview(tipsView)
-        self.addSubview(upButton)
-        self.addSubview(downButton)
+        addSubview(headerView)
+        addSubview(imageView)
+        addSubview(tipsView)
+        addSubview(upButton)
+        addSubview(downButton)
         
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()

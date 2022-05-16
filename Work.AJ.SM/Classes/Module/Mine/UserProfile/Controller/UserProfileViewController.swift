@@ -54,7 +54,7 @@ class UserProfileViewController: BaseViewController {
         didSet{
             if let _ = avatar {
                 viewState = .edit
-                self.contentView.tableView.reloadRow(at: IndexPath.init(row: 0, section: 0), with: .none)
+                contentView.tableView.reloadRow(at: IndexPath.init(row: 0, section: 0), with: .none)
             }
         }
     }
@@ -401,7 +401,7 @@ extension UserProfileViewController {
                 self.contentView.tableView.reloadData()
             }
         }
-        self.present(datePickerManager, animated: true) {}
+        present(datePickerManager, animated: true) {}
     }
 }
 
@@ -417,7 +417,7 @@ extension UserProfileViewController: UserProfileInputViewControllerDelegate {
         case .realName:
             vc.value = userRealName
         }
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func userProfileInput(_ value: String, _ type: UserProfileInputType) {

@@ -18,9 +18,9 @@ class ElevatorConfigurationSendDataView: BaseView {
     }
     
     override func initializeView() {
-        self.addSubview(headerView)
-        self.addSubview(tipsLabel)
-        self.addSubview(tableView)
+        addSubview(headerView)
+        addSubview(tipsLabel)
+        addSubview(tableView)
         
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()

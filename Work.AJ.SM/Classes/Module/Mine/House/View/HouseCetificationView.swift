@@ -8,52 +8,52 @@
 import UIKit
 
 class HouseCetificationView: BaseView {
-    
+
     override func initData() {
-     
+
     }
-    
+
     override func initializeView() {
-        self.addSubview(headerView)
-        self.addSubview(locationConetntView)
+        addSubview(headerView)
+        addSubview(locationConetntView)
         locationConetntView.addSubview(locationIconImage)
         locationConetntView.addSubview(locationName)
-        self.addSubview(tableView)
-        self.addSubview(confirmButton)
-        
+        addSubview(tableView)
+        addSubview(confirmButton)
+
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(kTitleAndStateHeight)
         }
-        
+
         locationConetntView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(50)
             make.top.equalTo(headerView.snp.bottom)
         }
-        
+
         locationName.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
             make.centerY.equalToSuperview()
         }
-        
+
         locationIconImage.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.width.equalTo(12)
             make.height.equalTo(17)
-            make.right.equalTo(locationName.snp.left).offset(-kMargin/2)
+            make.right.equalTo(locationName.snp.left).offset(-kMargin / 2)
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(locationConetntView.snp.bottom).offset(kMargin/2)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.top.equalTo(locationConetntView.snp.bottom).offset(kMargin / 2)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
         }
-        
+
         confirmButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(tableView.snp.bottom).offset(kMargin/2)
+            make.top.equalTo(tableView.snp.bottom).offset(kMargin / 2)
             make.height.equalTo(40)
             make.width.equalTo(250)
         }
@@ -67,19 +67,19 @@ class HouseCetificationView: BaseView {
         view.titleLabel.textColor = R.color.blackColor()
         return view
     }()
-    
+
     lazy var locationConetntView: UIView = {
         let view = UIView()
         view.backgroundColor = R.color.whiteColor()
         return view
     }()
-    
+
     lazy var locationIconImage: UIImageView = {
         let view = UIImageView()
         view.image = R.image.base_image_location()
         return view
     }()
-    
+
     lazy var locationName: UILabel = {
         let view = UILabel()
         view.textColor = R.color.maintextColor()
@@ -88,7 +88,7 @@ class HouseCetificationView: BaseView {
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
-    
+
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
@@ -99,7 +99,7 @@ class HouseCetificationView: BaseView {
         view.backgroundColor = R.color.backgroundColor()
         return view
     }()
-    
+
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("完成", for: .normal)

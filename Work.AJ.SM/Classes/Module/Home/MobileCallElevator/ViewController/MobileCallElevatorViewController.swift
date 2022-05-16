@@ -14,43 +14,45 @@ class MobileCallElevatorViewController: BaseViewController {
     var currentFloorID = ""
     private var originalData: MobileCallElevatorModel?
     private var selectFloor = ""//showFloor
-    
+
     lazy var mobileCallElevator: MobileCallElevatorView = {
         let view = MobileCallElevatorView()
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadDatas()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
     }
-    
+
     override func initUI() {
         view.addSubview(mobileCallElevator)
         mobileCallElevator.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
-    
+
     override func initData() {
         mobileCallElevator.collectionView.delegate = self
         mobileCallElevator.collectionView.dataSource = self
         mobileCallElevator.delegate = self
         mobileCallElevator.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        MCERepository.shared.getElevators {[weak self] model, response in
-            guard let `self` = self else { return }
+        MCERepository.shared.getElevators { [weak self] model, response in
+            guard let `self` = self else {
+                return
+            }
             if model.isEmpty {
                 SVProgressHUD.showInfo(withStatus: "电梯数据为空!")
-                SVProgressHUD.dismiss(withDelay: 2){
+                SVProgressHUD.dismiss(withDelay: 2) {
                     self.navigationController?.popViewController(animated: true)
                 }
                 return
@@ -63,16 +65,18 @@ class MobileCallElevatorViewController: BaseViewController {
             self.reloadDatas()
         }
     }
-    
+
     private func reloadDatas() {
         mobileCallElevator.collectionView.reloadData()
         mobileCallElevator.elevatorTitle.text = MCERepository.shared.getFloorName(floorID: currentFloorID, model: originalData)
         mobileCallElevator.elevatorLocation.text = HomeRepository.shared.getCurrentUnitName()
     }
-    
+
     private func callElevator(_ floorInfo: FloorMapInfo) {
         PermissionManager.PermissionRequest(.bluetooth) { [weak self] authorized in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             if authorized {
                 SVProgressHUD.show()
                 guard let originalData = self.originalData else {
@@ -80,13 +84,13 @@ class MobileCallElevatorViewController: BaseViewController {
                     return
                 }
                 MCERepository.shared.sendCallElevatorData(self.currentFloorID, self.selectFloor, floorInfo, originalData)
-            }else{
+            } else {
                 SVProgressHUD.showInfo(withStatus: "请打开蓝牙权限")
             }
         }
 
     }
-    
+
 }
 
 extension MobileCallElevatorViewController: MobileCallElevatorViewDelegate {
@@ -96,14 +100,16 @@ extension MobileCallElevatorViewController: MobileCallElevatorViewDelegate {
             vc.delegate = self
             vc.currentFloorID = currentFloorID
             vc.dataSource = lifts
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
 
 extension MobileCallElevatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MobileCallElevatorCellidentifier, for: indexPath) as? MCECollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MobileCallElevatorCellidentifier, for: indexPath) as? MCECollectionViewCell else {
+            return UICollectionViewCell()
+        }
         if let floors = dataSource[currentFloorID] {
             let floor = floors[indexPath.row]
             if let showFloor = floor.showFloor {
@@ -116,19 +122,19 @@ extension MobileCallElevatorViewController: UICollectionViewDataSource {
         }
         return cell
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let floors = dataSource[currentFloorID] {
             return floors.count
         }
         return 0
     }
-    
-    
+
+
 }
 
 extension MobileCallElevatorViewController: UICollectionViewDelegate {
@@ -147,7 +153,7 @@ extension MobileCallElevatorViewController: UICollectionViewDelegate {
 
 extension MobileCallElevatorViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (kScreenWidth - kMargin*5)/4, height: (kScreenWidth - kMargin*5)/4)
+        return .init(width: (kScreenWidth - kMargin * 5) / 4, height: (kScreenWidth - kMargin * 5) / 4)
     }
 }
 

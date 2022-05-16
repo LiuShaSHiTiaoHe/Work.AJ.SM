@@ -9,16 +9,16 @@ import UIKit
 import CoreLocation
 
 class LocationManager: NSObject {
-    
+
     static let shared = LocationManager()
     private lazy var geoCoder = CLGeocoder()
 
     var getLocationHandle: ((_ success: Bool, _ latitude: Double, _ longitude: Double) -> Void)?
-    
+
     var getCurrentCity: ((_ cityName: String) -> Void)?
-        
+
     private var locationManager: CLLocationManager!
-    
+
     override init() {
         super.init()
         locationManager = CLLocationManager()
@@ -31,7 +31,7 @@ class LocationManager: NSObject {
     func requestLocation() {
         locationManager.requestLocation()
     }
-    
+
     func inTheRangeChina(latitude: Double, longitude: Double) -> Bool {
         if (longitude < 72.004 || longitude > 137.8347) {
             return false
@@ -41,33 +41,37 @@ class LocationManager: NSObject {
         }
         return true
     }
-    
+
     // MARK: 反地理编码  经纬度->地址
-    private func getGeoLocation(_ latitude:Double, _ longitude:Double) {
+    private func getGeoLocation(_ latitude: Double, _ longitude: Double) {
         let loc1 = CLLocation(latitude: latitude, longitude: longitude)
         if inTheRangeChina(latitude: latitude, longitude: longitude) {
-            geoCoder.reverseGeocodeLocation(loc1) { [weak self] (pls: [CLPlacemark]?, error: Error?)  in
-                guard let `self` = self else { return }
+            geoCoder.reverseGeocodeLocation(loc1) { [weak self] (pls: [CLPlacemark]?, error: Error?) in
+                guard let `self` = self else {
+                    return
+                }
                 if error == nil {
                     print("反地理编码成功")
-                    guard let plsResult = pls else {return}
+                    guard let plsResult = pls else {
+                        return
+                    }
                     if let block = self.getCurrentCity {
                         block(self.getLocationItem(plsResult))
                     }
-                }else {
+                } else {
                     if let block = self.getCurrentCity {
                         block("")
                     }
                 }
             }
-        }else{
-            if let block = self.getCurrentCity {
+        } else {
+            if let block = getCurrentCity {
                 block("")
             }
         }
 
     }
-    
+
     private func getLocationItem(_ pls: [CLPlacemark]) -> String {
         var cityName = ""
         if let pl = pls.first {
@@ -105,17 +109,17 @@ extension LocationManager: CLLocationManagerDelegate {
     //MARK: - 获取定位后的经纬度
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let loction = locations.last {
-            
+
             print("latitude: \(loction.coordinate.latitude)   longitude:\(loction.coordinate.longitude)")
-            self.getGeoLocation(loction.coordinate.latitude, loction.coordinate.longitude)
+            getGeoLocation(loction.coordinate.latitude, loction.coordinate.longitude)
             if let block = getLocationHandle {
                 block(true, loction.coordinate.latitude, loction.coordinate.longitude)
             }
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
+
         if let block = getLocationHandle {
             block(false, 0, 0)
         }

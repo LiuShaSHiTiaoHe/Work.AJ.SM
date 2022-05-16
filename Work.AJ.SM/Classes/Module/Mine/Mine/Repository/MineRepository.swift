@@ -377,7 +377,7 @@ extension MineRepository {
         }
         
         cityNames.forEach { name in
-            let firstLetter = self.findFirstLetterFromString(aString: name)
+            let firstLetter = findFirstLetterFromString(aString: name)
             if result.has(firstLetter), let values = result[firstLetter] {
                 var names = Array<String>()
                 names.append(contentsOf: values)

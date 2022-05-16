@@ -24,39 +24,43 @@ public enum NetworkCacheType {
     /** First read the data from the cache, then get it from the network and cache it, the cached data is thrown out through the closure */
     case cacheThenNetwork
 }
+
 // MARK: - NetWork Cahce
 extension TargetType {
-    
+
     var cachedKey: String {
         if let urlRequest = try? endpoint.urlRequest(),
-            let data = urlRequest.httpBody,
-            let parameters = String(data: data, encoding: .utf8) {
+           let data = urlRequest.httpBody,
+           let parameters = String(data: data, encoding: .utf8) {
             return "\(method.rawValue):\(endpoint.url)"
         }
         return "\(method.rawValue):\(endpoint.url)"
     }
-    
+
     var endpoint: Endpoint {
         return Endpoint(url: URL(target: self).absoluteString,
-                        sampleResponseClosure: { .networkResponse(200, self.sampleData) },
-                        method: method,
-                        task: task,
-                        httpHeaderFields: headers)
+                sampleResponseClosure: { .networkResponse(200, self.sampleData) },
+                method: method,
+                task: task,
+                httpHeaderFields: headers)
     }
-    
+
     func readCacheResponse() -> Moya.Response? {
         guard let dict = CacheManager.network.fetchCachedWithKey(cachedKey),
               let statusCode = dict.value(forKey: "statusCode") as? Int,
-              let data = dict.value(forKey: "data") as? Data else {
-                  return nil
-              }
+              let data = dict.value(forKey: "data") as? Data
+        else {
+            return nil
+        }
         let response = Response(statusCode: statusCode, data: data)
-        
+
         return response
     }
-    
+
     func saveCacheResponse(_ response: Moya.Response?) {
-        guard let response = response else { return }
+        guard let response = response else {
+            return
+        }
         let key = cachedKey
         let storage: NSDictionary = [
             "data": response.data,
@@ -66,8 +70,8 @@ extension TargetType {
             CacheManager.network.saveCacheWithDictionary(storage, key: key)
         }
     }
-    
-    
+
+
 }
 
 

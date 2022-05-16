@@ -8,18 +8,18 @@
 import UIKit
 import Haptica
 
-extension AppDelegate: UNUserNotificationCenterDelegate{
-    
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
     func registerNotification(_ application: UIApplication, _ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
-          options: authOptions,
-          completionHandler: {_, _ in })
+                options: authOptions,
+                completionHandler: { _, _ in })
         application.registerForRemoteNotifications()
         GDataManager.shared.setupPush(launchOptions)
     }
-    
+
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         logger.info(userInfo)
     }
@@ -34,18 +34,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         logger.info("Unable to register for remote notifications: \(error.localizedDescription)")
     }
-    
+
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         logger.info("APNs token retrieved: \(deviceToken)")
         GDataManager.shared.registerDeviceToken(deviceToken)
     }
-    
+
     //处理提醒通知
     // Receive displayed notifications for iOS 10 devices. in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
-      withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-      
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
         let userInfo = notification.request.content.userInfo
         logger.info(userInfo)
         if ud.inAppNotification {
@@ -53,7 +53,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
             if ud.vibrationAvailable {
                 Haptic.impact(.medium).generate()
             }
-        }else{
+        } else {
             completionHandler([])
         }
     }
@@ -61,7 +61,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-      
+
         let userInfo = response.notification.request.content.userInfo
         logger.info(userInfo)
         completionHandler()

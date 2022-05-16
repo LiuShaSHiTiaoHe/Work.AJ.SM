@@ -14,7 +14,7 @@ enum CommonStatusType {
 }
 
 class CommonStatusView: BaseView {
-    
+
     var type: CommonStatusType? {
         didSet {
             if let type = type {
@@ -29,7 +29,7 @@ class CommonStatusView: BaseView {
             }
         }
     }
-    
+
     var statusStr: String? {
         didSet {
             if let statusStr = statusStr {
@@ -37,7 +37,7 @@ class CommonStatusView: BaseView {
             }
         }
     }
-    
+
     var tipsStr: String? {
         didSet {
             if let tipsStr = tipsStr {
@@ -45,30 +45,30 @@ class CommonStatusView: BaseView {
             }
         }
     }
-    
-    
+
+
     override func initData() {
-        
+
     }
-    
+
     override func initializeView() {
-        self.addSubview(imageView)
-        self.addSubview(statusLabel)
-        self.addSubview(tipsLabel)
-        
+        addSubview(imageView)
+        addSubview(statusLabel)
+        addSubview(tipsLabel)
+
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.height.equalTo(80)
             make.top.equalTo(66)
         }
-        
+
         statusLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(20)
             make.top.equalTo(imageView.snp.bottom).offset(kMargin)
         }
-        
+
         tipsLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
@@ -81,19 +81,19 @@ class CommonStatusView: BaseView {
         let view = UIImageView.init()
         return view
     }()
-    
+
     lazy var statusLabel: UILabel = {
         let view = UILabel()
         view.font = k18Font
         view.textColor = R.color.maintextColor()
         return view
     }()
-    
+
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.font = k12Font
         view.textColor = R.color.maintextColor()
         return view
     }()
-    
+
 }

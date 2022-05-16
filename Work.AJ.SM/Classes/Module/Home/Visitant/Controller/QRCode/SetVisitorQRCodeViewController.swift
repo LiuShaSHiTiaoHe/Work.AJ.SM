@@ -86,7 +86,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
                 self.contentView.tableView.reloadRow(at: IndexPath.init(row: 1, section: 0), with: .none)
             }
         }
-        self.present(datePickerManager, animated: false) {
+        present(datePickerManager, animated: false) {
             
         }
     }
@@ -176,7 +176,7 @@ extension SetVisitorQRCodeViewController: UITableViewDelegate, UITableViewDataSo
         default:
             fatalError()
         }
-        self.selectTime()
+        selectTime()
     }
 
 }

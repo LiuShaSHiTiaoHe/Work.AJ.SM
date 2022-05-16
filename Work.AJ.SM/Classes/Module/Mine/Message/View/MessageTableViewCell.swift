@@ -30,7 +30,7 @@ class MessageTableViewCell: UITableViewCell {
     
     private func initializeView() {
         contentView.backgroundColor = R.color.backgroundColor()
-        self.contentView.addSubview(backgrdView)
+        contentView.addSubview(backgrdView)
         backgrdView.addSubview(nameLabel)
         backgrdView.addSubview(timeLabel)
         backgrdView.addSubview(messageLabel)

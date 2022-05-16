@@ -31,8 +31,8 @@ class SelectHouseLocationIndexCell: UICollectionViewCell {
     }
     
     func initializeView() {
-        self.backgroundColor = R.color.whiteColor()
-        self.contentView.addSubview(locationNameLabel)
+        backgroundColor = R.color.whiteColor()
+        contentView.addSubview(locationNameLabel)
         
         locationNameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()

@@ -8,7 +8,7 @@
 import UIKit
 
 class NoticeModel: Mappable {
-    
+
     var communityid: String?
     var creby: String?
     var crebyname: String?
@@ -17,9 +17,10 @@ class NoticeModel: Mappable {
     var remark: String?
     var rid: String?
     var username: String?
-    
-    required init?(map: ObjectMapper.Map) {}
-    
+
+    required init?(map: ObjectMapper.Map) {
+    }
+
     func mapping(map: ObjectMapper.Map) {
         communityid <- map["COMMUNITYID"]
         creby <- map["CREBY"]
@@ -30,6 +31,6 @@ class NoticeModel: Mappable {
         rid <- map["RID"]
         username <- map["USERNAME"]
     }
-    
+
 
 }

@@ -10,18 +10,18 @@ import SPPermissions
 
 class PermissionManager {
     static let shared = PermissionManager()
-    
+
     func requestAllPermission() {
         requset([.bluetooth, .camera, .microphone])
     }
-    
+
     static func PermissionRequest(_ permisson: SPPermissions.Permission, _ completion: @escaping (Bool) -> Void) {
         permisson.request {
             let authorized = permisson.authorized
             completion(authorized)
         }
     }
-    
+
     @discardableResult
     func requestPermission(_ permission: SPPermissions.Permission) -> SPPermissions.PermissionStatus {
         let status = permission.status
@@ -37,7 +37,7 @@ class PermissionManager {
         }
         return status
     }
-    
+
     private func requset(_ permissions: [SPPermissions.Permission]) {
         if permissions.count == 1 {
             if let topViewController = UIViewController.jk.topViewController() {
@@ -46,7 +46,7 @@ class PermissionManager {
                 controller.dataSource = self
                 controller.present(on: topViewController)
             }
-        }else{
+        } else {
             if let topViewController = UIViewController.jk.topViewController() {
                 let controller = SPPermissions.dialog(permissions)
                 controller.showCloseButton = true
@@ -57,28 +57,32 @@ class PermissionManager {
         }
 
     }
-    
+
     private func go2Setting(_ permission: SPPermissions.Permission) {
         let alert = UIAlertController.init(title: "\(permission.type.name)权限已被拒绝", message: "请前往系统设置页面打开相应权限", preferredStyle: .alert)
         alert.addAction("取消", .cancel) {
-            
+
         }
         alert.addAction("设置", .default) {
             permission.openSettingPage()
         }
         alert.show()
     }
-    
-    private init() {}
+
+    private init() {
+    }
 }
 
 extension PermissionManager: SPPermissionsDelegate {
-    
-    func didHidePermissions(_ permissions: [SPPermissions.Permission]) { }
-    
-    func didAllowPermission(_ permission: SPPermissions.Permission) { }
-    
-    func didDeniedPermission(_ permission: SPPermissions.Permission) { }
+
+    func didHidePermissions(_ permissions: [SPPermissions.Permission]) {
+    }
+
+    func didAllowPermission(_ permission: SPPermissions.Permission) {
+    }
+
+    func didDeniedPermission(_ permission: SPPermissions.Permission) {
+    }
 }
 
 extension PermissionManager: SPPermissionsDataSource {
@@ -98,13 +102,13 @@ extension PermissionManager: SPPermissionsDataSource {
         case .microphone:
             description = "使用麦克风进行音频通话"
             cell.permissionIconView.setCustomImage(R.image.permission_microphone_icon()!)
-        default :
+        default:
             break
         }
         cell.permissionDescriptionLabel.text = description
         cell.permissionDescriptionLabel.font = k14Font
     }
-    
+
     func deniedAlertTexts(for permission: SPPermissions.Permission) -> SPPermissionsDeniedAlertTexts? {
         let texts = SPPermissionsDeniedAlertTexts()
         texts.titleText = "权限已被拒绝"

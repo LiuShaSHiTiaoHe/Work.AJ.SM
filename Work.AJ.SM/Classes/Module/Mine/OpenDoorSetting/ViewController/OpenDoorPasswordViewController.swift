@@ -142,7 +142,7 @@ extension OpenDoorPasswordViewController :CodeTextFieldDelegate {
                 SVProgressHUD.showInfo(withStatus: "请再次输入")
             }else{
                 if firstPassword == valueChanged {
-                    self.codeTextField.resignFirstResponder()
+                    codeTextField.resignFirstResponder()
                     setOwnerPassword(firstPassword)
                 }else{
                     SVProgressHUD.showError(withStatus: "两次输入不一致，请重新设置")

@@ -81,7 +81,7 @@ class SettingViewController: BaseViewController {
     func aboutApp() {
         let vc = BaseWebViewController()
         vc.urlString = kAboutUsPageURLString
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func logOut() {

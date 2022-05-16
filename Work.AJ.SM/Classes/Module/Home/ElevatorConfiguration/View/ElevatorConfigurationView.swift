@@ -14,13 +14,13 @@ class ElevatorConfigurationView: BaseView {
     }
     
     override func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
-        self.addSubview(headerView)
-        self.addSubview(titleContentView)
+        backgroundColor = R.color.backgroundColor()
+        addSubview(headerView)
+        addSubview(titleContentView)
         titleContentView.addSubview(locationIcon)
         titleContentView.addSubview(tipsLabel)
-        self.addSubview(tableView)
-        self.addSubview(confirmButton)
+        addSubview(tableView)
+        addSubview(confirmButton)
         
         headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
@@ -49,7 +49,7 @@ class ElevatorConfigurationView: BaseView {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleContentView.snp.bottom).offset(kMargin)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
         }
         
         confirmButton.snp.makeConstraints { make in

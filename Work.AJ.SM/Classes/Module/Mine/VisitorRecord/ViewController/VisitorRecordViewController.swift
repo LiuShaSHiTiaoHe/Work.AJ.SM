@@ -195,7 +195,7 @@ extension VisitorRecordViewController: UITableViewDelegate, UITableViewDataSourc
         let model = dataSource[indexPath.row]
         let vc = VisitorInvitationRecordViewController()
         vc.record = model
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

@@ -80,7 +80,7 @@ class PasswordInvitationViewController: BaseViewController {
         if let image = contentView.bgContentView.jk.toImage() {
             let acyivityVC = UIActivityViewController.init(activityItems: [image], applicationActivities: nil)
             acyivityVC.excludedActivityTypes = [.airDrop, .message, .saveToCameraRoll, .copyToPasteboard]
-            self.present(acyivityVC, animated: true, completion: nil)
+            present(acyivityVC, animated: true, completion: nil)
             acyivityVC.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
                 if completed {
                     SVProgressHUD.showSuccess(withStatus: "分享成功")

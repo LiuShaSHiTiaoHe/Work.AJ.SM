@@ -10,8 +10,8 @@ import ObjectMapper
 import ObjectMapper_Realm
 import RealmSwift
 
-class UserModel: Object, Mappable  {
-    
+class UserModel: Object, Mappable {
+
     @Persisted var openID: String?
     @Persisted var ptnval: String?
     @Persisted var loginToken: String?
@@ -31,8 +31,8 @@ class UserModel: Object, Mappable  {
     @Persisted var sex: String?
     @Persisted var userName: String?
     @Persisted var mobile: String?
-    
-    
+
+
     @Persisted var stringValue1: String?
     @Persisted var stringValue2: String?
     @Persisted var stringValue3: String?
@@ -47,38 +47,38 @@ class UserModel: Object, Mappable  {
     @Persisted var intValue2: Int?
     @Persisted var intValue3: Int?
     @Persisted var intValue4: Int?
-    
+
     // Mappable
     func mapping(map: ObjectMapper.Map) {
-        openID          <- map["OPENID"]
-        ptnval          <- map["PTNVAL"]
-        loginToken      <- map["LOGINTOKEN"]
-        callNo          <- map["CALLNO"]
-        folderPath      <- map["FOLDERPATH"]
-        realName        <- map["REALNAME"]
-        servicePhone    <- map["SERVICEPHONE"]
-        signature       <- map["SIGNATURE"]
-        job             <- map["JOB"]
-        videoCall       <- map["VIDEOCALL"]
-        HeadImageUrl    <- map["HEADIMGURL"]
-        cstAddUp        <- map["CSTADDUP"]
-        education       <- map["EDUCATION"]
-        birthdate       <- map["BIRTHDATE"]
-        rid             <- map["RID"]
-        ptnAddUp        <- map["PTNADDUP"]
-        sex             <- map["SEX"]
-        userName        <- map["USERNAME"]
-        mobile          <- map["MOBILE"]
+        openID <- map["OPENID"]
+        ptnval <- map["PTNVAL"]
+        loginToken <- map["LOGINTOKEN"]
+        callNo <- map["CALLNO"]
+        folderPath <- map["FOLDERPATH"]
+        realName <- map["REALNAME"]
+        servicePhone <- map["SERVICEPHONE"]
+        signature <- map["SIGNATURE"]
+        job <- map["JOB"]
+        videoCall <- map["VIDEOCALL"]
+        HeadImageUrl <- map["HEADIMGURL"]
+        cstAddUp <- map["CSTADDUP"]
+        education <- map["EDUCATION"]
+        birthdate <- map["BIRTHDATE"]
+        rid <- map["RID"]
+        ptnAddUp <- map["PTNADDUP"]
+        sex <- map["SEX"]
+        userName <- map["USERNAME"]
+        mobile <- map["MOBILE"]
     }
-    
+
     required convenience init?(map: ObjectMapper.Map) {
-      self.init()
+        self.init()
     }
-    
+
     override class func primaryKey() -> String? {
-      return "mobile"
+        return "mobile"
     }
-    
+
 
 }
 

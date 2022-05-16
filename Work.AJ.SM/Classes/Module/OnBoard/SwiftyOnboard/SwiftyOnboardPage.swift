@@ -50,9 +50,9 @@ open class SwiftyOnboardPage: UIView {
     }
     
     func setUp() {
-        self.addSubview(imageView)
-        self.addSubview(title)
-        self.addSubview(subTitle)
+        addSubview(imageView)
+        addSubview(title)
+        addSubview(subTitle)
 
         title.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(40)

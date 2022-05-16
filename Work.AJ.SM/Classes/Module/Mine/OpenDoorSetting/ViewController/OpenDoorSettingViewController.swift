@@ -158,7 +158,7 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
             switch indexPath.row{
             case 0:
                 let vc = OpenDoorPasswordViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                navigationController?.pushViewController(vc, animated: true)
             default:
                 break
             }

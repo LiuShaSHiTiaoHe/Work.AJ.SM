@@ -28,12 +28,12 @@ class HomeView: BaseView {
             headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
         }
     }
-    
+
     func reloadView() {
         collectionView.reloadData()
         collectionView.mj_header?.endRefreshing()
     }
-    
+
     func updateAdsAndNotices(_ ads: [AdsModel], _ notices: [NoticeModel]) {
         advertisement.removeAll()
         notice.removeAll()
@@ -41,30 +41,30 @@ class HomeView: BaseView {
         notice.append(contentsOf: notices)
         reloadView()
     }
-    
+
     func updateHomeFunctions(_ functionModules: [HomePageFunctionModule]) {
         updateTitle()
         functionModule.removeAll()
         functionModule.append(contentsOf: functionModules)
     }
-    
+
     // MARK: -
     override func initData() {
         headerView.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
+
     override func initializeView() {
-        self.addSubview(headerView)
-        self.addSubview(collectionView)
-        
+        addSubview(headerView)
+        addSubview(collectionView)
+
         headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
             make.height.equalTo(kOriginTitleAndStateHeight)
         }
-        
+
         collectionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(1)
@@ -76,15 +76,15 @@ class HomeView: BaseView {
     override func layoutSubviews() {
         addlayer()
     }
-    
+
     lazy var headerView: HomeNaviHeaderView = {
         let view = HomeNaviHeaderView.init()
         return view
     }()
-    
+
     lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.sectionInset = UIEdgeInsets.init(top: kMargin/2, left: kMargin/2, bottom: kMargin/2, right: kMargin/2)
+        flowLayout.sectionInset = UIEdgeInsets.init(top: kMargin / 2, left: kMargin / 2, bottom: kMargin / 2, right: kMargin / 2)
         flowLayout.minimumLineSpacing = 10
         flowLayout.minimumInteritemSpacing = 0
         let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
@@ -95,23 +95,28 @@ class HomeView: BaseView {
         return c
     }()
 }
+
 extension HomeView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeModuleCellIdentifier, for: indexPath) as? HomeModuleCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeModuleCellIdentifier, for: indexPath) as? HomeModuleCell else {
+            return UICollectionViewCell()
+        }
         cell.initData(functionModule[indexPath.row])
         return cell
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return functionModule.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeViewSectionHeaderIdentifier, for: indexPath) as? HomeHeaderView else { return UICollectionReusableView() }
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeViewSectionHeaderIdentifier, for: indexPath) as? HomeHeaderView else {
+            return UICollectionReusableView()
+        }
         header.initData(ads: advertisement, notice: notice)
         return header
     }
@@ -129,11 +134,11 @@ extension HomeView: UICollectionViewDelegate {
 
 extension HomeView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: self.frame.width, height: 220)
+        return .init(width: frame.width, height: 220)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (self.frame.width - kMargin*2)/2, height: (self.frame.width - kMargin*2)/4.5 )
+        return .init(width: (frame.width - kMargin * 2) / 2, height: (frame.width - kMargin * 2) / 4.5)
     }
 }
 

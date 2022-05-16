@@ -32,8 +32,8 @@ class MCECollectionViewCell: UICollectionViewCell {
     }
     
     func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
-        self.contentView.addSubview(elevatorName)
+        backgroundColor = R.color.backgroundColor()
+        contentView.addSubview(elevatorName)
         
         elevatorName.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(8)
@@ -41,7 +41,7 @@ class MCECollectionViewCell: UICollectionViewCell {
             make.bottom.right.equalToSuperview().offset(-8)
         }
         
-        self.layer.cornerRadius = 10.0
+        layer.cornerRadius = 10.0
     }
 
 }

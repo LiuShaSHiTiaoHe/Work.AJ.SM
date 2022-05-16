@@ -19,8 +19,8 @@ class BLEAdvertisingManager: NSObject {
     static let shared = BLEAdvertisingManager()
     private var peripheralManager: CBPeripheralManager?
     var isBleOpen: Bool = false
-    
-    private override init(){
+
+    private override init() {
         super.init()
         peripheralManager = CBPeripheralManager.init(delegate: self, queue: .main)
     }
@@ -30,57 +30,61 @@ class BLEAdvertisingManager: NSObject {
         if let peripheralManager = peripheralManager, isBleOpen {
             if !peripheralManager.isAdvertising {
                 // FIXME: - Need Send Data
-                self.stopAdvertismentIn {
+                stopAdvertismentIn {
                     SVProgressHUD.showSuccess(withStatus: "发送成功")
                 }
-            }else{
+            } else {
                 SVProgressHUD.showError(withStatus: "正在发送数据,稍后再试")
             }
-        }else{
+        } else {
             SVProgressHUD.showError(withStatus: "请确认蓝牙打开后再试")
         }
     }
-    
-    
+
+
     // MARK: - 发送蓝牙开门数据
     @discardableResult
     func openDoor() -> Bool {
         SVProgressHUD.show()
         if let peripheralManager = peripheralManager, isBleOpen {
             if !peripheralManager.isAdvertising {
-                if let openDoorData = self.prepareOpenDoorData() {
+                if let openDoorData = prepareOpenDoorData() {
                     logger.info("openDoorData===> \(openDoorData)")
                     peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
-                    self.stopAdvertismentIn {
+                    stopAdvertismentIn {
                         SVProgressHUD.showSuccess(withStatus: "发送成功")
                     }
                     return true
-                }else{
+                } else {
                     SVProgressHUD.showError(withStatus: "数据错误")
                 }
-            }else {
+            } else {
                 SVProgressHUD.showError(withStatus: "正在发送数据,稍后再试")
             }
-        }else{
+        } else {
             SVProgressHUD.showError(withStatus: "请确认蓝牙打开后再试")
         }
         return false
     }
-    
-    func noneStopSendOpenDoorData(){
-        guard let peripheralManager = self.peripheralManager else { return }
-        if let openDoorData = self.prepareOpenDoorData() {
+
+    func noneStopSendOpenDoorData() {
+        guard let peripheralManager = peripheralManager else {
+            return
+        }
+        if let openDoorData = prepareOpenDoorData() {
             peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
         }
     }
-    
+
     func stopSendOpenDoorData() {
-        guard let peripheralManager = self.peripheralManager else { return }
+        guard let peripheralManager = peripheralManager else {
+            return
+        }
         if peripheralManager.isAdvertising {
             peripheralManager.stopAdvertising()
         }
     }
-    
+
     // MARK: - 发送手机呼梯
     /**
      data[0] - data[9]
@@ -103,53 +107,57 @@ class BLEAdvertisingManager: NSObject {
                 }
                 var fullFloorNumber = floor
                 if let floorInt = floor.jk.toInt() {
-                    fullFloorNumber = String(format:"%03d", floorInt)
+                    fullFloorNumber = String(format: "%03d", floorInt)
                 }
                 let advertisementData = SN + authorizeFlag + side + fullFloorNumber + "00000"
                 peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: advertisementData])
                 logger.shortLine()
                 logger.info("advertisementData ===>  \(advertisementData)")
                 logger.shortLine()
-                self.stopAdvertismentIn {
+                stopAdvertismentIn {
                     SVProgressHUD.showSuccess(withStatus: "发送成功")
                 }
-            }else {
+            } else {
                 SVProgressHUD.showError(withStatus: "正在发送数据,稍后再试")
             }
-        }else{
+        } else {
             SVProgressHUD.showError(withStatus: "请确认蓝牙打开后再试")
         }
     }
-    
+
     // MARK: - Stop Advertising
     func stopAdvertismentIn(seconds: Double = 2, completion: @escaping (() -> Void)) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
-            guard let `self` = self else { return }
-            guard let peripheralManager = self.peripheralManager else { return }
+            guard let `self` = self else {
+                return
+            }
+            guard let peripheralManager = self.peripheralManager else {
+                return
+            }
             if peripheralManager.isAdvertising {
                 peripheralManager.stopAdvertising()
                 completion()
-            }else{
+            } else {
                 completion()
             }
         }
     }
-    
+
     // MARK: - Private Functions
-    
+
     // MARK: - OpenDoor Data
     private func prepareOpenDoorData() -> String? {
         if let unit = HomeRepository.shared.getCurrentUnit(), let cellMM = unit.cellmm, let userID = unit.userid, let phsycalFloorInt = unit.physicalfloor?.jk.toInt(), let sortbar = unit.sortbar {
-            let userIDString = String(format:"%05d", userID)
+            let userIDString = String(format: "%05d", userID)
             let bleSignal = Defaults.bluetoothSignalStrength.jk.intToString
-            let phsycalFloor = String(format:"%02d", phsycalFloorInt)
+            let phsycalFloor = String(format: "%02d", phsycalFloorInt)
             let partOfData = userIDString + sortbar + bleSignal + "M "
             let openDoorData = "AJ" + partOfData + cellMM + "11" + phsycalFloor
             return openDoorData
         }
         return nil
     }
-    
+
     // MARK: - addSum
     private func addSum(_ writeData: String, _ data: String) -> String {
         var result = ""
@@ -163,8 +171,8 @@ class BLEAdvertisingManager: NSObject {
         sum += dataCmd.jk.hexInt
         if data.count == 2 {
             sum += data.jk.hexInt
-        }else{
-            for index in stride(from: 0, to: data.count, by: 2){
+        } else {
+            for index in stride(from: 0, to: data.count, by: 2) {
                 let tempData = data.jk.sub(start: index, length: 2)
                 sum += tempData.jk.hexInt
             }
@@ -173,20 +181,20 @@ class BLEAdvertisingManager: NSObject {
         result = writeData.jk.removeSomeStringUseSomeString(removeString: "*", replacingString: data + sumHexa)
         return result
     }
-    
+
 }
 
 extension BLEAdvertisingManager: CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         if peripheral.state == .poweredOn {
             isBleOpen = true
-        }else{
+        } else {
             isBleOpen = false
         }
     }
-    
+
     func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
         logger.info("peripheralManagerDidStartAdvertising")
     }
-    
+
 }

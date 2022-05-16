@@ -86,7 +86,7 @@ class ElevatorConfigurationViewController: BaseViewController {
             let vc = ElevatorConfigurationSendDataViewController()
             vc.elevator = elevator
             vc.configurationData = configurationData
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -131,14 +131,14 @@ extension ElevatorConfigurationViewController: UITableViewDelegate, UITableViewD
             }
             cell.nameLabel.text = ElevatorConfigurationPickerType.cell.rawValue
         case 2:
-            if let group = self.group, let groupName = group.groupname {
+            if let group = group, let groupName = group.groupname {
                 cell.commonInput.text = groupName
             }else{
                 cell.commonInput.placeholder = "请选择" + ElevatorConfigurationPickerType.group.rawValue
             }
             cell.nameLabel.text = ElevatorConfigurationPickerType.group.rawValue
         case 3:
-            if let elevator = self.elevator, let elevatorName = elevator.remark {
+            if let elevator = elevator, let elevatorName = elevator.remark {
                 cell.commonInput.text = elevatorName
             }else{
                 cell.commonInput.placeholder = "请选择" + ElevatorConfigurationPickerType.elevator.rawValue

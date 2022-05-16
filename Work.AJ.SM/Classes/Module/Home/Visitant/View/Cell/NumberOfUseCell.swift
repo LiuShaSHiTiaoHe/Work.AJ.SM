@@ -51,7 +51,7 @@ class NumberOfUseCell: UITableViewCell {
     }
     
     func initializeView() {
-        self.contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whiteColor()
         
         contentView.addSubview(nameLabel)
         contentView.addSubview(singleButton)

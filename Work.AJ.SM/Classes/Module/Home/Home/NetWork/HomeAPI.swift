@@ -10,17 +10,17 @@ import Moya
 enum HomeAPI {
     case getMyUnit(mobile: String)
     case getAdvertisement(operID: String, communityID: String)
-    case getNotice(communityID:String, blockID: String, cellID: String)
-    case getElevators(communityID:String, unitID: String, cellID: String, groupID: String)
+    case getNotice(communityID: String, blockID: String, cellID: String)
+    case getElevators(communityID: String, unitID: String, cellID: String, groupID: String)
     case getLocks(communityID: String, blockID: String, cellID: String, unitID: String, userID: String, physicfloor: String)
     case getUserOfflineQRCode(unitID: String, communityID: String, blockID: String, userID: String)
     case getInvitationQRCode(unitID: String, arriveTime: String, validTime: String, communityID: String, blockID: String, userID: String)
-    case generateVisitorPassword(communityID: String, blockID: String, unitID: String, userID: String, phone: String, sDate: String, eDate: String , type: String)
+    case generateVisitorPassword(communityID: String, blockID: String, unitID: String, userID: String, phone: String, sDate: String, eDate: String, type: String)
     case getFloorsBySN(SNCode: String, phone: String, userID: String)
     case openDoor(lockMac: String, userID: String, communityID: String, blockID: String, unitID: String, cellID: String, physicalFloor: String)
     case callElevatorViaMobile(cellID: String, direction: String, physicalFloor: String, unitNo: String)
     case getElevatorConfiguration(communityID: String)
-    
+
     // MARK: - NCOM
     case ncomAllDevice(unitID: String)
     case ncomRecord(communityID: String, startTime: String, endTime: String, page: String, count: String)
@@ -28,11 +28,11 @@ enum HomeAPI {
 }
 
 extension HomeAPI: TargetType {
-    
+
     var baseURL: URL {
         return URL(string: APIs.baseUrl)!
     }
-    
+
     var path: String {
         switch self {
         case .getMyUnit:
@@ -65,11 +65,11 @@ extension HomeAPI: TargetType {
             return APIs.sendNCallStatus
         }
     }
-    
+
     var method: Moya.Method {
         return .post
     }
-    
+
     var task: Task {
         switch self {
         case let .getMyUnit(mobile):
@@ -83,9 +83,9 @@ extension HomeAPI: TargetType {
         case let .getLocks(communityID, blockID, cellID, unitID, userID, _):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "USERID": userID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getUserOfflineQRCode(unitID, communityID, blockID, userID):
-            return .requestParameters(parameters: ["UNITID": unitID, "COMMUNITYID":communityID, "BLOCKID": blockID, "USERID": userID, "isVisitor": "0"].ekey("UNITID"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["UNITID": unitID, "COMMUNITYID": communityID, "BLOCKID": blockID, "USERID": userID, "isVisitor": "0"].ekey("UNITID"), encoding: URLEncoding.default)
         case let .getInvitationQRCode(unitID, arriveTime, validTime, communityID, blockID, userID):
-            return .requestParameters(parameters: ["UNITID": unitID, "COMMUNITYID":communityID, "BLOCKID": blockID, "USERID": userID, "isVisitor": "1", "startTime": arriveTime, "endTime": validTime].ekey("UNITID"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["UNITID": unitID, "COMMUNITYID": communityID, "BLOCKID": blockID, "USERID": userID, "isVisitor": "1", "startTime": arriveTime, "endTime": validTime].ekey("UNITID"), encoding: URLEncoding.default)
         case let .generateVisitorPassword(communityID, blockID, unitID, userID, phone, sDate, eDate, type):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "UNITID": unitID, "USERID": userID, "PHONE": phone, "apiVersion": "1", "STARTDATE": sDate, "ENDDATE": eDate, "PASSTYPE": type, "needPwd": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getFloorsBySN(SNCode, phone, userID):
@@ -96,8 +96,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-            
-        // MARK: - N方对讲
+
+                // MARK: - N方对讲
         case let .ncomAllDevice(unitID):
             return .requestParameters(parameters: ["UNITID": unitID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .ncomRecord(communityID, startTime, endTime, page, count):
@@ -107,10 +107,10 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         }
     }
-    
-    var headers: [String : String]? {
+
+    var headers: [String: String]? {
         return [:]
     }
-    
+
 }
 

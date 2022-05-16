@@ -15,11 +15,11 @@ import SVProgressHUD
 
 class GDataManager: NSObject {
     static let shared = GDataManager()
-    
+
     func loginState() -> Bool {
         return ud.loginState
     }
-    
+
     func showLoginView() {
         if let currentVC = UIViewController.currentViewController() {
             let vc = LoginViewController()
@@ -27,15 +27,16 @@ class GDataManager: NSObject {
             currentVC.present(vc, animated: true, completion: nil)
         }
     }
-    
+
     // MARK: - 初始化realm
     func setupDataBase() {
         if let username = ud.username {
             RealmTools.configRealm(userID: username)
         }
     }
+
     // MARK: - 初始化云信
-    func setupNIMSDK(){
+    func setupNIMSDK() {
         let config = NIMSDKConfig.shared()
         config.delegate = self
         config.shouldSyncUnreadCount = true
@@ -48,7 +49,7 @@ class GDataManager: NSObject {
         option.pkCername = nil
         NIMSDK.shared().register(with: option)
     }
-    
+
     // MARK: - 登陆云信
     func loginNIMSDK() {
         if let mobile = ud.userMobile, let token = ud.NIMToken {
@@ -56,13 +57,13 @@ class GDataManager: NSObject {
             NIMSDK.shared().loginManager.login(account, token: token) { error in
                 if let _ = error {
                     logger.info("云信登录失败")
-                }else{
+                } else {
                     logger.info("云信登录成功")
                 }
             }
         }
     }
-    
+
     // MARK: - JPUSH
     func setupPush(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: isProduction)
@@ -73,17 +74,17 @@ class GDataManager: NSObject {
             }
         }
     }
-    
+
     func pushSetAlias(_ alias: String) {
         JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
             logger.info("JPUSH setAlias ==> \(String(describing: iAlias))")
         }, seq: 1)
     }
-    
+
     func registerDeviceToken(_ token: Data) {
         JPUSHService.registerDeviceToken(token)
     }
-    
+
     // MARK: - 检查更新
     func checkAppUpdate() {
         MineAPI.versionCheck(type: "ios").defaultRequest { jsonData in
@@ -91,7 +92,7 @@ class GDataManager: NSObject {
                 if effectiveStr == "T" {
                     if updateStr == "T" {
                         GDataManager.shared.checkAppStoreVersion(true, .immediately)
-                    }else if updateStr == "F" {
+                    } else if updateStr == "F" {
                         GDataManager.shared.checkAppStoreVersion(false, .immediately)
                     }
                 }
@@ -100,21 +101,21 @@ class GDataManager: NSObject {
             SVProgressHUD.showError(withStatus: response.message)
         }
     }
-    
-    
+
+
     private func checkAppStoreVersion(_ force: Bool, _ frequency: Rules.UpdatePromptFrequency) {
         let siren = Siren.shared
         siren.apiManager = APIManager.init(countryCode: "cn")
         if force {
             let rule = Rules.init(promptFrequency: frequency, forAlertType: .force)
             siren.rulesManager = RulesManager(globalRules: rule)
-        }else {
+        } else {
             let rule = Rules.init(promptFrequency: frequency, forAlertType: .option)
             siren.rulesManager = RulesManager(globalRules: rule)
         }
         siren.presentationManager = PresentationManager(alertTintColor: R.color.themeColor(),
-                                                           appName: Bundle.jk.appDisplayName,
-                                                           forceLanguageLocalization: .chineseSimplified)
+                appName: Bundle.jk.appDisplayName,
+                forceLanguageLocalization: .chineseSimplified)
         siren.wail(performCheck: .onDemand) { results in
             switch results {
             case .success(let updateResults):
@@ -132,14 +133,15 @@ class GDataManager: NSObject {
             }
         }
     }
-    
+
     // MARK: - 清除数据
     func clearAccount() {
         RealmTools.deleteRealmFiles()
-        self.removeUserData()
-        self.removeNetCache()
-        self.removeNomalCache()
+        removeUserData()
+        removeNetCache()
+        removeNomalCache()
     }
+
     // MARK: - 删除用户数据
     func removeUserData() {
         ud.remove(\.loginState)
@@ -153,21 +155,21 @@ class GDataManager: NSObject {
         ud.remove(\.openDoorStyle)
         ud.remove(\.personalOpenDoorPasswordStatus)
     }
-    
+
     // MARK: - 删除网络请求缓存
     func removeNetCache() {
         CacheManager.network.removeAllCache()
     }
-    
+
     // MARK: - 删除用户日常缓存
     func removeNomalCache() {
         CacheManager.normal.removeAllCache()
     }
-    
+
     func isOwner() -> Bool {
         if let unit = HomeRepository.shared.getCurrentUnit(), let userType = unit.usertype, userType == "O" {
             return true
-        }else{
+        } else {
             return false
         }
     }
@@ -179,7 +181,9 @@ extension GDataManager {
             let timestamp = NSDate().timeIntervalSince1970.jk.string
             let encryptString = evalue + timestamp + "p!P2QklnjGGaZKlw"
             let fkey = encryptString.md5()
-            var result = Dictionary().merging(dic){ (_, new) in new }
+            var result = Dictionary().merging(dic) { (_, new) in
+                new
+            }
             result.updateValue(timestamp, forKey: "TIMESTAMP")
             result.updateValue(fkey, forKey: "FKEY")
             result.removeValue(forKey: "ekey")
@@ -198,7 +202,7 @@ extension GDataManager {
             } catch {
                 return false
             }
-        }else{
+        } else {
             return false
         }
     }
@@ -206,29 +210,29 @@ extension GDataManager {
 
 
 extension GDataManager: NIMSDKConfigDelegate {
-    
+
 }
 
 extension GDataManager {
     func timeDuration(withInterval time: Int) -> String {
         var result = ""
-        let seconds = time%60
-        var minutes = time/60
+        let seconds = time % 60
+        var minutes = time / 60
         var hours: Int = 0
         if minutes > 60 {
-            hours = minutes/60
-            minutes = minutes%60
+            hours = minutes / 60
+            minutes = minutes % 60
         }
         if hours > 0 {
             result = hours.jk.intToString + "小时" + minutes.jk.intToString + "分钟" + seconds.jk.intToString + "秒"
-        }else{
+        } else {
             if minutes > 0 {
                 result = minutes.jk.intToString + "分种" + seconds.jk.intToString + "秒"
-            }else{
+            } else {
                 result = seconds.jk.intToString + "秒"
             }
         }
-        
+
         return result
     }
 }

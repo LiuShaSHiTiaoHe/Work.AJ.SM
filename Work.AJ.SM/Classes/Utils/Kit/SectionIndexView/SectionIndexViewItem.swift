@@ -25,7 +25,7 @@ import UIKit
 public class SectionIndexViewItemView: UIView, SectionIndexViewItem {
     @objc public var isSelected: Bool = false {
         didSet {
-            self.selectItem(isSelected)
+            selectItem(isSelected)
         }
     }
     @objc public var indicator: UIView?

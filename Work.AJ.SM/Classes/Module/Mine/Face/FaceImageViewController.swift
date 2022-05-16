@@ -16,28 +16,28 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         button.setImage(R.image.face_icon_cancel(), for: .normal)
         return button
     }()
-    
+
     lazy var swicthButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.face_icon_switchCamera(), for: .normal)
         return button
     }()
-    
+
     lazy var cameraButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.mine_camera(), for: .normal)
         return button
     }()
-    
+
     lazy var galleryButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.face_icon_openLibrary(), for: .normal)
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         initUI()
         cameraDelegate = self
@@ -50,7 +50,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         swicthButton.isEnabled = false
         cameraButton.isEnabled = false
     }
-    
+
     private func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(cancelButton)
@@ -61,15 +61,15 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         view.bringSubviewToFront(swicthButton)
         view.bringSubviewToFront(cameraButton)
         view.bringSubviewToFront(galleryButton)
-        
+
         cancelButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
             make.width.height.equalTo(40)
             make.top.equalToSuperview().offset(kStateHeight + kMargin)
         }
-        
+
         swicthButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin*2)
+            make.left.equalToSuperview().offset(kMargin * 2)
             make.width.height.equalTo(40)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 1.5)
         }
@@ -79,32 +79,32 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
             make.centerX.equalToSuperview()
         }
         galleryButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin*2)
+            make.right.equalToSuperview().offset(-kMargin * 2)
             make.width.height.equalTo(40)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin * 1.5)
         }
     }
-    
+
     @objc
     func cancelAction() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
-    
+
     @objc
     func switchCameraAction() {
         switchCamera()
     }
-    
+
     @objc
     func takePhotoAction() {
         takePhoto()
     }
-    
+
     @objc
     func galleryAction() {
         showImagePicker()
     }
-    
+
     func confirmFaceImage(_ image: UIImage) {
         SVProgressHUD.show()
         let vc = ConfirmFaceImageViewController()
@@ -113,16 +113,16 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
             if fixImage.imageOrientation == .leftMirrored {
                 fixImage = UIImage(cgImage: cgImage, scale: fixImage.scale, orientation: .right)
             }
-        }else{
+        } else {
             SVProgressHUD.showInfo(withStatus: "图片数据错误")
         }
-   
+
         if let imageData = fixImage.jk.fixOrientation().pngData() {
             SVProgressHUD.dismiss()
             CacheManager.network.removeCacheWithKey(FaceImageCacheKey)
             CacheManager.network.saveCacheWithDictionary([FaceImageCacheKey: imageData], key: FaceImageCacheKey)
-            self.navigationController?.pushViewController(vc, animated: true)
-        }else{
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
             SVProgressHUD.showInfo(withStatus: "图片数据错误")
         }
     }
@@ -130,18 +130,18 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
 }
 
 extension FaceImageViewController: SwiftyCamViewControllerDelegate {
-    
+
     func swiftyCamSessionDidStartRunning(_ swiftyCam: SwiftyCamViewController) {
         swicthButton.isEnabled = true
         cameraButton.isEnabled = true
     }
-    
+
     func swiftyCamSessionDidStopRunning(_ swiftyCam: SwiftyCamViewController) {
         swicthButton.isEnabled = false
         cameraButton.isEnabled = false
     }
 
-    
+
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
         switch detect(photo) {
         case 0:
@@ -152,14 +152,14 @@ extension FaceImageViewController: SwiftyCamViewControllerDelegate {
             SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
         }
     }
-    
+
 }
 
 
 extension FaceImageViewController {
     func detect(_ faceImage: UIImage) -> Int {
         let accuracy = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
-        if let faceCIImage = CIImage.init(image: faceImage), let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: accuracy), let imageOptions =  NSDictionary(object: NSNumber(value: 5) as NSNumber, forKey: CIDetectorImageOrientation as NSString) as? [String : Any] {
+        if let faceCIImage = CIImage.init(image: faceImage), let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: accuracy), let imageOptions = NSDictionary(object: NSNumber(value: 5) as NSNumber, forKey: CIDetectorImageOrientation as NSString) as? [String: Any] {
             let features = faceDetector.features(in: faceCIImage, options: imageOptions)
             let faceFeature = features.compactMap { feature in
                 return feature as? CIFaceFeature
@@ -172,12 +172,13 @@ extension FaceImageViewController {
 
 
 extension FaceImageViewController: YPImagePickerDelegate {
-    func imagePickerHasNoItemsInLibrary(_ picker: YPImagePicker) {}
-    
+    func imagePickerHasNoItemsInLibrary(_ picker: YPImagePicker) {
+    }
+
     func shouldAddToSelection(indexPath: IndexPath, numSelections: Int) -> Bool {
         return true
     }
-    
+
     func showImagePicker() {
         var config = YPImagePickerConfiguration()
         config.library.mediaType = .photo
@@ -192,14 +193,16 @@ extension FaceImageViewController: YPImagePickerDelegate {
         config.colors.tintColor = R.color.blackColor()!
 //        config.colors.defaultNavigationBarColor = R.color.themeColor()!
 //        config.colors.coverSelectorBorderColor = R.color.themeColor()!
-        
+
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self
         picker.didFinishPicking { [weak self] items, cancelled in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             if cancelled {
                 picker.dismiss(animated: true)
-            }else{
+            } else {
                 if let image = items.singlePhoto?.image {
                     switch self.detect(image) {
                     case 0:

@@ -12,10 +12,10 @@ import UIKit
 /// - line: 下划线
 /// - border: 边框
 public enum Style {
-    
+
     case line(nomal: UIColor, selected: UIColor)
     case border(nomal: UIColor, selected: UIColor)
-    
+
     public var nomal: UIColor {
         switch self {
         case let .line(nomal, _):
@@ -24,7 +24,7 @@ public enum Style {
             return nomal
         }
     }
-    
+
     public var selected: UIColor {
         switch self {
         case let .line(_, selected):
@@ -37,10 +37,10 @@ public enum Style {
 
 /// MARK - 标签
 public class StyleLabel: UILabel, CodeLable {
-    
+
     /// 大小
     public var itemSize: CGSize
-    
+
     /// 风格
     public var style: Style = Style.line(nomal: UIColor.gray, selected: UIColor.red) {
         didSet {
@@ -59,13 +59,13 @@ public class StyleLabel: UILabel, CodeLable {
             }
         }
     }
-    
+
     /// 是否编辑
     private var isEditing = false
-    
+
     /// 是否焦点
     private var isFocusingCharacter = false
-    
+
     /// 线
     private lazy var lineLayer: CALayer = {
         let temLayer = CALayer()
@@ -74,14 +74,14 @@ public class StyleLabel: UILabel, CodeLable {
         temLayer.backgroundColor = self.style.nomal.cgColor
         return temLayer
     }()
-    
+
     init(size: CGSize) {
-        self.itemSize = size
+        itemSize = size
         super.init(frame: CGRect.zero)
         layer.addSublayer(lineLayer)
     }
-    
-    
+
+
     /// 刷新文本
     ///
     /// - Parameters:
@@ -89,8 +89,10 @@ public class StyleLabel: UILabel, CodeLable {
     ///   - isFocusingCharacter: isFocusingCharacter
     ///   - isEditing: isEditing
     public func update(character: Character?, isFocusingCharacter: Bool, isEditing: Bool) {
-        
-        text = character.map { String($0) }
+
+        text = character.map {
+            String($0)
+        }
         self.isEditing = isEditing
         self.isFocusingCharacter = isFocusingCharacter
         if (text?.isEmpty ?? true) == false || (isEditing && isFocusingCharacter) {
@@ -109,14 +111,14 @@ public class StyleLabel: UILabel, CodeLable {
             }
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 public class DashLineLabel: UILabel {
-    
+
     public var itemSize: CGSize
     private let lineHeight: CGFloat = 1
 
@@ -125,33 +127,33 @@ public class DashLineLabel: UILabel {
         let temLayer = CAShapeLayer()
         temLayer.strokeColor = R.color.separateColor()!.cgColor
         temLayer.lineWidth = 1
-        temLayer.lineDashPattern = [5,2]
+        temLayer.lineDashPattern = [5, 2]
         let path = CGMutablePath()
         path.addLines(between: [CGPoint(x: 0, y: itemSize.height - lineHeight),
                                 CGPoint(x: itemSize.width, y: itemSize.height - lineHeight)])
         temLayer.path = path
         return temLayer
     }()
-    
+
     init(size: CGSize) {
-        self.itemSize = size
+        itemSize = size
         super.init(frame: CGRect.zero)
         layer.addSublayer(lineLayer)
     }
-    
+
     func updateLine(_ color: UIColor, _ width: CGFloat) {
         let path = CGMutablePath()
         path.addLines(between: [CGPoint(x: 0, y: itemSize.height - lineHeight),
                                 CGPoint(x: width, y: itemSize.height - lineHeight)])
         lineLayer.path = path
         lineLayer.strokeColor = color.cgColor
-        self.layoutIfNeeded()
+        layoutIfNeeded()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }
 
 /// MARK - 自定义
@@ -172,18 +174,17 @@ public class CustomLabel: UILabel, CodeLable {
         let lineHeight: CGFloat = 1
         temLayer.frame = CGRect(x: 0, y: itemSize.height - lineHeight, width: itemSize.width, height: lineHeight)
         temLayer.colors = [UIColor.gray.cgColor,
-                                UIColor.gray.cgColor,
-                                UIColor.gray.cgColor]
+                           UIColor.gray.cgColor,
+                           UIColor.gray.cgColor]
         temLayer.locations = [0.0, 0.25, 0.5]
         temLayer.startPoint = CGPoint(x: 0, y: 0)
         temLayer.endPoint = CGPoint(x: 1, y: 1)
         return temLayer
     }()
 
-    
-    
+
     init(size: CGSize) {
-        self.itemSize = size
+        itemSize = size
         super.init(frame: CGRect.zero)
         layer.addSublayer(lineLayer)
     }
@@ -197,19 +198,21 @@ public class CustomLabel: UILabel, CodeLable {
     ///   - isEditing: isEditing
     public func update(character: Character?, isFocusingCharacter: Bool, isEditing: Bool) {
 
-        text = character.map { String($0) }
+        text = character.map {
+            String($0)
+        }
         self.isEditing = isEditing
         self.isFocusingCharacter = isFocusingCharacter
         if (text?.isEmpty ?? true) == false || (isEditing && isFocusingCharacter) {
             lineLayer.colors = [UIColor.red.cgColor,
-                               UIColor.green.cgColor,
-                               UIColor.purple.cgColor]
-            
+                                UIColor.green.cgColor,
+                                UIColor.purple.cgColor]
+
         } else {
-            
+
             lineLayer.colors = [UIColor.gray.cgColor,
-                               UIColor.gray.cgColor,
-                               UIColor.gray.cgColor]
+                                UIColor.gray.cgColor,
+                                UIColor.gray.cgColor]
         }
     }
 
@@ -222,16 +225,16 @@ public class CustomLabel: UILabel, CodeLable {
 
 /// MARK - 自定义
 public class CustomBorderLabel: UILabel, CodeLable {
-    
+
     /// 大小
     public var itemSize: CGSize
-    
+
     /// 是否编辑
     private var isEditing = false
-    
+
     /// 是否焦点
     private var isFocusingCharacter = false
-    
+
     /// 线
     private lazy var lineLayer: CAGradientLayer = {
         let temLayer = CAGradientLayer()
@@ -245,16 +248,15 @@ public class CustomBorderLabel: UILabel, CodeLable {
         temLayer.endPoint = CGPoint(x: 1, y: 1)
         return temLayer
     }()
-    
-    
-    
+
+
     init(size: CGSize) {
-        self.itemSize = size
+        itemSize = size
         super.init(frame: CGRect.zero)
         layer.addSublayer(lineLayer)
     }
-    
-    
+
+
     /// 刷新文本
     ///
     /// - Parameters:
@@ -262,27 +264,29 @@ public class CustomBorderLabel: UILabel, CodeLable {
     ///   - isFocusingCharacter: isFocusingCharacter
     ///   - isEditing: isEditing
     public func update(character: Character?, isFocusingCharacter: Bool, isEditing: Bool) {
-        
-        text = character.map { String($0) }
+
+        text = character.map {
+            String($0)
+        }
         self.isEditing = isEditing
         self.isFocusingCharacter = isFocusingCharacter
         if (text?.isEmpty ?? true) == false || (isEditing && isFocusingCharacter) {
             lineLayer.colors = [UIColor.red.cgColor,
                                 UIColor.green.cgColor,
                                 UIColor.purple.cgColor]
-            
+
         } else {
-            
+
             lineLayer.colors = [UIColor.gray.cgColor,
                                 UIColor.gray.cgColor,
                                 UIColor.gray.cgColor]
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }
 
 

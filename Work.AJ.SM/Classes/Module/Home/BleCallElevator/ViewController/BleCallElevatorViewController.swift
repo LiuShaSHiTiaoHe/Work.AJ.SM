@@ -14,20 +14,22 @@ class BleCallElevatorViewController: BaseViewController {
         let view = BleCallElevatorView()
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func initData() {
         contentView.sendButton.addTarget(self, action: #selector(sendBleData), for: .touchUpInside)
         let _ = BLEAdvertisingManager.shared
     }
-    
+
     @objc
-    func sendBleData(){
-        PermissionManager.PermissionRequest(.bluetooth) {[weak self] authorized in
-            guard let self = self else { return }
+    func sendBleData() {
+        PermissionManager.PermissionRequest(.bluetooth) { [weak self] authorized in
+            guard let self = self else {
+                return
+            }
             if authorized {
                 let manager = BLEAdvertisingManager.shared
                 let sendStatus = manager.openDoor()
@@ -35,25 +37,25 @@ class BleCallElevatorViewController: BaseViewController {
                 if sendStatus {
                     self.contentView.statusImage.image = R.image.bce_success_image()
                     self.contentView.tips2Label.text = "已呼梯！请稍候…"
-                }else{
+                } else {
                     self.contentView.statusImage.image = R.image.bce_failed_image()
                     self.contentView.tips2Label.text = "呼梯失败，请重试！"
                 }
-            }else{
+            } else {
                 SVProgressHUD.showInfo(withStatus: "请打开蓝牙权限")
             }
         }
 
     }
-    
+
     // MARK: - UI
     override func initUI() {
         view.addSubview(contentView)
-        
+
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
     }
-    
+
 }

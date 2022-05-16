@@ -31,7 +31,7 @@ class Orientation  {
     }
     
     func start() {
-        self.deviceOrientation = UIDevice.current.orientation
+        deviceOrientation = UIDevice.current.orientation
         coreMotionManager.startAccelerometerUpdates(to: .main) { [weak self] (data, error) in
             guard let data = data else {
                 return
@@ -41,12 +41,12 @@ class Orientation  {
     }
   
     func stop() {
-        self.coreMotionManager.stopAccelerometerUpdates()
-        self.deviceOrientation = nil
+        coreMotionManager.stopAccelerometerUpdates()
+        deviceOrientation = nil
     }
     
     func getImageOrientation(forCamera: SwiftyCamViewController.CameraSelection) -> UIImage.Orientation {
-        guard shouldUseDeviceOrientation, let deviceOrientation = self.deviceOrientation else { return forCamera == .rear ? .right : .leftMirrored }
+        guard shouldUseDeviceOrientation, let deviceOrientation = deviceOrientation else { return forCamera == .rear ? .right : .leftMirrored }
         
         switch deviceOrientation {
         case .landscapeLeft:
@@ -75,7 +75,7 @@ class Orientation  {
     }
     
     func getVideoOrientation() -> AVCaptureVideoOrientation? {
-        guard shouldUseDeviceOrientation, let deviceOrientation = self.deviceOrientation else { return nil }
+        guard shouldUseDeviceOrientation, let deviceOrientation = deviceOrientation else { return nil }
         
         switch deviceOrientation {
         case .landscapeLeft:

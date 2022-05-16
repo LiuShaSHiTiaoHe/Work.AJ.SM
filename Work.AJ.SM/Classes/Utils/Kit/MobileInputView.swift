@@ -14,13 +14,13 @@ class MobileInputView: UIView {
             tipLabel.text = errorMsg
         }
     }
-    
+
     var inputString: String? {
         get {
             return textInput.text
         }
     }
-    
+
     var placeHolders: String = "" {
         didSet {
             textInput.placeholder = placeHolders
@@ -35,7 +35,7 @@ class MobileInputView: UIView {
         label.textAlignment = .left
         return label
     }()
-    
+
     private(set) var textInput: UITextField = {
         let input = UITextField()
         input.font = k14Font
@@ -45,7 +45,7 @@ class MobileInputView: UIView {
         input.keyboardType = .phonePad
         return input
     }()
-    
+
     private let seperator: UIView = {
         let view = UIView()
         view.backgroundColor = R.color.separateColor()
@@ -59,55 +59,55 @@ class MobileInputView: UIView {
         label.textColor = R.color.errorRedColor()
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeView()
         textInput.addTarget(self, action: #selector(textInputEditingBegin(_:)), for: .editingDidBegin)
         textInput.addTarget(self, action: #selector(textInputEditingEnd(_:)), for: .editingDidEnd)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func initializeView() {
-        self.backgroundColor = .clear
-        
-        self.addSubview(titleLabel)
-        self.addSubview(textInput)
-        self.addSubview(seperator)
-        self.addSubview(tipLabel)
-        
+        backgroundColor = .clear
+
+        addSubview(titleLabel)
+        addSubview(textInput)
+        addSubview(seperator)
+        addSubview(tipLabel)
+
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.width.equalTo(60)
-            make.top.equalToSuperview().offset(kMargin/4)
+            make.top.equalToSuperview().offset(kMargin / 4)
             make.height.equalTo(30)
         }
-        
+
         textInput.snp.makeConstraints { make in
-            make.left.equalTo(titleLabel.snp.right).offset(kMargin/2)
+            make.left.equalTo(titleLabel.snp.right).offset(kMargin / 2)
             make.right.equalToSuperview()
             make.centerY.equalTo(titleLabel)
         }
-        
+
         seperator.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin/4)
+            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin / 4)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalTo(1/kScale)
+            make.height.equalTo(1 / kScale)
         }
-        
+
         tipLabel.snp.makeConstraints { make in
             make.left.equalTo(textInput)
             make.right.equalToSuperview()
             make.height.equalTo(20)
-            make.top.equalTo(seperator.snp.bottom).offset(kMargin/4)
+            make.top.equalTo(seperator.snp.bottom).offset(kMargin / 4)
         }
-        
+
     }
-    
+
     // MARK: -Actions
     @objc func textInputEditingBegin(_ sender: UITextField) {
         DispatchQueue.main.async {
@@ -116,7 +116,7 @@ class MobileInputView: UIView {
             self.errorMsg = ""
         }
     }
-    
+
     @objc func textInputEditingEnd(_ sender: UITextField) {
         DispatchQueue.main.async {
             self.seperator.backgroundColor = R.color.separateColor()
@@ -126,7 +126,7 @@ class MobileInputView: UIView {
             }
         }
     }
-    
+
     func cleanInput() {
         textInput.text = ""
     }

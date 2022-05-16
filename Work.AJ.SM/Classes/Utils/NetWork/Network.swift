@@ -8,29 +8,29 @@
 import Moya
 
 open class Network {
-    
+
     public static let `default`: Network = {
         Network(configuration: Configuration.default)
     }()
-    
+
     public let provider: MoyaProvider<MultiTarget>
-    
+
     public init(configuration: Configuration) {
         provider = MoyaProvider(configuration: configuration)
     }
 }
 
 public extension MoyaProvider {
-    
+
     convenience init(configuration: Network.Configuration) {
-        
+
         let endpointClosure = { target -> Endpoint in
             MoyaProvider.defaultEndpointMapping(for: target)
-                .adding(newHTTPHeaderFields: configuration.addingHeaders(target))
-                .replacing(task: configuration.replacingTask(target))
+                    .adding(newHTTPHeaderFields: configuration.addingHeaders(target))
+                    .replacing(task: configuration.replacingTask(target))
         }
-        
-        let requestClosure =  { (endpoint: Endpoint, closure: RequestResultClosure) -> Void in
+
+        let requestClosure = { (endpoint: Endpoint, closure: RequestResultClosure) -> Void in
             do {
                 var request = try endpoint.urlRequest()
                 request.timeoutInterval = configuration.timeoutInterval
@@ -43,11 +43,11 @@ public extension MoyaProvider {
                 closure(.failure(.underlying(error, nil)))
             }
         }
-        
+
         self.init(
-            endpointClosure: endpointClosure,
-            requestClosure: requestClosure,
-            plugins: configuration.plugins
+                endpointClosure: endpointClosure,
+                requestClosure: requestClosure,
+                plugins: configuration.plugins
         )
     }
 }

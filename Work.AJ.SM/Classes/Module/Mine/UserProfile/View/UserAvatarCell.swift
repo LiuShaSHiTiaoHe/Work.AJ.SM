@@ -12,8 +12,8 @@ let UserAvatarCellIdentifier = "UserAvatarCellIdentifier"
 class UserAvatarCell: UITableViewCell {
 
     private func initializeView() {
-        self.contentView.addSubview(nameLabel)
-        self.contentView.addSubview(avatar)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(avatar)
         
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

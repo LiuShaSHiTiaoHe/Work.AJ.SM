@@ -54,7 +54,7 @@ class OwnerQRCodeViewController: BaseViewController {
 
 extension OwnerQRCodeViewController: OwnerQRCodeViewDelegate {
     func close() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func refresh() {

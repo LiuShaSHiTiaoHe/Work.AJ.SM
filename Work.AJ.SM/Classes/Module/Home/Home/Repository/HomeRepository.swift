@@ -21,7 +21,7 @@ typealias NComCallRecordCompletion = (([NComRecordInfo], Int) -> Void)
 
 class HomeRepository {
     static let shared = HomeRepository()
-    
+
     func homeData(completion: @escaping HomeDataCompletion) {
         SVProgressHUD.show()
         var homeModuleArray: Array<HomePageFunctionModule> = []
@@ -34,8 +34,12 @@ class HomeRepository {
             return
         }
         HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .ignoreCache, showError: true) { [weak self] models, response in
-            guard let `self` = self else { return }
-            guard models.count > 0 else { return }
+            guard let `self` = self else {
+                return
+            }
+            guard models.count > 0 else {
+                return
+            }
             RealmTools.addList(models, update: .all) {
                 logger.info("update done")
             }
@@ -50,10 +54,10 @@ class HomeRepository {
                         noticeArray = notices
                         completion(homeModuleArray, adsArray, noticeArray)
                     }
-                }else{
+                } else {
                     completion(homeModuleArray, adsArray, noticeArray)
                 }
-            }else{
+            } else {
                 currentUnit = models.first(where: { model in
                     model.state == "N"
                 })
@@ -65,7 +69,7 @@ class HomeRepository {
                         noticeArray = notices
                         completion(homeModuleArray, adsArray, noticeArray)
                     }
-                }else{
+                } else {
                     completion(homeModuleArray, adsArray, noticeArray)
                 }
             }
@@ -74,12 +78,14 @@ class HomeRepository {
             completion(homeModuleArray, adsArray, noticeArray)
         }
     }
-    
+
     func allUnits(completion: @escaping HomeModulesCompletion) {
         SVProgressHUD.show()
         HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheThenNetwork, showError: true) { [weak self] models, response in
             SVProgressHUD.dismiss()
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             guard models.count > 0 else {
                 return
             }
@@ -92,13 +98,13 @@ class HomeRepository {
                 }) {
                     completion(self.filterHomePageModules(unit))
                 }
-            }else{
+            } else {
                 if let firstUnit = models.first(where: { model in
                     model.state == "N"
                 }), let unitID = firstUnit.unitid {
                     Defaults.currentUnitID = unitID
                     completion(self.filterHomePageModules(firstUnit))
-                }else{
+                } else {
                     completion([])
                 }
             }
@@ -107,7 +113,7 @@ class HomeRepository {
             completion([])
         }
     }
-    
+
     func adsAndNotice(completion: @escaping HomeAdsAndNoticeCompletion) {
         var adsData: [AdsModel] = []
         var noticeData: [NoticeModel] = []
@@ -134,32 +140,32 @@ class HomeRepository {
             }
         }
     }
-    
+
     func getUnitName(unitID: Int) -> String {
         if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname, let blockname = unit.blockname, let unitno = unit.unitno {
             return communityname + blockname + cellname + unitno + "室"
         }
         return ""
     }
-    
+
     func getCurrentUnit() -> UnitModel? {
         if let unitID = Defaults.currentUnitID {
-            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first{
+            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first {
                 return unit
             }
         }
         return nil
     }
-    
+
     func getCurrentUnitName() -> String {
         if let unitID = Defaults.currentUnitID {
-            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname{
+            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname {
                 return communityname + cellname
             }
         }
         return ""
     }
-    
+
     func getCurrentHouseName() -> String {
         if let unitID = Defaults.currentUnitID {
             if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let cell = unit.cellname, let community = unit.communityname, let unitno = unit.unitno, let blockName = unit.blockname {
@@ -168,7 +174,7 @@ class HomeRepository {
         }
         return ""
     }
-    
+
     func getCurrentUser() -> UserModel? {
         if let userID = ud.userID, let _ = userID.jk.toInt() {
             if let user = RealmTools.objectsWithPredicate(object: UserModel(), predicate: NSPredicate.init(format: "rid == %@", userID)).first {
@@ -177,7 +183,7 @@ class HomeRepository {
         }
         return nil
     }
-    
+
     func currentUserType() -> String {
         if let unit = getCurrentUnit(), let type = unit.usertype {
             return type
@@ -188,7 +194,7 @@ class HomeRepository {
 
 // MARK: - locks
 extension HomeRepository {
-    
+
     func getCurrentLocks() -> [UnitLockModel] {
         var result = [UnitLockModel]()
         if let unit = getCurrentUnit() {
@@ -199,7 +205,7 @@ extension HomeRepository {
         }
         return result
     }
-    
+
     func getAllLocks(completion: @escaping HomeAllLocksCompletion) {
         if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = ud.userID {
             HomeAPI.getLocks(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, userID: userID, physicfloor: "").request(modelType: [UnitLockModel].self, cacheType: .networkElseCache, showError: true) { models, response in
@@ -209,7 +215,7 @@ extension HomeRepository {
             }
         }
     }
-    
+
     func openDoorViaPush(_ lockMac: String, completion: @escaping DefaultCompletion) {
         if let userID = ud.userID, let unit = getCurrentUnit(), let physicalFloor = unit.physicalfloor, let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
             HomeAPI.openDoor(lockMac: lockMac, userID: userID, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, physicalFloor: physicalFloor).defaultRequest { jsonData in
@@ -217,7 +223,7 @@ extension HomeRepository {
             } failureCallback: { response in
                 completion(response.message)
             }
-        }else {
+        } else {
             completion("数据错误")
         }
     }
@@ -232,7 +238,7 @@ extension HomeRepository {
             } failureCallback: { response in
                 completion(response.message)
             }
-        }else {
+        } else {
             completion("数据错误")
         }
     }
@@ -262,20 +268,20 @@ extension HomeRepository {
             }
         }
     }
-    
+
     func loadNComRecord(_ sTime: String = "", _ eTime: String = "", _ page: String, _ count: String = "15", completion: @escaping NComCallRecordCompletion) {
         if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
             HomeAPI.ncomRecord(communityID: communityID, startTime: sTime, endTime: eTime, page: page, count: count).defaultRequest { jsonData in
                 if let recordsData = jsonData["data"].rawString(), let records = [NComRecordInfo](JSONString: recordsData) {
                     if let pageData = jsonData["page"].dictionaryObject, let tPage = pageData["totalPage"] as? Int {
                         completion(records, tPage)
-                    }else{
+                    } else {
                         completion([], -1)
                     }
-                }else{
-                    if let pageData = jsonData["page"].dictionaryObject, let tPage = pageData["totalPage"] as? Int  {
+                } else {
+                    if let pageData = jsonData["page"].dictionaryObject, let tPage = pageData["totalPage"] as? Int {
                         completion([], tPage)
-                    }else{
+                    } else {
                         completion([], -1)
                     }
                 }
@@ -286,16 +292,18 @@ extension HomeRepository {
 
 // MARK: - Private
 extension HomeRepository {
-    
-    func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule]{
+
+    func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule] {
         var result = [HomePageFunctionModule]()
         let allkeys = HomePageModule.allCases
         let allModules = allkeys.compactMap { moduleEnum in
             return moduleEnum.model
         }
         if let otherused = unit.otherused, otherused == 1 {
-            return allModules.filter {$0.tag == "OTHERUSED"}
-        }else{
+            return allModules.filter {
+                $0.tag == "OTHERUSED"
+            }
+        } else {
             let validModules = allValidModules(unit)
             allModules.forEach { module in
                 if module.showinpage == .home, !module.tag.isEmpty {
@@ -311,7 +319,7 @@ extension HomeRepository {
         }
         return result
     }
-    
+
     private func allValidModules(_ unit: UnitModel) -> [String] {
         var result: Array<String> = []
         if unit.moudle1 == "T" {
@@ -367,7 +375,7 @@ extension HomeRepository {
         // MARK: - module17访客二维码，myset7 开门密码,根据这两个判断是否显示邀请访客功能。若只有一个开启，则点击邀请访客后，只有二维码或者密码一个对应选项。
         if unit.moudle17 == "T" {
             result.append("MOUDLE17")
-        }else {
+        } else {
             if isVisitorPasswordEnable(unit) {
                 result.append("MOUDLE17")
             }
@@ -384,14 +392,15 @@ extension HomeRepository {
         }
         return false
     }
+
     // MARK: - 访客二维码是否支持
     func isVisitorQrCodeEnable(_ unit: UnitModel) -> Bool {
-        if let module17 = unit.moudle17, module17 == "T"{
+        if let module17 = unit.moudle17, module17 == "T" {
             return true
         }
         return false
     }
-    
+
     // MARK: - 是否允许访客呼叫到手机
     func isVisitorCallUserMobileEnable(_ unit: UnitModel) -> Bool {
         if let myset8 = unit.myset8, myset8 == "T" {
@@ -399,7 +408,7 @@ extension HomeRepository {
         }
         return false
     }
-    
+
     // MARK: - 人脸认证是否支持
     func isFaceCertificationEnable(_ unit: UnitModel) -> Bool {
         if let myset1 = unit.myset1, myset1 == "T" {
@@ -407,18 +416,18 @@ extension HomeRepository {
         }
         return false
     }
-    
+
     // MARK: - 访客记录是否支持
     func isVisitorRecordEnable(_ unit: UnitModel) -> Bool {
-        if isVisitorPasswordEnable(unit){
+        if isVisitorPasswordEnable(unit) {
             return true
         }
-        if isVisitorQrCodeEnable(unit){
+        if isVisitorQrCodeEnable(unit) {
             return true
         }
         return false
     }
-    
+
     // MARK: - 户户通是否支持
     func isCallOtherUserEnable(_ unit: UnitModel) -> Bool {
         if let myset2 = unit.myset2, myset2 == "T" {
@@ -426,7 +435,7 @@ extension HomeRepository {
         }
         return false
     }
-    
+
     // MARK: - 联系物业是否支持
     func isContactPropertyEnable(_ unit: UnitModel) -> Bool {
         if let myset9 = unit.myset9, myset9 == "T" {
@@ -434,7 +443,7 @@ extension HomeRepository {
         }
         return false
     }
-    
+
     // MARK: - 消息是否支持
     func isNoticeMessageEnable(_ unit: UnitModel) -> Bool {
         if let myset4 = unit.myset4, myset4 == "T" {

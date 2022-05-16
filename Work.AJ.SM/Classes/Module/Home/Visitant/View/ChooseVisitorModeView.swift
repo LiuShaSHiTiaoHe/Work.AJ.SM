@@ -44,12 +44,12 @@ class ChooseVisitorModeView: BaseView {
         if !isPasswordEnable && !isQRCodeEnable {
             return
         }
-        self.addSubview(closeButton)
-        self.addSubview(titleLabel)
-        self.addSubview(qrcodeButton)
-        self.addSubview(qrcodeTitle)
-        self.addSubview(passwordButton)
-        self.addSubview(passwordTitle)
+        addSubview(closeButton)
+        addSubview(titleLabel)
+        addSubview(qrcodeButton)
+        addSubview(qrcodeTitle)
+        addSubview(passwordButton)
+        addSubview(passwordTitle)
         
         closeButton.snp.makeConstraints { make in
             make.width.height.equalTo(30)
@@ -67,7 +67,7 @@ class ChooseVisitorModeView: BaseView {
         if isPasswordEnable && isQRCodeEnable {
             qrcodeButton.snp.makeConstraints { make in
                 make.width.height.equalTo(65)
-                make.centerX.equalTo(self.snp.centerX).dividedBy(2)
+                make.centerX.equalTo(snp.centerX).dividedBy(2)
                 make.centerY.equalToSuperview()
             }
             
@@ -78,7 +78,7 @@ class ChooseVisitorModeView: BaseView {
             }
             
             passwordButton.snp.makeConstraints { make in
-                make.centerX.equalTo(self.snp.centerX).multipliedBy(1.5)
+                make.centerX.equalTo(snp.centerX).multipliedBy(1.5)
                 make.width.height.equalTo(65)
                 make.top.equalTo(qrcodeButton)
             }
@@ -94,7 +94,7 @@ class ChooseVisitorModeView: BaseView {
                 passwordTitle.isHidden = true
                 qrcodeButton.snp.makeConstraints { make in
                     make.width.height.equalTo(65)
-                    make.centerX.equalTo(self.snp.centerX)
+                    make.centerX.equalTo(snp.centerX)
                     make.centerY.equalToSuperview()
                 }
                 
@@ -110,7 +110,7 @@ class ChooseVisitorModeView: BaseView {
                 
                 passwordButton.snp.makeConstraints { make in
                     make.width.height.equalTo(65)
-                    make.centerX.equalTo(self.snp.centerX)
+                    make.centerX.equalTo(snp.centerX)
                     make.centerY.equalToSuperview()
                 }
                 

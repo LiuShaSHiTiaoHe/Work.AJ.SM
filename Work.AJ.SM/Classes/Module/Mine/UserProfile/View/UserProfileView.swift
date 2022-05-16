@@ -14,8 +14,8 @@ class UserProfileView: BaseView {
     }
     
     override func initializeView() {
-        self.addSubview(headerView)
-        self.addSubview(tableView)
+        addSubview(headerView)
+        addSubview(tableView)
         
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
