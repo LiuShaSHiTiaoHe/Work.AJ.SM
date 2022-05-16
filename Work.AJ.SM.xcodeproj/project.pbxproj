@@ -189,12 +189,23 @@
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
 		419E2DE827D9977500B60633 /* HouseCetificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE727D9977500B60633 /* HouseCetificationView.swift */; };
 		41A6202E2816723300DE3B54 /* CityTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6202D2816723300DE3B54 /* CityTipsView.swift */; };
+		41A620312817BC2200DE3B54 /* AgoraRtm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620302817BC2200DE3B54 /* AgoraRtm.swift */; };
+		41A620342817BC8800DE3B54 /* AGEError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620332817BC8700DE3B54 /* AGEError.swift */; };
+		41A620362817BD1400DE3B54 /* AgoraRtmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620352817BD1400DE3B54 /* AgoraRtmModels.swift */; };
+		41A620382817BEB900DE3B54 /* AgoraRtmCallKit.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620372817BEB900DE3B54 /* AgoraRtmCallKit.Extension.swift */; };
+		41A6203B2817CA1F00DE3B54 /* BaseVideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6203A2817CA1F00DE3B54 /* BaseVideoChatViewController.swift */; };
+		41A6203F2817F32E00DE3B54 /* CallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6203E2817F32E00DE3B54 /* CallingViewController.swift */; };
+		41A620422817F41900DE3B54 /* AureolaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620412817F41900DE3B54 /* AureolaView.swift */; };
+		41A62044281908E600DE3B54 /* ring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41A62043281908E600DE3B54 /* ring.mp3 */; };
+		41A6204628191B2A00DE3B54 /* AgoraVideoChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6204528191B2A00DE3B54 /* AgoraVideoChatView.swift */; };
+		41A6204828191CBA00DE3B54 /* AgoraCallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6204728191CBA00DE3B54 /* AgoraCallingView.swift */; };
 		41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A127D607BC007020AD /* CurrentLocationView.swift */; };
 		41AA41A827D6F067007020AD /* SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A427D6F067007020AD /* SectionIndexView.swift */; };
 		41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */; };
 		41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */; };
 		41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */; };
 		41B4D84E2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D84D2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift */; };
+		41B4D8502824EE26004DFCFC /* BaseViewController.AgoraCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D84F2824EE26004DFCFC /* BaseViewController.AgoraCall.swift */; };
 		41B4D85228266042004DFCFC /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D85128266042004DFCFC /* DeviceManager.swift */; };
 		41B4D8542826750A004DFCFC /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D8532826750A004DFCFC /* Throttler.swift */; };
 		41B4D8572828FF4F004DFCFC /* OtherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4D8562828FF4F004DFCFC /* OtherAPI.swift */; };
@@ -222,7 +233,6 @@
 		41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */; };
 		41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */; };
 		41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */; };
-		41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */; };
 		41E7D8C727EC4EDD00241706 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */; };
 		41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C827EC661300241706 /* ChatRingManager.swift */; };
 		41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */; };
@@ -233,10 +243,8 @@
 		41E7D8D827ED50EB00241706 /* video_chat_tip_receiver.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */; };
 		41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */; };
 		41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */; };
-		41E7D8DC27ED70F700241706 /* AudioChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */; };
-		41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */; };
 		41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E427F2947A00241706 /* BaseChatView.swift */; };
-		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
+		5725EA557964E97381B3D44D /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A907B2FA6EA7BC72891DB2EB /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +265,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016659A80B065080AAD503EA /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitGuestModel.swift; sourceTree = "<group>"; };
 		4106766D280FD5010011AA40 /* VisitorInvitationRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorInvitationRecordViewController.swift; sourceTree = "<group>"; };
 		4106766F281138B70011AA40 /* StringProtocol.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.Extension.swift; sourceTree = "<group>"; };
@@ -448,12 +457,23 @@
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
 		419E2DE727D9977500B60633 /* HouseCetificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationView.swift; sourceTree = "<group>"; };
 		41A6202D2816723300DE3B54 /* CityTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTipsView.swift; sourceTree = "<group>"; };
+		41A620302817BC2200DE3B54 /* AgoraRtm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraRtm.swift; sourceTree = "<group>"; };
+		41A620332817BC8700DE3B54 /* AGEError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGEError.swift; sourceTree = "<group>"; };
+		41A620352817BD1400DE3B54 /* AgoraRtmModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraRtmModels.swift; sourceTree = "<group>"; };
+		41A620372817BEB900DE3B54 /* AgoraRtmCallKit.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraRtmCallKit.Extension.swift; sourceTree = "<group>"; };
+		41A6203A2817CA1F00DE3B54 /* BaseVideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVideoChatViewController.swift; sourceTree = "<group>"; };
+		41A6203E2817F32E00DE3B54 /* CallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingViewController.swift; sourceTree = "<group>"; };
+		41A620412817F41900DE3B54 /* AureolaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AureolaView.swift; sourceTree = "<group>"; };
+		41A62043281908E600DE3B54 /* ring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ring.mp3; sourceTree = "<group>"; };
+		41A6204528191B2A00DE3B54 /* AgoraVideoChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraVideoChatView.swift; sourceTree = "<group>"; };
+		41A6204728191CBA00DE3B54 /* AgoraCallingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraCallingView.swift; sourceTree = "<group>"; };
 		41AA41A127D607BC007020AD /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
 		41AA41A427D6F067007020AD /* SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexView.swift; sourceTree = "<group>"; };
 		41AA41A527D6F067007020AD /* UITableView+SectionIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+SectionIndexView.swift"; sourceTree = "<group>"; };
 		41AA41A627D6F067007020AD /* SectionIndexViewItemIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItemIndicator.swift; sourceTree = "<group>"; };
 		41AA41A727D6F067007020AD /* SectionIndexViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIndexViewItem.swift; sourceTree = "<group>"; };
 		41B4D84D2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorMaskConfigurationCell.swift; sourceTree = "<group>"; };
+		41B4D84F2824EE26004DFCFC /* BaseViewController.AgoraCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.AgoraCall.swift; sourceTree = "<group>"; };
 		41B4D85128266042004DFCFC /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		41B4D8532826750A004DFCFC /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		41B4D8562828FF4F004DFCFC /* OtherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAPI.swift; sourceTree = "<group>"; };
@@ -481,7 +501,6 @@
 		41C3502F27CEF8FA006E440F /* OpenDoorSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorSettingViewController.swift; sourceTree = "<group>"; };
 		41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorPasswordViewController.swift; sourceTree = "<group>"; };
 		41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOpenDoorStyleCell.swift; sourceTree = "<group>"; };
-		41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		41E7D8C827EC661300241706 /* ChatRingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRingManager.swift; sourceTree = "<group>"; };
 		41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_connect_chat_tip_sender.aac; sourceTree = "<group>"; };
@@ -492,12 +511,9 @@
 		41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_receiver.aac; sourceTree = "<group>"; };
 		41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_onTimer.aac; sourceTree = "<group>"; };
 		41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = video_chat_push.mp3; sourceTree = "<group>"; };
-		41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChatViewController.swift; sourceTree = "<group>"; };
-		41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8E427F2947A00241706 /* BaseChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatView.swift; sourceTree = "<group>"; };
-		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
-		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
+		A907B2FA6EA7BC72891DB2EB /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B303FE4C8C2A06CB45284678 /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,7 +521,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */,
+				5725EA557964E97381B3D44D /* Pods_Work_AJ_SM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +676,7 @@
 				416F2E1E279BAF67004E5AD9 /* Work.AJ.SMUITests */,
 				416F2DFC279BAF67004E5AD9 /* Products */,
 				F39FE6BFA7B5E0F81763EDF1 /* Pods */,
-				D230459476043C9D855A19D9 /* Frameworks */,
+				DED5FD780C9740B07F8ED8D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -746,6 +762,7 @@
 		416F2E31279D1E9F004E5AD9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				41A6202F2817BC0500DE3B54 /* Agora */,
 				41E7D8C327EC4AD700241706 /* Chat */,
 				41B7DBD627E0331D002A23D0 /* Camera */,
 				4173C20327C36FB500B8FBB8 /* QRCode */,
@@ -830,6 +847,7 @@
 				416F2E5427B0B66C004E5AD9 /* BaseViewController.swift */,
 				416F2E5627B0B691004E5AD9 /* BaseWebViewController.swift */,
 				41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */,
+				41B4D84F2824EE26004DFCFC /* BaseViewController.AgoraCall.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1643,6 +1661,38 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		41A6202F2817BC0500DE3B54 /* Agora */ = {
+			isa = PBXGroup;
+			children = (
+				41A6203A2817CA1F00DE3B54 /* BaseVideoChatViewController.swift */,
+				41A6203E2817F32E00DE3B54 /* CallingViewController.swift */,
+				41A620302817BC2200DE3B54 /* AgoraRtm.swift */,
+				41A620372817BEB900DE3B54 /* AgoraRtmCallKit.Extension.swift */,
+				41A620402817F40E00DE3B54 /* View */,
+				41A620322817BC7900DE3B54 /* Models */,
+			);
+			path = Agora;
+			sourceTree = "<group>";
+		};
+		41A620322817BC7900DE3B54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				41A620332817BC8700DE3B54 /* AGEError.swift */,
+				41A620352817BD1400DE3B54 /* AgoraRtmModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		41A620402817F40E00DE3B54 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41A620412817F41900DE3B54 /* AureolaView.swift */,
+				41A6204528191B2A00DE3B54 /* AgoraVideoChatView.swift */,
+				41A6204728191CBA00DE3B54 /* AgoraCallingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		41AA41A327D6F051007020AD /* SectionIndexView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1762,9 +1812,6 @@
 			children = (
 				41E7D8E627F294B700241706 /* Manager */,
 				41E7D8DD27ED8A7700241706 /* View */,
-				41E7D8C427EC4AEB00241706 /* BaseChatViewController.swift */,
-				41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */,
-				41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1772,6 +1819,7 @@
 		41E7D8CA27ED50EB00241706 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				41A62043281908E600DE3B54 /* ring.mp3 */,
 				41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */,
 				41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */,
 				41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */,
@@ -1826,10 +1874,10 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		D230459476043C9D855A19D9 /* Frameworks */ = {
+		DED5FD780C9740B07F8ED8D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */,
+				A907B2FA6EA7BC72891DB2EB /* Pods_Work_AJ_SM.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1837,8 +1885,8 @@
 		F39FE6BFA7B5E0F81763EDF1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */,
-				D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */,
+				016659A80B065080AAD503EA /* Pods-Work.AJ.SM.debug.xcconfig */,
+				B303FE4C8C2A06CB45284678 /* Pods-Work.AJ.SM.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1850,21 +1898,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 416F2E25279BAF67004E5AD9 /* Build configuration list for PBXNativeTarget "Work.AJ.SM" */;
 			buildPhases = (
-				D5999047F02A75C8986BF302 /* [CP] Check Pods Manifest.lock */,
+				0958158D2147A4230D99AA7F /* [CP] Check Pods Manifest.lock */,
 				416F2E7B27B0C981004E5AD9 /* ShellScript */,
 				416F2DF7279BAF67004E5AD9 /* Sources */,
 				416F2DF8279BAF67004E5AD9 /* Frameworks */,
 				416F2DF9279BAF67004E5AD9 /* Resources */,
-				0F320F9032A01B6E81C14EE4 /* [CP] Embed Pods Frameworks */,
-				C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */,
+				E05C0FC207971D5A8C820459 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Work.AJ.SM;
-			packageProductDependencies = (
-			);
 			productName = Work.AJ.SM;
 			productReference = 416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */;
 			productType = "com.apple.product-type.application";
@@ -1940,8 +1985,6 @@
 				"zh-Hans",
 			);
 			mainGroup = 416F2DF2279BAF66004E5AD9;
-			packageReferences = (
-			);
 			productRefGroup = 416F2DFC279BAF67004E5AD9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1960,6 +2003,7 @@
 			files = (
 				41E7D8D827ED50EB00241706 /* video_chat_tip_receiver.aac in Resources */,
 				41E7D8D527ED50EB00241706 /* video_chat_tip_sender.aac in Resources */,
+				41A62044281908E600DE3B54 /* ring.mp3 in Resources */,
 				41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */,
 				41E7D8D727ED50EB00241706 /* message.wav in Resources */,
 				416F2E0B279BAF67004E5AD9 /* LaunchScreen.storyboard in Resources */,
@@ -1989,60 +2033,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F320F9032A01B6E81C14EE4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		416F2E7B27B0C981004E5AD9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$TEMP_DIR/rswift-lastrun",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				$SRCROOT/R.generated.swift,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
-		};
-		C02623FD3D8F2B04BF43A2CB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D5999047F02A75C8986BF302 /* [CP] Check Pods Manifest.lock */ = {
+		0958158D2147A4230D99AA7F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2062,6 +2053,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		416F2E7B27B0C981004E5AD9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$SRCROOT/R.generated.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
+		E05C0FC207971D5A8C820459 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2090,10 +2117,12 @@
 				416F2E3927B0B427004E5AD9 /* ImportFile.swift in Sources */,
 				416F2F0B27BF4724004E5AD9 /* BLEAdvertisingManager.swift in Sources */,
 				416F2EB027B60C7F004E5AD9 /* PasswordInputView.swift in Sources */,
+				41A6203B2817CA1F00DE3B54 /* BaseVideoChatViewController.swift in Sources */,
 				4173C20027C3521E00B8FBB8 /* RemoteIntercomViewController.swift in Sources */,
 				410A109527F4596D0059B2C3 /* CommonPickerView.swift in Sources */,
 				416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */,
 				416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */,
+				41A620362817BD1400DE3B54 /* AgoraRtmModels.swift in Sources */,
 				419AD6A027FD747600C902B8 /* NetWork.Cache.swift in Sources */,
 				41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */,
 				416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */,
@@ -2122,6 +2151,7 @@
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
 				419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */,
+				41A6204828191CBA00DE3B54 /* AgoraCallingView.swift in Sources */,
 				41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */,
 				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
@@ -2148,13 +2178,13 @@
 				4143293327F8320300DA8D47 /* AppDelegateNotification.swift in Sources */,
 				416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */,
 				412FC54227D73260001050E9 /* SelectUnitCell.swift in Sources */,
+				41A6203F2817F32E00DE3B54 /* CallingViewController.swift in Sources */,
 				416F2E4B27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift in Sources */,
 				41985F4027D0B62F00E02A9A /* SelectUnitCityViewController.swift in Sources */,
 				416F2E4327B0B4F6004E5AD9 /* Logger.swift in Sources */,
-				41E7D8DC27ED70F700241706 /* AudioChatViewController.swift in Sources */,
+				41A620382817BEB900DE3B54 /* AgoraRtmCallKit.Extension.swift in Sources */,
 				41C3501727CC5EFB006E440F /* CommonStatusView.swift in Sources */,
 				41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */,
-				41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				419AD69E27FD3EB400C902B8 /* HomeView.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
@@ -2166,6 +2196,7 @@
 				419AD6BE2805086800C902B8 /* NComRecordInfo.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
 				419AD6C028050F4B00C902B8 /* NComViewController.swift in Sources */,
+				41A620342817BC8800DE3B54 /* AGEError.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
 				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
 				4173C24F27C7732500B8FBB8 /* MemberModel.swift in Sources */,
@@ -2201,6 +2232,7 @@
 				416F2EE727BCEABE004E5AD9 /* EntryKitAttributes.swift in Sources */,
 				41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */,
 				416F2E5127B0B638004E5AD9 /* BaseTabBarViewController.swift in Sources */,
+				41B4D8502824EE26004DFCFC /* BaseViewController.AgoraCall.swift in Sources */,
 				410A108E27F302780059B2C3 /* UserProfileView.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
@@ -2246,6 +2278,7 @@
 				416F2F0F27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift in Sources */,
 				4136257D282A769200186188 /* MessageModel.swift in Sources */,
 				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
+				41A620312817BC2200DE3B54 /* AgoraRtm.swift in Sources */,
 				4173C24027C61DD000B8FBB8 /* MineTableViewCell.swift in Sources */,
 				4173C20927C36FD400B8FBB8 /* QRCodeImageGenerator.swift in Sources */,
 				41B7DBE627E044E8002A23D0 /* SwiftyCamButton.swift in Sources */,
@@ -2276,9 +2309,9 @@
 				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
 				4136257A282A6FB100186188 /* PropertyContactTableViewCell.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
-				41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */,
 				41B4D8542826750A004DFCFC /* Throttler.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
+				41A620422817F41900DE3B54 /* AureolaView.swift in Sources */,
 				419AD6A527FEC58F00C902B8 /* ElevatorConfigurationView.swift in Sources */,
 				4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */,
 				416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */,
@@ -2286,6 +2319,7 @@
 				410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */,
 				416F2EED27BCF98B004E5AD9 /* BleCallElevatorViewController.swift in Sources */,
 				416F2E4527B0B514004E5AD9 /* GDataManager.swift in Sources */,
+				41A6204628191B2A00DE3B54 /* AgoraVideoChatView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2463,7 +2497,7 @@
 		};
 		416F2E26279BAF67004E5AD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */;
+			baseConfigurationReference = 016659A80B065080AAD503EA /* Pods-Work.AJ.SM.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2474,7 +2508,7 @@
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区";
+				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区(Agora)";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "我们需要在呼梯和开门等使用蓝牙的时候使用蓝牙做连接硬件";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "是否允许使用进行蓝牙开门";
 				INFOPLIST_KEY_NSCameraUsageDescription = "是否允许使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能";
@@ -2493,7 +2527,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.agora;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Work.AJ.SM/Work.AJ.SM-Bridging-Header.h";
@@ -2505,7 +2539,7 @@
 		};
 		416F2E27279BAF67004E5AD9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */;
+			baseConfigurationReference = B303FE4C8C2A06CB45284678 /* Pods-Work.AJ.SM.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2517,7 +2551,7 @@
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区";
+				INFOPLIST_KEY_CFBundleDisplayName = "智慧社区(Agora)";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "我们需要在呼梯和开门等使用蓝牙的时候使用蓝牙做连接硬件";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "是否允许使用进行蓝牙开门";
 				INFOPLIST_KEY_NSCameraUsageDescription = "是否允许使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能";
@@ -2536,7 +2570,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.agora;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

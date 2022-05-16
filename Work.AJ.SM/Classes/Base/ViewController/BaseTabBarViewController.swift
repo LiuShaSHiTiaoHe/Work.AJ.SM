@@ -8,7 +8,10 @@
 import Foundation
 import ESTabBarController_swift
 import Haptica
-import NIMAVChat
+import SVProgressHUD
+
+import AgoraRtmKit
+import AgoraRtcKit
 
 class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 
@@ -19,9 +22,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     }
 
     func initData() {
-        NIMAVChatSDK.shared().netCallManager.add(self)
-        NIMSDK.shared().loginManager.add(self)
-//        let _ = BLEAdvertisingManager.shared
+        loginAgoraRtm()
     }
 
     func initUI() {
@@ -53,32 +54,37 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         Haptic.impact(.medium).generate()
     }
-
-}
-
-// MARK: - 云信通话
-extension BaseTabBarViewController: NIMNetCallManagerDelegate {
-    func onReceive(_ callID: UInt64, from caller: String, type: NIMNetCallMediaType, message extendMessage: String?) {
-        logger.info("收到通话请求。。。")
-        if ud.allowVisitorCall {
-            if type == .audio {
-                let vc = AudioChatViewController.init(responseCall: caller, callID: callID)
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
-            } else {
-                let vc = VideoChatViewController.init(responseCall: caller, callID: callID)
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
-            }
+    
+    private func loginAgoraRtm(){
+        let rtm = AgoraRtm.shared()
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/rtm.log"
+        rtm.setLogPath(path)
+        rtm.inviterDelegate = self
+                
+        // rtm login
+        guard let kit = AgoraRtm.shared().kit else {
+            SVProgressHUD.showError(withStatus: "AgoraRtmKit nil")
+            return
         }
-    }
-}
-
-extension BaseTabBarViewController: NIMLoginManagerDelegate {
-    func onKicked() {
-        SVProgressHUD.showInfo(withStatus: "账号在其他终端登录")
-        SVProgressHUD.dismiss(withDelay: 2) {
-            GDataManager.shared.showLoginView()
+        
+        if let userID = ud.userID {
+            // MARK: - Agora Device Account 默认加41前缀，跟门口机设备区分
+            let account = userID.ajAgoraAccount()
+            kit.login(account: account, token: nil, fail:  { (error) in
+                logger.error("AgoraRtm ====> \(error.localizedDescription)")
+                SVProgressHUD.showError(withStatus: "error.localizedDescription")
+            })
+            // MARK: - Agora Remove Token
+//            HomeRepository.shared.agoraRTMToken { token in
+//                if token.isEmpty {
+//                    logger.error("AgoraRtm ====> RTM token 获取失败")
+//                }else{
+//                    kit.login(account: account, token: token, fail:  { (error) in
+//                        logger.error("AgoraRtm ====> \(error.localizedDescription)")
+//                        SVProgressHUD.showError(withStatus: "error.localizedDescription")
+//                    })
+//                }
+//            }
         }
     }
 }
@@ -109,3 +115,82 @@ extension BaseTabBarViewController {
         }
     }
 }
+
+
+extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
+    func inviter(_ inviter: AgoraRtmCallKit, didReceivedIncoming invitation: AgoraRtmInvitation) {
+        if AgoraRtm.shared().status == .online {
+            let vc = CallingViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.delegate = self
+            vc.isOutgoing = false
+            vc.localNumber = invitation.callee
+            vc.remoteNumber = invitation.caller
+            vc.channel = invitation.caller
+            // MARK: - content 放入两个参数，用','隔开:门口机的mac地址和名称
+            if let content = invitation.content{
+                let datas = content.components(separatedBy: ",")
+                if datas.count == 2 {
+                    vc.lockMac = datas[0]
+                    vc.remoteName = datas[1]
+                }else{
+                    vc.lockMac = content
+                }
+            }
+            self.present(vc, animated: true)
+        }
+    }
+    
+    func inviter(_ inviter: AgoraRtmCallKit, remoteDidCancelIncoming invitation: AgoraRtmInvitation) {
+        if let vc = self.presentedViewController as? BaseVideoChatViewController {
+            vc.leaveChannel()
+            vc.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension BaseTabBarViewController: CallingViewControllerDelegate {
+    func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason) {
+        vc.dismiss(animated: reason.rawValue == 1 ? false : true) { [weak self] in
+            guard let self = self else { return }
+            switch reason {
+            case .error:
+                SVProgressHUD.showError(withStatus: "\(reason.description)")
+            case .remoteReject(let remote):
+                SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
+            case .normaly(_):
+                guard let inviter = AgoraRtm.shared().inviter else {
+                    fatalError("rtm inviter nil")
+                }
+                let errorHandle: ErrorCompletion = { (error: AGEError) in
+                    SVProgressHUD.showError(withStatus: "\(error.localizedDescription)")
+                }
+                switch inviter.status {
+                case .outgoing:
+                    inviter.cancelLastOutgoingInvitation(fail: errorHandle)
+                default:
+                    break
+                }
+            case .toVideoChat(let channel , let remote, let lockMac):
+                let vc = BaseVideoChatViewController()
+                vc.modalPresentationStyle = .fullScreen
+                vc.delegate = self
+                vc.channel = channel
+                vc.remoteUid = remote
+                vc.lockMac = lockMac
+                vc.localUid = UInt(AgoraRtm.shared().account!)!
+                self.present(vc, animated: true)
+                break
+            }
+        }
+    }
+}
+
+extension BaseTabBarViewController: BaseVideoChatVCDelegate {
+    func videoChat(_ vc: BaseVideoChatViewController, didEndChatWith uid: UInt) {
+        vc.dismiss(animated: true) {
+            SVProgressHUD.showInfo(withStatus: "挂断-\(uid)")
+        }
+    }
+}
+

@@ -1,5 +1,7 @@
 PODS:
   - ActiveLabel (1.1.0)
+  - AgoraRtcEngine_iOS/RtcBasic (3.7.0)
+  - AgoraRtm_iOS (1.4.10)
   - Alamofire (5.6.1)
   - BEMCheckBox (1.4.1)
   - BetterSegmentedControl (2.0.1)
@@ -9,7 +11,7 @@ PODS:
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
   - JCore (2.1.4-noidfa)
-  - JKSwiftExtension (2.1.1)
+  - JKSwiftExtension (2.1.0)
   - JPush (3.2.4-noidfa):
     - JCore (< 3.0.0, >= 2.0.0)
   - KeychainAccess (4.2.2)
@@ -21,7 +23,6 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - NIMSDK (6.1.1)
   - NotificationBannerSwift (2.5.0):
     - MarqueeLabel (~> 4.0.0)
     - SnapKit (~> 5.0.0)
@@ -39,11 +40,11 @@ PODS:
   - R.swift (6.1.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
-  - Realm (10.25.2):
-    - Realm/Headers (= 10.25.2)
-  - Realm/Headers (10.25.2)
-  - RealmSwift (10.25.2):
-    - Realm (= 10.25.2)
+  - Realm (10.25.1):
+    - Realm/Headers (= 10.25.1)
+  - Realm/Headers (10.25.1)
+  - RealmSwift (10.25.1):
+    - Realm (= 10.25.1)
   - SDCycleScrollView (1.82):
     - SDWebImage (>= 5.0.0)
   - SDWebImage (5.12.5):
@@ -80,6 +81,8 @@ PODS:
 
 DEPENDENCIES:
   - ActiveLabel
+  - AgoraRtcEngine_iOS/RtcBasic (= 3.7.0)
+  - AgoraRtm_iOS
   - BEMCheckBox
   - BetterSegmentedControl
   - CryptoSwift (= 1.4.2)
@@ -95,7 +98,6 @@ DEPENDENCIES:
   - LTMorphingLabel (~> 0.9.3)
   - MJRefresh (= 3.7.5)
   - Moya
-  - NIMSDK (= 6.1.1)
   - NotificationBannerSwift (= 2.5.0)
   - ObjectMapper (= 4.2.0)
   - "ObjectMapper+Realm"
@@ -123,6 +125,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - ActiveLabel
+    - AgoraRtcEngine_iOS
+    - AgoraRtm_iOS
     - Alamofire
     - BEMCheckBox
     - BetterSegmentedControl
@@ -140,7 +144,6 @@ SPEC REPOS:
     - MarqueeLabel
     - MJRefresh
     - Moya
-    - NIMSDK
     - NotificationBannerSwift
     - ObjcExceptionBridging
     - ObjectMapper
@@ -170,6 +173,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
+  AgoraRtcEngine_iOS: e6bc354af9b8b883926382b5034f18822b5303df
+  AgoraRtm_iOS: 95e7070466f42a6494435a7f39fd2b13fc143cbf
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
@@ -179,7 +184,7 @@ SPEC CHECKSUMS:
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JCore: 2f15311e6889ab43ed5d629802ef793cac566465
-  JKSwiftExtension: 81595522c10081f6b6a0a44d2f64dfdd09102121
+  JKSwiftExtension: 1ae63dabde89608f8d6b63ffc482cc9b57c44873
   JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
@@ -187,7 +192,6 @@ SPEC CHECKSUMS:
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  NIMSDK: d007a6ea3497867733bb05e21fa059e6960f24bb
   NotificationBannerSwift: 684966fa934c48b70eff8bbec93fccf8db603365
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
@@ -197,8 +201,8 @@ SPEC CHECKSUMS:
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
-  Realm: 978303663d0509166498f423d112e5ee97d4c91b
-  RealmSwift: a0c30c1efc49e928a0a6f8fb141bb2629616d79b
+  Realm: 1a6e9b4f6983711655d8c0bcb6d2d29c3afbb1f3
+  RealmSwift: e72669550d27082aa4fad5d176f5076cfe806245
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   Siren: 76ac728f4f2f4a3576c322272e94a0e37955664f
@@ -215,6 +219,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 7baf7de4be608550f9c2aef18aff6999d287208f
+PODFILE CHECKSUM: 9d60d4388826ba34492ed3baf418c596028d128e
 
 COCOAPODS: 1.11.2

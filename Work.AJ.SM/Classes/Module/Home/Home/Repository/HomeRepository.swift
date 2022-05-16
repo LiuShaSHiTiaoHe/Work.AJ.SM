@@ -15,6 +15,8 @@ typealias HomeDataCompletion = (([HomePageFunctionModule], [AdsModel], [NoticeMo
 
 typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
 typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
+typealias AgoraTokenCompletion = ((String) -> Void)
+
 // MARK: - NCom
 typealias NComAllDeviceInfoCompletion = (([NComDTU]) -> Void)
 typealias NComCallRecordCompletion = (([NComRecordInfo], Int) -> Void)
@@ -81,7 +83,7 @@ class HomeRepository {
 
     func allUnits(completion: @escaping HomeModulesCompletion) {
         SVProgressHUD.show()
-        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheThenNetwork, showError: true) { [weak self] models, response in
+        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             SVProgressHUD.dismiss()
             guard let `self` = self else {
                 return
@@ -286,6 +288,35 @@ extension HomeRepository {
                     }
                 }
             }
+        }
+    }
+}
+
+extension HomeRepository {
+    // FIXME: - 获取最新的声网RTM Token
+    func agoraRTMToken(completion: @escaping AgoraTokenCompletion) {
+        if let mobile = ud.userMobile {
+            HomeAPI.getAgoraRtmToken(account: mobile).defaultRequest(cacheType: .ignoreCache, showError: false) { jsonData in
+                if let tokenData = jsonData["data"].dictionaryObject, let token = tokenData["token"] as? String {
+                    completion(token)
+                }else{
+                    completion("")
+                }
+            } failureCallback: { response in
+                completion("")
+            }
+        }
+    }
+    
+    func agoraRTCToken(channel: String, completion: @escaping AgoraTokenCompletion) {
+        HomeAPI.getAgoraRtcToken(channel: channel).defaultRequest(cacheType: .ignoreCache, showError: false) { jsonData in
+            if let tokenData = jsonData["data"].dictionaryObject, let token = tokenData["token"] as? String {
+                completion(token)
+            }else{
+                completion("")
+            }
+        } failureCallback: { response in
+            completion("")
         }
     }
 }

@@ -10,4 +10,8 @@ extension String {
     func ajImageUrl() -> String {
         return host + "images/" + self
     }
+    
+    func ajAgoraAccount() -> String {
+        return "41" + self
+    }
 }

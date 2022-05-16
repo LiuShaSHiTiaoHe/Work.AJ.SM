@@ -49,9 +49,12 @@ target 'Work.AJ.SM' do
   pod 'SPPermissions/Bluetooth'
   pod 'SPPermissions/Microphone'
     
-  pod 'NIMSDK', '6.1.1'
+#  pod 'NIMSDK', '6.1.1'
   pod 'JCore', '2.1.4-noidfa'
   pod 'JPush', '3.2.4-noidfa'
-
+  
+  pod 'AgoraRtm_iOS'
+#  pod 'AgoraAudio_iOS'
+  pod 'AgoraRtcEngine_iOS', '3.7.0', :subspecs => ['RtcBasic']
 end
 

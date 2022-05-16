@@ -12,7 +12,7 @@ typealias LoginCompletion = ((_ errorMsg: String?) -> Void)
 
 class AuthenticationRepository: NSObject {
     static let shared = AuthenticationRepository()
-
+    // FIXME: - 登录成功之后，登录到agora RTM
     func login(mobile: String, password: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData in
             if let userData = JsonData["map"].rawString(), let userModel = UserModel(JSONString: userData) {

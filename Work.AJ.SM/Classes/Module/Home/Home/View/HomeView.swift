@@ -46,6 +46,7 @@ class HomeView: BaseView {
         updateTitle()
         functionModule.removeAll()
         functionModule.append(contentsOf: functionModules)
+        reloadView()
     }
 
     // MARK: -
