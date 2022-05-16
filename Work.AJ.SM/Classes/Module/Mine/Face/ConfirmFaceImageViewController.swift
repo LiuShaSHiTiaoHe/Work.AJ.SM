@@ -57,7 +57,11 @@ class ConfirmFaceImageViewController: BaseViewController {
                 if errorMsg.isEmpty {
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
                     SVProgressHUD.dismiss(withDelay: 2) {
-                        self.navigationController?.popViewController(animated: true)
+                        if let vc = self.navigationController?.viewControllers[1] {
+                            self.navigationController?.popToViewController(vc, animated: true)
+                        } else {
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
                     }
                 } else {
                     SVProgressHUD.showError(withStatus: errorMsg)
@@ -152,7 +156,7 @@ class ConfirmFaceImageViewController: BaseViewController {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
-        view.register(CommonSelectButtonCell.self, forCellReuseIdentifier: CommonSelectButtonCellIdentifier)
+        view.register(FaceUploadRoleSelectCell.self, forCellReuseIdentifier: FaceUploadRoleSelectCellIdentifier)
         view.register(CommonIDNumberInpuCell.self, forCellReuseIdentifier: CommonIDNumberInpuCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.backgroundColor()
@@ -191,12 +195,13 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
             cell.placeholder = "请输入家人/成员身份证号"
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CommonSelectButtonCellIdentifier, for: indexPath) as! CommonSelectButtonCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: FaceUploadRoleSelectCellIdentifier, for: indexPath) as! FaceUploadRoleSelectCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份"
-            cell.leftButtonName = "本人"
-            cell.centerButtonName = "父母"
-            cell.rightButtonName = "子女"
+            cell.firstButtonName = "本人"
+            cell.secondButtonName = "父母"
+            cell.thirdButtonName = "子女"
+            cell.fourthButtonName = "家属"
             cell.delegate = self
             return cell
         default:
@@ -213,17 +218,23 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension ConfirmFaceImageViewController: CommonSelectButtonCellDelegate {
-
-    func letfButtonSelected(_ isSelected: Bool) {
+extension ConfirmFaceImageViewController: FaceUploadRoleSelectCellDelegate {
+    func firstButtonSelected(_ isSelected: Bool) {
         faceType = "0"
     }
-
-    func centerButtonSelected(_ isSelected: Bool) {
+    
+    func secondButtonSelected(_ isSelected: Bool) {
         faceType = "1"
     }
-
-    func rightButtonSelected(_ isSelected: Bool) {
+    
+    func thirdButtonSelected(_ isSelected: Bool) {
         faceType = "2"
     }
+    
+    func fourthButtonSelected(_ isSelected: Bool) {
+        faceType = "3"
+    }
+    
+
+
 }

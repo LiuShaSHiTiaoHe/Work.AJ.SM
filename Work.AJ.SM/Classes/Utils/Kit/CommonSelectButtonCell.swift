@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CommonSelectButtonCellDelegate: NSObjectProtocol {
-    func letfButtonSelected(_ isSelected: Bool)
+    func leftButtonSelected(_ isSelected: Bool)
     func centerButtonSelected(_ isSelected: Bool)
     func rightButtonSelected(_ isSelected: Bool)
 
@@ -84,7 +84,7 @@ class CommonSelectButtonCell: UITableViewCell {
         } else {
             leftButton.backgroundColor = R.color.whiteColor()
         }
-        delegate?.letfButtonSelected(state)
+        delegate?.leftButtonSelected(state)
     }
 
     @objc

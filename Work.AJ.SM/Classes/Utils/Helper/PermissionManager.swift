@@ -12,7 +12,7 @@ class PermissionManager {
     static let shared = PermissionManager()
 
     func requestAllPermission() {
-        requset([.bluetooth, .camera, .microphone])
+        requset([.bluetooth, .camera, .microphone, .photoLibrary])
     }
 
     static func PermissionRequest(_ permisson: SPPermissions.Permission, _ completion: @escaping (Bool) -> Void) {
@@ -91,13 +91,13 @@ extension PermissionManager: SPPermissionsDataSource {
         switch permission {
         case .photoLibrary:
             description = "使用相册进行本地二维码扫描、头像上传、物业报修图片上传等功能"
+            cell.permissionIconView.setCustomImage(R.image.permission_photo_icon()!)
         case .camera:
             description = "使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能"
             cell.permissionIconView.setCustomImage(R.image.permission_camera_icon()!)
         case .bluetooth:
             description = "使用蓝牙权限进行远程呼梯，远程开门等功能"
-//        case .locationWhenInUse:
-//            description = "使用位置信息能更好的定位您所在的小区信息"
+            cell.permissionIconView.setCustomImage(R.image.permission_bluetooth_icon()!)
         case .microphone:
             description = "使用麦克风进行音频通话"
             cell.permissionIconView.setCustomImage(R.image.permission_microphone_icon()!)

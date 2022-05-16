@@ -186,7 +186,7 @@ extension HouseCertificationViewController: UITableViewDelegate, UITableViewData
 
 extension HouseCertificationViewController: CommonSelectButtonCellDelegate {
 
-    func letfButtonSelected(_ isSelected: Bool) {
+    func leftButtonSelected(_ isSelected: Bool) {
         userType = "O"
     }
 

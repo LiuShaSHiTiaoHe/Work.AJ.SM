@@ -26,13 +26,10 @@ class FaceTableViewCell: UITableViewCell {
                     roleLabel.isHidden = true
                 }else{
                     roleLabel.isHidden = false
-                    roleLabel.backgroundColor = R.color.familyB_yellowColor()
-                    roleLabel.textColor = R.color.family_yellowColor()
+                    roleLabel.textColor = R.color.secondtextColor()
                     switch type {//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
                     case "0":
                         roleLabel.text = "本人"
-                        roleLabel.backgroundColor = R.color.ownerB_greenColor()
-                        roleLabel.textColor = R.color.owner_greenColor()
                     case "1":
                         roleLabel.text = "父母"
                     case "2":
@@ -73,22 +70,20 @@ class FaceTableViewCell: UITableViewCell {
             make.left.equalTo(faceImage.snp.right).offset(kMargin)
             make.right.equalToSuperview().offset(-100)
             make.height.equalTo(30)
-            make.bottom.equalTo(bgView.snp.centerY).offset(-kMargin/2)
+            make.bottom.equalTo(bgView.snp.centerY)
         }
         
         roleLabel.snp.makeConstraints { make in
             make.left.equalTo(faceImage.snp.right).offset(kMargin)
             make.height.equalTo(30)
-//            make.top.equalTo(bgView.snp.centerY)
             make.bottom.equalTo(faceImage.snp.bottom)
-            make.width.equalTo(80)
         }
         
         deleteButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin)
-            make.width.equalTo(80)
-            make.height.equalTo(30)
+            make.width.equalTo(16)
+            make.height.equalTo(19)
             make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-kMargin)
         }
     }
     
@@ -135,24 +130,18 @@ class FaceTableViewCell: UITableViewCell {
     
     lazy var roleLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.owner_greenColor()
+        view.textColor = R.color.secondtextColor()
         view.font = k14Font
-        view.layer.cornerRadius = 6.0
-        view.textAlignment = .center
-        view.clipsToBounds = true
-        view.backgroundColor = R.color.ownerB_greenColor()
+        view.textAlignment = .left
         view.text = ""
-//        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
     
     lazy var deleteButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setTitle("删除", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.titleLabel?.font = k15Font
-        button.layer.cornerRadius = 15.0
-        button.backgroundColor = R.color.errorRedColor()
+
+        button.setBackgroundImage(R.image.base_icon_trash(), for: .normal)
         return button
     }()
     

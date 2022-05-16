@@ -152,7 +152,7 @@ extension AddMemberViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddMemberViewController: CommonSelectButtonCellDelegate {
-    func letfButtonSelected(_ isSelected: Bool) {
+    func leftButtonSelected(_ isSelected: Bool) {
         
     }
     

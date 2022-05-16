@@ -13,65 +13,21 @@ class FaceListViewController: BaseViewController {
     private var dataSource: [FaceModel] = []
     private var faceImage: UIImage?
 
-    lazy var headerView: CommonHeaderView = {
-        let view = CommonHeaderView.init()
-        view.titleLabel.textColor = R.color.maintextColor()
-        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
-        return view
-    }()
-
-    lazy var tableView: UITableView = {
-        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
-        view.register(FaceTableViewCell.self, forCellReuseIdentifier: FaceTableViewCellIdentifier)
-        view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
-        return view
-    }()
-
-    lazy var addButton: UIButton = {
-        let button = UIButton.init(type: .custom)
-        button.setTitle("添加人脸照片", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
-        button.addTarget(self, action: #selector(addFaceImage), for: .touchUpInside)
-        button.layer.cornerRadius = 20.0
-        return button
-    }()
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.  
     }
-
-    override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
-        view.addSubview(headerView)
-        view.addSubview(tableView)
-        view.addSubview(addButton)
-        headerView.snp.makeConstraints { make in
-            make.left.top.right.equalToSuperview()
-            make.height.equalTo(kTitleAndStateHeight)
-        }
-        tableView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(headerView.snp.bottom)
-        }
-        addButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.height.equalTo(40)
-            make.width.equalTo(250)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
-        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
     }
-
+    
     override func initData() {
         tableView.delegate = self
         tableView.dataSource = self
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "人脸认证"
-        reloadData()
     }
 
     private func reloadData() {
@@ -133,6 +89,52 @@ class FaceListViewController: BaseViewController {
         }
     }
 
+    override func initUI() {
+        view.backgroundColor = R.color.backgroundColor()
+        view.addSubview(headerView)
+        view.addSubview(tableView)
+        view.addSubview(addButton)
+        headerView.snp.makeConstraints { make in
+            make.left.top.right.equalToSuperview()
+            make.height.equalTo(kTitleAndStateHeight)
+        }
+        tableView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(headerView.snp.bottom)
+        }
+        addButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(40)
+            make.width.equalTo(250)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+        }
+    }
+    
+    lazy var headerView: CommonHeaderView = {
+        let view = CommonHeaderView.init()
+        view.titleLabel.textColor = R.color.maintextColor()
+        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
+        view.backgroundColor = R.color.whiteColor()
+        return view
+    }()
+
+    lazy var tableView: UITableView = {
+        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
+        view.register(FaceTableViewCell.self, forCellReuseIdentifier: FaceTableViewCellIdentifier)
+        view.separatorStyle = .none
+        view.backgroundColor = R.color.backgroundColor()
+        return view
+    }()
+
+    lazy var addButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setTitle("添加人脸照片", for: .normal)
+        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.backgroundColor = R.color.themeColor()
+        button.addTarget(self, action: #selector(addFaceImage), for: .touchUpInside)
+        button.layer.cornerRadius = 20.0
+        return button
+    }()
 }
 
 extension FaceListViewController: UITableViewDelegate, UITableViewDataSource {
