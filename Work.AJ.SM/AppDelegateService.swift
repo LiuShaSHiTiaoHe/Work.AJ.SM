@@ -18,6 +18,9 @@ extension AppDelegate {
     
     func initUI() {
         window = UIWindow(frame: UIScreen.main.bounds)
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
         setupRootViewController()
         self.window?.makeKeyAndVisible()
     }
