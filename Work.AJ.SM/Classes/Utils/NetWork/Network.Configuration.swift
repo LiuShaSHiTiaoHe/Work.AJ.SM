@@ -12,7 +12,7 @@ import JKSwiftExtension
 import KeychainAccess
 
 public extension Network {
-    
+
     class Configuration {
 
         public static var `default`: Configuration = {
@@ -51,15 +51,20 @@ public extension Network {
             
             return configuration
         }()//Configuration()
-        
-        public var addingHeaders: (TargetType) -> [String: String] = { _ in [:] }
-        
-        public var replacingTask: (TargetType) -> Task = { $0.task }
-        
+
+        public var addingHeaders: (TargetType) -> [String: String] = { _ in
+            [:]
+        }
+
+        public var replacingTask: (TargetType) -> Task = {
+            $0.task
+        }
+
         public var timeoutInterval: TimeInterval = 20
-        
+
         public var plugins: [PluginType] = []
-        
-        public init() {}
+
+        public init() {
+        }
     }
 }

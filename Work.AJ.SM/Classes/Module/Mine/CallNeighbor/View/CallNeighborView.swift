@@ -13,19 +13,19 @@ protocol CallNeighborViewDelegate: NSObjectProtocol {
 }
 
 class CallNeighborView: BaseView {
-    
-    private let dialButtonsStr: [String] = ["1","2","3","4","5","6","7","8","9","*","0","#"]
+
+    private let dialButtonsStr: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"]
     private let dialButtonHeight: CGFloat = 80.0
-    
+
     weak var delegate: CallNeighborViewDelegate?
-    
+
     override func initData() {
         dialPad.delegate = self
         dialPad.dataSource = self
         deleteButton.addTarget(self, action: #selector(deleteStr), for: .touchUpInside)
         dialButton.addTarget(self, action: #selector(callButtonAction), for: .touchUpInside)
     }
-    
+
     @objc
     func deleteStr() {
         if let inputStr = inputFiled.text, !inputStr.isEmpty {
@@ -33,64 +33,64 @@ class CallNeighborView: BaseView {
             inputFiled.text = tempString
         }
     }
-    
+
     @objc
     func callButtonAction() {
-        if let inputStr = inputFiled.text{
+        if let inputStr = inputFiled.text {
             delegate?.callNeighborWithAddress(inputStr)
         }
     }
-    
+
     override func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
-        
-        self.addSubview(headerView)
-        self.addSubview(tipLabel)
-        self.addSubview(inputFiled)
-        self.addSubview(deleteButton)
-        self.addSubview(dialPad)
-        self.addSubview(dialButton)
-        
+        backgroundColor = R.color.backgroundColor()
+
+        addSubview(headerView)
+        addSubview(tipLabel)
+        addSubview(inputFiled)
+        addSubview(deleteButton)
+        addSubview(dialPad)
+        addSubview(dialButton)
+
         headerView.snp.makeConstraints { make in
             make.height.equalTo(kTitleAndStateHeight)
             make.left.right.top.equalToSuperview()
         }
-        
+
         tipLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
         }
-        
+
         inputFiled.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-80)
             make.bottom.equalTo(dialPad.snp.top).offset(-kMargin)
             make.height.equalTo(40)
         }
-        
+
         deleteButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
             make.width.equalTo(40)
             make.height.equalTo(27)
             make.centerY.equalTo(inputFiled)
         }
-        
+
         dialPad.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-80)
-            make.height.equalTo(dialButtonHeight*4)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-80)
+            make.height.equalTo(dialButtonHeight * 4)
         }
-        
+
         dialButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(40)
             make.width.equalTo(200)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
         }
     }
-    
+
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "户户通"
@@ -99,7 +99,7 @@ class CallNeighborView: BaseView {
         view.backgroundColor = R.color.themeColor()
         return view
     }()
-    
+
     lazy var tipLabel: UILabel = {
         let view = UILabel.init()
         view.numberOfLines = 0
@@ -109,7 +109,7 @@ class CallNeighborView: BaseView {
         view.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         return view
     }()
-    
+
     lazy var inputFiled: UILabel = {
         let view = UILabel()
         view.font = k28Font
@@ -117,7 +117,7 @@ class CallNeighborView: BaseView {
         view.textAlignment = .right
         return view
     }()
-    
+
     lazy var deleteButton: UIButton = {//40 27
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.chat_delete_image(), for: .normal)
@@ -135,7 +135,7 @@ class CallNeighborView: BaseView {
         c.register(DialCollectionViewCell.self, forCellWithReuseIdentifier: DialCollectionViewCellCellIdentifier)
         return c
     }()
-    
+
     lazy var dialButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("呼叫", for: .normal)
@@ -149,20 +149,22 @@ class CallNeighborView: BaseView {
 
 extension CallNeighborView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DialCollectionViewCellCellIdentifier, for: indexPath) as? DialCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DialCollectionViewCellCellIdentifier, for: indexPath) as? DialCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         let str = dialButtonsStr[indexPath.row]
         cell.nameLabel.text = str
         return cell
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dialButtonsStr.count
     }
-    
+
 }
 
 extension CallNeighborView: UICollectionViewDelegate {
@@ -172,7 +174,7 @@ extension CallNeighborView: UICollectionViewDelegate {
         if let inputStr = inputFiled.text {
             text = inputStr + str
             inputFiled.text = text
-        }else{
+        } else {
             inputFiled.text = str
         }
     }
@@ -181,6 +183,6 @@ extension CallNeighborView: UICollectionViewDelegate {
 extension CallNeighborView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: floor((self.frame.width - kMargin*2)/3), height: dialButtonHeight)
+        return .init(width: floor((frame.width - kMargin * 2) / 3), height: dialButtonHeight)
     }
 }

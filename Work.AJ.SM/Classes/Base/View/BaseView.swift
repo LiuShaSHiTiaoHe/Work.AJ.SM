@@ -15,26 +15,28 @@ class BaseView: UIView {
         initializeView()
         initData()
     }
-        
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func initializeView(){}
-    
-    func initData() {}
+
+    func initializeView() {
+    }
+
+    func initData() {
+    }
 
     func hideKeyboard() {
         IQKeyboardManager.shared.resignFirstResponder()
     }
-    
+
     func addlayer() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor,UIColor.white.cgColor]
-        gradientLayer.locations = [0.0,0.4,1.0]
+        gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor, UIColor.white.cgColor]
+        gradientLayer.locations = [0.0, 0.4, 1.0]
         gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-        gradientLayer.endPoint  = CGPoint.init(x: 0, y: 1.0)
-        gradientLayer.frame = CGRect.init(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
-        self.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.endPoint = CGPoint.init(x: 0, y: 1.0)
+        gradientLayer.frame = CGRect.init(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        layer.insertSublayer(gradientLayer, at: 0)
     }
 }

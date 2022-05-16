@@ -85,7 +85,7 @@ class SetVisitorPasswordViewController: BaseViewController {
                 self.contentView.tableView.reloadRow(at: IndexPath.init(row: 2, section: 0), with: .none)
             }
         }
-        self.present(datePickerManager, animated: true) {}
+        present(datePickerManager, animated: true) {}
     }
     
     func defaultTime() {
@@ -110,7 +110,7 @@ class SetVisitorPasswordViewController: BaseViewController {
         vc.visitTimes = visitTimes
         vc.phoneNumber = phoneNumber
         vc.password = password
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func generatePassword(_ validTime: Date, _ arriveTime: Date, _ phoneNumber: String) {
@@ -214,10 +214,10 @@ extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewData
             break
         case 1:
             timeType = .arrive
-            self.selectTime()
+            selectTime()
         case 2:
             timeType = .valid
-            self.selectTime()
+            selectTime()
         case 3:
             break
         default:

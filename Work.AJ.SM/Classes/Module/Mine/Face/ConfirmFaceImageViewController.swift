@@ -16,7 +16,7 @@ class ConfirmFaceImageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
@@ -26,7 +26,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         }
         confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
     }
-    
+
     // FIXME: - 身份证号还是手机号码？？
     @objc
     func confirm() {
@@ -35,9 +35,9 @@ class ConfirmFaceImageViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "请输入姓名")
             return
         }
-        
+
         let identitfireNumber = getMemberIdentifierNumber()
-        if identitfireNumber.isEmpty{
+        if identitfireNumber.isEmpty {
             SVProgressHUD.showInfo(withStatus: "请输入身份证号")
             return
         }
@@ -59,32 +59,32 @@ class ConfirmFaceImageViewController: BaseViewController {
                     SVProgressHUD.dismiss(withDelay: 2) {
                         self.navigationController?.popViewController(animated: true)
                     }
-                }else{
+                } else {
                     SVProgressHUD.showError(withStatus: errorMsg)
                 }
             }
         }
-        
+
     }
-    
+
     func getMemberName() -> String {
         let cell = tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! CommonInputCell
         if let name = cell.commonInput.text {
             return name
-        }else{
+        } else {
             return ""
         }
     }
-    
+
     func getMemberIdentifierNumber() -> String {
         let cell = tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! CommonIDNumberInpuCell
         if let PhoneNumber = cell.IDNumberInput.text {
             return PhoneNumber
-        }else{
+        } else {
             return ""
         }
     }
-    
+
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(headerView)
@@ -120,12 +120,12 @@ class ConfirmFaceImageViewController: BaseViewController {
 
         confirmButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(tableView.snp.bottom).offset(kMargin/2)
+            make.top.equalTo(tableView.snp.bottom).offset(kMargin / 2)
             make.height.equalTo(40)
             make.width.equalTo(250)
         }
     }
-        
+
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.backgroundColor = R.color.whiteColor()
@@ -134,12 +134,12 @@ class ConfirmFaceImageViewController: BaseViewController {
         view.titleLabel.text = "提交人脸认证"
         return view
     }()
-    
+
     lazy var faceImageView: UIImageView = {
         let view = UIImageView()
         return view
     }()
-    
+
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.textColor = R.color.maintextColor()
@@ -148,7 +148,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         view.textAlignment = .center
         return view
     }()
-    
+
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
@@ -158,7 +158,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         view.backgroundColor = R.color.backgroundColor()
         return view
     }()
-    
+
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("完成", for: .normal)
@@ -167,15 +167,15 @@ class ConfirmFaceImageViewController: BaseViewController {
         button.backgroundColor = R.color.themeColor()
         return button
     }()
-    
+
 }
 
 
-extension ConfirmFaceImageViewController : UITableViewDelegate, UITableViewDataSource {
+extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
@@ -203,26 +203,26 @@ extension ConfirmFaceImageViewController : UITableViewDelegate, UITableViewDataS
             fatalError()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 
 extension ConfirmFaceImageViewController: CommonSelectButtonCellDelegate {
-    
+
     func letfButtonSelected(_ isSelected: Bool) {
         faceType = "0"
     }
-    
+
     func centerButtonSelected(_ isSelected: Bool) {
         faceType = "1"
     }
-    
+
     func rightButtonSelected(_ isSelected: Bool) {
         faceType = "2"
     }

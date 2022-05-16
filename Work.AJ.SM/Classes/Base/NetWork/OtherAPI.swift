@@ -18,31 +18,31 @@ extension OtherAPI: TargetType {
             return URL.init(string: "https://restapi.amap.com/")!
         }
     }
-    
+
     var path: String {
         switch self {
         case .AmapLocation:
             return "v3/ip"
         }
     }
-    
+
     var method: Moya.Method {
         switch self {
         case .AmapLocation:
             return .get
         }
     }
-    
+
     var task: Task {
         switch self {
         case let .AmapLocation(key):
             return .requestParameters(parameters: ["key": key], encoding: URLEncoding.default)
         }
     }
-    
-    var headers: [String : String]? {
+
+    var headers: [String: String]? {
         return [:]
     }
-    
-    
+
+
 }

@@ -40,33 +40,57 @@ public struct QRCode {
      - **high**:     30%
      */
     public enum InputCorrection: String {
-        case low      = "L"
-        case medium   = "M"
+        case low = "L"
+        case medium = "M"
         case quartile = "Q"
-        case high     = "H"
+        case high = "H"
     }
 
     /// QRCode data to be encoded.
-    public var data: Data { didSet { updateCache(oldValue, newValue: data) } }
+    public var data: Data {
+        didSet {
+            updateCache(oldValue, newValue: data)
+        }
+    }
 
     /// Output image foreground (actual code) color.
     /// Defaults to black.
-    public var color = defaultColor { didSet { updateCache(oldValue, newValue: color) } }
+    public var color = defaultColor {
+        didSet {
+            updateCache(oldValue, newValue: color)
+        }
+    }
 
     /// Output image background color.
     /// Defaults to white.
-    public var backgroundColor = defaultBackgroundColor { didSet { updateCache(oldValue, newValue: backgroundColor) } }
+    public var backgroundColor = defaultBackgroundColor {
+        didSet {
+            updateCache(oldValue, newValue: backgroundColor)
+        }
+    }
 
     /// Desired Output image size.
     /// Defaults to optimal size needed for given data.
-    public var size: CGSize? { didSet { updateCache(oldValue, newValue: size) } }
+    public var size: CGSize? {
+        didSet {
+            updateCache(oldValue, newValue: size)
+        }
+    }
 
     /// Desired Output image size.
     /// Defaults to optimal size needed for given data.
-    public var scale: CGFloat = defaultScale { didSet { updateCache(oldValue, newValue: scale) } }
+    public var scale: CGFloat = defaultScale {
+        didSet {
+            updateCache(oldValue, newValue: scale)
+        }
+    }
 
     /// Amount of input error correction to apply. Default is `.Low`.
-    public var inputCorrection = defaultInputCorrection { didSet { updateCache(oldValue, newValue: inputCorrection) } }
+    public var inputCorrection = defaultInputCorrection {
+        didSet {
+            updateCache(oldValue, newValue: inputCorrection)
+        }
+    }
 
 // MARK: - Initializers
 
@@ -84,7 +108,7 @@ public struct QRCode {
         self.backgroundColor = backgroundColor
         self.size = size
         self.scale = scale
-        self.inputCorrection = correction
+        inputCorrection = correction
     }
 
     /**
@@ -104,8 +128,8 @@ public struct QRCode {
                 scale: CGFloat = defaultScale,
                 inputCorrection correction: InputCorrection = defaultInputCorrection) {
         self.init(imageGenerator: DefaultQRCodeImageGenerator(),
-                  data: data, color: color, backgroundColor: backgroundColor,
-                  size: size, scale: scale, inputCorrection: correction)
+                data: data, color: color, backgroundColor: backgroundColor,
+                size: size, scale: scale, inputCorrection: correction)
     }
 
     /**
@@ -124,9 +148,11 @@ public struct QRCode {
                  size: CGSize? = defaultImageSize,
                  scale: CGFloat = defaultScale,
                  inputCorrection correction: InputCorrection = defaultInputCorrection) {
-        guard let data = string.data(using: .isoLatin1) else { return nil }
+        guard let data = string.data(using: .isoLatin1) else {
+            return nil
+        }
         self.init(data: data, color: color, backgroundColor: backgroundColor,
-                  size: size, scale: scale, inputCorrection: correction)
+                size: size, scale: scale, inputCorrection: correction)
     }
 
     /**
@@ -145,9 +171,11 @@ public struct QRCode {
                  size: CGSize? = defaultImageSize,
                  scale: CGFloat = defaultScale,
                  inputCorrection correction: InputCorrection = defaultInputCorrection) {
-        guard let data = url.absoluteString.data(using: .isoLatin1) else { return nil }
+        guard let data = url.absoluteString.data(using: .isoLatin1) else {
+            return nil
+        }
         self.init(data: data, color: color, backgroundColor: backgroundColor,
-                  size: size, scale: scale, inputCorrection: correction)
+                size: size, scale: scale, inputCorrection: correction)
     }
 
     /**
@@ -156,7 +184,9 @@ public struct QRCode {
      - throws: GenerationError if requested image size is too small to encode the data.
      */
     public func image() throws -> UIImage {
-        if let image = imageCache.cachedImage { return image }
+        if let image = imageCache.cachedImage {
+            return image
+        }
         imageCache.cachedImage = try imageGenerator.image(for: self)
         return imageCache.cachedImage!
     }
@@ -173,13 +203,13 @@ public struct QRCode {
 // MARK: - Equatable
 
 extension QRCode: Equatable {
-    public static func == (lhs: QRCode, rhs: QRCode) -> Bool {
+    public static func ==(lhs: QRCode, rhs: QRCode) -> Bool {
         return lhs.data == rhs.data &&
-            lhs.color == rhs.color &&
-            lhs.backgroundColor == rhs.backgroundColor &&
-            lhs.size == rhs.size &&
-            lhs.scale == rhs.scale &&
-            lhs.inputCorrection == rhs.inputCorrection
+                lhs.color == rhs.color &&
+                lhs.backgroundColor == rhs.backgroundColor &&
+                lhs.size == rhs.size &&
+                lhs.scale == rhs.scale &&
+                lhs.inputCorrection == rhs.inputCorrection
     }
 }
 

@@ -79,12 +79,12 @@ public class SectionIndexView: UIView {
     }
     
     @objc public func hideCurrentItemIndicator() {
-        guard let indicator = self.selectedItem?.indicator else { return }
+        guard let indicator = selectedItem?.indicator else { return }
         indicator.alpha = 0
     }
     
     private func loadView() {
-        guard let dataSource = self.dataSource  else { return }
+        guard let dataSource = dataSource  else { return }
         let numberOfItems = dataSource.numberOfScetions(in: self)
         items = Array(0..<numberOfItems).compactMap { dataSource.sectionIndexView(self, itemAt: $0)}
         setItemsLayoutConstraint()
@@ -121,7 +121,7 @@ public class SectionIndexView: UIView {
     private func touchesOccurred(_ touches: Set<UITouch>) {
         isTouching = true
         guard let section = getSectionBy(touches) else { return }
-        guard let item = item(at: section), !(self.selectedItem?.isEqual(item) ?? false) else { return }
+        guard let item = item(at: section), !(selectedItem?.isEqual(item) ?? false) else { return }
         delegate?.sectionIndexView(self, didSelect: section)
         NotificationCenter.default.post(name: SectionIndexView.touchesEndedNotification, object: self, userInfo: ["section": section])
     }

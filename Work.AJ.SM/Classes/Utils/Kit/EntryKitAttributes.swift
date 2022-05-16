@@ -7,15 +7,15 @@
 
 import Foundation
 
-let EKBackgroundColor   = EKColor(light: UIColor(hex: "FFFEFF")!, dark: UIColor(hex: "23272D")!)
-let EKScreenBackground  = EKColor(light: UIColor(white: 0.5, alpha: 0.5), dark: UIColor(white: 0.5, alpha: 0.5))
+let EKBackgroundColor = EKColor(light: UIColor(hex: "FFFEFF")!, dark: UIColor(hex: "23272D")!)
+let EKScreenBackground = EKColor(light: UIColor(white: 0.5, alpha: 0.5), dark: UIColor(white: 0.5, alpha: 0.5))
 
 enum EntryKitAttributes: Int {
     case bottomFloat
     case centerFloat
     case fullScreenFloat
-    
-    var attributes: EKAttributes{
+
+    var attributes: EKAttributes {
         switch self {
         case .bottomFloat:
             var attributes: EKAttributes
@@ -30,35 +30,35 @@ enum EntryKitAttributes: Int {
             attributes.entryInteraction = .absorbTouches
             attributes.scroll = .edgeCrossingDisabled(swipeable: true)
             attributes.entranceAnimation = .init(
-                translate: .init(
-                    duration: 0.5,
-                    spring: .init(damping: 1, initialVelocity: 0)
-                )
+                    translate: .init(
+                            duration: 0.5,
+                            spring: .init(damping: 1, initialVelocity: 0)
+                    )
             )
             attributes.exitAnimation = .init(
-                translate: .init(duration: 0.35)
+                    translate: .init(duration: 0.35)
             )
             attributes.popBehavior = .animated(
-                animation: .init(
-                    translate: .init(duration: 0.35)
-                )
+                    animation: .init(
+                            translate: .init(duration: 0.35)
+                    )
             )
             attributes.shadow = .active(
-                with: .init(
-                    color: .black,
-                    opacity: 0.3,
-                    radius: 6
-                )
+                    with: .init(
+                            color: .black,
+                            opacity: 0.3,
+                            radius: 6
+                    )
             )
             attributes.positionConstraints.size = .init(
-                width: .fill,
-                height: .ratio(value: 0.3)
+                    width: .fill,
+                    height: .ratio(value: 0.3)
             )
             attributes.positionConstraints.verticalOffset = 0
             attributes.positionConstraints.safeArea = .overridden
             attributes.statusBar = .inferred
             return attributes
-            
+
         case .centerFloat:
             var attributes: EKAttributes
             attributes = .centerFloat
@@ -72,29 +72,29 @@ enum EntryKitAttributes: Int {
             attributes.entryInteraction = .absorbTouches
             attributes.scroll = .edgeCrossingDisabled(swipeable: true)
             attributes.entranceAnimation = .init(
-                translate: .init(
-                    duration: 0.5,
-                    spring: .init(damping: 1, initialVelocity: 0)
-                )
+                    translate: .init(
+                            duration: 0.5,
+                            spring: .init(damping: 1, initialVelocity: 0)
+                    )
             )
             attributes.exitAnimation = .init(
-                translate: .init(duration: 0.35)
+                    translate: .init(duration: 0.35)
             )
             attributes.popBehavior = .animated(
-                animation: .init(
-                    translate: .init(duration: 0.35)
-                )
+                    animation: .init(
+                            translate: .init(duration: 0.35)
+                    )
             )
             attributes.shadow = .active(
-                with: .init(
-                    color: .black,
-                    opacity: 0.3,
-                    radius: 6
-                )
+                    with: .init(
+                            color: .black,
+                            opacity: 0.3,
+                            radius: 6
+                    )
             )
             attributes.positionConstraints.size = .init(
-                width: .fill,
-                height: .ratio(value: 0.3)
+                    width: .fill,
+                    height: .ratio(value: 0.3)
             )
             attributes.positionConstraints.verticalOffset = 0
             attributes.positionConstraints.safeArea = .overridden
@@ -113,36 +113,36 @@ enum EntryKitAttributes: Int {
             attributes.entryInteraction = .absorbTouches
             attributes.scroll = .disabled
             attributes.entranceAnimation = .init(
-                translate: .init(
-                    duration: 0.5,
-                    spring: .init(damping: 1, initialVelocity: 0)
-                )
+                    translate: .init(
+                            duration: 0.5,
+                            spring: .init(damping: 1, initialVelocity: 0)
+                    )
             )
             attributes.exitAnimation = .init(
-                translate: .init(duration: 0.35)
+                    translate: .init(duration: 0.35)
             )
             attributes.popBehavior = .animated(
-                animation: .init(
-                    translate: .init(duration: 0.35)
-                )
+                    animation: .init(
+                            translate: .init(duration: 0.35)
+                    )
             )
             attributes.shadow = .active(
-                with: .init(
-                    color: .black,
-                    opacity: 0.3,
-                    radius: 6
-                )
+                    with: .init(
+                            color: .black,
+                            opacity: 0.3,
+                            radius: 6
+                    )
             )
             attributes.positionConstraints.size = .init(
-                width: .fill,
-                height: .fill
+                    width: .fill,
+                    height: .fill
             )
             attributes.positionConstraints.verticalOffset = 0
             attributes.positionConstraints.safeArea = .overridden
             attributes.statusBar = .inferred
             return attributes
         }
-    
+
     }
-    
+
 }

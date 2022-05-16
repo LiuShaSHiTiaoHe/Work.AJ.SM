@@ -27,22 +27,21 @@ let k28Font = fontSize(28)
 let k34Font = fontSize(34)
 
 
-
 let k12BoldFont = UIFont.boldSystemFont(ofSize: 12)
 let k16BoldFont = UIFont.boldSystemFont(ofSize: 16)
 
-let kNaviTitleFont      = k22Font
-let kHeaderTitleFont    = k20Font
-let kTitleFont          = k18Font
-let kSecondTitleFont    = k16Font
+let kNaviTitleFont = k22Font
+let kHeaderTitleFont = k20Font
+let kTitleFont = k18Font
+let kSecondTitleFont = k16Font
 
 func fontSize(_ fontSize: CGFloat) -> UIFont {
 //    return UIFont.systemFont(ofSize: fontSize*kWidthScale)
-    if (kScreenWidth==320) {
+    if (kScreenWidth == 320) {
         return UIFont.systemFont(ofSize: fontSize - 2)
-    }else if (kScreenWidth==375){
+    } else if (kScreenWidth == 375) {
         return UIFont.systemFont(ofSize: fontSize)
-    }else{
+    } else {
         return UIFont.systemFont(ofSize: fontSize + 2)
     }
 }

@@ -14,13 +14,13 @@ class PasswordInputView: BaseView {
             tipLabel.text = errorMsg
         }
     }
-    
+
     var inputString: String? {
         get {
             return textInput.text
         }
     }
-    
+
     var placeHolders: String = "" {
         didSet {
             textInput.placeholder = placeHolders
@@ -34,7 +34,7 @@ class PasswordInputView: BaseView {
         label.textAlignment = .left
         return label
     }()
-    
+
     private(set) var textInput: UITextField = {
         let input = UITextField()
         input.font = k14Font
@@ -45,14 +45,14 @@ class PasswordInputView: BaseView {
         input.returnKeyType = .go
         return input
     }()
-    
+
     private let eyeButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.password_eye_close(), for: .normal)
         button.setImage(R.image.password_eye_open(), for: .selected)
         return button
     }()
-    
+
     private let seperator: UIView = {
         let view = UIView()
         view.backgroundColor = R.color.separateColor()
@@ -66,57 +66,57 @@ class PasswordInputView: BaseView {
         label.textColor = R.color.errorRedColor()
         return label
     }()
-        
+
     override func initData() {
         eyeButton.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
         textInput.addTarget(self, action: #selector(textInputEditingBegin(_:)), for: .editingDidBegin)
         textInput.addTarget(self, action: #selector(textInputEditingEnd(_:)), for: .editingDidEnd)
     }
-    
+
     override func initializeView() {
-        self.backgroundColor = .clear
-        
-        self.addSubview(titleLabel)
-        self.addSubview(textInput)
-        self.addSubview(eyeButton)
-        self.addSubview(seperator)
-        self.addSubview(tipLabel)
+        backgroundColor = .clear
+
+        addSubview(titleLabel)
+        addSubview(textInput)
+        addSubview(eyeButton)
+        addSubview(seperator)
+        addSubview(tipLabel)
 
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.width.equalTo(60)
-            make.top.equalToSuperview().offset(kMargin/4)
+            make.top.equalToSuperview().offset(kMargin / 4)
             make.height.equalTo(30)
         }
-        
+
         textInput.snp.makeConstraints { make in
-            make.left.equalTo(titleLabel.snp.right).offset(kMargin/2)
+            make.left.equalTo(titleLabel.snp.right).offset(kMargin / 2)
             make.right.equalToSuperview().offset(-50)
             make.centerY.equalTo(titleLabel)
         }
-        
+
         eyeButton.snp.makeConstraints { make in
             make.centerY.equalTo(textInput)
-            make.right.equalToSuperview().offset(-kMargin/2)
+            make.right.equalToSuperview().offset(-kMargin / 2)
             make.width.height.equalTo(20)
         }
-        
+
         seperator.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin/4)
+            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin / 4)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalTo(1/kScale)
+            make.height.equalTo(1 / kScale)
         }
-        
+
         tipLabel.snp.makeConstraints { make in
             make.left.equalTo(textInput)
             make.right.equalToSuperview()
             make.height.equalTo(20)
-            make.top.equalTo(seperator.snp.bottom).offset(kMargin/4)
+            make.top.equalTo(seperator.snp.bottom).offset(kMargin / 4)
         }
-        
+
     }
-    
+
     // MARK: -Actions
     @objc func textInputEditingBegin(_ sender: UITextField) {
         DispatchQueue.main.async {
@@ -125,7 +125,7 @@ class PasswordInputView: BaseView {
             self.errorMsg = ""
         }
     }
-    
+
     @objc func textInputEditingEnd(_ sender: UITextField) {
         DispatchQueue.main.async {
             self.seperator.backgroundColor = R.color.separateColor()
@@ -135,11 +135,11 @@ class PasswordInputView: BaseView {
             }
         }
     }
-    
+
     func cleanInput() {
         textInput.text = ""
     }
-    
+
     @objc
     func showPassword() {
         eyeButton.isSelected = !eyeButton.isSelected

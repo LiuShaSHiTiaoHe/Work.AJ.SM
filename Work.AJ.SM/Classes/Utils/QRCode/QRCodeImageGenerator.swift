@@ -57,7 +57,9 @@ struct DefaultQRCodeImageGenerator: QRCodeImageGenerator {
     }
 
     private func desiredSizeIsSufficient(for code: QRCode, with image: CIImage) -> Bool {
-        guard let desiredSize = code.size else { return true }
+        guard let desiredSize = code.size else {
+            return true
+        }
         let hasSufficientWidth = desiredSize.width >= image.extent.size.width
         let hasSufficientHeight = desiredSize.height >= image.extent.size.height
         return hasSufficientWidth && hasSufficientHeight

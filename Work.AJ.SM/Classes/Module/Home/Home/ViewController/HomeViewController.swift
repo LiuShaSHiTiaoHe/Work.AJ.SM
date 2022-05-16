@@ -12,30 +12,30 @@ import SVProgressHUD
 import swiftScan
 
 class HomeViewController: BaseViewController {
-    
+
     lazy var contentView: HomeView = {
         let view = HomeView()
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(currentUnitChanged), name: .kCurrentUnitChanged, object: nil)
     }
-    
+
     override func initUI() {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
-    
+
     override func initData() {
         contentView.delegate = self
         contentView.collectionView.mj_header = refreshHeader()
         loadUnitData()
     }
-    
+
     override func headerRefresh() {
         loadUnitData()
     }
@@ -44,13 +44,15 @@ class HomeViewController: BaseViewController {
     func currentUnitChanged() {
         loadUnitData()
     }
-    
+
     func loadUnitData() {
         HomeRepository.shared.homeData { [weak self] modules, ads, notices in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             if modules.isEmpty {
                 self.showNoDataView(.nohouse)
-            }else{
+            } else {
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.contentView.updateAdsAndNotices(ads, notices)
@@ -63,7 +65,7 @@ extension HomeViewController: HomeViewDelegate {
     func chooseUnit() {
         pushTo(viewController: SelectHouseViewController())
     }
-    
+
     func selectModule(_ module: HomePageModule) {
         switch module {
         case .mobileCallElevator:
@@ -74,8 +76,8 @@ extension HomeViewController: HomeViewDelegate {
             pushTo(viewController: IndoorCallElevatorViewController())
         case .bleCallElevator:
             PopViewManager.shared.display(BleCallElevatorViewController(), .center, .init(
-                width: .constant(value: 280),
-                height: .constant(value: 380)
+                    width: .constant(value: 280),
+                    height: .constant(value: 380)
             ), true)
         case .cloudOpneGate:
             pushTo(viewController: RemoteOpenDoorViewController())
@@ -84,7 +86,7 @@ extension HomeViewController: HomeViewDelegate {
         case .scanElevatorQRCode:
             if GDataManager.shared.checkAvailableCamera() {
                 pushTo(viewController: ScanQRCodeCallElevatorViewController())
-            }else{
+            } else {
                 SVProgressHUD.showError(withStatus: "没有可使用的相机")
             }
         case .inviteVisitors:
@@ -99,9 +101,9 @@ extension HomeViewController: HomeViewDelegate {
             pushTo(viewController: ElevatorConfigurationViewController())
         case .ncall:
             pushTo(viewController: NComViewController())
-        default :
+        default:
             return
-            
+
         }
     }
 }
@@ -115,7 +117,7 @@ extension HomeViewController: ChooseVisitorModeDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+
     func password() {
         SwiftEntryKit.dismiss(.displayed) {
             let vc = SetVisitorPasswordViewController()

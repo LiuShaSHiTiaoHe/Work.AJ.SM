@@ -4,6 +4,7 @@
 //
 //  Created by Fairdesk on 2022/2/9.
 //
+
 import UIKit
 import RealmSwift
 import SwiftyUserDefaults
@@ -18,6 +19,7 @@ import SwiftyUserDefaults
 
 // 事件闭包(做完Realm操作后的事件)
 public typealias RealmDoneTask = () -> Void
+
 class RealmTools: NSObject {
     /// 单
     static let sharedInstance = RealmTools()
@@ -40,7 +42,7 @@ class RealmTools: NSObject {
  */
 // 在(application:didFinishLaunchingWithOptions:)中进行配置
 extension RealmTools {
-    
+
     // MARK: 配置数据库，为用户提供个性化的 Realm 配置(加密暂时没有使用)
     /// 配置数据库，为用户提供个性化的 Realm 配置
     /// - Parameters:
@@ -77,7 +79,7 @@ extension RealmTools {
         sharedInstance.currentRealm = realm
         sharedInstance.currentKeyWord = keyWord
     }
-    
+
     // MARK: 删除当前的realm库
     /// 删除当前的realm库
     @discardableResult
@@ -91,7 +93,7 @@ extension RealmTools {
         for URL in realmURLs {
             do {
                 try FileManager.default.removeItem(at: URL)
-                self.configRealm(userID: nil, keyWord: sharedInstance.currentKeyWord, schemaVersion: sharedInstance.currentSchemaVersion)
+                configRealm(userID: nil, keyWord: sharedInstance.currentKeyWord, schemaVersion: sharedInstance.currentSchemaVersion)
             } catch {
                 // handle error
                 return false
@@ -103,7 +105,7 @@ extension RealmTools {
 
 // MARK:- 增
 extension RealmTools {
-    
+
     // MARK: 添加单个对象
     /// 添加单个对象
     /// - Parameters:
@@ -119,7 +121,7 @@ extension RealmTools {
             task()
         }
     }
-    
+
     // MARK: 添加多个对象
     /// 添加多个对象
     /// - Parameters:
@@ -139,7 +141,7 @@ extension RealmTools {
 
 // MARK:- 删
 extension RealmTools {
-    
+
     // MARK: 在事务中删除一个对象
     /// 在事务中删除一个对象
     /// - Parameters:
@@ -154,7 +156,7 @@ extension RealmTools {
             task()
         }
     }
-    
+
     // MARK: 在事务中删除多个对象
     /// 在事务中删除多个对象
     /// - Parameters:
@@ -169,7 +171,7 @@ extension RealmTools {
             task()
         }
     }
-    
+
     // MARK: 删除所有数据（不要轻易调用）
     /// 从 Realm 中删除所有数据
     /// - Parameter task: 删除后操作
@@ -182,7 +184,7 @@ extension RealmTools {
             task()
         }
     }
-    
+
     // MARK: 根据条件删除对象
     /// 根据条件删除对象
     /// - Parameters:
@@ -192,13 +194,14 @@ extension RealmTools {
         guard let results: Array<Object> = objectsWithPredicate(object: object, predicate: predicate) else {
             return
         }
-        deleteList(results) {}
+        deleteList(results) {
+        }
     }
 }
 
 // MARK:- 改
 extension RealmTools {
-    
+
     // MARK: 更改某个对象（根据主键存在来更新，元素必须有主键）
     /// 更改某个对象（根据主键存在来更新）
     /// - Parameters:
@@ -226,7 +229,7 @@ extension RealmTools {
             weakCurrentRealm.add(objects, update: .modified)
         }
     }
-    
+
     // MARK: 更新操作，对于realm搜索结果集当中的元素，在action当中直接赋值即可修改(比如查询到的某些属性可直接修改)
     /// 更新操作，对于realm搜索结果集当中的元素，在action当中直接赋值即可修改
     /// - Parameter action: 操作
@@ -238,7 +241,7 @@ extension RealmTools {
             action(true)
         }
     }
-    
+
     // MARK: 更新一个一个对象的多个属性值（根据主键存在来更新，元素必须有主键）
     /// 更新一个一个对象的多个属性值
     /// - Parameters:
@@ -254,7 +257,7 @@ extension RealmTools {
                 weakCurrentRealm.create(object, value: value, update: update)
             }
         } catch _ {
-            
+
         }
     }
 }
@@ -271,11 +274,11 @@ extension RealmTools {
 //        }
 //        return resultsToObjectList(results: results)
 //    }
-    
+
     static func objects<T: Object>(_ object: T) -> [T] {
         return queryWithType(object: object)
     }
-    
+
     // MARK: 查询某个对象数据(根据条件)
     /// 查询某个对象数据(根据条件)
     /// - Parameters:
@@ -288,9 +291,11 @@ extension RealmTools {
         }
         return resultsToObjectList(results: results)
     }
+
     static func objectsWithPredicate<T: Object>(object: T, predicate: NSPredicate) -> [T] {
         return queryWith(object: object, predicate: predicate)
     }
+
     // MARK: 带排序条件查询
     ///  带排序条件查询
     /// - Parameters:
@@ -308,14 +313,14 @@ extension RealmTools {
 //        }
 //        return resultsToObjectList(results: results)
 //    }
-  
+
     static func objectsWithPredicateAndSorted<T: Object>(object: T,
-                                           predicate: NSPredicate,
-                                           sortedKey: String,
-                                         isAssending: Bool = true) -> [T] {
+                                                         predicate: NSPredicate,
+                                                         sortedKey: String,
+                                                         isAssending: Bool = true) -> [T] {
         return queryWithSorted(object: object, predicate: predicate, sortedKey: sortedKey, isAssending: isAssending)
     }
-    
+
     // MARK: 带分页的查询
     /// 带分页的查询
     /// - Parameters:
@@ -353,7 +358,7 @@ extension RealmTools {
 
 //MARK:- 私有(查询)
 extension RealmTools {
-    
+
     /// 查询某个对象数据
     /// - Parameter object: 对象类型
     /// - Returns: 返回查询对象数组
@@ -363,21 +368,24 @@ extension RealmTools {
 //        }
 //        return weakCurrentRealm.objects(object)
 //    }
-    
-    
+
+
     private static func queryWithType<T: Object>(object: T) -> [T] {
         guard let weakCurrentRealm = sharedInstance.currentRealm else {
             return []
         }
-        var results : Results<Object>
+        var results: Results<Object>
         results = weakCurrentRealm.objects((T.self as Object.Type).self)
-        guard results.count > 0 else { return [] }
+        guard results.count > 0 else {
+            return []
+        }
         var objectArray = [T]()
-        for model in results{
-           objectArray.append(model as! T)
+        for model in results {
+            objectArray.append(model as! T)
         }
         return objectArray
     }
+
     // MARK: 根据条件查询数据
     /// 根据条件查询数据
     /// - Parameters:
@@ -385,28 +393,30 @@ extension RealmTools {
     ///   - predicate: 查询条件
     /// - Returns: 返回查询对象数组
     private static func queryWith(object: Object.Type,
-                               predicate: NSPredicate) -> Results<Object>? {
+                                  predicate: NSPredicate) -> Results<Object>? {
         guard let weakCurrentRealm = sharedInstance.currentRealm else {
             return nil
         }
         return weakCurrentRealm.objects(object).filter(predicate)
     }
-    
+
     private static func queryWith<T: Object>(object: T,
-                               predicate: NSPredicate) -> [T] {
+                                             predicate: NSPredicate) -> [T] {
         guard let weakCurrentRealm = sharedInstance.currentRealm else {
             return []
         }
-        var results : Results<Object>
+        var results: Results<Object>
         results = weakCurrentRealm.objects((T.self as Object.Type).self).filter(predicate)
-        guard results.count > 0 else { return [] }
+        guard results.count > 0 else {
+            return []
+        }
         var objectArray = [T]()
-        for model in results{
-           objectArray.append(model as! T)
+        for model in results {
+            objectArray.append(model as! T)
         }
         return objectArray
     }
-    
+
     // MARK: 带排序条件查询
     /// 带排序条件查询
     /// - Parameters:
@@ -425,24 +435,26 @@ extension RealmTools {
 //        return weakCurrentRealm.objects(object).filter(predicate)
 //            .sorted(byKeyPath: sortedKey, ascending: isAssending)
 //    }
-    
+
     private static func queryWithSorted<T: Object>(object: T,
-                                     predicate: NSPredicate,
-                                     sortedKey: String,
-                                   isAssending: Bool = true) -> [T] {
+                                                   predicate: NSPredicate,
+                                                   sortedKey: String,
+                                                   isAssending: Bool = true) -> [T] {
         guard let weakCurrentRealm = sharedInstance.currentRealm else {
             return []
         }
-        var results : Results<Object>
+        var results: Results<Object>
         results = weakCurrentRealm.objects((T.self as Object.Type).self).filter(predicate).sorted(byKeyPath: sortedKey, ascending: isAssending)
-        guard results.count > 0 else { return [] }
+        guard results.count > 0 else {
+            return []
+        }
         var objectArray = [T]()
-        for model in results{
-           objectArray.append(model as! T)
+        for model in results {
+            objectArray.append(model as! T)
         }
         return objectArray
     }
-    
+
     // MARK: 查询结果转Array<Object>
     /// 查询结果转Array<Object>
     /// - Parameter results: 查询结果

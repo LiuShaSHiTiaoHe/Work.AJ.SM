@@ -10,11 +10,11 @@ import Foundation
 // MARK: - 标记是否是生产环境。服务器地址，JPush等
 let isProduction = false
 
-let host = isProduction ? "http://120.27.237.7:9393/": "http://47.111.8.231:9091/"
+let host = isProduction ? "http://120.27.237.7:9393/" : "http://47.111.8.231:9091/"
 let servicePath = "hxcloudplus/"
 
 final class APIs {
-    
+
     static let baseUrl = host + servicePath
     // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"
@@ -32,12 +32,12 @@ final class APIs {
     static let resetPassword = "appcity/resetPassword.do"
     static let editPassword = "appcity/editPassword.do"
     static let deleteAccount = "appcity/delMyself"
-    
+
     // MARK: - 用户信息
     static let updateUserInfo = "appcity/perfectAppUser"
     static let updateAvatar = "appcity/addUserHeader.do"
     static let getUserInfo = "/appcity/getUserInfo"
-    
+
     // MARK: - 房屋
     static let userUnit = "appcity/getMyUnit.do"
     static let allCity = "appcity/getCity.do"
@@ -50,29 +50,29 @@ final class APIs {
     static let ownerOpenDoorPassword = "appcity/setMyUnitOpenDoorMM.do"
     static let findUnit = "appcity/findUnit.do"
     static let searchUnitWithName = "/appcity/getCommunityByName"
-    
+
     // MARK: - 根据单元电梯群组获取电梯
     static let cellGroupElevators = "appcity/getLiftByCellGroup"
     static let floorsBySN = "appcity/getFloorsByLiftsn.do"
     static let locks = "appcity/getLock.do"
     static let openDoor = "appcity/openDoorByAliyun.do"
     static let indoorCallElevator = "appSend2device/landing.do"
-    
+
     // MARK: - 获取二维码信息
     static let userQRCode = "appcity/createOfflineQrcode"
-    
+
     // MARK: - 访客
     static let visitors = "appcity/getMyGuest.do"
     static let generateVisitorPassword = "appcity/reduceGuestPassword.do"
     static let updateVisitorPassword = "appcity/updateGuestStatus.do"
     static let inviteVisitor = "appcity/inviteUser.do"
     static let myUnitGuest = "/appcity/getMyUnitGuest"
-    
+
     // MARK: - 业主添加家属
     static let addFamilyMember = "appcity/addFamilyer"
     static let unitMembers = "appcity/getUnitUsers"
     static let deleteUnitMembers = "appcity/delUnitUser"
-    
+
     // MARK: - 人脸
     static let faceFile = "appcity/getFaceFile.do"
     static let addFaceFile = "appcity/addFaceFile.do"
@@ -82,13 +82,13 @@ final class APIs {
     // MARK: - 通话
     static let pushApp = "appDevice/pushApp.do"
     static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"
-    
+
     // MARK: - 记录
     static let openDoorRecord = "appcity/findAccess.do"
-    
+
     // MARK: - 电梯配置
     static let elevatorConfiguration = "appcity/getLiftConfigByCellGroup"
-    
+
     // MARK: - N方对讲
     static let checkNCallSupport = "apphxUnitAuthorities/judgeNcomUtil"
     static let allDTUInfo = "appajNcomUser/appFindDtus.do"

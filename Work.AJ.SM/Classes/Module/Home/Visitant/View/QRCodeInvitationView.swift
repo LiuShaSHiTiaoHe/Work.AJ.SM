@@ -49,9 +49,9 @@ class QRCodeInvitationView: BaseView {
         let qrCodeWidth = kScreenWidth - kMargin*2
         let qrCodeHeight = contentImageHeight - topPartHeight - 70 - 20
         
-        self.addSubview(bgImageView)
-        self.addSubview(headerView)
-        self.addSubview(bgContentView)
+        addSubview(bgImageView)
+        addSubview(headerView)
+        addSubview(bgContentView)
         
         bgContentView.addSubview(titleLabel)
         bgContentView.addSubview(statusLabel)
@@ -65,8 +65,8 @@ class QRCodeInvitationView: BaseView {
         bgContentView.addSubview(invalidIcon)
         bgContentView.addSubview(invalidTips)
         
-        self.addSubview(saveButton)
-        self.addSubview(shareButton)
+        addSubview(saveButton)
+        addSubview(shareButton)
         
         statusLabel.isHidden = true
         invalidTips.isHidden = true

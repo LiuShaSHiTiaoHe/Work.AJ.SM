@@ -127,7 +127,7 @@ open class SwiftyCamViewController: UIViewController {
     @available(*, deprecated, message: "use flashMode .on or .off") //use flashMode
     public var flashEnabled: Bool = false {
         didSet{
-            self.flashMode = self.flashEnabled ? .on : .off
+            flashMode = flashEnabled ? .on : .off
         }
     }
     
@@ -328,9 +328,9 @@ open class SwiftyCamViewController: UIViewController {
 			sessionQueue.suspend()
 			AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [unowned self] granted in
 				if !granted {
-					self.setupResult = .notAuthorized
+					setupResult = .notAuthorized
 				}
-				self.sessionQueue.resume()
+				sessionQueue.resume()
 			})
 		default:
 
@@ -338,7 +338,7 @@ open class SwiftyCamViewController: UIViewController {
 			setupResult = .notAuthorized
 		}
 		sessionQueue.async { [unowned self] in
-			self.configureSession()
+			configureSession()
 		}
 	}
 
@@ -352,14 +352,14 @@ open class SwiftyCamViewController: UIViewController {
         } else {
             layer.videoOrientation = .portrait
         }
-        previewLayer.frame = self.view.bounds
+        previewLayer.frame = view.bounds
 
     }
 
     override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        if let connection =  self.previewLayer?.videoPreviewLayer.connection  {
+        if let connection =  previewLayer?.videoPreviewLayer.connection  {
 
             let currentDevice: UIDevice = UIDevice.current
 
@@ -459,9 +459,9 @@ open class SwiftyCamViewController: UIViewController {
         sessionRunning = false
 
 		// If session is running, stop the session
-		if self.isSessionRunning == true {
-			self.session.stopRunning()
-			self.isSessionRunning = false
+		if isSessionRunning == true {
+			session.stopRunning()
+			isSessionRunning = false
 		}
 
 		//Disble flash if it is currently enabled
@@ -514,7 +514,7 @@ open class SwiftyCamViewController: UIViewController {
             print("[SwiftyCam]: Cannot start video recoding. Capture session is not running")
             return
         }
-		guard let movieFileOutput = self.movieFileOutput else {
+		guard let movieFileOutput = movieFileOutput else {
 			return
 		}
 
@@ -535,7 +535,7 @@ open class SwiftyCamViewController: UIViewController {
 		sessionQueue.async { [unowned self] in
 			if !movieFileOutput.isRecording {
 				if UIDevice.current.isMultitaskingSupported {
-					self.backgroundRecordingID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+					backgroundRecordingID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
 				}
 
 				// Update the orientation on the movie file output video connection before starting recording.
@@ -543,19 +543,19 @@ open class SwiftyCamViewController: UIViewController {
 
 
 				//flip video output if front facing camera is selected
-				if self.currentCamera == .front {
+				if currentCamera == .front {
 					movieFileOutputConnection?.isVideoMirrored = true
 				}
 
-				movieFileOutputConnection?.videoOrientation = self.orientation.getVideoOrientation() ?? previewOrientation
+				movieFileOutputConnection?.videoOrientation = orientation.getVideoOrientation() ?? previewOrientation
 
 				// Start recording to a temporary file.
 				let outputFileName = UUID().uuidString
-				let outputFilePath = (self.outputFolder as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+				let outputFilePath = (outputFolder as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
 				movieFileOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
-				self.isVideoRecording = true
+				isVideoRecording = true
 				DispatchQueue.main.async {
-					self.cameraDelegate?.swiftyCam(self, didBeginRecordingVideo: self.currentCamera)
+					cameraDelegate?.swiftyCam(self, didBeginRecordingVideo: currentCamera)
 				}
 			}
 			else {
@@ -575,8 +575,8 @@ open class SwiftyCamViewController: UIViewController {
 	*/
 
 	public func stopVideoRecording() {
-		if self.isVideoRecording == true {
-			self.isVideoRecording = false
+		if isVideoRecording == true {
+			isVideoRecording = false
 			movieFileOutput!.stopRecording()
 			disableFlash()
 
@@ -626,16 +626,16 @@ open class SwiftyCamViewController: UIViewController {
 
 			// remove and re-add inputs and outputs
 
-			for input in self.session.inputs {
-				self.session.removeInput(input )
+			for input in session.inputs {
+				session.removeInput(input )
 			}
 
-			self.addInputs()
+			addInputs()
 			DispatchQueue.main.async {
-				self.cameraDelegate?.swiftyCam(self, didSwitchCameras: self.currentCamera)
+				cameraDelegate?.swiftyCam(self, didSwitchCameras: currentCamera)
 			}
 
-			self.session.startRunning()
+			session.startRunning()
 		}
 
 		// If flash is enabled, disable it as the torch is needed for front facing camera
@@ -783,8 +783,8 @@ open class SwiftyCamViewController: UIViewController {
 	fileprivate func configureVideoOutput() {
 		let movieFileOutput = AVCaptureMovieFileOutput()
 
-		if self.session.canAddOutput(movieFileOutput) {
-			self.session.addOutput(movieFileOutput)
+		if session.canAddOutput(movieFileOutput) {
+			session.addOutput(movieFileOutput)
 			if let connection = movieFileOutput.connection(with: AVMediaType.video) {
 				if connection.isVideoStabilizationSupported {
 					connection.preferredVideoStabilizationMode = .auto
@@ -808,9 +808,9 @@ open class SwiftyCamViewController: UIViewController {
 	fileprivate func configurePhotoOutput() {
 		let photoFileOutput = AVCaptureStillImageOutput()
 
-		if self.session.canAddOutput(photoFileOutput) {
+		if session.canAddOutput(photoFileOutput) {
 			photoFileOutput.outputSettings  = [AVVideoCodecKey: AVVideoCodecJPEG]
-			self.session.addOutput(photoFileOutput)
+			session.addOutput(photoFileOutput)
 			self.photoFileOutput = photoFileOutput
 		}
 	}
@@ -831,7 +831,7 @@ open class SwiftyCamViewController: UIViewController {
 		// Set proper orientation for photo
 		// If camera is currently set to front camera, flip image
 
-		let image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: self.orientation.getImageOrientation(forCamera: self.currentCamera))
+		let image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: orientation.getImageOrientation(forCamera: currentCamera))
 
 		return image
 	}
@@ -882,7 +882,7 @@ open class SwiftyCamViewController: UIViewController {
 					}
 				}
 			}))
-			self.present(alertController, animated: true, completion: nil)
+			present(alertController, animated: true, completion: nil)
 		})
 	}
 
@@ -956,7 +956,7 @@ fileprivate func changeFlashSettings(device: AVCaptureDevice, mode: FlashMode) {
 	/// Enable flash
 
 	fileprivate func enableFlash() {
-		if self.isCameraTorchOn == false {
+		if isCameraTorchOn == false {
 			toggleFlash()
 		}
 	}
@@ -964,7 +964,7 @@ fileprivate func changeFlashSettings(device: AVCaptureDevice, mode: FlashMode) {
 	/// Disable flash
 
 	fileprivate func disableFlash() {
-		if self.isCameraTorchOn == true {
+		if isCameraTorchOn == true {
 			toggleFlash()
 		}
 	}
@@ -972,7 +972,7 @@ fileprivate func changeFlashSettings(device: AVCaptureDevice, mode: FlashMode) {
 	/// Toggles between enabling and disabling flash
 
 	fileprivate func toggleFlash() {
-		guard self.currentCamera == .rear else {
+		guard currentCamera == .rear else {
 			// Flash is not supported for front facing camera
 			return
 		}
@@ -984,11 +984,11 @@ fileprivate func changeFlashSettings(device: AVCaptureDevice, mode: FlashMode) {
 				try device?.lockForConfiguration()
 				if (device?.torchMode == AVCaptureDevice.TorchMode.on) {
 					device?.torchMode = AVCaptureDevice.TorchMode.off
-					self.isCameraTorchOn = false
+					isCameraTorchOn = false
 				} else {
 					do {
 						try device?.setTorchModeOn(level: 1.0)
-						self.isCameraTorchOn = true
+						isCameraTorchOn = true
 					} catch {
 						print("[SwiftyCam]: \(error)")
 					}
@@ -1118,7 +1118,7 @@ extension SwiftyCamViewController {
 	/// Handle pinch gesture
 
 	@objc fileprivate func zoomGesture(pinch: UIPinchGestureRecognizer) {
-		guard pinchToZoom == true && self.currentCamera == .rear else {
+		guard pinchToZoom == true && currentCamera == .rear else {
 			//ignore pinch
 			return
 		}
@@ -1190,7 +1190,7 @@ extension SwiftyCamViewController {
 
     @objc private func panGesture(pan: UIPanGestureRecognizer) {
 
-        guard swipeToZoom == true && self.currentCamera == .rear else {
+        guard swipeToZoom == true && currentCamera == .rear else {
             //ignore pan
             return
         }

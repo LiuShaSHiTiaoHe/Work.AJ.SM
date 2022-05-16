@@ -59,34 +59,35 @@ enum HomePageModule: String {
         case .inviteVisitors:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8, showinpage: .home)
 
-        // MARK: - 暂时不需要的模块
+                // MARK: - 暂时不需要的模块
         case .bleOpenDoor:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleOpenDoor", tag: "MOUDLE3", index: 4 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleOpenDoor", tag: "MOUDLE3", index: 4)
         case .propertyBill:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "zhangDanModule", tag: "MOUDLE4", index: 5 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "zhangDanModule", tag: "MOUDLE4", index: 5)
         case .contactProperty:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "contactWuye", tag: "MOUDLE4", index: 6 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "contactWuye", tag: "MOUDLE4", index: 6)
         case .declareRepairs:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "weixiuModule", tag: "MOUDLE4", index: 7 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "weixiuModule", tag: "MOUDLE4", index: 7)
         case .suggestion:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "advice", tag: "MOUDLE4", index: 8 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "advice", tag: "MOUDLE4", index: 8)
         case .rent:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "houseRent", tag: "MOUDLE4", index: 9 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "houseRent", tag: "MOUDLE4", index: 9)
         case .samrtParking:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "parking", tag: "MOUDLE5", index: 10 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "parking", tag: "MOUDLE5", index: 10)
         case .smartHome:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "jiajuModule", tag: "MOUDLE6", index: 11 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "jiajuModule", tag: "MOUDLE6", index: 11)
         case .ncall:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudSpeak", tag: "OTHERUSED", index: 13 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudSpeak", tag: "OTHERUSED", index: 13)
         case .openUnitDoor:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "openunitdoor", tag: "MOUDLE14", index: 16 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "openunitdoor", tag: "MOUDLE14", index: 16)
         case .emergencyCall:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "emergencycall", tag: "MOUDLE15", index: 17 )
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "emergencycall", tag: "MOUDLE15", index: 17)
         }
     }
 }
 
-extension HomePageModule: CaseIterable {}
+extension HomePageModule: CaseIterable {
+}
 
 
 enum ShowInPage {

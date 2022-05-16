@@ -53,8 +53,8 @@ class MyVisitorCell: UITableViewCell {
     }
     
     func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
-        self.addSubview(backContentView)
+        backgroundColor = R.color.backgroundColor()
+        addSubview(backContentView)
         backContentView.addSubview(nameLabel)
         backContentView.addSubview(startLabel)
         backContentView.addSubview(startTime)

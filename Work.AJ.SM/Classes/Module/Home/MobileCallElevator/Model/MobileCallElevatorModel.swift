@@ -9,13 +9,14 @@ import Foundation
 import ObjectMapper
 
 class MobileCallElevatorModel: Mappable {
-    
+
     var unit: UnitElevatorModel?
     var showFloors: [FloorInfo]?
     var lifts: [ElevatorInfo]?
-    
-    required init?(map: ObjectMapper.Map) {}
-    
+
+    required init?(map: ObjectMapper.Map) {
+    }
+
     func mapping(map: ObjectMapper.Map) {
         unit <- map["unit"]
         showFloors <- map["showFloors"]
@@ -36,8 +37,9 @@ class UnitElevatorModel: Mappable {
     var blockID: Int?
     var unitNO: String?
 
-    required init?(map: ObjectMapper.Map) {}
-    
+    required init?(map: ObjectMapper.Map) {
+    }
+
     func mapping(map: ObjectMapper.Map) {
         doorSide <- map["DOORSIDE"]
         showFloor <- map["SHOWFLOOR"]
@@ -53,13 +55,14 @@ class UnitElevatorModel: Mappable {
 }
 
 class FloorInfo: Mappable {
-    
+
     var communityID: Int?
     var showFloor: String?
     var increaseID: Int?
 
-    required init?(map: ObjectMapper.Map) {}
-    
+    required init?(map: ObjectMapper.Map) {
+    }
+
     func mapping(map: ObjectMapper.Map) {
         communityID <- map["COMMUNITYID"]
         showFloor <- map["SHOWFLOOR"]
@@ -68,7 +71,7 @@ class FloorInfo: Mappable {
 }
 
 class ElevatorInfo: Mappable {
-    
+
     var config: String?
     var cellGroupID: Int?//电梯单元群组id
     var groupID: Int?//电梯id
@@ -89,8 +92,9 @@ class ElevatorInfo: Mappable {
     var doorType: Int?//电梯门类型（1单开门、2贯穿门）
     var mac: String?
 
-    required init?(map: ObjectMapper.Map) {}
-    
+    required init?(map: ObjectMapper.Map) {
+    }
+
     func mapping(map: ObjectMapper.Map) {
         config <- map["CONFIG"]
         cellGroupID <- map["CELL_GROUP_ID"]
@@ -118,7 +122,7 @@ class FloorMapInfo {
 
 
 class FloorInfoMappable: Mappable {
-    
+
     var increasID: String? //显示楼层对应的自增字符
     var physicalFloor: String?//物理楼层
     var showFloor: String?//显示楼层
@@ -126,8 +130,9 @@ class FloorInfoMappable: Mappable {
     var controlA: String?//A门是否受控（1受控，0不受控）
     var controlB: String?//B门是否受控（1受控，0不受控，单开门
 
-    required init?(map: ObjectMapper.Map) {}
-    
+    required init?(map: ObjectMapper.Map) {
+    }
+
     func mapping(map: ObjectMapper.Map) {
         increasID <- map["INCREASEID"]
         physicalFloor <- map["PHYSICALFLOOR"]

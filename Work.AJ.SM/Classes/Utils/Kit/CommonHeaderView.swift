@@ -14,7 +14,7 @@ class CommonHeaderView: UIView {
         button.setImage(R.image.common_back_white(), for: .normal)
         return button
     }()
-    
+
     lazy var titleLabel: UILabel = {
         let label = UILabel.init()
         label.textAlignment = .center
@@ -22,62 +22,62 @@ class CommonHeaderView: UIView {
         label.textColor = R.color.whiteColor()
         return label
     }()
-    
+
     lazy var rightButton: UIButton = {
         let button = UIButton.init()
         button.titleLabel?.font = k14Font
         return button
     }()
-    
+
     lazy var lineView: UIView = {
         let view = UIView()
         view.backgroundColor = R.color.lineColor()
         return view
     }()
-    
+
     private func initializeView() {
-        self.backgroundColor = R.color.themebackgroundColor()
-        
-        self.addSubview(closeButton)
-        self.addSubview(titleLabel)
-        self.addSubview(rightButton)
-        self.addSubview(lineView)
-        
+        backgroundColor = R.color.themebackgroundColor()
+
+        addSubview(closeButton)
+        addSubview(titleLabel)
+        addSubview(rightButton)
+        addSubview(lineView)
+
         closeButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin/2)
+            make.left.equalToSuperview().offset(kMargin / 2)
             make.width.height.equalTo(30)
-            make.bottom.equalToSuperview().offset((20 + kStateHeight - kOriginTitleAndStateHeight)/2)
+            make.bottom.equalToSuperview().offset((20 + kStateHeight - kOriginTitleAndStateHeight) / 2)
         }
-        
+
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalTo(closeButton)
             make.height.equalTo(30)
             make.centerX.equalToSuperview()
             make.width.equalTo(200)
         }
-        
+
         rightButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
             make.centerY.equalTo(closeButton)
             make.height.equalTo(30)
-            make.width.equalTo(kMargin*3)
+            make.width.equalTo(kMargin * 3)
         }
-        
+
         lineView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(1/kScale)
+            make.height.equalTo(1 / kScale)
         }
-            
+
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeView()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }

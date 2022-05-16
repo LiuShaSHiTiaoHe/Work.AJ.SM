@@ -9,8 +9,8 @@ import UIKit
 import SVProgressHUD
 
 class FaceListViewController: BaseViewController {
-    
-    private var dataSource:[FaceModel] = []
+
+    private var dataSource: [FaceModel] = []
     private var faceImage: UIImage?
 
     lazy var headerView: CommonHeaderView = {
@@ -20,7 +20,7 @@ class FaceListViewController: BaseViewController {
         view.backgroundColor = R.color.whiteColor()
         return view
     }()
-    
+
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .grouped)
         view.register(FaceTableViewCell.self, forCellReuseIdentifier: FaceTableViewCellIdentifier)
@@ -28,7 +28,7 @@ class FaceListViewController: BaseViewController {
         view.backgroundColor = R.color.backgroundColor()
         return view
     }()
-    
+
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加人脸照片", for: .normal)
@@ -38,13 +38,13 @@ class FaceListViewController: BaseViewController {
         button.layer.cornerRadius = 20.0
         return button
     }()
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.  
     }
-    
+
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(headerView)
@@ -65,7 +65,7 @@ class FaceListViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
         }
     }
-    
+
     override func initData() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -73,20 +73,22 @@ class FaceListViewController: BaseViewController {
         headerView.titleLabel.text = "人脸认证"
         reloadData()
     }
-    
+
     private func reloadData() {
         MineRepository.shared.getFaceList { [weak self] faces in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             if faces.isEmpty {
                 self.dataSource.removeAll()
                 SVProgressHUD.showInfo(withStatus: "暂无数据")
-            }else{
+            } else {
                 self.dataSource = faces
             }
             self.tableView.reloadData()
         }
     }
-    
+
     @objc
     func addFaceImage() {
         getExtralFaceFile()
@@ -130,18 +132,19 @@ class FaceListViewController: BaseViewController {
             }
         }
     }
-    
+
 }
+
 extension FaceListViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FaceTableViewCellIdentifier, for: indexPath) as! FaceTableViewCell
         let data = dataSource[indexPath.row]
@@ -149,11 +152,11 @@ extension FaceListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120.0
     }
-        
+
 }
 
 extension FaceListViewController: FaceTableViewCellDelegate {
@@ -171,7 +174,7 @@ extension FaceListViewController: FaceTableViewCellDelegate {
             if errorMsg.isEmpty {
                 SVProgressHUD.showSuccess(withStatus: "删除成功")
                 self.reloadData()
-            }else{
+            } else {
                 SVProgressHUD.showInfo(withStatus: errorMsg)
             }
         }

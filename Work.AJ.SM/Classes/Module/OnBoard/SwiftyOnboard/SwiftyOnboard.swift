@@ -111,19 +111,19 @@ public class SwiftyOnboard: UIView, UIScrollViewDelegate {
     }
     
     fileprivate func setUpContainerView() {
-        let viewFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
-        self.containerView.frame = viewFrame
+        let viewFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        containerView.frame = viewFrame
         containerView.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappedPage))
         containerView.addGestureRecognizer(tap)
-        self.addSubview(containerView)
+        addSubview(containerView)
     }
     
     fileprivate func setBackgroundView() {
         if let dataSource = dataSource {
             if let background = dataSource.swiftyOnboardViewForBackground(self) {
-                self.addSubview(background)
-                self.sendSubviewToBack(background)
+                addSubview(background)
+                sendSubviewToBack(background)
             }
         }
     }
@@ -133,27 +133,27 @@ public class SwiftyOnboard: UIView, UIScrollViewDelegate {
             pageCount = dataSource.swiftyOnboardNumberOfPages(self)
             for index in 0..<pageCount{
                 if let view = dataSource.swiftyOnboardPageForIndex(self, index: index) {
-                    self.contentMode = .scaleAspectFit
+                    contentMode = .scaleAspectFit
                     view.set(style: style)
                     containerView.addSubview(view)
-                    var viewFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
-                    viewFrame.origin.x = self.frame.width * CGFloat(index)
+                    var viewFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+                    viewFrame.origin.x = frame.width * CGFloat(index)
                     view.frame = viewFrame
-                    self.pages.append(view)
+                    pages.append(view)
                 }
             }
-            containerView.contentSize = CGSize(width: self.frame.width * CGFloat(pageCount), height: self.frame.height)
+            containerView.contentSize = CGSize(width: frame.width * CGFloat(pageCount), height: frame.height)
         }
     }
     
     fileprivate func setOverlayView() {
         if let dataSource = dataSource {
             if let overlay = dataSource.swiftyOnboardViewForOverlay(self) {
-                overlay.page(count: self.pageCount)
+                overlay.page(count: pageCount)
                 overlay.set(style: style)
-                self.addSubview(overlay)
-                self.bringSubviewToFront(overlay)
-                let viewFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+                addSubview(overlay)
+                bringSubviewToFront(overlay)
+                let viewFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
                 overlay.frame = viewFrame
                 self.overlay = overlay
                 self.overlay?.pageControl.addTarget(self, action: #selector(didTapPageControl), for: .allTouchEvents)
@@ -163,7 +163,7 @@ public class SwiftyOnboard: UIView, UIScrollViewDelegate {
     
     @objc internal func tappedPage() {
         let currentpage = Int(getCurrentPosition())
-        self.delegate?.swiftyOnboard(self, tapped: currentpage)
+        delegate?.swiftyOnboard(self, tapped: currentpage)
     }
     
     fileprivate func getCurrentPosition() -> CGFloat {
@@ -217,7 +217,7 @@ public class SwiftyOnboard: UIView, UIScrollViewDelegate {
     @objc open func didTapPageControl(_ sender: Any) {
         let pager = sender as! UIPageControl
         let page = pager.currentPage
-        self.goToPage(index: page, animated: true)
+        goToPage(index: page, animated: true)
     }
     
     open var currentPage: Int{
@@ -226,30 +226,30 @@ public class SwiftyOnboard: UIView, UIScrollViewDelegate {
     
     open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = Int(getCurrentPosition())
-        self.delegate?.swiftyOnboard(self, currentPage: currentPage)
+        delegate?.swiftyOnboard(self, currentPage: currentPage)
     }
     
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentPosition = Double(getCurrentPosition())
-        self.overlay?.currentPage(index: Int(round(currentPosition)))
-        if self.fadePages {
+        overlay?.currentPage(index: Int(round(currentPosition)))
+        if fadePages {
             fadePageTransitions(containerView: scrollView, currentPage: Int(getCurrentPosition()))
         }
         
-        self.delegate?.swiftyOnboard(self, leftEdge: currentPosition)
-        if let overlayView = self.overlay {
-            self.dataSource?.swiftyOnboardOverlayForPosition(self, overlay: overlayView, for: currentPosition)
+        delegate?.swiftyOnboard(self, leftEdge: currentPosition)
+        if let overlayView = overlay {
+            dataSource?.swiftyOnboardOverlayForPosition(self, overlay: overlayView, for: currentPosition)
         }
         
         if let color = colorForPosition(CGFloat(currentPosition)) {
-            self.backgroundColor = color
+            backgroundColor = color
         }
     }
     
     open func goToPage(index: Int, animated: Bool) {
-        if index < self.pageCount {
+        if index < pageCount {
             let index = CGFloat(index)
-            containerView.setContentOffset(CGPoint(x: index * self.frame.width, y: 0), animated: animated)
+            containerView.setContentOffset(CGPoint(x: index * frame.width, y: 0), animated: animated)
         }
     }
 }

@@ -122,7 +122,7 @@ class VisitorInvitationRecordViewController: BaseViewController {
     private func shareInvitationImage(_ image: UIImage){
         let acyivityVC = UIActivityViewController.init(activityItems: [image], applicationActivities: nil)
         acyivityVC.excludedActivityTypes = [.airDrop, .message, .saveToCameraRoll, .copyToPasteboard]
-        self.present(acyivityVC, animated: true, completion: nil)
+        present(acyivityVC, animated: true, completion: nil)
         acyivityVC.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
             if completed {
                 SVProgressHUD.showSuccess(withStatus: "分享成功")

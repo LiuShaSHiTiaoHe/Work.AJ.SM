@@ -29,7 +29,7 @@ class SelectUnitCityViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         searchView.initViewType(true)
@@ -39,32 +39,36 @@ class SelectUnitCityViewController: BaseViewController {
         tableVeiw.dataSource = self
         getAllCity()
     }
-    
+
     func getAllCity() {
-        MineRepository.shared.getAllCity {[weak self] cityArray, names in
-            guard let self = self else { return }
+        MineRepository.shared.getAllCity { [weak self] cityArray, names in
+            guard let self = self else {
+                return
+            }
             if cityArray.isEmpty {
                 SVProgressHUD.showInfo(withStatus: "数据为空")
-            }else{
+            } else {
                 self.cityNames = names
                 self.dataSource = cityArray
-                self.keysArray = cityArray.allKeys().sorted{$0 < $1}
+                self.keysArray = cityArray.allKeys().sorted {
+                    $0 < $1
+                }
                 self.sortAllCity()
                 self.tableVeiw.reloadData()
             }
         }
     }
-    
+
     func sortAllCity() {
-        let items = self.items()
+        let items = items()
         let configuration = SectionIndexViewConfiguration.init()
         configuration.adjustedContentInset = UIApplication.shared.statusBarFrame.size.height + 44
-        self.tableVeiw.sectionIndexView(items: items, configuration: configuration)
+        tableVeiw.sectionIndexView(items: items, configuration: configuration)
     }
 
     private func items() -> [SectionIndexViewItemView] {
         var items = [SectionIndexViewItemView]()
-        for title in self.keysArray {
+        for title in keysArray {
             let item = SectionIndexViewItemView.init()
             item.title = title
             item.indicator = SectionIndexViewItemIndicator.init(title: title)
@@ -72,32 +76,32 @@ class SelectUnitCityViewController: BaseViewController {
         }
         return items
     }
-    
+
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
-        
+
         view.addSubview(headerView)
         view.addSubview(searchView)
         view.addSubview(tableVeiw)
-        
+
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(kTitleAndStateHeight)
         }
-        
+
         searchView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
             make.height.equalTo(60)
         }
-        
+
         tableVeiw.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(searchView.snp.bottom)
         }
 
     }
-    
+
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.backgroundColor = R.color.whiteColor()
@@ -106,58 +110,58 @@ class SelectUnitCityViewController: BaseViewController {
         view.titleLabel.textColor = R.color.maintextColor()
         return view
     }()
-    
+
     lazy var searchView: CommonSearchView = {
         let view = CommonSearchView.init()
         view.placeHolder = "请输入城市名或拼音"
         return view
     }()
-    
-    
+
+
     lazy var tableVeiw: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .grouped)
         view.register(UITableViewCell.self, forCellReuseIdentifier: UnitCityCellIdentifier)
         view.separatorStyle = .singleLine
         return view
     }()
-    
+
 }
 
 extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if isSearch {
             return 0
         }
         return 25
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         if isSearch {
             return 1
         }
         return keysArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearch {
             return searchResult.count
-        }else{
+        } else {
             let values = dataSource[keysArray[section]]
             return values?.count ?? 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UnitCityCellIdentifier, for: indexPath)
         if isSearch {
             let name = searchResult[indexPath.row]
             cell.textLabel?.text = name
-        }else{
+        } else {
             if let values = dataSource[keysArray[indexPath.section]] {
                 let name = values[indexPath.row]
                 cell.textLabel?.text = name
@@ -165,30 +169,30 @@ extension SelectUnitCityViewController: UITableViewDelegate, UITableViewDataSour
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if isSearch {
             return ""
-        }else{
+        } else {
             return keysArray[section]
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if isSearch {
             let name = searchResult[indexPath.row]
             delegate?.selectCity(name: name)
-            self.navigationController?.popViewController(animated: true)
-        }else{
+            navigationController?.popViewController(animated: true)
+        } else {
             if let values = dataSource[keysArray[indexPath.section]] {
                 let name = values[indexPath.row]
                 delegate?.selectCity(name: name)
-                self.navigationController?.popViewController(animated: true)
+                navigationController?.popViewController(animated: true)
             }
         }
     }
-    
+
 }
 
 extension SelectUnitCityViewController: CommonSearchViewDelegate {
@@ -202,12 +206,12 @@ extension SelectUnitCityViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
 //        isSearch = true
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         isSearch = false
         tableVeiw.reloadData()
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let searchString = textField.text, !searchString.isEmpty {
             let searchStringPY = searchString.jk.toPinyin()

@@ -14,27 +14,27 @@ class IndoorCallElevatorViewController: BaseViewController {
         let view = IndoorCallElevatorView()
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hidesBottomBarWhenPushed = true
+        hidesBottomBarWhenPushed = true
         // Do any additional setup after loading the view.
     }
-    
+
     override func initData() {
         contentView.delegate = self
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
     }
-    
+
     // MARK: - refreshView
     private func refreshView() {
         contentView.refreshKit()
     }
-    
+
     private func updateResultView(_ flag: Bool) {
         contentView.updateResultView(flag)
     }
-    
+
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(contentView)
@@ -45,15 +45,15 @@ class IndoorCallElevatorViewController: BaseViewController {
 }
 
 extension IndoorCallElevatorViewController: IndoorCallElevatorViewDelegate {
-    
+
     func callElevatorAction(_ isUp: Bool) {
-        let direction = isUp ? "2":"1"
+        let direction = isUp ? "2" : "1"
         SVProgressHUD.show()
         HomeRepository.shared.callElevatorViaMobile(direction: direction) { errorMsg in
             if errorMsg.isEmpty {
                 SVProgressHUD.showSuccess(withStatus: "呼梯成功")
                 self.updateResultView(true)
-            }else{
+            } else {
                 SVProgressHUD.showError(withStatus: errorMsg)
                 self.updateResultView(false)
             }

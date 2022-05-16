@@ -48,9 +48,9 @@ class PasswordInvitationView: BaseView {
         
         let topPartHeight = 240.0
         
-        self.addSubview(bgImageView)
-        self.addSubview(headerView)
-        self.addSubview(bgContentView)
+        addSubview(bgImageView)
+        addSubview(headerView)
+        addSubview(bgContentView)
         
         bgContentView.addSubview(titleLabel)
         bgContentView.addSubview(statusLabel)
@@ -67,8 +67,8 @@ class PasswordInvitationView: BaseView {
         bgContentView.addSubview(invalidIcon)
         bgContentView.addSubview(invalidTips)
         
-        self.addSubview(saveButton)
-        self.addSubview(shareButton)
+        addSubview(saveButton)
+        addSubview(shareButton)
         
         statusLabel.isHidden = true
         invalidTips.isHidden = true
@@ -87,7 +87,7 @@ class PasswordInvitationView: BaseView {
             make.left.equalToSuperview().offset(kMargin/2)
             make.right.equalToSuperview().offset(-kMargin/2)
             make.top.equalTo(headerView.snp.bottom).offset(kMargin)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-100)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-100)
         }
         
         statusLabel.snp.makeConstraints { make in
@@ -187,7 +187,7 @@ class PasswordInvitationView: BaseView {
             make.width.equalTo(160)
             make.height.equalTo(50)
             make.centerX.equalToSuperview().dividedBy(2)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
         }
         
         shareButton.snp.makeConstraints { make in

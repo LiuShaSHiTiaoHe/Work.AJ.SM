@@ -71,13 +71,13 @@ open class SwiftyOnboardOverlay: UIView {
     }
     
     func setUp() {
-        self.addSubview(pageControl)
-        self.addSubview(continueButton)
-        self.addSubview(skipButton)
+        addSubview(pageControl)
+        addSubview(continueButton)
+        addSubview(skipButton)
         
         pageControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin*2)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-kMargin*2)
             make.height.equalTo(30)
         }
         
@@ -85,7 +85,7 @@ open class SwiftyOnboardOverlay: UIView {
             make.width.equalTo(180)
             make.height.equalTo(40)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin*2)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-kMargin*2)
         }
         
         skipButton.snp.makeConstraints { make in

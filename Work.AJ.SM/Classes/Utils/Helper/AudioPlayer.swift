@@ -157,7 +157,7 @@ public class AudioPlayer: NSObject {
 extension AudioPlayer {
 
     public func play(withDelay delay: Int = 0) {
-        if !self.isPlaying {
+        if !isPlaying {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay), execute: {
                 self.sound?.play()
             })

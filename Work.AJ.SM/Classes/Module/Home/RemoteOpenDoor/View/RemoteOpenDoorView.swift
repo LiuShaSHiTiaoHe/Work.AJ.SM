@@ -13,12 +13,12 @@ let RemoteOpenDoorCellIdentifier = "RemoteOpenDoorCell"
 class RemoteOpenDoorView: BaseView {
 
     override func initializeView(){
-        self.addSubview(headerView)
-        self.addSubview(offlineTipsContentView)
+        addSubview(headerView)
+        addSubview(offlineTipsContentView)
         offlineTipsContentView.addSubview(offlineTipsLogo)
         offlineTipsContentView.addSubview(offlineTips)
-        self.addSubview(tipsLabel)
-        self.addSubview(tableView)
+        addSubview(tipsLabel)
+        addSubview(tableView)
         
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()

@@ -41,13 +41,13 @@ class ScanQRCodeSelectElevatorView: UIView {
     }
     
     func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.backgroundColor()
         
-        self.addSubview(headerView)
-        self.addSubview(titleContentView)
+        addSubview(headerView)
+        addSubview(titleContentView)
         titleContentView.addSubview(elevatorTitle)
-        self.addSubview(tipsLabel)
-        self.addSubview(collectionView)
+        addSubview(tipsLabel)
+        addSubview(collectionView)
         
         headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()

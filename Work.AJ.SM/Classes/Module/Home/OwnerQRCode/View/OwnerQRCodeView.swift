@@ -103,14 +103,14 @@ class OwnerQRCodeView: UIView {
     }
     
     func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.backgroundColor()
         
-        self.addSubview(backImage)
+        addSubview(backImage)
         backImage.addSubview(closeButton)
         backImage.addSubview(titleLabel)
         backImage.addSubview(keyImage)
         
-        self.addSubview(contentBack)
+        addSubview(contentBack)
         contentBack.addSubview(nameLabel)
         contentBack.addSubview(tipsLabel)
         contentBack.addSubview(qrcodeView)
@@ -145,7 +145,7 @@ class OwnerQRCodeView: UIView {
             make.top.equalToSuperview().offset(166)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-kMargin*2)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-kMargin*2)
         }
         
         nameLabel.snp.makeConstraints { make in

@@ -27,8 +27,8 @@ class MemberListHeaderView: BaseView {
     }()
     
     override func initializeView() {
-        self.addSubview(bgImageView)
-        self.addSubview(locationLabel)
+        addSubview(bgImageView)
+        addSubview(locationLabel)
         
         bgImageView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin/2)

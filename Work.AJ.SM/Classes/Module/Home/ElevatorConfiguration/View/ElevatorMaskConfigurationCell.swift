@@ -22,10 +22,10 @@ class ElevatorMaskConfigurationCell: UITableViewCell {
     }
     
     private func initializeView() {
-        self.contentView.addSubview(name)
-        self.contentView.addSubview(aDoor)
-        self.contentView.addSubview(bDoor)
-        self.contentView.addSubview(input)
+        contentView.addSubview(name)
+        contentView.addSubview(aDoor)
+        contentView.addSubview(bDoor)
+        contentView.addSubview(input)
         
         name.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)

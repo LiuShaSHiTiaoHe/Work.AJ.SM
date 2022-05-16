@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+
 public class CustomButton: UIControl {
     /// 布局类型 (同时有标题和图片的时候生效)
     enum Layout {
@@ -21,8 +22,8 @@ public class CustomButton: UIControl {
         case titleBottom
     }
 
-    var layout: Layout = .titleLeft{
-        didSet{
+    var layout: Layout = .titleLeft {
+        didSet {
             updateLayout()
         }
     }
@@ -31,37 +32,37 @@ public class CustomButton: UIControl {
 
     /// 图片
     lazy var imageView = ButtonImageView()
-    
+
     /// 水平间距
     var horizontalSpace: CGFloat = 4.0
 
     /// 竖直间距
     var verticalSpace: CGFloat = 4.0
-    
+
     /// 按钮点击高亮背景色
     var hightlightBackColor: UIColor?
-    
+
     /// 按钮点击高亮文本颜色
     var hightlightTextColor: UIColor?
-    
+
     /// 渐变高亮色
     var gradientHightlightBackColors: [CGColor?] = []
-    
+
     /// 保存上次文本颜色
     private var previousTxetColor: UIColor = .black
-    
+
     /// 保存上次背景色
     private var previousBackgroundColor: UIColor = .clear
 
     /// 保存上次渐变色数组
     private var previousGradientColors: [CGColor?] = []
-    
+
     /// 渐变色数组
     private var gradientColors: [CGColor?] = []
 
     /// 渐变色layer
-    private var gradientLayer : CAGradientLayer?
-    
+    private var gradientLayer: CAGradientLayer?
+
     /// 每组颜色所在位置（范围0~1)
     private var colorLocations: [NSNumber] = [0.0, 1.0]
 
@@ -70,7 +71,7 @@ public class CustomButton: UIControl {
 
     /// 结束位置（默认是矩形右上角）
     private var endPoint = CGPoint(x: 1, y: 0)
-    
+
     convenience init() {
         self.init(frame: CGRect.zero)
         backgroundColor = .clear
@@ -81,7 +82,9 @@ public class CustomButton: UIControl {
         super.init(frame: frame)
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     private func initViews() {
         addSubview(titleLabel)
@@ -94,8 +97,8 @@ public class CustomButton: UIControl {
             titleLabel.isHidden = titleLabel.text == nil ? true : false
             updateLayout()
         }
-        
-        
+
+
         addSubview(imageView)
         imageView.isHidden = true
         imageView.setButtonImage = { [unowned self] in
@@ -111,18 +114,22 @@ public class CustomButton: UIControl {
 
     /// 设置文本颜色
     func setTitleColor(_ color: UIColor?) {
-        guard let color = color else { return }
+        guard let color = color else {
+            return
+        }
         titleLabel.textColor = color
     }
-    
+
     /// 设置图片
     func setImage(_ image: UIImage?) {
         imageView.image = image
     }
-    
+
     /// 渐变色背景设置
-    func gradientColor(colors: [CGColor?], startPoint: CGPoint = CGPoint(x: 0, y: 0), endPoint: CGPoint = CGPoint(x: 1, y: 0),colorLocations: [NSNumber] = [0,1]) {
-        guard let gradient = gradientLayer == nil ? CAGradientLayer() : gradientLayer else { return }
+    func gradientColor(colors: [CGColor?], startPoint: CGPoint = CGPoint(x: 0, y: 0), endPoint: CGPoint = CGPoint(x: 1, y: 0), colorLocations: [NSNumber] = [0, 1]) {
+        guard let gradient = gradientLayer == nil ? CAGradientLayer() : gradientLayer else {
+            return
+        }
         gradient.locations = colorLocations
         gradient.colors = colors as [Any]
         gradient.startPoint = startPoint
@@ -136,15 +143,15 @@ public class CustomButton: UIControl {
         self.endPoint = endPoint
         updateLayout()
     }
-    
+
     /// 更新布局
-    func updateLayout(){
+    func updateLayout() {
         setNeedsLayout()
         layoutIfNeeded()
     }
-    
+
     /// 移除渐变层
-    func removeGradientLayer(){
+    func removeGradientLayer() {
         gradientLayer?.removeFromSuperlayer()
         gradientHightlightBackColors.removeAll()
         gradientColors.removeAll()
@@ -155,8 +162,10 @@ public class CustomButton: UIControl {
 extension CustomButton {
     override public func layoutSubviews() {
         super.layoutSubviews()
-        guard frame.size.width > 0 , frame.size.height > 0 else { return }
-        
+        guard frame.size.width > 0, frame.size.height > 0 else {
+            return
+        }
+
         // ======== 渐变色层部分 ============
         if let gradientLayer = gradientLayer {
             // KVC取出Button圆角值，渐变层也要设置
@@ -172,7 +181,7 @@ extension CustomButton {
         let text = titleLabel.text
         let image = imageView.image
         if let text = text, let image = image {
-            let titleLabelSize = labelSize(text: text, maxSize: CGSize(width: viewWidth , height: viewHeight), font: titleLabel.font)
+            let titleLabelSize = labelSize(text: text, maxSize: CGSize(width: viewWidth, height: viewHeight), font: titleLabel.font)
             updateViewSize(with: titleLabel, size: titleLabelSize)
             updateViewSize(with: imageView, size: image.size)
             let horizontalSpaceImage = horizontalSpace + image.size.width / 2.0
@@ -203,9 +212,9 @@ extension CustomButton {
             imageView.center = CGPoint(x: viewWidth / 2.0, y: viewHeight / 2.0)
         }
     }
-    
+
     /// 更新控件大小
-    func updateViewSize(with targetView: UIView , size: CGSize){
+    func updateViewSize(with targetView: UIView, size: CGSize) {
         var rect = targetView.frame
         rect.size.width = size.width
         rect.size.height = size.height
@@ -214,13 +223,14 @@ extension CustomButton {
 
     /// 计算文本大小
     func labelSize(text: String?, maxSize: CGSize, font: UIFont) -> CGSize {
-        guard let text = text else { return CGSize.zero }
+        guard let text = text else {
+            return CGSize.zero
+        }
         let constraintRect = CGSize(width: maxSize.width, height: maxSize.height)
         let boundingBox = text.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [.font: font], context: nil)
         return boundingBox.size
     }
 }
-
 
 
 // MARK: - 按钮点击效果
@@ -231,12 +241,12 @@ public extension CustomButton {
         // 渐变色
         if !gradientHightlightBackColors.isEmpty, !gradientColors.isEmpty {
             previousGradientColors = gradientColors
-            gradientColor(colors:gradientHightlightBackColors,startPoint: startPoint,endPoint:endPoint,colorLocations: colorLocations)
+            gradientColor(colors: gradientHightlightBackColors, startPoint: startPoint, endPoint: endPoint, colorLocations: colorLocations)
         } else if let hightlightBackColor = hightlightBackColor {
             // 背景色
             backgroundColor = hightlightBackColor
         }
-        
+
         // 文字高亮色
         if hightlightTextColor != nil {
             previousTxetColor = titleLabel.textColor
@@ -246,10 +256,10 @@ public extension CustomButton {
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        if !gradientHightlightBackColors.isEmpty, !previousGradientColors.isEmpty{
-            gradientColor(colors:previousGradientColors,startPoint: startPoint,endPoint:endPoint,colorLocations: colorLocations)
-     
-        } else if hightlightBackColor != nil  {
+        if !gradientHightlightBackColors.isEmpty, !previousGradientColors.isEmpty {
+            gradientColor(colors: previousGradientColors, startPoint: startPoint, endPoint: endPoint, colorLocations: colorLocations)
+
+        } else if hightlightBackColor != nil {
             backgroundColor = previousBackgroundColor
         }
         if hightlightTextColor != nil {
@@ -260,7 +270,7 @@ public extension CustomButton {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         if !gradientHightlightBackColors.isEmpty, !previousGradientColors.isEmpty {
-            gradientColor(colors:previousGradientColors,startPoint: startPoint,endPoint:endPoint,colorLocations: colorLocations)
+            gradientColor(colors: previousGradientColors, startPoint: startPoint, endPoint: endPoint, colorLocations: colorLocations)
         } else if hightlightBackColor != nil {
             backgroundColor = previousBackgroundColor
         }
@@ -284,9 +294,9 @@ class ButtonLabel: UILabel {
             text = attributedText?.string
         }
     }
-    
-    override var font: UIFont!{
-        didSet{
+
+    override var font: UIFont! {
+        didSet {
             updateFrame?()
         }
     }
@@ -296,8 +306,8 @@ class ButtonLabel: UILabel {
 class ButtonImageView: UIImageView {
     var setButtonImage: (() -> Void)?
     /// 保证任何方式赋值都能做相应处理
-    override var image: UIImage?{
-        didSet{
+    override var image: UIImage? {
+        didSet {
             setButtonImage?()
         }
     }

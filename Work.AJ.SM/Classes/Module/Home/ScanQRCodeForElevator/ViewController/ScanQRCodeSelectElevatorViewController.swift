@@ -47,7 +47,7 @@ class ScanQRCodeSelectElevatorViewController: BaseViewController {
     
     @objc
     func popRoot() {
-        self.navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     override func initUI() {

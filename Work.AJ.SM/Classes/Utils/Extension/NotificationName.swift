@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 extension Notification.Name {
     // MARK: - 生物识别
     static let kUserBioMetricesStateChanged = Notification.Name("userBioMetricesStateChanged")

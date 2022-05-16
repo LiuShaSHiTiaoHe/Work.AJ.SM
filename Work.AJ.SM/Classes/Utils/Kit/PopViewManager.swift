@@ -11,31 +11,31 @@ import SwiftEntryKit
 class PopViewManager: NSObject {
     static let shared = PopViewManager()
     private let entranceAnimation: EKAttributes.Animation = .init(
-        translate: .init(
-            duration: 0.5,
-            spring: .init(damping: 1, initialVelocity: 0)
-        )
+            translate: .init(
+                    duration: 0.5,
+                    spring: .init(damping: 1, initialVelocity: 0)
+            )
     )
     private let exitAnimation: EKAttributes.Animation = .init(
-        translate: .init(duration: 0.35)
+            translate: .init(duration: 0.35)
     )
-    private let shadow: EKAttributes.Shadow =  .active(
-        with: .init(
-            color: .black,
-            opacity: 0.3,
-            radius: 6
-        )
+    private let shadow: EKAttributes.Shadow = .active(
+            with: .init(
+                    color: .black,
+                    opacity: 0.3,
+                    radius: 6
+            )
     )
     private let popBehavior: EKAttributes.PopBehavior = .animated(
-        animation: .init(
-            translate: .init(duration: 0.35)
-        )
+            animation: .init(
+                    translate: .init(duration: 0.35)
+            )
     )
-    
+
     func dissmiss(with completion: @escaping () -> Void) {
         SwiftEntryKit.dismiss(.all, with: completion)
     }
-    
+
     func display(_ displayView: Any, _ position: EKAttributes.Position, _ size: EKAttributes.PositionConstraints.Size, _ insideKeyWindow: Bool = false) {
         if let userInterfaceStyle = UIViewController.currentViewController()?.traitCollection.userInterfaceStyle {
             var displayMode: EKAttributes.DisplayMode = .light
@@ -69,7 +69,7 @@ class PopViewManager: NSObject {
                 attributes.positionConstraints.size = size
                 attributes.positionConstraints.verticalOffset = 0
                 attributes.positionConstraints.safeArea = .overridden
-         
+
             case .bottom:
                 attributes = .bottomFloat
                 attributes.displayMode = displayMode
@@ -89,18 +89,18 @@ class PopViewManager: NSObject {
                 attributes.positionConstraints.verticalOffset = 0
                 attributes.positionConstraints.safeArea = .overridden
             }
-            
+
             if let view = displayView as? UIView {
                 if #available(iOS 13.0, *) {
                     view.overrideUserInterfaceStyle = userInterfaceStyle
                 }
                 SwiftEntryKit.display(entry: view, using: attributes, presentInsideKeyWindow: insideKeyWindow)
-            }else if let viewController = displayView as? UIViewController {
+            } else if let viewController = displayView as? UIViewController {
                 if #available(iOS 13.0, *) {
                     viewController.overrideUserInterfaceStyle = userInterfaceStyle
                 }
                 SwiftEntryKit.display(entry: viewController, using: attributes, presentInsideKeyWindow: insideKeyWindow)
-            }else{
+            } else {
                 return
             }
 

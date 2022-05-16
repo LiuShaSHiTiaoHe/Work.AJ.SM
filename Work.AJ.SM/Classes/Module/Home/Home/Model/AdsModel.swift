@@ -8,7 +8,7 @@
 import UIKit
 
 class AdsModel: Mappable {
-    
+
     var adid: String?
     var covers: String?//位置  a首页  b商圈 c开门
     var credate: String?
@@ -37,9 +37,10 @@ class AdsModel: Mappable {
         }
     }
     var folderpath: String?//新增相对路径
-    
-    required init?(map: ObjectMapper.Map) {}
-    
+
+    required init?(map: ObjectMapper.Map) {
+    }
+
     func mapping(map: ObjectMapper.Map) {
         adid <- map["ADID"]
         covers <- map["COVERS"]
@@ -50,9 +51,6 @@ class AdsModel: Mappable {
         title <- map["TITLE"]
         adurl <- map["ADURL"]
     }
-    
 
- 
-    
-    
+
 }

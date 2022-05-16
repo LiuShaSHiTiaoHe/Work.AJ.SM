@@ -58,8 +58,6 @@ PODS:
   - SPPermissions/Core (7.1.5)
   - SPPermissions/Microphone (7.1.5):
     - SPPermissions/Core
-  - SPPermissions/Notification (7.1.5):
-    - SPPermissions/Core
   - SPPermissions/PhotoLibrary (7.1.5):
     - SPPermissions/Core
   - SteviaLayout (4.7.3)
@@ -111,7 +109,6 @@ DEPENDENCIES:
   - SPPermissions/Bluetooth
   - SPPermissions/Camera
   - SPPermissions/Microphone
-  - SPPermissions/Notification
   - SPPermissions/PhotoLibrary
   - SVProgressHUD (= 2.2.5)
   - SwiftEntryKit (= 2.0.0)
@@ -218,6 +215,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: a940dafbbf6494a23b1bd390d722134b5241af74
+PODFILE CHECKSUM: 7baf7de4be608550f9c2aef18aff6999d287208f
 
 COCOAPODS: 1.11.2

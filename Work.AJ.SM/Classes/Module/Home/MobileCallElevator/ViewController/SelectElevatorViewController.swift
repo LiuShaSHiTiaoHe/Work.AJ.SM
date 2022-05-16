@@ -13,15 +13,15 @@ protocol SelectElevatorViewControllerDelegate: NSObjectProtocol {
 }
 
 class SelectElevatorViewController: BaseViewController {
-    
+
     var dataSource: [ElevatorInfo] = []
     var currentFloorID = ""
     weak var delegate: SelectElevatorViewControllerDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-        
+
     override func initData() {
         headerView.rightButton.isHidden = true
         headerView.titleLabel.text = "请选择电梯"
@@ -29,14 +29,14 @@ class SelectElevatorViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
+
     override func closeAction() {
         if !currentFloorID.isEmpty {
             delegate?.updateSelectedElevator(currentFloorID)
         }
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
-    
+
     // MARK: - UI
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
@@ -46,18 +46,18 @@ class SelectElevatorViewController: BaseViewController {
             make.left.right.top.equalToSuperview()
             make.height.equalTo(kOriginTitleAndStateHeight)
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
         }
     }
-    
+
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView.init()
         return view
     }()
-    
+
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .grouped)
         view.register(SelectElevatorTableViewCell.self, forCellReuseIdentifier: "SelectElevatorTableViewCell")
@@ -65,14 +65,14 @@ class SelectElevatorViewController: BaseViewController {
         view.backgroundColor = R.color.backgroundColor()
         return view
     }()
-    
+
 }
 
 extension SelectElevatorViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectElevatorTableViewCell", for: indexPath) as! SelectElevatorTableViewCell
         let elevator = dataSource[indexPath.row]
@@ -81,7 +81,7 @@ extension SelectElevatorViewController: UITableViewDataSource, UITableViewDelega
             if groupID == currentFloorID {
                 cell.selectButton.isHidden = true
                 cell.currentStateLabel.isHidden = false
-            }else{
+            } else {
                 cell.selectButton.isHidden = false
                 cell.currentStateLabel.isHidden = true
             }
@@ -90,11 +90,11 @@ extension SelectElevatorViewController: UITableViewDataSource, UITableViewDelega
         cell.cellName.text = elevator.remark
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-    
+
 }
 
 extension SelectElevatorViewController: SelectElevatorTableViewCellDelegate {

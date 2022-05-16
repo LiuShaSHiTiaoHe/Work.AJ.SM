@@ -17,11 +17,11 @@ enum AuthenticationAPI {
 }
 
 extension AuthenticationAPI: TargetType {
-    
+
     var baseURL: URL {
         return URL(string: APIs.baseUrl)!
     }
-    
+
     var path: String {
         switch self {
         case .login:
@@ -36,20 +36,20 @@ extension AuthenticationAPI: TargetType {
             return APIs.resetPassword
         }
     }
-    
+
     var method: Moya.Method {
         switch self {
         case .login, .regist, .getMessageCode, .checkMessageCode, .resetPassword:
             return .post
         }
     }
-    
+
     var task: Task {
         switch self {
         case let .login(mobile, passWord):
             return .requestParameters(parameters: ["MOBILE": mobile, "PASSWORD": passWord].ekey("MOBILE"), encoding: URLEncoding.default)
         case let .regist(mobile, code, passWord):
-            return .requestParameters(parameters: ["MOBILE": mobile,"CODE": code, "PASSWORD": passWord, "USERNAME": mobile.jk.sub(from: mobile.count - 4), "REALNAME": mobile.jk.sub(from: mobile.count - 4)].ekey("USERNAME"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["MOBILE": mobile, "CODE": code, "PASSWORD": passWord, "USERNAME": mobile.jk.sub(from: mobile.count - 4), "REALNAME": mobile.jk.sub(from: mobile.count - 4)].ekey("USERNAME"), encoding: URLEncoding.default)
         case let .getMessageCode(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
         case let .checkMessageCode(mobile, code):
@@ -58,10 +58,10 @@ extension AuthenticationAPI: TargetType {
             return .requestParameters(parameters: ["MOBILE": mobile, "NEWPASSWORD": password].ekey("MOBILE"), encoding: URLEncoding.default)
         }
     }
-    
-    var headers: [String : String]? {
+
+    var headers: [String: String]? {
         return [:]
     }
-    
+
 }
 

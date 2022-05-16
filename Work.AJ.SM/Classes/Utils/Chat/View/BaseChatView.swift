@@ -112,13 +112,13 @@ class BaseChatView: BaseView {
     }
     
     override func initializeView() {
-        self.addSubview(videoImageView)
-        self.addSubview(nameLabel)
-        self.addSubview(tipsLabel)
-        self.addSubview(refuseButton)
-        self.addSubview(responseButton)
-        self.addSubview(hangupButton)
-        self.addSubview(openDoorButton)
+        addSubview(videoImageView)
+        addSubview(nameLabel)
+        addSubview(tipsLabel)
+        addSubview(refuseButton)
+        addSubview(responseButton)
+        addSubview(hangupButton)
+        addSubview(openDoorButton)
                 
         videoImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -140,25 +140,25 @@ class BaseChatView: BaseView {
         
         refuseButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.right.equalTo(self.snp.centerX).offset(-50)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.right.equalTo(snp.centerX).offset(-50)
         }
         
         responseButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.left.equalTo(self.snp.centerX).offset(50)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.left.equalTo(snp.centerX).offset(50)
         }
         
         hangupButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.centerX.equalToSuperview().offset(-50)
         }
         
         openDoorButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.centerX.equalToSuperview().offset(50)
         }
     }

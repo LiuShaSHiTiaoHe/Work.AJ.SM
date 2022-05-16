@@ -27,7 +27,7 @@ class NoDataView: BaseView {
             }
         }
     }
-    
+
 //    override func initData() {
 //        button.addTarget(self, action: #selector(emptyViewAddHouse), for: .touchUpInside)
 //    }
@@ -35,27 +35,27 @@ class NoDataView: BaseView {
 //    @objc private func emptyViewAddHouse() {
 //        NotificationCenter.default.post(name: .kUserAddNewHouse, object: nil)
 //    }
-    
+
     override func initializeView() {
-        self.backgroundColor = R.color.backgroundColor()
-        self.addSubview(imageView)
-        self.addSubview(label)
-        self.addSubview(button)
-        
+        backgroundColor = R.color.backgroundColor()
+        addSubview(imageView)
+        addSubview(label)
+        addSubview(button)
+
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalTo(self.snp.centerY).offset(-kMargin)
+            make.centerY.equalTo(snp.centerY).offset(-kMargin)
             make.width.equalTo(145)
             make.height.equalTo(115)
         }
-        
+
         label.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(20)
             make.top.equalTo(imageView.snp.bottom).offset(kMargin)
             make.width.equalTo(200)
         }
-        
+
         button.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(40)
@@ -63,13 +63,13 @@ class NoDataView: BaseView {
             make.top.equalTo(label.snp.bottom).offset(kMargin)
         }
     }
-    
+
     lazy var imageView: UIImageView = {
         let view = UIImageView.init()
         view.image = R.image.base_image_nodata()
         return view
     }()
-    
+
     lazy var label: UILabel = {
         let view = UILabel()
         view.text = "暂无数据"
@@ -78,7 +78,7 @@ class NoDataView: BaseView {
         view.textAlignment = .center
         return view
     }()
-    
+
     lazy var button: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加房屋", for: .normal)

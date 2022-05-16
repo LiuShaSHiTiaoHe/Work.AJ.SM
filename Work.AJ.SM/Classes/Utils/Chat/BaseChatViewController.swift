@@ -29,20 +29,20 @@ class BaseChatViewController: BaseViewController {
     private var manager: NIMNetCallManager?
 
     init(startCall callee: String, callType: NIMNetCallMediaType) {
-        self.kCaller = NIMSDK.shared().loginManager.currentAccount()
-        self.kCallee = callee
-        self.isCalled = false
-        self.kCallType = callType
-        self.kCallID = 0
+        kCaller = NIMSDK.shared().loginManager.currentAccount()
+        kCallee = callee
+        isCalled = false
+        kCallType = callType
+        kCallID = 0
         super.init(nibName: nil, bundle: nil)
     }
     
     init(responseCall caller: String, callID: UInt64, callType: NIMNetCallMediaType) {
-        self.kCallID = callID
-        self.kCallType = callType
-        self.kCallee = NIMSDK.shared().loginManager.currentAccount()
-        self.kCaller = caller
-        self.isCalled = true
+        kCallID = callID
+        kCallType = callType
+        kCallee = NIMSDK.shared().loginManager.currentAccount()
+        kCaller = caller
+        isCalled = true
         super.init(nibName: nil, bundle: nil)
     }
         
@@ -132,7 +132,7 @@ class BaseChatViewController: BaseViewController {
         logger.info("挂断")
         NIMAVChatSDK.shared().netCallManager.hangup(kCallID)
         updateTips("挂断中...")
-        self.showErrorMessageAndDismiss("挂断中...")
+        showErrorMessageAndDismiss("挂断中...")
     }
     
     func response2Call(_ accept: Bool) {
@@ -279,7 +279,7 @@ extension BaseChatViewController: NIMNetCallManagerDelegate {
 extension BaseChatViewController {
     private func showErrorMessageAndDismiss(_ msg: String){
         if msg.isEmpty{
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }else{
             SVProgressHUD.showError(withStatus: msg)
             SVProgressHUD.dismiss(withDelay: 1) {

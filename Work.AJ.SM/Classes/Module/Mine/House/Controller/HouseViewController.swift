@@ -12,7 +12,7 @@ class HouseViewController: BaseViewController {
 
     var units: [UnitModel] = []
     private var initialUnitID: Int = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -20,19 +20,19 @@ class HouseViewController: BaseViewController {
             initialUnitID = unitID
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.mj_header?.beginRefreshing()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let unitID = Defaults.currentUnitID, initialUnitID != unitID {
             NotificationCenter.default.post(name: .kCurrentUnitChanged, object: nil)
         }
     }
-    
+
     override func initData() {
         headerView.rightButton.isHidden = true
         headerView.rightButton.addTarget(self, action: #selector(addHouse), for: .touchUpInside)
@@ -41,34 +41,36 @@ class HouseViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
-    
+
+
     @objc
-    func addHouse(){
-        self.navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
+    func addHouse() {
+        navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
     }
-    
+
     override func headerRefresh() {
         MineRepository.shared.getAllUnits { [weak self] errorMsg in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             self.tableView.mj_header?.endRefreshing()
             if errorMsg.isEmpty {
                 self.units.removeAll()
                 self.units.append(contentsOf: RealmTools.objects(UnitModel()))
                 self.tableView.reloadData()
-            }else {
+            } else {
                 SVProgressHUD.showError(withStatus: errorMsg)
                 self.showNoDataView(.nohouse, self.headerView)
             }
         }
     }
-    
+
     // MARK: - UI
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView.init()
         return view
     }()
-    
+
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
@@ -77,7 +79,7 @@ class HouseViewController: BaseViewController {
         view.mj_header = refreshHeader(R.color.blackColor())
         return view
     }()
-    
+
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加房屋", for: .normal)
@@ -87,7 +89,7 @@ class HouseViewController: BaseViewController {
         button.layer.cornerRadius = 20.0
         return button
     }()
-    
+
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(headerView)
@@ -97,13 +99,13 @@ class HouseViewController: BaseViewController {
             make.left.right.top.equalToSuperview()
             make.height.equalTo(kOriginTitleAndStateHeight)
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-70)
         }
-        
+
         addButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
             make.width.equalTo(250)
@@ -111,7 +113,6 @@ class HouseViewController: BaseViewController {
             make.centerX.equalToSuperview()
         }
     }
-    
 
 
 }
@@ -124,15 +125,15 @@ extension HouseViewController: HouseCellDelegate {
 }
 
 extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return units.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HouseCell", for: indexPath) as! HouseCell
         let unit = units[indexPath.row]
@@ -141,11 +142,11 @@ extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-  
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 60))
         view.backgroundColor = R.color.backgroundColor()

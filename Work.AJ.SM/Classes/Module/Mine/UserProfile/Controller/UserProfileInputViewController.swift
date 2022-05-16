@@ -41,7 +41,7 @@ class UserProfileInputViewController: BaseViewController {
     func confirmAction() {
         if let inputString = textfield.text {
             delegate?.userProfileInput(inputString, type)
-            self.navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
         }else{
             SVProgressHUD.showInfo(withStatus: "请输入内容")
         }

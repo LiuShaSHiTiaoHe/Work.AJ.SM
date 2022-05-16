@@ -10,10 +10,10 @@ import UIKit
 class MemberInvitationView: BaseView {
 
     override func initializeView() {
-        self.addSubview(bgImageView)
-        self.addSubview(headerView)
-        self.addSubview(avatar)
-        self.addSubview(bgContentView)
+        addSubview(bgImageView)
+        addSubview(headerView)
+        addSubview(avatar)
+        addSubview(bgContentView)
         bgContentView.addSubview(nameLabel)
         bgContentView.addSubview(titleLabel)
         bgContentView.addSubview(locationLabel)
@@ -21,8 +21,8 @@ class MemberInvitationView: BaseView {
         bgContentView.addSubview(tipsLabel)
         bgContentView.addSubview(tips1Label)
         bgContentView.addSubview(tips2Label)
-        self.addSubview(saveButton)
-        self.addSubview(shareButton)
+        addSubview(saveButton)
+        addSubview(shareButton)
         
         bgImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -109,7 +109,7 @@ class MemberInvitationView: BaseView {
             make.centerY.equalTo(saveButton)
         }
         
-        self.bringSubviewToFront(avatar)
+        bringSubviewToFront(avatar)
     }
     
     lazy var headerView: CommonHeaderView = {
