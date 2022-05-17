@@ -311,8 +311,7 @@ extension HomeRepository {
                     }
                 }
             }
-            // MARK: - 当前用户在当前房屋的角色是业主，有添加成员的功能
-            if let userType = unit.usertype, userType == "O" {
+            if isAddMemberEnable(unit) {
                 result.append(HomePageModule.addFamilyMember.model)
             }
         }
@@ -384,6 +383,15 @@ extension HomeRepository {
 }
 
 extension HomeRepository {
+    // MARK: - 添加成员是否支持
+    func isAddMemberEnable(_ unit: UnitModel) -> Bool {
+        // MARK: - 当前用户在当前房屋的角色是业主，有添加成员的功能
+        if let myset11 = unit.myset11, myset11 == "T", let userType = unit.usertype, userType == "O" {
+            return true
+        }
+        return false
+    }
+
     // MARK: - 访客密码功能是否支持
     func isVisitorPasswordEnable(_ unit: UnitModel) -> Bool {
         if let myset7 = unit.myset7, myset7 == "T" {
