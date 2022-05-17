@@ -8,23 +8,21 @@
 import UIKit
 import SVProgressHUD
 
-typealias UnitMembersCompletion = (([MemberModel]) -> Void)
-typealias HouseChooseCompletion = (([UnitModel]) -> Void)
-typealias FaceListCompletion = (([FaceModel]) -> Void)
-typealias ExtralFaceFileCompletion = (([ExtralFaceModel]) -> Void)
-typealias CityListCompletion = ((Dictionary<String, Array<String>>, Array<String>) -> Void)
-typealias CommunityListCompletion = (([CommunityModel]) -> Void)
-typealias BlockListCompletion = (([BlockModel]) -> Void)
-typealias CellListCompletion = (([CellModel]) -> Void)
-typealias UnitInCellListCompletion = (([UserUnitModel]) -> Void)
-typealias VisitorListCompletion = (([VisitorModel]) -> Void)
-typealias MyUnitGuestCompletion = (([UnitGuestModel]) -> Void)
-
-typealias PropertyContactCompletion = (([PropertyContactModel]) -> Void)
-typealias MessagesCompletion = (([MessageModel]) -> Void)
-typealias CallNeighborFindUnitCompletion = (([String], String) -> Void)
-
-typealias UserDoNotDisturbStatusCompletion = ((Bool) -> Void)
+typealias UnitMembersCompletion = ([MemberModel]) -> Void
+typealias HouseChooseCompletion = ([UnitModel]) -> Void
+typealias FaceListCompletion = ([FaceModel]) -> Void
+typealias ExtralFaceFileCompletion = ([ExtralFaceModel]) -> Void
+typealias CityListCompletion = (Dictionary<String, Array<String>>, Array<String>) -> Void
+typealias CommunityListCompletion = ([CommunityModel]) -> Void
+typealias BlockListCompletion = ([BlockModel]) -> Void
+typealias CellListCompletion = ([CellModel]) -> Void
+typealias UnitInCellListCompletion = ([UserUnitModel]) -> Void
+typealias VisitorListCompletion = ([VisitorModel]) -> Void
+typealias MyUnitGuestCompletion = ([UnitGuestModel]) -> Void
+typealias PropertyContactCompletion = ([PropertyContactModel]) -> Void
+typealias MessagesCompletion = ([MessageModel]) -> Void
+typealias CallNeighborFindUnitCompletion = ([String], String) -> Void
+typealias UserDoNotDisturbStatusCompletion = (Bool) -> Void
 
 
 class MineRepository: NSObject {
@@ -120,7 +118,7 @@ class MineRepository: NSObject {
             }
             // MARK: - 业主有权限查看房屋成员
             if !GDataManager.shared.isOwner() {
-                allModules = allModules.filter { $0.name != MineModuleType.memeberManager.rawValue }
+                allModules = allModules.filter { $0.name != MineModuleType.memberManager.rawValue }
             }
             // MARK: - 没有邀请访客模块。隐藏访客记录
             if !HomeRepository.shared.isVisitorRecordEnable(unit){

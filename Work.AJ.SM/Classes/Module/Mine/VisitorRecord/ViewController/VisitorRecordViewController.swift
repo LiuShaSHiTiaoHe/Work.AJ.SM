@@ -17,42 +17,48 @@ class VisitorRecordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+    }
+
     override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.mj_header = refreshHeader(R.color.maintextColor()!)
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.footerLoadMore()
         })
-    
         titleView.locationLabel.text = HomeRepository.shared.getCurrentHouseName()
-        
-        loadData()
     }
-    
+
     func loadData() {
         if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let userID = ud.userID {
-            MineRepository.shared.getMyUnitGuset(userID: userID, unitID: unitID, page: currentPage.jk.intToString, size: pageSize.jk.intToString) { [weak self] datas in
-                guard let self = self else { return }
-                if datas.isEmpty {
-                    if self.currentPage == 1{
+            MineRepository.shared.getMyUnitGuset(userID: userID, unitID: unitID, page: currentPage.jk.intToString, size: pageSize.jk.intToString) { [weak self] responseData in
+                guard let self = self else {
+                    return
+                }
+                if responseData.isEmpty {
+                    if self.currentPage == 1 {
                         self.showNoDataView(.nodata, self.headerView)
-                    }else{
+                    } else {
                         self.endLoading(true)
                     }
-                }else{
+                } else {
                     if self.currentPage == 1 {
                         self.dataSource.removeAll()
-                        self.dataSource = datas
-                    }else{
-                        self.dataSource.append(contentsOf: datas)
+                        self.dataSource = responseData
+                    } else {
+                        self.dataSource.append(contentsOf: responseData)
                     }
-                    if datas.count < self.pageSize {
+                    if responseData.count < self.pageSize {
                         self.endLoading(true)
-                    }else{
+                    } else {
                         self.endLoading()
                     }
                     self.tableView.reloadData()
@@ -60,17 +66,17 @@ class VisitorRecordViewController: BaseViewController {
             }
         }
     }
-    
-    @objc func footerLoadMore(){
+
+    @objc func footerLoadMore() {
         currentPage += 1
         loadData()
     }
-    
+
     override func headerRefresh() {
         currentPage = 1
         loadData()
     }
-    
+
     func endLoading(_ isNoMoreData: Bool = false) {
         tableView.mj_header?.endRefreshing()
         tableView.mj_footer?.endRefreshing()
@@ -78,14 +84,14 @@ class VisitorRecordViewController: BaseViewController {
             tableView.mj_footer?.endRefreshingWithNoMoreData()
         }
     }
-    
+
     @objc
     func addMemberAction() {
         let view = ChooseVisitorModeView()
         view.delegate = self
         PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
     }
-    
+
     override func initUI() {
         view.backgroundColor = R.color.backgroundColor()
         view.addSubview(headerView)
@@ -99,13 +105,13 @@ class VisitorRecordViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-            make.bottom.equalTo(addButton.snp.top).offset(-kMargin/2)
+            make.bottom.equalTo(addButton.snp.top).offset(-kMargin / 2)
         }
         addButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(40)
             make.width.equalTo(250)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin/2)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin / 2)
         }
     }
 
@@ -117,12 +123,12 @@ class VisitorRecordViewController: BaseViewController {
         view.backgroundColor = R.color.whiteColor()
         return view
     }()
-    
+
     lazy var titleView: MemberListHeaderView = {
         let view = MemberListHeaderView()
         return view
     }()
-    
+
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(MyVisitorCell.self, forCellReuseIdentifier: MyVisitorCellIdentifier)
@@ -130,7 +136,7 @@ class VisitorRecordViewController: BaseViewController {
         view.backgroundColor = R.color.backgroundColor()
         return view
     }()
-    
+
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加访客", for: .normal)
@@ -142,6 +148,7 @@ class VisitorRecordViewController: BaseViewController {
     }()
 
 }
+
 extension VisitorRecordViewController: ChooseVisitorModeDelegate {
     func qrcode() {
         SwiftEntryKit.dismiss(.displayed) {
@@ -150,7 +157,7 @@ extension VisitorRecordViewController: ChooseVisitorModeDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+
     func password() {
         SwiftEntryKit.dismiss(.displayed) {
             let vc = SetVisitorPasswordViewController()
@@ -161,42 +168,42 @@ extension VisitorRecordViewController: ChooseVisitorModeDelegate {
 }
 
 extension VisitorRecordViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        dataSource.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyVisitorCellIdentifier, for: indexPath) as! MyVisitorCell
         cell.selectionStyle = .none
-        let model = dataSource[indexPath.row]
-        cell.dataSource = model
+        cell.dataSource = dataSource[indexPath.row]
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180.0
+        180.0
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return titleView
+        titleView
     }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 120
+        120
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
+
         let model = dataSource[indexPath.row]
         let vc = VisitorInvitationRecordViewController()
         vc.record = model
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
+
+
 }

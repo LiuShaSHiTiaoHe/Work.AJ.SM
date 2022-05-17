@@ -9,15 +9,15 @@ import Foundation
 import SVProgressHUD
 import JKSwiftExtension
 
-typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
-typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
-typealias HomeDataCompletion = (([HomePageFunctionModule], [AdsModel], [NoticeModel]) -> Void)
+typealias HomeModulesCompletion = ([HomePageFunctionModule]) -> Void
+typealias HomeAdsAndNoticeCompletion = ([AdsModel], [NoticeModel]) -> Void
+typealias HomeDataCompletion = ([HomePageFunctionModule], [AdsModel], [NoticeModel]) -> Void
 
-typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
-typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
+typealias HomeAllLocksCompletion = ([UnitLockModel]) -> Void
+typealias ElevatorConfigurationCompletion = (ElevatorConfiguration?) -> Void
 // MARK: - NCom
-typealias NComAllDeviceInfoCompletion = (([NComDTU]) -> Void)
-typealias NComCallRecordCompletion = (([NComRecordInfo], Int) -> Void)
+typealias NComAllDeviceInfoCompletion = ([NComDTU]) -> Void
+typealias NComCallRecordCompletion = ([NComRecordInfo], Int) -> Void
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -246,7 +246,7 @@ extension HomeRepository {
 
 // MARK: - 配置
 extension HomeRepository {
-    func getElevatorConffiguration(completion: @escaping ElevatorConfigurationCompletion) {
+    func getElevatorConfiguration(completion: @escaping ElevatorConfigurationCompletion) {
         if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
             HomeAPI.getElevatorConfiguration(communityID: communityID).request(modelType: ElevatorConfiguration.self, cacheType: .ignoreCache, showError: true) { model, response in
                 completion(model)
@@ -297,7 +297,7 @@ extension HomeRepository {
         var result = [HomePageFunctionModule]()
         let allkeys = HomePageModule.allCases
         let allModules = allkeys.compactMap { moduleEnum in
-            return moduleEnum.model
+            moduleEnum.model
         }
         if let otherused = unit.otherused, otherused == 1 {
             return allModules.filter {
@@ -445,9 +445,15 @@ extension HomeRepository {
     }
 
     // MARK: - 消息是否支持
-    func isNoticeMessageEnable(_ unit: UnitModel) -> Bool {
-        if let myset4 = unit.myset4, myset4 == "T" {
-            return true
+    func isNoticeMessageEnable(_ unit: UnitModel? = nil) -> Bool {
+        if let unit = unit {
+            if let myset4 = unit.myset4, myset4 == "T" {
+                return true
+            }
+        } else {
+            if let unit = HomeRepository.shared.getCurrentUnit(), let myset4 = unit.myset4, myset4 == "T" {
+                return true
+            }
         }
         return false
     }

@@ -8,7 +8,7 @@
 import UIKit
 import Moya
 
-typealias LoginCompletion = ((_ errorMsg: String?) -> Void)
+typealias LoginCompletion = (_ errorMsg: String?) -> Void
 
 class AuthenticationRepository: NSObject {
     static let shared = AuthenticationRepository()

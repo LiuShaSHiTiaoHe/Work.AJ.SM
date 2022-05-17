@@ -14,7 +14,7 @@ class BaseNavigationController: UINavigationController {
 
         interactivePopGestureRecognizer?.delegate = self
         isNavigationBarHidden = true
-        let navigationBarAppearence = UINavigationBar.appearance()
+        let navigationBarAppearance = UINavigationBar.appearance()
         let nBar = navigationBar
         nBar.isTranslucent = false
 
@@ -23,8 +23,8 @@ class BaseNavigationController: UINavigationController {
             barAppearance.backgroundColor = R.color.themeColor()
             barAppearance.shadowColor = .clear
             barAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navigationBarAppearence.scrollEdgeAppearance = barAppearance
-            navigationBarAppearence.standardAppearance = barAppearance
+            navigationBarAppearance.scrollEdgeAppearance = barAppearance
+            navigationBarAppearance.standardAppearance = barAppearance
             nBar.scrollEdgeAppearance = barAppearance
             nBar.standardAppearance = barAppearance
         } else {
@@ -43,6 +43,6 @@ extension BaseNavigationController: UIGestureRecognizerDelegate {
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
+        false
     }
 }

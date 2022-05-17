@@ -24,6 +24,7 @@ class MineViewController: BaseViewController {
         super.viewWillAppear(animated)
         dataSource = MineRepository.shared.getMineModules()
         contentView.tableView.reloadData()
+        contentView.messageButton.isHidden = HomeRepository.shared.isNoticeMessageEnable()
     }
     
     override func initData() {
@@ -48,7 +49,7 @@ class MineViewController: BaseViewController {
     }
     
     override func initUI() {
-        addlayer()
+        addGradientLayer()
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -120,7 +121,7 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     let vc = FaceListViewController()
                     vc.hidesBottomBarWhenPushed = true
                     navigationController?.pushViewController(vc, animated: true)
-                case .memeberManager:
+                case .memberManager:
                     let vc = MemberListViewController()
                     vc.hidesBottomBarWhenPushed = true
                     navigationController?.pushViewController(vc, animated: true)

@@ -14,7 +14,7 @@ let host = isProduction ? "http://120.27.237.7:9393/" : "http://47.111.8.231:909
 let servicePath = "hxcloudplus/"
 
 final class APIs {
-
+    
     static let baseUrl = host + servicePath
     // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"

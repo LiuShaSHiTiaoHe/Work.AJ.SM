@@ -30,7 +30,7 @@ class BaseView: UIView {
         IQKeyboardManager.shared.resignFirstResponder()
     }
 
-    func addlayer() {
+    func addGradientLayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor, UIColor.white.cgColor]
         gradientLayer.locations = [0.0, 0.4, 1.0]

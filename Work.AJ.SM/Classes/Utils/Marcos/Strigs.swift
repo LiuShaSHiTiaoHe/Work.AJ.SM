@@ -24,6 +24,6 @@ let kDeviceType = "iOS"
 
 
 // MARK: - Const String
-let kDefaultDateFormatte = "yyyy-MM-dd HH:mm:ss"
+let kDefaultDateFormatter = "yyyy-MM-dd HH:mm:ss"
 let kKeyChainServiceKey = "com.anjie.home.keys"
 let kDefaultCityName = "南京"

@@ -86,12 +86,24 @@ class GDataManager: NSObject {
 
     func pushSetAlias(_ alias: String) {
         JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
-            logger.info("JPUSH setAlias ==> \(String(describing: iAlias))")
+            if seq != 1 { return }
+            if  iResCode != 0 {
+                JPUSHService.deleteAlias({ diResCode, diAlias, dseq in
+                    if diResCode == 0 && dseq == 10086 {
+                        JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in  }, seq: 3)
+                    }
+                }, seq: 10086)
+            }
         }, seq: 1)
     }
 
     func registerDeviceToken(_ token: Data) {
         JPUSHService.registerDeviceToken(token)
+    }
+    
+    func pushDeleteAlias() {
+        JPUSHService.deleteAlias({ iResCode, iAlias, seq in
+        }, seq: 2)
     }
 
     // MARK: - 检查更新
@@ -145,6 +157,7 @@ class GDataManager: NSObject {
 
     // MARK: - 清除数据
     func clearAccount() {
+        pushDeleteAlias()
         RealmTools.deleteRealmFiles()
         removeUserData()
         removeNetCache()

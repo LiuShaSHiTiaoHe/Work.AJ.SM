@@ -74,7 +74,7 @@ class HomeView: BaseView {
     }
 
     override func layoutSubviews() {
-        addlayer()
+        addGradientLayer()
     }
 
     lazy var headerView: HomeNaviHeaderView = {
