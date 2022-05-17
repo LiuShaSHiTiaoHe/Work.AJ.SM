@@ -59,9 +59,9 @@ extension MineAPI: TargetType {
         case .deleteFace:
             return APIs.deleteFaceFile
         case .extralFace:
-            return APIs.extralFaceFile
+            return APIs.extraFaceFile
         case .syncExtralFace:
-            return APIs.syncExtralFaceFile
+            return APIs.syncExtraFaceFile
         case .versionCheck:
             return APIs.versionCheck
         case .deleteAccount:

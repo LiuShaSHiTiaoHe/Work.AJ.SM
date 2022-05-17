@@ -12,7 +12,6 @@ import JKSwiftExtension
 typealias HomeModulesCompletion = ([HomePageFunctionModule]) -> Void
 typealias HomeAdsAndNoticeCompletion = ([AdsModel], [NoticeModel]) -> Void
 typealias HomeDataCompletion = ([HomePageFunctionModule], [AdsModel], [NoticeModel]) -> Void
-
 typealias HomeAllLocksCompletion = ([UnitLockModel]) -> Void
 typealias ElevatorConfigurationCompletion = (ElevatorConfiguration?) -> Void
 // MARK: - NCom

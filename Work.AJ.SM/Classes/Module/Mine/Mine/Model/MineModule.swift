@@ -54,7 +54,7 @@ enum MineModuleDestination {
     case mine_1//section 1
     case mine_2//section 2
     case setting
-    case unkown
+    case unknown
 }
 
 struct MineModule {
@@ -62,6 +62,6 @@ struct MineModule {
     var icon: String = ""
     var tag: String = ""
     var index: Int = 0
-    var destination: MineModuleDestination = .unkown
+    var destination: MineModuleDestination = .unknown
     var isOtherUsed: Bool = false
 }

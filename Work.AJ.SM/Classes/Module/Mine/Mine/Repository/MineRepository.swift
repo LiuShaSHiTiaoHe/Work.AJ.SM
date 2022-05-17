@@ -11,7 +11,7 @@ import SVProgressHUD
 typealias UnitMembersCompletion = ([MemberModel]) -> Void
 typealias HouseChooseCompletion = ([UnitModel]) -> Void
 typealias FaceListCompletion = ([FaceModel]) -> Void
-typealias ExtralFaceFileCompletion = ([ExtralFaceModel]) -> Void
+typealias ExtraFaceFileCompletion = ([ExtralFaceModel]) -> Void
 typealias CityListCompletion = (Dictionary<String, Array<String>>, Array<String>) -> Void
 typealias CommunityListCompletion = ([CommunityModel]) -> Void
 typealias BlockListCompletion = ([BlockModel]) -> Void
@@ -238,7 +238,7 @@ extension MineRepository {
         }
     }
     
-    func getMyUnitGuset(userID: String, unitID: String, page: String, size: String, completion: @escaping MyUnitGuestCompletion) {
+    func getMyUnitGuest(userID: String, unitID: String, page: String, size: String, completion: @escaping MyUnitGuestCompletion) {
         SVProgressHUD.show()
         MineAPI.getMyUnitGuest(userID: userID, unitID: unitID, currentPage: page, showCount: size).request(modelType: [UnitGuestModel].self , cacheType: .ignoreCache, showError: true) { models, response in
             SVProgressHUD.dismiss()
@@ -292,7 +292,7 @@ extension MineRepository {
         }
     }
     
-    func getExtralFace(completion: @escaping ExtralFaceFileCompletion) {
+    func getExtraFace(completion: @escaping ExtraFaceFileCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = ud.userMobile {
             MineAPI.extralFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).request(modelType: [ExtralFaceModel].self, cacheType: .ignoreCache, showError: true) { models, response in
                 completion(models)
@@ -304,7 +304,7 @@ extension MineRepository {
         }
     }
     
-    func syncExtralFace(completion: @escaping DefaultCompletion) {
+    func syncExtraFace(completion: @escaping DefaultCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = ud.userMobile {
             MineAPI.syncExtralFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).defaultRequest(cacheType: .ignoreCache, showError: true) { jasonData in
                 completion("")
@@ -335,59 +335,59 @@ extension MineRepository {
 // MARK: - 房屋
 extension MineRepository {
     
-    func searchCommunity(with name: String, competion: @escaping CommunityListCompletion) {
+    func searchCommunity(with name: String, completion: @escaping CommunityListCompletion) {
         MineAPI.searchUnit(name: name).request(modelType: [CommunityModel].self, cacheType: .ignoreCache, showError: true) { datas, response in
-            competion(datas)
+            completion(datas)
         } failureCallback: { response in
-            competion([])
+            completion([])
         }
     }
     
-    func getCommunityWithCityName(_ city: String, competion: @escaping CommunityListCompletion) {
+    func getCommunityWithCityName(_ city: String, completion: @escaping CommunityListCompletion) {
         MineAPI.communitiesInCity(city: city).request(modelType: [CommunityModel].self, showError: true) { data, response in
-            competion(data)
+            completion(data)
         } failureCallback: { response in
-            competion([])
+            completion([])
         }
     }
     
-    func getBlocksWithCommunityID(_ communityID: String, competion: @escaping BlockListCompletion) {
+    func getBlocksWithCommunityID(_ communityID: String, completion: @escaping BlockListCompletion) {
         MineAPI.blockInCommunity(communityID: communityID).request(modelType: [BlockModel].self, showError: true) { data, response in
-            competion(data)
+            completion(data)
         } failureCallback: { response in
-            competion([])
+            completion([])
         }
     }
     
-    func getCellsWithBlockID(_ blockID: String, competion: @escaping CellListCompletion){
+    func getCellsWithBlockID(_ blockID: String, completion: @escaping CellListCompletion){
         MineAPI.cellInBlock(blockID: blockID).request(modelType: [CellModel].self, showError: true) { data, response in
-            competion(data)
+            completion(data)
         } failureCallback: { response in
-            competion([])
+            completion([])
         }
     }
     
-    func getUnitWithBlockIDAndCellID(_ blockID: String, _ cellID: String, competion: @escaping UnitInCellListCompletion) {
+    func getUnitWithBlockIDAndCellID(_ blockID: String, _ cellID: String, completion: @escaping UnitInCellListCompletion) {
         MineAPI.unitInCell(blockID: blockID, cellID: cellID).request(modelType: [UserUnitModel].self, showError: true) { data, response in
-            competion(data)
+            completion(data)
         } failureCallback: { response in
-            competion([])
+            completion([])
         }
     }
     
     
     
-    func getAllCity(competion: @escaping CityListCompletion) {
+    func getAllCity(completion: @escaping CityListCompletion) {
         MineAPI.allCity(encryptString: "").defaultRequest { jsonData in
             if let cityArray = jsonData["data"].arrayObject as? Array<Dictionary<String, String>> {
-                competion(self.sortCityWithPY(cityArray), cityArray.compactMap({ item in
+                completion(self.sortCityWithPY(cityArray), cityArray.compactMap({ item in
                     item["CITY"]
                 }))
             }else{
-                competion([:], [])
+                completion([:], [])
             }
         } failureCallback: { response in
-            competion([:], [])
+            completion([:], [])
         }
     }
     
@@ -420,7 +420,7 @@ extension MineRepository {
         //去掉声调
         let pinyinString = mutableString.folding(options: String.CompareOptions.diacriticInsensitive, locale: NSLocale.current)
         //将拼音首字母换成大写
-        let strPinYin = polyphoneStringHandle(nameString: aString, pinyinString: pinyinString).uppercased()
+        let strPinYin = polyphonyStringHandle(nameString: aString, pinyinString: pinyinString).uppercased()
         //截取大写首字母
         let firstString = strPinYin.substring(to:strPinYin.index(strPinYin.startIndex, offsetBy: 1))
         //判断首字母是否为大写
@@ -430,7 +430,7 @@ extension MineRepository {
     }
 
     //多音字处理，根据需要添自行加
-    func polyphoneStringHandle(nameString: String, pinyinString: String) -> String {
+    func polyphonyStringHandle(nameString: String, pinyinString: String) -> String {
         if nameString.hasPrefix("长") {return "chang"}
         if nameString.hasPrefix("沈") {return "shen"}
         if nameString.hasPrefix("厦") {return "xia"}

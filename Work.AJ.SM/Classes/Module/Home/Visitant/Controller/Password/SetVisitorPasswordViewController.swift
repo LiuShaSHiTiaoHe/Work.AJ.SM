@@ -12,7 +12,7 @@ import SVProgressHUD
 
 enum VisitTimes: String {//T为多次有效，F为1次有效
     case single = "F"
-    case multy = "T"
+    case multi = "T"
     case initial = ""
 }
 
@@ -166,7 +166,7 @@ class SetVisitorPasswordViewController: BaseViewController {
 
 extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -236,9 +236,9 @@ extension SetVisitorPasswordViewController: NumberOfUseCellDelegate {
         }
     }
     
-    func multy(isSelected: Bool) {
+    func multi(isSelected: Bool) {
         if isSelected {
-            visitTimes = .multy
+            visitTimes = .multi
         }else{
             visitTimes = .initial
         }

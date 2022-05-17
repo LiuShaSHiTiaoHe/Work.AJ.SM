@@ -9,9 +9,9 @@ import UIKit
 
 class PasswordInvitationView: BaseView {
     
-    var isvalid: Bool? {
+    var isValid: Bool? {
         didSet {
-            if let isvalid = isvalid {
+            if let isvalid = isValid {
                 statusLabel.isHidden = false
                 if isvalid {
                     statusLabel.text = "有效"

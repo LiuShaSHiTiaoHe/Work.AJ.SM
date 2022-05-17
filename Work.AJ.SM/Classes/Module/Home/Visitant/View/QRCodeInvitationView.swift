@@ -10,11 +10,11 @@ import SnapKit
 
 class QRCodeInvitationView: BaseView {
     
-    var isvalid: Bool? {
+    var isValid: Bool? {
         didSet {
-            if let isvalid = isvalid {
+            if let isValid = isValid {
                 statusLabel.isHidden = false
-                if isvalid {
+                if isValid {
                     statusLabel.text = "有效"
                     statusLabel.backgroundColor = R.color.owner_greenColor()
                     invalidTips.isHidden = true

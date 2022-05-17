@@ -39,7 +39,7 @@ class VisitorRecordViewController: BaseViewController {
 
     func loadData() {
         if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let userID = ud.userID {
-            MineRepository.shared.getMyUnitGuset(userID: userID, unitID: unitID, page: currentPage.jk.intToString, size: pageSize.jk.intToString) { [weak self] responseData in
+            MineRepository.shared.getMyUnitGuest(userID: userID, unitID: unitID, page: currentPage.jk.intToString, size: pageSize.jk.intToString) { [weak self] responseData in
                 guard let self = self else {
                     return
                 }

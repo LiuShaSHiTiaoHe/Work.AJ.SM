@@ -19,28 +19,37 @@ class FaceTableViewCell: UITableViewCell {
     
     var faceData: FaceModel? {
         didSet {
-            if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name, let type = faceData.faceType {
+            if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name{
                 nameLabel.text = name
                 faceImage.kf.setImage(with: URL.init(string: url), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
-                if type.isEmpty {
-                    roleLabel.isHidden = true
-                }else{
-                    roleLabel.isHidden = false
-                    roleLabel.textColor = R.color.secondtextColor()
-                    switch type {//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
-                    case "0":
-                        roleLabel.text = "本人"
-                    case "1":
-                        roleLabel.text = "父母"
-                    case "2":
-                        roleLabel.text = "子女"
-                    case "3":
-                        roleLabel.text = "亲属"
-                    default:
+                if let faceType = faceData.faceType {
+                    if faceType.isEmpty {
                         roleLabel.isHidden = true
-                        break
+                    }else{
+                        roleLabel.isHidden = false
+                        roleLabel.textColor = R.color.secondtextColor()
+                        switch faceType {//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
+                        case "0":
+                            roleLabel.text = "本人"
+                        case "1":
+                            roleLabel.text = "父母"
+                        case "2":
+                            roleLabel.text = "子女"
+                        case "3":
+                            roleLabel.text = "亲属"
+                        default:
+                            roleLabel.isHidden = true
+                            break
+                        }
+                    }
+                } else {
+                    if let type = faceData.type {
+                        roleLabel.text = type
+                    } else {
+                        roleLabel.isHidden = true
                     }
                 }
+
             }
         }
     }

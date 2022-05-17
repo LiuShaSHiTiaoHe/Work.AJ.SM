@@ -52,7 +52,7 @@ class FaceListViewController: BaseViewController {
     
     func getExtralFaceFile() {
         SVProgressHUD.show()
-        MineRepository.shared.getExtralFace { [weak self] models in
+        MineRepository.shared.getExtraFace { [weak self] models in
             SVProgressHUD.dismiss()
             guard let self = self else { return }
             let data = models.filter{ $0.isValid == "1"}
@@ -75,7 +75,7 @@ class FaceListViewController: BaseViewController {
     
     func syncExtralFaceFile() {
         SVProgressHUD.show()
-        MineRepository.shared.syncExtralFace { [weak self] errorMsg in
+        MineRepository.shared.syncExtraFace { [weak self] errorMsg in
             SVProgressHUD.dismiss()
             guard let self = self else { return }
             if errorMsg.isEmpty {

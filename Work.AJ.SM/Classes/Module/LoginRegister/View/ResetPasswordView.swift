@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol ResetPasswordViewDelegate: NSObjectProtocol {
-    func resetPasswordComfirm(mobile: String, code: String, newPassword: String)
+    func resetPasswordConfirm(mobile: String, code: String, newPassword: String)
     func resetPasswordClose()
     func sendCode(mobile: String)
 }
@@ -71,7 +71,7 @@ class ResetPasswordView: UIView {
         button.titleLabel?.font = k18Font
         button.backgroundColor = R.color.themeColor()
         button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(comfirmButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmButtonAction), for: .touchUpInside)
         return button
     }()
 
@@ -158,7 +158,7 @@ class ResetPasswordView: UIView {
     }
 
     @objc
-    func comfirmButtonAction() {
+    func confirmButtonAction() {
         var resetMobile = ""
         var resetCode = ""
         var newPassword = ""
@@ -180,7 +180,7 @@ class ResetPasswordView: UIView {
             passwordInput.errorMsg = "请设置正确格式的密码"
             return
         }
-        delegate?.resetPasswordComfirm(mobile: resetMobile, code: resetCode, newPassword: newPassword)
+        delegate?.resetPasswordConfirm(mobile: resetMobile, code: resetCode, newPassword: newPassword)
     }
 
     @objc

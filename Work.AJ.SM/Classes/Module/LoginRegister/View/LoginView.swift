@@ -59,7 +59,7 @@ class LoginView: BaseView {
             viewType = .login
             loginInputContentView.isHidden = false
             registerInputContentView.isHidden = true
-            comfirmButton.setTitle("登录", for: .normal)
+            confirmButton.setTitle("登录", for: .normal)
             inputContentView.snp.updateConstraints { make in
                 make.height.equalTo(345)
             }
@@ -67,7 +67,7 @@ class LoginView: BaseView {
             viewType = .register
             loginInputContentView.isHidden = true
             registerInputContentView.isHidden = false
-            comfirmButton.setTitle("注册", for: .normal)
+            confirmButton.setTitle("注册", for: .normal)
             inputContentView.snp.updateConstraints { make in
                 make.height.equalTo(405)
             }
@@ -85,7 +85,7 @@ class LoginView: BaseView {
     }
 
     @objc
-    func comfirmButtonAction() {
+    func confirmButtonAction() {
         hideKeyboard()
         switch viewType {
         case .login:
@@ -252,15 +252,15 @@ class LoginView: BaseView {
 
     private let policyLabel = ActiveLabel()
 
-    // MARK: - Comfirm Button
-    lazy var comfirmButton: UIButton = {
+    // MARK: - Confirm Button
+    lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("登录", for: .normal)
         button.setTitleColor(R.color.whiteColor(), for: .normal)
         button.titleLabel?.font = k18Font
         button.backgroundColor = R.color.themeColor()
         button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(comfirmButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmButtonAction), for: .touchUpInside)
         return button
     }()
 
@@ -282,7 +282,7 @@ class LoginView: BaseView {
         registerInputContentView.addSubview(registerPasswordInputView)
         registerInputContentView.addSubview(registerCheckButton)
         registerInputContentView.addSubview(policyLabel)
-        inputContentView.addSubview(comfirmButton)
+        inputContentView.addSubview(confirmButton)
         registerInputContentView.isHidden = true
         bringSubviewToFront(iconImageView)
 
@@ -398,7 +398,7 @@ class LoginView: BaseView {
             make.height.equalTo(22)
         }
 
-        comfirmButton.snp.makeConstraints { make in
+        confirmButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(43)
@@ -425,10 +425,10 @@ extension LoginView: VerificationCodeInputViewDelegate {
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.isEqual(loginPasswordInputView.textInput) {
-            comfirmButtonAction()
+            confirmButtonAction()
             return true
         } else if textField.isEqual(registerPasswordInputView.textInput) {
-            comfirmButtonAction()
+            confirmButtonAction()
             return true
         }
         return false

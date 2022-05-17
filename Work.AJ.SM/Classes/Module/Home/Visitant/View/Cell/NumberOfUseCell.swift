@@ -9,7 +9,7 @@ import UIKit
 
 protocol NumberOfUseCellDelegate: NSObjectProtocol {
     func single(isSelected: Bool)
-    func multy(isSelected: Bool)
+    func multi(isSelected: Bool)
 }
 
 let NumberOfUseCellIdentifier = "NumberOfUseCellIdentifier"
@@ -35,7 +35,7 @@ class NumberOfUseCell: UITableViewCell {
     }
     
     @objc
-    func multyAction() {
+    func multiAction() {
         multyButton.isSelected = !multyButton.isSelected
         let state = multyButton.isSelected
         if state {
@@ -47,7 +47,7 @@ class NumberOfUseCell: UITableViewCell {
         }else{
             multyButton.backgroundColor = R.color.whiteColor()
         }
-        delegate?.multy(isSelected: state)
+        delegate?.multi(isSelected: state)
     }
     
     func initializeView() {
@@ -118,7 +118,7 @@ class NumberOfUseCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initializeView()
         singleButton.addTarget(self, action: #selector(singleAction), for: .touchUpInside)
-        multyButton.addTarget(self, action: #selector(multyAction), for: .touchUpInside)
+        multyButton.addTarget(self, action: #selector(multiAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
