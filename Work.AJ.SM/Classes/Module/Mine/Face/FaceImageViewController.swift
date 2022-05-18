@@ -52,7 +52,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     }
 
     private func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(cancelButton)
         view.addSubview(swicthButton)
         view.addSubview(cameraButton)

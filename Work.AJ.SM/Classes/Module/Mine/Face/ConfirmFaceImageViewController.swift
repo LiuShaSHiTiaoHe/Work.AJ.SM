@@ -90,7 +90,7 @@ class ConfirmFaceImageViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(faceImageView)
         view.addSubview(tipsLabel)
@@ -134,7 +134,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         let view = CommonHeaderView()
         view.backgroundColor = R.color.whiteColor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.titleLabel.text = "提交人脸认证"
         return view
     }()
@@ -146,7 +146,7 @@ class ConfirmFaceImageViewController: BaseViewController {
 
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k16BoldFont
         view.text = "请填写身份信息"
         view.textAlignment = .center
@@ -159,7 +159,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         view.register(FaceUploadRoleSelectCell.self, forCellReuseIdentifier: FaceUploadRoleSelectCellIdentifier)
         view.register(CommonIDNumberInpuCell.self, forCellReuseIdentifier: CommonIDNumberInpuCellIdentifier)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 

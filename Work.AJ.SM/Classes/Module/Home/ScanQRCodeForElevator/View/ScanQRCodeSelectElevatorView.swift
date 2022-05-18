@@ -41,7 +41,7 @@ class ScanQRCodeSelectElevatorView: UIView {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         
         addSubview(headerView)
         addSubview(titleContentView)
@@ -83,7 +83,7 @@ class ScanQRCodeSelectElevatorView: UIView {
         view.rightButton.isHidden = true
         view.backgroundColor = R.color.whiteColor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         return view
     }()
     
@@ -117,7 +117,7 @@ class ScanQRCodeSelectElevatorView: UIView {
         flowLayout.minimumInteritemSpacing = 10
         let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         c.alwaysBounceVertical = true
-        c.backgroundColor = R.color.backgroundColor()
+        c.backgroundColor = R.color.bg()
         c.register(MCECollectionViewCell.self, forCellWithReuseIdentifier: MobileCallElevatorCellidentifier)
         return c
     }()

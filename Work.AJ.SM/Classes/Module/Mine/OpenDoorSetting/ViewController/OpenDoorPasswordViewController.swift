@@ -17,7 +17,7 @@ class OpenDoorPasswordViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.backgroundColor = R.color.whiteColor()
         view.titleLabel.text = "设置开门密码"
         return view
@@ -28,7 +28,7 @@ class OpenDoorPasswordViewController: BaseViewController {
         view.text = "请输入开门密码"
         view.textAlignment = .center
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     

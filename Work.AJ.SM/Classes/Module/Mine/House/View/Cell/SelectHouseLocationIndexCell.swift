@@ -12,7 +12,7 @@ let SelectHouseLocationIndexCellIdetifier = "SelectHouseLocationIndexCellIdetifi
 class SelectHouseLocationIndexCell: UICollectionViewCell {
     lazy var locationNameLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.backgroundColor = .clear
         view.font = k14Font

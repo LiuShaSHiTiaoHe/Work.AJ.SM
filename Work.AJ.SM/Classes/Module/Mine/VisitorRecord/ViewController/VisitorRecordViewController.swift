@@ -27,7 +27,7 @@ class VisitorRecordViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.mj_header = refreshHeader(R.color.maintextColor()!)
+        tableView.mj_header = refreshHeader(R.color.text_title()!)
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
             guard let self = self else {
                 return
@@ -93,7 +93,7 @@ class VisitorRecordViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)
@@ -119,7 +119,7 @@ class VisitorRecordViewController: BaseViewController {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "访客记录"
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.backgroundColor = R.color.whiteColor()
         return view
     }()
@@ -133,7 +133,7 @@ class VisitorRecordViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(MyVisitorCell.self, forCellReuseIdentifier: MyVisitorCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 

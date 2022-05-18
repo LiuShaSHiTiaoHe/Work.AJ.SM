@@ -64,7 +64,7 @@ class RemoteIntercomView: BaseView {
     
     lazy var offlineTipsContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.familyB_yellowColor()
+        view.backgroundColor = R.color.bg_yellow()
         return view
     }()
     
@@ -76,7 +76,7 @@ class RemoteIntercomView: BaseView {
     
     lazy var offlineTips: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.family_yellowColor()
+        view.textColor = R.color.sub_yellow()
         view.font = k12Font
         view.text = "设备离线状态下，无法远程开门和视频通话"
         return view
@@ -87,7 +87,7 @@ class RemoteIntercomView: BaseView {
         view.textAlignment = .center
         view.textColor = R.color.themeColor()
         view.font = k15Font
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.text = "请选择视频通话的门禁设备"
         return view
     }()
@@ -96,7 +96,7 @@ class RemoteIntercomView: BaseView {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 }

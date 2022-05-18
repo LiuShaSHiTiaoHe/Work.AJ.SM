@@ -13,8 +13,8 @@ class MCECollectionViewCell: UICollectionViewCell {
         let view = UILabel()
         view.layer.cornerRadius = 4
         view.layer.borderWidth = 1/kScale
-        view.layer.borderColor = R.color.secondtextColor()!.cgColor
-        view.textColor = R.color.secondtextColor()
+        view.layer.borderColor = R.color.text_info()!.cgColor
+        view.textColor = R.color.text_info()
         view.textAlignment = .center
         view.font = k28Font
         view.backgroundColor = .clear
@@ -32,7 +32,7 @@ class MCECollectionViewCell: UICollectionViewCell {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         contentView.addSubview(elevatorName)
         
         elevatorName.snp.makeConstraints { make in

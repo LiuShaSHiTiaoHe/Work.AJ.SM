@@ -92,7 +92,7 @@ class NComRecordCell: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k16Font
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -100,7 +100,7 @@ class NComRecordCell: UITableViewCell {
     
     lazy var dateLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.font = k14Font
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)

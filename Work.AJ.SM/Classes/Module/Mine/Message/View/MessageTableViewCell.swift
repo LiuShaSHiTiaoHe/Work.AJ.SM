@@ -29,7 +29,7 @@ class MessageTableViewCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         contentView.addSubview(backgrdView)
         backgrdView.addSubview(nameLabel)
         backgrdView.addSubview(timeLabel)
@@ -71,7 +71,7 @@ class MessageTableViewCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel.init()
         view.font = k14Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -80,7 +80,7 @@ class MessageTableViewCell: UITableViewCell {
     lazy var timeLabel: UILabel = {
         let view = UILabel.init()
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -89,7 +89,7 @@ class MessageTableViewCell: UITableViewCell {
     lazy var messageLabel: UILabel = {
         let view = UILabel.init()
         view.font = k20Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .left
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

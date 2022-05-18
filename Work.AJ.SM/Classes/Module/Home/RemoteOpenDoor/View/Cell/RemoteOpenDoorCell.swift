@@ -23,18 +23,18 @@ class RemoteOpenDoorCell: UITableViewCell {
             if let status = status {
                 if status {
                     statusLabel.text = "在线"
-                    statusLabel.textColor = R.color.owner_greenColor()
+                    statusLabel.textColor = R.color.sub_green()
                     cameraButton.isUserInteractionEnabled = true
                     openDoorButton.isUserInteractionEnabled = true
                 }else{
                     statusLabel.text = "不在线"
-                    statusLabel.textColor = R.color.errorRedColor()
+                    statusLabel.textColor = R.color.sub_red()
                     cameraButton.isUserInteractionEnabled = false
                     openDoorButton.isUserInteractionEnabled = false
                 }
             }else{
                 statusLabel.text = "未知"
-                statusLabel.textColor = R.color.secondtextColor()
+                statusLabel.textColor = R.color.text_info()
                 cameraButton.isUserInteractionEnabled = false
                 openDoorButton.isUserInteractionEnabled = false
             }
@@ -57,14 +57,14 @@ class RemoteOpenDoorCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel.init()
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     
     lazy var typeLabel: UILabel = {
         let view = UILabel.init()
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
     
@@ -94,7 +94,7 @@ class RemoteOpenDoorCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         contentView.addSubview(bgView)
         bgView.addSubview(typeImageView)
         bgView.addSubview(nameLabel)

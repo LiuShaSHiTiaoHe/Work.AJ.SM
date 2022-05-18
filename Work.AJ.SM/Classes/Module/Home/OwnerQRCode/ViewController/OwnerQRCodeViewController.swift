@@ -21,7 +21,7 @@ class OwnerQRCodeViewController: BaseViewController {
     }
     
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         
         view.addSubview(ownerQRCodeView)
         ownerQRCodeView.snp.makeConstraints { make in

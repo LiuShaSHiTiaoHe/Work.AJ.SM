@@ -75,7 +75,7 @@ class HouseViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.mj_header = refreshHeader(R.color.blackColor())
         return view
     }()
@@ -91,13 +91,13 @@ class HouseViewController: BaseViewController {
     }()
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(kOriginTitleAndStateHeight)
+            make.height.equalTo(kTitleAndStateHeight)
         }
 
         tableView.snp.makeConstraints { make in
@@ -149,12 +149,12 @@ extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 60))
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.text = "如需加快房屋审核，请联系物业"
         view.textAlignment = .center
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
-        view.backgroundColor = R.color.backgroundColor()
+        view.textColor = R.color.text_info()
+        view.backgroundColor = R.color.bg()
         return view
     }
 

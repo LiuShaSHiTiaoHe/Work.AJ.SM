@@ -21,7 +21,7 @@ class CommonPickerView: BaseView {
         leftButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         leftButton.setTitle("取消", for: .normal)
-        leftButton.setTitleColor(R.color.errorRedColor(), for: .normal)
+        leftButton.setTitleColor(R.color.sub_red(), for: .normal)
         rightButton.setTitle("确定", for: .normal)
         rightButton.setTitleColor(R.color.themeColor(), for: .normal)
     }

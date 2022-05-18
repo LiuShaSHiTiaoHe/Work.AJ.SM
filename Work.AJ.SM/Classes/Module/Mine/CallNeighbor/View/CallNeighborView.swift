@@ -42,7 +42,7 @@ class CallNeighborView: BaseView {
     }
 
     override func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
 
         addSubview(headerView)
         addSubview(tipLabel)
@@ -105,7 +105,7 @@ class CallNeighborView: BaseView {
         view.numberOfLines = 0
         view.text = "拨号规则：楼栋号+单元号+房屋号，比如拨打2栋2单元101室的用户，楼栋号与单元号不足两位的前面多加0，单元号为空输00，房间号不足四位多加0，拨号02020101"
         view.font = k16Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         return view
     }()
@@ -131,7 +131,7 @@ class CallNeighborView: BaseView {
         flowLayout.minimumInteritemSpacing = 0
         let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         c.alwaysBounceHorizontal = false
-        c.backgroundColor = R.color.backgroundColor()
+        c.backgroundColor = R.color.bg()
         c.register(DialCollectionViewCell.self, forCellWithReuseIdentifier: DialCollectionViewCellCellIdentifier)
         return c
     }()
@@ -140,7 +140,7 @@ class CallNeighborView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setTitle("呼叫", for: .normal)
         button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.owner_greenColor()
+        button.backgroundColor = R.color.sub_green()
         button.layer.cornerRadius = 20.0
         return button
     }()

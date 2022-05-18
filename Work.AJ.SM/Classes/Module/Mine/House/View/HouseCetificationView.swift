@@ -82,7 +82,7 @@ class HouseCetificationView: BaseView {
 
     lazy var locationName: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k14Font
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
@@ -96,7 +96,7 @@ class HouseCetificationView: BaseView {
         view.register(CommonPhoneNumberCell.self, forCellReuseIdentifier: CommonPhoneNumberCellIdentifier)
         view.register(CommonIDNumberInpuCell.self, forCellReuseIdentifier: CommonIDNumberInpuCellIdentifier)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 

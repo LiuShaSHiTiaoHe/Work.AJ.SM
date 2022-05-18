@@ -51,7 +51,7 @@ class ElevatorMaskConfigurationViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(ElevatorMaskConfigurationCell.self, forCellReuseIdentifier: ElevatorMaskConfigurationCellIdentifier)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
     

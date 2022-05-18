@@ -27,7 +27,7 @@ class FaceTableViewCell: UITableViewCell {
                         roleLabel.isHidden = true
                     }else{
                         roleLabel.isHidden = false
-                        roleLabel.textColor = R.color.secondtextColor()
+                        roleLabel.textColor = R.color.text_info()
                         switch faceType {//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
                         case "0":
                             roleLabel.text = "本人"
@@ -43,11 +43,7 @@ class FaceTableViewCell: UITableViewCell {
                         }
                     }
                 } else {
-                    if let type = faceData.type {
-                        roleLabel.text = type
-                    } else {
-                        roleLabel.isHidden = true
-                    }
+                    roleLabel.isHidden = true
                 }
 
             }
@@ -55,7 +51,7 @@ class FaceTableViewCell: UITableViewCell {
     }
     
     func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         contentView.addSubview(bgView)
         bgView.addSubview(faceImage)
         bgView.addSubview(nameLabel)
@@ -132,14 +128,14 @@ class FaceTableViewCell: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k16Font
         return view
     }()
     
     lazy var roleLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.font = k14Font
         view.textAlignment = .left
         view.text = ""

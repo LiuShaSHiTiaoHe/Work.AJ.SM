@@ -49,7 +49,7 @@ class UserProfileInputViewController: BaseViewController {
     
     // MARK: - UI
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(inputBgView)
         inputBgView.addSubview(textfield)
@@ -100,7 +100,7 @@ class UserProfileInputViewController: BaseViewController {
     lazy var textfield: UITextField = {
         let view = UITextField.init()
         view.backgroundColor = R.color.whiteColor()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k16Font
         return view
     }()

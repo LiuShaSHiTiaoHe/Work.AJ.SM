@@ -21,7 +21,7 @@ class ResetPasswordView: UIView {
 
     lazy var headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.themebackgroundColor()
+        view.backgroundColor = R.color.bg_theme()
         return view
     }()
 
@@ -86,7 +86,7 @@ class ResetPasswordView: UIView {
     }
 
     func initializeView() {
-        backgroundColor = R.color.themebackgroundColor()
+        backgroundColor = R.color.bg_theme()
 
         addSubview(headerView)
         headerView.addSubview(closeButton)
@@ -100,13 +100,13 @@ class ResetPasswordView: UIView {
         headerView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
-            make.height.equalTo(kOriginTitleAndStateHeight)
+            make.height.equalTo(kTitleAndStateHeight)
         }
 
         closeButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin / 2)
             make.width.height.equalTo(20)
-            make.bottom.equalToSuperview().offset((20 + kStateHeight - kOriginTitleAndStateHeight) / 2)
+            make.bottom.equalToSuperview().offset((20 + kStateHeight - kTitleAndStateHeight) / 2)
         }
 
         titleLabel.snp.makeConstraints { make in

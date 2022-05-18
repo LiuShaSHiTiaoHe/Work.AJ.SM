@@ -22,7 +22,7 @@ class SettingViewController: BaseViewController {
     override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "通用设置"
-        headerView.titleLabel.textColor = R.color.maintextColor()
+        headerView.titleLabel.textColor = R.color.text_title()
         // MARK: - 允许访客呼叫到手机 这个选项是否显示
         if let unit = HomeRepository.shared.getCurrentUnit() {
             ud.allowVisitorCall = HomeRepository.shared.isVisitorCallUserMobileEnable(unit)
@@ -125,7 +125,7 @@ class SettingViewController: BaseViewController {
     
     // MARK: - UI
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         
@@ -143,7 +143,7 @@ class SettingViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.backgroundColor = R.color.whiteColor()
         view.titleLabel.text = "通用设置"
         return view
@@ -156,7 +156,7 @@ class SettingViewController: BaseViewController {
             view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
             view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }else{
             let view = UITableView.init(frame: CGRect.zero, style: .grouped)
@@ -164,7 +164,7 @@ class SettingViewController: BaseViewController {
             view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
             view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }
     }()

@@ -54,7 +54,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
         let datePickerManager = PGDatePickManager.init()
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
-        datePickerManager.cancelButtonTextColor = R.color.errorRedColor()
+        datePickerManager.cancelButtonTextColor = R.color.sub_red()
         datePickerManager.confirmButtonTextColor = R.color.themeColor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line

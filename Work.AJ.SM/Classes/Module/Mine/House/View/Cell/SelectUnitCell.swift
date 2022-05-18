@@ -18,9 +18,9 @@ class SelectUnitCell: UITableViewCell {
                 horizonLine.isHidden = false
                 locationName.textColor = R.color.themeColor()
             }else {
-                backgroundColor = R.color.backgroundColor()
+                backgroundColor = R.color.bg()
                 horizonLine.isHidden = true
-                locationName.textColor = R.color.maintextColor()
+                locationName.textColor = R.color.text_title()
             }
         }
     }
@@ -47,7 +47,7 @@ class SelectUnitCell: UITableViewCell {
     }
     
     private func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         selectionStyle = .none
         contentView.addSubview(horizonLine)
         contentView.addSubview(locationName)
@@ -76,7 +76,7 @@ class SelectUnitCell: UITableViewCell {
     lazy var locationName: UILabel = {
         let view = UILabel()
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     

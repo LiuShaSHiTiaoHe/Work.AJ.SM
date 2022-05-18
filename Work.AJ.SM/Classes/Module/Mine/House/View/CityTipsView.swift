@@ -63,7 +63,7 @@ class CityTipsView: BaseView {
         let view = UILabel()
         view.textAlignment = .left
         view.font = k16Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.text = "请选择城市"
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

@@ -40,7 +40,7 @@ class LoginView: BaseView {
             label.text = "已阅读并同意《用户协议》和《隐私声明》"
             label.font = k12Font
             label.numberOfLines = 0
-            label.textColor = R.color.secondtextColor()
+            label.textColor = R.color.text_info()
             label.customColor[customType1] = R.color.themeColor()
             label.customColor[customType2] = R.color.themeColor()
             label.customSelectedColor[customType1] = R.color.themeColor()
@@ -186,7 +186,7 @@ class LoginView: BaseView {
         let seg = BetterSegmentedControl.init()
         seg.segments = LabelSegment.segments(withTitles: ["账号登录", "账号注册"],
                 normalFont: k18Font,
-                normalTextColor: R.color.secondtextColor(),
+                normalTextColor: R.color.text_info(),
                 selectedFont: k18Font,
                 selectedTextColor: R.color.themeColor())
         seg.setOptions([.backgroundColor(R.color.whiteColor()!), .indicatorViewBackgroundColor(R.color.whiteColor()!), .cornerRadius(5)])

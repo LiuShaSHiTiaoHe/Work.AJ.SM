@@ -22,7 +22,7 @@ class MessageViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.mj_header = refreshHeader(R.color.maintextColor()!)
+        tableView.mj_header = refreshHeader(R.color.text_title()!)
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             self.footerLoadMore()
@@ -106,7 +106,7 @@ class MessageViewController: BaseViewController {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCellIdentifier)
         return view
     }()

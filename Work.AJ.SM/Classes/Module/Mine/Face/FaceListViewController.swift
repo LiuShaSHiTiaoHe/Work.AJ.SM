@@ -90,7 +90,7 @@ class FaceListViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)
@@ -112,7 +112,7 @@ class FaceListViewController: BaseViewController {
     
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView.init()
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.backgroundColor = R.color.whiteColor()
         return view
@@ -122,7 +122,7 @@ class FaceListViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .grouped)
         view.register(FaceTableViewCell.self, forCellReuseIdentifier: FaceTableViewCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 

@@ -165,7 +165,7 @@ class BaseChatView: BaseView {
     
     lazy var videoImageView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.contentMode = .scaleAspectFill
         return view
     }()
@@ -174,7 +174,7 @@ class BaseChatView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k18Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     
@@ -182,7 +182,7 @@ class BaseChatView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k14Font
-        view.textColor = R.color.family_yellowColor()
+        view.textColor = R.color.sub_yellow()
         return view
     }()
     

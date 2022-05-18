@@ -36,7 +36,7 @@ class IndoorCallElevatorViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

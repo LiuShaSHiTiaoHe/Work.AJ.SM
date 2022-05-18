@@ -48,7 +48,7 @@ class SettingTableViewCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k14Font
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -58,7 +58,7 @@ class SettingTableViewCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .right
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()

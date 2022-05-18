@@ -15,14 +15,14 @@ class PasswordInvitationView: BaseView {
                 statusLabel.isHidden = false
                 if isvalid {
                     statusLabel.text = "有效"
-                    statusLabel.backgroundColor = R.color.owner_greenColor()
+                    statusLabel.backgroundColor = R.color.sub_green()
                     invalidTips.isHidden = true
                     invalidIcon.isHidden = true
                     passwordTipsLabel.isHidden = false
                     passwordLabel.isHidden = false
                 }else{
                     statusLabel.text = "已过期"
-                    statusLabel.backgroundColor = R.color.secondtextColor()
+                    statusLabel.backgroundColor = R.color.text_info()
                     invalidTips.isHidden = false
                     invalidIcon.isHidden = false
                     passwordTipsLabel.isHidden = true
@@ -227,7 +227,7 @@ class PasswordInvitationView: BaseView {
     lazy var titleLabel: UILabel = {
         let view = UILabel.init()
         view.text = "邀请您到访"
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.font = k15Font
         return view
@@ -245,7 +245,7 @@ class PasswordInvitationView: BaseView {
     
     lazy var locationLabel: UILabel = {
         let view = UILabel.init()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         view.textAlignment = .center
         return view
@@ -255,7 +255,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "来访时间"
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -263,7 +263,7 @@ class PasswordInvitationView: BaseView {
     lazy var arriveTime: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         return view
     }()
@@ -273,7 +273,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "有效期至"
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -281,7 +281,7 @@ class PasswordInvitationView: BaseView {
     lazy var validTime: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         return view
     }()
@@ -291,7 +291,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "使用次数"
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -299,7 +299,7 @@ class PasswordInvitationView: BaseView {
     lazy var visitTimes: UILabel = {
         let view = UILabel()
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         return view
     }()
@@ -312,7 +312,7 @@ class PasswordInvitationView: BaseView {
     lazy var passwordTipsLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         view.text = "访客密码"
         return view
@@ -335,7 +335,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "访客密码已过期"
         view.font = k18Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()

@@ -40,6 +40,6 @@ class DialCollectionViewCell: UICollectionViewCell {
 
         }
 //        self.layer.cornerRadius = 10
-//        self.jk.addShadow(shadowColor: R.color.themebackgroundColor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.3, shadowRadius: 4)
+//        self.jk.addShadow(shadowColor: R.color.bg_theme()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.3, shadowRadius: 4)
     }
 }

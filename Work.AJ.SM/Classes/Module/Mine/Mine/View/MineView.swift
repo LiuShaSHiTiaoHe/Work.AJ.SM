@@ -48,14 +48,14 @@ class MineView: BaseView {
             let view = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
             view.register(MineTableViewCell.self, forCellReuseIdentifier: MineTableViewCellIdentifier)
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         } else {
             // Fallback on earlier versions
             let view = UITableView.init(frame: CGRect.zero, style: .grouped)
             view.register(MineTableViewCell.self, forCellReuseIdentifier: MineTableViewCellIdentifier)
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }
     }()

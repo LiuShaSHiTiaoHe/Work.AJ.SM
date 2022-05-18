@@ -82,7 +82,7 @@ class IndoorCallElevatorView: UIView {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         
         addSubview(headerView)
         addSubview(imageView)

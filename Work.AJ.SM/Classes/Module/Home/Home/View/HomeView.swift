@@ -62,7 +62,7 @@ class HomeView: BaseView {
         headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
-            make.height.equalTo(kOriginTitleAndStateHeight)
+            make.height.equalTo(kTitleAndStateHeight)
         }
 
         collectionView.snp.makeConstraints { make in

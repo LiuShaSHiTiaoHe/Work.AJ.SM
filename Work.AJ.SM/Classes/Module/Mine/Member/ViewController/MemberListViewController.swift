@@ -16,7 +16,7 @@ class MemberListViewController: BaseViewController {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "房屋成员"
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.backgroundColor = R.color.whiteColor()
         return view
     }()
@@ -30,7 +30,7 @@ class MemberListViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(MemberListCell.self, forCellReuseIdentifier: MemberListCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
@@ -56,7 +56,7 @@ class MemberListViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)

@@ -63,7 +63,7 @@ class PropertyContactViewController: BaseViewController {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(PropertyContactTableViewCell.self, forCellReuseIdentifier: PropertyContactTableViewCellIdentifier)
         return view
     }()

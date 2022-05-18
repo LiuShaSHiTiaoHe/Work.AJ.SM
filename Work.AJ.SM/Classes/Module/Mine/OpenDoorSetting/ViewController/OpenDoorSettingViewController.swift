@@ -12,7 +12,7 @@ class OpenDoorSettingViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.backgroundColor = R.color.whiteColor()
         view.titleLabel.text = "开门设置"
         return view
@@ -25,7 +25,7 @@ class OpenDoorSettingViewController: BaseViewController {
             view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
             view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }else{
             let view = UITableView.init(frame: CGRect.zero, style: .grouped)
@@ -33,7 +33,7 @@ class OpenDoorSettingViewController: BaseViewController {
             view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
             view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }
     }()
@@ -48,7 +48,7 @@ class OpenDoorSettingViewController: BaseViewController {
     }
     
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         

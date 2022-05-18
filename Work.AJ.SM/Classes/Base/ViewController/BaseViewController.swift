@@ -28,7 +28,7 @@ class BaseViewController: UIViewController {
     // MARK: - GradientLayer
     func addGradientLayer() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor, UIColor.white.cgColor]
+        gradientLayer.colors = [R.color.bg_theme()!.cgColor, UIColor.white.cgColor]
         gradientLayer.locations = [0.0, 0.4, 1.0]
         gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint.init(x: 0, y: 1.0)

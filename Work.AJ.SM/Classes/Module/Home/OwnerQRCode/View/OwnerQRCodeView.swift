@@ -54,14 +54,14 @@ class OwnerQRCodeView: UIView {
     lazy var nameLabel: UILabel = {
         let view = UILabel.init()
         view.textAlignment = .center
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     
     lazy var tipsLabel: UILabel = {
         let view = UILabel.init()
         view.textAlignment = .center
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.text = "请在开门/乘梯时展示此二维码"
         return view
     }()
@@ -103,7 +103,7 @@ class OwnerQRCodeView: UIView {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         
         addSubview(backImage)
         backImage.addSubview(closeButton)

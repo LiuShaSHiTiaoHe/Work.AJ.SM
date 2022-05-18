@@ -199,7 +199,7 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .left
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

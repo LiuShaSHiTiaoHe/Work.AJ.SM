@@ -57,7 +57,7 @@ class ElevatorMaskConfigurationCell: UITableViewCell {
         let view = UILabel()
         view.font = k13Font
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     

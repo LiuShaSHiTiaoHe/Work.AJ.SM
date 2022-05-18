@@ -37,7 +37,7 @@ class NoDataView: BaseView {
 //    }
 
     override func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         addSubview(imageView)
         addSubview(label)
         addSubview(button)
@@ -74,7 +74,7 @@ class NoDataView: BaseView {
         let view = UILabel()
         view.text = "暂无数据"
         view.font = k15Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.textAlignment = .center
         return view
     }()

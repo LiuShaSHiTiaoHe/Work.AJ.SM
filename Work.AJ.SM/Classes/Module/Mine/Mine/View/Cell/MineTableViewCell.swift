@@ -35,7 +35,7 @@ class MineTableViewCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.font = k14Font
         return view
@@ -45,7 +45,7 @@ class MineTableViewCell: UITableViewCell {
         let view = UILabel()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
     

@@ -13,7 +13,7 @@ class CurrentLocationView: BaseView {
         let view = UILabel()
         view.text = "当前城市"
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
 
@@ -32,7 +32,7 @@ class CurrentLocationView: BaseView {
     lazy var locationName: UILabel = {
         let view = UILabel()
         view.font = k16Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
 
@@ -45,7 +45,7 @@ class CurrentLocationView: BaseView {
     }()
 
     override func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
 
         addSubview(titleLabel)
         addSubview(contentBackView)

@@ -135,20 +135,20 @@ class CommonSearchView: UIView {
         let view = UIView()
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
     lazy var titleButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setTitleColor(R.color.maintextColor(), for: .normal)
+        button.setTitleColor(R.color.text_title(), for: .normal)
         button.titleLabel?.font = k14Font
         return button
     }()
 
     lazy var separator: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.separateColor()
+        view.backgroundColor = R.color.separator()
         return view
     }()
 

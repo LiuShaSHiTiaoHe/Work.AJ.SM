@@ -20,7 +20,7 @@ class CommonPhoneNumberCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .left
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -28,7 +28,7 @@ class CommonPhoneNumberCell: UITableViewCell {
 
     lazy var phoneInput: UITextField = {
         let view = UITextField.init()
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.font = k14Font
         view.textAlignment = .right
         view.keyboardType = .phonePad
@@ -37,7 +37,7 @@ class CommonPhoneNumberCell: UITableViewCell {
 
     lazy var errorMsg: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.errorRedColor()
+        view.textColor = R.color.sub_red()
         view.font = k11Font
         view.textAlignment = .right
         return view

@@ -145,7 +145,7 @@ class MemberInvitationView: BaseView {
     
     lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         view.textAlignment = .center
         return view
@@ -154,7 +154,7 @@ class MemberInvitationView: BaseView {
     lazy var titleLabel: UILabel = {
         let view = UILabel.init()
         view.text = "邀请您加入房间"
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.font = k15Font
         return view
@@ -162,7 +162,7 @@ class MemberInvitationView: BaseView {
     
     lazy var locationLabel: UILabel = {
         let view = UILabel.init()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         view.textAlignment = .center
         return view
@@ -178,7 +178,7 @@ class MemberInvitationView: BaseView {
         view.text = "----------------   加入房屋   ----------------"
         view.font = k12Font
         view.textAlignment = .center
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
     
@@ -187,7 +187,7 @@ class MemberInvitationView: BaseView {
         view.text = "1.  微信识别二维码，选择“接受邀请”。"
         view.textAlignment = .left
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
     
@@ -196,7 +196,7 @@ class MemberInvitationView: BaseView {
         view.textAlignment = .left
         view.font = k12Font
         view.numberOfLines = 2
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
     

@@ -21,7 +21,7 @@ class SelectHouseIndexView: BaseView {
     }
 
     override func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
 
         addSubview(tipsContentView)
         tipsContentView.addSubview(tipsLabel)
@@ -47,14 +47,14 @@ class SelectHouseIndexView: BaseView {
 
     lazy var tipsContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.font = k14Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.text = "当前已选择"
         return view
     }()

@@ -19,7 +19,7 @@ class SetVisitorPasswordView: UIView {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         addSubview(headerView)
         addSubview(titleContentView)
         titleContentView.addSubview(locationIcon)
@@ -91,7 +91,7 @@ class SetVisitorPasswordView: UIView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k15Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -104,7 +104,7 @@ class SetVisitorPasswordView: UIView {
         view.register(NumberOfUseCell.self, forCellReuseIdentifier: NumberOfUseCellIdentifier)
         view.register(CommonPhoneNumberCell.self, forCellReuseIdentifier: CommonPhoneNumberCellIdentifier)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.tableFooterView = UIView()
         return view
     }()

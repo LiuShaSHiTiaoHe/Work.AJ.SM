@@ -27,21 +27,21 @@ class SelectElevatorTableViewCell: UITableViewCell {
     lazy var cellName: UILabel = {
         let label = UILabel.init()
         label.font = k15Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         return label
     }()
     
     lazy var communityName: UILabel = {
         let label = UILabel.init()
         label.font = k12Font
-        label.textColor = R.color.secondtextColor()
+        label.textColor = R.color.text_info()
         return label
     }()
     
     lazy var currentStateLabel: UILabel = {
         let label = UILabel.init()
         label.font = k12Font
-        label.textColor = R.color.secondtextColor()
+        label.textColor = R.color.text_info()
         label.textAlignment = .center
         label.text = "当前电梯"
         return label
@@ -51,7 +51,7 @@ class SelectElevatorTableViewCell: UITableViewCell {
         let button = UIButton.init(type: .custom)
         button.setTitle("选择", for: .normal)
         button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.blueColor()
+        button.backgroundColor = R.color.themeColor()
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = k12Font
         button.addTarget(self, action: #selector(chooseElevator), for: .touchUpInside)
@@ -64,7 +64,7 @@ class SelectElevatorTableViewCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         contentView.addSubview(backGround)
         
         backGround.addSubview(cellName)

@@ -39,7 +39,7 @@ class NComRecordView: BaseView {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(NComRecordCell.self, forCellReuseIdentifier: NComRecordCellIdentifier)
         return view
     }()

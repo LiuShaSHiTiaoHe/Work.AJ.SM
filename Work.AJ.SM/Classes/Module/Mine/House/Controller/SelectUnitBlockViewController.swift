@@ -175,7 +175,7 @@ class SelectUnitBlockViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
 
         view.addSubview(headerView)
         view.addSubview(cityTipsView)
@@ -228,7 +228,7 @@ class SelectUnitBlockViewController: BaseViewController {
         view.backgroundColor = R.color.whiteColor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "选择小区/楼栋"
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         return view
     }()
 
@@ -241,7 +241,7 @@ class SelectUnitBlockViewController: BaseViewController {
         let view = UILabel()
         view.text = "请选择小区/楼栋"
         view.font = k14Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
 
@@ -254,7 +254,7 @@ class SelectUnitBlockViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(SelectUnitCell.self, forCellReuseIdentifier: SelectUnitCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
@@ -262,7 +262,7 @@ class SelectUnitBlockViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(SelectUnitCell.self, forCellReuseIdentifier: SelectUnitCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 }

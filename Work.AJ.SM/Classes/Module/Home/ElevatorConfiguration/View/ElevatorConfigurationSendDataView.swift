@@ -52,15 +52,15 @@ class ElevatorConfigurationSendDataView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k16Font
-        view.backgroundColor = R.color.backgroundColor()
-        view.textColor = R.color.maintextColor()
+        view.backgroundColor = R.color.bg()
+        view.textColor = R.color.text_title()
         return view
     }()
     
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(UITableViewCell.self, forCellReuseIdentifier: "configurationSendDataCellIdentifier")
         return view
     }()

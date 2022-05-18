@@ -59,7 +59,7 @@ class SettingNoticeTableViewCell: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k14Font
         view.textAlignment = .left
         return view
@@ -67,7 +67,7 @@ class SettingNoticeTableViewCell: UITableViewCell {
     
     lazy var switchView: UISwitch = {
         let view = UISwitch.init()
-        view.tintColor = R.color.owner_greenColor()
+        view.tintColor = R.color.sub_green()
         view.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
         return view
     }()
