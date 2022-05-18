@@ -45,7 +45,6 @@ target 'Work.AJ.SM' do
   
   pod 'SPPermissions/Camera'
   pod 'SPPermissions/PhotoLibrary'
-#  pod 'SPPermissions/Notification'
   pod 'SPPermissions/Bluetooth'
   pod 'SPPermissions/Microphone'
     
