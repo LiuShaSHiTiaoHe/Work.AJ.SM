@@ -497,7 +497,7 @@ extension MineRepository {
     // MARK: - 获取物业联系方式
     func getPropertyContact(completion: @escaping PropertyContactCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
-            MineAPI.propertyContactList(communityID: communityID).request(modelType: [PropertyContactModel].self, cacheType: .ignoreCache, showError: true) { models, response in
+            MineAPI.propertyContactList(communityID: communityID).request(modelType: [PropertyContactModel].self, cacheType: .ignoreCache, showError: false) { models, response in
                 completion(models)
             } failureCallback: { response in
                 completion([])

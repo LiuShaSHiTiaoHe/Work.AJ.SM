@@ -50,8 +50,9 @@ class ConfirmFaceImageViewController: BaseViewController {
 //            return
 //        }
         
-        if let imageData = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile{
-            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
+        if let imageData = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile, let userType = unit.usertype{
+            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
+            
             MineRepository.shared.addFace(model) { errorMsg in
                 if errorMsg.isEmpty {
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
