@@ -20,7 +20,7 @@ class HomeModuleCell: UICollectionViewCell {
         let label = UILabel.init()
         label.textAlignment = .left
         label.font = k16Font
-        label.textColor = R.color.blackColor()
+        label.textColor = R.color.text_title()
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
