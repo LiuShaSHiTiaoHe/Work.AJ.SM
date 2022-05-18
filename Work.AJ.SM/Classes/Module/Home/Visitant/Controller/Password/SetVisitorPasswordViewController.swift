@@ -142,7 +142,6 @@ class SetVisitorPasswordViewController: BaseViewController {
                     return
                 }
             }
-            
             if let interval = validTime.jk.numberOfMinutes(from: arriveTime), interval >= 30 {
                 if interval > 12*60*60 {
                     SVProgressHUD.showError(withStatus: "有效期超出限值")
@@ -154,7 +153,7 @@ class SetVisitorPasswordViewController: BaseViewController {
                     }
                 }
             }else{
-                SVProgressHUD.showError(withStatus: "有效期早于来访时间")
+                SVProgressHUD.showError(withStatus: "有效期最少为30分钟")
             }
         } else {
             SVProgressHUD.showError(withStatus: "请选择来访时间")

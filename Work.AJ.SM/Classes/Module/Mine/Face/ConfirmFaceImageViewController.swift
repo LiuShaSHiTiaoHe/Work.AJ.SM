@@ -27,7 +27,6 @@ class ConfirmFaceImageViewController: BaseViewController {
         confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
     }
 
-    // FIXME: - 身份证号还是手机号码？？
     @objc
     func confirm() {
         let name = getMemberName()
@@ -46,10 +45,10 @@ class ConfirmFaceImageViewController: BaseViewController {
             return
         }
                
-        if faceType.isEmpty{
-            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
-            return
-        }
+//        if faceType.isEmpty{
+//            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
+//            return
+//        }
         
         if let imageData = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile{
             let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
@@ -177,7 +176,8 @@ class ConfirmFaceImageViewController: BaseViewController {
 
 extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        // FIXME: - 暂时隐藏身份选项
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

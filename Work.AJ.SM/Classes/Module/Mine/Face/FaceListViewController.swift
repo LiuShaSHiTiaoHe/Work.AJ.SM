@@ -47,7 +47,10 @@ class FaceListViewController: BaseViewController {
 
     @objc
     func addFaceImage() {
-        getExtralFaceFile()
+        // FIXME: - 暂时讲新的接口注释，使用旧的应付上架
+        let vc = FaceImageViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+//        getExtralFaceFile()
     }
     
     func getExtralFaceFile() {

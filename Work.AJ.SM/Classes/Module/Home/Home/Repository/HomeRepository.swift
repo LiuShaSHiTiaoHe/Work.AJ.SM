@@ -311,7 +311,7 @@ extension HomeRepository {
                     }
                 }
             }
-            if isAddMemberEnable(unit) {
+            if isMemberManagementEnable(unit) {
                 result.append(HomePageModule.addFamilyMember.model)
             }
         }
@@ -384,7 +384,7 @@ extension HomeRepository {
 
 extension HomeRepository {
     // MARK: - 添加成员是否支持
-    func isAddMemberEnable(_ unit: UnitModel) -> Bool {
+    func isMemberManagementEnable(_ unit: UnitModel) -> Bool {
         // MARK: - 当前用户在当前房屋的角色是业主，有添加成员的功能
         if let myset11 = unit.myset11, myset11 == "T", let userType = unit.usertype, userType == "O" {
             return true
