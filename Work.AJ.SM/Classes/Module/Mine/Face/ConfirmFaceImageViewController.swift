@@ -35,12 +35,12 @@ class ConfirmFaceImageViewController: BaseViewController {
             return
         }
 
-        let identitfireNumber = getMemberIdentifierNumber()
-        if identitfireNumber.isEmpty {
+        let identifiedNumber = getMemberIdentifierNumber()
+        if identifiedNumber.isEmpty {
             SVProgressHUD.showInfo(withStatus: "请输入身份证号")
             return
         }
-        if !identitfireNumber.jk.isValidIDCardNumStrict {
+        if !identifiedNumber.jk.isValidIDCardNumStrict {
             SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
             return
         }
