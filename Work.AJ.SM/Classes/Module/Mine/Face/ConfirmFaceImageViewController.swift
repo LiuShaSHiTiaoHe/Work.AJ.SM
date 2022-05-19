@@ -10,7 +10,7 @@ import SVProgressHUD
 
 class ConfirmFaceImageViewController: BaseViewController {
         
-    private var faceType: String = ""//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
+    private var faceType: String = ""//“0”：本人；“1”：父母；“2”：子女；
     
 
     override func viewDidLoad() {
@@ -198,10 +198,9 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: FaceUploadRoleSelectCellIdentifier, for: indexPath) as! FaceUploadRoleSelectCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份"
-            cell.firstButtonName = "本人"
-            cell.secondButtonName = "父母"
-            cell.thirdButtonName = "子女"
-            cell.fourthButtonName = "家属"
+            cell.secondButtonName = "本人"
+            cell.thirdButtonName = "父母"
+            cell.fourthButtonName = "子女"
             cell.delegate = self
             return cell
         default:
@@ -220,19 +219,18 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
 
 extension ConfirmFaceImageViewController: FaceUploadRoleSelectCellDelegate {
     func firstButtonSelected(_ isSelected: Bool) {
-        faceType = "0"
     }
     
     func secondButtonSelected(_ isSelected: Bool) {
-        faceType = "1"
+        faceType = "0"
     }
     
     func thirdButtonSelected(_ isSelected: Bool) {
-        faceType = "2"
+        faceType = "1"
     }
     
     func fourthButtonSelected(_ isSelected: Bool) {
-        faceType = "3"
+        faceType = "2"
     }
     
 
