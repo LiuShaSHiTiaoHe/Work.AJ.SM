@@ -11,8 +11,8 @@ enum HomePageModule: String {
     case mobileCallElevator = "乘梯选层"
     case ownerQRCode = "一码通"
     case indoorCallElevator = "室内呼梯"
-    case bleCallElevator = "蓝牙开门"
-    case cloudOpneGate = "远程开门"
+    case bleCallElevator = "蓝牙呼梯/开门"
+    case cloudOpenGate = "远程开门"
     case cloudIntercom = "门禁对讲"
     case scanElevatorQRCode = "扫码乘梯"
     case inviteVisitors = "访客邀请"
@@ -50,7 +50,7 @@ enum HomePageModule: String {
             return HomePageFunctionModule.init(name: self.rawValue, icon: "indoorCallElevator", tag: "MOUDLE1", index: 3, showinpage: .home)
         case .bleCallElevator:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "bleCallElevator", tag: "MOUDLE3", index: 4, showinpage: .home)
-        case .cloudOpneGate:
+        case .cloudOpenGate:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudOpneGate", tag: "MOUDLE2", index: 5, showinpage: .home)
         case .cloudIntercom:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudIntercom", tag: "MOUDLE2", index: 6, showinpage: .home)
@@ -94,7 +94,7 @@ enum ShowInPage {
     case home
     case service
     case neighbour
-    case unkown
+    case unknown
 }
 
 struct HomePageFunctionModule {
@@ -102,5 +102,5 @@ struct HomePageFunctionModule {
     var icon: String = ""
     var tag: String = ""
     var index: Int = 0
-    var showinpage: ShowInPage = .unkown
+    var showinpage: ShowInPage = .unknown
 }

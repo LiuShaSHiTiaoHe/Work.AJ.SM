@@ -79,7 +79,7 @@ extension HomeViewController: HomeViewDelegate {
                     width: .constant(value: 280),
                     height: .constant(value: 380)
             ), true)
-        case .cloudOpneGate:
+        case .cloudOpenGate:
             pushTo(viewController: RemoteOpenDoorViewController())
         case .cloudIntercom:
             pushTo(viewController: RemoteIntercomViewController())

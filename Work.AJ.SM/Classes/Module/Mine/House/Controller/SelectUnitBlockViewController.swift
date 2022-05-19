@@ -69,7 +69,7 @@ class SelectUnitBlockViewController: BaseViewController {
         locationIndexTips.isUserInteractionEnabled = true
         locationIndexTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
         
-        OtherAPI.AmapLocation(key: kAmapKey).defaultRequest { jsonData in
+        CommonAPI.amapLocation(key: kAmapKey).defaultRequest { jsonData in
             self.cityName = "南京"
         } failureCallback: { response in
             self.cityName = "南京"

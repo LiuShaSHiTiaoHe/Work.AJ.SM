@@ -73,7 +73,7 @@ class MobileCallElevatorViewController: BaseViewController {
     }
 
     private func callElevator(_ floorInfo: FloorMapInfo) {
-        PermissionManager.PermissionRequest(.bluetooth) { [weak self] authorized in
+        PermissionManager.permissionRequest(.bluetooth) { [weak self] authorized in
             guard let self = self else {
                 return
             }

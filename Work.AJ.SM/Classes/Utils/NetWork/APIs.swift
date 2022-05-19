@@ -24,9 +24,10 @@ final class APIs {
     static let updateNotificationStatus = "appcity/addMyNoDisturbTime.do"
     static let propertyContactList = "appcity/getContact.do"
     static let messageList = "appcity/getMyMessage.do"
+    static let commonPush = "appDevice/commonPush"
     // MARK: - 用户鉴权
     static let login = "appcity/login.do"
-    static let regist = "appcity/register.do"
+    static let register = "appcity/register.do"
     static let msgCode = "appcity/getMessageCode.do"
     static let checkMsgCode = "appcity/checkMessageCode.do"
     static let resetPassword = "appcity/resetPassword.do"

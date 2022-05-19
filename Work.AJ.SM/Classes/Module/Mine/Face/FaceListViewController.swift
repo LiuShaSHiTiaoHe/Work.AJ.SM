@@ -15,7 +15,6 @@ class FaceListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,10 +46,18 @@ class FaceListViewController: BaseViewController {
 
     @objc
     func addFaceImage() {
-        getExtralFaceFile()
+        PermissionManager.permissionRequest(.camera) { [weak self] authorized in
+            guard let self = self else { return }
+            if authorized {
+                self.getExtrasFaceFile()
+            } else {
+                PermissionManager.shared.go2Setting(.camera)
+            }
+        }
+//        getExtrasFaceFile()
     }
     
-    func getExtralFaceFile() {
+    func getExtrasFaceFile() {
         SVProgressHUD.show()
         MineRepository.shared.getExtraFace { [weak self] models in
             SVProgressHUD.dismiss()
@@ -60,7 +67,7 @@ class FaceListViewController: BaseViewController {
                 let unitName = HomeRepository.shared.getCurrentHouseName()
                 let alert = UIAlertController.init(title: "人脸图片同步提醒", message: "您在其他小区已上传\(data.count)张人脸图片，是否同步至\(unitName)", preferredStyle: .alert)
                 alert.addAction(action: .init(title: "确定", style: .destructive, handler: { action in
-                    self.syncExtralFaceFile()
+                    self.syncExtrasFaceFile()
                 })).addAction("取消", .cancel) {
                     let vc = FaceImageViewController()
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -73,7 +80,7 @@ class FaceListViewController: BaseViewController {
         }
     }
     
-    func syncExtralFaceFile() {
+    func syncExtrasFaceFile() {
         SVProgressHUD.show()
         MineRepository.shared.syncExtraFace { [weak self] errorMsg in
             SVProgressHUD.dismiss()

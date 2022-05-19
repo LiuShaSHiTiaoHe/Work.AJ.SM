@@ -77,7 +77,7 @@ extension RemoteIntercomViewController: RemoteOpenDoorCellDelegate{
     
     func camera(_ lockModel: UnitLockModel) {
         if let lockMac = lockModel.lockmac {
-            PermissionManager.PermissionRequest(.microphone) { authorized in
+            PermissionManager.permissionRequest(.microphone) { authorized in
                 if authorized {
                     let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
                     vc.modalPresentationStyle = .fullScreen

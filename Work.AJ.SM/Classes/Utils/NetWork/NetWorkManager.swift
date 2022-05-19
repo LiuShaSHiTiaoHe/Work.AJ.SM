@@ -15,12 +15,12 @@ import CryptoSwift
 
 
 // MARK: - Completion Callback Block Defines
-typealias DefaultCompletion = ((_ errorMsg: String) -> Void)
-typealias RequestModelCallback<T: Mappable> = ((T, ResponseModel?) -> Void)
-typealias RequestModelsCallback<T: Mappable> = (([T], ResponseModel?) -> Void)
-typealias RequestBaseCallback = ((ResponseModel, JSON?) -> Void)
-typealias RequestFailureCallback = ((ResponseModel) -> Void)
-typealias DefaultSuccessCallback = ((JSON) -> Void)
+typealias DefaultCompletion = (_ errorMsg: String) -> Void
+typealias RequestModelCallback<T: Mappable> = (T, ResponseModel?) -> Void
+typealias RequestModelsCallback<T: Mappable> = ([T], ResponseModel?) -> Void
+typealias RequestBaseCallback = (ResponseModel, JSON?) -> Void
+typealias RequestFailureCallback = (ResponseModel) -> Void
+typealias DefaultSuccessCallback = (JSON) -> Void
 
 
 // MARK: - Network Response Key

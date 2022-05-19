@@ -12,12 +12,12 @@ class PermissionManager {
     static let shared = PermissionManager()
 
     func requestAllPermission() {
-        requset([.bluetooth, .camera, .microphone, .photoLibrary])
+        request([.bluetooth, .camera, .microphone, .photoLibrary])
     }
 
-    static func PermissionRequest(_ permisson: SPPermissions.Permission, _ completion: @escaping (Bool) -> Void) {
-        permisson.request {
-            let authorized = permisson.authorized
+    static func permissionRequest(_ permission: SPPermissions.Permission, _ completion: @escaping (Bool) -> Void) {
+        permission.request {
+            let authorized = permission.authorized
             completion(authorized)
         }
     }
@@ -31,14 +31,14 @@ class PermissionManager {
         case .denied:
             go2Setting(permission)
         case .notDetermined:
-            requset([permission])
+            request([permission])
         case .notSupported:
             break
         }
         return status
     }
 
-    private func requset(_ permissions: [SPPermissions.Permission]) {
+    private func request(_ permissions: [SPPermissions.Permission]) {
         if permissions.count == 1 {
             if let topViewController = UIViewController.jk.topViewController() {
                 let controller = SPPermissions.native(permissions)
@@ -58,8 +58,8 @@ class PermissionManager {
 
     }
 
-    private func go2Setting(_ permission: SPPermissions.Permission) {
-        let alert = UIAlertController.init(title: "\(permission.type.name)权限已被拒绝", message: "请前往系统设置页面打开相应权限", preferredStyle: .alert)
+    func go2Setting(_ permission: SPPermissions.Permission) {
+        let alert = UIAlertController.init(title: "\(permission.localisedName)权限已被拒绝", message: "请前往系统设置页面打开相应权限", preferredStyle: .alert)
         alert.addAction("取消", .cancel) {
 
         }

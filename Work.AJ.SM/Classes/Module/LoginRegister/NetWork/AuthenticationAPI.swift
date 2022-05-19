@@ -27,7 +27,7 @@ extension AuthenticationAPI: TargetType {
         case .login:
             return APIs.login
         case .register:
-            return APIs.regist
+            return APIs.register
         case .getMessageCode:
             return APIs.msgCode
         case .checkMessageCode:
