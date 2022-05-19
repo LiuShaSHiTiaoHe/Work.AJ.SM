@@ -35,7 +35,7 @@ class MemberListCell: UITableViewCell {
                         memberType.backgroundColor = R.color.bg_yellow()
                     }
                     if userType == "R" {
-                        memberType.text = "访客"
+                        memberType.text = "成员"
                         memberType.textColor = R.color.sub_yellow()
                         memberType.backgroundColor = R.color.bg_yellow()
                     }
