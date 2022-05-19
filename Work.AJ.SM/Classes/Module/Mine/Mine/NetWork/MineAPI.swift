@@ -14,8 +14,8 @@ enum MineAPI {
     case allFace(communityID: String, blockID: String, cellID: String, unitID: String)
     case addFace(data: AddFaceModel)
     case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String, faceID: String)
-    case extralFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
-    case syncExtralFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
+    case extraFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
+    case syncExtraFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
     case versionCheck(type: String)
     case deleteAccount(userID: String)
     case ownerOpenDoorPassword(communityID: String, unitID: String, blockID: String, userID: String, phone: String, openDoorPassword: String)
@@ -33,7 +33,7 @@ enum MineAPI {
     case searchUnit(name: String)
     case updateNotificationStatus(userID: String, status: String)
     case getUserDoNotDisturbStatus(userID: String)
-    case findUnitAvliable(communityID: String, blockNo: String, unitNo: String, cellID: String)
+    case findUnitAvailable(communityID: String, blockNo: String, unitNo: String, cellID: String)
     case videoCallNotificationPush(mobile: String)
     case propertyContactList(communityID: String)
     case getUserMessageList(userID: String, currentPage: String, showCount: String)
@@ -58,9 +58,9 @@ extension MineAPI: TargetType {
             return APIs.addFaceFile
         case .deleteFace:
             return APIs.deleteFaceFile
-        case .extralFace:
+        case .extraFace:
             return APIs.extraFaceFile
-        case .syncExtralFace:
+        case .syncExtraFace:
             return APIs.syncExtraFaceFile
         case .versionCheck:
             return APIs.versionCheck
@@ -96,7 +96,7 @@ extension MineAPI: TargetType {
             return APIs.updateNotificationStatus
         case .getUserDoNotDisturbStatus:
             return APIs.notificationStatus
-        case .findUnitAvliable:
+        case .findUnitAvailable:
             return APIs.findUnit
         case .videoCallNotificationPush:
             return APIs.videoCallPushNotice
@@ -132,9 +132,9 @@ extension MineAPI: TargetType {
             return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
         case let .deleteFace(communityID, blockID, cellID, unitID, imagePath, faceID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "IMAGE": imagePath, "ID": faceID, "apiVersion": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-        case let .extralFace(communityID, blockID, cellID, unitID, mobile):
+        case let .extraFace(communityID, blockID, cellID, unitID, mobile):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-        case let .syncExtralFace(communityID, blockID, cellID, unitID, mobile):
+        case let .syncExtraFace(communityID, blockID, cellID, unitID, mobile):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .versionCheck(type):
             return .requestParameters(parameters: ["TYPE": type].ekey("TYPE"), encoding: URLEncoding.default)
@@ -173,7 +173,7 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["USERID": userID, "STATUS": status].ekey("USERID"), encoding: URLEncoding.default)
         case let .getUserDoNotDisturbStatus(userID):
             return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
-        case let .findUnitAvliable(communityID, blockNo, unitNo, cellID):
+        case let .findUnitAvailable(communityID, blockNo, unitNo, cellID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKNO": blockNo, "UNITNO": unitNo, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .videoCallNotificationPush(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)

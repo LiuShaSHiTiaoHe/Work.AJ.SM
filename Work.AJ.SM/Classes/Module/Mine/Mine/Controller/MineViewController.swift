@@ -43,9 +43,7 @@ class MineViewController: BaseViewController {
     
     @objc
     private func userProfileView(){
-        let vc = UserProfileViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
+        pushTo(viewController: UserProfileViewController())
     }
     
     override func initUI() {
@@ -79,20 +77,18 @@ class MineViewController: BaseViewController {
     
     @objc
     func showMessageView() {
-        let vc = MessageViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
+        pushTo(viewController: MessageViewController())
     }
 
 }
 extension MineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return MineRepository.shared.getSectionCount(dataSource)
+        MineRepository.shared.getSectionCount(dataSource)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MineRepository.shared.getRowCount(section, dataSource)
+        MineRepository.shared.getRowCount(section, dataSource)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,7 +101,7 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
+        60.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -114,42 +110,23 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
             if let moduleType = MineModuleType.init(rawValue: module.name) {
                 switch moduleType {
                 case .house:
-                    let vc = HouseViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
+                    pushTo(viewController: HouseViewController())
                 case .faceCertification:
-                    let vc = FaceListViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
+                    pushTo(viewController: FaceListViewController())
                 case .memberManager:
-                    let vc = MemberListViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
+                    pushTo(viewController: MemberListViewController())
                 case .visitorRecord:
-                    let vc = VisitorRecordViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
+                    pushTo(viewController: VisitorRecordViewController())
                 case .setting:
-                    let vc = SettingViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
+                    pushTo(viewController: SettingViewController())
                 case .opendoorSetting:
-                    let vc = OpenDoorSettingViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
+                    pushTo(viewController: OpenDoorSettingViewController())
                 case .videoCall:
-                    let vc = CallNeighborViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
+                    pushTo(viewController: CallNeighborViewController())
                 case .activateCard:
                     break
                 case .contactProperty:
-                    let vc = PropertyContactViewController()
-                    vc.hidesBottomBarWhenPushed = true
-                    navigationController?.pushViewController(vc, animated: true)
-                    break
-                default:
-                    break
+                    pushTo(viewController: PropertyContactViewController())
                 }
             }
         }

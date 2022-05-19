@@ -64,7 +64,7 @@ class BaseViewController: UIViewController {
     func initData() {
     }
 
-    // MARK: - HearderRefresh
+    // MARK: - HeaderRefresh
     @objc func headerRefresh() {
     }
 

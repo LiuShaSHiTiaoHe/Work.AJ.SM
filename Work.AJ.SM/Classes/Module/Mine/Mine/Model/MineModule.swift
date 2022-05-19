@@ -7,7 +7,6 @@
 
 import UIKit
 
-//MARK: FIXME 暂时写死设置的模块，用这进行过滤
 let mineModuleType = "mineModuleType"
 
 enum MineModuleType: String {

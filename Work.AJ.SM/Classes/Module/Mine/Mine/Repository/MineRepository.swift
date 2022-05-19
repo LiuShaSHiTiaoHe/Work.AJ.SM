@@ -337,7 +337,7 @@ extension MineRepository {
 
     func getExtraFace(completion: @escaping ExtraFaceFileCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = ud.userMobile {
-            MineAPI.extralFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).request(modelType: [ExtralFaceModel].self, cacheType: .ignoreCache, showError: true) { models, response in
+            MineAPI.extraFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).request(modelType: [ExtralFaceModel].self, cacheType: .ignoreCache, showError: true) { models, response in
                 completion(models)
             } failureCallback: { response in
                 completion([])
@@ -349,7 +349,7 @@ extension MineRepository {
 
     func syncExtraFace(completion: @escaping DefaultCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = ud.userMobile {
-            MineAPI.syncExtralFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).defaultRequest(cacheType: .ignoreCache, showError: true) { jasonData in
+            MineAPI.syncExtraFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).defaultRequest(cacheType: .ignoreCache, showError: true) { jasonData in
                 completion("")
             } failureCallback: { response in
                 completion(response.message)
@@ -520,7 +520,7 @@ extension MineRepository {
     // MARK: - 户户通
     func validationNumber(completion: @escaping CallNeighborFindUnitCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockNo = unit.blockno, let unitNo = unit.unitno, let cellID = unit.cellid?.jk.intToString {
-            MineAPI.findUnitAvliable(communityID: communityID, blockNo: blockNo, unitNo: unitNo, cellID: cellID).defaultRequest(cacheType: .ignoreCache, showError: true) { jsonData in
+            MineAPI.findUnitAvailable(communityID: communityID, blockNo: blockNo, unitNo: unitNo, cellID: cellID).defaultRequest(cacheType: .ignoreCache, showError: true) { jsonData in
                 if let dataDic = jsonData["data"].dictionaryObject {
                     var macString = ""
                     var mobiles: [String] = []
