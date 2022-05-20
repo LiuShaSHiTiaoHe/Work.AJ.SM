@@ -208,8 +208,9 @@ extension SelectUnitCityViewController: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        isSearch = false
-        tableVeiw.reloadData()
+        if !isSearch {
+            tableVeiw.reloadData()
+        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
