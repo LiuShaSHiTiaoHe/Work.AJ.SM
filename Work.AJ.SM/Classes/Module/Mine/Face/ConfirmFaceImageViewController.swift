@@ -11,6 +11,8 @@ import SVProgressHUD
 class ConfirmFaceImageViewController: BaseViewController {
         
     private var faceType: String = ""//“0”：本人；“1”：父母；“2”：子女；
+    var isOnwerFaceUploaded: Bool = false
+    var faceImage: UIImage?
     
 
     override func viewDidLoad() {
@@ -21,7 +23,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
-        if let faceImageCache = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey), let imageData = faceImageCache[FaceImageCacheKey] as? Data, let faceImage = UIImage.init(data: imageData) {
+        if let faceImage = faceImage {
             faceImageView.image = faceImage
         }
         confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
@@ -40,18 +42,27 @@ class ConfirmFaceImageViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "请输入身份证号")
             return
         }
+        
         if !identifiedNumber.jk.isValidIDCardNumStrict {
             SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
             return
         }
-               
-        if faceType.isEmpty{
-            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
-            return
-        }
-        
-        if let imageData = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile, let userType = unit.usertype{
-            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
+        // FIXME: - 1.1.4版本暂时隐藏角色选择
+//        if faceType.isEmpty{
+//            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
+//            return
+//        }
+        if let imageData = faceImage?.pngData(),
+           let unit = HomeRepository.shared.getCurrentUnit(),
+           let communityID = unit.communityid?.jk.intToString,
+           let blockID = unit.blockid?.jk.intToString,
+           let cellID = unit.cellid?.jk.intToString,
+           let unitID = unit.unitid?.jk.intToString,
+           let mobile = unit.mobile,
+           let userType = unit.usertype {
+
+            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name,
+                    userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
             
             MineRepository.shared.addFace(model) { errorMsg in
                 if errorMsg.isEmpty {
@@ -177,7 +188,8 @@ class ConfirmFaceImageViewController: BaseViewController {
 
 extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        // FIXME: - 1.1.4版本暂时隐藏角色选择
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -198,7 +210,11 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: FaceUploadRoleSelectCellIdentifier, for: indexPath) as! FaceUploadRoleSelectCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份"
-            cell.secondButtonName = "本人"
+            if isOnwerFaceUploaded {
+                cell.secondButtonName = ""
+            }else{
+                cell.secondButtonName = "本人"
+            }
             cell.thirdButtonName = "父母"
             cell.fourthButtonName = "子女"
             cell.delegate = self

@@ -17,7 +17,7 @@ class OnBoardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        swiftyOnboard = SwiftyOnboard(frame: view.frame, style: .dark)
+        swiftyOnboard = SwiftyOnboard(frame: view.frame, style: .light)
         view.addSubview(swiftyOnboard)
         swiftyOnboard.dataSource = self
         swiftyOnboard.delegate = self

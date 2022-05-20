@@ -11,6 +11,7 @@ import MJRefresh
 class BaseViewController: UIViewController {
 
     private let noDataViewTag: Int = 404
+    var needReloadData: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()

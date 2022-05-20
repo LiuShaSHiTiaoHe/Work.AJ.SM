@@ -30,6 +30,9 @@ class FaceListViewController: BaseViewController {
     }
 
     private func reloadData() {
+        if !needReloadData {
+            return
+        }
         MineRepository.shared.getFaceList { [weak self] faces in
             guard let `self` = self else {
                 return
@@ -49,14 +52,34 @@ class FaceListViewController: BaseViewController {
         PermissionManager.permissionRequest(.camera) { [weak self] authorized in
             guard let self = self else { return }
             if authorized {
-                self.getExtrasFaceFile()
+                // MARK: - 暂时不需要同步人脸数据，等讨论完方案再添加
+//                self.getExtrasFaceFile()
+                self.showFaceImageVC()
             } else {
                 PermissionManager.shared.go2Setting(.camera)
             }
         }
-//        getExtrasFaceFile()
+    }
+
+    private func showFaceImageVC() {
+        let vc = FaceImageViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
+    private func go2ConfirmFaceImageVC(_ faceImage: UIImage) {
+        let vc = ConfirmFaceImageViewController()
+        // FIXME: - 1.1.4版本暂时隐藏角色选择
+//        if HomeRepository.shared.isUnitOwner(), let _ = self.dataSource.first(where: { model in
+//            model.faceType == "0"
+//        }) {
+//            vc.isOnwerFaceUploaded = true
+//        }
+        vc.faceImage = faceImage
+        pushTo(viewController: vc)
+    }
+
     func getExtrasFaceFile() {
         SVProgressHUD.show()
         MineRepository.shared.getExtraFace { [weak self] models in
@@ -69,8 +92,7 @@ class FaceListViewController: BaseViewController {
                 alert.addAction(action: .init(title: "确定", style: .destructive, handler: { action in
                     self.syncExtrasFaceFile()
                 })).addAction("取消", .cancel) {
-                    let vc = FaceImageViewController()
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.pushTo(viewController: FaceImageViewController())
                 }
                 alert.show()
             }else{
@@ -190,3 +212,13 @@ extension FaceListViewController: FaceTableViewCellDelegate {
     }
 }
 
+extension FaceListViewController: FaceImageViewControllerDelegate {
+
+    func faceImageCompleted(_ image: UIImage, _ faceImageVC: FaceImageViewController) {
+        self.needReloadData = false
+        faceImageVC.dismiss(animated: true) {
+            self.needReloadData = true
+            self.go2ConfirmFaceImageVC(image)
+        }
+    }
+}

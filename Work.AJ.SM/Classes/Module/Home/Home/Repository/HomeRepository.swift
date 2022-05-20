@@ -189,6 +189,13 @@ class HomeRepository {
         }
         return ""
     }
+    
+    func isUnitOwner() -> Bool {
+        if currentUserType() == "O" {
+            return true
+        }
+        return false
+    }
 }
 
 // MARK: - locks
