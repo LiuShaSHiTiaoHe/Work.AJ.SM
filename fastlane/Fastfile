@@ -1,12 +1,24 @@
 
 APP_NAME = "智慧社区"
 WORKSPACE = "Work.AJ.SM.xcworkspace"
+XCODEPROJ = "Work.AJ.SM.xcodeproj"
 SCHEME = "Work.AJ.SM"
 IPA_TIME = Time.now.strftime("%Y%m%d_%H%M")
 OUTPUT_DIRECTORY = "Packages"
 APP_INFO_PLIST_PATH = './Work.AJ.SM/Info.plist'
 ENV_PREFIX=""
 IPA_NAME = ""
+
+def updateProjectBuildNumber 
+  buildpre = get_build_number().to_i
+  build = get_build_number().to_i + 1
+  puts("*************| 获取到build #{buildpre} |*************")
+  puts("*************| 更新build #{build} |*************")
+  increment_build_number(
+    build_number: "#{build}"
+  )
+end
+
 default_platform(:ios)
 
 platform :ios do
@@ -25,19 +37,18 @@ platform :ios do
     notification(subtitle: "上传完成", message: "最新测试包已经上传至蒲公英平台")
   end
 
-  # #ad-hoc
-  # lane :iosRelease do
-  #   ENV_PREFIX="adhoc_"
-  #   EXPORT_METHOD = "ad-hoc"
-  #   package(configuration: "Release")
-  # end
-
-  # #AppStore
-  # lane :iosAppStore do
-  #   ENV_PREFIX="appstore_"
-  #   EXPORT_METHOD = "app-store"
-  #   package(configuration: "Release")
-  # end
+  #testflight
+  lane :beta do
+    updateProjectBuildNumber
+    ENV_PREFIX="appstore_"
+    EXPORT_METHOD = "app-store"
+    package(configuration: "Release")
+    # upload_to_testflight(
+    #   skip_waiting_for_build_processing: true,
+    #   apple_id: "1444571864"
+    # )
+    notification(subtitle: "上传完成", message: "最新包已经上传至testflight")
+  end
 
   #package
   lane :package do |option|
@@ -46,12 +57,13 @@ platform :ios do
       IPA_NAME = "#{ENV_PREFIX}" + "#{APP_NAME}_"  +  "#{IPA_TIME}_" + "#{PLIST_INFO_VERSION}"+ ".ipa"
       
       gym(
+        clean: true,
         scheme: "#{SCHEME}",
         export_method: "#{EXPORT_METHOD}",
         configuration: option[:configuration],
         output_directory: "#{OUTPUT_DIRECTORY}",
         include_symbols: true,
-        include_bitcode: false,
+        include_bitcode: true,
         xcargs: 'DEBUG_INFORMATION_FORMAT="dwarf-with-dsym"',
         output_name: "#{IPA_NAME}",
         export_xcargs: "-allowProvisioningUpdates"
