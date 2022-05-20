@@ -94,7 +94,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
 
     @objc
     func cancelAction() {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
 
     @objc
@@ -118,8 +118,8 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
             if fixImage.imageOrientation == .leftMirrored {
                 fixImage = UIImage(cgImage: cgImage, scale: fixImage.scale, orientation: .right)
                 fixImage = fixImage.jk.fixOrientation()
-                delegate?.faceImageCompleted(fixImage, self)
             }
+            delegate?.faceImageCompleted(fixImage, self)
         } else {
             SVProgressHUD.showInfo(withStatus: "图片数据错误")
         }
@@ -199,13 +199,11 @@ extension FaceImageViewController: YPImagePickerDelegate {
             if cancelled {
                 picker.dismiss(animated: true)
             }else{
-                SVProgressHUD.show()
                 if let image = items.singlePhoto?.image {
                     switch self.detect(image) {
                     case 0:
                         SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
                     case 1:
-                        SVProgressHUD.dismiss()
                         picker.dismiss(animated: true) {
                             self.confirmFaceImage(image)
                         }
