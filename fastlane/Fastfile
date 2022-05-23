@@ -10,9 +10,7 @@ ENV_PREFIX=""
 IPA_NAME = ""
 
 def updateProjectBuildNumber 
-  buildpre = get_build_number().to_i
   build = get_build_number().to_i + 1
-  puts("*************| 获取到build #{buildpre} |*************")
   puts("*************| 更新build #{build} |*************")
   increment_build_number(
     build_number: "#{build}"
@@ -43,10 +41,10 @@ platform :ios do
     ENV_PREFIX="appstore_"
     EXPORT_METHOD = "app-store"
     package(configuration: "Release")
-    # upload_to_testflight(
-    #   skip_waiting_for_build_processing: true,
-    #   apple_id: "1444571864"
-    # )
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      apple_id: "1444571864"
+    )
     notification(subtitle: "上传完成", message: "最新包已经上传至testflight")
   end
 
