@@ -92,8 +92,6 @@ class MemberListViewController: BaseViewController {
             guard let `self` = self else {
                 return
             }
-            // FIXME: - 这个过滤暂时不需要
-//            self.dataSource = members.filter{$0.userType != "R"}
             self.dataSource = members
             self.tableView.reloadData()
         }

@@ -96,14 +96,13 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-
-                // MARK: - N方对讲
+        // MARK: - N方对讲
         case let .ncomAllDevice(unitID):
             return .requestParameters(parameters: ["UNITID": unitID].ekey("UNITID"), encoding: URLEncoding.default)
         case let .ncomRecord(communityID, startTime, endTime, page, count):
             let parameters = ["COMMUNITYID": communityID, "STARTTIME": startTime, "ENDTIME": endTime, "currentPage": page, "showCount": count].ekey("COMMUNITYID")
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-            // FIXME: - 待完善
+        // FIXME: - 待完善
         case .ncomSendStatus:
             return .requestPlain
         }

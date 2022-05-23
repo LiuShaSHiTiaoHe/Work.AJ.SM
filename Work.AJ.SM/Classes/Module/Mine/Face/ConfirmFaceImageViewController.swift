@@ -11,10 +11,8 @@ import SVProgressHUD
 class ConfirmFaceImageViewController: BaseViewController {
         
     private var faceType: String = ""//“0”：本人；“1”：父母；“2”：子女；
-    var isOnwerFaceUploaded: Bool = false
     var faceImage: UIImage?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -47,11 +45,11 @@ class ConfirmFaceImageViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
             return
         }
-        // FIXME: - 1.1.4版本暂时隐藏角色选择
-//        if faceType.isEmpty{
-//            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
-//            return
-//        }
+        
+        if faceType.isEmpty{
+            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
+            return
+        }
         if let imageData = faceImage?.pngData(),
            let unit = HomeRepository.shared.getCurrentUnit(),
            let communityID = unit.communityid?.jk.intToString,
@@ -188,8 +186,7 @@ class ConfirmFaceImageViewController: BaseViewController {
 
 extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // FIXME: - 1.1.4版本暂时隐藏角色选择
-        return 2
+        return 3
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -210,11 +207,7 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: FaceUploadRoleSelectCellIdentifier, for: indexPath) as! FaceUploadRoleSelectCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份"
-            if isOnwerFaceUploaded {
-                cell.secondButtonName = ""
-            }else{
-                cell.secondButtonName = "本人"
-            }
+            cell.secondButtonName = "本人"
             cell.thirdButtonName = "父母"
             cell.fourthButtonName = "子女"
             cell.delegate = self

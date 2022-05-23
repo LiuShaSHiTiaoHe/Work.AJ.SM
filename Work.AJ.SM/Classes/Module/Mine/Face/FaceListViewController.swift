@@ -52,15 +52,29 @@ class FaceListViewController: BaseViewController {
         PermissionManager.permissionRequest(.camera) { [weak self] authorized in
             guard let self = self else { return }
             if authorized {
-                // MARK: - 暂时不需要同步人脸数据，等讨论完方案再添加
-//                self.getExtrasFaceFile()
-                self.showFaceImageVC()
+                self.isSyncFaceImage()
             } else {
                 PermissionManager.shared.go2Setting(.camera)
             }
         }
     }
 
+    private func isSyncFaceImage() {
+        let unitIDs = ud.unitIDsOfShownSyncFaceImageNotification
+        if let unit = HomeRepository.shared.getCurrentUnit(),  let unitID = unit.unitid?.jk.intToString {
+            if !unitIDs.isEmpty, unitIDs.contains(unitID) {
+                self.showFaceImageVC()
+            } else {
+                self.getExtrasFaceFile()
+            }
+        } else {
+            SVProgressHUD.showError(withStatus: "数据错误")
+            SVProgressHUD.dismiss(withDelay: 2) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
     private func showFaceImageVC() {
         let vc = FaceImageViewController()
         vc.delegate = self
@@ -70,12 +84,6 @@ class FaceListViewController: BaseViewController {
     
     private func go2ConfirmFaceImageVC(_ faceImage: UIImage) {
         let vc = ConfirmFaceImageViewController()
-        // FIXME: - 1.1.4版本暂时隐藏角色选择
-//        if HomeRepository.shared.isUnitOwner(), let _ = self.dataSource.first(where: { model in
-//            model.faceType == "0"
-//        }) {
-//            vc.isOnwerFaceUploaded = true
-//        }
         vc.faceImage = faceImage
         pushTo(viewController: vc)
     }
@@ -88,10 +96,10 @@ class FaceListViewController: BaseViewController {
             let data = models.filter{ $0.isValid == "1"}
             if data.count > 0 {
                 let unitName = HomeRepository.shared.getCurrentHouseName()
-                let alert = UIAlertController.init(title: "人脸图片同步提醒", message: "您在其他小区已上传\(data.count)张人脸图片，是否同步至\(unitName)", preferredStyle: .alert)
-                alert.addAction(action: .init(title: "确定", style: .destructive, handler: { action in
+                let alert = UIAlertController.init(title: "人脸图片同步提醒", message: "您在其他房屋已上传\(data.count)张人脸图片，是否同步至\(unitName)", preferredStyle: .alert)
+                alert.addAction(action: .init(title: "需要", style: .destructive, handler: { action in
                     self.syncExtrasFaceFile()
-                })).addAction("取消", .cancel) {
+                })).addAction("不需要", .cancel) {
                     self.pushTo(viewController: FaceImageViewController())
                 }
                 alert.show()
