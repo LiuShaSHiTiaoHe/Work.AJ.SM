@@ -52,7 +52,9 @@ class FaceListViewController: BaseViewController {
         PermissionManager.permissionRequest(.camera) { [weak self] authorized in
             guard let self = self else { return }
             if authorized {
-                self.isSyncFaceImage()
+                // MARK: - APP侧上传人脸增加关系（不含APP侧提示是否同步本人以外的人脸）
+//                self.isSyncFaceImage()
+                self.showFaceImageVC()
             } else {
                 PermissionManager.shared.go2Setting(.camera)
             }
@@ -100,12 +102,11 @@ class FaceListViewController: BaseViewController {
                 alert.addAction(action: .init(title: "需要", style: .destructive, handler: { action in
                     self.syncExtrasFaceFile()
                 })).addAction("不需要", .cancel) {
-                    self.pushTo(viewController: FaceImageViewController())
+                    self.showFaceImageVC()
                 }
                 alert.show()
             }else{
-                let vc = FaceImageViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.showFaceImageVC()
             }
         }
     }
