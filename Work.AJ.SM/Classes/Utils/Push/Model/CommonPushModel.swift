@@ -10,6 +10,7 @@ struct CommonPushModel {
     alias            userId       deviceId
      */
     var alias: String = ""
+    var aliasType: String = ""
     var pushFor: String = "" //1：app； 2：device
     /*
     推送类型（默认推送双端，单端暂不支持。双端推送有一个成功即返回成功，同理，APP推送时极光或阿里推送成功即返回成功）

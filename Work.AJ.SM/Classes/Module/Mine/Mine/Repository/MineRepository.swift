@@ -555,13 +555,16 @@ extension MineRepository {
                             } else {
                                 completion(false)
                             }
+                        } else {
+                            completion(false)
                         }
+                    } else {
+                        completion(false)
                     }
                 }
             } failureCallback: { response in
                 completion(false)
             }
-
         }
     }
 

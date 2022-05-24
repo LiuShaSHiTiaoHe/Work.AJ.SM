@@ -12,8 +12,17 @@ import Siren
 
 class SettingViewController: BaseViewController {
 
+    // MARK: - 是否显示允许访客呼叫到手机的模块
+    private var showAllowVisitorCallSwitch: Bool = true
     // MARK: - 允许访客呼叫的状态记录
-    private var isAllowVisitorCall: Bool  = false
+    private var isAllowVisitorCall: Bool {
+        set {
+            ud.allowVisitorCall = newValue
+        }
+        get {
+            return ud.allowVisitorCall
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +34,8 @@ class SettingViewController: BaseViewController {
         headerView.titleLabel.textColor = R.color.text_title()
         // MARK: - 允许访客呼叫到手机 这个选项是否显示
         if let unit = HomeRepository.shared.getCurrentUnit() {
-            ud.allowVisitorCall = HomeRepository.shared.isVisitorCallUserMobileEnable(unit)
-            if ud.allowVisitorCall {
+            showAllowVisitorCallSwitch = HomeRepository.shared.isVisitorCallUserMobileEnable(unit)
+            if showAllowVisitorCallSwitch {
                 readAllowVisitorCallStatus()
             }
         }
@@ -34,16 +43,21 @@ class SettingViewController: BaseViewController {
         tableView.dataSource = self
     }
     
+    
     func readAllowVisitorCallStatus() {
         MineRepository.shared.getUserDoNotDisturbStatus { [weak self] status in
             guard let self = self else { return }
+            let operateStatus = status ? "T" : "F"
+            logger.info("从服务端获取的状态=====> \(operateStatus)")
             self.isAllowVisitorCall = status
             self.tableView.reloadData()
         }
     }
     
     func updateAllowVisitorCallStatus(_ status: Bool) {
-        MineRepository.shared.updateUserDoNotDisturbStatus(status ? "F":"T") { [weak self] errorMsg in
+        let operateStatus = status ? "T" : "F"
+        logger.info("操作之后的状态=====> \(operateStatus)")
+        MineRepository.shared.updateUserDoNotDisturbStatus(status ? "T":"F") { [weak self] errorMsg in
             guard let self = self else { return }
             if errorMsg.isEmpty {
                 self.isAllowVisitorCall = status
@@ -189,7 +203,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if ud.allowVisitorCall {
+            if showAllowVisitorCallSwitch {
                 return 4
             }else{
                 return 3
