@@ -43,7 +43,7 @@ class SettingViewController: BaseViewController {
     }
     
     func updateAllowVisitorCallStatus(_ status: Bool) {
-        MineRepository.shared.updateUserDoNotDisturbStatus(status ? "T":"F") { [weak self] errorMsg in
+        MineRepository.shared.updateUserDoNotDisturbStatus(status ? "F":"T") { [weak self] errorMsg in
             guard let self = self else { return }
             if errorMsg.isEmpty {
                 self.isAllowVisitorCall = status
