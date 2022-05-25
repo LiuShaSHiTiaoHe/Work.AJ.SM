@@ -44,7 +44,7 @@ class HouseCertificationViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "手机号码不能为空")
             return
         } else {
-            if !phone.jk.isValidMobile {
+            if !phone.aj_isMobileNumber {
                 SVProgressHUD.showInfo(withStatus: "手机号码格式错误")
                 return
             }

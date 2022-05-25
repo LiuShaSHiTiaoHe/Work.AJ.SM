@@ -162,7 +162,7 @@ class ResetPasswordView: UIView {
         var resetMobile = ""
         var resetCode = ""
         var newPassword = ""
-        if let mobile = mobileInput.inputString, mobile.jk.isValidMobile {
+        if let mobile = mobileInput.inputString, mobile.aj_isMobileNumber {
             resetMobile = mobile
         } else {
             mobileInput.errorMsg = "请填写正确的手机号码"
@@ -193,7 +193,7 @@ class ResetPasswordView: UIView {
 extension ResetPasswordView: VerificationCodeInputViewDelegate {
     func sendCodeButtonPressed() {
         if let phoneNumber = mobileInput.inputString, !phoneNumber.isEmpty {
-            if phoneNumber.jk.isValidMobile {
+            if phoneNumber.aj_isMobileNumber {
                 codeInput.startCountDown()
                 delegate?.sendCode(mobile: phoneNumber)
             } else {

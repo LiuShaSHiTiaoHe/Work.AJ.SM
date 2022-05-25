@@ -137,7 +137,7 @@ class SetVisitorPasswordViewController: BaseViewController {
                 SVProgressHUD.showError(withStatus: "请输入访客的手机号码")
                 return
             }else{
-                if !phoneNumber.jk.isValidMobile {
+                if !phoneNumber.aj_isMobileNumber {
                     SVProgressHUD.showError(withStatus: "请输入正确的手机号码")
                     return
                 }

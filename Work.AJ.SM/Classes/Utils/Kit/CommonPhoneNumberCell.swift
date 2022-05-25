@@ -100,7 +100,7 @@ class CommonPhoneNumberCell: UITableViewCell {
                 if phoneNumber.count == 0 {
                     self.showErrorMsg("手机号不能为空")
                 } else {
-                    if phoneNumber.jk.isValidMobile {
+                    if phoneNumber.aj_isMobileNumber {
                         self.clearErrorMsg()
                     } else {
                         self.showErrorMsg("请填写正确的手机号")

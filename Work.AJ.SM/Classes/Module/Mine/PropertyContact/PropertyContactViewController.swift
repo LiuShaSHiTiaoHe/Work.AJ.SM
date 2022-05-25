@@ -92,7 +92,7 @@ extension PropertyContactViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = dataSource[indexPath.row]
-        if let mobile = model.mobile, mobile.jk.isValidMobile {
+        if let mobile = model.mobile, mobile.aj_isMobileNumber {
             JKGlobalTools.callPhone(phoneNumber: mobile) { flag in
                 
             }

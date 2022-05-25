@@ -58,7 +58,7 @@ class AddMemberViewController: BaseViewController {
             SVProgressHUD.showError(withStatus: "请输入成员的手机号码")
             return
         }
-        if !memberPhone.jk.isValidMobile {
+        if !memberPhone.aj_isMobileNumber {
             SVProgressHUD.showError(withStatus: "手机号码格式不正确")
             return
         }

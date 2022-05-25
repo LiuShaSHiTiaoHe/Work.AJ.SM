@@ -412,7 +412,7 @@ class LoginView: BaseView {
 extension LoginView: VerificationCodeInputViewDelegate {
     func sendCodeButtonPressed() {
         if let phoneNumber = registerMobileInputView.inputString, !phoneNumber.isEmpty {
-            if phoneNumber.jk.isValidMobile {
+            if phoneNumber.aj_isMobileNumber {
                 registerCodeInputView.startCountDown()
                 delegate?.sendCode(mobile: phoneNumber)
             } else {
