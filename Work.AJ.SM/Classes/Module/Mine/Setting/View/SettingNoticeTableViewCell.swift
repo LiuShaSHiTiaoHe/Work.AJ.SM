@@ -87,7 +87,6 @@ class SettingNoticeTableViewCell: UITableViewCell {
                 ud.ringtoneAvailable = sender.isOn
                 break
             case 3:
-//                ud.allowVisitorCall = sender.isOn
                 break
             default:
                 break

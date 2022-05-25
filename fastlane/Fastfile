@@ -28,6 +28,7 @@ platform :ios do
 
   #debug
   lane :pgy do
+    updateProjectBuildNumber
     ENV_PREFIX="Debug_"
     EXPORT_METHOD = "development"
     package(configuration: "Debug")

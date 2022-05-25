@@ -47,7 +47,7 @@ class SettingViewController: BaseViewController {
     func readAllowVisitorCallStatus() {
         MineRepository.shared.getUserDoNotDisturbStatus { [weak self] status in
             guard let self = self else { return }
-            let operateStatus = status ? "T" : "F"
+            let operateStatus = status ? "F" : "T"
             logger.info("从服务端获取的状态=====> \(operateStatus)")
             self.isAllowVisitorCall = status
             self.tableView.reloadData()
@@ -55,9 +55,9 @@ class SettingViewController: BaseViewController {
     }
     
     func updateAllowVisitorCallStatus(_ status: Bool) {
-        let operateStatus = status ? "T" : "F"
+        let operateStatus = status ? "F" : "T"
         logger.info("操作之后的状态=====> \(operateStatus)")
-        MineRepository.shared.updateUserDoNotDisturbStatus(status ? "T":"F") { [weak self] errorMsg in
+        MineRepository.shared.updateUserDoNotDisturbStatus(operateStatus) { [weak self] errorMsg in
             guard let self = self else { return }
             if errorMsg.isEmpty {
                 self.isAllowVisitorCall = status

@@ -46,10 +46,11 @@ class ConfirmFaceImageViewController: BaseViewController {
             return
         }
         
-        if faceType.isEmpty{
-            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
-            return
-        }
+        // FIXME: - 暂时隐藏
+//        if faceType.isEmpty{
+//            SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
+//            return
+//        }
         if let imageData = faceImage?.pngData(),
            let unit = HomeRepository.shared.getCurrentUnit(),
            let communityID = unit.communityid?.jk.intToString,
@@ -186,7 +187,8 @@ class ConfirmFaceImageViewController: BaseViewController {
 
 extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        // FIXME: - 暂时隐藏
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
