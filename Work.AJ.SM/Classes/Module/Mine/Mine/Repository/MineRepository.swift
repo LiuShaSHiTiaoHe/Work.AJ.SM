@@ -518,9 +518,9 @@ extension MineRepository {
 
 extension MineRepository {
     // MARK: - 户户通
-    func validationNumber(completion: @escaping CallNeighborFindUnitCompletion) {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockNo = unit.blockno, let unitNo = unit.unitno, let cellID = unit.cellid?.jk.intToString {
-            MineAPI.findUnitAvailable(communityID: communityID, blockNo: blockNo, unitNo: unitNo, cellID: cellID).defaultRequest(cacheType: .ignoreCache, showError: true) { jsonData in
+    func validationNumber(blockNo: String, unitNo: String, cellNo: String, completion: @escaping CallNeighborFindUnitCompletion) {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
+            MineAPI.findUnitAvailable(communityID: communityID, blockNo: blockNo, unitNo: unitNo, cellNo: cellNo, cellID: cellID).defaultRequest(cacheType: .ignoreCache, showError: true) { jsonData in
                 if let dataDic = jsonData["data"].dictionaryObject {
                     var macString = ""
                     var mobiles: [String] = []
@@ -528,7 +528,8 @@ extension MineRepository {
                         if locks.count > 0 {
                             let macDic = locks[0]
                             if let lockMac = macDic["LOCKMAC"] as? String {
-                                macString = lockMac
+                                let mac = lockMac.jk.removeCharacter(characterString: ":")
+                                macString = mac
                             }
                         }
                     }

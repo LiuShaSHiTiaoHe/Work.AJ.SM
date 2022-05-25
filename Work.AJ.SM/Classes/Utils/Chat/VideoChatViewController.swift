@@ -12,7 +12,6 @@ import SVProgressHUD
 class VideoChatViewController: BaseChatViewController {
     
     var lockMac: String?
-    private var isLockMac: Bool = false
     
     override func initData() {
         super.initData()
@@ -20,17 +19,33 @@ class VideoChatViewController: BaseChatViewController {
     }
     
     // MARK: - init
-    init(startCall callee: String, isLock: Bool = false) {
+    init(startCall callee: String) {
         super.init(startCall: kNIMSDKPrefixString + callee, callType: .video)
-        isLockMac = isLock
+        if !callee.aj_isMobileNumber {
+            lockMac = callee
+        }
     }
     
     init(responseCall caller: String, callID: UInt64) {
         super.init(responseCall: caller, callID: callID, callType: .video)
+        if caller.hasPrefix(kNIMSDKPrefixString) || caller.hasPrefix(kNIMSDKPrefixString.lowercased()){
+            let callerNumberString = caller.jk.sub(from: kNIMSDKPrefixString.count)
+            if !callerNumberString.aj_isMobileNumber {
+                lockMac = callerNumberString
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if lockMac == nil {
+            contentView.hideOpenDoorView()
+        }
     }
     
     // MARK: - Delegate
@@ -58,26 +73,14 @@ class VideoChatViewController: BaseChatViewController {
 extension VideoChatViewController {
     @objc
     func openDoor() {
-        if isLockMac{
-            let lockMac = kCallee.jk.removeCharacter(characterString: kNIMSDKPrefixString)
+        // MARK: - 通话是app和门口机之间的
+        if let lockMac = lockMac {
             HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
                 if !errorMsg.isEmpty {
                     SVProgressHUD.showError(withStatus: errorMsg)
                 }else{
                     SVProgressHUD.showSuccess(withStatus: "开门成功")
                 }
-            }
-        }else{
-            if let lockMac = lockMac {
-                HomeRepository.shared.openDoorViaPush(lockMac) { errorMsg in
-                    if !errorMsg.isEmpty {
-                        SVProgressHUD.showError(withStatus: errorMsg)
-                    }else{
-                        SVProgressHUD.showSuccess(withStatus: "开门成功")
-                    }
-                }
-            }else{
-                SVProgressHUD.showInfo(withStatus: "开门数据错误")
             }
         }
     }
@@ -90,6 +93,9 @@ extension VideoChatViewController: BaseChatViewDelegate {
     
     func responseAudioCall() {
         response2Call(true)
+        if lockMac == nil {
+            contentView.hideOpenDoorView()
+        }
     }
     
     func hangupAudioCall() {

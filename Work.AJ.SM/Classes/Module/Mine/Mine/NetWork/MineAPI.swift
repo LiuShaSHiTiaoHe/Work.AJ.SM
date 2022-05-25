@@ -33,7 +33,7 @@ enum MineAPI {
     case searchUnit(name: String)
     case updateNotificationStatus(userID: String, status: String)
     case getUserDoNotDisturbStatus(userID: String)
-    case findUnitAvailable(communityID: String, blockNo: String, unitNo: String, cellID: String)
+    case findUnitAvailable(communityID: String, blockNo: String, unitNo: String, cellNo: String, cellID: String)
     case videoCallNotificationPush(mobile: String)
     case propertyContactList(communityID: String)
     case getUserMessageList(userID: String, currentPage: String, showCount: String)
@@ -109,7 +109,7 @@ extension MineAPI: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .getUserInfo, .getMyUnitGuest:
+        case .getUserInfo, .getMyUnitGuest, .findUnitAvailable:
             return .get
         default:
             return .post
@@ -173,8 +173,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["USERID": userID, "STATUS": status].ekey("USERID"), encoding: URLEncoding.default)
         case let .getUserDoNotDisturbStatus(userID):
             return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
-        case let .findUnitAvailable(communityID, blockNo, unitNo, cellID):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKNO": blockNo, "UNITNO": unitNo, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .findUnitAvailable(communityID, blockNo, unitNo, cellNo, cellID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKNO": blockNo, "UNITNO": unitNo, "CELLNO": cellNo, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .videoCallNotificationPush(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
         case let .propertyContactList(communityID):

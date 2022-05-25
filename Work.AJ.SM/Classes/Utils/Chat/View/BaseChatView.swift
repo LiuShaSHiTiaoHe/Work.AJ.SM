@@ -30,6 +30,13 @@ class BaseChatView: BaseView {
     
     var isVideoCall: Bool?
     
+    func hideOpenDoorView() {
+        openDoorButton.isHidden = true
+        hangupButton.snp.updateConstraints { make in
+            make.right.equalTo(snp.centerX).offset(40)
+        }
+    }
+    
     private func updateButtons(_ isVideo: Bool, _ isCaller: Bool) {
         if isVideo {
             if isCaller {
@@ -153,13 +160,13 @@ class BaseChatView: BaseView {
         hangupButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.centerX.equalToSuperview().offset(-50)
+            make.right.equalTo(snp.centerX).offset(-50)
         }
         
         openDoorButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.centerX.equalToSuperview().offset(50)
+            make.left.equalTo(snp.centerX).offset(50)
         }
     }
     

@@ -88,7 +88,7 @@ extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
         if let lockMac = lockModel.lockmac {
             PermissionManager.permissionRequest(.microphone) { authorized in
                 if authorized {
-                    let vc = VideoChatViewController.init(startCall: lockMac, isLock: true)
+                    let vc = VideoChatViewController.init(startCall: lockMac)
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
                 }else{

@@ -130,6 +130,7 @@ class BaseChatViewController: BaseViewController {
     
     func hangUp() {
         logger.info("挂断")
+        ChatRingManager.shared.stopRing()
         NIMAVChatSDK.shared().netCallManager.hangup(kCallID)
         updateTips("挂断中...")
         showErrorMessageAndDismiss("挂断中...")

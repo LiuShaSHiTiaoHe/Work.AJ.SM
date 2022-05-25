@@ -53,7 +53,7 @@ class HomeViewController: BaseViewController {
             switch status {
             case .Invalid:
                 self.showNoDataView(.nohouse)
-                SVProgressHUD.showInfo(withStatus: "当前房间已失效，请重新添加房间。")
+                SVProgressHUD.showInfo(withStatus: "该房屋已被停用，请联系物业或添加其他房屋")
                 break
             case .Unknown:
                 self.showNoDataView(.nohouse)
