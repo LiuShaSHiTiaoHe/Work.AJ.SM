@@ -11,12 +11,18 @@ import JKSwiftExtension
 
 typealias HomeModulesCompletion = ([HomePageFunctionModule]) -> Void
 typealias HomeAdsAndNoticeCompletion = ([AdsModel], [NoticeModel]) -> Void
-typealias HomeDataCompletion = ([HomePageFunctionModule], [AdsModel], [NoticeModel]) -> Void
+typealias HomeDataCompletion = ([HomePageFunctionModule], [AdsModel], [NoticeModel], UnitStatus) -> Void
 typealias HomeAllLocksCompletion = ([UnitLockModel]) -> Void
 typealias ElevatorConfigurationCompletion = (ElevatorConfiguration?) -> Void
 // MARK: - NCom
 typealias NComAllDeviceInfoCompletion = ([NComDTU]) -> Void
 typealias NComCallRecordCompletion = ([NComRecordInfo], Int) -> Void
+
+enum UnitStatus {
+    case Invalid
+    case Normal
+    case Unknown
+}
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -26,92 +32,93 @@ class HomeRepository {
         var homeModuleArray: Array<HomePageFunctionModule> = []
         var adsArray: Array<AdsModel> = []
         var noticeArray: Array<NoticeModel> = []
-        var currentUnit: UnitModel?
         guard let userMobile = ud.userMobile else {
             SVProgressHUD.dismiss()
-            completion(homeModuleArray, adsArray, noticeArray)
+            completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             return
         }
+        /*
+         房屋状态：
+         待审核 P, 失效 H, 过期 E, 正常 N
+         */
         HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .ignoreCache, showError: true) { [weak self] models, response in
             guard let `self` = self else {
                 return
             }
             guard models.count > 0 else {
+                completion(homeModuleArray, adsArray, noticeArray, .Unknown)
                 return
             }
             RealmTools.addList(models, update: .all) {
                 logger.info("update done")
             }
-            if let currentUnitID = Defaults.currentUnitID {
-                currentUnit = models.first(where: { model in
-                    model.unitid == currentUnitID
-                })
-                if let unit = currentUnit {
+            
+            // MARK: - 当前房间是否有效
+            if let cUnitID = ud.currentUnitID, let cUnit = models.first(where: { model in
+                model.unitid == cUnitID
+            }), let cUnitState = cUnit.state, cUnitState == "N" {
+                homeModuleArray = self.filterHomePageModules(cUnit)
+                self.adsAndNotice { ads, notices in
+                    adsArray = ads
+                    noticeArray = notices
+                    completion(homeModuleArray, adsArray, noticeArray, .Normal)
+                }
+            } else {
+            // MARK: - 第一个有效的房屋
+                if let unit = models.first(where: { model in
+                    model.state == "N"
+                }), let unitID = unit.unitid {
+                    ud.currentUnitID = unitID
                     homeModuleArray = self.filterHomePageModules(unit)
                     self.adsAndNotice { ads, notices in
                         adsArray = ads
                         noticeArray = notices
-                        completion(homeModuleArray, adsArray, noticeArray)
+                        completion(homeModuleArray, adsArray, noticeArray, .Normal)
                     }
                 } else {
-                    completion(homeModuleArray, adsArray, noticeArray)
-                }
-            } else {
-                currentUnit = models.first(where: { model in
-                    model.state == "N"
-                })
-                if let firstUnit = currentUnit, let unitID = firstUnit.unitid {
-                    Defaults.currentUnitID = unitID
-                    homeModuleArray = self.filterHomePageModules(firstUnit)
-                    self.adsAndNotice { ads, notices in
-                        adsArray = ads
-                        noticeArray = notices
-                        completion(homeModuleArray, adsArray, noticeArray)
-                    }
-                } else {
-                    completion(homeModuleArray, adsArray, noticeArray)
+                    completion(homeModuleArray, adsArray, noticeArray, .Invalid)
                 }
             }
         } failureCallback: { response in
             logger.info("\(response.message)")
-            completion(homeModuleArray, adsArray, noticeArray)
+            completion(homeModuleArray, adsArray, noticeArray, .Unknown)
         }
     }
 
-    func allUnits(completion: @escaping HomeModulesCompletion) {
-        SVProgressHUD.show()
-        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheThenNetwork, showError: true) { [weak self] models, response in
-            SVProgressHUD.dismiss()
-            guard let `self` = self else {
-                return
-            }
-            guard models.count > 0 else {
-                return
-            }
-            RealmTools.addList(models, update: .all) {
-                logger.info("update done")
-            }
-            if let currentUnitID = Defaults.currentUnitID {
-                if let unit = models.first(where: { model in
-                    model.unitid == currentUnitID
-                }) {
-                    completion(self.filterHomePageModules(unit))
-                }
-            } else {
-                if let firstUnit = models.first(where: { model in
-                    model.state == "N"
-                }), let unitID = firstUnit.unitid {
-                    Defaults.currentUnitID = unitID
-                    completion(self.filterHomePageModules(firstUnit))
-                } else {
-                    completion([])
-                }
-            }
-        } failureCallback: { response in
-            logger.info("\(response.message)")
-            completion([])
-        }
-    }
+//    func allUnits(completion: @escaping HomeModulesCompletion) {
+//        SVProgressHUD.show()
+//        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheThenNetwork, showError: true) { [weak self] models, response in
+//            SVProgressHUD.dismiss()
+//            guard let `self` = self else {
+//                return
+//            }
+//            guard models.count > 0 else {
+//                return
+//            }
+//            RealmTools.addList(models, update: .all) {
+//                logger.info("update done")
+//            }
+//            if let currentUnitID = Defaults.currentUnitID {
+//                if let unit = models.first(where: { model in
+//                    model.unitid == currentUnitID
+//                }) {
+//                    completion(self.filterHomePageModules(unit))
+//                }
+//            } else {
+//                if let firstUnit = models.first(where: { model in
+//                    model.state == "N"
+//                }), let unitID = firstUnit.unitid {
+//                    Defaults.currentUnitID = unitID
+//                    completion(self.filterHomePageModules(firstUnit))
+//                } else {
+//                    completion([])
+//                }
+//            }
+//        } failureCallback: { response in
+//            logger.info("\(response.message)")
+//            completion([])
+//        }
+//    }
 
     func adsAndNotice(completion: @escaping HomeAdsAndNoticeCompletion) {
         var adsData: [AdsModel] = []

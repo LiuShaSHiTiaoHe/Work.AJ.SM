@@ -46,17 +46,25 @@ class HomeViewController: BaseViewController {
     }
 
     func loadUnitData() {
-        HomeRepository.shared.homeData { [weak self] modules, ads, notices in
+        HomeRepository.shared.homeData { [weak self] modules, ads, notices, status in
             guard let `self` = self else {
                 return
             }
-            if modules.isEmpty {
+            switch status {
+            case .Invalid:
                 self.showNoDataView(.nohouse)
-            } else {
+                SVProgressHUD.showInfo(withStatus: "当前房间已失效，请重新添加房间。")
+                break
+            case .Unknown:
+                self.showNoDataView(.nohouse)
+                break
+            case .Normal:
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.contentView.updateAdsAndNotices(ads, notices)
+                break
             }
+
         }
     }
 }
