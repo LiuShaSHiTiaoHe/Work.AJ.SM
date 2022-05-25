@@ -91,7 +91,8 @@ class LoginView: BaseView {
         case .login:
             var loginMobile = ""
             var loginPassword = ""
-            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
+            // MARK: - 暂时放开手机号码严格校验。
+            if let mobile = loginMobileInputView.inputString, mobile.aj_isMobileNumber {
                 loginMobile = mobile
             } else {
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
@@ -112,7 +113,8 @@ class LoginView: BaseView {
             var registerMobile = ""
             var registerCode = ""
             var registerPassword = ""
-            if let mobile = registerMobileInputView.inputString, mobile.jk.isValidMobile {
+            // MARK: - 暂时放开手机号码严格校验。
+            if let mobile = registerMobileInputView.inputString, mobile.aj_isMobileNumber {
                 registerMobile = mobile
             } else {
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
