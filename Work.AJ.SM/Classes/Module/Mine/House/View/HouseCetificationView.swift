@@ -9,10 +9,6 @@ import UIKit
 
 class HouseCetificationView: BaseView {
 
-    override func initData() {
-
-    }
-
     override func initializeView() {
         addSubview(headerView)
         addSubview(locationConetntView)
