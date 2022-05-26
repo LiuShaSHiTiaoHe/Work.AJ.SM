@@ -188,6 +188,9 @@
 		419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C3280514E900C902B8 /* NComRecordCell.swift */; };
 		419AD6C62805453400C902B8 /* NComRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C52805453400C902B8 /* NComRecordView.swift */; };
 		419AD6C82805456C00C902B8 /* NComRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C72805456C00C902B8 /* NComRecordViewController.swift */; };
+		419C95D1283F3B8A001E7099 /* VersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419C95D0283F3B8A001E7099 /* VersionCheck.swift */; };
+		419C95D3283F59D3001E7099 /* AppUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419C95D2283F59D3001E7099 /* AppUpdateView.swift */; };
+		419C95D5283F5B6F001E7099 /* EntryKitCustomAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419C95D4283F5B6F001E7099 /* EntryKitCustomAttributes.swift */; };
 		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
@@ -450,6 +453,9 @@
 		419AD6C3280514E900C902B8 /* NComRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordCell.swift; sourceTree = "<group>"; };
 		419AD6C52805453400C902B8 /* NComRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordView.swift; sourceTree = "<group>"; };
 		419AD6C72805456C00C902B8 /* NComRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordViewController.swift; sourceTree = "<group>"; };
+		419C95D0283F3B8A001E7099 /* VersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheck.swift; sourceTree = "<group>"; };
+		419C95D2283F59D3001E7099 /* AppUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateView.swift; sourceTree = "<group>"; };
+		419C95D4283F5B6F001E7099 /* EntryKitCustomAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryKitCustomAttributes.swift; sourceTree = "<group>"; };
 		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
@@ -857,6 +863,8 @@
 				41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */,
 				41B4D85128266042004DFCFC /* DeviceManager.swift */,
 				41B4D8532826750A004DFCFC /* Throttler.swift */,
+				419C95D0283F3B8A001E7099 /* VersionCheck.swift */,
+				419C95D4283F5B6F001E7099 /* EntryKitCustomAttributes.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1060,6 +1068,7 @@
 				410A109427F4596D0059B2C3 /* CommonPickerView.swift */,
 				419AD69B27FD382100C902B8 /* CustomButton.swift */,
 				419AD6B12803B6DA00C902B8 /* NoDataView.swift */,
+				419C95D2283F59D3001E7099 /* AppUpdateView.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -2297,8 +2306,10 @@
 				4173C23A27C6192400B8FBB8 /* MineRepository.swift in Sources */,
 				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
 				412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */,
+				419C95D3283F59D3001E7099 /* AppUpdateView.swift in Sources */,
 				419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */,
 				41985F3427CF456E00E02A9A /* SwiftyOnboardOverlay.swift in Sources */,
+				419C95D5283F5B6F001E7099 /* EntryKitCustomAttributes.swift in Sources */,
 				41B7DBE527E044E8002A23D0 /* PreviewView.swift in Sources */,
 				41362580282A782C00186188 /* MessageViewController.swift in Sources */,
 				4173C20727C36FD400B8FBB8 /* QRCode.swift in Sources */,
@@ -2317,6 +2328,7 @@
 				41AA41AB27D6F067007020AD /* SectionIndexViewItem.swift in Sources */,
 				4136257A282A6FB100186188 /* PropertyContactTableViewCell.swift in Sources */,
 				4173C23527C5F92000B8FBB8 /* MemberInvitationViewController.swift in Sources */,
+				419C95D1283F3B8A001E7099 /* VersionCheck.swift in Sources */,
 				41E7D8C527EC4AEB00241706 /* BaseChatViewController.swift in Sources */,
 				41B4D8542826750A004DFCFC /* Throttler.swift in Sources */,
 				416F2E6F27B0BFB5004E5AD9 /* AdsModel.swift in Sources */,
@@ -2514,7 +2526,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Work.AJ.SM/Work.AJ.SMDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
@@ -2537,7 +2549,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2558,7 +2570,7 @@
 				CODE_SIGN_ENTITLEMENTS = Work.AJ.SM/Work.AJ.SMRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
@@ -2581,7 +2593,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2598,7 +2610,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -2618,7 +2630,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -2637,7 +2649,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -2655,7 +2667,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;

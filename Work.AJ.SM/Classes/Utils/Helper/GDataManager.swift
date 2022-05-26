@@ -7,7 +7,6 @@
 
 import Foundation
 import CryptoSwift
-import Siren
 import NIMSDK
 import AVFoundation
 import SwiftyUserDefaults
@@ -112,9 +111,9 @@ class GDataManager: NSObject {
             if let updateStr = jsonData["data"]["IFFORCE"].string, let effectiveStr = jsonData["data"]["EFFECTIVESTATUS"].string {
                 if effectiveStr == "T" {
                     if updateStr == "T" {
-                        GDataManager.shared.checkAppStoreVersion(true, .immediately)
+                        self.checkAppStoreNewVersion(true)
                     } else if updateStr == "F" {
-                        GDataManager.shared.checkAppStoreVersion(false, .immediately)
+                        self.checkAppStoreNewVersion(false)
                     }
                 }
             }
@@ -123,37 +122,27 @@ class GDataManager: NSObject {
         }
     }
 
-
-    private func checkAppStoreVersion(_ force: Bool, _ frequency: Rules.UpdatePromptFrequency) {
-        let siren = Siren.shared
-        siren.apiManager = APIManager.init(countryCode: "cn")
-        if force {
-            let rule = Rules.init(promptFrequency: frequency, forAlertType: .force)
-            siren.rulesManager = RulesManager(globalRules: rule)
-        } else {
-            let rule = Rules.init(promptFrequency: frequency, forAlertType: .option)
-            siren.rulesManager = RulesManager(globalRules: rule)
-        }
-        siren.presentationManager = PresentationManager(alertTintColor: R.color.themeColor(),
-                appName: Bundle.jk.appDisplayName,
-                forceLanguageLocalization: .chineseSimplified)
-        siren.wail(performCheck: .onDemand) { results in
-            switch results {
-            case .success(let updateResults):
-                logger.info(updateResults.localization)
-            case .failure(let error):
-                switch error {
-                case .appStoreOSVersionUnsupported:
-                    SVProgressHUD.showError(withStatus: "当前手机系统不支持最新版本。")
-                case .noUpdateAvailable:
-                    SVProgressHUD.showSuccess(withStatus: "当前已是最新版本。")
-                default:
-                    SVProgressHUD.showError(withStatus: "检查更新失败。")
-                }
-                logger.info(error.localizedDescription)
+    private func checkAppStoreNewVersion(_ force: Bool) {
+        VersionCheck.shared.checkNewVersion { hasNewerVersion, versionResult, errorMsg in
+            if hasNewerVersion, let versionResult = versionResult {
+                let aView = AppUpdateView.init()
+                aView.configData(versionResult, force)
+                var attributes = EntryKitCustomAttributes.centerFloat.attributes
+                attributes.screenInteraction = .absorbTouches
+                attributes.scroll = .disabled
+                attributes.entryBackground = .color(color: .clear)
+                attributes.positionConstraints.size = .init(
+                    width: .ratio(value: 0.8),
+                    height: .constant(value: 420)
+                )
+                SwiftEntryKit.display(entry: aView, using: attributes)
+            } else {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
             }
         }
     }
+
+    
 
     // MARK: - 清除数据
     func clearAccount() {

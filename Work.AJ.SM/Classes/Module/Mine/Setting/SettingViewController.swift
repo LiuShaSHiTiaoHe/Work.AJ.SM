@@ -8,7 +8,6 @@
 import UIKit
 import JKSwiftExtension
 import SVProgressHUD
-import Siren
 
 class SettingViewController: BaseViewController {
 

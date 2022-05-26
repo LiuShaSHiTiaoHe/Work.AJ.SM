@@ -29,7 +29,6 @@ target 'Work.AJ.SM' do
   pod 'IQKeyboardManagerSwift', '6.5.9'
   pod 'JKSwiftExtension'
   pod 'Kingfisher','7.2.0'
-  pod 'Siren'
   pod 'DeviceKit', '~> 4.4.0'
 
   pod 'ESTabBarController-swift', '2.8.0'

@@ -12,7 +12,6 @@ import ObjectMapper
 import SwiftyJSON
 import SVProgressHUD
 import IQKeyboardManagerSwift
-import Siren
 
 extension AppDelegate {
 
