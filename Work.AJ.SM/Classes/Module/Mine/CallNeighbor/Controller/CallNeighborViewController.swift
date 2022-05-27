@@ -34,8 +34,8 @@ class CallNeighborViewController: BaseViewController {
     }
 
     func startCall(_ number: String, _ lockMac: String, _ name: String) {
+        GDataManager.shared.sendVideoCallNotification(number)
         let vc = VideoChatViewController.init(startCall: number)
-//        vc.lockMac = lockMac
         vc.name = name
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)

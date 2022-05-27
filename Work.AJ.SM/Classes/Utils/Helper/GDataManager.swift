@@ -82,18 +82,24 @@ class GDataManager: NSObject {
             }
         }
     }
-
-    func pushSetAlias(_ alias: String) {
-        JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
-            if seq != 1 { return }
-            if  iResCode != 0 {
-                JPUSHService.deleteAlias({ diResCode, diAlias, dseq in
-                    if diResCode == 0 && dseq == 10086 {
-                        JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in  }, seq: 3)
-                    }
-                }, seq: 10086)
+    
+    func pushSetAlias(_ alias: String? = nil) {
+        if let alias = alias {
+            JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
+                if seq != 1 { return }
+                if  iResCode != 0 {
+                    JPUSHService.deleteAlias({ diResCode, diAlias, dseq in
+                        if diResCode == 0 && dseq == 10086 {
+                            JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in  }, seq: 3)
+                        }
+                    }, seq: 10086)
+                }
+            }, seq: 1)
+        } else {
+            if let mobile = ud.userMobile {
+                pushSetAlias(mobile)
             }
-        }, seq: 1)
+        }
     }
 
     func registerDeviceToken(_ token: Data) {
@@ -103,6 +109,21 @@ class GDataManager: NSObject {
     func pushDeleteAlias() {
         JPUSHService.deleteAlias({ iResCode, iAlias, seq in
         }, seq: 2)
+    }
+    
+    // MARK: - 发送视频通话推送给对方，暂时用于户户通。
+    func sendVideoCallNotification(_ alias: String) {
+        var pushModel = CommonPushModel()
+        pushModel.alias = alias
+        pushModel.aliasType = "3"
+        pushModel.pushFor = "1"
+        pushModel.pushType = "1"
+        pushModel.type = "videoCall"
+        pushModel.title = "智慧社区视频通话"
+        pushModel.body = "收到视频通话呼叫请求，请及时接听..."
+        CommonRepository.shared.sendPushNotification(pushModel) { errorMsg in
+            
+        }
     }
 
     // MARK: - 检查更新
