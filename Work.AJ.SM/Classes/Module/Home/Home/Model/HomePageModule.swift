@@ -21,17 +21,6 @@ enum HomePageModule: String {
     case elevatorConfiguration = "电梯配置"
     case ncall = "N方对讲"
 
-    // MARK: - 暂时不需要的模块
-    case bleOpenDoor = "蓝牙开门2"
-    case propertyBill = "物业账单"
-    case contactProperty = "联系物业"
-    case declareRepairs = "维修申报"
-    case suggestion = "投诉建议"
-    case rent = "房屋租赁"
-    case samrtParking = "智慧停车"
-    case smartHome = "智能家居"
-    case openUnitDoor = "开单元门"
-    case emergencyCall = "困人呼叫"
 
     var model: HomePageFunctionModule {
         switch self {
@@ -58,30 +47,9 @@ enum HomePageModule: String {
             return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7, showinpage: .home)
         case .inviteVisitors:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8, showinpage: .home)
-
-                // MARK: - 暂时不需要的模块
-        case .bleOpenDoor:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "bleOpenDoor", tag: "MOUDLE3", index: 4)
-        case .propertyBill:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "zhangDanModule", tag: "MOUDLE4", index: 5)
-        case .contactProperty:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "contactWuye", tag: "MOUDLE4", index: 6)
-        case .declareRepairs:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "weixiuModule", tag: "MOUDLE4", index: 7)
-        case .suggestion:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "advice", tag: "MOUDLE4", index: 8)
-        case .rent:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "houseRent", tag: "MOUDLE4", index: 9)
-        case .samrtParking:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "parking", tag: "MOUDLE5", index: 10)
-        case .smartHome:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "jiajuModule", tag: "MOUDLE6", index: 11)
         case .ncall:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudSpeak", tag: "OTHERUSED", index: 13)
-        case .openUnitDoor:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "openunitdoor", tag: "MOUDLE14", index: 16)
-        case .emergencyCall:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "emergencycall", tag: "MOUDLE15", index: 17)
+
         }
     }
 }

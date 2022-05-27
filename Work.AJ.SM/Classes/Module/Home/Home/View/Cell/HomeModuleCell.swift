@@ -39,14 +39,14 @@ class HomeModuleCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         backgroundColor = R.color.whiteColor()
         iconImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin/2)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(35)
         }
 
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(iconImage.snp.right).offset(kMargin)
+            make.left.equalTo(iconImage.snp.right).offset(kMargin/2)
             make.height.equalTo(30)
             make.right.equalToSuperview().offset(-kMargin / 2)
 
