@@ -74,7 +74,7 @@ class MineTableViewCell: UITableViewCell {
         
         iconImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(16)
+            make.width.height.equalTo(19)
             make.left.equalToSuperview().offset(kMargin)
         }
         

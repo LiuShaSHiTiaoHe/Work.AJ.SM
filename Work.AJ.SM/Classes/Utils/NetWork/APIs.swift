@@ -16,6 +16,7 @@ let servicePath = "hxcloudplus/"
 final class APIs {       
     
     static let baseUrl = host + servicePath
+    
     // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"
     static let notice = "appcity/getNotice.do"
@@ -25,6 +26,7 @@ final class APIs {
     static let propertyContactList = "appcity/getContact.do"
     static let messageList = "appcity/getMyMessage.do"
     static let commonPush = "appDevice/commonPush"
+    
     // MARK: - 用户鉴权
     static let login = "appcity/login.do"
     static let register = "appcity/register.do"
@@ -80,6 +82,7 @@ final class APIs {
     static let deleteFaceFile = "appcity/delFaceFile.do"
     static let extraFaceFile = "appcity/getExtraFaceFile"
     static let syncExtraFaceFile = "appcity/synExtraFaceFile"
+    
     // MARK: - 通话
     static let pushApp = "appDevice/pushApp.do"
     static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"
