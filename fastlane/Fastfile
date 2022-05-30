@@ -27,7 +27,7 @@ platform :ios do
   end
 
   #debug
-  lane :pgy do
+  lane :beta do
     updateProjectBuildNumber
     ENV_PREFIX="Debug_"
     EXPORT_METHOD = "development"
@@ -37,7 +37,7 @@ platform :ios do
   end
 
   #testflight
-  lane :beta do
+  lane :tf do
     updateProjectBuildNumber
     ENV_PREFIX="appstore_"
     EXPORT_METHOD = "app-store"
