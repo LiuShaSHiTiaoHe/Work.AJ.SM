@@ -11,7 +11,7 @@ enum MineAPI {
     case getUnitMembers(unitID: String, userID: String)
     case addFamilyMember(communityID: String, unitID: String, userID: String, name: String, phone: String, type: String)
     case deleteMember(unitID: String, userID: String, memberUserID: String)
-    case allFace(communityID: String, blockID: String, cellID: String, unitID: String)
+    case allFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
     case addFace(data: AddFaceModel)
     case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String, faceID: String)
     case extraFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
@@ -124,8 +124,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["TARGETMOBILE": phone, "REALNAME": name, "USERID": userID, "UNITID": unitID, "COMMUNITYID": communityID, "USERTYPE": type].ekey("USERID"), encoding: URLEncoding.default)
         case let .deleteMember(unitID, userID, memberUserID):
             return .requestParameters(parameters: ["UNITID": unitID, "USERID": userID, "TARGETUSERID": memberUserID].ekey("UNITID"), encoding: URLEncoding.default)
-        case let .allFace(communityID, blockID, cellID, unitID):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "apiVersion": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .allFace(communityID, blockID, cellID, unitID, mobile):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "apiVersion": "1", "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .addFace(data):
             let multipartData = [MultipartFormData(provider: .data(data.faceData), name: "file", fileName: "\(data.phone).png", mimeType: "image/png")]
             let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version": "3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID, "apiVersion": "1", "FACETYPE": data.faceType].ekey("MOBILE")

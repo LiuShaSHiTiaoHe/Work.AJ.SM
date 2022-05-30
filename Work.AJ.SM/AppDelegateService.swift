@@ -12,6 +12,7 @@ import ObjectMapper
 import SwiftyJSON
 import SVProgressHUD
 import IQKeyboardManagerSwift
+import UIKit
 
 extension AppDelegate {
 
@@ -28,6 +29,7 @@ extension AppDelegate {
         logger.info("\(FileManager.jk.DocumnetsDirectory())")
         GDataManager.shared.setupKeyChain()
         GDataManager.shared.setupDataBase()
+        UIApplication.shared.applicationIconBadgeNumber = 0
         setuplibs()
     }
 

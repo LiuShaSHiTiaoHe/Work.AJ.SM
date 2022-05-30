@@ -294,9 +294,9 @@ extension MineRepository {
 // MARK: - 人脸识别
 extension MineRepository {
     func getFaceList(completion: @escaping FaceListCompletion) {
-        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile {
             SVProgressHUD.show()
-            MineAPI.allFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID).request(modelType: [FaceModel].self) { models, response in
+            MineAPI.allFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).request(modelType: [FaceModel].self) { models, response in
                 SVProgressHUD.dismiss()
                 completion(models)
             } failureCallback: { response in
