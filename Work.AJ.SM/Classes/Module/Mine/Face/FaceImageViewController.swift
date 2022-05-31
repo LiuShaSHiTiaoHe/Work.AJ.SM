@@ -119,7 +119,11 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
                 fixImage = UIImage(cgImage: cgImage, scale: fixImage.scale, orientation: .right)
                 fixImage = fixImage.jk.fixOrientation()
             }
-            delegate?.faceImageCompleted(fixImage, self)
+            if let compressedImageData = fixImage.jk.compress(), let compressedImage = UIImage.init(data: compressedImageData) {
+                delegate?.faceImageCompleted(compressedImage, self)
+            } else {
+                delegate?.faceImageCompleted(fixImage, self)
+            }
         } else {
             SVProgressHUD.showInfo(withStatus: "图片数据错误")
         }
