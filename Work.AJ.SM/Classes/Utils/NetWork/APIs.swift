@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - 标记是否是生产环境。服务器地址，JPush等
-let isProduction = false
+let isProduction = true
 
 let host = isProduction ? "http://120.27.237.7:9393/" : "http://47.111.8.231:9091/"
 let servicePath = "hxcloudplus/"
