@@ -35,8 +35,8 @@ class FaceTableViewCell: UITableViewCell {
                             roleLabel.text = "父母"
                         case "2":
                             roleLabel.text = "子女"
-                        case "3":
-                            roleLabel.text = "亲属"
+//                        case "3":
+//                            roleLabel.text = "亲属"
                         default:
                             roleLabel.isHidden = true
                             break
