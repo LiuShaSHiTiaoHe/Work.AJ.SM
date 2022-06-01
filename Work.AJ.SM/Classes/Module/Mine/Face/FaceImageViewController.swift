@@ -117,8 +117,8 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         if let cgImage = fixImage.cgImage {
             if fixImage.imageOrientation == .leftMirrored {
                 fixImage = UIImage(cgImage: cgImage, scale: fixImage.scale, orientation: .right)
-                fixImage = fixImage.jk.fixOrientation()
             }
+            fixImage = fixImage.jk.fixOrientation()
             if let compressedImageData = fixImage.jk.compress(), let compressedImage = UIImage.init(data: compressedImageData) {
                 delegate?.faceImageCompleted(compressedImage, self)
             } else {
