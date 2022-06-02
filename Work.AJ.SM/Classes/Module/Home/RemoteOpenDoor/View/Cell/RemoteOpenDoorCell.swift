@@ -43,7 +43,7 @@ class RemoteOpenDoorCell: UITableViewCell {
     
     lazy var bgView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         view.clipsToBounds = true
         return view

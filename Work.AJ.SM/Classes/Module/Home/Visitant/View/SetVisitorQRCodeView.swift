@@ -69,15 +69,15 @@ class SetVisitorQRCodeView: UIView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.titleLabel.text = "设置访客二维码"
-        view.titleLabel.textColor = R.color.blackColor()
+        view.titleLabel.textColor = R.color.blackcolor()
         return view
     }()
     
     lazy var titleContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         return view
     }()
     
@@ -110,9 +110,9 @@ class SetVisitorQRCodeView: UIView {
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("完成", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.layer.cornerRadius = 20.0
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         return button
     }()
     

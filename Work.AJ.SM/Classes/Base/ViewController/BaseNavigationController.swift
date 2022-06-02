@@ -20,7 +20,7 @@ class BaseNavigationController: UINavigationController {
 
         if #available(iOS 15.0, *) {
             let barAppearance = UINavigationBarAppearance.init()
-            barAppearance.backgroundColor = R.color.themeColor()
+            barAppearance.backgroundColor = R.color.themecolor()
             barAppearance.shadowColor = .clear
             barAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navigationBarAppearance.scrollEdgeAppearance = barAppearance
@@ -29,7 +29,7 @@ class BaseNavigationController: UINavigationController {
             nBar.standardAppearance = barAppearance
         } else {
             nBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-            nBar.barTintColor = R.color.themeColor()
+            nBar.barTintColor = R.color.themecolor()
         }
     }
 }

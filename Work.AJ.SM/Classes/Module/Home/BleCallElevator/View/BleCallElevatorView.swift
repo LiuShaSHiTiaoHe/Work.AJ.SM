@@ -47,7 +47,7 @@ class BleCallElevatorView: BaseView {
         let view = UILabel()
         view.text = "-------------------------"
         view.font = k14Font
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         return view
     }()
 
@@ -142,7 +142,7 @@ class BleCallElevatorView: BaseView {
 
 
 //    override func layoutSubviews() {
-//        dashView.jk.drawDashLine(strokeColor: R.color.themeColor()!)
+//        dashView.jk.drawDashLine(strokeColor: R.color.themecolor()!)
 //    }
 
 }

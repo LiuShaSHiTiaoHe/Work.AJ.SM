@@ -129,7 +129,7 @@ class MemberInvitationView: BaseView {
     
     lazy var bgContentView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         return view
@@ -204,7 +204,7 @@ class MemberInvitationView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setBackgroundImage(R.image.btn_image_bg_white(), for: .normal)
         button.setTitle("保存到相册", for: .normal)
-        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.themecolor(), for: .normal)
         button.titleLabel?.font = k14Font
         return button
     }()
@@ -213,7 +213,7 @@ class MemberInvitationView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setBackgroundImage(R.image.btn_image_bg_blue(), for: .normal)
         button.setTitle("分享给家人/成员", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.titleLabel?.font = k14Font
         return button
     }()

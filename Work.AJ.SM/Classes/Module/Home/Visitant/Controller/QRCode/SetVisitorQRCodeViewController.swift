@@ -55,7 +55,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
         datePickerManager.cancelButtonTextColor = R.color.sub_red()
-        datePickerManager.confirmButtonTextColor = R.color.themeColor()
+        datePickerManager.confirmButtonTextColor = R.color.themecolor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line
         datePicker?.datePickerMode = .dateHourMinute
@@ -66,9 +66,9 @@ class SetVisitorQRCodeViewController: BaseViewController {
         case .valid:
             datePickerManager.title = "有效期至"
         }
-        datePicker?.textColorOfSelectedRow = R.color.themeColor()
+        datePicker?.textColorOfSelectedRow = R.color.themecolor()
         datePicker?.textFontOfSelectedRow = k18Font
-        datePicker?.lineBackgroundColor = R.color.themeColor()
+        datePicker?.lineBackgroundColor = R.color.themecolor()
         datePicker?.minimumDate = Date()
         datePicker?.maximumDate = NSDate.init().addingHours(12)//addingMonths(13)
         datePicker?.selectedDate = {[weak self] dateComponents in

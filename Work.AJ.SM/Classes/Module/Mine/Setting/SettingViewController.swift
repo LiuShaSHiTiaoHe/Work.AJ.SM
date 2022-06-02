@@ -157,7 +157,7 @@ class SettingViewController: BaseViewController {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.textColor = R.color.text_title()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.titleLabel.text = "通用设置"
         return view
     }()

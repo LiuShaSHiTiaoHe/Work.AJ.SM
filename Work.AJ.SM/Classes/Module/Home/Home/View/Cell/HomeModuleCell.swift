@@ -37,7 +37,7 @@ class HomeModuleCell: UICollectionViewCell {
     private func initUI() {
         contentView.addSubview(iconImage)
         contentView.addSubview(nameLabel)
-        backgroundColor = R.color.whiteColor()
+        backgroundColor = R.color.whitecolor()
         iconImage.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin/2)
             make.centerY.equalToSuperview()

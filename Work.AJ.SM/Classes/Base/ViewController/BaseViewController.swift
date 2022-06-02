@@ -38,12 +38,12 @@ class BaseViewController: UIViewController {
     }
 
 
-    func refreshHeader(_ textColor: UIColor? = R.color.whiteColor()!) -> MJRefreshStateHeader {
+    func refreshHeader(_ textColor: UIColor? = R.color.whitecolor()!) -> MJRefreshStateHeader {
         let header = MJRefreshStateHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         if let textColor = textColor {
             header.stateLabel!.textColor = textColor
         } else {
-            header.stateLabel!.textColor = R.color.whiteColor()!
+            header.stateLabel!.textColor = R.color.whitecolor()!
         }
         header.lastUpdatedTimeLabel?.isHidden = true
         return header

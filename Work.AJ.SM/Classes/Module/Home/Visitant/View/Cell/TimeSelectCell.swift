@@ -46,7 +46,7 @@ class TimeSelectCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         
         contentView.addSubview(nameLabel)
         contentView.addSubview(timeLabel)

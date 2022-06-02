@@ -48,7 +48,7 @@ class CommonSearchView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = R.color.whiteColor()
+        backgroundColor = R.color.whitecolor()
         initializeView()
         cancleButton.addTarget(self, action: #selector(cancleAction), for: .touchUpInside)
     }
@@ -161,14 +161,14 @@ class CommonSearchView: UIView {
     lazy var searchView: UITextField = {
         let view = UITextField.init()
         view.font = k14Font
-        view.textColor = R.color.blackColor()
+        view.textColor = R.color.blackcolor()
         view.returnKeyType = .search
         return view
     }()
 
     lazy var cancleButton: UIButton = {
         let view = UIButton.init(type: .custom)
-        view.setTitleColor(R.color.themeColor(), for: .normal)
+        view.setTitleColor(R.color.themecolor(), for: .normal)
         view.titleLabel?.font = k14Font
         view.setTitle("取消", for: .normal)
         return view

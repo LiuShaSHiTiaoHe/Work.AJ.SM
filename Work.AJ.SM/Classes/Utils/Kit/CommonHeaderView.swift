@@ -19,7 +19,7 @@ class CommonHeaderView: UIView {
         let label = UILabel.init()
         label.textAlignment = .center
         label.font = k18Font
-        label.textColor = R.color.whiteColor()
+        label.textColor = R.color.whitecolor()
         return label
     }()
 

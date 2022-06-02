@@ -41,10 +41,10 @@ class LoginView: BaseView {
             label.font = k12Font
             label.numberOfLines = 0
             label.textColor = R.color.text_info()
-            label.customColor[customType1] = R.color.themeColor()
-            label.customColor[customType2] = R.color.themeColor()
-            label.customSelectedColor[customType1] = R.color.themeColor()
-            label.customSelectedColor[customType2] = R.color.themeColor()
+            label.customColor[customType1] = R.color.themecolor()
+            label.customColor[customType2] = R.color.themecolor()
+            label.customSelectedColor[customType1] = R.color.themecolor()
+            label.customSelectedColor[customType2] = R.color.themecolor()
             label.handleCustomTap(for: customType1) { element in
                 self.delegate?.showTermsOfServices()
             }
@@ -155,7 +155,7 @@ class LoginView: BaseView {
     lazy var tipsLabel: UILabel = {
         let label = UILabel.init()
         label.text = "欢迎使用"
-        label.textColor = R.color.whiteColor()
+        label.textColor = R.color.whitecolor()
         label.textAlignment = .left
         label.font = k34Font
         return label
@@ -164,7 +164,7 @@ class LoginView: BaseView {
     lazy var appNameLabel: UILabel = {
         let label = UILabel.init()
         label.text = "安杰智慧社区"
-        label.textColor = R.color.whiteColor()
+        label.textColor = R.color.whitecolor()
         label.textAlignment = .left
         label.font = k20Font
         return label
@@ -179,8 +179,8 @@ class LoginView: BaseView {
     lazy var inputContentView: UIView = {
         let view = UIView.init()
         view.layer.cornerRadius = 10
-        view.backgroundColor = R.color.whiteColor()
-        view.jk.addShadow(shadowColor: R.color.themeColor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
+        view.backgroundColor = R.color.whitecolor()
+        view.jk.addShadow(shadowColor: R.color.themecolor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
         return view
     }()
 
@@ -190,8 +190,8 @@ class LoginView: BaseView {
                 normalFont: k18Font,
                 normalTextColor: R.color.text_info(),
                 selectedFont: k18Font,
-                selectedTextColor: R.color.themeColor())
-        seg.setOptions([.backgroundColor(R.color.whiteColor()!), .indicatorViewBackgroundColor(R.color.whiteColor()!), .cornerRadius(5)])
+                selectedTextColor: R.color.themecolor())
+        seg.setOptions([.backgroundColor(R.color.whitecolor()!), .indicatorViewBackgroundColor(R.color.whitecolor()!), .cornerRadius(5)])
         seg.addTarget(self, action: #selector(navigationSegmentedControlValueChanged(_:)), for: .valueChanged)
         return seg
     }()
@@ -217,7 +217,7 @@ class LoginView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setTitle("忘记密码?", for: .normal)
         button.titleLabel?.font = k14Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.themecolor(), for: .normal)
         button.addTarget(self, action: #selector(forgetPassword), for: .touchUpInside)
         return button
     }()
@@ -258,16 +258,16 @@ class LoginView: BaseView {
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("登录", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.titleLabel?.font = k18Font
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(confirmButtonAction), for: .touchUpInside)
         return button
     }()
 
     override func initializeView() {
-        backgroundColor = R.color.whiteColor()
+        backgroundColor = R.color.whitecolor()
         addSubview(backgroundImage)
         addSubview(tipsLabel)
         addSubview(appNameLabel)

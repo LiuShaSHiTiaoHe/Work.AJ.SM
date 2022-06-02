@@ -57,7 +57,7 @@ extension OnBoardViewController: SwiftyOnboardDelegate, SwiftyOnboardDataSource 
     
     func swiftyOnboardBackgroundColorFor(_ swiftyOnboard: SwiftyOnboard, atIndex index: Int) -> UIColor? {
         //Return the background color for the page at index:
-        return R.color.whiteColor()
+        return R.color.whitecolor()
     }
     
     func swiftyOnboardPageForIndex(_ swiftyOnboard: SwiftyOnboard, index: Int) -> SwiftyOnboardPage? {

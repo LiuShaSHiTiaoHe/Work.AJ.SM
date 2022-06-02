@@ -111,8 +111,8 @@ class MobileInputView: UIView {
     // MARK: -Actions
     @objc func textInputEditingBegin(_ sender: UITextField) {
         DispatchQueue.main.async {
-            self.seperator.backgroundColor = R.color.themeColor()
-            self.titleLabel.textColor = R.color.themeColor()
+            self.seperator.backgroundColor = R.color.themecolor()
+            self.titleLabel.textColor = R.color.themecolor()
             self.errorMsg = ""
         }
     }

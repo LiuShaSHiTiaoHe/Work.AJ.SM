@@ -29,7 +29,7 @@ class IndoorCallElevatorView: UIView {
     lazy var tipsView: UILabel = {
         let view = UILabel()
         view.text = "请选择电梯上行或下行"
-        view.textColor = R.color.blackColor()
+        view.textColor = R.color.blackcolor()
         view.textAlignment = .center
         view.font = k20Font
         return view

@@ -30,8 +30,8 @@ class NComRecordView: BaseView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "通话记录"
-        view.titleLabel.textColor = R.color.whiteColor()
-        view.backgroundColor = R.color.themeColor()
+        view.titleLabel.textColor = R.color.whitecolor()
+        view.backgroundColor = R.color.themecolor()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
         return view
     }()

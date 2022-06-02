@@ -76,15 +76,15 @@ class HouseViewController: BaseViewController {
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
         view.separatorStyle = .none
         view.backgroundColor = R.color.bg()
-        view.mj_header = refreshHeader(R.color.blackColor())
+        view.mj_header = refreshHeader(R.color.blackcolor())
         return view
     }()
 
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加房屋", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
         button.addTarget(self, action: #selector(addHouse), for: .touchUpInside)
         button.layer.cornerRadius = 20.0
         return button

@@ -72,8 +72,8 @@ extension ScanQRCodeSelectElevatorViewController: UICollectionViewDataSource {
         if let showFloor = floor.showFloor {
             cell.elevatorName.text = showFloor
             if selectFloor == showFloor {
-                cell.backgroundColor = R.color.themeColor()
-                cell.elevatorName.textColor = R.color.whiteColor()
+                cell.backgroundColor = R.color.themecolor()
+                cell.elevatorName.textColor = R.color.whitecolor()
             }
         }
         return cell

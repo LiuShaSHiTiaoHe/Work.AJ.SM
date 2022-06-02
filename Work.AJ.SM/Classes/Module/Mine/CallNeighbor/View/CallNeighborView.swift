@@ -94,9 +94,9 @@ class CallNeighborView: BaseView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "户户通"
-        view.titleLabel.textColor = R.color.whiteColor()
+        view.titleLabel.textColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         return view
     }()
 
@@ -113,7 +113,7 @@ class CallNeighborView: BaseView {
     lazy var inputFiled: UILabel = {
         let view = UILabel()
         view.font = k28Font
-        view.textColor = R.color.blackColor()
+        view.textColor = R.color.blackcolor()
         view.textAlignment = .right
         return view
     }()
@@ -139,7 +139,7 @@ class CallNeighborView: BaseView {
     lazy var dialButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("呼叫", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.backgroundColor = R.color.sub_green()
         button.layer.cornerRadius = 20.0
         return button

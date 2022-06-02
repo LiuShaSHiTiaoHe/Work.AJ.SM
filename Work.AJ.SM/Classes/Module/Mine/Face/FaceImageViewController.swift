@@ -192,7 +192,7 @@ extension FaceImageViewController: YPImagePickerDelegate {
         config.showsPhotoFilters = false
         config.wordings.next = "完成"
         //colors
-        config.colors.tintColor = R.color.blackColor()!
+        config.colors.tintColor = R.color.blackcolor()!
         
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self

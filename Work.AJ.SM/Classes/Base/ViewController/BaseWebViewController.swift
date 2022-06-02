@@ -73,7 +73,7 @@ class BaseWebViewController: UIViewController {
     //MARK: - UIProgressView进度条对象
     fileprivate lazy var progress: UIProgressView = {
         let tempProgressView = UIProgressView.init()
-        tempProgressView.tintColor = R.color.themeColor()
+        tempProgressView.tintColor = R.color.themecolor()
         tempProgressView.backgroundColor = .white
         return tempProgressView
     }()
@@ -151,7 +151,7 @@ class BaseWebViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = R.color.bg()
         navigationItem.title = titleString
-        navigationController?.navigationBar.tintColor = R.color.whiteColor()
+        navigationController?.navigationBar.tintColor = R.color.whitecolor()
         setupUI()
         loadRequest()
         addKVOObserver()

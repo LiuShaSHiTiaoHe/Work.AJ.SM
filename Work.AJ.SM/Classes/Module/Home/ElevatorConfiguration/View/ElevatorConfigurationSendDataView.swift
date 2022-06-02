@@ -42,9 +42,9 @@ class ElevatorConfigurationSendDataView: BaseView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.titleLabel.text = "电梯配置"
-        view.titleLabel.textColor = R.color.blackColor()
+        view.titleLabel.textColor = R.color.blackcolor()
         return view
     }()
     

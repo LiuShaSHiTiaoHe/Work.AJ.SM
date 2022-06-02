@@ -19,7 +19,7 @@ class CurrentLocationView: BaseView {
 
     lazy var contentBackView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         return view
     }()
 
@@ -39,7 +39,7 @@ class CurrentLocationView: BaseView {
     lazy var locationButton: UIButton = {
         let view = UIButton.init(type: .custom)
         view.setTitle("重新定位", for: .normal)
-        view.setTitleColor(R.color.themeColor(), for: .normal)
+        view.setTitleColor(R.color.themecolor(), for: .normal)
         view.titleLabel?.font = k14Font
         return view
     }()

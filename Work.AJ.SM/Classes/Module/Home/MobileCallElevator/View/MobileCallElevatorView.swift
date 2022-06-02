@@ -96,7 +96,7 @@ class MobileCallElevatorView: UIView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.rightButton.isHidden = true
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "乘梯选层"
         view.titleLabel.textColor = R.color.text_title()
@@ -105,13 +105,13 @@ class MobileCallElevatorView: UIView {
 
     lazy var titleContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         return view
     }()
 
     lazy var elevatorTitle: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.blackColor()
+        view.textColor = R.color.blackcolor()
         view.font = k15Font
         view.textAlignment = .center
         return view
@@ -119,7 +119,7 @@ class MobileCallElevatorView: UIView {
 
     lazy var elevatorLocation: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.blackColor()
+        view.textColor = R.color.blackcolor()
         view.font = k15Font
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
@@ -134,7 +134,7 @@ class MobileCallElevatorView: UIView {
 
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         view.font = k15Font
         view.textAlignment = .center
         view.text = "请移步至电梯厅，再选择目的楼层"

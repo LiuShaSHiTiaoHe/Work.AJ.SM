@@ -114,7 +114,7 @@ class HomeHeaderView: UICollectionReusableView {
             make.bottom.equalToSuperview().offset(-kMargin / 2)
         }
 
-        textCycleBackground.jk.addShadow(shadowColor: R.color.blackColor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.2, shadowRadius: 10)
+        textCycleBackground.jk.addShadow(shadowColor: R.color.blackcolor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.2, shadowRadius: 10)
     }
 
 }

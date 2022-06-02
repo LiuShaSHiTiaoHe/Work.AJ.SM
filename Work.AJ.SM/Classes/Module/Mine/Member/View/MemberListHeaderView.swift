@@ -21,7 +21,7 @@ class MemberListHeaderView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k20Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         view.numberOfLines = 0
         return view
     }()

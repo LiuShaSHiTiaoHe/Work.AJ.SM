@@ -141,7 +141,7 @@ class MyVisitorCell: UITableViewCell {
     
     lazy var backContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 20.0
         view.clipsToBounds = true
         return view

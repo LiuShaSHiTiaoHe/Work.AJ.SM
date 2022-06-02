@@ -18,7 +18,7 @@ class OpenDoorPasswordViewController: BaseViewController {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.textColor = R.color.text_title()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.titleLabel.text = "设置开门密码"
         return view
     }()
@@ -38,7 +38,7 @@ class OpenDoorPasswordViewController: BaseViewController {
                                          validCharacterSet: CharacterSet(charactersIn: "0123456789"),
                                          characterLabelGenerator: { (_) -> LableRenderable in
                                             let label = StyleLabel(size: CGSize(width: boxSizeWidth, height: boxSizeWidth))
-                                            label.style = Style.border(nomal: UIColor.gray, selected: R.color.themeColor()!)
+                                            label.style = Style.border(nomal: UIColor.gray, selected: R.color.themecolor()!)
                                             return label})
         temTextField.keyboardType = .numberPad
         temTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ class OpenDoorPasswordViewController: BaseViewController {
     
     override func initUI() {
         adjustBoxWidth()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.addSubview(headerView)
         view.addSubview(tipsLabel)
         view.addSubview(codeTextField)

@@ -37,7 +37,7 @@ class PropertyContactTableViewCell: UITableViewCell {
     
     lazy var backgrdView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         view.clipsToBounds = true
         return view

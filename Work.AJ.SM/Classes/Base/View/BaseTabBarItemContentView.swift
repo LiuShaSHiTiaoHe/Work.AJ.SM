@@ -12,9 +12,9 @@ class BaseTabBarItemContentView: ESTabBarItemContentView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         textColor = R.color.text_content()!
-        highlightTextColor = R.color.themeColor()!
+        highlightTextColor = R.color.themecolor()!
         iconColor = R.color.text_content()!
-        highlightIconColor = R.color.themeColor()!
+        highlightIconColor = R.color.themecolor()!
     }
 
     public required init?(coder aDecoder: NSCoder) {

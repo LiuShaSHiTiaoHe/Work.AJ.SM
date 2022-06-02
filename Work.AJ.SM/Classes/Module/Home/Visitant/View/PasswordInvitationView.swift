@@ -199,7 +199,7 @@ class PasswordInvitationView: BaseView {
     }
     
     override func layoutSubviews() {
-        dashLine.jk.drawDashLine(strokeColor: R.color.themeColor()!)
+        dashLine.jk.drawDashLine(strokeColor: R.color.themecolor()!)
     }
     
     lazy var headerView: CommonHeaderView = {
@@ -218,7 +218,7 @@ class PasswordInvitationView: BaseView {
     
     lazy var bgContentView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 15.0
         view.clipsToBounds = true
         return view
@@ -236,7 +236,7 @@ class PasswordInvitationView: BaseView {
     //状态标签
     lazy var statusLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         view.font = k14Font
         view.jk.addCorner(conrners: UIRectCorner.topRight, radius: 15.0)
         view.jk.addCorner(conrners: UIRectCorner.bottomRight, radius: 15.0)
@@ -322,7 +322,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.font = k34Font
         view.textAlignment = .center
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         return view
     }()
     
@@ -345,7 +345,7 @@ class PasswordInvitationView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setBackgroundImage(R.image.btn_image_bg_white(), for: .normal)
         button.setTitle("保存到相册", for: .normal)
-        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.themecolor(), for: .normal)
         return button
     }()
     
@@ -353,7 +353,7 @@ class PasswordInvitationView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setBackgroundImage(R.image.btn_image_bg_blue(), for: .normal)
         button.setTitle("分享给访客", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         return button
     }()
 

@@ -103,18 +103,18 @@ class AppUpdateView: BaseView {
     
     lazy var cancelButton: UIButton = {
         let btn = UIButton.init(type: .custom)
-        btn.setTitleColor(R.color.themeColor(), for: .normal)
-        btn.backgroundColor = R.color.whiteColor()
+        btn.setTitleColor(R.color.themecolor(), for: .normal)
+        btn.backgroundColor = R.color.whitecolor()
         btn.setTitle("取消", for: .normal)
-        btn.jk.addBorder(borderWidth: 1, borderColor: R.color.themeColor()!)
+        btn.jk.addBorder(borderWidth: 1, borderColor: R.color.themecolor()!)
         btn.layer.cornerRadius = 5
         return btn
     }()
     
     lazy var confirmButton: UIButton = {
         let btn = UIButton.init(type: .custom)
-        btn.setTitleColor(R.color.whiteColor(), for: .normal)
-        btn.backgroundColor = R.color.themeColor()
+        btn.setTitleColor(R.color.whitecolor(), for: .normal)
+        btn.backgroundColor = R.color.themecolor()
         btn.setTitle("更新", for: .normal)
         btn.layer.cornerRadius = 5
         return btn

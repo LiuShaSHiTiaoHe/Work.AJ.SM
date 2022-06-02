@@ -35,7 +35,7 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
         view.titleLabel.text = "扫描二维码"
-        view.titleLabel.textColor = R.color.whiteColor()
+        view.titleLabel.textColor = R.color.whitecolor()
         view.lineView.isHidden = true
         view.backgroundColor = .clear
         return view
@@ -103,7 +103,7 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
         scanStyle?.color_NotRecoginitonArea = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.4)
         scanStyle?.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Inner
         scanStyle?.colorRetangleLine = .clear
-        scanStyle?.colorAngle = R.color.whiteColor()!
+        scanStyle?.colorAngle = R.color.whitecolor()!
         scanStyle?.photoframeLineW = 2.0
         scanStyle?.photoframeAngleW = 16
         scanStyle?.photoframeAngleH = 16

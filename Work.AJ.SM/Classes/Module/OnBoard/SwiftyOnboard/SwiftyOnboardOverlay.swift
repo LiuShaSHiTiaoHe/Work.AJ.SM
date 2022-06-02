@@ -22,8 +22,8 @@ open class SwiftyOnboardOverlay: UIView {
         let button = UIButton(type: .custom)
         button.contentHorizontalAlignment = .center
         button.titleLabel?.font = k16Font
-        button.backgroundColor = R.color.themeColor()
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.layer.cornerRadius = 20.0
         return button
     }()
@@ -59,7 +59,7 @@ open class SwiftyOnboardOverlay: UIView {
     
     open func set(style: SwiftyOnboardStyle) {
         skipButton.setTitleColor(R.color.onboardtitleColor(), for: .normal)
-        pageControl.currentPageIndicatorTintColor = R.color.themeColor()
+        pageControl.currentPageIndicatorTintColor = R.color.themecolor()
     }
     
     open func page(count: Int) {

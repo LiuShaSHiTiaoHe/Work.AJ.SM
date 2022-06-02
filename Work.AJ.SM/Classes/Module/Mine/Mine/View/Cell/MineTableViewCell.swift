@@ -65,7 +65,7 @@ class MineTableViewCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)

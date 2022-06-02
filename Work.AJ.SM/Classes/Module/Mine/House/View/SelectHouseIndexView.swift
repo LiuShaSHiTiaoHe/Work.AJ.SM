@@ -69,7 +69,7 @@ class SelectHouseIndexView: BaseView {
         let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         c.alwaysBounceHorizontal = true
         c.showsHorizontalScrollIndicator = false
-        c.backgroundColor = R.color.whiteColor()
+        c.backgroundColor = R.color.whitecolor()
         c.register(SelectHouseLocationIndexCell.self, forCellWithReuseIdentifier: SelectHouseLocationIndexCellIdetifier)
         return c
     }()

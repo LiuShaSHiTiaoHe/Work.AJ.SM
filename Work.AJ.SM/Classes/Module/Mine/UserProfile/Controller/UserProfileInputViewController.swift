@@ -84,7 +84,7 @@ class UserProfileInputViewController: BaseViewController {
     
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
         view.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         return view
@@ -92,14 +92,14 @@ class UserProfileInputViewController: BaseViewController {
     
     lazy var inputBgView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.corner(5)
         return view
     }()
     
     lazy var textfield: UITextField = {
         let view = UITextField.init()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.textColor = R.color.text_title()
         view.font = k16Font
         return view
@@ -108,8 +108,8 @@ class UserProfileInputViewController: BaseViewController {
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("确认", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
         button.addTarget(self, action: #selector(confirmAction), for: .touchUpInside)
         button.layer.cornerRadius = 20.0
         return button

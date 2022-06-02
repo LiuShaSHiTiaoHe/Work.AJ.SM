@@ -23,7 +23,7 @@ class CommonPickerView: BaseView {
         leftButton.setTitle("取消", for: .normal)
         leftButton.setTitleColor(R.color.sub_red(), for: .normal)
         rightButton.setTitle("确定", for: .normal)
-        rightButton.setTitleColor(R.color.themeColor(), for: .normal)
+        rightButton.setTitleColor(R.color.themecolor(), for: .normal)
     }
 
     @objc

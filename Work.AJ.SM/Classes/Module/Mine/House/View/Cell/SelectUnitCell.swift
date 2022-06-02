@@ -14,9 +14,9 @@ class SelectUnitCell: UITableViewCell {
     var isCurrentCell: Bool = false {
         didSet {
             if isCurrentCell {
-                backgroundColor = R.color.whiteColor()
+                backgroundColor = R.color.whitecolor()
                 horizonLine.isHidden = false
-                locationName.textColor = R.color.themeColor()
+                locationName.textColor = R.color.themecolor()
             }else {
                 backgroundColor = R.color.bg()
                 horizonLine.isHidden = true
@@ -69,7 +69,7 @@ class SelectUnitCell: UITableViewCell {
     
     lazy var horizonLine: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         return view
     }()
     

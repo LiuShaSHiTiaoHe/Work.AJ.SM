@@ -72,17 +72,17 @@ class CommonSelectButtonCell: UITableViewCell {
         leftButton.isSelected = !leftButton.isSelected
         let state = leftButton.isSelected
         if state {
-            leftButton.backgroundColor = R.color.themeColor()
+            leftButton.backgroundColor = R.color.themecolor()
             if rightButton.isSelected {
                 rightButton.isSelected = false
-                rightButton.backgroundColor = R.color.whiteColor()
+                rightButton.backgroundColor = R.color.whitecolor()
             }
             if centerButton.isSelected {
                 centerButton.isSelected = false
-                centerButton.backgroundColor = R.color.whiteColor()
+                centerButton.backgroundColor = R.color.whitecolor()
             }
         } else {
-            leftButton.backgroundColor = R.color.whiteColor()
+            leftButton.backgroundColor = R.color.whitecolor()
         }
         delegate?.leftButtonSelected(state)
     }
@@ -92,19 +92,19 @@ class CommonSelectButtonCell: UITableViewCell {
         centerButton.isSelected = !centerButton.isSelected
         let state = centerButton.isSelected
         if state {
-            centerButton.backgroundColor = R.color.themeColor()
+            centerButton.backgroundColor = R.color.themecolor()
             if rightButton.isSelected {
                 rightButton.isSelected = false
-                rightButton.backgroundColor = R.color.whiteColor()
+                rightButton.backgroundColor = R.color.whitecolor()
             }
 
             if leftButton.isSelected {
                 leftButton.isSelected = false
-                leftButton.backgroundColor = R.color.whiteColor()
+                leftButton.backgroundColor = R.color.whitecolor()
             }
 
         } else {
-            centerButton.backgroundColor = R.color.whiteColor()
+            centerButton.backgroundColor = R.color.whitecolor()
         }
         delegate?.centerButtonSelected(state)
     }
@@ -114,23 +114,23 @@ class CommonSelectButtonCell: UITableViewCell {
         rightButton.isSelected = !rightButton.isSelected
         let state = rightButton.isSelected
         if state {
-            rightButton.backgroundColor = R.color.themeColor()
+            rightButton.backgroundColor = R.color.themecolor()
             if leftButton.isSelected {
                 leftButton.isSelected = false
-                leftButton.backgroundColor = R.color.whiteColor()
+                leftButton.backgroundColor = R.color.whitecolor()
             }
             if centerButton.isSelected {
                 centerButton.isSelected = false
-                centerButton.backgroundColor = R.color.whiteColor()
+                centerButton.backgroundColor = R.color.whitecolor()
             }
         } else {
-            rightButton.backgroundColor = R.color.whiteColor()
+            rightButton.backgroundColor = R.color.whitecolor()
         }
         delegate?.rightButtonSelected(state)
     }
 
     func initializeView() {
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         selectionStyle = .none
         contentView.addSubview(nameLabel)
         contentView.addSubview(leftButton)
@@ -182,9 +182,9 @@ class CommonSelectButtonCell: UITableViewCell {
     lazy var leftButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .selected)
-        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.setTitleColor(R.color.themecolor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .selected)
+        button.layer.borderColor = R.color.themecolor()!.cgColor
         button.layer.borderWidth = 1 / kScale
         button.layer.cornerRadius = 4
         return button
@@ -193,9 +193,9 @@ class CommonSelectButtonCell: UITableViewCell {
     lazy var centerButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .selected)
-        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.setTitleColor(R.color.themecolor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .selected)
+        button.layer.borderColor = R.color.themecolor()!.cgColor
         button.layer.borderWidth = 1 / kScale
         button.layer.cornerRadius = 4
         return button
@@ -204,9 +204,9 @@ class CommonSelectButtonCell: UITableViewCell {
     lazy var rightButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .selected)
-        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.setTitleColor(R.color.themecolor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .selected)
+        button.layer.borderColor = R.color.themecolor()!.cgColor
         button.layer.borderWidth = 1 / kScale
         button.layer.cornerRadius = 4
         return button

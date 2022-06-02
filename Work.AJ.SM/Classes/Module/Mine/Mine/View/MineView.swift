@@ -26,14 +26,14 @@ class MineView: BaseView {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = k18Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         return view
     }()
     
     lazy var phoneLabel: UILabel = {
         let view = UILabel()
         view.font = k18Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         return view
     }()
     

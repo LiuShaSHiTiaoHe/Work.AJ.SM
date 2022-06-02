@@ -75,7 +75,7 @@ class HouseSearchViewController: BaseViewController {
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "选择小区/楼栋"
         view.titleLabel.textColor = R.color.text_title()

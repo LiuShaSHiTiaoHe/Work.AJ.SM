@@ -18,7 +18,7 @@ class HomeNaviHeaderView: UIView {
 
     lazy var unitNameLabel: UILabel = {
         let label = UILabel.init()
-        label.textColor = R.color.whiteColor()
+        label.textColor = R.color.whitecolor()
         label.font = k18Font
         label.textAlignment = .left
         label.isUserInteractionEnabled = true

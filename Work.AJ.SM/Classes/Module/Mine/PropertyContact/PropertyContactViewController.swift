@@ -55,7 +55,7 @@ class PropertyContactViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "联系物业"
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         view.closeButton.setImage(R.image.common_back_white()!, for: .normal)
         return view
     }()

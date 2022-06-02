@@ -53,7 +53,7 @@ class CommonIDNumberInpuCell: UITableViewCell {
 
     private func initializeView() {
         selectionStyle = .none
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         contentView.addSubview(nameLabel)
         contentView.addSubview(IDNumberInput)
         contentView.addSubview(errorMsg)

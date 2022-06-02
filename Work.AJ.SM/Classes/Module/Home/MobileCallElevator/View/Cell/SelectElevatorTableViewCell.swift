@@ -18,7 +18,7 @@ class SelectElevatorTableViewCell: UITableViewCell {
     
     lazy var backGround: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         view.clipsToBounds = true
         return view
@@ -50,8 +50,8 @@ class SelectElevatorTableViewCell: UITableViewCell {
     lazy var selectButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("选择", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = k12Font
         button.addTarget(self, action: #selector(chooseElevator), for: .touchUpInside)

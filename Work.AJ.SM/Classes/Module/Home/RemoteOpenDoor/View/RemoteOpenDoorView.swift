@@ -60,8 +60,8 @@ class RemoteOpenDoorView: BaseView {
         let view = CommonHeaderView()
         view.titleLabel.text = "远程开门"
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
-        view.titleLabel.textColor = R.color.blackColor()
+        view.backgroundColor = R.color.whitecolor()
+        view.titleLabel.textColor = R.color.blackcolor()
         return view
     }()
     
@@ -88,7 +88,7 @@ class RemoteOpenDoorView: BaseView {
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         view.font = k15Font
         view.backgroundColor = R.color.bg()
         view.text = "请选择设备开门"

@@ -58,9 +58,9 @@ class ElevatorMaskConfigurationViewController: BaseViewController {
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("发送", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.layer.cornerRadius = 20.0
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         return button
     }()
 

@@ -82,15 +82,15 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     func firstAction() {
         firstButton.isSelected.toggle()
         if firstButton.isSelected {
-            firstButton.backgroundColor = R.color.themeColor()
+            firstButton.backgroundColor = R.color.themecolor()
             secondButton.isSelected = false
             thirdButton.isSelected = false
             fourthButton.isSelected = false
-            secondButton.backgroundColor = R.color.whiteColor()
-            thirdButton.backgroundColor = R.color.whiteColor()
-            fourthButton.backgroundColor = R.color.whiteColor()
+            secondButton.backgroundColor = R.color.whitecolor()
+            thirdButton.backgroundColor = R.color.whitecolor()
+            fourthButton.backgroundColor = R.color.whitecolor()
         } else {
-            firstButton.backgroundColor = R.color.whiteColor()
+            firstButton.backgroundColor = R.color.whitecolor()
         }
         delegate?.firstButtonSelected(firstButton.isSelected)
     }
@@ -99,15 +99,15 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     func secondAction() {
         secondButton.isSelected.toggle()
         if secondButton.isSelected {
-            secondButton.backgroundColor = R.color.themeColor()
+            secondButton.backgroundColor = R.color.themecolor()
             firstButton.isSelected = false
             thirdButton.isSelected = false
             fourthButton.isSelected = false
-            firstButton.backgroundColor = R.color.whiteColor()
-            thirdButton.backgroundColor = R.color.whiteColor()
-            fourthButton.backgroundColor = R.color.whiteColor()
+            firstButton.backgroundColor = R.color.whitecolor()
+            thirdButton.backgroundColor = R.color.whitecolor()
+            fourthButton.backgroundColor = R.color.whitecolor()
         } else {
-            secondButton.backgroundColor = R.color.whiteColor()
+            secondButton.backgroundColor = R.color.whitecolor()
         }
         delegate?.secondButtonSelected(secondButton.isSelected)
     }
@@ -116,15 +116,15 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     func thirdAction() {
         thirdButton.isSelected.toggle()
         if thirdButton.isSelected {
-            thirdButton.backgroundColor = R.color.themeColor()
+            thirdButton.backgroundColor = R.color.themecolor()
             secondButton.isSelected = false
             firstButton.isSelected = false
             fourthButton.isSelected = false
-            secondButton.backgroundColor = R.color.whiteColor()
-            firstButton.backgroundColor = R.color.whiteColor()
-            fourthButton.backgroundColor = R.color.whiteColor()
+            secondButton.backgroundColor = R.color.whitecolor()
+            firstButton.backgroundColor = R.color.whitecolor()
+            fourthButton.backgroundColor = R.color.whitecolor()
         } else {
-            thirdButton.backgroundColor = R.color.whiteColor()
+            thirdButton.backgroundColor = R.color.whitecolor()
         }
         delegate?.thirdButtonSelected(thirdButton.isSelected)
     }
@@ -133,21 +133,21 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     func fourthAction() {
         fourthButton.isSelected.toggle()
         if fourthButton.isSelected {
-            fourthButton.backgroundColor = R.color.themeColor()
+            fourthButton.backgroundColor = R.color.themecolor()
             secondButton.isSelected = false
             thirdButton.isSelected = false
             firstButton.isSelected = false
-            secondButton.backgroundColor = R.color.whiteColor()
-            thirdButton.backgroundColor = R.color.whiteColor()
-            firstButton.backgroundColor = R.color.whiteColor()
+            secondButton.backgroundColor = R.color.whitecolor()
+            thirdButton.backgroundColor = R.color.whitecolor()
+            firstButton.backgroundColor = R.color.whitecolor()
         } else {
-            fourthButton.backgroundColor = R.color.whiteColor()
+            fourthButton.backgroundColor = R.color.whitecolor()
         }
         delegate?.fourthButtonSelected(fourthButton.isSelected)
     }
 
     func initializeView() {
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         selectionStyle = .none
         contentView.addSubview(nameLabel)
         contentView.addSubview(firstButton)
@@ -208,9 +208,9 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     lazy var firstButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .selected)
-        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.setTitleColor(R.color.themecolor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .selected)
+        button.layer.borderColor = R.color.themecolor()!.cgColor
         button.layer.borderWidth = 1 / kScale
         button.layer.cornerRadius = 4
         return button
@@ -219,9 +219,9 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     lazy var secondButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .selected)
-        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.setTitleColor(R.color.themecolor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .selected)
+        button.layer.borderColor = R.color.themecolor()!.cgColor
         button.layer.borderWidth = 1 / kScale
         button.layer.cornerRadius = 4
         return button
@@ -230,9 +230,9 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     lazy var thirdButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .selected)
-        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.setTitleColor(R.color.themecolor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .selected)
+        button.layer.borderColor = R.color.themecolor()!.cgColor
         button.layer.borderWidth = 1 / kScale
         button.layer.cornerRadius = 4
         return button
@@ -241,9 +241,9 @@ class FaceUploadRoleSelectCell: UITableViewCell {
     lazy var fourthButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k12Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .selected)
-        button.layer.borderColor = R.color.themeColor()!.cgColor
+        button.setTitleColor(R.color.themecolor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .selected)
+        button.layer.borderColor = R.color.themecolor()!.cgColor
         button.layer.borderWidth = 1 / kScale
         button.layer.cornerRadius = 4
         return button

@@ -52,9 +52,7 @@ class FaceListViewController: BaseViewController {
         PermissionManager.permissionRequest(.camera) { [weak self] authorized in
             guard let self = self else { return }
             if authorized {
-                // MARK: - APP侧上传人脸增加关系（不含APP侧提示是否同步本人以外的人脸）
                 self.isSyncFaceImage()
-//                self.showFaceImageVC()
             } else {
                 PermissionManager.shared.go2Setting(.camera)
             }
@@ -67,6 +65,10 @@ class FaceListViewController: BaseViewController {
             if !unitIDs.isEmpty, unitIDs.contains(unitID) {
                 self.showFaceImageVC()
             } else {
+                var newUnitIDs = Array<String>()
+                newUnitIDs.append(contentsOf: unitIDs)
+                newUnitIDs.append(unitID)
+                ud.unitIDsOfShownSyncFaceImageNotification = newUnitIDs
                 self.getExtrasFaceFile()
             }
         } else {
@@ -152,7 +154,7 @@ class FaceListViewController: BaseViewController {
         let view = CommonHeaderView.init()
         view.titleLabel.textColor = R.color.text_title()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         return view
     }()
 
@@ -167,8 +169,8 @@ class FaceListViewController: BaseViewController {
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加人脸照片", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
         button.addTarget(self, action: #selector(addFaceImage), for: .touchUpInside)
         button.layer.cornerRadius = 20.0
         return button

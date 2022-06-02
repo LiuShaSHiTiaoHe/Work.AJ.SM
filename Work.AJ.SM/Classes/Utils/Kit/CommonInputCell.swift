@@ -53,7 +53,7 @@ class CommonInputCell: UITableViewCell {
 
     private func initializeView() {
         selectionStyle = .none
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         contentView.addSubview(nameLabel)
         contentView.addSubview(commonInput)
         contentView.addSubview(errorMsg)

@@ -36,7 +36,7 @@ class ResetPasswordView: UIView {
         let view = UILabel.init()
         view.text = "重置密码"
         view.font = k16Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         view.textAlignment = .center
         return view
     }()
@@ -44,8 +44,8 @@ class ResetPasswordView: UIView {
     lazy var inputContentView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        view.backgroundColor = R.color.whiteColor()
-        view.jk.addShadow(shadowColor: R.color.themeColor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
+        view.backgroundColor = R.color.whitecolor()
+        view.jk.addShadow(shadowColor: R.color.themecolor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
         return view
     }()
 
@@ -67,9 +67,9 @@ class ResetPasswordView: UIView {
     lazy var comfirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("重置密码", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.titleLabel?.font = k18Font
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(confirmButtonAction), for: .touchUpInside)
         return button
