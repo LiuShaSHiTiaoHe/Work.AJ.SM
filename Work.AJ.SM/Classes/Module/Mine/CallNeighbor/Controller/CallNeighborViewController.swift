@@ -34,6 +34,7 @@ class CallNeighborViewController: BaseViewController {
     }
 
     func startCall(_ number: String, _ lockMac: String, _ name: String) {
+        //MARK: - 发送推送
         GDataManager.shared.sendVideoCallNotification(number)
         let vc = VideoChatViewController.init(startCall: number)
         vc.name = name
