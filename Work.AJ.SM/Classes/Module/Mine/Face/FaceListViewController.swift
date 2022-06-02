@@ -53,8 +53,8 @@ class FaceListViewController: BaseViewController {
             guard let self = self else { return }
             if authorized {
                 // MARK: - APP侧上传人脸增加关系（不含APP侧提示是否同步本人以外的人脸）
-//                self.isSyncFaceImage()
-                self.showFaceImageVC()
+                self.isSyncFaceImage()
+//                self.showFaceImageVC()
             } else {
                 PermissionManager.shared.go2Setting(.camera)
             }

@@ -148,6 +148,13 @@ class MineRepository: NSObject {
                     $0.name != MineModuleType.contactProperty.rawValue
                 }
             }
+            //MARK: - 是否支持开门设置
+            if !HomeRepository.shared.isOpenDoorSettingEnable(unit) {
+                allModules = allModules.filter {
+                    $0.name != MineModuleType.opendoorSetting.rawValue
+                }
+            }
+            
             // MARK: - 暂时不支持激活蓝牙卡
             allModules = allModules.filter {
                 $0.name != MineModuleType.activateCard.rawValue

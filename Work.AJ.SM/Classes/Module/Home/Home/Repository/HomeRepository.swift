@@ -437,6 +437,14 @@ extension HomeRepository {
         }
         return false
     }
+    
+    //MARK: - 开门设置是否支持
+    func isOpenDoorSettingEnable(_ unit: UnitModel) -> Bool {
+        if let myset6 = unit.myset6, myset6 == "T" {
+            return true
+        }
+        return false
+    }
 
     // MARK: - 访客记录是否支持
     func isVisitorRecordEnable(_ unit: UnitModel) -> Bool {
