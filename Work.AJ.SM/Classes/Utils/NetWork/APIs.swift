@@ -11,6 +11,7 @@ import Foundation
 let isProduction = true
 
 let host = isProduction ? "http://120.27.237.7:9393/" : "http://47.111.8.231:9091/"
+
 let servicePath = "hxcloudplus/"
 
 final class APIs {       

@@ -5,13 +5,13 @@
 import Foundation
 
 struct CommonPushModel {
-    /*
-    pushFor           1               2
-    alias            userId       deviceId
-     */
+
+    //别名（根据aliasType传入对应的值）
     var alias: String = ""
+    //aliasType1：userId； 2：deviceId；3：mobile
     var aliasType: String = ""
-    var pushFor: String = "" //1：app； 2：device
+    //1：app； 2：device
+    var pushFor: String = ""
     /*
     推送类型（默认推送双端，单端暂不支持。双端推送有一个成功即返回成功，同理，APP推送时极光或阿里推送成功即返回成功）
     pushType 1：通知 2：离线消息 3:通知&离线消息 4:Android通知 5:IOS通知 6:Android离线消息 7:IOS离线消息 8:Android通知&离线消息 9:IOS通知&离线消息

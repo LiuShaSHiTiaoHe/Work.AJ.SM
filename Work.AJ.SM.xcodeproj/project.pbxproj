@@ -243,6 +243,7 @@
 		41E7D8E127EDB7B300241706 /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */; };
 		41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E427F2947A00241706 /* BaseChatView.swift */; };
 		683D0AB07C53C0CF59FA8F70 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */; };
+		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -507,6 +508,7 @@
 		41E7D8DB27ED70F700241706 /* AudioChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8E027EDB7B300241706 /* VideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
 		41E7D8E427F2947A00241706 /* BaseChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatView.swift; sourceTree = "<group>"; };
+		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -1822,6 +1824,7 @@
 		41E7D8CA27ED50EB00241706 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				68D8F82F28409EE200D68FC6 /* videocall.aiff */,
 				41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */,
 				41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */,
 				41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */,
@@ -2013,6 +2016,7 @@
 				41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */,
 				41E7D8D727ED50EB00241706 /* message.wav in Resources */,
 				416F2E0B279BAF67004E5AD9 /* LaunchScreen.storyboard in Resources */,
+				68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */,
 				41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */,
 				41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */,
 				416F2E08279BAF67004E5AD9 /* Assets.xcassets in Resources */,
