@@ -30,7 +30,6 @@ extension AppDelegate {
         GDataManager.shared.setupKeyChain()
         GDataManager.shared.setupDataBase()
         GDataManager.shared.pushSetAlias()
-        UIApplication.shared.applicationIconBadgeNumber = 0
         setuplibs()
     }
 

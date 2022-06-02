@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerNotification(application, launchOptions)
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
 
 }
 
