@@ -52,7 +52,9 @@ class FaceListViewController: BaseViewController {
         PermissionManager.permissionRequest(.camera) { [weak self] authorized in
             guard let self = self else { return }
             if authorized {
-                self.isSyncFaceImage()
+                //FIXME: - 放开，方便测试
+//                self.isSyncFaceImage()
+                self.getExtrasFaceFile()
             } else {
                 PermissionManager.shared.go2Setting(.camera)
             }

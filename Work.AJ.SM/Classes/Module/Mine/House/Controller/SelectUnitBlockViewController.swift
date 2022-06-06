@@ -69,8 +69,16 @@ class SelectUnitBlockViewController: BaseViewController {
         locationIndexTips.isUserInteractionEnabled = true
         locationIndexTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
         
-        CommonAPI.amapLocation(key: kAmapKey).defaultRequest { jsonData in
-            self.cityName = "南京"
+        CommonAPI.amapLocation(key: kAmapKey).otherRequest { jsonData in
+            if let city = jsonData["city"].string {
+                if city.hasSuffix("市"){
+                    self.cityName = city.jk.removeSomeStringUseSomeString(removeString: "市")
+                } else {
+                    self.cityName = city
+                }
+            } else {
+                self.cityName = "南京"
+            }
         } failureCallback: { response in
             self.cityName = "南京"
         }
@@ -80,7 +88,7 @@ class SelectUnitBlockViewController: BaseViewController {
         if let cityName = cityName {
             SVProgressHUD.show()
             MineRepository.shared.getCommunityWithCityName(cityName) { [weak self] models in
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(withDelay: 1)
                 guard let `self` = self else {
                     return
                 }
@@ -103,7 +111,6 @@ class SelectUnitBlockViewController: BaseViewController {
                     DispatchQueue.main.asyncAfter(deadline: .now()+1) {
                         self.leftTableView.scroll(row: index)
                     }
-
                     self.getBlocksData()
                 } else {
                     self.rightTableView.reloadData()
@@ -114,7 +121,9 @@ class SelectUnitBlockViewController: BaseViewController {
 
     func getBlocksData() {
         if let selectedCommunity = selectedCommunity, let communityID = selectedCommunity.rid?.jk.intToString {
+            SVProgressHUD.show()
             MineRepository.shared.getBlocksWithCommunityID(communityID) { [weak self] models in
+                SVProgressHUD.dismiss(withDelay: 1)
                 guard let `self` = self else {
                     return
                 }
@@ -127,7 +136,9 @@ class SelectUnitBlockViewController: BaseViewController {
     }
 
     func getUserCellData(_ blockID: String) {
+        SVProgressHUD.show()
         MineRepository.shared.getCellsWithBlockID(blockID) { [weak self] models in
+            SVProgressHUD.dismiss(withDelay: 1)
             guard let `self` = self else {
                 return
             }
@@ -145,7 +156,9 @@ class SelectUnitBlockViewController: BaseViewController {
     }
 
     func getUserUnitInCell(_ blockID: String, _ cellID: String) {
+        SVProgressHUD.show()
         MineRepository.shared.getUnitWithBlockIDAndCellID(blockID, cellID) { [weak self] models in
+            SVProgressHUD.dismiss(withDelay: 1)
             guard let `self` = self else {
                 return
             }
