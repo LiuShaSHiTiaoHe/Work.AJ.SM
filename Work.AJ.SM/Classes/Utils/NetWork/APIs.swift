@@ -7,16 +7,14 @@
 
 import Foundation
 
-// MARK: - 标记是否是生产环境。服务器地址，JPush等
-let isProduction = true
+// MARK: - 测试地址  "http://47.111.8.231:9091/"
+// MARK: - 线上地址  "http://120.27.237.7:9393/"
 
-let host = isProduction ? "http://120.27.237.7:9393/" : "http://47.111.8.231:9091/"
-
-let servicePath = "hxcloudplus/"
+func ApiBaseUrl() -> String {
+    return ud.appHost + ud.appServicePath
+}
 
 final class APIs {       
-    
-    static let baseUrl = host + servicePath
     
     // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"

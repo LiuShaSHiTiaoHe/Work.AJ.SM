@@ -31,7 +31,7 @@ class AdsModel: Mappable {
     var imageurl: String {
         get {
             if let picurl = picurl, !picurl.isEmpty {
-                return APIs.baseUrl + picurl
+                return ApiBaseUrl() + picurl
             }
             return ""
         }

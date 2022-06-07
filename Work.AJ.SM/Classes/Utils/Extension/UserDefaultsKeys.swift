@@ -78,4 +78,13 @@ extension DefaultsKeys {
     var unitIDsOfShownSyncFaceImageNotification: DefaultsKey<Array<String>> {
         .init("showSyncFaceImageNotification", defaultValue: [])
     }
+    
+    // MARK: - 配置信息
+    var appHost: DefaultsKey<String> {
+        .init("appHost", defaultValue: "http://120.27.237.7:9393/")
+    }
+    
+    var appServicePath: DefaultsKey<String> {
+        .init("appServicePath", defaultValue: "hxcloudplus/")
+    }
 }

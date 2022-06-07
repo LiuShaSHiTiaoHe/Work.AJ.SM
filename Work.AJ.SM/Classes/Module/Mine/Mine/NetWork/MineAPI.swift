@@ -41,7 +41,7 @@ enum MineAPI {
 
 extension MineAPI: TargetType {
     var baseURL: URL {
-        return URL(string: APIs.baseUrl)!
+        return URL(string: ApiBaseUrl())!
     }
 
     var path: String {

@@ -40,6 +40,10 @@ class HomeViewController: BaseViewController {
         loadUnitData()
     }
 
+    override func emptyViewRefresh() {
+        loadUnitData()
+    }
+    
     @objc
     func currentUnitChanged() {
         loadUnitData()

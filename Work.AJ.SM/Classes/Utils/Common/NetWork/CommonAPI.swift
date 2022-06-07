@@ -20,7 +20,7 @@ extension CommonAPI: TargetType {
         case .amapLocation:
             return URL.init(string: "https://restapi.amap.com/")!
         case .commonPush:
-            return URL(string: APIs.baseUrl)!
+            return URL(string: ApiBaseUrl())!
         }
     }
 

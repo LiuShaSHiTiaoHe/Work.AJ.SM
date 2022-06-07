@@ -74,7 +74,13 @@ class GDataManager: NSObject {
 
     // MARK: - JPUSH
     func setupPush(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: isProduction)
+        #if DEBUG
+        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: false)
+        logger.info("JPUSH APS DEBUG")
+        #else
+        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: true)
+        logger.info("JPUSH APS PRODUCTION")
+        #endif
         JPUSHService.setLogOFF()
         JPUSHService.registrationIDCompletionHandler { resCode, registrationID in
             if let registrationID = registrationID {

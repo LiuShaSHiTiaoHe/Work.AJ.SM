@@ -8,7 +8,7 @@
 import Foundation
 extension String {
     func ajImageUrl() -> String {
-        return host + "images/" + self
+        return ud.appHost + "images/" + self
     }
     
     public var aj_isMobileNumber: Bool {

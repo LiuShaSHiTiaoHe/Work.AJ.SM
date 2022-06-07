@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JKSwiftExtension
 
 enum EmptyDataType: String {
     case nodata = "暂无数据"
@@ -21,26 +22,22 @@ class NoDataView: BaseView {
                 switch viewType {
                 case .nodata:
                     button.isHidden = true
+                    //FIXME: - 暂时隐藏刷新按钮
+                    refreshButton.isHidden = true
                 case .nohouse:
                     button.isHidden = false
+                    refreshButton.isHidden = false
                 }
             }
         }
     }
-
-//    override func initData() {
-//        button.addTarget(self, action: #selector(emptyViewAddHouse), for: .touchUpInside)
-//    }
-//
-//    @objc private func emptyViewAddHouse() {
-//        NotificationCenter.default.post(name: .kUserAddNewHouse, object: nil)
-//    }
 
     override func initializeView() {
         backgroundColor = R.color.bg()
         addSubview(imageView)
         addSubview(label)
         addSubview(button)
+        addSubview(refreshButton)
 
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -62,6 +59,13 @@ class NoDataView: BaseView {
             make.width.equalTo(200)
             make.top.equalTo(label.snp.bottom).offset(kMargin)
         }
+        
+        refreshButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(40)
+            make.width.equalTo(200)
+            make.top.equalTo(button.snp.bottom).offset(kMargin)
+        }
     }
 
     lazy var imageView: UIImageView = {
@@ -81,7 +85,20 @@ class NoDataView: BaseView {
 
     lazy var button: UIButton = {
         let button = UIButton.init(type: .custom)
+        button.setImage(R.image.base_btn_add(), for: .normal)
+        button.jk.setImageTitleLayout(.imgRight, spacing: kMargin/2)
         button.setTitle("添加房屋", for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
+        button.layer.cornerRadius = 20.0
+        return button
+    }()
+    
+    lazy var refreshButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(R.image.base_btn_refresh(), for: .normal)
+        button.jk.setImageTitleLayout(.imgRight, spacing: kMargin/2)
+        button.setTitle("重新加载", for: .normal)
         button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.backgroundColor = R.color.themecolor()
         button.layer.cornerRadius = 20.0

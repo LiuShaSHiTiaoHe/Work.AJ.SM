@@ -85,8 +85,9 @@ class BaseViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
-
     }
+    // MARK: - 重新加载数据
+    @objc func emptyViewRefresh() {}
 }
 
 // MARK: - EmptyView
@@ -94,6 +95,7 @@ extension BaseViewController {
     func showNoDataView(_ type: EmptyDataType = .nodata, _ constraintView: UIView? = nil) {
         let noDataView = NoDataView()
         noDataView.button.addTarget(self, action: #selector(go2AddNewHouseView), for: .touchUpInside)
+        noDataView.refreshButton.addTarget(self, action: #selector(emptyViewRefresh), for: .touchUpInside)
         noDataView.viewType = type
         noDataView.tag = noDataViewTag
         view.addSubview(noDataView)
