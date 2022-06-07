@@ -41,7 +41,7 @@ class HomeRepository {
          房屋状态：
          待审核 P, 失效 H, 过期 E, 正常 N
          */
-        HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .ignoreCache, showError: true) { [weak self] models, response in
+        HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             guard let `self` = self else {
                 return
             }
@@ -84,41 +84,6 @@ class HomeRepository {
             completion(homeModuleArray, adsArray, noticeArray, .Unknown)
         }
     }
-
-//    func allUnits(completion: @escaping HomeModulesCompletion) {
-//        SVProgressHUD.show()
-//        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .cacheThenNetwork, showError: true) { [weak self] models, response in
-//            SVProgressHUD.dismiss()
-//            guard let `self` = self else {
-//                return
-//            }
-//            guard models.count > 0 else {
-//                return
-//            }
-//            RealmTools.addList(models, update: .all) {
-//                logger.info("update done")
-//            }
-//            if let currentUnitID = Defaults.currentUnitID {
-//                if let unit = models.first(where: { model in
-//                    model.unitid == currentUnitID
-//                }) {
-//                    completion(self.filterHomePageModules(unit))
-//                }
-//            } else {
-//                if let firstUnit = models.first(where: { model in
-//                    model.state == "N"
-//                }), let unitID = firstUnit.unitid {
-//                    Defaults.currentUnitID = unitID
-//                    completion(self.filterHomePageModules(firstUnit))
-//                } else {
-//                    completion([])
-//                }
-//            }
-//        } failureCallback: { response in
-//            logger.info("\(response.message)")
-//            completion([])
-//        }
-//    }
 
     func adsAndNotice(completion: @escaping HomeAdsAndNoticeCompletion) {
         var adsData: [AdsModel] = []
