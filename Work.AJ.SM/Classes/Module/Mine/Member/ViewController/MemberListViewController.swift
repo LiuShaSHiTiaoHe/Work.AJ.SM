@@ -16,8 +16,8 @@ class MemberListViewController: BaseViewController {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "房屋成员"
-        view.titleLabel.textColor = R.color.maintextColor()
-        view.backgroundColor = R.color.whiteColor()
+        view.titleLabel.textColor = R.color.text_title()
+        view.backgroundColor = R.color.whitecolor()
         return view
     }()
 
@@ -30,15 +30,15 @@ class MemberListViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(MemberListCell.self, forCellReuseIdentifier: MemberListCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加家人/成员", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
         button.addTarget(self, action: #selector(addMemberAction), for: .touchUpInside)
         button.layer.cornerRadius = 20.0
         return button
@@ -56,7 +56,7 @@ class MemberListViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)
@@ -92,8 +92,6 @@ class MemberListViewController: BaseViewController {
             guard let `self` = self else {
                 return
             }
-            // FIXME: - 这个过滤暂时不需要
-//            self.dataSource = members.filter{$0.userType != "R"}
             self.dataSource = members
             self.tableView.reloadData()
         }

@@ -13,40 +13,124 @@ class FaceListViewController: BaseViewController {
     private var dataSource: [FaceModel] = []
     private var faceImage: UIImage?
 
-    lazy var headerView: CommonHeaderView = {
-        let view = CommonHeaderView.init()
-        view.titleLabel.textColor = R.color.maintextColor()
-        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
-        return view
-    }()
-
-    lazy var tableView: UITableView = {
-        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
-        view.register(FaceTableViewCell.self, forCellReuseIdentifier: FaceTableViewCellIdentifier)
-        view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
-        return view
-    }()
-
-    lazy var addButton: UIButton = {
-        let button = UIButton.init(type: .custom)
-        button.setTitle("添加人脸照片", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
-        button.addTarget(self, action: #selector(addFaceImage), for: .touchUpInside)
-        button.layer.cornerRadius = 20.0
-        return button
-    }()
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.  
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
+    }
+    
+    override func initData() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        headerView.titleLabel.text = "人脸认证"
+    }
+
+    private func reloadData() {
+        if !needReloadData {
+            return
+        }
+        MineRepository.shared.getFaceList { [weak self] faces in
+            guard let `self` = self else {
+                return
+            }
+            if faces.isEmpty {
+                self.dataSource.removeAll()
+                SVProgressHUD.showInfo(withStatus: "暂无数据")
+            } else {
+                self.dataSource = faces
+            }
+            self.tableView.reloadData()
+        }
+    }
+
+    @objc
+    func addFaceImage() {
+        PermissionManager.permissionRequest(.camera) { [weak self] authorized in
+            guard let self = self else { return }
+            if authorized {
+                self.isSyncFaceImage()
+            } else {
+                PermissionManager.shared.go2Setting(.camera)
+            }
+        }
+    }
+
+    private func isSyncFaceImage() {
+        let unitIDs = ud.unitIDsOfShownSyncFaceImageNotification
+        if let unit = HomeRepository.shared.getCurrentUnit(),  let unitID = unit.unitid?.jk.intToString {
+            if !unitIDs.isEmpty, unitIDs.contains(unitID) {
+                self.showFaceImageVC()
+            } else {
+                var newUnitIDs = Array<String>()
+                newUnitIDs.append(contentsOf: unitIDs)
+                newUnitIDs.append(unitID)
+                ud.unitIDsOfShownSyncFaceImageNotification = newUnitIDs
+                self.getExtrasFaceFile()
+            }
+        } else {
+            SVProgressHUD.showError(withStatus: "数据错误")
+            SVProgressHUD.dismiss(withDelay: 2) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    private func showFaceImageVC() {
+        let vc = FaceImageViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    private func go2ConfirmFaceImageVC(_ faceImage: UIImage) {
+        let vc = ConfirmFaceImageViewController()
+        vc.faceImage = faceImage
+        pushTo(viewController: vc)
+    }
+
+    func getExtrasFaceFile() {
+        SVProgressHUD.show()
+        MineRepository.shared.getExtraFace { [weak self] models in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            let data = models.filter{ $0.isValid == "1"}
+            if data.count > 0 {
+                let unitName = HomeRepository.shared.getCurrentHouseName()
+                let alert = UIAlertController.init(title: "人脸图片同步提醒", message: "您在其他房屋已上传\(data.count)张人脸图片，是否同步至\(unitName)", preferredStyle: .alert)
+                alert.addAction(action: .init(title: "需要", style: .destructive, handler: { action in
+                    self.syncExtrasFaceFile()
+                })).addAction("不需要", .cancel) {
+                    self.showFaceImageVC()
+                }
+                alert.show()
+            }else{
+                self.showFaceImageVC()
+            }
+        }
+    }
+    
+    func syncExtrasFaceFile() {
+        SVProgressHUD.show()
+        MineRepository.shared.syncExtraFace { [weak self] errorMsg in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            if errorMsg.isEmpty {
+                SVProgressHUD.showSuccess(withStatus: "同步成功")
+                SVProgressHUD.dismiss(withDelay: 2) {
+                    self.reloadData()
+                }
+            }else{
+                SVProgressHUD.showError(withStatus: errorMsg)
+            }
+        }
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)
@@ -65,74 +149,32 @@ class FaceListViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-kMargin)
         }
     }
-
-    override func initData() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
-        headerView.titleLabel.text = "人脸认证"
-        reloadData()
-    }
-
-    private func reloadData() {
-        MineRepository.shared.getFaceList { [weak self] faces in
-            guard let `self` = self else {
-                return
-            }
-            if faces.isEmpty {
-                self.dataSource.removeAll()
-                SVProgressHUD.showInfo(withStatus: "暂无数据")
-            } else {
-                self.dataSource = faces
-            }
-            self.tableView.reloadData()
-        }
-    }
-
-    @objc
-    func addFaceImage() {
-        getExtralFaceFile()
-    }
     
-    func getExtralFaceFile() {
-        SVProgressHUD.show()
-        MineRepository.shared.getExtralFace { [weak self] models in
-            SVProgressHUD.dismiss()
-            guard let self = self else { return }
-            let data = models.filter{ $0.isValid == "1"}
-            if data.count > 0 {
-                let unitName = HomeRepository.shared.getCurrentHouseName()
-                let alert = UIAlertController.init(title: "人脸图片同步提醒", message: "您在其他小区已上传\(data.count)张人脸图片，是否同步至\(unitName)", preferredStyle: .alert)
-                alert.addAction(action: .init(title: "确定", style: .destructive, handler: { action in
-                    self.syncExtralFaceFile()
-                })).addAction("取消", .cancel) {
-                    let vc = FaceImageViewController()
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                alert.show()
-            }else{
-                let vc = FaceImageViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
-    }
-    
-    func syncExtralFaceFile() {
-        SVProgressHUD.show()
-        MineRepository.shared.syncExtralFace { [weak self] errorMsg in
-            SVProgressHUD.dismiss()
-            guard let self = self else { return }
-            if errorMsg.isEmpty {
-                SVProgressHUD.showSuccess(withStatus: "同步成功")
-                SVProgressHUD.dismiss(withDelay: 2) {
-                    self.reloadData()
-                }
-            }else{
-                SVProgressHUD.showError(withStatus: errorMsg)
-            }
-        }
-    }
+    lazy var headerView: CommonHeaderView = {
+        let view = CommonHeaderView.init()
+        view.titleLabel.textColor = R.color.text_title()
+        view.closeButton.setImage(R.image.common_back_black(), for: .normal)
+        view.backgroundColor = R.color.whitecolor()
+        return view
+    }()
 
+    lazy var tableView: UITableView = {
+        let view = UITableView.init(frame: CGRect.zero, style: .grouped)
+        view.register(FaceTableViewCell.self, forCellReuseIdentifier: FaceTableViewCellIdentifier)
+        view.separatorStyle = .none
+        view.backgroundColor = R.color.bg()
+        return view
+    }()
+
+    lazy var addButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setTitle("添加人脸照片", for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
+        button.addTarget(self, action: #selector(addFaceImage), for: .touchUpInside)
+        button.layer.cornerRadius = 20.0
+        return button
+    }()
 }
 
 extension FaceListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -181,3 +223,13 @@ extension FaceListViewController: FaceTableViewCellDelegate {
     }
 }
 
+extension FaceListViewController: FaceImageViewControllerDelegate {
+
+    func faceImageCompleted(_ image: UIImage, _ faceImageVC: FaceImageViewController) {
+        self.needReloadData = false
+        faceImageVC.dismiss(animated: true) {
+            self.needReloadData = true
+            self.go2ConfirmFaceImageVC(image)
+        }
+    }
+}

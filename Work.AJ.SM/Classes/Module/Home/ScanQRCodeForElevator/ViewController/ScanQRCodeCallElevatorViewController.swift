@@ -11,10 +11,10 @@ import SVProgressHUD
 
 class ScanQRCodeCallElevatorViewController: LBXScanViewController {
 
-    private let symbolSeperator = "sn=" //"?C="
+    private let symbolSeparator = "sn=" //"?C="
     private var isOpenFlash: Bool = false
     
-    lazy var bottonFuncView: UIView = {
+    lazy var buttonFuncView: UIView = {
         let view = UIView()
         return view
     }()
@@ -35,14 +35,12 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
         view.titleLabel.text = "扫描二维码"
-        view.titleLabel.textColor = R.color.whiteColor()
+        view.titleLabel.textColor = R.color.whitecolor()
         view.lineView.isHidden = true
         view.backgroundColor = .clear
         return view
     }()
-    
-   
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,8 +58,8 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
     override func handleCodeResult(arrayResult: [LBXScanResult]) {
         let result: LBXScanResult = arrayResult[0]
         if let qrString = result.strScanned {
-            if qrString.contains(symbolSeperator) {
-                let StrArray = qrString.components(separatedBy: symbolSeperator)
+            if qrString.contains(symbolSeparator) {
+                let StrArray = qrString.components(separatedBy: symbolSeparator)
                 if StrArray.count > 1, let SNCode = StrArray.last {
                     let vc = ScanQRCodeSelectElevatorViewController()
                     vc.SNCode = SNCode
@@ -76,8 +74,6 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
             SVProgressHUD.showInfo(withStatus: "扫描结果不符合要求")
         }
     }
-    
-    
     
     func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
@@ -107,7 +103,7 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
         scanStyle?.color_NotRecoginitonArea = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.4)
         scanStyle?.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Inner
         scanStyle?.colorRetangleLine = .clear
-        scanStyle?.colorAngle = R.color.whiteColor()!
+        scanStyle?.colorAngle = R.color.whitecolor()!
         scanStyle?.photoframeLineW = 2.0
         scanStyle?.photoframeAngleW = 16
         scanStyle?.photoframeAngleH = 16
@@ -117,19 +113,18 @@ class ScanQRCodeCallElevatorViewController: LBXScanViewController {
     
     func initUI() {
         view.addSubview(headerView)
-        view.addSubview(bottonFuncView)
-        bottonFuncView.addSubview(photoLibraryButton)
-        bottonFuncView.addSubview(flashButton)
-        
+        view.addSubview(buttonFuncView)
+        buttonFuncView.addSubview(photoLibraryButton)
+        buttonFuncView.addSubview(flashButton)
         view.bringSubviewToFront(headerView)
-        view.bringSubviewToFront(bottonFuncView)
+        view.bringSubviewToFront(buttonFuncView)
 
         headerView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
             make.height.equalTo(kTitleAndStateHeight)
         }
         
-        bottonFuncView.snp.makeConstraints { make in
+        buttonFuncView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(100)
             make.bottom.equalToSuperview().offset(-50)

@@ -14,7 +14,7 @@ class TimeSelectCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .left
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -22,7 +22,7 @@ class TimeSelectCell: UITableViewCell {
     
     lazy var timeLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.font = k12Font
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
@@ -46,7 +46,7 @@ class TimeSelectCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         
         contentView.addSubview(nameLabel)
         contentView.addSubview(timeLabel)

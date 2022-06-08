@@ -277,10 +277,10 @@ extension UserProfileViewController: YPImagePickerDelegate {
         config.showsPhotoFilters = false
         config.wordings.next = "完成"
         //colors
-        config.colors.tintColor = R.color.blackColor()!
-        config.colors.defaultNavigationBarColor = R.color.themeColor()!
-        config.colors.bottomMenuItemSelectedTextColor = R.color.themeColor()!
-        config.colors.bottomMenuItemUnselectedTextColor = R.color.blackColor()!
+        config.colors.tintColor = R.color.blackcolor()!
+        config.colors.defaultNavigationBarColor = R.color.themecolor()!
+        config.colors.bottomMenuItemSelectedTextColor = R.color.themecolor()!
+        config.colors.bottomMenuItemUnselectedTextColor = R.color.blackcolor()!
         
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self
@@ -377,16 +377,16 @@ extension UserProfileViewController {
         let datePickerManager = PGDatePickManager.init()
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
-        datePickerManager.cancelButtonTextColor = R.color.errorRedColor()
-        datePickerManager.confirmButtonTextColor = R.color.themeColor()
+        datePickerManager.cancelButtonTextColor = R.color.sub_red()
+        datePickerManager.confirmButtonTextColor = R.color.themecolor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line
         datePicker?.datePickerMode = .date
         datePicker?.language = "zh-Hans"
         datePickerManager.title = "生日"
-        datePicker?.textColorOfSelectedRow = R.color.themeColor()
+        datePicker?.textColorOfSelectedRow = R.color.themecolor()
         datePicker?.textFontOfSelectedRow = k18Font
-        datePicker?.lineBackgroundColor = R.color.themeColor()
+        datePicker?.lineBackgroundColor = R.color.themecolor()
         datePicker?.maximumDate = Date()
         datePicker?.selectedDate = {[weak self] dateComponents in
             guard let `self` = self else { return }

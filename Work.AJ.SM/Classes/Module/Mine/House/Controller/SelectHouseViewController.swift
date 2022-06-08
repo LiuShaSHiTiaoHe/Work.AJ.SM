@@ -21,7 +21,7 @@ class SelectHouseViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
@@ -41,12 +41,12 @@ class SelectHouseViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(kOriginTitleAndStateHeight)
+            make.height.equalTo(kTitleAndStateHeight)
         }
 
         tableView.snp.makeConstraints { make in

@@ -9,8 +9,14 @@ import UIKit
 import SVProgressHUD
 import YPImagePicker
 
-class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDelegate {
+protocol FaceImageViewControllerDelegate: NSObjectProtocol {
+    func faceImageCompleted(_ image: UIImage, _ faceImageVC: FaceImageViewController)
+}
 
+class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDelegate {
+    
+    weak var delegate: FaceImageViewControllerDelegate?
+    
     lazy var cancelButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setImage(R.image.face_icon_cancel(), for: .normal)
@@ -51,8 +57,9 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
         cameraButton.isEnabled = false
     }
 
+    // MARK: - UI
     private func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(cancelButton)
         view.addSubview(swicthButton)
         view.addSubview(cameraButton)
@@ -87,7 +94,7 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
 
     @objc
     func cancelAction() {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
 
     @objc
@@ -106,22 +113,17 @@ class FaceImageViewController: SwiftyCamViewController, UINavigationControllerDe
     }
 
     func confirmFaceImage(_ image: UIImage) {
-        SVProgressHUD.show()
-        let vc = ConfirmFaceImageViewController()
         var fixImage = image
         if let cgImage = fixImage.cgImage {
             if fixImage.imageOrientation == .leftMirrored {
                 fixImage = UIImage(cgImage: cgImage, scale: fixImage.scale, orientation: .right)
             }
-        } else {
-            SVProgressHUD.showInfo(withStatus: "图片数据错误")
-        }
-
-        if let imageData = fixImage.jk.fixOrientation().pngData() {
-            SVProgressHUD.dismiss()
-            CacheManager.network.removeCacheWithKey(FaceImageCacheKey)
-            CacheManager.network.saveCacheWithDictionary([FaceImageCacheKey: imageData], key: FaceImageCacheKey)
-            navigationController?.pushViewController(vc, animated: true)
+            fixImage = fixImage.jk.fixOrientation()
+            if let compressedImageData = fixImage.jk.compress(), let compressedImage = UIImage.init(data: compressedImageData) {
+                delegate?.faceImageCompleted(compressedImage, self)
+            } else {
+                delegate?.faceImageCompleted(fixImage, self)
+            }
         } else {
             SVProgressHUD.showInfo(withStatus: "图片数据错误")
         }
@@ -190,7 +192,7 @@ extension FaceImageViewController: YPImagePickerDelegate {
         config.showsPhotoFilters = false
         config.wordings.next = "完成"
         //colors
-        config.colors.tintColor = R.color.blackColor()!
+        config.colors.tintColor = R.color.blackcolor()!
         
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self
@@ -201,13 +203,11 @@ extension FaceImageViewController: YPImagePickerDelegate {
             if cancelled {
                 picker.dismiss(animated: true)
             }else{
-                SVProgressHUD.show()
                 if let image = items.singlePhoto?.image {
                     switch self.detect(image) {
                     case 0:
                         SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
                     case 1:
-                        SVProgressHUD.dismiss()
                         picker.dismiss(animated: true) {
                             self.confirmFaceImage(image)
                         }

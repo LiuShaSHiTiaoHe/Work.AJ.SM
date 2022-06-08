@@ -78,7 +78,7 @@ class SelectUnitCityViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
 
         view.addSubview(headerView)
         view.addSubview(searchView)
@@ -104,10 +104,10 @@ class SelectUnitCityViewController: BaseViewController {
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "选择城市"
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         return view
     }()
 
@@ -208,8 +208,9 @@ extension SelectUnitCityViewController: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        isSearch = false
-        tableVeiw.reloadData()
+        if !isSearch {
+            tableVeiw.reloadData()
+        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

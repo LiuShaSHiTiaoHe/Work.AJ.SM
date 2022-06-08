@@ -7,15 +7,15 @@
 
 import Foundation
 
-// MARK: - 标记是否是生产环境。服务器地址，JPush等
-let isProduction = true
+// MARK: - 测试地址  "http://47.111.8.231:9091/"
+// MARK: - 线上地址  "http://120.27.237.7:9393/"
 
-let host = isProduction ? "http://120.27.237.7:9393/" : "http://47.111.8.231:9091/"
-let servicePath = "hxcloudplus/"
+func ApiBaseUrl() -> String {
+    return ud.appHost + ud.appServicePath
+}
 
-final class APIs {
-
-    static let baseUrl = host + servicePath
+final class APIs {       
+    
     // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"
     static let notice = "appcity/getNotice.do"
@@ -24,9 +24,11 @@ final class APIs {
     static let updateNotificationStatus = "appcity/addMyNoDisturbTime.do"
     static let propertyContactList = "appcity/getContact.do"
     static let messageList = "appcity/getMyMessage.do"
+    static let commonPush = "appDevice/commonPush"
+    
     // MARK: - 用户鉴权
     static let login = "appcity/login.do"
-    static let regist = "appcity/register.do"
+    static let register = "appcity/register.do"
     static let msgCode = "appcity/getMessageCode.do"
     static let checkMsgCode = "appcity/checkMessageCode.do"
     static let resetPassword = "appcity/resetPassword.do"
@@ -77,8 +79,9 @@ final class APIs {
     static let faceFile = "appcity/getFaceFile.do"
     static let addFaceFile = "appcity/addFaceFile.do"
     static let deleteFaceFile = "appcity/delFaceFile.do"
-    static let extralFaceFile = "appcity/getExtraFaceFile"
-    static let syncExtralFaceFile = "appcity/synExtraFaceFile"
+    static let extraFaceFile = "appcity/getExtraFaceFile"
+    static let syncExtraFaceFile = "appcity/synExtraFaceFile"
+    
     // MARK: - 通话
     static let pushApp = "appDevice/pushApp.do"
     static let videoCallPushNotice = "appDevice/pushNoticeToIOS.do"

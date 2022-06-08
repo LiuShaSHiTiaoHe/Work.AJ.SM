@@ -68,7 +68,7 @@ class ElevatorConfigurationViewController: BaseViewController {
     }
     
     private func loadData() {
-        HomeRepository.shared.getElevatorConffiguration {[weak self] model in
+        HomeRepository.shared.getElevatorConfiguration {[weak self] model in
             guard let self = self else { return }
             if let model = model {
                 self.ec = model

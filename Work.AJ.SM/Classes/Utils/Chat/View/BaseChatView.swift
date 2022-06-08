@@ -30,6 +30,13 @@ class BaseChatView: BaseView {
     
     var isVideoCall: Bool?
     
+    func hideOpenDoorView() {
+        openDoorButton.isHidden = true
+        hangupButton.snp.updateConstraints { make in
+            make.right.equalTo(snp.centerX).offset(40)
+        }
+    }
+    
     private func updateButtons(_ isVideo: Bool, _ isCaller: Bool) {
         if isVideo {
             if isCaller {
@@ -153,19 +160,19 @@ class BaseChatView: BaseView {
         hangupButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.centerX.equalToSuperview().offset(-50)
+            make.right.equalTo(snp.centerX).offset(-50)
         }
         
         openDoorButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
-            make.centerX.equalToSuperview().offset(50)
+            make.left.equalTo(snp.centerX).offset(50)
         }
     }
     
     lazy var videoImageView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.contentMode = .scaleAspectFill
         return view
     }()
@@ -174,7 +181,7 @@ class BaseChatView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k18Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     
@@ -182,7 +189,7 @@ class BaseChatView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k14Font
-        view.textColor = R.color.family_yellowColor()
+        view.textColor = R.color.sub_yellow()
         return view
     }()
     

@@ -65,7 +65,7 @@ class AgoraCallingView: BaseView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k16Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     

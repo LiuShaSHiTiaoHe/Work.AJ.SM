@@ -40,23 +40,35 @@ class HomeViewController: BaseViewController {
         loadUnitData()
     }
 
+    override func emptyViewRefresh() {
+        loadUnitData()
+    }
+    
     @objc
     func currentUnitChanged() {
         loadUnitData()
     }
 
     func loadUnitData() {
-        HomeRepository.shared.homeData { [weak self] modules, ads, notices in
+        HomeRepository.shared.homeData { [weak self] modules, ads, notices, status in
             guard let `self` = self else {
                 return
             }
-            if modules.isEmpty {
+            switch status {
+            case .Invalid:
                 self.showNoDataView(.nohouse)
-            } else {
+                SVProgressHUD.showInfo(withStatus: "该房屋已被停用，请联系物业或添加其他房屋")
+                break
+            case .Unknown:
+                self.showNoDataView(.nohouse)
+                break
+            case .Normal:
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.contentView.updateAdsAndNotices(ads, notices)
+                break
             }
+
         }
     }
 }
@@ -79,7 +91,7 @@ extension HomeViewController: HomeViewDelegate {
                     width: .constant(value: 280),
                     height: .constant(value: 380)
             ), true)
-        case .cloudOpneGate:
+        case .cloudOpenGate:
             pushTo(viewController: RemoteOpenDoorViewController())
         case .cloudIntercom:
             pushTo(viewController: RemoteIntercomViewController())
@@ -101,9 +113,6 @@ extension HomeViewController: HomeViewDelegate {
             pushTo(viewController: ElevatorConfigurationViewController())
         case .ncall:
             pushTo(viewController: NComViewController())
-        default:
-            return
-
         }
     }
 }

@@ -79,7 +79,7 @@ class BleOpenDoorStyleCell: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k16Font
         view.textAlignment = .left
         return view
@@ -89,7 +89,7 @@ class BleOpenDoorStyleCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .left
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -99,9 +99,9 @@ class BleOpenDoorStyleCell: UITableViewCell {
         box.boxType = .circle
         box.onAnimationType = .oneStroke
         box.offAnimationType = .oneStroke
-        box.tintColor = R.color.owner_greenColor()!
-        box.onTintColor = R.color.owner_greenColor()!
-        box.onCheckColor = R.color.owner_greenColor()!
+        box.tintColor = R.color.sub_green()!
+        box.onTintColor = R.color.sub_green()!
+        box.onCheckColor = R.color.sub_green()!
         return box
     }()
     

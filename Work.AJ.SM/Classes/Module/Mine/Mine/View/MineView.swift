@@ -26,14 +26,14 @@ class MineView: BaseView {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = k18Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         return view
     }()
     
     lazy var phoneLabel: UILabel = {
         let view = UILabel()
         view.font = k18Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         return view
     }()
     
@@ -48,14 +48,14 @@ class MineView: BaseView {
             let view = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
             view.register(MineTableViewCell.self, forCellReuseIdentifier: MineTableViewCellIdentifier)
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         } else {
             // Fallback on earlier versions
             let view = UITableView.init(frame: CGRect.zero, style: .grouped)
             view.register(MineTableViewCell.self, forCellReuseIdentifier: MineTableViewCellIdentifier)
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }
     }()

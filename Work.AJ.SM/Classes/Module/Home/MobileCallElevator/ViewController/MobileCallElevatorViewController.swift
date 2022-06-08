@@ -73,7 +73,7 @@ class MobileCallElevatorViewController: BaseViewController {
     }
 
     private func callElevator(_ floorInfo: FloorMapInfo) {
-        PermissionManager.PermissionRequest(.bluetooth) { [weak self] authorized in
+        PermissionManager.permissionRequest(.bluetooth) { [weak self] authorized in
             guard let self = self else {
                 return
             }
@@ -115,8 +115,8 @@ extension MobileCallElevatorViewController: UICollectionViewDataSource {
             if let showFloor = floor.showFloor {
                 cell.elevatorName.text = showFloor
                 if selectFloor == showFloor {
-                    cell.backgroundColor = R.color.blueColor()
-                    cell.elevatorName.textColor = R.color.whiteColor()
+                    cell.backgroundColor = R.color.themecolor()
+                    cell.elevatorName.textColor = R.color.whitecolor()
                 }
             }
         }

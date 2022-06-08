@@ -11,11 +11,11 @@ enum MineAPI {
     case getUnitMembers(unitID: String, userID: String)
     case addFamilyMember(communityID: String, unitID: String, userID: String, name: String, phone: String, type: String)
     case deleteMember(unitID: String, userID: String, memberUserID: String)
-    case allFace(communityID: String, blockID: String, cellID: String, unitID: String)
+    case allFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
     case addFace(data: AddFaceModel)
     case deleteFace(communityID: String, blockID: String, cellID: String, unitID: String, imagePath: String, faceID: String)
-    case extralFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
-    case syncExtralFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
+    case extraFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
+    case syncExtraFace(communityID: String, blockID: String, cellID: String, unitID: String, mobile: String)
     case versionCheck(type: String)
     case deleteAccount(userID: String)
     case ownerOpenDoorPassword(communityID: String, unitID: String, blockID: String, userID: String, phone: String, openDoorPassword: String)
@@ -33,7 +33,7 @@ enum MineAPI {
     case searchUnit(name: String)
     case updateNotificationStatus(userID: String, status: String)
     case getUserDoNotDisturbStatus(userID: String)
-    case findUnitAvliable(communityID: String, blockNo: String, unitNo: String, cellID: String)
+    case findUnitAvailable(communityID: String, blockNo: String, unitNo: String, cellNo: String, cellID: String)
     case videoCallNotificationPush(mobile: String)
     case propertyContactList(communityID: String)
     case getUserMessageList(userID: String, currentPage: String, showCount: String)
@@ -41,9 +41,9 @@ enum MineAPI {
 
 extension MineAPI: TargetType {
     var baseURL: URL {
-        return URL(string: APIs.baseUrl)!
+        return URL(string: ApiBaseUrl())!
     }
-    
+
     var path: String {
         switch self {
         case .getUnitMembers:
@@ -58,10 +58,10 @@ extension MineAPI: TargetType {
             return APIs.addFaceFile
         case .deleteFace:
             return APIs.deleteFaceFile
-        case .extralFace:
-            return APIs.extralFaceFile
-        case .syncExtralFace:
-            return APIs.syncExtralFaceFile
+        case .extraFace:
+            return APIs.extraFaceFile
+        case .syncExtraFace:
+            return APIs.syncExtraFaceFile
         case .versionCheck:
             return APIs.versionCheck
         case .deleteAccount:
@@ -96,7 +96,7 @@ extension MineAPI: TargetType {
             return APIs.updateNotificationStatus
         case .getUserDoNotDisturbStatus:
             return APIs.notificationStatus
-        case .findUnitAvliable:
+        case .findUnitAvailable:
             return APIs.findUnit
         case .videoCallNotificationPush:
             return APIs.videoCallPushNotice
@@ -106,16 +106,16 @@ extension MineAPI: TargetType {
             return APIs.messageList
         }
     }
-    
+
     var method: Moya.Method {
         switch self {
-        case .getUserInfo, .getMyUnitGuest:
+        case .getUserInfo, .getMyUnitGuest, .findUnitAvailable:
             return .get
         default:
             return .post
         }
     }
-    
+
     var task: Task {
         switch self {
         case let .getUnitMembers(unitID, userID):
@@ -124,19 +124,17 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["TARGETMOBILE": phone, "REALNAME": name, "USERID": userID, "UNITID": unitID, "COMMUNITYID": communityID, "USERTYPE": type].ekey("USERID"), encoding: URLEncoding.default)
         case let .deleteMember(unitID, userID, memberUserID):
             return .requestParameters(parameters: ["UNITID": unitID, "USERID": userID, "TARGETUSERID": memberUserID].ekey("UNITID"), encoding: URLEncoding.default)
-        case let .allFace(communityID, blockID, cellID, unitID):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "apiVersion": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .allFace(communityID, blockID, cellID, unitID, mobile):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "apiVersion": "2", "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .addFace(data):
-            let fileName = "\(data.phone).png"
-            let faceData = MultipartFormData(provider: .data(data.faceData), name: "file", fileName: fileName, mimeType: "image/png")
-            let multipartData = [faceData]
-            let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version":"3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID, "apiVersion": "1", "FACETYPE": data.faceType].ekey("MOBILE")
+            let multipartData = [MultipartFormData(provider: .data(data.faceData), name: "file", fileName: "\(data.phone).png", mimeType: "image/png")]
+            let urlParameters = ["NAME": data.name, "TYPE": data.userType, "Version": "3.0", "MOBILE": data.phone, "COMMUNITYID": data.communityID, "BLOCKID": data.blockID, "CELLID": data.cellID, "UNITID": data.unitID, "apiVersion": "2", "FACETYPE": data.faceType].ekey("MOBILE")
             return .uploadCompositeMultipart(multipartData, urlParameters: urlParameters)
         case let .deleteFace(communityID, blockID, cellID, unitID, imagePath, faceID):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "IMAGE": imagePath,"ID": faceID, "apiVersion": "1"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-        case let .extralFace(communityID, blockID, cellID, unitID, mobile):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "IMAGE": imagePath, "ID": faceID, "apiVersion": "2"].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .extraFace(communityID, blockID, cellID, unitID, mobile):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
-        case let .syncExtralFace(communityID, blockID, cellID, unitID, mobile):
+        case let .syncExtraFace(communityID, blockID, cellID, unitID, mobile):
             return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKID": blockID, "CELLID": cellID, "UNITID": unitID, "MOBILE": mobile].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .versionCheck(type):
             return .requestParameters(parameters: ["TYPE": type].ekey("TYPE"), encoding: URLEncoding.default)
@@ -175,8 +173,8 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["USERID": userID, "STATUS": status].ekey("USERID"), encoding: URLEncoding.default)
         case let .getUserDoNotDisturbStatus(userID):
             return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
-        case let .findUnitAvliable(communityID, blockNo, unitNo, cellID):
-            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKNO": blockNo, "UNITNO": unitNo, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .findUnitAvailable(communityID, blockNo, unitNo, cellNo, cellID):
+            return .requestParameters(parameters: ["COMMUNITYID": communityID, "BLOCKNO": blockNo, "UNITNO": unitNo, "CELLNO": cellNo, "CELLID": cellID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .videoCallNotificationPush(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
         case let .propertyContactList(communityID):
@@ -185,10 +183,10 @@ extension MineAPI: TargetType {
             return .requestParameters(parameters: ["USERID": userID, "appPage": currentPage, "appPageNum": showCount, "ifApp": "1"].ekey("USERID"), encoding: URLEncoding.default)
         }
     }
-    
-    var headers: [String : String]? {
+
+    var headers: [String: String]? {
         return [:]
     }
-    
-    
+
+
 }

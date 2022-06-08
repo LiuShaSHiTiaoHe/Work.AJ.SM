@@ -31,16 +31,16 @@ class UserProfileView: BaseView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "用户信息"
-        view.titleLabel.textColor = R.color.whiteColor()
+        view.titleLabel.textColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         return view
     }()
     
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .grouped)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
         view.register(UserAvatarCell.self, forCellReuseIdentifier: UserAvatarCellIdentifier)
         return view

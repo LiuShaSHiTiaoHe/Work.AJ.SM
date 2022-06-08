@@ -11,6 +11,7 @@ import MJRefresh
 class BaseViewController: UIViewController {
 
     private let noDataViewTag: Int = 404
+    var needReloadData: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +27,9 @@ class BaseViewController: UIViewController {
     // MARK: - Functions
 
     // MARK: - GradientLayer
-    func addlayer() {
+    func addGradientLayer() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [R.color.themebackgroundColor()!.cgColor, UIColor.white.cgColor]
+        gradientLayer.colors = [R.color.bg_theme()!.cgColor, UIColor.white.cgColor]
         gradientLayer.locations = [0.0, 0.4, 1.0]
         gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint.init(x: 0, y: 1.0)
@@ -37,12 +38,12 @@ class BaseViewController: UIViewController {
     }
 
 
-    func refreshHeader(_ textColor: UIColor? = R.color.whiteColor()!) -> MJRefreshStateHeader {
+    func refreshHeader(_ textColor: UIColor? = R.color.whitecolor()!) -> MJRefreshStateHeader {
         let header = MJRefreshStateHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         if let textColor = textColor {
             header.stateLabel!.textColor = textColor
         } else {
-            header.stateLabel!.textColor = R.color.whiteColor()!
+            header.stateLabel!.textColor = R.color.whitecolor()!
         }
         header.lastUpdatedTimeLabel?.isHidden = true
         return header
@@ -64,7 +65,7 @@ class BaseViewController: UIViewController {
     func initData() {
     }
 
-    // MARK: - HearderRefresh
+    // MARK: - HeaderRefresh
     @objc func headerRefresh() {
     }
 
@@ -84,8 +85,9 @@ class BaseViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
-
     }
+    // MARK: - 重新加载数据
+    @objc func emptyViewRefresh() {}
 }
 
 // MARK: - EmptyView
@@ -93,6 +95,7 @@ extension BaseViewController {
     func showNoDataView(_ type: EmptyDataType = .nodata, _ constraintView: UIView? = nil) {
         let noDataView = NoDataView()
         noDataView.button.addTarget(self, action: #selector(go2AddNewHouseView), for: .touchUpInside)
+        noDataView.refreshButton.addTarget(self, action: #selector(emptyViewRefresh), for: .touchUpInside)
         noDataView.viewType = type
         noDataView.tag = noDataViewTag
         view.addSubview(noDataView)

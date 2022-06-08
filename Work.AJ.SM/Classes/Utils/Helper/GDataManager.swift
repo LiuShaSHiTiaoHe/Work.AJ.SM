@@ -7,7 +7,6 @@
 
 import Foundation
 import CryptoSwift
-import Siren
 import AVFoundation
 import SwiftyUserDefaults
 import SVProgressHUD
@@ -55,7 +54,13 @@ class GDataManager: NSObject {
 
     // MARK: - JPUSH
     func setupPush(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: isProduction)
+        #if DEBUG
+        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: false)
+        logger.info("JPUSH APS DEBUG")
+        #else
+        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: true)
+        logger.info("JPUSH APS PRODUCTION")
+        #endif
         JPUSHService.setLogOFF()
         JPUSHService.registrationIDCompletionHandler { resCode, registrationID in
             if let registrationID = registrationID {
@@ -63,15 +68,48 @@ class GDataManager: NSObject {
             }
         }
     }
-
-    func pushSetAlias(_ alias: String) {
-        JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
-            logger.info("JPUSH setAlias ==> \(String(describing: iAlias))")
-        }, seq: 1)
+    
+    func pushSetAlias(_ alias: String? = nil) {
+        if let alias = alias {
+            JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
+                if seq != 1 { return }
+                if  iResCode != 0 {
+                    JPUSHService.deleteAlias({ diResCode, diAlias, dseq in
+                        if diResCode == 0 && dseq == 10086 {
+                            JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in  }, seq: 3)
+                        }
+                    }, seq: 10086)
+                }
+            }, seq: 1)
+        } else {
+            if let mobile = ud.userMobile {
+                pushSetAlias(mobile)
+            }
+        }
     }
 
     func registerDeviceToken(_ token: Data) {
         JPUSHService.registerDeviceToken(token)
+    }
+    
+    func pushDeleteAlias() {
+        JPUSHService.deleteAlias({ iResCode, iAlias, seq in
+        }, seq: 2)
+    }
+    
+    // MARK: - 发送视频通话推送给对方，暂时用于户户通。
+    func sendVideoCallNotification(_ alias: String) {
+        var pushModel = CommonPushModel()
+        pushModel.alias = alias
+        pushModel.aliasType = "3"
+        pushModel.pushFor = "1"
+        pushModel.pushType = "1"
+        pushModel.type = "videoCall"
+        pushModel.title = "智慧社区视频通话"
+        pushModel.body = "收到视频通话呼叫请求，请及时接听..."
+        CommonRepository.shared.sendPushNotification(pushModel) { errorMsg in
+            
+        }
     }
 
     // MARK: - 检查更新
@@ -80,9 +118,9 @@ class GDataManager: NSObject {
             if let updateStr = jsonData["data"]["IFFORCE"].string, let effectiveStr = jsonData["data"]["EFFECTIVESTATUS"].string {
                 if effectiveStr == "T" {
                     if updateStr == "T" {
-                        GDataManager.shared.checkAppStoreVersion(true, .immediately)
+                        self.checkAppStoreNewVersion(true)
                     } else if updateStr == "F" {
-                        GDataManager.shared.checkAppStoreVersion(false, .immediately)
+                        self.checkAppStoreNewVersion(false)
                     }
                 }
             }
@@ -91,40 +129,31 @@ class GDataManager: NSObject {
         }
     }
 
-
-    private func checkAppStoreVersion(_ force: Bool, _ frequency: Rules.UpdatePromptFrequency) {
-        let siren = Siren.shared
-        siren.apiManager = APIManager.init(countryCode: "cn")
-        if force {
-            let rule = Rules.init(promptFrequency: frequency, forAlertType: .force)
-            siren.rulesManager = RulesManager(globalRules: rule)
-        } else {
-            let rule = Rules.init(promptFrequency: frequency, forAlertType: .option)
-            siren.rulesManager = RulesManager(globalRules: rule)
-        }
-        siren.presentationManager = PresentationManager(alertTintColor: R.color.themeColor(),
-                appName: Bundle.jk.appDisplayName,
-                forceLanguageLocalization: .chineseSimplified)
-        siren.wail(performCheck: .onDemand) { results in
-            switch results {
-            case .success(let updateResults):
-                logger.info(updateResults.localization)
-            case .failure(let error):
-                switch error {
-                case .appStoreOSVersionUnsupported:
-                    SVProgressHUD.showError(withStatus: "当前手机系统不支持最新版本。")
-                case .noUpdateAvailable:
-                    SVProgressHUD.showSuccess(withStatus: "当前已是最新版本。")
-                default:
-                    SVProgressHUD.showError(withStatus: "检查更新失败。")
-                }
-                logger.info(error.localizedDescription)
+    private func checkAppStoreNewVersion(_ force: Bool) {
+        VersionCheck.shared.checkNewVersion { hasNewerVersion, versionResult, errorMsg in
+            if hasNewerVersion, let versionResult = versionResult {
+                let aView = AppUpdateView.init()
+                aView.configData(versionResult, force)
+                var attributes = EntryKitCustomAttributes.centerFloat.attributes
+                attributes.screenInteraction = .absorbTouches
+                attributes.scroll = .disabled
+                attributes.entryBackground = .color(color: .clear)
+                attributes.positionConstraints.size = .init(
+                    width: .ratio(value: 0.8),
+                    height: .constant(value: 420)
+                )
+                SwiftEntryKit.display(entry: aView, using: attributes)
+            } else {
+                SVProgressHUD.showInfo(withStatus: errorMsg)
             }
         }
     }
 
+    
+
     // MARK: - 清除数据
     func clearAccount() {
+        pushDeleteAlias()
         RealmTools.deleteRealmFiles()
         removeUserData()
         removeNetCache()

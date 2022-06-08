@@ -62,15 +62,23 @@ class SelectUnitBlockViewController: BaseViewController {
         headerView.rightButton.isHidden = false
         headerView.rightButton.addTarget(self, action: #selector(move2HouseSearchVC), for: .touchUpInside)
         cityTipsView.delegate = self
-        leftTableVeiw.delegate = self
-        leftTableVeiw.dataSource = self
-        rightTableVeiw.delegate = self
-        rightTableVeiw.dataSource = self
+        leftTableView.delegate = self
+        leftTableView.dataSource = self
+        rightTableView.delegate = self
+        rightTableView.dataSource = self
         locationIndexTips.isUserInteractionEnabled = true
         locationIndexTips.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(resetSelection)))
         
-        OtherAPI.AmapLocation(key: kAmapKey).defaultRequest { jsonData in
-            self.cityName = "南京"
+        CommonAPI.amapLocation(key: kAmapKey).otherRequest { jsonData in
+            if let city = jsonData["city"].string {
+                if city.hasSuffix("市"){
+                    self.cityName = city.jk.removeSomeStringUseSomeString(removeString: "市")
+                } else {
+                    self.cityName = city
+                }
+            } else {
+                self.cityName = "南京"
+            }
         } failureCallback: { response in
             self.cityName = "南京"
         }
@@ -80,27 +88,32 @@ class SelectUnitBlockViewController: BaseViewController {
         if let cityName = cityName {
             SVProgressHUD.show()
             MineRepository.shared.getCommunityWithCityName(cityName) { [weak self] models in
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(withDelay: 1)
                 guard let `self` = self else {
                     return
                 }
                 if models.count > 0 {
                     self.communityDataSource = models
-                    if !self.searchResultCommunityRID.isEmpty {
-                        self.selectedCommunity = self.communityDataSource.first(where: { element in
-                            if let ridStringValue = element.rid?.jk.intToString {
-                                return ridStringValue == self.searchResultCommunityRID
-                            } else {
-                                return false
-                            }
-                        })
+                    var index = 0
+                    if !self.searchResultCommunityRID.isEmpty, let searchResultCommunityIndex = self.communityDataSource.firstIndex(where: { element in
+                        if let ridStringValue = element.rid?.jk.intToString {
+                            return ridStringValue == self.searchResultCommunityRID
+                        } else {
+                            return false
+                        }
+                    }) {
+                        index = searchResultCommunityIndex
+                        self.selectedCommunity = self.communityDataSource[searchResultCommunityIndex]
                     } else {
                         self.selectedCommunity = models[0]
                     }
-                    self.leftTableVeiw.reloadData()
+                    self.leftTableView.reloadData()
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                        self.leftTableView.scroll(row: index)
+                    }
                     self.getBlocksData()
                 } else {
-                    self.rightTableVeiw.reloadData()
+                    self.rightTableView.reloadData()
                 }
             }
         }
@@ -108,45 +121,51 @@ class SelectUnitBlockViewController: BaseViewController {
 
     func getBlocksData() {
         if let selectedCommunity = selectedCommunity, let communityID = selectedCommunity.rid?.jk.intToString {
+            SVProgressHUD.show()
             MineRepository.shared.getBlocksWithCommunityID(communityID) { [weak self] models in
+                SVProgressHUD.dismiss(withDelay: 1)
                 guard let `self` = self else {
                     return
                 }
                 if models.count > 0 {
                     self.blockDataSource = models
                 }
-                self.rightTableVeiw.reloadData()
+                self.rightTableView.reloadData()
             }
         }
     }
 
     func getUserCellData(_ blockID: String) {
+        SVProgressHUD.show()
         MineRepository.shared.getCellsWithBlockID(blockID) { [weak self] models in
+            SVProgressHUD.dismiss(withDelay: 1)
             guard let `self` = self else {
                 return
             }
             if models.count > 0 {
                 self.cellDataSource = models
                 self.selectedCell = models.first
-                self.leftTableVeiw.reloadData()
+                self.leftTableView.reloadData()
                 if let cellID = self.selectedCell?.cellID?.jk.intToString {
                     self.getUserUnitInCell(blockID, cellID)
                 }
             } else {
-                self.rightTableVeiw.reloadData()
+                self.rightTableView.reloadData()
             }
         }
     }
 
     func getUserUnitInCell(_ blockID: String, _ cellID: String) {
+        SVProgressHUD.show()
         MineRepository.shared.getUnitWithBlockIDAndCellID(blockID, cellID) { [weak self] models in
+            SVProgressHUD.dismiss(withDelay: 1)
             guard let `self` = self else {
                 return
             }
             if models.count > 0 {
                 self.unitDataSource = models
             }
-            self.rightTableVeiw.reloadData()
+            self.rightTableView.reloadData()
         }
     }
     
@@ -175,15 +194,13 @@ class SelectUnitBlockViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
-
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(cityTipsView)
         view.addSubview(tipsLabel)
         view.addSubview(locationIndexTips)
-        view.addSubview(leftTableVeiw)
-        view.addSubview(rightTableVeiw)
-
+        view.addSubview(leftTableView)
+        view.addSubview(rightTableView)
         locationIndexTips.isHidden = true
 
         headerView.snp.makeConstraints { make in
@@ -209,13 +226,13 @@ class SelectUnitBlockViewController: BaseViewController {
             make.height.equalTo(90)
         }
 
-        leftTableVeiw.snp.makeConstraints { make in
+        leftTableView.snp.makeConstraints { make in
             make.left.bottom.equalToSuperview()
             make.right.equalTo(view.snp.centerX)
             make.top.equalTo(tipsLabel.snp.bottom)
         }
 
-        rightTableVeiw.snp.makeConstraints { make in
+        rightTableView.snp.makeConstraints { make in
             make.left.equalTo(view.snp.centerX)
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -225,10 +242,10 @@ class SelectUnitBlockViewController: BaseViewController {
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "选择小区/楼栋"
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         return view
     }()
 
@@ -241,7 +258,7 @@ class SelectUnitBlockViewController: BaseViewController {
         let view = UILabel()
         view.text = "请选择小区/楼栋"
         view.font = k14Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
 
@@ -250,19 +267,19 @@ class SelectUnitBlockViewController: BaseViewController {
         return view
     }()
 
-    lazy var leftTableVeiw: UITableView = {
+    lazy var leftTableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(SelectUnitCell.self, forCellReuseIdentifier: SelectUnitCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
-    lazy var rightTableVeiw: UITableView = {
+    lazy var rightTableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(SelectUnitCell.self, forCellReuseIdentifier: SelectUnitCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 }
@@ -276,13 +293,13 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSelectCommunity {
-            if tableView == leftTableVeiw {
+            if tableView == leftTableView {
                 return communityDataSource.count
             } else {
                 return blockDataSource.count
             }
         } else {
-            if tableView == leftTableVeiw {
+            if tableView == leftTableView {
                 return cellDataSource.count
             } else {
                 return unitDataSource.count
@@ -294,7 +311,7 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectUnitCellIdentifier, for: indexPath) as! SelectUnitCell
         cell.isCurrentCell = false
         if isSelectCommunity {
-            if tableView == leftTableVeiw {
+            if tableView == leftTableView {
                 let model = communityDataSource[indexPath.row]
                 if model.rid == selectedCommunity?.rid {
                     cell.isCurrentCell = true
@@ -308,7 +325,7 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 cell.locationName.text = model.blockName
             }
         } else {
-            if tableView == leftTableVeiw {
+            if tableView == leftTableView {
                 let model = cellDataSource[indexPath.row]
                 if model.cellID == selectedCell?.cellID {
                     cell.isCurrentCell = true
@@ -328,11 +345,11 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if isSelectCommunity {
-            if tableView == leftTableVeiw {
+            if tableView == leftTableView {
                 let currentCommunity = communityDataSource[indexPath.row]
                 if selectedCommunity?.rid != currentCommunity.rid {
                     selectedCommunity = currentCommunity
-                    leftTableVeiw.reloadData()
+                    leftTableView.reloadData()
                     clearBlockData()
                     getBlocksData()
                 }
@@ -346,11 +363,11 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
                 }
             }
         } else {
-            if tableView == leftTableVeiw {
+            if tableView == leftTableView {
                 let currentCell = cellDataSource[indexPath.row]
                 if selectedCell?.cellID != currentCell.cellID {
                     selectedCell = currentCell
-                    leftTableVeiw.reloadData()
+                    leftTableView.reloadData()
                     if let blockID = selectedBlock?.rid?.jk.intToString, let cellID = currentCell.cellID?.jk.intToString {
                         clearUnitData()
                         getUserUnitInCell(blockID, cellID)
@@ -359,7 +376,7 @@ extension SelectUnitBlockViewController: UITableViewDelegate, UITableViewDataSou
             } else {
                 let currentUnit = unitDataSource[indexPath.row]
                 selectedUnit = currentUnit
-                rightTableVeiw.reloadData()
+                rightTableView.reloadData()
                 moveToCertification()
             }
         }
@@ -415,8 +432,8 @@ extension SelectUnitBlockViewController {
         if !isSelectCommunity {
             isSelectCommunity = true
             clearCellData()
-            leftTableVeiw.reloadData()
-            rightTableVeiw.reloadData()
+            leftTableView.reloadData()
+            rightTableView.reloadData()
         }
     }
 

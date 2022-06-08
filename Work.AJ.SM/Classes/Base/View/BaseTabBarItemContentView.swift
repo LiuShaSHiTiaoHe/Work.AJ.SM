@@ -11,10 +11,10 @@ import ESTabBarController_swift
 class BaseTabBarItemContentView: ESTabBarItemContentView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textColor = R.color.tabbarColor()!
-        highlightTextColor = R.color.themeColor()!
-        iconColor = R.color.tabbarColor()!
-        highlightIconColor = R.color.themeColor()!
+        textColor = R.color.text_content()!
+        highlightTextColor = R.color.themecolor()!
+        iconColor = R.color.text_content()!
+        highlightIconColor = R.color.themecolor()!
     }
 
     public required init?(coder aDecoder: NSCoder) {

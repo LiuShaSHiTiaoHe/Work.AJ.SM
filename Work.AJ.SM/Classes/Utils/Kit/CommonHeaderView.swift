@@ -19,7 +19,7 @@ class CommonHeaderView: UIView {
         let label = UILabel.init()
         label.textAlignment = .center
         label.font = k18Font
-        label.textColor = R.color.whiteColor()
+        label.textColor = R.color.whitecolor()
         return label
     }()
 
@@ -31,12 +31,12 @@ class CommonHeaderView: UIView {
 
     lazy var lineView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.lineColor()
+        view.backgroundColor = R.color.separator()
         return view
     }()
 
     private func initializeView() {
-        backgroundColor = R.color.themebackgroundColor()
+        backgroundColor = R.color.bg_theme()
 
         addSubview(closeButton)
         addSubview(titleLabel)
@@ -46,7 +46,7 @@ class CommonHeaderView: UIView {
         closeButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin / 2)
             make.width.height.equalTo(30)
-            make.bottom.equalToSuperview().offset((20 + kStateHeight - kOriginTitleAndStateHeight) / 2)
+            make.bottom.equalToSuperview().offset((20 + kStateHeight - kTitleAndStateHeight) / 2)
         }
 
         titleLabel.snp.makeConstraints { make in

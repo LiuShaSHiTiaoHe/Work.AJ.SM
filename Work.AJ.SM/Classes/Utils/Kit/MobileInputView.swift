@@ -30,7 +30,7 @@ class MobileInputView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel.init()
         label.font = k16Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         label.text = "手机号"
         label.textAlignment = .left
         return label
@@ -48,7 +48,7 @@ class MobileInputView: UIView {
 
     private let seperator: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.separateColor()
+        view.backgroundColor = R.color.separator()
         return view
     }()
 
@@ -56,7 +56,7 @@ class MobileInputView: UIView {
     private lazy var tipLabel: UILabel = {
         let label = UILabel()
         label.font = k10Font
-        label.textColor = R.color.errorRedColor()
+        label.textColor = R.color.sub_red()
         return label
     }()
 
@@ -111,16 +111,16 @@ class MobileInputView: UIView {
     // MARK: -Actions
     @objc func textInputEditingBegin(_ sender: UITextField) {
         DispatchQueue.main.async {
-            self.seperator.backgroundColor = R.color.themeColor()
-            self.titleLabel.textColor = R.color.themeColor()
+            self.seperator.backgroundColor = R.color.themecolor()
+            self.titleLabel.textColor = R.color.themecolor()
             self.errorMsg = ""
         }
     }
 
     @objc func textInputEditingEnd(_ sender: UITextField) {
         DispatchQueue.main.async {
-            self.seperator.backgroundColor = R.color.separateColor()
-            self.titleLabel.textColor = R.color.maintextColor()
+            self.seperator.backgroundColor = R.color.separator()
+            self.titleLabel.textColor = R.color.text_title()
             if sender.text?.count == 0 {
                 self.cleanInput()
             }

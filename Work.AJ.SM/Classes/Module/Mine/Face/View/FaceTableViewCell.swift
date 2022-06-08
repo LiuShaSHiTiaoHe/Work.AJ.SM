@@ -19,37 +19,39 @@ class FaceTableViewCell: UITableViewCell {
     
     var faceData: FaceModel? {
         didSet {
-            if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name, let type = faceData.faceType {
+            if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name{
                 nameLabel.text = name
                 faceImage.kf.setImage(with: URL.init(string: url), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
-                if type.isEmpty {
-                    roleLabel.isHidden = true
-                }else{
-                    roleLabel.isHidden = false
-                    roleLabel.backgroundColor = R.color.familyB_yellowColor()
-                    roleLabel.textColor = R.color.family_yellowColor()
-                    switch type {//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
-                    case "0":
-                        roleLabel.text = "本人"
-                        roleLabel.backgroundColor = R.color.ownerB_greenColor()
-                        roleLabel.textColor = R.color.owner_greenColor()
-                    case "1":
-                        roleLabel.text = "父母"
-                    case "2":
-                        roleLabel.text = "子女"
-                    case "3":
-                        roleLabel.text = "亲属"
-                    default:
+                if let faceType = faceData.faceType {
+                    if faceType.isEmpty {
                         roleLabel.isHidden = true
-                        break
+                    }else{
+                        roleLabel.isHidden = false
+                        roleLabel.textColor = R.color.text_info()
+                        switch faceType {//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
+                        case "0":
+                            roleLabel.text = "本人"
+                        case "1":
+                            roleLabel.text = "父母"
+                        case "2":
+                            roleLabel.text = "子女"
+//                        case "3":
+//                            roleLabel.text = "亲属"
+                        default:
+                            roleLabel.isHidden = true
+                            break
+                        }
                     }
+                } else {
+                    roleLabel.isHidden = true
                 }
+
             }
         }
     }
     
     func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         contentView.addSubview(bgView)
         bgView.addSubview(faceImage)
         bgView.addSubview(nameLabel)
@@ -73,22 +75,20 @@ class FaceTableViewCell: UITableViewCell {
             make.left.equalTo(faceImage.snp.right).offset(kMargin)
             make.right.equalToSuperview().offset(-100)
             make.height.equalTo(30)
-            make.bottom.equalTo(bgView.snp.centerY).offset(-kMargin/2)
+            make.bottom.equalTo(bgView.snp.centerY)
         }
         
         roleLabel.snp.makeConstraints { make in
             make.left.equalTo(faceImage.snp.right).offset(kMargin)
             make.height.equalTo(30)
-//            make.top.equalTo(bgView.snp.centerY)
             make.bottom.equalTo(faceImage.snp.bottom)
-            make.width.equalTo(80)
         }
         
         deleteButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-kMargin)
-            make.width.equalTo(80)
-            make.height.equalTo(30)
+            make.width.equalTo(16)
+            make.height.equalTo(19)
             make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-kMargin)
         }
     }
     
@@ -115,7 +115,7 @@ class FaceTableViewCell: UITableViewCell {
     
     lazy var bgView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         view.clipsToBounds = true
         return view
@@ -128,31 +128,25 @@ class FaceTableViewCell: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k16Font
         return view
     }()
     
     lazy var roleLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.owner_greenColor()
+        view.textColor = R.color.text_info()
         view.font = k14Font
-        view.layer.cornerRadius = 6.0
-        view.textAlignment = .center
-        view.clipsToBounds = true
-        view.backgroundColor = R.color.ownerB_greenColor()
+        view.textAlignment = .left
         view.text = ""
-//        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
     
     lazy var deleteButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setTitle("删除", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.titleLabel?.font = k15Font
-        button.layer.cornerRadius = 15.0
-        button.backgroundColor = R.color.errorRedColor()
+
+        button.setBackgroundImage(R.image.base_icon_trash(), for: .normal)
         return button
     }()
     

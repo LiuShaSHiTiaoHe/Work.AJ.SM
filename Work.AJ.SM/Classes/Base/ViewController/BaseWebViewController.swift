@@ -61,7 +61,7 @@ class BaseWebViewController: UIViewController {
         let webView = WKWebView.init(frame: CGRect.zero, configuration: configuration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
-        webView.backgroundColor = R.color.backgroundColor()
+        webView.backgroundColor = R.color.bg()
         webView.autoresizingMask = UIView.AutoresizingMask.init(rawValue: 1 | 4)
         webView.isMultipleTouchEnabled = true
         webView.autoresizesSubviews = true
@@ -73,7 +73,7 @@ class BaseWebViewController: UIViewController {
     //MARK: - UIProgressView进度条对象
     fileprivate lazy var progress: UIProgressView = {
         let tempProgressView = UIProgressView.init()
-        tempProgressView.tintColor = R.color.themeColor()
+        tempProgressView.tintColor = R.color.themecolor()
         tempProgressView.backgroundColor = .white
         return tempProgressView
     }()
@@ -149,9 +149,9 @@ class BaseWebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         navigationItem.title = titleString
-        navigationController?.navigationBar.tintColor = R.color.whiteColor()
+        navigationController?.navigationBar.tintColor = R.color.whitecolor()
         setupUI()
         loadRequest()
         addKVOObserver()

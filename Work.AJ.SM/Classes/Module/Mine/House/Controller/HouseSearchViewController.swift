@@ -42,7 +42,7 @@ class HouseSearchViewController: BaseViewController {
 
     // MARK: - UI
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(searchView)
         view.addSubview(tipsLabel)
@@ -75,10 +75,10 @@ class HouseSearchViewController: BaseViewController {
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
         view.titleLabel.text = "选择小区/楼栋"
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         return view
     }()
 
@@ -92,7 +92,7 @@ class HouseSearchViewController: BaseViewController {
         let view = UILabel()
         view.text = "搜索结果"
         view.font = k14Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         return view
     }()
 

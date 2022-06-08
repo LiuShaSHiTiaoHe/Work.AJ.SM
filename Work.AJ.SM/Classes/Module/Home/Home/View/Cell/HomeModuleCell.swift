@@ -20,7 +20,7 @@ class HomeModuleCell: UICollectionViewCell {
         let label = UILabel.init()
         label.textAlignment = .left
         label.font = k16Font
-        label.textColor = R.color.blackColor()
+        label.textColor = R.color.text_title()
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -37,22 +37,22 @@ class HomeModuleCell: UICollectionViewCell {
     private func initUI() {
         contentView.addSubview(iconImage)
         contentView.addSubview(nameLabel)
-        backgroundColor = R.color.whiteColor()
+        backgroundColor = R.color.whitecolor()
         iconImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin/2)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(35)
         }
 
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(iconImage.snp.right).offset(kMargin)
+            make.left.equalTo(iconImage.snp.right).offset(kMargin/2)
             make.height.equalTo(30)
             make.right.equalToSuperview().offset(-kMargin / 2)
 
         }
         layer.cornerRadius = 10
-        jk.addShadow(shadowColor: R.color.themebackgroundColor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.3, shadowRadius: 4)
+        jk.addShadow(shadowColor: R.color.bg_theme()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.3, shadowRadius: 4)
     }
 
     func initData(_ model: HomePageFunctionModule) {

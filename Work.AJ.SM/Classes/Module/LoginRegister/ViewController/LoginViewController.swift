@@ -24,10 +24,31 @@ class LoginViewController: BaseViewController {
         loginView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        #if DEBUG
+        loginView.iconImageView.isUserInteractionEnabled = true
+        let tapPress = UITapGestureRecognizer(target: self, action: #selector(showDebugView))
+        tapPress.numberOfTapsRequired = 2
+        loginView.iconImageView.addGestureRecognizer(tapPress)
+        #endif
     }
 
     override func initData() {
         loginView.delegate = self
+    }
+    
+    @objc
+    private func showDebugView() {
+        let aView = DebugView.init()
+        var attributes = EntryKitCustomAttributes.bottomFloat.attributes
+        attributes.screenInteraction = .absorbTouches
+        attributes.scroll = .disabled
+        attributes.entryBackground = .color(color: .white)
+        attributes.positionConstraints.size = .init(
+            width: .fill,
+            height: .constant(value: 420)
+        )
+        SwiftEntryKit.display(entry: aView, using: attributes)
     }
 
 }

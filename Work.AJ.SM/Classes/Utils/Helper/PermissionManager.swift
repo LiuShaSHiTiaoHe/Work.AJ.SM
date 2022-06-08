@@ -12,12 +12,12 @@ class PermissionManager {
     static let shared = PermissionManager()
 
     func requestAllPermission() {
-        requset([.bluetooth, .camera, .microphone])
+        request([.bluetooth, .camera, .microphone, .photoLibrary])
     }
 
-    static func PermissionRequest(_ permisson: SPPermissions.Permission, _ completion: @escaping (Bool) -> Void) {
-        permisson.request {
-            let authorized = permisson.authorized
+    static func permissionRequest(_ permission: SPPermissions.Permission, _ completion: @escaping (Bool) -> Void) {
+        permission.request {
+            let authorized = permission.authorized
             completion(authorized)
         }
     }
@@ -31,14 +31,14 @@ class PermissionManager {
         case .denied:
             go2Setting(permission)
         case .notDetermined:
-            requset([permission])
+            request([permission])
         case .notSupported:
             break
         }
         return status
     }
 
-    private func requset(_ permissions: [SPPermissions.Permission]) {
+    private func request(_ permissions: [SPPermissions.Permission]) {
         if permissions.count == 1 {
             if let topViewController = UIViewController.jk.topViewController() {
                 let controller = SPPermissions.native(permissions)
@@ -58,8 +58,8 @@ class PermissionManager {
 
     }
 
-    private func go2Setting(_ permission: SPPermissions.Permission) {
-        let alert = UIAlertController.init(title: "\(permission.type.name)权限已被拒绝", message: "请前往系统设置页面打开相应权限", preferredStyle: .alert)
+    func go2Setting(_ permission: SPPermissions.Permission) {
+        let alert = UIAlertController.init(title: "\(permission.localisedName)权限已被拒绝", message: "请前往系统设置页面打开相应权限", preferredStyle: .alert)
         alert.addAction("取消", .cancel) {
 
         }
@@ -91,13 +91,13 @@ extension PermissionManager: SPPermissionsDataSource {
         switch permission {
         case .photoLibrary:
             description = "使用相册进行本地二维码扫描、头像上传、物业报修图片上传等功能"
+            cell.permissionIconView.setCustomImage(R.image.permission_photo_icon()!)
         case .camera:
             description = "使用相机进行视频通话、头像上传、物业报修图片上传、二维码扫描等功能"
             cell.permissionIconView.setCustomImage(R.image.permission_camera_icon()!)
         case .bluetooth:
             description = "使用蓝牙权限进行远程呼梯，远程开门等功能"
-//        case .locationWhenInUse:
-//            description = "使用位置信息能更好的定位您所在的小区信息"
+            cell.permissionIconView.setCustomImage(R.image.permission_bluetooth_icon()!)
         case .microphone:
             description = "使用麦克风进行音频通话"
             cell.permissionIconView.setCustomImage(R.image.permission_microphone_icon()!)

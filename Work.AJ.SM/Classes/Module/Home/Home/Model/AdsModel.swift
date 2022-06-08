@@ -10,13 +10,13 @@ import UIKit
 class AdsModel: Mappable {
 
     var adid: String?
-    var covers: String?//位置  a首页  b商圈 c开门
+    var covers: String? //位置  a首页  b商圈 c开门
     var credate: String?
     var picurl: String?
     var rid: String?
     var state: String?
     var title: String?
-    var adurl: String?//图片链接
+    var adurl: String? //图片链接
 
     //是否有广告链接
     var hasadurl: Bool {
@@ -31,7 +31,7 @@ class AdsModel: Mappable {
     var imageurl: String {
         get {
             if let picurl = picurl, !picurl.isEmpty {
-                return APIs.baseUrl + picurl
+                return ApiBaseUrl() + picurl
             }
             return ""
         }

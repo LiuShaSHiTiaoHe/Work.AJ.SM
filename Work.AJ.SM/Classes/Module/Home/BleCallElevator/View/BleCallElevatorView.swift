@@ -24,8 +24,8 @@ class BleCallElevatorView: BaseView {
 
     lazy var tipsLabel: UILabel = {
         let view = UILabel.init()
-        view.backgroundColor = R.color.familyB_yellowColor()
-        view.textColor = R.color.family_yellowColor()
+        view.backgroundColor = R.color.bg_yellow()
+        view.textColor = R.color.sub_yellow()
         view.font = k12Font
         view.textAlignment = .center
         view.text = "在2米范围内，才能使用蓝牙操作哦"
@@ -47,7 +47,7 @@ class BleCallElevatorView: BaseView {
         let view = UILabel()
         view.text = "-------------------------"
         view.font = k14Font
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         return view
     }()
 
@@ -59,7 +59,7 @@ class BleCallElevatorView: BaseView {
 
     lazy var tips2Label: UILabel = {
         let view = UILabel.init()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.font = k12Font
         view.text = "请靠近电梯/门禁设备后再操作"
@@ -142,7 +142,7 @@ class BleCallElevatorView: BaseView {
 
 
 //    override func layoutSubviews() {
-//        dashView.jk.drawDashLine(strokeColor: R.color.themeColor()!)
+//        dashView.jk.drawDashLine(strokeColor: R.color.themecolor()!)
 //    }
 
 }

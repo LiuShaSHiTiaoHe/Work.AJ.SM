@@ -20,7 +20,7 @@ class CommonPhoneNumberCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .left
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -28,7 +28,7 @@ class CommonPhoneNumberCell: UITableViewCell {
 
     lazy var phoneInput: UITextField = {
         let view = UITextField.init()
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.font = k14Font
         view.textAlignment = .right
         view.keyboardType = .phonePad
@@ -37,7 +37,7 @@ class CommonPhoneNumberCell: UITableViewCell {
 
     lazy var errorMsg: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.errorRedColor()
+        view.textColor = R.color.sub_red()
         view.font = k11Font
         view.textAlignment = .right
         return view
@@ -54,7 +54,7 @@ class CommonPhoneNumberCell: UITableViewCell {
 
     private func initializeView() {
         selectionStyle = .none
-        contentView.backgroundColor = R.color.whiteColor()
+        contentView.backgroundColor = R.color.whitecolor()
         contentView.addSubview(nameLabel)
         contentView.addSubview(phoneInput)
         contentView.addSubview(errorMsg)
@@ -100,7 +100,7 @@ class CommonPhoneNumberCell: UITableViewCell {
                 if phoneNumber.count == 0 {
                     self.showErrorMsg("手机号不能为空")
                 } else {
-                    if phoneNumber.jk.isValidMobile {
+                    if phoneNumber.aj_isMobileNumber {
                         self.clearErrorMsg()
                     } else {
                         self.showErrorMsg("请填写正确的手机号")

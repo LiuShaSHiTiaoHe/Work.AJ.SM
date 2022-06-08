@@ -19,7 +19,7 @@ class SetVisitorPasswordView: UIView {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         addSubview(headerView)
         addSubview(titleContentView)
         titleContentView.addSubview(locationIcon)
@@ -69,15 +69,15 @@ class SetVisitorPasswordView: UIView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.titleLabel.text = "设置访客密码"
-        view.titleLabel.textColor = R.color.blackColor()
+        view.titleLabel.textColor = R.color.blackcolor()
         return view
     }()
     
     lazy var titleContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         return view
     }()
     
@@ -91,7 +91,7 @@ class SetVisitorPasswordView: UIView {
         let view = UILabel()
         view.textAlignment = .center
         view.font = k15Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -104,7 +104,7 @@ class SetVisitorPasswordView: UIView {
         view.register(NumberOfUseCell.self, forCellReuseIdentifier: NumberOfUseCellIdentifier)
         view.register(CommonPhoneNumberCell.self, forCellReuseIdentifier: CommonPhoneNumberCellIdentifier)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.tableFooterView = UIView()
         return view
     }()
@@ -112,9 +112,9 @@ class SetVisitorPasswordView: UIView {
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("完成", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.layer.cornerRadius = 20.0
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         return button
     }()
     

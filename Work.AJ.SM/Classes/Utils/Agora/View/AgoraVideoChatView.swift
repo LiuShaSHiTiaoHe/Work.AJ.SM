@@ -14,7 +14,7 @@ class AgoraVideoChatView: BaseView {
     }
     
     override func initializeView() {
-        self.backgroundColor = R.color.themeColor()
+        self.backgroundColor = R.color.themecolor()
         self.addSubview(remoteVideo)
         self.addSubview(localVideo)
         self.addSubview(micButton)

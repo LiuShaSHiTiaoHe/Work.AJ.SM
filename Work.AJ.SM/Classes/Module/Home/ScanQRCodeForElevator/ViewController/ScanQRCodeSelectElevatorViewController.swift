@@ -21,8 +21,6 @@ class ScanQRCodeSelectElevatorViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func initData() {
@@ -36,12 +34,12 @@ class ScanQRCodeSelectElevatorViewController: BaseViewController {
             MCERepository.shared.getFloorsBySNCode(code: SNCode) {[weak self] models in
                 guard let `self` = self else { return }
                 self.dataSource = models
-                self.reloadDatas()
+                self.reloadData()
             }
         }
     }
     
-    private func reloadDatas() {
+    private func reloadData() {
         contentView.collectionView.reloadData()
     }
     
@@ -74,19 +72,19 @@ extension ScanQRCodeSelectElevatorViewController: UICollectionViewDataSource {
         if let showFloor = floor.showFloor {
             cell.elevatorName.text = showFloor
             if selectFloor == showFloor {
-                cell.backgroundColor = R.color.blueColor()
-                cell.elevatorName.textColor = R.color.whiteColor()
+                cell.backgroundColor = R.color.themecolor()
+                cell.elevatorName.textColor = R.color.whitecolor()
             }
         }
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        dataSource.count
     }
     
     
@@ -100,6 +98,6 @@ extension ScanQRCodeSelectElevatorViewController: UICollectionViewDelegate {
 
 extension ScanQRCodeSelectElevatorViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (kScreenWidth - kMargin*5)/4, height: (kScreenWidth - kMargin*5)/4)
+        .init(width: (kScreenWidth - kMargin*5)/4, height: (kScreenWidth - kMargin*5)/4)
     }
 }

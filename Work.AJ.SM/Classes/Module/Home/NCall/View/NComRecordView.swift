@@ -30,8 +30,8 @@ class NComRecordView: BaseView {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "通话记录"
-        view.titleLabel.textColor = R.color.whiteColor()
-        view.backgroundColor = R.color.themeColor()
+        view.titleLabel.textColor = R.color.whitecolor()
+        view.backgroundColor = R.color.themecolor()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
         return view
     }()
@@ -39,7 +39,7 @@ class NComRecordView: BaseView {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(NComRecordCell.self, forCellReuseIdentifier: NComRecordCellIdentifier)
         return view
     }()

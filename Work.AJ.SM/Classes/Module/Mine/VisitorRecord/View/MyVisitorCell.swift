@@ -20,28 +20,45 @@ class MyVisitorCell: UITableViewCell {
                 }else{
                     nameLabel.text = "访客"
                 }
-                if let sTime = dataSource.startdate {
-                    startTime.text = sTime
+                guard let sTime = dataSource.startdate else {
+                    return
                 }
-                if let eTime = dataSource.enddate {
-                    endTime.text = eTime
+                guard let eTime = dataSource.enddate else {
+                    return
                 }
-                if let status = dataSource.status, let valid = dataSource.valid {
-                    if status == "O" {
-                        if valid == 1 {
-                            statusImageView.image = R.image.visitor_image_valid()
-                        }else{
-                            statusImageView.image = R.image.visitor_image_Expired()
-                        }
-                    }else{
-                        statusImageView.image = R.image.visitor_image_Expired()
-                    }
+
+                startTime.text = sTime
+                endTime.text = eTime
+                // MARK: - 不使用服务端返回的状态字段，根据startdate 和 enddate 判断
+                let currentTimeInterval = Date.jk.currentDate.timeIntervalSince1970
+                let startTimeInterval = Date.jk.formatterTimeStringToDate(timesString: sTime, formatter: kDefaultDateFormatter).timeIntervalSince1970
+                let endTimeInterval = Date.jk.formatterTimeStringToDate(timesString: eTime, formatter: kDefaultDateFormatter).timeIntervalSince1970
+                if currentTimeInterval < startTimeInterval {
+                    // MARK: - 生效时间早于当前时间，待生效
+                    statusImageView.image = R.image.visitor_image_ealier()
+                } else if currentTimeInterval > endTimeInterval {
+                    // MARK: - 当前时间晚于截至时间，失效
+                    statusImageView.image = R.image.visitor_image_Expired()
+                } else if currentTimeInterval > startTimeInterval && currentTimeInterval < endTimeInterval {
+                    statusImageView.image = R.image.visitor_image_valid()
                 }
+
+//                if let status = dataSource.status, let valid = dataSource.valid {
+//                    if status == "O" {
+//                        if valid == 1 {
+//                            statusImageView.image = R.image.visitor_image_valid()
+//                        }else{
+//                            statusImageView.image = R.image.visitor_image_Expired()
+//                        }
+//                    }else{
+//                        statusImageView.image = R.image.visitor_image_Expired()
+//                    }
+//                }
                 
-                if let gusetType = dataSource.guesttype {
-                    if gusetType == "1" {
+                if let guestType = dataSource.guesttype {
+                    if guestType == "1" {
                         typeNameLabel.text = "访客密码"
-                    } else if gusetType == "2" {
+                    } else if guestType == "2" {
                         typeNameLabel.text = "访客二维码"
                     }else{
                         typeNameLabel.text = "未知"
@@ -53,7 +70,7 @@ class MyVisitorCell: UITableViewCell {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         addSubview(backContentView)
         backContentView.addSubview(nameLabel)
         backContentView.addSubview(startLabel)
@@ -124,7 +141,7 @@ class MyVisitorCell: UITableViewCell {
     
     lazy var backContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 20.0
         view.clipsToBounds = true
         return view
@@ -133,7 +150,7 @@ class MyVisitorCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.font = k20Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.text = "访客"
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -143,7 +160,7 @@ class MyVisitorCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .right
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.text = "访客时间"
         return view
@@ -153,7 +170,7 @@ class MyVisitorCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .left
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -162,7 +179,7 @@ class MyVisitorCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .right
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.text = "有效期至"
         return view
@@ -172,7 +189,7 @@ class MyVisitorCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .left
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -181,7 +198,7 @@ class MyVisitorCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .right
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         view.text = "访问权限"
         return view
@@ -191,7 +208,7 @@ class MyVisitorCell: UITableViewCell {
         let view = UILabel()
         view.textAlignment = .left
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()

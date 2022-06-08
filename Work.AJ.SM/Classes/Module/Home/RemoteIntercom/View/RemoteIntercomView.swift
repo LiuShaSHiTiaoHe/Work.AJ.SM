@@ -57,14 +57,14 @@ class RemoteIntercomView: BaseView {
         let view = CommonHeaderView()
         view.titleLabel.text = "门禁对讲"
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.backgroundColor = R.color.whiteColor()
-        view.titleLabel.textColor = R.color.blackColor()
+        view.backgroundColor = R.color.whitecolor()
+        view.titleLabel.textColor = R.color.blackcolor()
         return view
     }()
     
     lazy var offlineTipsContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.familyB_yellowColor()
+        view.backgroundColor = R.color.bg_yellow()
         return view
     }()
     
@@ -76,7 +76,7 @@ class RemoteIntercomView: BaseView {
     
     lazy var offlineTips: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.family_yellowColor()
+        view.textColor = R.color.sub_yellow()
         view.font = k12Font
         view.text = "设备离线状态下，无法远程开门和视频通话"
         return view
@@ -85,9 +85,9 @@ class RemoteIntercomView: BaseView {
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         view.font = k15Font
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.text = "请选择视频通话的门禁设备"
         return view
     }()
@@ -96,7 +96,7 @@ class RemoteIntercomView: BaseView {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(RemoteOpenDoorCell.self, forCellReuseIdentifier: RemoteOpenDoorCellIdentifier)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 }

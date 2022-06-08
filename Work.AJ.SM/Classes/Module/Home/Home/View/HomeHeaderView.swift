@@ -14,7 +14,7 @@ class HomeHeaderView: UICollectionReusableView {
         let cycleView = SDCycleScrollView.init()
         cycleView.placeholderImage = R.image.home_banner()
         cycleView.scrollDirection = .horizontal
-        cycleView.backgroundColor = R.color.backgroundColor()
+        cycleView.backgroundColor = R.color.bg()
         cycleView.bannerImageViewContentMode = .scaleToFill
         cycleView.delegate = self
         cycleView.layer.cornerRadius = 10
@@ -27,9 +27,9 @@ class HomeHeaderView: UICollectionReusableView {
         cycleView.onlyDisplayText = true
         cycleView.scrollDirection = .vertical
         cycleView.disableScrollGesture()
-        cycleView.backgroundColor = R.color.contentColor()
-        cycleView.titleLabelTextColor = R.color.secondtextColor()
-        cycleView.titleLabelBackgroundColor = R.color.contentColor()
+        cycleView.backgroundColor = R.color.bg()
+        cycleView.titleLabelTextColor = R.color.text_info()
+        cycleView.titleLabelBackgroundColor = R.color.bg()
         cycleView.titleLabelTextFont = k12BoldFont
         cycleView.autoScrollTimeInterval = 4
         cycleView.delegate = self
@@ -43,7 +43,7 @@ class HomeHeaderView: UICollectionReusableView {
 
     private lazy var textCycleBackground: UIView = {
         let view = UIView.init()
-        view.backgroundColor = R.color.contentColor()
+        view.backgroundColor = R.color.bg()
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         return view
@@ -114,7 +114,7 @@ class HomeHeaderView: UICollectionReusableView {
             make.bottom.equalToSuperview().offset(-kMargin / 2)
         }
 
-        textCycleBackground.jk.addShadow(shadowColor: R.color.blackColor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.2, shadowRadius: 10)
+        textCycleBackground.jk.addShadow(shadowColor: R.color.blackcolor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.2, shadowRadius: 10)
     }
 
 }

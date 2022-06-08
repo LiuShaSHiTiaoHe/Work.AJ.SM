@@ -22,7 +22,7 @@ class MessageViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.mj_header = refreshHeader(R.color.maintextColor()!)
+        tableView.mj_header = refreshHeader(R.color.text_title()!)
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             self.footerLoadMore()
@@ -98,7 +98,7 @@ class MessageViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "消息"
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         view.closeButton.setImage(R.image.common_back_white(), for: .normal)
         return view
     }()
@@ -106,7 +106,7 @@ class MessageViewController: BaseViewController {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCellIdentifier)
         return view
     }()

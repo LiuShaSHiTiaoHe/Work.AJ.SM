@@ -52,7 +52,7 @@ class RemoteOpenDoorViewController: BaseViewController {
 
 extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,7 +64,7 @@ extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+        100.0
     }
     
 
@@ -85,7 +85,7 @@ extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
     
     func camera(_ lockModel: UnitLockModel) {
         if let lockMac = lockModel.lockmac, let lockID = lockModel.lockID?.jk.intToString, let lockName = lockModel.lockname {
-            PermissionManager.PermissionRequest(.microphone) {[weak self] authorized in
+            PermissionManager.permissionRequest(.microphone) {[weak self] authorized in
                 guard let self = self else { return }
                 if authorized {
                     self.startAgoraCall(lockID, lockMac, lockName)

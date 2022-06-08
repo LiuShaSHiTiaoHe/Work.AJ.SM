@@ -75,29 +75,29 @@ class HouseViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(HouseCell.self, forCellReuseIdentifier: "HouseCell")
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
-        view.mj_header = refreshHeader(R.color.blackColor())
+        view.backgroundColor = R.color.bg()
+        view.mj_header = refreshHeader(R.color.blackcolor())
         return view
     }()
 
     lazy var addButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("添加房屋", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.themeColor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
         button.addTarget(self, action: #selector(addHouse), for: .touchUpInside)
         button.layer.cornerRadius = 20.0
         return button
     }()
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         view.addSubview(addButton)
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(kOriginTitleAndStateHeight)
+            make.height.equalTo(kTitleAndStateHeight)
         }
 
         tableView.snp.makeConstraints { make in
@@ -149,12 +149,12 @@ extension HouseViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 60))
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.text = "如需加快房屋审核，请联系物业"
         view.textAlignment = .center
         view.font = k12Font
-        view.textColor = R.color.secondtextColor()
-        view.backgroundColor = R.color.backgroundColor()
+        view.textColor = R.color.text_info()
+        view.backgroundColor = R.color.bg()
         return view
     }
 

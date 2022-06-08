@@ -11,7 +11,7 @@ PODS:
   - Haptica (3.0.3)
   - IQKeyboardManagerSwift (6.5.9)
   - JCore (2.1.4-noidfa)
-  - JKSwiftExtension (2.1.0)
+  - JKSwiftExtension (2.1.5)
   - JPush (3.2.4-noidfa):
     - JCore (< 3.0.0, >= 2.0.0)
   - KeychainAccess (4.2.2)
@@ -40,17 +40,16 @@ PODS:
   - R.swift (6.1.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
-  - Realm (10.25.1):
-    - Realm/Headers (= 10.25.1)
-  - Realm/Headers (10.25.1)
-  - RealmSwift (10.25.1):
-    - Realm (= 10.25.1)
+  - Realm (10.27.0):
+    - Realm/Headers (= 10.27.0)
+  - Realm/Headers (10.27.0)
+  - RealmSwift (10.27.0):
+    - Realm (= 10.27.0)
   - SDCycleScrollView (1.82):
     - SDWebImage (>= 5.0.0)
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
-  - Siren (5.7.1)
   - SnapKit (5.0.1)
   - SPPermissions/Bluetooth (7.1.5):
     - SPPermissions/Core
@@ -91,7 +90,7 @@ DEPENDENCIES:
   - Haptica (= 3.0.3)
   - IQKeyboardManagerSwift (= 6.5.9)
   - JCore (= 2.1.4-noidfa)
-  - JKSwiftExtension
+  - JKSwiftExtension (= 2.1.5)
   - JPush (= 3.2.4-noidfa)
   - KeychainAccess (~> 4.2.2)
   - Kingfisher (= 7.2.0)
@@ -102,11 +101,10 @@ DEPENDENCIES:
   - ObjectMapper (= 4.2.0)
   - "ObjectMapper+Realm"
   - PGDatePicker
-  - R.swift
-  - Realm
-  - RealmSwift
+  - R.swift (= 6.1.0)
+  - Realm (= 10.27.0)
+  - RealmSwift (= 10.27.0)
   - SDCycleScrollView (= 1.82)
-  - Siren
   - SnapKit (= 5.0.1)
   - SPPermissions/Bluetooth
   - SPPermissions/Camera
@@ -157,7 +155,6 @@ SPEC REPOS:
     - RealmSwift
     - SDCycleScrollView
     - SDWebImage
-    - Siren
     - SnapKit
     - SPPermissions
     - SteviaLayout
@@ -184,7 +181,7 @@ SPEC CHECKSUMS:
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JCore: 2f15311e6889ab43ed5d629802ef793cac566465
-  JKSwiftExtension: 1ae63dabde89608f8d6b63ffc482cc9b57c44873
+  JKSwiftExtension: c8b5aac0760517cd6e889caeb7e4dc71cf1491c2
   JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
@@ -201,11 +198,10 @@ SPEC CHECKSUMS:
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
-  Realm: 1a6e9b4f6983711655d8c0bcb6d2d29c3afbb1f3
-  RealmSwift: e72669550d27082aa4fad5d176f5076cfe806245
+  Realm: 9ca328bd7e700cc19703799785e37f77d1a130f2
+  RealmSwift: 271de77b09a73c5e46ee3252283878153bd5d288
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
-  Siren: 76ac728f4f2f4a3576c322272e94a0e37955664f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPPermissions: c63ac1132badad39917de03a3c9dc2429ace94be
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
@@ -219,6 +215,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 9d60d4388826ba34492ed3baf418c596028d128e
+PODFILE CHECKSUM: fa1f2455782d74d4b6b17151cd0157e065900bcc
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

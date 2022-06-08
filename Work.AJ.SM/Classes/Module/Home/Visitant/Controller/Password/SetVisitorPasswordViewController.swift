@@ -12,7 +12,7 @@ import SVProgressHUD
 
 enum VisitTimes: String {//T为多次有效，F为1次有效
     case single = "F"
-    case multy = "T"
+    case multi = "T"
     case initial = ""
 }
 
@@ -53,8 +53,8 @@ class SetVisitorPasswordViewController: BaseViewController {
         let datePickerManager = PGDatePickManager.init()
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
-        datePickerManager.cancelButtonTextColor = R.color.errorRedColor()
-        datePickerManager.confirmButtonTextColor = R.color.themeColor()
+        datePickerManager.cancelButtonTextColor = R.color.sub_red()
+        datePickerManager.confirmButtonTextColor = R.color.themecolor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line
         datePicker?.datePickerMode = .dateHourMinute
@@ -65,9 +65,9 @@ class SetVisitorPasswordViewController: BaseViewController {
         case .valid:
             datePickerManager.title = "有效期至"
         }
-        datePicker?.textColorOfSelectedRow = R.color.themeColor()
+        datePicker?.textColorOfSelectedRow = R.color.themecolor()
         datePicker?.textFontOfSelectedRow = k18Font
-        datePicker?.lineBackgroundColor = R.color.themeColor()
+        datePicker?.lineBackgroundColor = R.color.themecolor()
         datePicker?.minimumDate = Date()
         datePicker?.maximumDate = NSDate.init().addingMonths(13)
         datePicker?.selectedDate = {[weak self] dateComponents in
@@ -137,12 +137,11 @@ class SetVisitorPasswordViewController: BaseViewController {
                 SVProgressHUD.showError(withStatus: "请输入访客的手机号码")
                 return
             }else{
-                if !phoneNumber.jk.isValidMobile {
+                if !phoneNumber.aj_isMobileNumber {
                     SVProgressHUD.showError(withStatus: "请输入正确的手机号码")
                     return
                 }
             }
-            
             if let interval = validTime.jk.numberOfMinutes(from: arriveTime), interval >= 30 {
                 if interval > 12*60*60 {
                     SVProgressHUD.showError(withStatus: "有效期超出限值")
@@ -154,7 +153,7 @@ class SetVisitorPasswordViewController: BaseViewController {
                     }
                 }
             }else{
-                SVProgressHUD.showError(withStatus: "有效期早于来访时间")
+                SVProgressHUD.showError(withStatus: "有效期最少为30分钟")
             }
         } else {
             SVProgressHUD.showError(withStatus: "请选择来访时间")
@@ -166,7 +165,7 @@ class SetVisitorPasswordViewController: BaseViewController {
 
 extension SetVisitorPasswordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -236,9 +235,9 @@ extension SetVisitorPasswordViewController: NumberOfUseCellDelegate {
         }
     }
     
-    func multy(isSelected: Bool) {
+    func multi(isSelected: Bool) {
         if isSelected {
-            visitTimes = .multy
+            visitTimes = .multi
         }else{
             visitTimes = .initial
         }

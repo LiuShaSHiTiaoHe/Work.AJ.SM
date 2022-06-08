@@ -12,7 +12,7 @@ let PropertyContactTableViewCellIdentifier = "PropertyContactTableViewCellIdenti
 class PropertyContactTableViewCell: UITableViewCell {
 
     private func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         self.contentView.addSubview(backgrdView)
         backgrdView.addSubview(name)
         backgrdView.addSubview(mobile)
@@ -37,7 +37,7 @@ class PropertyContactTableViewCell: UITableViewCell {
     
     lazy var backgrdView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         view.clipsToBounds = true
         return view
@@ -46,7 +46,7 @@ class PropertyContactTableViewCell: UITableViewCell {
     lazy var name: UILabel = {
         let view = UILabel.init()
         view.font = k16Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_info()
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -55,7 +55,7 @@ class PropertyContactTableViewCell: UITableViewCell {
     lazy var mobile: UILabel = {
         let view = UILabel.init()
         view.font = k16Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

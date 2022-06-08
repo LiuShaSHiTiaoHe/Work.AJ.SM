@@ -9,20 +9,20 @@ import UIKit
 
 class PasswordInvitationView: BaseView {
     
-    var isvalid: Bool? {
+    var isValid: Bool? {
         didSet {
-            if let isvalid = isvalid {
+            if let isvalid = isValid {
                 statusLabel.isHidden = false
                 if isvalid {
                     statusLabel.text = "有效"
-                    statusLabel.backgroundColor = R.color.owner_greenColor()
+                    statusLabel.backgroundColor = R.color.sub_green()
                     invalidTips.isHidden = true
                     invalidIcon.isHidden = true
                     passwordTipsLabel.isHidden = false
                     passwordLabel.isHidden = false
                 }else{
                     statusLabel.text = "已过期"
-                    statusLabel.backgroundColor = R.color.secondtextColor()
+                    statusLabel.backgroundColor = R.color.text_info()
                     invalidTips.isHidden = false
                     invalidIcon.isHidden = false
                     passwordTipsLabel.isHidden = true
@@ -199,7 +199,7 @@ class PasswordInvitationView: BaseView {
     }
     
     override func layoutSubviews() {
-        dashLine.jk.drawDashLine(strokeColor: R.color.themeColor()!)
+        dashLine.jk.drawDashLine(strokeColor: R.color.themecolor()!)
     }
     
     lazy var headerView: CommonHeaderView = {
@@ -218,7 +218,7 @@ class PasswordInvitationView: BaseView {
     
     lazy var bgContentView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 15.0
         view.clipsToBounds = true
         return view
@@ -227,7 +227,7 @@ class PasswordInvitationView: BaseView {
     lazy var titleLabel: UILabel = {
         let view = UILabel.init()
         view.text = "邀请您到访"
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.font = k15Font
         return view
@@ -236,7 +236,7 @@ class PasswordInvitationView: BaseView {
     //状态标签
     lazy var statusLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         view.font = k14Font
         view.jk.addCorner(conrners: UIRectCorner.topRight, radius: 15.0)
         view.jk.addCorner(conrners: UIRectCorner.bottomRight, radius: 15.0)
@@ -245,7 +245,7 @@ class PasswordInvitationView: BaseView {
     
     lazy var locationLabel: UILabel = {
         let view = UILabel.init()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         view.textAlignment = .center
         return view
@@ -255,7 +255,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "来访时间"
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -263,7 +263,7 @@ class PasswordInvitationView: BaseView {
     lazy var arriveTime: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         return view
     }()
@@ -273,7 +273,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "有效期至"
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -281,7 +281,7 @@ class PasswordInvitationView: BaseView {
     lazy var validTime: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         return view
     }()
@@ -291,7 +291,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "使用次数"
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -299,7 +299,7 @@ class PasswordInvitationView: BaseView {
     lazy var visitTimes: UILabel = {
         let view = UILabel()
         view.textAlignment = .right
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         return view
     }()
@@ -312,7 +312,7 @@ class PasswordInvitationView: BaseView {
     lazy var passwordTipsLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k18Font
         view.text = "访客密码"
         return view
@@ -322,7 +322,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.font = k34Font
         view.textAlignment = .center
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         return view
     }()
     
@@ -335,7 +335,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel()
         view.text = "访客密码已过期"
         view.font = k18Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
     }()
@@ -345,7 +345,7 @@ class PasswordInvitationView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setBackgroundImage(R.image.btn_image_bg_white(), for: .normal)
         button.setTitle("保存到相册", for: .normal)
-        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.themecolor(), for: .normal)
         return button
     }()
     
@@ -353,7 +353,7 @@ class PasswordInvitationView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setBackgroundImage(R.image.btn_image_bg_blue(), for: .normal)
         button.setTitle("分享给访客", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         return button
     }()
 

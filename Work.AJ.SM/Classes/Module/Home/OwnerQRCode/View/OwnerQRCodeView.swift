@@ -34,7 +34,7 @@ class OwnerQRCodeView: UIView {
         let view = UILabel.init()
         view.text = "一码通行"
         view.font = k24Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         return view
     }()
     
@@ -46,7 +46,7 @@ class OwnerQRCodeView: UIView {
     
     lazy var contentBack: UIView = {
         let view = UIView.init()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         return view
     }()
@@ -54,14 +54,14 @@ class OwnerQRCodeView: UIView {
     lazy var nameLabel: UILabel = {
         let view = UILabel.init()
         view.textAlignment = .center
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     
     lazy var tipsLabel: UILabel = {
         let view = UILabel.init()
         view.textAlignment = .center
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.text = "请在开门/乘梯时展示此二维码"
         return view
     }()
@@ -76,7 +76,7 @@ class OwnerQRCodeView: UIView {
         button.setImage(R.image.oqc_refresh_image(), for: .normal)
         button.setImage(R.image.oqc_refresh_image(), for: .highlighted)
         button.setTitle("刷新", for: .normal)
-        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.themecolor(), for: .normal)
         button.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
         button.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 10)
         return button
@@ -103,7 +103,7 @@ class OwnerQRCodeView: UIView {
     }
     
     func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         
         addSubview(backImage)
         backImage.addSubview(closeButton)

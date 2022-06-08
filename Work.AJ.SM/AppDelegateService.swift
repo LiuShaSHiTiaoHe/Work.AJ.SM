@@ -12,7 +12,7 @@ import ObjectMapper
 import SwiftyJSON
 import SVProgressHUD
 import IQKeyboardManagerSwift
-import Siren
+import UIKit
 
 extension AppDelegate {
 
@@ -29,6 +29,7 @@ extension AppDelegate {
         logger.info("\(FileManager.jk.DocumnetsDirectory())")
         GDataManager.shared.setupKeyChain()
         GDataManager.shared.setupDataBase()
+        GDataManager.shared.pushSetAlias()
         setuplibs()
     }
 

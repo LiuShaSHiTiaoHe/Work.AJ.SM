@@ -44,7 +44,7 @@ class HouseCertificationViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "手机号码不能为空")
             return
         } else {
-            if !phone.jk.isValidMobile {
+            if !phone.aj_isMobileNumber {
                 SVProgressHUD.showInfo(withStatus: "手机号码格式错误")
                 return
             }
@@ -109,7 +109,7 @@ class HouseCertificationViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -186,7 +186,7 @@ extension HouseCertificationViewController: UITableViewDelegate, UITableViewData
 
 extension HouseCertificationViewController: CommonSelectButtonCellDelegate {
 
-    func letfButtonSelected(_ isSelected: Bool) {
+    func leftButtonSelected(_ isSelected: Bool) {
         userType = "O"
     }
 

@@ -8,11 +8,11 @@ target 'Work.AJ.SM' do
 
   # Pods for Work.AJ.SM
   pod 'Moya'
-  pod 'Realm'
-  pod 'RealmSwift'
+  pod 'Realm', '10.27.0'
+  pod 'RealmSwift', '10.27.0'
   pod "ObjectMapper+Realm"
   pod 'XCGLogger', '7.0.1'
-  pod 'R.swift'
+  pod 'R.swift', '6.1.0'
   
   pod 'SnapKit', '5.0.1'
   pod 'SVProgressHUD', '2.2.5'
@@ -27,9 +27,8 @@ target 'Work.AJ.SM' do
   pod 'YYCategories'
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
-  pod 'JKSwiftExtension'
+  pod 'JKSwiftExtension', '2.1.5'
   pod 'Kingfisher','7.2.0'
-  pod 'Siren'
   pod 'DeviceKit', '~> 4.4.0'
 
   pod 'ESTabBarController-swift', '2.8.0'
@@ -45,7 +44,6 @@ target 'Work.AJ.SM' do
   
   pod 'SPPermissions/Camera'
   pod 'SPPermissions/PhotoLibrary'
-#  pod 'SPPermissions/Notification'
   pod 'SPPermissions/Bluetooth'
   pod 'SPPermissions/Microphone'
     

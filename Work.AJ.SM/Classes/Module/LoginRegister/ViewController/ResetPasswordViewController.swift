@@ -61,7 +61,7 @@ class ResetPasswordViewController: BaseViewController {
 }
 
 extension ResetPasswordViewController: ResetPasswordViewDelegate {
-    func resetPasswordComfirm(mobile: String, code: String, newPassword: String) {
+    func resetPasswordConfirm(mobile: String, code: String, newPassword: String) {
         checkMsgCode(mobile, code, newPassword)
     }
 

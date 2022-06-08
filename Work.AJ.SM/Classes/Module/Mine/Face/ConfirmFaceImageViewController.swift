@@ -10,9 +10,9 @@ import SVProgressHUD
 
 class ConfirmFaceImageViewController: BaseViewController {
         
-    private var faceType: String = ""//“0”：本人；“1”：父母；“2”：子女；“3”：亲属
+    private var faceType: String = ""//“0”：本人；“1”：父母；“2”：子女；
+    var faceImage: UIImage?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -21,13 +21,12 @@ class ConfirmFaceImageViewController: BaseViewController {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
-        if let faceImageCache = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey), let imageData = faceImageCache[FaceImageCacheKey] as? Data, let faceImage = UIImage.init(data: imageData) {
+        if let faceImage = faceImage {
             faceImageView.image = faceImage
         }
         confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
     }
 
-    // FIXME: - 身份证号还是手机号码？？
     @objc
     func confirm() {
         let name = getMemberName()
@@ -36,28 +35,43 @@ class ConfirmFaceImageViewController: BaseViewController {
             return
         }
 
-        let identitfireNumber = getMemberIdentifierNumber()
-        if identitfireNumber.isEmpty {
+        let identifiedNumber = getMemberIdentifierNumber()
+        if identifiedNumber.isEmpty {
             SVProgressHUD.showInfo(withStatus: "请输入身份证号")
             return
         }
-        if !identitfireNumber.jk.isValidIDCardNumStrict {
+        
+        if !identifiedNumber.jk.isValidIDCardNumStrict {
             SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
             return
         }
-               
+        
         if faceType.isEmpty{
             SVProgressHUD.showInfo(withStatus: "请选择与本人的关系")
             return
         }
-        
-        if let imageData = CacheManager.network.fetchCachedWithKey(FaceImageCacheKey)?.object(forKey: FaceImageCacheKey) as? Data, let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile{
-            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
+
+        if let imageData = faceImage?.pngData(),
+           let unit = HomeRepository.shared.getCurrentUnit(),
+           let communityID = unit.communityid?.jk.intToString,
+           let blockID = unit.blockid?.jk.intToString,
+           let cellID = unit.cellid?.jk.intToString,
+           let unitID = unit.unitid?.jk.intToString,
+           let mobile = unit.mobile,
+           let userType = unit.usertype {
+
+            let model = AddFaceModel.init(faceData: imageData, phone: mobile, name: name,
+                    userType: userType, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, faceType: faceType)
+            
             MineRepository.shared.addFace(model) { errorMsg in
                 if errorMsg.isEmpty {
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
                     SVProgressHUD.dismiss(withDelay: 2) {
-                        self.navigationController?.popViewController(animated: true)
+                        if let vc = self.navigationController?.viewControllers[1] {
+                            self.navigationController?.popToViewController(vc, animated: true)
+                        } else {
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
                     }
                 } else {
                     SVProgressHUD.showError(withStatus: errorMsg)
@@ -86,7 +100,7 @@ class ConfirmFaceImageViewController: BaseViewController {
     }
 
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(faceImageView)
         view.addSubview(tipsLabel)
@@ -128,9 +142,9 @@ class ConfirmFaceImageViewController: BaseViewController {
 
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
+        view.titleLabel.textColor = R.color.text_title()
         view.titleLabel.text = "提交人脸认证"
         return view
     }()
@@ -142,7 +156,7 @@ class ConfirmFaceImageViewController: BaseViewController {
 
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.font = k16BoldFont
         view.text = "请填写身份信息"
         view.textAlignment = .center
@@ -152,19 +166,19 @@ class ConfirmFaceImageViewController: BaseViewController {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
-        view.register(CommonSelectButtonCell.self, forCellReuseIdentifier: CommonSelectButtonCellIdentifier)
+        view.register(FaceUploadRoleSelectCell.self, forCellReuseIdentifier: FaceUploadRoleSelectCellIdentifier)
         view.register(CommonIDNumberInpuCell.self, forCellReuseIdentifier: CommonIDNumberInpuCellIdentifier)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
 
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("完成", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.layer.cornerRadius = 20.0
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         return button
     }()
 
@@ -191,12 +205,12 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
             cell.placeholder = "请输入家人/成员身份证号"
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CommonSelectButtonCellIdentifier, for: indexPath) as! CommonSelectButtonCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: FaceUploadRoleSelectCellIdentifier, for: indexPath) as! FaceUploadRoleSelectCell
             cell.accessoryType = .none
             cell.nameLabel.text = "身份"
-            cell.leftButtonName = "本人"
-            cell.centerButtonName = "父母"
-            cell.rightButtonName = "子女"
+            cell.secondButtonName = "本人"
+            cell.thirdButtonName = "父母"
+            cell.fourthButtonName = "子女"
             cell.delegate = self
             return cell
         default:
@@ -213,17 +227,22 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension ConfirmFaceImageViewController: CommonSelectButtonCellDelegate {
-
-    func letfButtonSelected(_ isSelected: Bool) {
+extension ConfirmFaceImageViewController: FaceUploadRoleSelectCellDelegate {
+    func firstButtonSelected(_ isSelected: Bool) {
+    }
+    
+    func secondButtonSelected(_ isSelected: Bool) {
         faceType = "0"
     }
-
-    func centerButtonSelected(_ isSelected: Bool) {
+    
+    func thirdButtonSelected(_ isSelected: Bool) {
         faceType = "1"
     }
-
-    func rightButtonSelected(_ isSelected: Bool) {
+    
+    func fourthButtonSelected(_ isSelected: Bool) {
         faceType = "2"
     }
+    
+
+
 }

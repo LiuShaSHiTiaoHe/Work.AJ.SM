@@ -31,7 +31,7 @@ class UserAvatarCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel.init()
         view.font = k16Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .right
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

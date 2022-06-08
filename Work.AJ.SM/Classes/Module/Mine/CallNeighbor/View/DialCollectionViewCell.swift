@@ -15,7 +15,7 @@ class DialCollectionViewCell: UICollectionViewCell {
         let label = UILabel.init()
         label.textAlignment = .center
         label.font = k28Font
-        label.textColor = R.color.blackColor()
+        label.textColor = R.color.blackcolor()
         return label
     }()
 
@@ -30,7 +30,7 @@ class DialCollectionViewCell: UICollectionViewCell {
 
     private func initUI() {
         contentView.addSubview(nameLabel)
-        backgroundColor = R.color.whiteColor()
+        backgroundColor = R.color.whitecolor()
 
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
@@ -40,6 +40,6 @@ class DialCollectionViewCell: UICollectionViewCell {
 
         }
 //        self.layer.cornerRadius = 10
-//        self.jk.addShadow(shadowColor: R.color.themebackgroundColor()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.3, shadowRadius: 4)
+//        self.jk.addShadow(shadowColor: R.color.bg_theme()!, shadowOffset: CGSize.init(width: 0, height: 0), shadowOpacity: 0.3, shadowRadius: 4)
     }
 }

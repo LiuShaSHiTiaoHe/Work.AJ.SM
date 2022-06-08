@@ -8,12 +8,20 @@
 import UIKit
 import JKSwiftExtension
 import SVProgressHUD
-import Siren
 
 class SettingViewController: BaseViewController {
 
+    // MARK: - 是否显示允许访客呼叫到手机的模块
+    private var showAllowVisitorCallSwitch: Bool = true
     // MARK: - 允许访客呼叫的状态记录
-    private var isAllowVisitorCall: Bool  = false
+    private var isAllowVisitorCall: Bool {
+        set {
+            ud.allowVisitorCall = newValue
+        }
+        get {
+            return ud.allowVisitorCall
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +30,11 @@ class SettingViewController: BaseViewController {
     override func initData() {
         headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         headerView.titleLabel.text = "通用设置"
-        headerView.titleLabel.textColor = R.color.maintextColor()
+        headerView.titleLabel.textColor = R.color.text_title()
         // MARK: - 允许访客呼叫到手机 这个选项是否显示
         if let unit = HomeRepository.shared.getCurrentUnit() {
-            ud.allowVisitorCall = HomeRepository.shared.isVisitorCallUserMobileEnable(unit)
-            if ud.allowVisitorCall {
+            showAllowVisitorCallSwitch = HomeRepository.shared.isVisitorCallUserMobileEnable(unit)
+            if showAllowVisitorCallSwitch {
                 readAllowVisitorCallStatus()
             }
         }
@@ -34,16 +42,21 @@ class SettingViewController: BaseViewController {
         tableView.dataSource = self
     }
     
+    
     func readAllowVisitorCallStatus() {
         MineRepository.shared.getUserDoNotDisturbStatus { [weak self] status in
             guard let self = self else { return }
+            let operateStatus = status ? "F" : "T"
+            logger.info("从服务端获取的状态=====> \(operateStatus)")
             self.isAllowVisitorCall = status
             self.tableView.reloadData()
         }
     }
     
     func updateAllowVisitorCallStatus(_ status: Bool) {
-        MineRepository.shared.updateUserDoNotDisturbStatus(status ? "T":"F") { [weak self] errorMsg in
+        let operateStatus = status ? "F" : "T"
+        logger.info("操作之后的状态=====> \(operateStatus)")
+        MineRepository.shared.updateUserDoNotDisturbStatus(operateStatus) { [weak self] errorMsg in
             guard let self = self else { return }
             if errorMsg.isEmpty {
                 self.isAllowVisitorCall = status
@@ -125,7 +138,7 @@ class SettingViewController: BaseViewController {
     
     // MARK: - UI
     override func initUI() {
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.addSubview(headerView)
         view.addSubview(tableView)
         
@@ -143,8 +156,8 @@ class SettingViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.closeButton.setImage(R.image.common_back_black(), for: .normal)
-        view.titleLabel.textColor = R.color.maintextColor()
-        view.backgroundColor = R.color.whiteColor()
+        view.titleLabel.textColor = R.color.text_title()
+        view.backgroundColor = R.color.whitecolor()
         view.titleLabel.text = "通用设置"
         return view
     }()
@@ -156,7 +169,7 @@ class SettingViewController: BaseViewController {
             view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
             view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }else{
             let view = UITableView.init(frame: CGRect.zero, style: .grouped)
@@ -164,7 +177,7 @@ class SettingViewController: BaseViewController {
             view.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCellIdentifier)
             view.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
             view.separatorStyle = .singleLine
-            view.backgroundColor = R.color.backgroundColor()
+            view.backgroundColor = R.color.bg()
             return view
         }
     }()
@@ -189,7 +202,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if ud.allowVisitorCall {
+            if showAllowVisitorCallSwitch {
                 return 4
             }else{
                 return 3

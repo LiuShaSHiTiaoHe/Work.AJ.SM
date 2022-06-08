@@ -10,7 +10,7 @@ import JKSwiftExtension
 
 enum AuthenticationAPI {
     case login(mobile: String, passWord: String)
-    case regist(mobile: String, code: String, passWord: String)
+    case register(mobile: String, code: String, passWord: String)
     case getMessageCode(mobile: String)
     case checkMessageCode(mobile: String, code: String)
     case resetPassword(mobile: String, password: String)
@@ -19,15 +19,15 @@ enum AuthenticationAPI {
 extension AuthenticationAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: APIs.baseUrl)!
+        return URL(string: ApiBaseUrl())!
     }
 
     var path: String {
         switch self {
         case .login:
             return APIs.login
-        case .regist:
-            return APIs.regist
+        case .register:
+            return APIs.register
         case .getMessageCode:
             return APIs.msgCode
         case .checkMessageCode:
@@ -39,7 +39,7 @@ extension AuthenticationAPI: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .login, .regist, .getMessageCode, .checkMessageCode, .resetPassword:
+        case .login, .register, .getMessageCode, .checkMessageCode, .resetPassword:
             return .post
         }
     }
@@ -48,7 +48,7 @@ extension AuthenticationAPI: TargetType {
         switch self {
         case let .login(mobile, passWord):
             return .requestParameters(parameters: ["MOBILE": mobile, "PASSWORD": passWord].ekey("MOBILE"), encoding: URLEncoding.default)
-        case let .regist(mobile, code, passWord):
+        case let .register(mobile, code, passWord):
             return .requestParameters(parameters: ["MOBILE": mobile, "CODE": code, "PASSWORD": passWord, "USERNAME": mobile.jk.sub(from: mobile.count - 4), "REALNAME": mobile.jk.sub(from: mobile.count - 4)].ekey("USERNAME"), encoding: URLEncoding.default)
         case let .getMessageCode(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)

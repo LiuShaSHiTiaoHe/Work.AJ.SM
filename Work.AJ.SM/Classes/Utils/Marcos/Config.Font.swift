@@ -36,7 +36,6 @@ let kTitleFont = k18Font
 let kSecondTitleFont = k16Font
 
 func fontSize(_ fontSize: CGFloat) -> UIFont {
-//    return UIFont.systemFont(ofSize: fontSize*kWidthScale)
     if (kScreenWidth == 320) {
         return UIFont.systemFont(ofSize: fontSize - 2)
     } else if (kScreenWidth == 375) {

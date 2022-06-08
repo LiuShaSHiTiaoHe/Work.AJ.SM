@@ -85,14 +85,14 @@ class CommonStatusView: BaseView {
     lazy var statusLabel: UILabel = {
         let view = UILabel()
         view.font = k18Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
 
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
         view.font = k12Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
 

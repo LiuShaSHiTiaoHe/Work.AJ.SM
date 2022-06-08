@@ -55,7 +55,7 @@ class PropertyContactViewController: BaseViewController {
     lazy var headerView: CommonHeaderView = {
         let view = CommonHeaderView()
         view.titleLabel.text = "联系物业"
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         view.closeButton.setImage(R.image.common_back_white()!, for: .normal)
         return view
     }()
@@ -63,7 +63,7 @@ class PropertyContactViewController: BaseViewController {
     lazy var tableView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .none
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         view.register(PropertyContactTableViewCell.self, forCellReuseIdentifier: PropertyContactTableViewCellIdentifier)
         return view
     }()
@@ -92,7 +92,7 @@ extension PropertyContactViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = dataSource[indexPath.row]
-        if let mobile = model.mobile, mobile.jk.isValidMobile {
+        if let mobile = model.mobile, mobile.aj_isMobileNumber {
             JKGlobalTools.callPhone(phoneNumber: mobile) { flag in
                 
             }

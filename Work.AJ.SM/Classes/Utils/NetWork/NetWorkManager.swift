@@ -15,21 +15,24 @@ import CryptoSwift
 
 
 // MARK: - Completion Callback Block Defines
-typealias DefaultCompletion = ((_ errorMsg: String) -> Void)
-typealias RequestModelCallback<T: Mappable> = ((T, ResponseModel?) -> Void)
-typealias RequestModelsCallback<T: Mappable> = (([T], ResponseModel?) -> Void)
-typealias RequestBaseCallback = ((ResponseModel, JSON?) -> Void)
-typealias RequestFailureCallback = ((ResponseModel) -> Void)
-typealias DefaultSuccessCallback = ((JSON) -> Void)
+typealias DefaultCompletion = (_ errorMsg: String) -> Void
+typealias RequestModelCallback<T: Mappable> = (T, ResponseModel?) -> Void
+typealias RequestModelsCallback<T: Mappable> = ([T], ResponseModel?) -> Void
+typealias RequestBaseCallback = (ResponseModel, JSON?) -> Void
+typealias RequestFailureCallback = (ResponseModel) -> Void
+typealias DefaultSuccessCallback = (JSON) -> Void
 
 
 // MARK: - Network Response Key
-let dataKey = "data"
-let messageKey = "msg"
-let codeKey = "code"
-let successCode: Int = 101
-let JsonDecodeErrorCode: Int = 1000000
-let ConnectionFailureErrorCode: Int = 9999
+struct BaseResponseKey {
+    static let dataKey = "data"
+    static let messageKey = "msg"
+    static let codeKey = "code"
+    static let successCode: Int = 101
+    static let JsonDecodeErrorCode: Int = 1000000
+    static let ConnectionFailureErrorCode: Int = 9999
+}
+
 
 class ResponseModel {
     var code: Int = -999
@@ -74,6 +77,34 @@ extension TargetType {
                 errorHandler(code: responseModel.code, message: "暂无数据", showError: showError, failure: failureCallback)
             }
         }, failureCallback: failureCallback)
+    }
+    
+    @discardableResult
+    func otherRequest(successCallback: @escaping DefaultSuccessCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable?  {
+        return Network.default.provider.request(MultiTarget(self)) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    let jsonData = try JSON(data: response.data)
+                    logNetWorkInfo("\(jsonData)")
+                    successCallback(jsonData)
+                } catch {
+                    let model = ResponseModel()
+                    model.code = BaseResponseKey.JsonDecodeErrorCode
+                    model.message = "数据解析错误"
+                    failureCallback?(model)
+                }
+            case let .failure(error):
+                let model = ResponseModel()
+                model.code = BaseResponseKey.ConnectionFailureErrorCode
+                if let msg = error.errorDescription {
+                    model.message = msg
+                } else {
+                    model.message = "请求失败"
+                }
+                failureCallback?(model)
+            }
+        }
     }
 
 
@@ -141,16 +172,16 @@ extension TargetType {
             let jsonData = try JSON(data: response.data)
             logNetWorkInfo("\(jsonData)")
             let respModel = ResponseModel()
-            respModel.code = jsonData[codeKey].intValue
-            respModel.message = jsonData[messageKey].stringValue
-            if respModel.code == successCode {
-                respModel.data = jsonData[dataKey].rawString() ?? ""
+            respModel.code = jsonData[BaseResponseKey.codeKey].intValue
+            respModel.message = jsonData[BaseResponseKey.messageKey].stringValue
+            if respModel.code == BaseResponseKey.successCode {
+                respModel.data = jsonData[BaseResponseKey.dataKey].rawString() ?? ""
                 successCallback(respModel, jsonData)
             } else {
                 errorHandler(code: respModel.code, message: respModel.message, showError: showError, failure: failureCallback)
             }
         } catch {
-            errorHandler(code: JsonDecodeErrorCode, message: String(data: response.data, encoding: String.Encoding.utf8)!, showError: showError, failure: failureCallback)
+            errorHandler(code: BaseResponseKey.JsonDecodeErrorCode, message: String(data: response.data, encoding: String.Encoding.utf8)!, showError: showError, failure: failureCallback)
         }
     }
 

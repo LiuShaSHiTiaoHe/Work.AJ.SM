@@ -40,13 +40,13 @@ class VisitorInvitationRecordViewController: BaseViewController {
             passwordContentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
             passwordContentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
             passwordContentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
-            passwordContentView.isvalid = isValid
+            passwordContentView.isValid = isValid
             break
         case .qrcode:
             qrCodeContentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
             qrCodeContentView.saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
             qrCodeContentView.shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
-            qrCodeContentView.isvalid = isValid
+            qrCodeContentView.isValid = isValid
             break
         }
     }

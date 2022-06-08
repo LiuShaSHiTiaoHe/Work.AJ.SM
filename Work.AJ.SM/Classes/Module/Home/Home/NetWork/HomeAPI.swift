@@ -31,7 +31,7 @@ enum HomeAPI {
 extension HomeAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: APIs.baseUrl)!
+        return URL(string: ApiBaseUrl())!
     }
 
     var path: String {
@@ -118,7 +118,7 @@ extension HomeAPI: TargetType {
         case let .ncomRecord(communityID, startTime, endTime, page, count):
             let parameters = ["COMMUNITYID": communityID, "STARTTIME": startTime, "ENDTIME": endTime, "currentPage": page, "showCount": count].ekey("COMMUNITYID")
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-            // FIXME: - 待完善
+        // FIXME: - 待完善
         case .ncomSendStatus:
             return .requestPlain
         }

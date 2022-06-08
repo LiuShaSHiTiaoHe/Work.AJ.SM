@@ -133,7 +133,7 @@ class ChooseVisitorModeView: BaseView {
     
     lazy var titleLabel: UILabel = {
         let view = UILabel.init()
-        view.textColor = R.color.blackColor()
+        view.textColor = R.color.blackcolor()
         view.font = k16Font
         view.text = "请选择合适的访客方式"
         view.textAlignment = .center
@@ -151,7 +151,7 @@ class ChooseVisitorModeView: BaseView {
         let view = UILabel.init()
         view.text = "访客二维码"
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -168,7 +168,7 @@ class ChooseVisitorModeView: BaseView {
         let view = UILabel.init()
         view.text = "访客密码"
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

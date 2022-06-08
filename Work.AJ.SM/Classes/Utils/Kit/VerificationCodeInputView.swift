@@ -36,7 +36,7 @@ class VerificationCodeInputView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel.init()
         label.font = k16Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         label.text = "验证码"
         label.textAlignment = .left
         return label
@@ -55,7 +55,7 @@ class VerificationCodeInputView: UIView {
     private let sendCodeButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("发送验证码", for: .normal)
-        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.themecolor(), for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.textAlignment = .right
         return button
@@ -65,7 +65,7 @@ class VerificationCodeInputView: UIView {
         let label = CountdownLabel.init()
         label.timeFormat = "ss"
         label.textAlignment = .right
-        label.textColor = R.color.themeColor()
+        label.textColor = R.color.themecolor()
         label.font = k16Font
         label.animationType = .Evaporate
         label.countdownDelegate = self
@@ -74,7 +74,7 @@ class VerificationCodeInputView: UIView {
 
     private let seperator: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.separateColor()
+        view.backgroundColor = R.color.separator()
         return view
     }()
 
@@ -82,7 +82,7 @@ class VerificationCodeInputView: UIView {
     private lazy var tipLabel: UILabel = {
         let label = UILabel()
         label.font = k10Font
-        label.textColor = R.color.errorRedColor()
+        label.textColor = R.color.sub_red()
         return label
     }()
 
@@ -152,15 +152,15 @@ class VerificationCodeInputView: UIView {
     // MARK: -Actions
     @objc private func textInputEditingBegin(_ sender: UITextField) {
         DispatchQueue.main.async {
-            self.seperator.backgroundColor = R.color.themeColor()
-            self.titleLabel.textColor = R.color.themeColor()
+            self.seperator.backgroundColor = R.color.themecolor()
+            self.titleLabel.textColor = R.color.themecolor()
         }
     }
 
     @objc private func textInputEditingEnd(_ sender: UITextField) {
         DispatchQueue.main.async {
-            self.seperator.backgroundColor = R.color.separateColor()
-            self.titleLabel.textColor = R.color.maintextColor()
+            self.seperator.backgroundColor = R.color.separator()
+            self.titleLabel.textColor = R.color.text_title()
             if sender.text?.count == 0 {
                 self.cleanInput()
             }

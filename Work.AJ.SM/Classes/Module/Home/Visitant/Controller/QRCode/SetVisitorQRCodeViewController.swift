@@ -54,8 +54,8 @@ class SetVisitorQRCodeViewController: BaseViewController {
         let datePickerManager = PGDatePickManager.init()
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
-        datePickerManager.cancelButtonTextColor = R.color.errorRedColor()
-        datePickerManager.confirmButtonTextColor = R.color.themeColor()
+        datePickerManager.cancelButtonTextColor = R.color.sub_red()
+        datePickerManager.confirmButtonTextColor = R.color.themecolor()
         let datePicker = datePickerManager.datePicker
         datePicker?.datePickerType = .line
         datePicker?.datePickerMode = .dateHourMinute
@@ -66,9 +66,9 @@ class SetVisitorQRCodeViewController: BaseViewController {
         case .valid:
             datePickerManager.title = "有效期至"
         }
-        datePicker?.textColorOfSelectedRow = R.color.themeColor()
+        datePicker?.textColorOfSelectedRow = R.color.themecolor()
         datePicker?.textFontOfSelectedRow = k18Font
-        datePicker?.lineBackgroundColor = R.color.themeColor()
+        datePicker?.lineBackgroundColor = R.color.themecolor()
         datePicker?.minimumDate = Date()
         datePicker?.maximumDate = NSDate.init().addingHours(12)//addingMonths(13)
         datePicker?.selectedDate = {[weak self] dateComponents in
@@ -139,7 +139,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
 
 extension SetVisitorQRCodeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,7 +163,7 @@ extension SetVisitorQRCodeViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
+        60.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

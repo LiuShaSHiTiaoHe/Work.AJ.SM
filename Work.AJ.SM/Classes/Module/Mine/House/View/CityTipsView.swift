@@ -25,7 +25,7 @@ class CityTipsView: BaseView {
     }
 
     override func initializeView() {
-        backgroundColor = R.color.whiteColor()
+        backgroundColor = R.color.whitecolor()
 
         addSubview(tipsLabel)
         addSubview(locationIcon)
@@ -63,7 +63,7 @@ class CityTipsView: BaseView {
         let view = UILabel()
         view.textAlignment = .left
         view.font = k16Font
-        view.textColor = R.color.secondtextColor()
+        view.textColor = R.color.text_title()
         view.text = "请选择城市"
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view
@@ -77,7 +77,7 @@ class CityTipsView: BaseView {
     lazy var cityName: UILabel = {
         let view = UILabel()
         view.font = k18Font
-        view.textColor = R.color.themeColor()
+        view.textColor = R.color.themecolor()
         view.textAlignment = .center
         view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         return view

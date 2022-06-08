@@ -9,17 +9,21 @@ import Foundation
 import SVProgressHUD
 import JKSwiftExtension
 
-typealias HomeModulesCompletion = (([HomePageFunctionModule]) -> Void)
-typealias HomeAdsAndNoticeCompletion = (([AdsModel], [NoticeModel]) -> Void)
-typealias HomeDataCompletion = (([HomePageFunctionModule], [AdsModel], [NoticeModel]) -> Void)
-
-typealias HomeAllLocksCompletion = (([UnitLockModel]) -> Void)
-typealias ElevatorConfigurationCompletion = ((ElevatorConfiguration?) -> Void)
-typealias AgoraTokenCompletion = ((String) -> Void)
-
+typealias HomeModulesCompletion = ([HomePageFunctionModule]) -> Void
+typealias HomeAdsAndNoticeCompletion = ([AdsModel], [NoticeModel]) -> Void
+typealias HomeDataCompletion = ([HomePageFunctionModule], [AdsModel], [NoticeModel], UnitStatus) -> Void
+typealias HomeAllLocksCompletion = ([UnitLockModel]) -> Void
+typealias ElevatorConfigurationCompletion = (ElevatorConfiguration?) -> Void
+typealias AgoraTokenCompletion = (String) -> Void
 // MARK: - NCom
-typealias NComAllDeviceInfoCompletion = (([NComDTU]) -> Void)
-typealias NComCallRecordCompletion = (([NComRecordInfo], Int) -> Void)
+typealias NComAllDeviceInfoCompletion = ([NComDTU]) -> Void
+typealias NComCallRecordCompletion = ([NComRecordInfo], Int) -> Void
+
+enum UnitStatus {
+    case Invalid
+    case Normal
+    case Unknown
+}
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -29,90 +33,56 @@ class HomeRepository {
         var homeModuleArray: Array<HomePageFunctionModule> = []
         var adsArray: Array<AdsModel> = []
         var noticeArray: Array<NoticeModel> = []
-        var currentUnit: UnitModel?
         guard let userMobile = ud.userMobile else {
             SVProgressHUD.dismiss()
-            completion(homeModuleArray, adsArray, noticeArray)
+            completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             return
         }
-        HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .ignoreCache, showError: true) { [weak self] models, response in
+        /*
+         房屋状态：
+         待审核 P, 失效 H, 过期 E, 正常 N
+         */
+        HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             guard let `self` = self else {
                 return
             }
             guard models.count > 0 else {
+                completion(homeModuleArray, adsArray, noticeArray, .Unknown)
                 return
             }
             RealmTools.addList(models, update: .all) {
                 logger.info("update done")
             }
-            if let currentUnitID = Defaults.currentUnitID {
-                currentUnit = models.first(where: { model in
-                    model.unitid == currentUnitID
-                })
-                if let unit = currentUnit {
+            
+            // MARK: - 当前房间是否有效
+            if let cUnitID = ud.currentUnitID, let cUnit = models.first(where: { model in
+                model.unitid == cUnitID
+            }), let cUnitState = cUnit.state, cUnitState == "N" {
+                homeModuleArray = self.filterHomePageModules(cUnit)
+                self.adsAndNotice { ads, notices in
+                    adsArray = ads
+                    noticeArray = notices
+                    completion(homeModuleArray, adsArray, noticeArray, .Normal)
+                }
+            } else {
+            // MARK: - 第一个有效的房屋
+                if let unit = models.first(where: { model in
+                    model.state == "N"
+                }), let unitID = unit.unitid {
+                    ud.currentUnitID = unitID
                     homeModuleArray = self.filterHomePageModules(unit)
                     self.adsAndNotice { ads, notices in
                         adsArray = ads
                         noticeArray = notices
-                        completion(homeModuleArray, adsArray, noticeArray)
+                        completion(homeModuleArray, adsArray, noticeArray, .Normal)
                     }
                 } else {
-                    completion(homeModuleArray, adsArray, noticeArray)
-                }
-            } else {
-                currentUnit = models.first(where: { model in
-                    model.state == "N"
-                })
-                if let firstUnit = currentUnit, let unitID = firstUnit.unitid {
-                    Defaults.currentUnitID = unitID
-                    homeModuleArray = self.filterHomePageModules(firstUnit)
-                    self.adsAndNotice { ads, notices in
-                        adsArray = ads
-                        noticeArray = notices
-                        completion(homeModuleArray, adsArray, noticeArray)
-                    }
-                } else {
-                    completion(homeModuleArray, adsArray, noticeArray)
+                    completion(homeModuleArray, adsArray, noticeArray, .Invalid)
                 }
             }
         } failureCallback: { response in
             logger.info("\(response.message)")
-            completion(homeModuleArray, adsArray, noticeArray)
-        }
-    }
-
-    func allUnits(completion: @escaping HomeModulesCompletion) {
-        SVProgressHUD.show()
-        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
-            SVProgressHUD.dismiss()
-            guard let `self` = self else {
-                return
-            }
-            guard models.count > 0 else {
-                return
-            }
-            RealmTools.addList(models, update: .all) {
-                logger.info("update done")
-            }
-            if let currentUnitID = Defaults.currentUnitID {
-                if let unit = models.first(where: { model in
-                    model.unitid == currentUnitID
-                }) {
-                    completion(self.filterHomePageModules(unit))
-                }
-            } else {
-                if let firstUnit = models.first(where: { model in
-                    model.state == "N"
-                }), let unitID = firstUnit.unitid {
-                    Defaults.currentUnitID = unitID
-                    completion(self.filterHomePageModules(firstUnit))
-                } else {
-                    completion([])
-                }
-            }
-        } failureCallback: { response in
-            logger.info("\(response.message)")
-            completion([])
+            completion(homeModuleArray, adsArray, noticeArray, .Unknown)
         }
     }
 
@@ -192,6 +162,13 @@ class HomeRepository {
         }
         return ""
     }
+    
+    func isUnitOwner() -> Bool {
+        if currentUserType() == "O" {
+            return true
+        }
+        return false
+    }
 }
 
 // MARK: - locks
@@ -248,7 +225,7 @@ extension HomeRepository {
 
 // MARK: - 配置
 extension HomeRepository {
-    func getElevatorConffiguration(completion: @escaping ElevatorConfigurationCompletion) {
+    func getElevatorConfiguration(completion: @escaping ElevatorConfigurationCompletion) {
         if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
             HomeAPI.getElevatorConfiguration(communityID: communityID).request(modelType: ElevatorConfiguration.self, cacheType: .ignoreCache, showError: true) { model, response in
                 completion(model)
@@ -328,7 +305,7 @@ extension HomeRepository {
         var result = [HomePageFunctionModule]()
         let allkeys = HomePageModule.allCases
         let allModules = allkeys.compactMap { moduleEnum in
-            return moduleEnum.model
+            moduleEnum.model
         }
         if let otherused = unit.otherused, otherused == 1 {
             return allModules.filter {
@@ -343,8 +320,7 @@ extension HomeRepository {
                     }
                 }
             }
-            // MARK: - 当前用户在当前房屋的角色是业主，有添加成员的功能
-            if let userType = unit.usertype, userType == "O" {
+            if isMemberManagementEnable(unit) {
                 result.append(HomePageModule.addFamilyMember.model)
             }
         }
@@ -416,6 +392,15 @@ extension HomeRepository {
 }
 
 extension HomeRepository {
+    // MARK: - 添加成员是否支持
+    func isMemberManagementEnable(_ unit: UnitModel) -> Bool {
+        // MARK: - 当前用户在当前房屋的角色是业主，有添加成员的功能
+        if let myset11 = unit.myset11, myset11 == "T", let userType = unit.usertype, userType == "O" {
+            return true
+        }
+        return false
+    }
+
     // MARK: - 访客密码功能是否支持
     func isVisitorPasswordEnable(_ unit: UnitModel) -> Bool {
         if let myset7 = unit.myset7, myset7 == "T" {
@@ -443,6 +428,14 @@ extension HomeRepository {
     // MARK: - 人脸认证是否支持
     func isFaceCertificationEnable(_ unit: UnitModel) -> Bool {
         if let myset1 = unit.myset1, myset1 == "T" {
+            return true
+        }
+        return false
+    }
+    
+    //MARK: - 开门设置是否支持
+    func isOpenDoorSettingEnable(_ unit: UnitModel) -> Bool {
+        if let myset6 = unit.myset6, myset6 == "T" {
             return true
         }
         return false
@@ -476,9 +469,15 @@ extension HomeRepository {
     }
 
     // MARK: - 消息是否支持
-    func isNoticeMessageEnable(_ unit: UnitModel) -> Bool {
-        if let myset4 = unit.myset4, myset4 == "T" {
-            return true
+    func isNoticeMessageEnable(_ unit: UnitModel? = nil) -> Bool {
+        if let unit = unit {
+            if let myset4 = unit.myset4, myset4 == "T" {
+                return true
+            }
+        } else {
+            if let unit = HomeRepository.shared.getCurrentUnit(), let myset4 = unit.myset4, myset4 == "T" {
+                return true
+            }
         }
         return false
     }

@@ -25,19 +25,19 @@ class MemberListCell: UITableViewCell {
                     deleteButton.isHidden = false
                     if userType == "O" {
                         memberType.text = "业主"
-                        memberType.textColor = R.color.owner_greenColor()
-                        memberType.backgroundColor = R.color.ownerB_greenColor()
+                        memberType.textColor = R.color.sub_green()
+                        memberType.backgroundColor = R.color.bg_green()
                         deleteButton.isHidden = true
                     }
                     if userType == "F" {
                         memberType.text = "家属"
-                        memberType.textColor = R.color.family_yellowColor()
-                        memberType.backgroundColor = R.color.familyB_yellowColor()
+                        memberType.textColor = R.color.sub_yellow()
+                        memberType.backgroundColor = R.color.bg_yellow()
                     }
                     if userType == "R" {
-                        memberType.text = "访客"
-                        memberType.textColor = R.color.family_yellowColor()
-                        memberType.backgroundColor = R.color.familyB_yellowColor()
+                        memberType.text = "成员"
+                        memberType.textColor = R.color.sub_yellow()
+                        memberType.backgroundColor = R.color.bg_yellow()
                     }
                 }
                 if let realName = member.realName, !realName.isEmpty {
@@ -83,7 +83,7 @@ class MemberListCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         contentView.addSubview(bgView)
         bgView.addSubview(memberType)
         bgView.addSubview(nameLabel)
@@ -147,7 +147,7 @@ class MemberListCell: UITableViewCell {
     
     lazy var bgView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         view.clipsToBounds = true
         return view
@@ -165,28 +165,28 @@ class MemberListCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel.init()
         label.font = k15Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         return label
     }()
     
     lazy var phoneLabel: UILabel = {
         let label = UILabel.init()
         label.font = k15Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         return label
     }()
     
     lazy var statusLabel: UILabel = {
         let label = UILabel.init()
         label.font = k15Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         return label
     }()
     
     lazy var roleLabel: UILabel = {
         let label = UILabel.init()
         label.font = k15Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         label.textAlignment = .right
         return label
     }()

@@ -34,13 +34,13 @@ class HouseCell: UITableViewCell {
             if let state = unit?.state {
                 if state == "P" {
                     currentStateLabel.text = "待审核"
-                    currentStateLabel.textColor = R.color.family_yellowColor()
+                    currentStateLabel.textColor = R.color.sub_yellow()
                 }else if state == "H" {
                     currentStateLabel.text = "已失效"
-                    currentStateLabel.textColor = R.color.errorRedColor()
+                    currentStateLabel.textColor = R.color.sub_red()
                 }else if state == "E" {
                     currentStateLabel.text = "已过期"
-                    currentStateLabel.textColor = R.color.errorRedColor()
+                    currentStateLabel.textColor = R.color.sub_red()
                 }else{
                     currentStateLabel.text = ""
                     currentStateLabel.isHidden = true
@@ -55,19 +55,19 @@ class HouseCell: UITableViewCell {
                     selectButton.isHidden = true
                     currentStateLabel.isHidden = false
                     currentStateLabel.text = "当前房屋"
-                    currentStateLabel.textColor = R.color.secondtextColor()
+                    currentStateLabel.textColor = R.color.text_info()
                 }
             }
             
             if let userType = unit?.usertype {
                 if userType == "O" {
                     ownerType.text = "业主"
-                    ownerType.textColor = R.color.owner_greenColor()
-                    ownerType.backgroundColor = R.color.ownerB_greenColor()
+                    ownerType.textColor = R.color.sub_green()
+                    ownerType.backgroundColor = R.color.bg_green()
                 }else{
                     ownerType.text = "家属"
-                    ownerType.textColor = R.color.family_yellowColor()
-                    ownerType.backgroundColor = R.color.familyB_yellowColor()
+                    ownerType.textColor = R.color.sub_yellow()
+                    ownerType.backgroundColor = R.color.bg_yellow()
                 }
             }
             
@@ -81,7 +81,7 @@ class HouseCell: UITableViewCell {
     
     lazy var backGround: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         view.layer.cornerRadius = 10.0
         view.clipsToBounds = true
         return view
@@ -99,21 +99,21 @@ class HouseCell: UITableViewCell {
     lazy var cellName: UILabel = {
         let label = UILabel.init()
         label.font = k15Font
-        label.textColor = R.color.maintextColor()
+        label.textColor = R.color.text_title()
         return label
     }()
     
     lazy var communityName: UILabel = {
         let label = UILabel.init()
         label.font = k12Font
-        label.textColor = R.color.secondtextColor()
+        label.textColor = R.color.text_info()
         return label
     }()
     
     lazy var currentStateLabel: UILabel = {
         let label = UILabel.init()
         label.font = k12Font
-        label.textColor = R.color.secondtextColor()
+        label.textColor = R.color.text_info()
         label.textAlignment = .center
         return label
     }()
@@ -121,8 +121,8 @@ class HouseCell: UITableViewCell {
     lazy var selectButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("选择", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
-        button.backgroundColor = R.color.blueColor()
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.backgroundColor = R.color.themecolor()
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = k12Font
         button.addTarget(self, action: #selector(chooseUnit), for: .touchUpInside)
@@ -135,7 +135,7 @@ class HouseCell: UITableViewCell {
     }
     
     private func initializeView() {
-        contentView.backgroundColor = R.color.backgroundColor()
+        contentView.backgroundColor = R.color.bg()
         contentView.addSubview(backGround)
         
         backGround.addSubview(ownerType)

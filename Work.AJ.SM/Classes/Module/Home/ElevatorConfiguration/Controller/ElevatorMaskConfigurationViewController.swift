@@ -51,16 +51,16 @@ class ElevatorMaskConfigurationViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(ElevatorMaskConfigurationCell.self, forCellReuseIdentifier: ElevatorMaskConfigurationCellIdentifier)
         view.separatorStyle = .singleLine
-        view.backgroundColor = R.color.backgroundColor()
+        view.backgroundColor = R.color.bg()
         return view
     }()
     
     lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("发送", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.layer.cornerRadius = 20.0
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         return button
     }()
 

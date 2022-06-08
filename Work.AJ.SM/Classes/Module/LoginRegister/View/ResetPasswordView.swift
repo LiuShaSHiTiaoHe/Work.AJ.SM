@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol ResetPasswordViewDelegate: NSObjectProtocol {
-    func resetPasswordComfirm(mobile: String, code: String, newPassword: String)
+    func resetPasswordConfirm(mobile: String, code: String, newPassword: String)
     func resetPasswordClose()
     func sendCode(mobile: String)
 }
@@ -21,7 +21,7 @@ class ResetPasswordView: UIView {
 
     lazy var headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.themebackgroundColor()
+        view.backgroundColor = R.color.bg_theme()
         return view
     }()
 
@@ -36,7 +36,7 @@ class ResetPasswordView: UIView {
         let view = UILabel.init()
         view.text = "重置密码"
         view.font = k16Font
-        view.textColor = R.color.whiteColor()
+        view.textColor = R.color.whitecolor()
         view.textAlignment = .center
         return view
     }()
@@ -44,8 +44,8 @@ class ResetPasswordView: UIView {
     lazy var inputContentView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        view.backgroundColor = R.color.whiteColor()
-        view.jk.addShadow(shadowColor: R.color.themeColor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
+        view.backgroundColor = R.color.whitecolor()
+        view.jk.addShadow(shadowColor: R.color.themecolor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
         return view
     }()
 
@@ -67,11 +67,11 @@ class ResetPasswordView: UIView {
     lazy var comfirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("重置密码", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.titleLabel?.font = k18Font
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(comfirmButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmButtonAction), for: .touchUpInside)
         return button
     }()
 
@@ -86,7 +86,7 @@ class ResetPasswordView: UIView {
     }
 
     func initializeView() {
-        backgroundColor = R.color.themebackgroundColor()
+        backgroundColor = R.color.bg_theme()
 
         addSubview(headerView)
         headerView.addSubview(closeButton)
@@ -100,13 +100,13 @@ class ResetPasswordView: UIView {
         headerView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
-            make.height.equalTo(kOriginTitleAndStateHeight)
+            make.height.equalTo(kTitleAndStateHeight)
         }
 
         closeButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin / 2)
             make.width.height.equalTo(20)
-            make.bottom.equalToSuperview().offset((20 + kStateHeight - kOriginTitleAndStateHeight) / 2)
+            make.bottom.equalToSuperview().offset((20 + kStateHeight - kTitleAndStateHeight) / 2)
         }
 
         titleLabel.snp.makeConstraints { make in
@@ -158,11 +158,11 @@ class ResetPasswordView: UIView {
     }
 
     @objc
-    func comfirmButtonAction() {
+    func confirmButtonAction() {
         var resetMobile = ""
         var resetCode = ""
         var newPassword = ""
-        if let mobile = mobileInput.inputString, mobile.jk.isValidMobile {
+        if let mobile = mobileInput.inputString, mobile.aj_isMobileNumber {
             resetMobile = mobile
         } else {
             mobileInput.errorMsg = "请填写正确的手机号码"
@@ -180,7 +180,7 @@ class ResetPasswordView: UIView {
             passwordInput.errorMsg = "请设置正确格式的密码"
             return
         }
-        delegate?.resetPasswordComfirm(mobile: resetMobile, code: resetCode, newPassword: newPassword)
+        delegate?.resetPasswordConfirm(mobile: resetMobile, code: resetCode, newPassword: newPassword)
     }
 
     @objc
@@ -193,7 +193,7 @@ class ResetPasswordView: UIView {
 extension ResetPasswordView: VerificationCodeInputViewDelegate {
     func sendCodeButtonPressed() {
         if let phoneNumber = mobileInput.inputString, !phoneNumber.isEmpty {
-            if phoneNumber.jk.isValidMobile {
+            if phoneNumber.aj_isMobileNumber {
                 codeInput.startCountDown()
                 delegate?.sendCode(mobile: phoneNumber)
             } else {

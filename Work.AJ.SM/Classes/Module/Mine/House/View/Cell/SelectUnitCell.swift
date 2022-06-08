@@ -14,13 +14,13 @@ class SelectUnitCell: UITableViewCell {
     var isCurrentCell: Bool = false {
         didSet {
             if isCurrentCell {
-                backgroundColor = R.color.whiteColor()
+                backgroundColor = R.color.whitecolor()
                 horizonLine.isHidden = false
-                locationName.textColor = R.color.themeColor()
+                locationName.textColor = R.color.themecolor()
             }else {
-                backgroundColor = R.color.backgroundColor()
+                backgroundColor = R.color.bg()
                 horizonLine.isHidden = true
-                locationName.textColor = R.color.maintextColor()
+                locationName.textColor = R.color.text_title()
             }
         }
     }
@@ -47,7 +47,7 @@ class SelectUnitCell: UITableViewCell {
     }
     
     private func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
         selectionStyle = .none
         contentView.addSubview(horizonLine)
         contentView.addSubview(locationName)
@@ -69,14 +69,14 @@ class SelectUnitCell: UITableViewCell {
     
     lazy var horizonLine: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.themeColor()
+        view.backgroundColor = R.color.themecolor()
         return view
     }()
     
     lazy var locationName: UILabel = {
         let view = UILabel()
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
     

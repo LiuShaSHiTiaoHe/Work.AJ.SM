@@ -13,13 +13,13 @@ class CurrentLocationView: BaseView {
         let view = UILabel()
         view.text = "当前城市"
         view.font = k14Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
 
     lazy var contentBackView: UIView = {
         let view = UIView()
-        view.backgroundColor = R.color.whiteColor()
+        view.backgroundColor = R.color.whitecolor()
         return view
     }()
 
@@ -32,20 +32,20 @@ class CurrentLocationView: BaseView {
     lazy var locationName: UILabel = {
         let view = UILabel()
         view.font = k16Font
-        view.textColor = R.color.maintextColor()
+        view.textColor = R.color.text_title()
         return view
     }()
 
     lazy var locationButton: UIButton = {
         let view = UIButton.init(type: .custom)
         view.setTitle("重新定位", for: .normal)
-        view.setTitleColor(R.color.themeColor(), for: .normal)
+        view.setTitleColor(R.color.themecolor(), for: .normal)
         view.titleLabel?.font = k14Font
         return view
     }()
 
     override func initializeView() {
-        backgroundColor = R.color.backgroundColor()
+        backgroundColor = R.color.bg()
 
         addSubview(titleLabel)
         addSubview(contentBackView)

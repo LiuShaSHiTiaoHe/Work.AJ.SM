@@ -40,11 +40,11 @@ class LoginView: BaseView {
             label.text = "已阅读并同意《用户协议》和《隐私声明》"
             label.font = k12Font
             label.numberOfLines = 0
-            label.textColor = R.color.secondtextColor()
-            label.customColor[customType1] = R.color.themeColor()
-            label.customColor[customType2] = R.color.themeColor()
-            label.customSelectedColor[customType1] = R.color.themeColor()
-            label.customSelectedColor[customType2] = R.color.themeColor()
+            label.textColor = R.color.text_info()
+            label.customColor[customType1] = R.color.themecolor()
+            label.customColor[customType2] = R.color.themecolor()
+            label.customSelectedColor[customType1] = R.color.themecolor()
+            label.customSelectedColor[customType2] = R.color.themecolor()
             label.handleCustomTap(for: customType1) { element in
                 self.delegate?.showTermsOfServices()
             }
@@ -59,7 +59,7 @@ class LoginView: BaseView {
             viewType = .login
             loginInputContentView.isHidden = false
             registerInputContentView.isHidden = true
-            comfirmButton.setTitle("登录", for: .normal)
+            confirmButton.setTitle("登录", for: .normal)
             inputContentView.snp.updateConstraints { make in
                 make.height.equalTo(345)
             }
@@ -67,7 +67,7 @@ class LoginView: BaseView {
             viewType = .register
             loginInputContentView.isHidden = true
             registerInputContentView.isHidden = false
-            comfirmButton.setTitle("注册", for: .normal)
+            confirmButton.setTitle("注册", for: .normal)
             inputContentView.snp.updateConstraints { make in
                 make.height.equalTo(405)
             }
@@ -85,13 +85,14 @@ class LoginView: BaseView {
     }
 
     @objc
-    func comfirmButtonAction() {
+    func confirmButtonAction() {
         hideKeyboard()
         switch viewType {
         case .login:
             var loginMobile = ""
             var loginPassword = ""
-            if let mobile = loginMobileInputView.inputString, mobile.jk.isValidMobile {
+            // MARK: - 暂时放开手机号码严格校验。
+            if let mobile = loginMobileInputView.inputString, mobile.aj_isMobileNumber {
                 loginMobile = mobile
             } else {
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
@@ -112,7 +113,8 @@ class LoginView: BaseView {
             var registerMobile = ""
             var registerCode = ""
             var registerPassword = ""
-            if let mobile = registerMobileInputView.inputString, mobile.jk.isValidMobile {
+            // MARK: - 暂时放开手机号码严格校验。
+            if let mobile = registerMobileInputView.inputString, mobile.aj_isMobileNumber {
                 registerMobile = mobile
             } else {
                 loginMobileInputView.errorMsg = "请填写正确的手机号码"
@@ -153,7 +155,7 @@ class LoginView: BaseView {
     lazy var tipsLabel: UILabel = {
         let label = UILabel.init()
         label.text = "欢迎使用"
-        label.textColor = R.color.whiteColor()
+        label.textColor = R.color.whitecolor()
         label.textAlignment = .left
         label.font = k34Font
         return label
@@ -162,7 +164,7 @@ class LoginView: BaseView {
     lazy var appNameLabel: UILabel = {
         let label = UILabel.init()
         label.text = "安杰智慧社区"
-        label.textColor = R.color.whiteColor()
+        label.textColor = R.color.whitecolor()
         label.textAlignment = .left
         label.font = k20Font
         return label
@@ -177,8 +179,8 @@ class LoginView: BaseView {
     lazy var inputContentView: UIView = {
         let view = UIView.init()
         view.layer.cornerRadius = 10
-        view.backgroundColor = R.color.whiteColor()
-        view.jk.addShadow(shadowColor: R.color.themeColor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
+        view.backgroundColor = R.color.whitecolor()
+        view.jk.addShadow(shadowColor: R.color.themecolor()!, shadowOffset: .zero, shadowOpacity: 0.2, shadowRadius: 10)
         return view
     }()
 
@@ -186,10 +188,10 @@ class LoginView: BaseView {
         let seg = BetterSegmentedControl.init()
         seg.segments = LabelSegment.segments(withTitles: ["账号登录", "账号注册"],
                 normalFont: k18Font,
-                normalTextColor: R.color.secondtextColor(),
+                normalTextColor: R.color.text_info(),
                 selectedFont: k18Font,
-                selectedTextColor: R.color.themeColor())
-        seg.setOptions([.backgroundColor(R.color.whiteColor()!), .indicatorViewBackgroundColor(R.color.whiteColor()!), .cornerRadius(5)])
+                selectedTextColor: R.color.themecolor())
+        seg.setOptions([.backgroundColor(R.color.whitecolor()!), .indicatorViewBackgroundColor(R.color.whitecolor()!), .cornerRadius(5)])
         seg.addTarget(self, action: #selector(navigationSegmentedControlValueChanged(_:)), for: .valueChanged)
         return seg
     }()
@@ -215,7 +217,7 @@ class LoginView: BaseView {
         let button = UIButton.init(type: .custom)
         button.setTitle("忘记密码?", for: .normal)
         button.titleLabel?.font = k14Font
-        button.setTitleColor(R.color.themeColor(), for: .normal)
+        button.setTitleColor(R.color.themecolor(), for: .normal)
         button.addTarget(self, action: #selector(forgetPassword), for: .touchUpInside)
         return button
     }()
@@ -252,20 +254,20 @@ class LoginView: BaseView {
 
     private let policyLabel = ActiveLabel()
 
-    // MARK: - Comfirm Button
-    lazy var comfirmButton: UIButton = {
+    // MARK: - Confirm Button
+    lazy var confirmButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.setTitle("登录", for: .normal)
-        button.setTitleColor(R.color.whiteColor(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
         button.titleLabel?.font = k18Font
-        button.backgroundColor = R.color.themeColor()
+        button.backgroundColor = R.color.themecolor()
         button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(comfirmButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmButtonAction), for: .touchUpInside)
         return button
     }()
 
     override func initializeView() {
-        backgroundColor = R.color.whiteColor()
+        backgroundColor = R.color.whitecolor()
         addSubview(backgroundImage)
         addSubview(tipsLabel)
         addSubview(appNameLabel)
@@ -282,7 +284,7 @@ class LoginView: BaseView {
         registerInputContentView.addSubview(registerPasswordInputView)
         registerInputContentView.addSubview(registerCheckButton)
         registerInputContentView.addSubview(policyLabel)
-        inputContentView.addSubview(comfirmButton)
+        inputContentView.addSubview(confirmButton)
         registerInputContentView.isHidden = true
         bringSubviewToFront(iconImageView)
 
@@ -398,7 +400,7 @@ class LoginView: BaseView {
             make.height.equalTo(22)
         }
 
-        comfirmButton.snp.makeConstraints { make in
+        confirmButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(43)
@@ -410,7 +412,7 @@ class LoginView: BaseView {
 extension LoginView: VerificationCodeInputViewDelegate {
     func sendCodeButtonPressed() {
         if let phoneNumber = registerMobileInputView.inputString, !phoneNumber.isEmpty {
-            if phoneNumber.jk.isValidMobile {
+            if phoneNumber.aj_isMobileNumber {
                 registerCodeInputView.startCountDown()
                 delegate?.sendCode(mobile: phoneNumber)
             } else {
@@ -425,10 +427,10 @@ extension LoginView: VerificationCodeInputViewDelegate {
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.isEqual(loginPasswordInputView.textInput) {
-            comfirmButtonAction()
+            confirmButtonAction()
             return true
         } else if textField.isEqual(registerPasswordInputView.textInput) {
-            comfirmButtonAction()
+            confirmButtonAction()
             return true
         }
         return false
