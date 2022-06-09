@@ -88,9 +88,9 @@ class HomeHeaderView: UICollectionReusableView {
         textCycleBackground.addSubview(textCycleScrollView)
 
         textCycleBackground.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin)
-            make.right.equalToSuperview().offset(-kMargin)
-            make.top.equalToSuperview()//.offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin / 2)
+            make.right.equalToSuperview().offset(-kMargin / 2)
+            make.top.equalToSuperview()
             make.height.equalTo(kMargin * 2)
         }
 
@@ -108,8 +108,8 @@ class HomeHeaderView: UICollectionReusableView {
         }
 
         imageCycleScrollView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(kMargin)
-            make.right.equalToSuperview().offset(-kMargin)
+            make.left.equalToSuperview().offset(kMargin / 2)
+            make.right.equalToSuperview().offset(-kMargin / 2)
             make.top.equalTo(textCycleBackground.snp.bottom).offset(kMargin / 2)
             make.bottom.equalToSuperview().offset(-kMargin / 2)
         }

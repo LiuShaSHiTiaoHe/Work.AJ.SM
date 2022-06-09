@@ -106,7 +106,7 @@ class PasswordInvitationView: BaseView {
         
         locationLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(kMargin/2)
-            make.height.equalTo(30)
+            make.height.equalTo(50)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
         }
@@ -247,6 +247,7 @@ class PasswordInvitationView: BaseView {
         let view = UILabel.init()
         view.textColor = R.color.text_title()
         view.font = k18Font
+        view.numberOfLines = 0
         view.textAlignment = .center
         return view
     }()
