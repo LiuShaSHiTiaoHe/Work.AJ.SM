@@ -148,10 +148,14 @@ class BLEAdvertisingManager: NSObject {
     // MARK: - OpenDoor Data
     private func prepareOpenDoorData() -> String? {
         if let unit = HomeRepository.shared.getCurrentUnit(), let cellMM = unit.cellmm, let userID = unit.userid, let phsycalFloorInt = unit.physicalfloor?.jk.toInt(), let sortbar = unit.sortbar {
+            var sortBarString = "0"
+            if sortbar.count == 1 {
+                sortBarString = sortbar
+            }
             let userIDString = String(format: "%05d", userID)
             let bleSignal = Defaults.bluetoothSignalStrength.jk.intToString
             let phsycalFloor = String(format: "%02d", phsycalFloorInt)
-            let partOfData = userIDString + sortbar + bleSignal + "M "
+            let partOfData = userIDString + sortBarString + bleSignal + "M "
             let openDoorData = "AJ" + partOfData + cellMM + "11" + phsycalFloor
             return openDoorData
         }
