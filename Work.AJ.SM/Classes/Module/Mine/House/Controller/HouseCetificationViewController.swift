@@ -54,7 +54,7 @@ class HouseCertificationViewController: BaseViewController {
             SVProgressHUD.showInfo(withStatus: "身份证号码不能为空")
             return
         } else {
-            if !identityNumber.jk.isValidIDCardNumStrict {
+            if !identityNumber.isValidIDCardNumber() {
                 SVProgressHUD.showInfo(withStatus: "身份证号码格式错误")
                 return
             }

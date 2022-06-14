@@ -41,7 +41,7 @@ class ConfirmFaceImageViewController: BaseViewController {
             return
         }
         
-        if !identifiedNumber.jk.isValidIDCardNumStrict {
+        if !identifiedNumber.isValidIDCardNumber() {
             SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
             return
         }
