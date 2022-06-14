@@ -163,6 +163,9 @@ class BaseVideoChatViewController: BaseViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        if lockMac.isEmpty {
+            contentView.openDoorButton.isHidden = true
+        }
     }
     
     lazy var contentView: AgoraVideoChatView = {

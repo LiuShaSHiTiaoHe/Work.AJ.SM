@@ -21,21 +21,24 @@ class CallNeighborViewController: BaseViewController {
 
     func callNumberValidation(_ blockNo: String, _ cellNo: String, _ unitNo: String) {
         let name = blockNo + "栋" + cellNo + "单元" + unitNo + "室"
-        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
-            guard let self = self else {
-                return
-            }
-            if userIDs.isEmpty {
-                SVProgressHUD.showInfo(withStatus: "你选择的房号暂无联系人")
-            } else {
-                self.startCall(userIDs[0], mac, name)
-            }
-        }
+        self.startCall("4155".ajAgoraAccount(), "", name)
+        // FIXME: - 暂时
+//        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
+//            guard let self = self else {
+//                return
+//            }
+//            if userIDs.isEmpty {
+//                SVProgressHUD.showInfo(withStatus: "你选择的房号暂无联系人")
+//            } else {
+//                self.startCall(userIDs[0], mac, name)
+//            }
+//        }
     }
 
     func startCall(_ number: String, _ lockMac: String, _ name: String) {
         //MARK: - 发送推送
         GDataManager.shared.sendVideoCallNotification(number)
+        startAgoraCall(number, lockMac, name)
 //        let vc = VideoChatViewController.init(startCall: number)
 //        vc.name = name
 //        vc.modalPresentationStyle = .fullScreen
