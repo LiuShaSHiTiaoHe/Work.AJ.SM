@@ -7,7 +7,7 @@
 
 import Foundation
 extension String {
-    func ajImageUrl() -> String {
+    public func ajImageUrl() -> String {
         return ud.appHost + "images/" + self
     }
     
@@ -21,12 +21,10 @@ extension String {
         return checker.evaluate(with: (self))
     }
     
-    private func getStringByRangeIntValue(Str: NSString, location: Int, length: Int) -> Int{
-        let a = Str.substring(with: NSRange(location: location, length: length))
-        let intValue = (a as NSString).integerValue
-        return intValue
+    public func ajAgoraAccount() -> String {
+        return "41" + self
     }
-    
+        
     public func isValidIDCardNumber() -> Bool {
             
         var value = self
@@ -187,7 +185,11 @@ extension String {
         default:
             return false
         }
-    func ajAgoraAccount() -> String {
-        return "41" + self
+    }
+    
+    private func getStringByRangeIntValue(Str: NSString, location: Int, length: Int) -> Int{
+        let a = Str.substring(with: NSRange(location: location, length: length))
+        let intValue = (a as NSString).integerValue
+        return intValue
     }
 }

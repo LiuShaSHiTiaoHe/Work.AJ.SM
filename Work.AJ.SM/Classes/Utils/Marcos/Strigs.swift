@@ -24,9 +24,7 @@ let kAmapKey = "359d74c1fda0ceb00f5c446de2d36ce8"
 // MARK: - Device info
 let kDeviceType = "iOS"
 
-// FIXME: - 测试声网APPID
-//let kAgoraAppID = "b0969a21e1fb48bb89069c86f4788eab"
-// MARK: - None token
+// MARK: - 声网APPID None token
 let kAgoraAppID = "31c87e63d50446baba06c0da8a0c99d9"
 
 // MARK: - Const String

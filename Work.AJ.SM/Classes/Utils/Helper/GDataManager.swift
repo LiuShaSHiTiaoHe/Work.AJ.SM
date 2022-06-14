@@ -101,7 +101,7 @@ class GDataManager: NSObject {
     func sendVideoCallNotification(_ alias: String) {
         var pushModel = CommonPushModel()
         pushModel.alias = alias
-        pushModel.aliasType = "3"
+        pushModel.aliasType = "1"
         pushModel.pushFor = "1"
         pushModel.pushType = "1"
         pushModel.type = "videoCall"

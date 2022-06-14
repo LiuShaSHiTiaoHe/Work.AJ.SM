@@ -21,14 +21,14 @@ class CallNeighborViewController: BaseViewController {
 
     func callNumberValidation(_ blockNo: String, _ cellNo: String, _ unitNo: String) {
         let name = blockNo + "栋" + cellNo + "单元" + unitNo + "室"
-        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] mobiles, mac in
+        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
             guard let self = self else {
                 return
             }
-            if mobiles.isEmpty {
+            if userIDs.isEmpty {
                 SVProgressHUD.showInfo(withStatus: "你选择的房号暂无联系人")
             } else {
-                self.startCall(mobiles[0], mac, name)
+                self.startCall(userIDs[0], mac, name)
             }
         }
     }

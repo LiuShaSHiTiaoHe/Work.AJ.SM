@@ -531,6 +531,7 @@ extension MineRepository {
                 if let dataDic = jsonData["data"].dictionaryObject {
                     var macString = ""
                     var mobiles: [String] = []
+                    var userIDs: [String] = []
                     if let locks = dataDic["LOCKS"] as? Array<Dictionary<String, Any>> {
                         if locks.count > 0 {
                             let macDic = locks[0]
@@ -543,7 +544,11 @@ extension MineRepository {
                     if let mobilesString = dataDic["CALLORDERMOBILE"] as? String {
                         mobiles = mobilesString.components(separatedBy: "|")
                     }
-                    completion(mobiles, macString)
+//                    completion(mobiles, macString)
+                    if let userIDsString = dataDic["reCallorderUserId"] as? String {
+                        userIDs = userIDsString.components(separatedBy: "|")
+                    }
+                    completion(userIDs, macString)
                 }
             } failureCallback: { response in
                 completion([], "")
