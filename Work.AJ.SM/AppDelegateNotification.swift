@@ -2,7 +2,7 @@
 //  AppDelegateNotification.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/4/2.
+//  Created by Anjie on 2022/4/2.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  RemoteOpenDoorViewController.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/18.
+//  Created by Anjie on 2022/2/18.
 //
 
 import UIKit

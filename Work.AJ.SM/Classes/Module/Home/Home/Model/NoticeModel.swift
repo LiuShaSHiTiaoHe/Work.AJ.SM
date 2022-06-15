@@ -2,7 +2,7 @@
 //  NoticeModel.swift
 //  SmartCommunity
 //
-//  Created by Fairdesk on 2021/12/30.
+//  Created by Anjie on 2021/12/30.
 //
 
 import UIKit

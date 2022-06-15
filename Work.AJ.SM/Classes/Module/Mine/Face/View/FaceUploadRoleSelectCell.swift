@@ -2,7 +2,7 @@
 //  FaceUploadRoleSelectCell.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/5/16.
+//  Created by Anjie on 2022/5/16.
 //
 
 import UIKit

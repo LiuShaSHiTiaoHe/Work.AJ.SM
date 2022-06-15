@@ -2,7 +2,7 @@
 //  NetWorkManager.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/7.
+//  Created by Anjie on 2022/2/7.
 //
 
 import Foundation

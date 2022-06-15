@@ -2,7 +2,7 @@
 //  HomePageModuleEnum.swift
 //  SmartCommunity
 //
-//  Created by Fairdesk on 2021/12/31.
+//  Created by Anjie on 2021/12/31.
 //
 
 import Foundation
