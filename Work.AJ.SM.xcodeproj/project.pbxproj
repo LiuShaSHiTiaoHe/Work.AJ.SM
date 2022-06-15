@@ -52,7 +52,7 @@
 		416F2E20279BAF67004E5AD9 /* Work_AJ_SMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E1F279BAF67004E5AD9 /* Work_AJ_SMUITests.swift */; };
 		416F2E22279BAF67004E5AD9 /* Work_AJ_SMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E21279BAF67004E5AD9 /* Work_AJ_SMUITestsLaunchTests.swift */; };
 		416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3327B0B3DD004E5AD9 /* APIs.swift */; };
-		416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3627B0B406004E5AD9 /* Strigs.swift */; };
+		416F2E3727B0B406004E5AD9 /* ConstStrigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3627B0B406004E5AD9 /* ConstStrigs.swift */; };
 		416F2E3927B0B427004E5AD9 /* ImportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3827B0B427004E5AD9 /* ImportFile.swift */; };
 		416F2E3C27B0B46F004E5AD9 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3B27B0B46F004E5AD9 /* UserDefaultsKeys.swift */; };
 		416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3D27B0B483004E5AD9 /* NotificationName.swift */; };
@@ -81,7 +81,7 @@
 		416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E6E27B0BFB5004E5AD9 /* UnitLockModel.swift */; };
 		416F2E7827B0BFC0004E5AD9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E7727B0BFC0004E5AD9 /* HomeViewController.swift */; };
 		416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E7927B0C5C5004E5AD9 /* Marcos.swift */; };
-		416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E8827B0CAD0004E5AD9 /* Config.Font.swift */; };
+		416F2E8927B0CAD0004E5AD9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E8827B0CAD0004E5AD9 /* Fonts.swift */; };
 		416F2E9127B1FB6B004E5AD9 /* UIViewController.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */; };
 		416F2E9427B2141B004E5AD9 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9327B2141B004E5AD9 /* HomeRepository.swift */; };
 		416F2E9627B2426C004E5AD9 /* AppDelegateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E9527B2426C004E5AD9 /* AppDelegateService.swift */; };
@@ -327,7 +327,7 @@
 		416F2E1F279BAF67004E5AD9 /* Work_AJ_SMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work_AJ_SMUITests.swift; sourceTree = "<group>"; };
 		416F2E21279BAF67004E5AD9 /* Work_AJ_SMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work_AJ_SMUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		416F2E3327B0B3DD004E5AD9 /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
-		416F2E3627B0B406004E5AD9 /* Strigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strigs.swift; sourceTree = "<group>"; };
+		416F2E3627B0B406004E5AD9 /* ConstStrigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstStrigs.swift; sourceTree = "<group>"; };
 		416F2E3827B0B427004E5AD9 /* ImportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFile.swift; sourceTree = "<group>"; };
 		416F2E3B27B0B46F004E5AD9 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		416F2E3D27B0B483004E5AD9 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 		416F2E6E27B0BFB5004E5AD9 /* UnitLockModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitLockModel.swift; sourceTree = "<group>"; };
 		416F2E7727B0BFC0004E5AD9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		416F2E7927B0C5C5004E5AD9 /* Marcos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marcos.swift; sourceTree = "<group>"; };
-		416F2E8827B0CAD0004E5AD9 /* Config.Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.Font.swift; sourceTree = "<group>"; };
+		416F2E8827B0CAD0004E5AD9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		416F2E9027B1FB6B004E5AD9 /* UIViewController.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.Extension.swift; sourceTree = "<group>"; };
 		416F2E9327B2141B004E5AD9 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		416F2E9527B2426C004E5AD9 /* AppDelegateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateService.swift; sourceTree = "<group>"; };
@@ -859,10 +859,10 @@
 		416F2E3527B0B3F3004E5AD9 /* Marcos */ = {
 			isa = PBXGroup;
 			children = (
-				416F2E3627B0B406004E5AD9 /* Strigs.swift */,
+				416F2E3627B0B406004E5AD9 /* ConstStrigs.swift */,
 				416F2E3827B0B427004E5AD9 /* ImportFile.swift */,
 				416F2E7927B0C5C5004E5AD9 /* Marcos.swift */,
-				416F2E8827B0CAD0004E5AD9 /* Config.Font.swift */,
+				416F2E8827B0CAD0004E5AD9 /* Fonts.swift */,
 			);
 			path = Marcos;
 			sourceTree = "<group>";
@@ -2111,7 +2111,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2353,7 +2353,7 @@
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */,
 				4173C23A27C6192400B8FBB8 /* MineRepository.swift in Sources */,
-				416F2E3727B0B406004E5AD9 /* Strigs.swift in Sources */,
+				416F2E3727B0B406004E5AD9 /* ConstStrigs.swift in Sources */,
 				412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */,
 				419C95D3283F59D3001E7099 /* AppUpdateView.swift in Sources */,
 				419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */,
@@ -2383,7 +2383,7 @@
 				41A620422817F41900DE3B54 /* AureolaView.swift in Sources */,
 				419AD6A527FEC58F00C902B8 /* ElevatorConfigurationView.swift in Sources */,
 				4173C23D27C619A000B8FBB8 /* MineView.swift in Sources */,
-				416F2E8927B0CAD0004E5AD9 /* Config.Font.swift in Sources */,
+				416F2E8927B0CAD0004E5AD9 /* Fonts.swift in Sources */,
 				416F2EE227BCD0C8004E5AD9 /* OwnerQRCodeViewController.swift in Sources */,
 				410A108727F2E4120059B2C3 /* MyVisitorCell.swift in Sources */,
 				416F2EED27BCF98B004E5AD9 /* BleCallElevatorViewController.swift in Sources */,

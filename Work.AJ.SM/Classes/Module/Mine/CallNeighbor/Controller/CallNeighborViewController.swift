@@ -21,7 +21,7 @@ class CallNeighborViewController: BaseViewController {
 
     func callNumberValidation(_ blockNo: String, _ cellNo: String, _ unitNo: String) {
         let name = blockNo + "栋" + cellNo + "单元" + unitNo + "室"
-        self.startCall("4155".ajAgoraAccount(), "", name)
+        startCall("4155".ajAgoraAccount(), "", name)
         // FIXME: - 暂时
 //        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
 //            guard let self = self else {
@@ -39,10 +39,6 @@ class CallNeighborViewController: BaseViewController {
         //MARK: - 发送推送
         GDataManager.shared.sendVideoCallNotification(number)
         startAgoraCall(number, lockMac, name)
-//        let vc = VideoChatViewController.init(startCall: number)
-//        vc.name = name
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: true, completion: nil)
     }
 
     // MARK: - UI

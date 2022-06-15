@@ -544,8 +544,7 @@ extension MineRepository {
                     if let mobilesString = dataDic["CALLORDERMOBILE"] as? String {
                         mobiles = mobilesString.components(separatedBy: "|")
                     }
-//                    completion(mobiles, macString)
-                    if let userIDsString = dataDic["reCallorderUserId"] as? String {
+                    if let userIDsString = dataDic["CALLORDERSTR"] as? String {
                         userIDs = userIDsString.components(separatedBy: "|")
                     }
                     completion(userIDs, macString)
