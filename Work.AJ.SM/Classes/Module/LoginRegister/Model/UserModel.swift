@@ -2,7 +2,7 @@
 //  UserModel.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/14.
+//  Created by Anjie on 2022/2/14.
 //
 
 import Foundation

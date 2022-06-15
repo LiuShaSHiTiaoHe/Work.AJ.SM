@@ -2,7 +2,7 @@
 //  AddMemberView.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/23.
+//  Created by Anjie on 2022/2/23.
 //
 
 import UIKit

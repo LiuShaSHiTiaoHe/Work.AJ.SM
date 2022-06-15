@@ -2,7 +2,7 @@
 //  HomeModuleCell.swift
 //  SmartCommunity
 //
-//  Created by Fairdesk on 2022/1/4.
+//  Created by Anjie on 2022/1/4.
 //
 
 import UIKit

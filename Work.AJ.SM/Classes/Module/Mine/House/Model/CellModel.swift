@@ -2,7 +2,7 @@
 //  CellModel.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/3/9.
+//  Created by Anjie on 2022/3/9.
 //
 
 import UIKit
