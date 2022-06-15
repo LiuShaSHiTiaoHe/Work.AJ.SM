@@ -16,7 +16,7 @@ class GDataManager: NSObject {
     static let shared = GDataManager()
 
     func loginState() -> Bool {
-        return ud.loginState
+        ud.loginState
     }
 
     func showLoginView() {

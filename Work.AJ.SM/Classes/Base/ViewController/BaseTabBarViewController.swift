@@ -9,7 +9,7 @@ import Foundation
 import ESTabBarController_swift
 import Haptica
 import SVProgressHUD
-
+import SwiftyJSON
 import AgoraRtmKit
 import AgoraRtcKit
 
@@ -124,25 +124,46 @@ extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
             vc.isOutgoing = false
-            vc.localNumber = invitation.callee
-            vc.remoteNumber = invitation.caller
-            vc.channel = invitation.caller
+            var data = ToVideoChatModel()
+            data.localNumber = invitation.callee
+            data.remoteNumber = invitation.caller
+            data.channel = invitation.caller
+
+//            vc.localNumber = invitation.callee
+//            vc.remoteNumber = invitation.caller
+//            vc.channel = invitation.caller
             // MARK: - content 放入两个参数，用','隔开:门口机的mac地址和名称
-            if let content = invitation.content{
-                let datas = content.components(separatedBy: ",")
-                if datas.count == 2 {
-                    vc.lockMac = datas[0]
-                    vc.remoteName = datas[1]
-                }else{
-                    vc.lockMac = content
-                }
+            /*
+             Dictionary
+             "remoteType": "1"  mobile 1 device(门口机)2
+             "remoteName": ""
+             "lockMac": ""
+             */
+            if let content = invitation.content, !content.isEmpty {
+                let jsonData = JSON(parseJSON: content)
+                logger.info("RTM Invitation Content ===> \(jsonData)")
+                data.lockMac = jsonData["lockMac"].stringValue
+                data.remoteType = jsonData["remoteType"].stringValue
+                data.remoteName = jsonData["remoteName"].stringValue
+                vc.data = data
+                present(vc, animated: true)
+
+//                let data = content.components(separatedBy: ",")
+//                if data.count == 2 {
+//                    vc.lockMac = data[0]
+//                    vc.remoteName = data[1]
+//                }else{
+//                    vc.lockMac = content
+//                }
+            } else {
+                SVProgressHUD.showError(withStatus: "视频通话邀请参数不全")
             }
-            self.present(vc, animated: true)
+//            present(vc, animated: true)
         }
     }
     
     func inviter(_ inviter: AgoraRtmCallKit, remoteDidCancelIncoming invitation: AgoraRtmInvitation) {
-        if let vc = self.presentedViewController as? BaseVideoChatViewController {
+        if let vc = presentedViewController as? BaseVideoChatViewController {
             vc.leaveChannel()
             vc.dismiss(animated: true, completion: nil)
         }
@@ -158,7 +179,7 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
                 SVProgressHUD.showError(withStatus: "\(reason.description)")
             case .remoteReject(let remote):
                 SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
-            case .normaly(_):
+            case .normally(_):
                 guard let inviter = AgoraRtm.shared().inviter else {
                     fatalError("rtm inviter nil")
                 }
@@ -171,15 +192,17 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
                 default:
                     break
                 }
-            case .toVideoChat(let channel , let remote, let lockMac):
-                let vc = BaseVideoChatViewController()
-                vc.modalPresentationStyle = .fullScreen
-                vc.delegate = self
-                vc.channel = channel
-                vc.remoteUid = remote
-                vc.lockMac = lockMac
-                vc.localUid = UInt(AgoraRtm.shared().account!)!
-                self.present(vc, animated: true)
+            case .toVideoChat(let info):
+                if !info.isEmpty() {
+                    let vc = BaseVideoChatViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.delegate = self
+                    vc.channel = info.channel
+                    vc.remoteUid = UInt(info.remoteNumber)
+                    vc.lockMac = info.lockMac
+                    vc.localUid = UInt(info.localNumber)//UInt(AgoraRtm.shared().account!)!
+                    self.present(vc, animated: true)
+                }
                 break
             }
         }

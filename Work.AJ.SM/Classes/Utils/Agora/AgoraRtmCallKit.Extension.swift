@@ -35,7 +35,6 @@ extension AgoraRtmCallKit {
     
     func sendInvitation(peer: String, extraContent: String? = nil, accepted: Completion = nil, refused: Completion = nil, fail: ErrorCompletion = nil) {
         print("rtm sendInvitation peer: \(peer)")
-        
         let rtm = AgoraRtm.shared()
         let invitation = AgoraRtmLocalInvitation(calleeId: peer)
         invitation.content = extraContent

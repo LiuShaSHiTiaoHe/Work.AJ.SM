@@ -16,6 +16,24 @@ enum LoginStatus {
     case online, offline
 }
 
+enum VideoCallRemoteType: String {
+    case MobileApp = "1" //手机APP
+    case AndroidDevice = "2" //门口机设备
+}
+
+struct ToVideoChatModel {
+    var localNumber: String = ""
+    var channel: String = ""
+    var remoteNumber: String = ""
+    var lockMac: String = ""
+    var remoteName: String = ""
+    var remoteType: String = ""
+
+    func isEmpty() -> Bool {
+        localNumber.isEmpty || channel.isEmpty || remoteNumber.isEmpty || remoteType.isEmpty
+    }
+}
+
 protocol AgoraRtmInvitertDelegate: NSObjectProtocol {
     func inviter(_ inviter: AgoraRtmCallKit, didReceivedIncoming invitation: AgoraRtmInvitation)
     func inviter(_ inviter: AgoraRtmCallKit, remoteDidCancelIncoming invitation: AgoraRtmInvitation)
@@ -23,7 +41,7 @@ protocol AgoraRtmInvitertDelegate: NSObjectProtocol {
 
 struct AgoraRtmInvitation {
     var content: String?
-    var caller: String // outgoint call
+    var caller: String // outgoing call
     var callee: String // incoming call
     
     static func agRemoteInvitation(_ ag: AgoraRtmRemoteInvitation) -> AgoraRtmInvitation {
@@ -52,13 +70,13 @@ struct AgoraRtmInvitation {
 }
 
 enum HungupReason {
-    case remoteReject(String), toVideoChat(String, UInt, String), normaly(String), error(Error)
+    case remoteReject(String), toVideoChat(ToVideoChatModel), normally(String), error(Error)
     
     var rawValue: Int {
         switch self {
         case .remoteReject: return 0
         case .toVideoChat:  return 1
-        case .normaly:      return 2
+        case .normally:     return 2
         case .error:        return 3
         }
     }
@@ -71,7 +89,7 @@ enum HungupReason {
         switch self {
         case .remoteReject:     return "remote reject"
         case .toVideoChat:      return "start video chat"
-        case .normaly:          return "normally hung up"
+        case .normally:         return "normally hung up"
         case .error(let error): return error.localizedDescription
         }
     }

@@ -8,9 +8,13 @@
 import Foundation
 extension String {
     public func ajImageUrl() -> String {
-        return ud.appHost + "images/" + self
+        ud.appHost + "images/" + self
     }
-    
+
+    public var isNotEmpty: Bool {
+        !isEmpty
+    }
+
     public var aj_isMobileNumber: Bool {
         let rgex = "^1[3456789]\\d{9}$"
         return aj_PredicateValue(rgex: rgex)

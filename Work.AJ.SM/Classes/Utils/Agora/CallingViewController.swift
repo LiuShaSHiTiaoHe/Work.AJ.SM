@@ -9,6 +9,7 @@ import UIKit
 import AgoraRtmKit
 import AudioToolbox
 import AVFoundation
+import SwiftyJSON
 
 protocol CallingViewControllerDelegate: NSObjectProtocol {
     func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason)
@@ -20,19 +21,8 @@ class CallingViewController: BaseViewController {
     }
     
     weak var delegate: CallingViewControllerDelegate?
-    var localNumber: String?
-    var remoteNumber: String?
-    var channel: String?
+    var data: ToVideoChatModel?
     var isOutgoing: Bool = true
-    // MARK: - 门口机设备Mac地址，用于远程开门
-    var lockMac: String = ""
-    var remoteName: String? {
-        didSet {
-            if let remoteName = remoteName {
-                contentView.numberLabel.text = remoteName
-            }
-        }
-    }
     
     private var ringStatus: Operation = .off {
         didSet {
@@ -91,13 +81,13 @@ class CallingViewController: BaseViewController {
         guard let kit = AgoraRtm.shared().kit else {
             fatalError("rtm kit nil")
         }
-        
-        guard let _ = localNumber else {
-            fatalError("localNumber nil")
+        guard let data = data, !data.isEmpty() else {
+            fatalError("VideoData is Empty")
         }
-        guard let remoteNumber = remoteNumber else {
-            fatalError("remoteNumber nil")
-        }
+        let remoteNumber = data.remoteNumber
+        let localName = HomeRepository.shared.getCurrentHouseName()
+        let remoteType = data.remoteType
+        let lockMac = data.lockMac
 
         guard let inviter = AgoraRtm.shared().inviter else {
             fatalError("rtm inviter nil")
@@ -107,7 +97,7 @@ class CallingViewController: BaseViewController {
         kit.queryPeerOnline(remoteNumber, success: {[weak self] (onlineStatus) in
             guard let self = self else { return }
             switch onlineStatus {
-            case .online:      sendInvitation(remote: remoteNumber)
+            case .online:      sendInvitation()
             case .offline:     self.close(.remoteReject(remoteNumber))
             case .unreachable: self.close(.remoteReject(remoteNumber))
             @unknown default:  fatalError("queryPeerOnline")
@@ -118,15 +108,28 @@ class CallingViewController: BaseViewController {
         }
         
         // rtm send invitation
-        func sendInvitation(remote: String) {
-            if let channel = channel {
-                let name = HomeRepository.shared.getCurrentHouseName()
-                inviter.sendInvitation(peer: remoteNumber, extraContent: channel + name, accepted: { [weak self] in
+        func sendInvitation() {
+//            let channel = data.channel
+
+            /*
+             Dictionary
+             "remoteType": "1"  mobile 1 device(门口机)2
+             "remoteName": ""
+             "lockMac": ""
+             */
+
+            if let json = JSON(["remoteType": remoteType, "remoteName": localName, "lockMac": lockMac]).rawString() {
+                logger.info("SwiftyJson ====> \(json)")
+            }
+
+            if let invitationContent = ["remoteType": remoteType, "remoteName": localName, "lockMac": lockMac].toJSON() {
+                logger.info("JKSwiftExtension ====> \(invitationContent)")
+                inviter.sendInvitation(peer: remoteNumber, extraContent: invitationContent, accepted: { [weak self] in
                     guard let self = self else { return }
-                    if let remote = UInt(remoteNumber){
-                        self.close(.toVideoChat(channel, remote, self.lockMac))
+                    if let _ = UInt(remoteNumber){
+                        self.close(.toVideoChat(data))
                     }else{
-                        self.close(.normaly("channel或remoteNumber数据错误"))
+                        self.close(.normally("remoteNumber数据错误"))
                     }
                 }, refused: { [weak self] in
                     guard let self = self else { return }
@@ -135,27 +138,40 @@ class CallingViewController: BaseViewController {
                     guard let self = self else { return }
                     self.close(.error(error))
                 }
-            }else{
-                self.close(.normaly("channel数据错误"))
             }
+
+//            inviter.sendInvitation(peer: remoteNumber, extraContent: channel + name, accepted: { [weak self] in
+//                guard let self = self else { return }
+//                if let _ = UInt(remoteNumber){
+//                    self.close(.toVideoChat(data))
+//                }else{
+//                    self.close(.normally("remoteNumber数据错误"))
+//                }
+//            }, refused: { [weak self] in
+//                guard let self = self else { return }
+//                self.close(.remoteReject(remoteNumber))
+//            }) { [weak self] (error) in
+//                guard let self = self else { return }
+//                self.close(.error(error))
+//            }
         }
     }
     
     @objc
     func doHungUpPressed(_ sender: UIButton) {
-        close(.normaly(remoteNumber!))
+        close(.normally(data?.remoteNumber ?? ""))
     }
     
     @objc
     func acceptPressed(_ sender: UIButton) {
-        if let channel = channel, let remoteNumber = remoteNumber, let remote = UInt(remoteNumber) {
+        if let data = data {
             guard let inviter = AgoraRtm.shared().inviter else {
                 fatalError("rtm inviter nil")
             }
             inviter.accpetLastIncomingInvitation()
-            close(.toVideoChat(channel, remote, lockMac))
+            close(.toVideoChat(data))
         }else{
-            close(.normaly("channel或remoteNumber数据错误"))
+            close(.normally("channel或remoteNumber数据错误"))
         }
     }
     
@@ -165,7 +181,7 @@ class CallingViewController: BaseViewController {
             fatalError("rtm inviter nil")
         }
         inviter.refuseLastIncomingInvitation()
-        close(.normaly(remoteNumber!))
+        close(.normally(data?.remoteNumber ?? ""))
     }
     
     func close(_ reason: HungupReason) {
@@ -183,6 +199,7 @@ class CallingViewController: BaseViewController {
         contentView.hangupButton.isHidden = !isOutgoing
         contentView.declineButton.isHidden = isOutgoing
         contentView.acceptButton.isHidden = isOutgoing
+        contentView.numberLabel.text = data?.remoteName
     }
     
     lazy var contentView: AgoraCallingView = {

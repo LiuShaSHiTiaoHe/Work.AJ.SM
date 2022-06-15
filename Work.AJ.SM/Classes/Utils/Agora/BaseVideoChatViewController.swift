@@ -21,6 +21,9 @@ class BaseVideoChatViewController: BaseViewController {
     var channel: String?
     // MARK: - 门口机设备Mac地址，用于远程开门
     var lockMac: String = ""
+    var remoteName: String = ""
+    var remoteType: String = ""
+
     weak var delegate: BaseVideoChatVCDelegate?
     private var agoraKit: AgoraRtcEngineKit!
 
@@ -40,8 +43,17 @@ class BaseVideoChatViewController: BaseViewController {
         initializeAgoraEngine()
         setupVideo()
         // MARK: - hide local video view
-        contentView.localVideo.isHidden = true
-        agoraKit.enableLocalVideo(false)
+        if let remoteUid = remoteUid, remoteUid.jk.uintToInt.jk.intToString.hasPrefix("41"), lockMac.jk.isBlank {
+            contentView.localVideo.isHidden = false
+            agoraKit.enableLocalVideo(true)
+            setupLocalVideo()
+        } else {
+            contentView.localVideo.isHidden = true
+            agoraKit.enableLocalVideo(false)
+        }
+        if lockMac.isEmpty {
+            contentView.openDoorButton.isHidden = true
+        }
         joinChannel()
     }
     
@@ -162,9 +174,6 @@ class BaseVideoChatViewController: BaseViewController {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        }
-        if lockMac.isEmpty {
-            contentView.openDoorButton.isHidden = true
         }
     }
     

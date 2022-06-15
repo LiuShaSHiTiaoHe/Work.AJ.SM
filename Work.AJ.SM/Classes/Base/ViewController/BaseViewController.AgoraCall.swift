@@ -6,18 +6,20 @@
 //
 
 extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDelegate {
-    func startAgoraCall(_ remote: String, _ lockMac: String, _ lockName: String) {
+    func startAgoraCall(_ remoteNumber: String, _ lockMac: String, _ remoteName: String, _ remoteType: VideoCallRemoteType) {
         let vc = CallingViewController()
         vc.modalPresentationStyle = .fullScreen
         if let userID = ud.userID {
             let account = userID.ajAgoraAccount()
-            vc.remoteNumber = remote
-            vc.localNumber = account
-            vc.channel = remote
-            vc.lockMac = lockMac
-            vc.remoteName = lockName
+            let data = ToVideoChatModel.init(localNumber: account,
+                    channel: remoteNumber,
+                    remoteNumber: remoteNumber,
+                    lockMac: lockMac,
+                    remoteName: remoteName,
+                    remoteType: remoteType.rawValue)
+            vc.data = data
             vc.delegate = self
-            self.present(vc, animated: true)
+            present(vc, animated: true)
         }
     }
     
@@ -29,7 +31,7 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
                 SVProgressHUD.showError(withStatus: "\(reason.description)")
             case .remoteReject(let remote):
                 SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
-            case .normaly(_):
+            case .normally(_):
                 guard let inviter = AgoraRtm.shared().inviter else {
                     fatalError("rtm inviter nil")
                 }
@@ -42,15 +44,19 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
                 default:
                     break
                 }
-            case .toVideoChat(let channel, let remote, let lockMac):
-                let vc = BaseVideoChatViewController()
-                vc.modalPresentationStyle = .fullScreen
-                vc.delegate = self
-                vc.channel = channel
-                vc.remoteUid = remote
-                vc.lockMac = lockMac
-                vc.localUid = UInt(AgoraRtm.shared().account!)!
-                self.present(vc, animated: true)
+            case .toVideoChat(let info):
+                if !info.isEmpty() {
+                    let vc = BaseVideoChatViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.delegate = self
+                    vc.channel = info.channel
+                    vc.remoteUid = UInt(info.remoteNumber)
+                    vc.lockMac = info.lockMac
+                    vc.remoteType = info.remoteType
+                    vc.remoteName = info.remoteName
+                    vc.localUid = UInt(info.localNumber)//UInt(AgoraRtm.shared().account!)!
+                    self.present(vc, animated: true)
+                }
                 break
             }
         }
