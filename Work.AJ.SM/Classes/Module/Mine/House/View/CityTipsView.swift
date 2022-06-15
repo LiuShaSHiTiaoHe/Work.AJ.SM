@@ -2,7 +2,7 @@
 //  CityTipsView.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/4/25.
+//  Created by Anjie on 2022/4/25.
 //
 
 import UIKit

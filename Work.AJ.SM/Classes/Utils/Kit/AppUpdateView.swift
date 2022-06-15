@@ -2,7 +2,7 @@
 //  AppUpdateView.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/5/26.
+//  Created by Anjie on 2022/5/26.
 //
 
 import UIKit

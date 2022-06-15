@@ -2,7 +2,7 @@
 //  MCECollectionViewCell.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/17.
+//  Created by Anjie on 2022/2/17.
 //
 
 import UIKit

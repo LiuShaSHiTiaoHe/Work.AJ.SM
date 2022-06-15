@@ -2,7 +2,7 @@
 //  CommonSearchView.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/3/7.
+//  Created by Anjie on 2022/3/7.
 //
 
 import UIKit

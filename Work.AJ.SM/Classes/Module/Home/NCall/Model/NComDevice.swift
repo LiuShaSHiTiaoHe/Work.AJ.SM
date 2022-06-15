@@ -2,7 +2,7 @@
 //  NComDevice.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/4/12.
+//  Created by Anjie on 2022/4/12.
 //
 
 import UIKit

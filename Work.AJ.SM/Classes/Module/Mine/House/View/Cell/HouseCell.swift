@@ -2,7 +2,7 @@
 //  HouseCell.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/2/15.
+//  Created by Anjie on 2022/2/15.
 //
 
 import UIKit
