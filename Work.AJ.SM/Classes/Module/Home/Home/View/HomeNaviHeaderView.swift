@@ -14,17 +14,16 @@ protocol HomeNaviHeaderViewDelegate: NSObjectProtocol {
 
 class HomeNaviHeaderView: UIView {
     
-    private let maxUnitNameWidth = kScreenWidth - kMargin * 1.5 - kMargin
+    private let maxUnitNameWidth = kScreenWidth - kMargin*2 - kMargin
     weak var delegate: HomeNaviHeaderViewDelegate?
 
     lazy var unitNameLabel: UILabel = {
         let label = UILabel.init()
         label.textColor = R.color.whitecolor()
-        label.font = k18Font
+        label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .left
         label.isUserInteractionEnabled = true
-//        label.numberOfLines = 2
-//        label.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        label.lineBreakMode = .byTruncatingMiddle
         label.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(chooseUnitAction)))
         return label
     }()
@@ -37,10 +36,7 @@ class HomeNaviHeaderView: UIView {
 
     func updateTitle(unitName: String) {
         unitNameLabel.text = unitName
-//        let sizeWidth = unitName.jk.rectWidth(font: k18Font, size: CGSize.init(width: kScreenWidth, height: 30.0))
-        let sizeWidth = unitName.jk.singleLineWidth(font: k18Font)
-        logger.info("sizeWidth ===> \(sizeWidth.description)")
-        logger.info("maxUnitNameWidth ===> \(maxUnitNameWidth)")
+        let sizeWidth = unitName.jk.singleLineWidth(font: UIFont.systemFont(ofSize: 20))
         if sizeWidth < maxUnitNameWidth {
             unitNameLabel.snp.updateConstraints { make in
                 make.width.equalTo(sizeWidth)
@@ -64,7 +60,7 @@ class HomeNaviHeaderView: UIView {
         }
 
         arrowImage.snp.makeConstraints { make in
-            make.left.equalTo(unitNameLabel.snp.right).offset(4)
+            make.left.equalTo(unitNameLabel.snp.right)
             make.width.height.equalTo(20)
             make.centerY.equalTo(unitNameLabel)
         }
