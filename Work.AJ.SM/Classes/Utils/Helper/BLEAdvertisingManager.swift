@@ -126,7 +126,7 @@ class BLEAdvertisingManager: NSObject {
     }
 
     // MARK: - Stop Advertising
-    func stopAdvertismentIn(seconds: Double = 2, completion: @escaping (() -> Void)) {
+    func stopAdvertismentIn(seconds: Double = 3, completion: @escaping (() -> Void)) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
             guard let `self` = self else {
                 return
