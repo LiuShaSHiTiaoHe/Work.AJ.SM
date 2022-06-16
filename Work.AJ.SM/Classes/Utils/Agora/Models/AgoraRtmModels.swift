@@ -34,7 +34,7 @@ struct ToVideoChatModel {
     }
 }
 
-protocol AgoraRtmInvitertDelegate: NSObjectProtocol {
+protocol AgoraRtmInviterDelegate: NSObjectProtocol {
     func inviter(_ inviter: AgoraRtmCallKit, didReceivedIncoming invitation: AgoraRtmInvitation)
     func inviter(_ inviter: AgoraRtmCallKit, remoteDidCancelIncoming invitation: AgoraRtmInvitation)
 }
@@ -69,7 +69,7 @@ struct AgoraRtmInvitation {
     }
 }
 
-enum HungupReason {
+enum HangupReason {
     case remoteReject(String), toVideoChat(ToVideoChatModel), normally(String), error(Error)
     
     var rawValue: Int {
@@ -81,8 +81,8 @@ enum HungupReason {
         }
     }
     
-    static func==(left: HungupReason, right: HungupReason) -> Bool {
-        return left.rawValue == right.rawValue
+    static func==(left: HangupReason, right: HangupReason) -> Bool {
+        left.rawValue == right.rawValue
     }
     
     var description: String {

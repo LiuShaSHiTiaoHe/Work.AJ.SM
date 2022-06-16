@@ -13,8 +13,12 @@ class AgoraVideoChatView: BaseView {
         
     }
     
+    override func layoutSubviews() {
+        addGradientLayer()
+    }
+    
     override func initializeView() {
-        self.backgroundColor = R.color.themecolor()
+        self.backgroundColor = R.color.whitecolor()
         self.addSubview(remoteVideo)
         self.addSubview(localVideo)
         self.addSubview(micButton)

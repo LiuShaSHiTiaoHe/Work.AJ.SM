@@ -13,8 +13,12 @@ class AgoraCallingView: BaseView {
         
     }
     
+    override func layoutSubviews() {
+        addGradientLayer()
+    }
+    
     override func initializeView() {
-        self.backgroundColor = .systemBlue
+        self.backgroundColor = R.color.whitecolor()
         self.addSubview(headImageView)
         self.addSubview(numberLabel)
         self.addSubview(declineButton)

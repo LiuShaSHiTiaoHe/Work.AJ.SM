@@ -22,7 +22,7 @@ class AgoraRtm: NSObject {
         return kit?.getRtmCall()
     }
     
-    weak var inviterDelegate: AgoraRtmInvitertDelegate?
+    weak var inviterDelegate: AgoraRtmInviterDelegate?
     
     var lastOutgoingInvitation: AgoraRtmLocalInvitation?
     var lastIncomingInvitation: AgoraRtmRemoteInvitation?

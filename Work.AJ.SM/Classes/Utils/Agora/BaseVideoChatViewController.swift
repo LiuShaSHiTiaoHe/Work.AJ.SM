@@ -16,13 +16,17 @@ protocol BaseVideoChatVCDelegate: NSObjectProtocol {
 
 class BaseVideoChatViewController: BaseViewController {
 
-    var localUid: UInt?
-    var remoteUid: UInt?
-    var channel: String?
-    // MARK: - 门口机设备Mac地址，用于远程开门
-    var lockMac: String = ""
-    var remoteName: String = ""
-    var remoteType: String = ""
+    private var localUid: UInt?
+    private var remoteUid: UInt?
+
+    var data: ToVideoChatModel? {
+        didSet {
+            if let data = data {
+                localUid = UInt(data.localNumber)
+                remoteUid = UInt(data.remoteNumber)
+            }
+        }
+    }
 
     weak var delegate: BaseVideoChatVCDelegate?
     private var agoraKit: AgoraRtcEngineKit!
@@ -39,11 +43,11 @@ class BaseVideoChatViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        guard let data = data else { return }
         initializeAgoraEngine()
         setupVideo()
         // MARK: - hide local video view
-        if let remoteUid = remoteUid, remoteUid.jk.uintToInt.jk.intToString.hasPrefix("41"), lockMac.jk.isBlank {
+        if let remoteUid = remoteUid, remoteUid.jk.uintToInt.jk.intToString.hasPrefix("41"), data.lockMac.isEmpty {
             contentView.localVideo.isHidden = false
             agoraKit.enableLocalVideo(true)
             setupLocalVideo()
@@ -51,10 +55,10 @@ class BaseVideoChatViewController: BaseViewController {
             contentView.localVideo.isHidden = true
             agoraKit.enableLocalVideo(false)
         }
-        if lockMac.isEmpty {
+        joinChannel()
+        if data.lockMac.jk.isBlank {
             contentView.openDoorButton.isHidden = true
         }
-        joinChannel()
     }
     
     // MARK: - Functions
@@ -87,7 +91,7 @@ class BaseVideoChatViewController: BaseViewController {
     }
     
     func joinChannel() {
-        guard let channel = channel else {
+        guard let channel = data?.channel else {
             fatalError("rtc channel id nil")
         }
         guard let uid = localUid else {
@@ -150,6 +154,7 @@ class BaseVideoChatViewController: BaseViewController {
     
     @objc
     func didClickOpenDoorButton() {
+        guard let lockMac = data?.lockMac else { return }
         if lockMac.isEmpty {
             SVProgressHUD.showError(withStatus: "开门数据错误")
         }else{

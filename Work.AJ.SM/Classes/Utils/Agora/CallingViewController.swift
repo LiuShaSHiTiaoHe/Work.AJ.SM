@@ -12,7 +12,7 @@ import AVFoundation
 import SwiftyJSON
 
 protocol CallingViewControllerDelegate: NSObjectProtocol {
-    func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason)
+    func callingVC(_ vc: CallingViewController, didHangup reason: HangupReason)
 }
 
 class CallingViewController: BaseViewController {
@@ -184,10 +184,10 @@ class CallingViewController: BaseViewController {
         close(.normally(data?.remoteNumber ?? ""))
     }
     
-    func close(_ reason: HungupReason) {
+    func close(_ reason: HangupReason) {
         animationStatus = .off
         ringStatus = .off
-        delegate?.callingVC(self, didHungup: reason)
+        delegate?.callingVC(self, didHangup: reason)
     }
     
     // MARK: - UI

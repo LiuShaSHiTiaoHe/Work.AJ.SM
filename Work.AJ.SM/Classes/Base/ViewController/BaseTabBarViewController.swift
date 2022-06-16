@@ -117,7 +117,7 @@ extension BaseTabBarViewController {
 }
 
 
-extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
+extension BaseTabBarViewController: AgoraRtmInviterDelegate {
     func inviter(_ inviter: AgoraRtmCallKit, didReceivedIncoming invitation: AgoraRtmInvitation) {
         if AgoraRtm.shared().status == .online {
             let vc = CallingViewController()
@@ -127,7 +127,7 @@ extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
             var data = ToVideoChatModel()
             data.localNumber = invitation.callee
             data.remoteNumber = invitation.caller
-            data.channel = invitation.caller
+            data.channel = invitation.callee//invitation.caller
 
 //            vc.localNumber = invitation.callee
 //            vc.remoteNumber = invitation.caller
@@ -163,15 +163,14 @@ extension BaseTabBarViewController: AgoraRtmInvitertDelegate {
     }
     
     func inviter(_ inviter: AgoraRtmCallKit, remoteDidCancelIncoming invitation: AgoraRtmInvitation) {
-        if let vc = presentedViewController as? BaseVideoChatViewController {
-            vc.leaveChannel()
-            vc.dismiss(animated: true, completion: nil)
+        if let vc = presentedViewController as? CallingViewController {
+            vc.close(.normally("对方取消通话"))
         }
     }
 }
 
 extension BaseTabBarViewController: CallingViewControllerDelegate {
-    func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason) {
+    func callingVC(_ vc: CallingViewController, didHangup reason: HangupReason) {
         vc.dismiss(animated: reason.rawValue == 1 ? false : true) { [weak self] in
             guard let self = self else { return }
             switch reason {
@@ -179,7 +178,8 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
                 SVProgressHUD.showError(withStatus: "\(reason.description)")
             case .remoteReject(let remote):
                 SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
-            case .normally(_):
+            case .normally(let message):
+                logger.info("no normally close \(message)")
                 guard let inviter = AgoraRtm.shared().inviter else {
                     fatalError("rtm inviter nil")
                 }
@@ -190,17 +190,14 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
                 case .outgoing:
                     inviter.cancelLastOutgoingInvitation(fail: errorHandle)
                 default:
-                    break
+                    SVProgressHUD.showInfo(withStatus: message)
                 }
-            case .toVideoChat(let info):
-                if !info.isEmpty() {
+            case .toVideoChat(let data):
+                if !data.isEmpty() {
                     let vc = BaseVideoChatViewController()
                     vc.modalPresentationStyle = .fullScreen
                     vc.delegate = self
-                    vc.channel = info.channel
-                    vc.remoteUid = UInt(info.remoteNumber)
-                    vc.lockMac = info.lockMac
-                    vc.localUid = UInt(info.localNumber)//UInt(AgoraRtm.shared().account!)!
+                    vc.data = data
                     self.present(vc, animated: true)
                 }
                 break

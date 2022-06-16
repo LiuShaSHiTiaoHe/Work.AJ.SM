@@ -23,7 +23,7 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
         }
     }
     
-    func callingVC(_ vc: CallingViewController, didHungup reason: HungupReason) {
+    func callingVC(_ vc: CallingViewController, didHangup reason: HangupReason) {
         vc.dismiss(animated: reason.rawValue == 1 ? false : true) { [weak self] in
             guard let self = self else { return }
             switch reason {
@@ -44,17 +44,12 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
                 default:
                     break
                 }
-            case .toVideoChat(let info):
-                if !info.isEmpty() {
+            case .toVideoChat(let data):
+                if !data.isEmpty() {
                     let vc = BaseVideoChatViewController()
                     vc.modalPresentationStyle = .fullScreen
                     vc.delegate = self
-                    vc.channel = info.channel
-                    vc.remoteUid = UInt(info.remoteNumber)
-                    vc.lockMac = info.lockMac
-                    vc.remoteType = info.remoteType
-                    vc.remoteName = info.remoteName
-                    vc.localUid = UInt(info.localNumber)//UInt(AgoraRtm.shared().account!)!
+                    vc.data = data
                     self.present(vc, animated: true)
                 }
                 break
