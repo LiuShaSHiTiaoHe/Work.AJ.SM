@@ -21,13 +21,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        logger.info(userInfo)
+        logger.info("didReceiveRemoteNotification ======> \(userInfo)")
     }
 
     //处理静默推送通知
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        logger.info(userInfo)
+        logger.info("didReceiveRemoteNotification ======> 处理静默推送通知 \(userInfo)")
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
@@ -47,7 +47,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
         let userInfo = notification.request.content.userInfo
-        logger.info(userInfo)
+        logger.info("UNUserNotificationCenter willPresent ======> \(userInfo)")
         if ud.inAppNotification {
             completionHandler([[.alert, .sound]])
             if ud.vibrationAvailable {
@@ -63,7 +63,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
 
         let userInfo = response.notification.request.content.userInfo
-        logger.info(userInfo)
+        logger.info("UNUserNotificationCenter didReceive ======> \(userInfo)")
         completionHandler()
     }
 }

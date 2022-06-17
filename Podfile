@@ -30,7 +30,7 @@ target 'Work.AJ.SM' do
   pod 'JKSwiftExtension', '2.1.5'
   pod 'Kingfisher','7.2.0'
   pod 'DeviceKit', '~> 4.4.0'
-
+  
   pod 'ESTabBarController-swift', '2.8.0'
   pod 'MJRefresh', '3.7.5'
   pod 'SDCycleScrollView', '1.82'

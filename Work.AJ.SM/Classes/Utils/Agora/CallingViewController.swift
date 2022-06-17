@@ -23,6 +23,8 @@ class CallingViewController: BaseViewController {
     weak var delegate: CallingViewControllerDelegate?
     var data: ToVideoChatModel?
     var isOutgoing: Bool = true
+    // MARK: - 确定已经拨打出视频后，对方不在线，再去监听对方在线状态的变化
+    private var isCallingOnReadingRemoteOnlineStatus: Bool = false
     
     private var ringStatus: Operation = .off {
         didSet {
@@ -53,7 +55,6 @@ class CallingViewController: BaseViewController {
     private var timer: Timer?
     private var soundId = SystemSoundID()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -63,10 +64,9 @@ class CallingViewController: BaseViewController {
         animationStatus = .on
         ringStatus = .on
         if isOutgoing {
-            startCall()
+            outGoingCallManage()
         }
     }
-    
     
     override func initData() {
         try? AVAudioSession.sharedInstance().setMode(.videoChat)
@@ -76,84 +76,110 @@ class CallingViewController: BaseViewController {
         contentView.declineButton.addTarget(self, action: #selector(declinePressed(_:)), for: .touchUpInside)
     }
     
-    
-    func startCall() {
+    func outGoingCallManage() {
+        guard let data = data else {
+            self.close(.normally("初始化数据错误"))
+            return
+        }
+
         guard let kit = AgoraRtm.shared().kit else {
-            fatalError("rtm kit nil")
+            self.close(.normally("RTM初始化失败"))
+            return
         }
-        guard let data = data, !data.isEmpty() else {
-            fatalError("VideoData is Empty")
+        
+        if let invitationData = buildInvitationContent(withVideoCallData: data) {
+            let remoteNumber = invitationData.0
+            let invitationContent = invitationData.1
+            // MARK: - rtm query online status
+           kit.queryPeerOnline(remoteNumber, success: {[weak self] (onlineStatus) in
+               guard let self = self else { return }
+               switch onlineStatus {
+               case .online:
+                   self.sendInvitation(remoteNumber, invitationContent, data)
+               case .offline:
+//                   self.resendInvitation(after: 15.0, remoteNumber, invitationContent, data)
+//                   kit.send(AgoraRtmMessage.init(text: "Call"), toPeer: remoteNumber)
+                   self.checkRemoteStatus(for: 5, remoteNumber, data)
+               case .unreachable:
+                   self.close(.remoteReject(remoteNumber))
+               @unknown default:
+                   fatalError("queryPeerOnline")
+               }
+           }) { [weak self] (error) in
+               guard let self = self else { return }
+               self.close(.error(error))
+           }
+        } else {
+            self.close(.normally("初始化呼叫邀请数据失败"))
         }
-        let remoteNumber = data.remoteNumber
+    }
+    
+    func buildInvitationContent(withVideoCallData data: ToVideoChatModel) -> (String, String)? {
         let localName = HomeRepository.shared.getCurrentHouseName()
         let remoteType = data.remoteType
         let lockMac = data.lockMac
-
+        let remoteNumber = data.remoteNumber
+        if let invitationContent = ["remoteType": remoteType, "remoteName": localName, "lockMac": lockMac].toJSON(),
+           invitationContent.isNotEmpty, remoteNumber.isNotEmpty {
+            return (remoteNumber, invitationContent)
+        }
+        return nil
+    }
+    
+    func sendInvitation(_ remoteNumber: String, _ invitationContent: String, _ videoChatData: ToVideoChatModel) {
+        logger.info("sendInvitation")
         guard let inviter = AgoraRtm.shared().inviter else {
             fatalError("rtm inviter nil")
         }
-                
-        // rtm query online status
-        kit.queryPeerOnline(remoteNumber, success: {[weak self] (onlineStatus) in
+        inviter.sendInvitation(peer: remoteNumber, extraContent: invitationContent, accepted: { [weak self] in
             guard let self = self else { return }
-            switch onlineStatus {
-            case .online:      sendInvitation()
-            case .offline:     self.close(.remoteReject(remoteNumber))
-            case .unreachable: self.close(.remoteReject(remoteNumber))
-            @unknown default:  fatalError("queryPeerOnline")
+            if let _ = UInt(remoteNumber){
+                self.close(.toVideoChat(videoChatData))
+            }else{
+                self.close(.normally("remoteNumber数据错误"))
             }
+        }, refused: { [weak self] in
+            guard let self = self else { return }
+            self.close(.remoteReject(remoteNumber))
         }) { [weak self] (error) in
             guard let self = self else { return }
             self.close(.error(error))
         }
-        
-        // rtm send invitation
-        func sendInvitation() {
-//            let channel = data.channel
-
-            /*
-             Dictionary
-             "remoteType": "1"  mobile 1 device(门口机)2
-             "remoteName": ""
-             "lockMac": ""
-             */
-
-            if let json = JSON(["remoteType": remoteType, "remoteName": localName, "lockMac": lockMac]).rawString() {
-                logger.info("SwiftyJson ====> \(json)")
-            }
-
-            if let invitationContent = ["remoteType": remoteType, "remoteName": localName, "lockMac": lockMac].toJSON() {
-                logger.info("JKSwiftExtension ====> \(invitationContent)")
-                inviter.sendInvitation(peer: remoteNumber, extraContent: invitationContent, accepted: { [weak self] in
-                    guard let self = self else { return }
-                    if let _ = UInt(remoteNumber){
-                        self.close(.toVideoChat(data))
-                    }else{
-                        self.close(.normally("remoteNumber数据错误"))
-                    }
-                }, refused: { [weak self] in
-                    guard let self = self else { return }
-                    self.close(.remoteReject(remoteNumber))
-                }) { [weak self] (error) in
-                    guard let self = self else { return }
-                    self.close(.error(error))
+    }
+    
+    func resendInvitation(after seconds: Double, _ remoteNumber: String, _ invitation: String, _ videoChatData: ToVideoChatModel) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
+            guard let `self` = self else { return }
+            logger.info("resendInvitation")
+            self.sendInvitation(remoteNumber, invitation, videoChatData)
+        }
+    }
+    // MARK: - RTM开始不支持离线消息，订阅对方状态只是一次性的，Android推送如果直接打开app无法收到呼叫邀请。只能轮询查看对方是否在线。
+    func checkRemoteStatus(for times: Int, _ remoteNumber: String, _ data: ToVideoChatModel) {
+        logger.info("checkRemoteStatus")
+        isCallingOnReadingRemoteOnlineStatus = true
+        for t in 1...times {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(t*5)) { [weak self] in
+                guard let `self` = self else { return }
+                guard let kit = AgoraRtm.shared().kit else {
+                    return
                 }
+                guard self.isCallingOnReadingRemoteOnlineStatus else { return }
+                kit.queryPeerOnline(remoteNumber, success: {[weak self] (onlineStatus) in
+                    guard let self = self else { return }
+                    switch onlineStatus {
+                    case .online:
+                        self.isCallingOnReadingRemoteOnlineStatus = false
+                        if let invitationData = self.buildInvitationContent(withVideoCallData: data) {
+                            let remoteNumber = invitationData.0
+                            let invitationContent = invitationData.1
+                            self.sendInvitation(remoteNumber, invitationContent, data)
+                        }
+                    default:
+                        break
+                    }
+                })
             }
-
-//            inviter.sendInvitation(peer: remoteNumber, extraContent: channel + name, accepted: { [weak self] in
-//                guard let self = self else { return }
-//                if let _ = UInt(remoteNumber){
-//                    self.close(.toVideoChat(data))
-//                }else{
-//                    self.close(.normally("remoteNumber数据错误"))
-//                }
-//            }, refused: { [weak self] in
-//                guard let self = self else { return }
-//                self.close(.remoteReject(remoteNumber))
-//            }) { [weak self] (error) in
-//                guard let self = self else { return }
-//                self.close(.error(error))
-//            }
         }
     }
     
@@ -253,3 +279,34 @@ private extension CallingViewController {
         AudioServicesRemoveSystemSoundCompletion(soundId)
     }
 }
+
+//extension CallingViewController: AgoraRtmDelegate {
+//
+////    func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
+////        logger.info("messageReceived =====> \(message.text)")
+////        if isCallingOnReadingRemoteOnlineStatus, let data = data {
+////            let remoteNumber = data.remoteNumber
+////            if remoteNumber == peerId {
+////                logger.info("")
+////            }
+////        }
+////    }
+//
+//    func rtmKit(_ kit: AgoraRtmKit, peersOnlineStatusChanged onlineStatus: [AgoraRtmPeerOnlineStatus]) {
+//        logger.info("peersOnlineStatusChanged =====> ")
+//        if isCallingOnReadingRemoteOnlineStatus, let data = data {
+//            let remoteNumber = data.remoteNumber
+//            if let status = onlineStatus.first(where: { rtmPeer in
+//                rtmPeer.peerId == remoteNumber && rtmPeer.isOnline
+//            }), status.isOnline {
+//                isCallingOnReadingRemoteOnlineStatus = false
+//                if let invitationData = buildInvitationContent(withVideoCallData: data) {
+//
+//                    let remoteNumber = invitationData.0
+//                    let invitationContent = invitationData.1
+//                    sendInvitation(remoteNumber, invitationContent, data)
+//                }
+//            }
+//        }
+//    }
+//}

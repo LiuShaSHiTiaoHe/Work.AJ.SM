@@ -66,6 +66,16 @@ extension AgoraRtmKit {
         }
     }
     
+    func logOut() {
+        logger.info("rtm logout")
+        logout { errorCode in
+            guard errorCode == AgoraRtmLogoutErrorCode.ok else {
+                AgoraRtm.shared().status = .offline
+                return
+            }
+        }
+    }
+    
     func queryPeerOnline(_ peer: String, success: ((_ status: AgoraRtmPeerOnlineState) -> Void)? = nil, fail: ErrorCompletion = nil) {
         logger.info("rtm query peer: \(peer)")
         

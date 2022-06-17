@@ -63,7 +63,6 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
                 
         // rtm login
         guard let kit = AgoraRtm.shared().kit else {
-            SVProgressHUD.showError(withStatus: "AgoraRtmKit nil")
             return
         }
         
@@ -74,17 +73,6 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
                 logger.error("AgoraRtm ====> \(error.localizedDescription)")
                 SVProgressHUD.showError(withStatus: "error.localizedDescription")
             })
-            // MARK: - Agora Remove Token
-//            HomeRepository.shared.agoraRTMToken { token in
-//                if token.isEmpty {
-//                    logger.error("AgoraRtm ====> RTM token 获取失败")
-//                }else{
-//                    kit.login(account: account, token: token, fail:  { (error) in
-//                        logger.error("AgoraRtm ====> \(error.localizedDescription)")
-//                        SVProgressHUD.showError(withStatus: "error.localizedDescription")
-//                    })
-//                }
-//            }
         }
     }
 }
@@ -127,11 +115,7 @@ extension BaseTabBarViewController: AgoraRtmInviterDelegate {
             var data = ToVideoChatModel()
             data.localNumber = invitation.callee
             data.remoteNumber = invitation.caller
-            data.channel = invitation.callee//invitation.caller
-
-//            vc.localNumber = invitation.callee
-//            vc.remoteNumber = invitation.caller
-//            vc.channel = invitation.caller
+            data.channel = invitation.callee
             // MARK: - content 放入两个参数，用','隔开:门口机的mac地址和名称
             /*
              Dictionary
@@ -147,18 +131,9 @@ extension BaseTabBarViewController: AgoraRtmInviterDelegate {
                 data.remoteName = jsonData["remoteName"].stringValue
                 vc.data = data
                 present(vc, animated: true)
-
-//                let data = content.components(separatedBy: ",")
-//                if data.count == 2 {
-//                    vc.lockMac = data[0]
-//                    vc.remoteName = data[1]
-//                }else{
-//                    vc.lockMac = content
-//                }
             } else {
                 SVProgressHUD.showError(withStatus: "视频通话邀请参数不全")
             }
-//            present(vc, animated: true)
         }
     }
     

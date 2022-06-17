@@ -249,6 +249,7 @@
 		41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */; };
 		41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */; };
 		41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E427F2947A00241706 /* BaseChatView.swift */; };
+		680ED595285C89D0004A1857 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680ED594285C89D0004A1857 /* MyTimer.swift */; };
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
 		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
@@ -524,6 +525,7 @@
 		41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_onTimer.aac; sourceTree = "<group>"; };
 		41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = video_chat_push.mp3; sourceTree = "<group>"; };
 		41E7D8E427F2947A00241706 /* BaseChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatView.swift; sourceTree = "<group>"; };
+		680ED594285C89D0004A1857 /* MyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 				41B4D8532826750A004DFCFC /* Throttler.swift */,
 				419C95D0283F3B8A001E7099 /* VersionCheck.swift */,
 				419C95D4283F5B6F001E7099 /* EntryKitCustomAttributes.swift */,
+				680ED594285C89D0004A1857 /* MyTimer.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2342,6 +2345,7 @@
 				419AD6B027FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift in Sources */,
 				416F2E6227B0BF95004E5AD9 /* HomeHeaderView.swift in Sources */,
 				416F2F0F27BF7C8D004E5AD9 /* RemoteOpenDoorViewController.swift in Sources */,
+				680ED595285C89D0004A1857 /* MyTimer.swift in Sources */,
 				4136257D282A769200186188 /* MessageModel.swift in Sources */,
 				416F2ECF27BB7E29004E5AD9 /* HouseCell.swift in Sources */,
 				41A620312817BC2200DE3B54 /* AgoraRtm.swift in Sources */,
