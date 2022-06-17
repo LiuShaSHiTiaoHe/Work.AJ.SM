@@ -54,6 +54,7 @@ class CallingViewController: BaseViewController {
     
     private var timer: Timer?
     private var soundId = SystemSoundID()
+    private var swiftTimer: SwiftTimer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,11 @@ class CallingViewController: BaseViewController {
         ringStatus = .on
         if isOutgoing {
             outGoingCallManage()
+            swiftTimer = SwiftTimer(interval: .seconds(25)) {[weak self] stimer in
+                guard let `self` = self else { return }
+                self.close(.normally("无人接听"))
+            }
+            swiftTimer?.start()
         }
     }
     
