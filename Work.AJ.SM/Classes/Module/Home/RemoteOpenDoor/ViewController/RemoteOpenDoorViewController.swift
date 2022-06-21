@@ -84,16 +84,20 @@ extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
     }
     
     func camera(_ lockModel: UnitLockModel) {
-        if let lockMac = lockModel.lockmac, let lockID = lockModel.lockID?.jk.intToString, let lockName = lockModel.lockname {
+        if let lockMac = lockModel.lockmac, let lockID = lockModel.lockID?.jk.intToString, let lockName = lockModel.lockname, let userID = ud.userID {
             PermissionManager.permissionRequest(.microphone) {[weak self] authorized in
                 guard let self = self else { return }
                 if authorized {
-                    self.startAgoraCall("1057", "", "iosApp", VideoCallRemoteType.MobileApp)
-//                    self.startAgoraCall(lockID, lockMac, lockName, VideoCallRemoteType.AndroidDevice)
+                    let localName = HomeRepository.shared.getCurrentHouseName()
+                    let remoteNumber = lockID
+                    let data = ToVideoChatModel.init(localNumber: userID.ajAgoraAccount(), localName: localName, localType: .MobileApp,
+                            channel: remoteNumber, remoteNumber: remoteNumber, remoteName: lockName, remoteType: .AndroidDevice, lockMac: lockMac)
+                    self.startAgoraCall(with: data)
                 }else{
                     SVProgressHUD.showInfo(withStatus: "请打开系统麦克风权限")
                 }
             }
         }
+
     }
 }

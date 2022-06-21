@@ -2,25 +2,16 @@
 //  BaseViewController.AgoraCall.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/5/6.
+//  Created by Anjie on 2022/5/6.
 //
 
 extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDelegate {
-    func startAgoraCall(_ remoteNumber: String, _ lockMac: String, _ remoteName: String, _ remoteType: VideoCallRemoteType) {
+    func startAgoraCall(with data: ToVideoChatModel) {
         let vc = CallingViewController()
         vc.modalPresentationStyle = .fullScreen
-        if let userID = ud.userID {
-            let account = userID.ajAgoraAccount()
-            let data = ToVideoChatModel.init(localNumber: account,
-                    channel: remoteNumber,
-                    remoteNumber: remoteNumber,
-                    lockMac: lockMac,
-                    remoteName: remoteName,
-                    remoteType: remoteType.rawValue)
-            vc.data = data
-            vc.delegate = self
-            present(vc, animated: true)
-        }
+        vc.data = data
+        vc.delegate = self
+        present(vc, animated: true)
     }
     
     func callingVC(_ vc: CallingViewController, didHangup reason: HangupReason) {
@@ -59,7 +50,8 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
     
     func videoChat(_ vc: BaseVideoChatViewController, didEndChatWith uid: UInt) {
         vc.dismiss(animated: true) {
-            SVProgressHUD.showInfo(withStatus: "挂断-\(uid)")
+            logger.info("\(uid)挂断")
+            SVProgressHUD.showInfo(withStatus: "通话已结束")
         }
     }
 }

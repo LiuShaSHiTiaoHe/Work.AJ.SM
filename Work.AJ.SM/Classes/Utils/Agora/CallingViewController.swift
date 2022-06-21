@@ -2,7 +2,7 @@
 //  CallingViewController.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/4/26.
+//  Created by Anjie on 2022/4/26.
 //
 
 import UIKit
@@ -31,7 +31,6 @@ class CallingViewController: BaseViewController {
             guard oldValue != ringStatus else {
                 return
             }
-            
             switch ringStatus {
             case .on:  startPlayRing()
             case .off: stopPlayRing()
@@ -44,18 +43,16 @@ class CallingViewController: BaseViewController {
             guard oldValue != animationStatus else {
                 return
             }
-            
             switch animationStatus {
             case .on:  startAnimating()
-            case .off: stopAnimationg()
+            case .off: stopAnimating()
             }
         }
     }
     
     private var timer: Timer?
     private var soundId = SystemSoundID()
-    private var swiftTimer: SwiftTimer?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -66,11 +63,6 @@ class CallingViewController: BaseViewController {
         ringStatus = .on
         if isOutgoing {
             outGoingCallManage()
-            swiftTimer = SwiftTimer(interval: .seconds(25)) {[weak self] stimer in
-                guard let `self` = self else { return }
-                self.close(.normally("无人接听"))
-            }
-            swiftTimer?.start()
         }
     }
     
@@ -84,12 +76,12 @@ class CallingViewController: BaseViewController {
     
     func outGoingCallManage() {
         guard let data = data else {
-            self.close(.normally("初始化数据错误"))
+            close(.normally("初始化数据错误"))
             return
         }
 
         guard let kit = AgoraRtm.shared().kit else {
-            self.close(.normally("RTM初始化失败"))
+            close(.normally("RTM初始化失败"))
             return
         }
         
@@ -103,8 +95,6 @@ class CallingViewController: BaseViewController {
                case .online:
                    self.sendInvitation(remoteNumber, invitationContent, data)
                case .offline:
-//                   self.resendInvitation(after: 15.0, remoteNumber, invitationContent, data)
-//                   kit.send(AgoraRtmMessage.init(text: "Call"), toPeer: remoteNumber)
                    self.checkRemoteStatus(for: 5, remoteNumber, data)
                case .unreachable:
                    self.close(.remoteReject(remoteNumber))
@@ -116,18 +106,14 @@ class CallingViewController: BaseViewController {
                self.close(.error(error))
            }
         } else {
-            self.close(.normally("初始化呼叫邀请数据失败"))
+            close(.normally("初始化呼叫邀请数据失败"))
         }
     }
     
     func buildInvitationContent(withVideoCallData data: ToVideoChatModel) -> (String, String)? {
-        let localName = HomeRepository.shared.getCurrentHouseName()
-        let remoteType = data.remoteType
-        let lockMac = data.lockMac
-        let remoteNumber = data.remoteNumber
-        if let invitationContent = ["remoteType": remoteType, "remoteName": localName, "lockMac": lockMac].toJSON(),
-           invitationContent.isNotEmpty, remoteNumber.isNotEmpty {
-            return (remoteNumber, invitationContent)
+        if data.isNotEmpty(), let invitationContent = ["remoteType": data.localType.rawValue, "remoteName": data.localName, "lockMac": data.lockMac].toJSON(),
+           invitationContent.isNotEmpty, data.remoteNumber.isNotEmpty {
+            return (data.remoteNumber, invitationContent)
         }
         return nil
     }
@@ -153,13 +139,7 @@ class CallingViewController: BaseViewController {
         }
     }
     
-    func resendInvitation(after seconds: Double, _ remoteNumber: String, _ invitation: String, _ videoChatData: ToVideoChatModel) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
-            guard let `self` = self else { return }
-            logger.info("resendInvitation")
-            self.sendInvitation(remoteNumber, invitation, videoChatData)
-        }
-    }
+
     // MARK: - RTM开始不支持离线消息，订阅对方状态只是一次性的，Android推送如果直接打开app无法收到呼叫邀请。只能轮询查看对方是否在线。
     func checkRemoteStatus(for times: Int, _ remoteNumber: String, _ data: ToVideoChatModel) {
         logger.info("checkRemoteStatus")
@@ -171,6 +151,10 @@ class CallingViewController: BaseViewController {
                     return
                 }
                 guard self.isCallingOnReadingRemoteOnlineStatus else { return }
+                if t == times {
+                    self.close(.normally("无人接听"))
+                    return
+                }
                 kit.queryPeerOnline(remoteNumber, success: {[weak self] (onlineStatus) in
                     guard let self = self else { return }
                     switch onlineStatus {
@@ -260,7 +244,7 @@ private extension CallingViewController {
         self.timer = timer
     }
     
-    func stopAnimationg() {
+    func stopAnimating() {
         timer?.invalidate()
         timer = nil
         contentView.aureolaView.removeAnimation()
@@ -285,34 +269,3 @@ private extension CallingViewController {
         AudioServicesRemoveSystemSoundCompletion(soundId)
     }
 }
-
-//extension CallingViewController: AgoraRtmDelegate {
-//
-////    func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
-////        logger.info("messageReceived =====> \(message.text)")
-////        if isCallingOnReadingRemoteOnlineStatus, let data = data {
-////            let remoteNumber = data.remoteNumber
-////            if remoteNumber == peerId {
-////                logger.info("")
-////            }
-////        }
-////    }
-//
-//    func rtmKit(_ kit: AgoraRtmKit, peersOnlineStatusChanged onlineStatus: [AgoraRtmPeerOnlineStatus]) {
-//        logger.info("peersOnlineStatusChanged =====> ")
-//        if isCallingOnReadingRemoteOnlineStatus, let data = data {
-//            let remoteNumber = data.remoteNumber
-//            if let status = onlineStatus.first(where: { rtmPeer in
-//                rtmPeer.peerId == remoteNumber && rtmPeer.isOnline
-//            }), status.isOnline {
-//                isCallingOnReadingRemoteOnlineStatus = false
-//                if let invitationData = buildInvitationContent(withVideoCallData: data) {
-//
-//                    let remoteNumber = invitationData.0
-//                    let invitationContent = invitationData.1
-//                    sendInvitation(remoteNumber, invitationContent, data)
-//                }
-//            }
-//        }
-//    }
-//}

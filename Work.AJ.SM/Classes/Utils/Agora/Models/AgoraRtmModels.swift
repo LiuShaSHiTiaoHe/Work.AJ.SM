@@ -2,7 +2,7 @@
 //  AgoraRtmModels.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/4/26.
+//  Created by Anjie on 2022/4/26.
 //
 
 import Foundation
@@ -23,14 +23,20 @@ enum VideoCallRemoteType: String {
 
 struct ToVideoChatModel {
     var localNumber: String = ""
+    var localName: String = ""
+    var localType: VideoCallRemoteType = .MobileApp
     var channel: String = ""
     var remoteNumber: String = ""
-    var lockMac: String = ""
     var remoteName: String = ""
-    var remoteType: String = ""
+    var remoteType: VideoCallRemoteType = .AndroidDevice
+    var lockMac: String = ""
 
     func isEmpty() -> Bool {
-        localNumber.isEmpty || channel.isEmpty || remoteNumber.isEmpty || remoteType.isEmpty
+        localNumber.isEmpty || channel.isEmpty || remoteNumber.isEmpty
+    }
+    
+    func isNotEmpty() -> Bool {
+        return !isEmpty()
     }
 }
 

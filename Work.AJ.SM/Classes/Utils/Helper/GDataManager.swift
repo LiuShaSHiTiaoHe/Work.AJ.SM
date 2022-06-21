@@ -108,7 +108,7 @@ class GDataManager: NSObject {
         pushModel.title = "智慧社区视频通话"
         pushModel.body = "收到视频通话呼叫请求，请及时接听..."
         CommonRepository.shared.sendPushNotification(pushModel) { errorMsg in
-            
+            logger.info("\(errorMsg)")
         }
     }
 
@@ -182,7 +182,7 @@ class GDataManager: NSObject {
         RealmTools.deleteRealmFiles()
         removeUserData()
         removeNetCache()
-        removeNomalCache()
+        removeNormalCache()
     }
 
     // MARK: - 删除用户数据
@@ -205,7 +205,7 @@ class GDataManager: NSObject {
     }
 
     // MARK: - 删除用户日常缓存
-    func removeNomalCache() {
+    func removeNormalCache() {
         CacheManager.normal.removeAllCache()
     }
 

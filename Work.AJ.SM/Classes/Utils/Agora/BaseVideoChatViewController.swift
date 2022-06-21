@@ -2,7 +2,7 @@
 //  BaseVideoChatViewController.swift
 //  Work.AJ.SM
 //
-//  Created by Fairdesk on 2022/4/26.
+//  Created by Anjie on 2022/4/26.
 //
 
 import UIKit
@@ -47,18 +47,16 @@ class BaseVideoChatViewController: BaseViewController {
         initializeAgoraEngine()
         setupVideo()
         // MARK: - hide local video view
-        if let remoteUid = remoteUid, remoteUid.jk.uintToInt.jk.intToString.hasPrefix("41"), data.lockMac.isEmpty {
+        if let remoteUid = remoteUid, remoteUid.jk.uintToInt.jk.intToString.hasPrefix("41"), data.remoteType == .MobileApp {
             contentView.localVideo.isHidden = false
             agoraKit.enableLocalVideo(true)
             setupLocalVideo()
+            contentView.openDoorButton.isHidden = true
         } else {
             contentView.localVideo.isHidden = true
             agoraKit.enableLocalVideo(false)
         }
         joinChannel()
-        if data.lockMac.jk.isBlank {
-            contentView.openDoorButton.isHidden = true
-        }
     }
     
     // MARK: - Functions
@@ -107,23 +105,7 @@ class BaseVideoChatViewController: BaseViewController {
                              info: nil,
                              uid: uid) {(channel, uid, elapsed) -> Void in
             logger.info("did join channer \(channel)")
-        }
-//        HomeRepository.shared.agoraRTCToken(channel: channel) { [weak self] token in
-//            guard let self = self else { return }
-//            if token.isEmpty {
-//                self.dismiss(animated: true) {
-//                    SVProgressHUD.showError(withStatus: "agoraRTCToken 获取失败")
-//                }
-//            }else{
-//                self.agoraKit.joinChannel(byToken: token,
-//                                     channelId: channel,
-//                                     info: nil,
-//                                     uid: uid) {(channel, uid, elapsed) -> Void in
-//                    logger.info("did join channer \(channel)")
-//                }
-//            }
-//        }
-        
+        }        
         isStartCalling = true
         UIApplication.shared.isIdleTimerDisabled = true
     }

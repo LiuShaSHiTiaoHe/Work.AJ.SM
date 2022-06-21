@@ -99,11 +99,13 @@ extension BaseTabBarViewController: AgoraRtmInviterDelegate {
             vc.isOutgoing = false
             var data = ToVideoChatModel()
             data.localNumber = invitation.callee
-            data.remoteNumber = invitation.caller
+            data.localType = .MobileApp
+            data.localName = HomeRepository.shared.getCurrentHouseName()
+            // MARK: - 被叫时 加入自己的channel
             data.channel = invitation.callee
+            data.remoteNumber = invitation.caller
             // MARK: - content 放入两个参数，用','隔开:门口机的mac地址和名称
             /*
-             Dictionary
              "remoteType": "1"  mobile 1 device(门口机)2
              "remoteName": ""
              "lockMac": ""
@@ -112,7 +114,7 @@ extension BaseTabBarViewController: AgoraRtmInviterDelegate {
                 let jsonData = JSON(parseJSON: content)
                 logger.info("RTM Invitation Content ===> \(jsonData)")
                 data.lockMac = jsonData["lockMac"].stringValue
-                data.remoteType = jsonData["remoteType"].stringValue
+                data.remoteType = VideoCallRemoteType.init(rawValue: jsonData["remoteType"].stringValue) ?? .AndroidDevice
                 data.remoteName = jsonData["remoteName"].stringValue
                 vc.data = data
                 present(vc, animated: true)
@@ -169,7 +171,8 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
 extension BaseTabBarViewController: BaseVideoChatVCDelegate {
     func videoChat(_ vc: BaseVideoChatViewController, didEndChatWith uid: UInt) {
         vc.dismiss(animated: true) {
-            SVProgressHUD.showInfo(withStatus: "挂断-\(uid)")
+            logger.info("\(uid)挂断")
+            SVProgressHUD.showInfo(withStatus: "通话结束")
         }
     }
 }

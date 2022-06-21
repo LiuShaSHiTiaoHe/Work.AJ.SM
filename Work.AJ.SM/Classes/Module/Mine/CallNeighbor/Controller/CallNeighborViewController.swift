@@ -21,28 +21,29 @@ class CallNeighborViewController: BaseViewController {
 
     func callNumberValidation(_ blockNo: String, _ cellNo: String, _ unitNo: String) {
         let name = blockNo + "栋" + cellNo + "单元" + unitNo + "室"
-        if ud.userID == "4155" {
-            startCall("12622", "", name)
-        }else{
-            startCall("4155", "", name)
+        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
+            guard let self = self else {
+                return
+            }
+            if userIDs.isEmpty {
+                SVProgressHUD.showInfo(withStatus: "你选择的房号暂无联系人")
+            } else {
+                self.startCall(userIDs[0], mac, name)
+            }
         }
-        // FIXME: - 暂时
-//        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
-//            guard let self = self else {
-//                return
-//            }
-//            if userIDs.isEmpty {
-//                SVProgressHUD.showInfo(withStatus: "你选择的房号暂无联系人")
-//            } else {
-//                self.startCall(userIDs[0], mac, name)
-//            }
-//        }
     }
 
-    func startCall(_ number: String, _ lockMac: String, _ name: String) {
-        //MARK: - 发送推送
-        GDataManager.shared.sendVideoCallNotification(number)
-        startAgoraCall(number.ajAgoraAccount(), lockMac, name, VideoCallRemoteType.MobileApp)
+    func startCall(_ remoteUserID: String, _ lockMac: String, _ remoteName: String) {
+        if let userID = ud.userID {
+            // MARK: - Send Push Notification
+            GDataManager.shared.sendVideoCallNotification(remoteUserID)
+            let localName = HomeRepository.shared.getCurrentHouseName()
+            let remoteNumber = remoteUserID.ajAgoraAccount()
+            let data = ToVideoChatModel.init(localNumber: userID.ajAgoraAccount(), localName: localName, localType: .MobileApp,
+                    channel: remoteNumber, remoteNumber: remoteNumber, remoteName: remoteName, remoteType: .MobileApp, lockMac: lockMac)
+            startAgoraCall(with: data)
+        }
+
     }
 
     // MARK: - UI
