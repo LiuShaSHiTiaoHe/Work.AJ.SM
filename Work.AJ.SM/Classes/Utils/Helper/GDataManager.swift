@@ -112,6 +112,31 @@ class GDataManager: NSObject {
         }
     }
 
+    func loginAgoraRtm(){
+        guard let kit = AgoraRtm.shared().kit else {
+            return
+        }
+        if let userID = ud.userID {
+            // MARK: - Agora Device Account 默认加41前缀，跟门口机设备区分
+            let account = userID.ajAgoraAccount()
+            kit.login(account: account, token: nil, fail:  { (error) in
+                logger.error("AgoraRtm ====> \(error.localizedDescription)")
+                SVProgressHUD.showError(withStatus: "error.localizedDescription")
+            })
+        }
+    }
+
+    func logoutAgoraRtm() {
+        guard let kit = AgoraRtm.shared().kit else {
+            return
+        }
+        let status = AgoraRtm.shared().status
+        if status == .online {
+            kit.logOut()
+        }
+    }
+
+
     // MARK: - 检查更新
     func checkAppUpdate() {
         MineAPI.versionCheck(type: "ios").defaultRequest { jsonData in

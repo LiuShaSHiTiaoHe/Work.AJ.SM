@@ -88,7 +88,8 @@ extension RemoteOpenDoorViewController: RemoteOpenDoorCellDelegate {
             PermissionManager.permissionRequest(.microphone) {[weak self] authorized in
                 guard let self = self else { return }
                 if authorized {
-                    self.startAgoraCall(lockID, lockMac, lockName, VideoCallRemoteType.AndroidDevice)
+                    self.startAgoraCall("1057", "", "iosApp", VideoCallRemoteType.MobileApp)
+//                    self.startAgoraCall(lockID, lockMac, lockName, VideoCallRemoteType.AndroidDevice)
                 }else{
                     SVProgressHUD.showInfo(withStatus: "请打开系统麦克风权限")
                 }

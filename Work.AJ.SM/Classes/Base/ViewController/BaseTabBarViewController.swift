@@ -22,7 +22,11 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
     }
 
     func initData() {
-        loginAgoraRtm()
+        let rtm = AgoraRtm.shared()
+        rtm.inviterDelegate = self
+        if rtm.status == .offline {
+            GDataManager.shared.loginAgoraRtm()
+        }
     }
 
     func initUI() {
@@ -55,26 +59,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         Haptic.impact(.medium).generate()
     }
     
-    private func loginAgoraRtm(){
-        let rtm = AgoraRtm.shared()
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/rtm.log"
-        rtm.setLogPath(path)
-        rtm.inviterDelegate = self
-                
-        // rtm login
-        guard let kit = AgoraRtm.shared().kit else {
-            return
-        }
-        
-        if let userID = ud.userID {
-            // MARK: - Agora Device Account 默认加41前缀，跟门口机设备区分
-            let account = userID.ajAgoraAccount()
-            kit.login(account: account, token: nil, fail:  { (error) in
-                logger.error("AgoraRtm ====> \(error.localizedDescription)")
-                SVProgressHUD.showError(withStatus: "error.localizedDescription")
-            })
-        }
-    }
+
 }
 
 extension BaseTabBarViewController {

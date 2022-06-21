@@ -22,5 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // MARK: - 声网退出登录
+        GDataManager.shared.logoutAgoraRtm()
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // MARK: - 声网登录
+        GDataManager.shared.loginAgoraRtm()
+    }
 }
 
