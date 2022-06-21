@@ -184,7 +184,7 @@ class CallingViewController: BaseViewController {
             guard let inviter = AgoraRtm.shared().inviter else {
                 fatalError("rtm inviter nil")
             }
-            inviter.accpetLastIncomingInvitation()
+            inviter.acceptLastIncomingInvitation()
             close(.toVideoChat(data))
         }else{
             close(.normally("channel或remoteNumber数据错误"))

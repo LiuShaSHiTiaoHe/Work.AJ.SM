@@ -182,7 +182,7 @@ extension BaseVideoChatViewController: AgoraRtcEngineDelegate{
     
     // FIXME: - uid 跟remote ID 不一样？
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOfflineOfUid uid: UInt, reason: AgoraUserOfflineReason) {
-        print("didOfflineOfUid: \(uid)")
+        logger.info("didOfflineOfUid: \(uid)")
         leaveChannel()
     }
     

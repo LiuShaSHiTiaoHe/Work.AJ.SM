@@ -90,7 +90,7 @@ extension AgoraRtmCallKit {
         }
     }
     
-    func accpetLastIncomingInvitation(fail: ErrorCompletion = nil) {
+    func acceptLastIncomingInvitation(fail: ErrorCompletion = nil) {
         let rtm = AgoraRtm.shared()
         
         guard let last = rtm.lastIncomingInvitation else {
