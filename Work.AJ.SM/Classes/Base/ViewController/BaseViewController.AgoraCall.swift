@@ -20,21 +20,13 @@ extension BaseViewController: CallingViewControllerDelegate, BaseVideoChatVCDele
             switch reason {
             case .error:
                 SVProgressHUD.showError(withStatus: "\(reason.description)")
-            case .remoteReject(let _):
+            case .remoteReject(_):
                 SVProgressHUD.showError(withStatus: "\(reason.description)")
-            case .normally(_):
+            case .normally(let message):
                 guard let inviter = AgoraRtm.shared().inviter else {
                     fatalError("rtm inviter nil")
                 }
-                let errorHandle: ErrorCompletion = { (error: AGEError) in
-                    SVProgressHUD.showError(withStatus: "\(error.localizedDescription)")
-                }
-                switch inviter.status {
-                case .outgoing:
-                    inviter.cancelLastOutgoingInvitation(fail: errorHandle)
-                default:
-                    break
-                }
+                SVProgressHUD.showInfo(withStatus: message)
             case .toVideoChat(let data):
                 if !data.isEmpty() {
                     let vc = BaseVideoChatViewController()
