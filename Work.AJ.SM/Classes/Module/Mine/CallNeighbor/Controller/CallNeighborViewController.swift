@@ -21,16 +21,21 @@ class CallNeighborViewController: BaseViewController {
 
     func callNumberValidation(_ blockNo: String, _ cellNo: String, _ unitNo: String) {
         let name = blockNo + "栋" + cellNo + "单元" + unitNo + "室"
-        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
-            guard let self = self else {
-                return
-            }
-            if userIDs.isEmpty {
-                SVProgressHUD.showInfo(withStatus: "你选择的房号暂无联系人")
-            } else {
-                self.startCall(userIDs[0], mac, name)
-            }
+        var remoteNumber = "12622"
+        if let userID = ud.userID, userID == "12622" {
+            remoteNumber = "4155"
         }
+        self.startCall(remoteNumber, "", name)
+//        MineRepository.shared.validationNumber(blockNo: blockNo, unitNo: unitNo, cellNo: cellNo) { [weak self] userIDs, mac in
+//            guard let self = self else {
+//                return
+//            }
+//            if userIDs.isEmpty {
+//                SVProgressHUD.showInfo(withStatus: "你选择的房号暂无联系人")
+//            } else {
+//                self.startCall(userIDs[0], mac, name)
+//            }
+//        }
     }
 
     func startCall(_ remoteUserID: String, _ lockMac: String, _ remoteName: String) {

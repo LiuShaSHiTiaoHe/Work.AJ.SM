@@ -37,7 +37,6 @@ class BaseVideoChatViewController: BaseViewController {
                 contentView.micButton.isSelected = false
             }
             contentView.micButton.isHidden = !isStartCalling
-            contentView.openDoorButton.isHidden = !isStartCalling
         }
     }
     
@@ -53,6 +52,7 @@ class BaseVideoChatViewController: BaseViewController {
             setupLocalVideo()
             contentView.openDoorButton.isHidden = true
         } else {
+            contentView.openDoorButton.isHidden = false
             contentView.localVideo.isHidden = true
             agoraKit.enableLocalVideo(false)
         }

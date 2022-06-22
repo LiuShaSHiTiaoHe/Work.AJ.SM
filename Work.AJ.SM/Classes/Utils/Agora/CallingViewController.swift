@@ -175,7 +175,7 @@ class CallingViewController: BaseViewController {
     
     @objc
     func doHungUpPressed(_ sender: UIButton) {
-        close(.normally(data?.remoteNumber ?? ""))
+        close(.normally("通话已拒绝"))
     }
     
     @objc

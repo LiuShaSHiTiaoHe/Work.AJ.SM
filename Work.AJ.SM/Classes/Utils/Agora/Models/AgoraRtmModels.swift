@@ -93,9 +93,9 @@ enum HangupReason {
     
     var description: String {
         switch self {
-        case .remoteReject:     return "remote reject"
-        case .toVideoChat:      return "start video chat"
-        case .normally:         return "normally hung up"
+        case .remoteReject:     return "对方暂时无法接听"
+        case .toVideoChat:      return "开始视频通话"
+        case .normally:         return "通话已经结束"
         case .error(let error): return error.localizedDescription
         }
     }

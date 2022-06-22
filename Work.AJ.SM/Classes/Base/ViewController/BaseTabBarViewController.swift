@@ -145,15 +145,16 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
                 guard let inviter = AgoraRtm.shared().inviter else {
                     fatalError("rtm inviter nil")
                 }
-                let errorHandle: ErrorCompletion = { (error: AGEError) in
-                    SVProgressHUD.showError(withStatus: "\(error.localizedDescription)")
-                }
-                switch inviter.status {
-                case .outgoing:
-                    inviter.cancelLastOutgoingInvitation(fail: errorHandle)
-                default:
-                    SVProgressHUD.showInfo(withStatus: message)
-                }
+                SVProgressHUD.showInfo(withStatus: message)
+//                let errorHandle: ErrorCompletion = { (error: AGEError) in
+//                    SVProgressHUD.showError(withStatus: "\(error.localizedDescription)")
+//                }
+//                switch inviter.status {
+//                case .outgoing:
+//                    inviter.cancelLastOutgoingInvitation(fail: errorHandle)
+//                default:
+//                    SVProgressHUD.showInfo(withStatus: message)
+//                }
             case .toVideoChat(let data):
                 if !data.isEmpty() {
                     let vc = BaseVideoChatViewController()
