@@ -12,6 +12,14 @@ let RemoteOpenDoorCellIdentifier = "RemoteOpenDoorCell"
 
 class RemoteOpenDoorView: BaseView {
 
+    var offlineTipsText: String? {
+        didSet {
+            if let offlineTipsText = offlineTipsText {
+                offlineTips.text = offlineTipsText
+            }
+        }
+    }
+
     override func initializeView(){
         addSubview(headerView)
         addSubview(offlineTipsContentView)
@@ -81,7 +89,7 @@ class RemoteOpenDoorView: BaseView {
         let view = UILabel()
         view.textColor = R.color.sub_yellow()
         view.font = k12Font
-        view.text = "设备离线状态下，无法远程开门和视频通话"
+        view.numberOfLines = 0
         return view
     }()
     

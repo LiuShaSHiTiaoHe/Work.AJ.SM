@@ -245,6 +245,7 @@
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
 		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
+		A8570471B6937C25D39B76FF /* HomeRepository.Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8570AB0E56DF35AF25F92DA /* HomeRepository.Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -511,6 +512,7 @@
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
+		A8570AB0E56DF35AF25F92DA /* HomeRepository.Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRepository.Home.swift; sourceTree = "<group>"; };
 		B853C645EE120493374A98E1 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		C255B0509E51363E4DB560A8 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2116E584E2BE5DB7107B64E /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
@@ -986,6 +988,7 @@
 			isa = PBXGroup;
 			children = (
 				416F2E9327B2141B004E5AD9 /* HomeRepository.swift */,
+				A8570AB0E56DF35AF25F92DA /* HomeRepository.Home.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2358,6 +2361,7 @@
 				2896A05A179667FBB7FB0B56 /* CommonPushModel.swift in Sources */,
 				2896A68267A544DDAAF30F22 /* CommonAPI.swift in Sources */,
 				2896A030B641CD26C51E3A06 /* CommonRepository.swift in Sources */,
+				A8570471B6937C25D39B76FF /* HomeRepository.Home.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

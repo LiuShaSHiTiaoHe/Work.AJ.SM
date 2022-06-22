@@ -29,3 +29,6 @@ let kDeviceType = "iOS"
 let kDefaultDateFormatter = "yyyy-MM-dd HH:mm:ss"
 let kKeyChainServiceKey = "com.anjie.home.keys"
 let kDefaultCityName = "南京"
+
+// MARK: - Tips
+let kDefaultRemoteOpenDoorTips = "设备离线状态下，无法远程开门和视频通话"

@@ -20,6 +20,7 @@ enum HomeAPI {
     case openDoor(lockMac: String, userID: String, communityID: String, blockID: String, unitID: String, cellID: String, physicalFloor: String)
     case callElevatorViaMobile(cellID: String, direction: String, physicalFloor: String, unitNo: String)
     case getElevatorConfiguration(communityID: String)
+    case getSpecificPageNotice(pageID: String, communityID: String, userID: String)
 
     // MARK: - NCOM
     case ncomAllDevice(unitID: String)
@@ -30,7 +31,7 @@ enum HomeAPI {
 extension HomeAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: ApiBaseUrl())!
+        URL(string: ApiBaseUrl())!
     }
 
     var path: String {
@@ -63,6 +64,8 @@ extension HomeAPI: TargetType {
             return APIs.allNCallRecord
         case .ncomSendStatus:
             return APIs.sendNCallStatus
+        case .getSpecificPageNotice:
+            return APIs.specificPageNotice
         }
     }
 
@@ -96,6 +99,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getSpecificPageNotice(pageID, communityID, userID):
+            return .requestParameters(parameters: ["PAGEID": pageID, "USERID": userID, "COMMUNITYID": communityID].ekey("PAGEID"), encoding: URLEncoding.default)
         // MARK: - N方对讲
         case let .ncomAllDevice(unitID):
             return .requestParameters(parameters: ["UNITID": unitID].ekey("UNITID"), encoding: URLEncoding.default)
@@ -109,7 +114,7 @@ extension HomeAPI: TargetType {
     }
 
     var headers: [String: String]? {
-        return [:]
+        [:]
     }
 
 }
