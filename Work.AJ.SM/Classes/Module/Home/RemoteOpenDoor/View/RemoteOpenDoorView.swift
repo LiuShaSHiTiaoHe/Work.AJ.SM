@@ -12,6 +12,14 @@ let RemoteOpenDoorCellIdentifier = "RemoteOpenDoorCell"
 
 class RemoteOpenDoorView: BaseView {
 
+    var offlineTipsText: String? {
+        didSet {
+            if let offlineTipsText = offlineTipsText {
+                offlineTips.text = offlineTipsText
+            }
+        }
+    }
+
     override func initializeView(){
         addSubview(headerView)
         addSubview(offlineTipsContentView)
@@ -28,7 +36,7 @@ class RemoteOpenDoorView: BaseView {
         offlineTipsContentView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         offlineTipsLogo.snp.makeConstraints { make in
@@ -41,7 +49,7 @@ class RemoteOpenDoorView: BaseView {
             make.left.equalTo(offlineTipsLogo.snp.right).offset(5)
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.equalTo(30)
+            make.height.equalTo(40)
         }
         
         tipsLabel.snp.makeConstraints { make in
@@ -81,7 +89,7 @@ class RemoteOpenDoorView: BaseView {
         let view = UILabel()
         view.textColor = R.color.sub_yellow()
         view.font = k12Font
-        view.text = "设备离线状态下，无法远程开门和视频通话"
+        view.numberOfLines = 0
         return view
     }()
     

@@ -30,3 +30,6 @@ let kAgoraAppID = "31c87e63d50446baba06c0da8a0c99d9"
 let kDefaultDateFormatter = "yyyy-MM-dd HH:mm:ss"
 let kKeyChainServiceKey = "com.anjie.home.keys"
 let kDefaultCityName = "南京"
+
+// MARK: - Tips
+let kDefaultRemoteOpenDoorTips = "设备离线状态下，无法远程开门和视频通话"

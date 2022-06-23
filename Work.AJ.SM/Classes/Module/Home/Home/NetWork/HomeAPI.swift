@@ -22,6 +22,8 @@ enum HomeAPI {
     case getElevatorConfiguration(communityID: String)
     case getAgoraRtmToken(account: String)
     case getAgoraRtcToken(channel: String)
+    case getSpecificPageNotice(pageID: String, communityID: String, userID: String)
+
     // MARK: - NCOM
     case ncomAllDevice(unitID: String)
     case ncomRecord(communityID: String, startTime: String, endTime: String, page: String, count: String)
@@ -31,7 +33,7 @@ enum HomeAPI {
 extension HomeAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: ApiBaseUrl())!
+        URL(string: ApiBaseUrl())!
     }
 
     var path: String {
@@ -64,6 +66,8 @@ extension HomeAPI: TargetType {
             return APIs.allNCallRecord
         case .ncomSendStatus:
             return APIs.sendNCallStatus
+        case .getSpecificPageNotice:
+            return APIs.specificPageNotice
         case .getAgoraRtmToken:
             return APIs.getAgoraRtmToken
         case .getAgoraRtcToken:
@@ -106,6 +110,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["CELLID": cellID, "DIRECTION": direction, "PHYSICALFLOOR": physicalFloor, "LANDINGTYPE": "E", "UNITNO": unitNo].ekey("CELLID"), encoding: URLEncoding.default)
         case let .getElevatorConfiguration(communityID):
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
+        case let .getSpecificPageNotice(pageID, communityID, userID):
+            return .requestParameters(parameters: ["PAGEID": pageID, "USERID": userID, "COMMUNITYID": communityID].ekey("PAGEID"), encoding: URLEncoding.default)
         case let .getAgoraRtmToken(account):
             return .requestParameters(parameters: ["userAccount": account, "expirationTimeInSeconds": 36000].ekey("userAccount"), encoding: URLEncoding.default)
         case let .getAgoraRtcToken(channel):
@@ -125,7 +131,7 @@ extension HomeAPI: TargetType {
     }
 
     var headers: [String: String]? {
-        return [:]
+        [:]
     }
 
 }

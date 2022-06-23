@@ -28,146 +28,21 @@ enum UnitStatus {
 class HomeRepository {
     static let shared = HomeRepository()
 
-    func homeData(completion: @escaping HomeDataCompletion) {
-        SVProgressHUD.show()
-        var homeModuleArray: Array<HomePageFunctionModule> = []
-        var adsArray: Array<AdsModel> = []
-        var noticeArray: Array<NoticeModel> = []
-        guard let userMobile = ud.userMobile else {
-            SVProgressHUD.dismiss()
-            completion(homeModuleArray, adsArray, noticeArray, .Unknown)
-            return
-        }
-        /*
-         房屋状态：
-         待审核 P, 失效 H, 过期 E, 正常 N
-         */
-        HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
-            guard let `self` = self else {
-                return
-            }
-            guard models.count > 0 else {
-                completion(homeModuleArray, adsArray, noticeArray, .Unknown)
-                return
-            }
-            RealmTools.addList(models, update: .all) {
-                logger.info("update done")
-            }
-            
-            // MARK: - 当前房间是否有效
-            if let cUnitID = ud.currentUnitID, let cUnit = models.first(where: { model in
-                model.unitid == cUnitID
-            }), let cUnitState = cUnit.state, cUnitState == "N" {
-                homeModuleArray = self.filterHomePageModules(cUnit)
-                self.adsAndNotice { ads, notices in
-                    adsArray = ads
-                    noticeArray = notices
-                    completion(homeModuleArray, adsArray, noticeArray, .Normal)
-                }
-            } else {
-            // MARK: - 第一个有效的房屋
-                if let unit = models.first(where: { model in
-                    model.state == "N"
-                }), let unitID = unit.unitid {
-                    ud.currentUnitID = unitID
-                    homeModuleArray = self.filterHomePageModules(unit)
-                    self.adsAndNotice { ads, notices in
-                        adsArray = ads
-                        noticeArray = notices
-                        completion(homeModuleArray, adsArray, noticeArray, .Normal)
-                    }
-                } else {
-                    completion(homeModuleArray, adsArray, noticeArray, .Invalid)
-                }
-            }
-        } failureCallback: { response in
-            logger.info("\(response.message)")
-            completion(homeModuleArray, adsArray, noticeArray, .Unknown)
-        }
-    }
+}
 
-    func adsAndNotice(completion: @escaping HomeAdsAndNoticeCompletion) {
-        var adsData: [AdsModel] = []
-        var noticeData: [NoticeModel] = []
-        if let unit = getCurrentUnit(), let operID = unit.operid?.jk.intToString, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
-            SVProgressHUD.show()
-            let group = DispatchGroup()
-            group.enter()
-            HomeAPI.getAdvertisement(operID: operID, communityID: communityID).request(modelType: [AdsModel].self) { models, response in
-                adsData.append(contentsOf: models)
-                group.leave()
-            } failureCallback: { response in
-                group.leave()
-            }
-            group.enter()
-            HomeAPI.getNotice(communityID: communityID, blockID: blockID, cellID: cellID).request(modelType: [NoticeModel].self) { models, response in
-                noticeData.append(contentsOf: models)
-                group.leave()
-            } failureCallback: { response in
-                group.leave()
-            }
-            group.notify(queue: DispatchQueue.main) {
-                SVProgressHUD.dismiss()
-                completion(adsData, noticeData)
-            }
+// MARK: - SpecificPageNotice
+extension HomeRepository {
+    func getSpecificPageNotice(with pageID: String, completion: @escaping (_ errorMsg: String, _ notice: String) -> Void) {
+        if let unit = getCurrentUnit(), let userID = ud.userID, let communityID = unit.communityid?.jk.intToString {
+            HomeAPI.getSpecificPageNotice(pageID: pageID, communityID: communityID, userID: userID).defaultRequest(cacheType: .networkElseCache,
+                    showError: false, successCallback: { json in
+                        if let dataJson = json["data"].dictionary, let message = dataJson["msg"]?.string {
+                            completion("", message)
+                        }
+                    }, failureCallback: { response in
+                            completion(response.message, "")
+                    })
         }
-    }
-
-    func getUnitName(unitID: Int) -> String {
-        if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname, let blockname = unit.blockname, let unitno = unit.unitno {
-            return communityname + blockname + cellname + unitno + "室"
-        }
-        return ""
-    }
-
-    func getCurrentUnit() -> UnitModel? {
-        if let unitID = Defaults.currentUnitID {
-            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first {
-                return unit
-            }
-        }
-        return nil
-    }
-
-    func getCurrentUnitName() -> String {
-        if let unitID = Defaults.currentUnitID {
-            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname {
-                return communityname + cellname
-            }
-        }
-        return ""
-    }
-
-    func getCurrentHouseName() -> String {
-        if let unitID = Defaults.currentUnitID {
-            if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let cell = unit.cellname, let community = unit.communityname, let unitno = unit.unitno, let blockName = unit.blockname {
-                return community + blockName + cell + unitno
-            }
-        }
-        return ""
-    }
-
-    func getCurrentUser() -> UserModel? {
-        if let userID = ud.userID, let _ = userID.jk.toInt() {
-            if let user = RealmTools.objectsWithPredicate(object: UserModel(), predicate: NSPredicate.init(format: "rid == %@", userID)).first {
-                return user
-            }
-        }
-        return nil
-    }
-
-    func currentUserType() -> String {
-        if let unit = getCurrentUnit(), let type = unit.usertype {
-            return type
-        }
-        return ""
-    }
-    
-    func isUnitOwner() -> Bool {
-        if currentUserType() == "O" {
-            return true
-        }
-        return false
     }
 }
 

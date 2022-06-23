@@ -14,7 +14,7 @@ protocol HomeNaviHeaderViewDelegate: NSObjectProtocol {
 
 class HomeNaviHeaderView: UIView {
     
-    private let maxUnitNameWidth = kScreenWidth - kMargin*2 - kMargin
+    private let maxUnitNameWidth = kScreenWidth - kMargin*2 - 20
     weak var delegate: HomeNaviHeaderViewDelegate?
 
     lazy var unitNameLabel: UILabel = {
@@ -36,7 +36,7 @@ class HomeNaviHeaderView: UIView {
 
     func updateTitle(unitName: String) {
         unitNameLabel.text = unitName
-        let sizeWidth = unitName.jk.singleLineWidth(font: UIFont.systemFont(ofSize: 20))
+        let sizeWidth = unitName.jk.singleLineWidth(font: UIFont.systemFont(ofSize: 20)) + 15
         if sizeWidth < maxUnitNameWidth {
             unitNameLabel.snp.updateConstraints { make in
                 make.width.equalTo(sizeWidth)

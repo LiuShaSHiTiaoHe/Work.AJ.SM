@@ -39,6 +39,15 @@ class RemoteIntercomViewController: BaseViewController {
             self.dataSource = models
             self.contentView.tableView.reloadData()
         }
+        // MARK: - PageID = 1 远程开门 2 门禁对讲
+        HomeRepository.shared.getSpecificPageNotice(with: "2") { [weak self] errorMsg, notice in
+            guard let `self` = self else { return }
+            if notice.isEmpty {
+                self.contentView.offlineTipsText = kDefaultRemoteOpenDoorTips
+            } else {
+                self.contentView.offlineTipsText = notice
+            }
+        }
     }
     
 }

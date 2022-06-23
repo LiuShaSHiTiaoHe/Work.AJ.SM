@@ -25,7 +25,7 @@ final class APIs {
     static let propertyContactList = "appcity/getContact.do"
     static let messageList = "appcity/getMyMessage.do"
     static let commonPush = "appDevice/commonPush"
-    
+    static let specificPageNotice = "/appcity/getMsg"
     // MARK: - 用户鉴权
     static let login = "appcity/login.do"
     static let register = "appcity/register.do"
