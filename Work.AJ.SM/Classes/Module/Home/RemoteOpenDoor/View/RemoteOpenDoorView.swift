@@ -36,7 +36,7 @@ class RemoteOpenDoorView: BaseView {
         offlineTipsContentView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(headerView.snp.bottom)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         offlineTipsLogo.snp.makeConstraints { make in
@@ -49,7 +49,7 @@ class RemoteOpenDoorView: BaseView {
             make.left.equalTo(offlineTipsLogo.snp.right).offset(5)
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.equalTo(30)
+            make.height.equalTo(40)
         }
         
         tipsLabel.snp.makeConstraints { make in
