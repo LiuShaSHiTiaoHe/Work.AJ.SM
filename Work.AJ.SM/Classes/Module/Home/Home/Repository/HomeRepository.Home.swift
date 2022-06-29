@@ -4,6 +4,18 @@
 
 import Foundation
 
+/*
+ 房屋状态：
+ 待审核 P, 失效 H, 过期 E, 正常 N
+ */
+enum UnitStatus: String {
+    case Pendding = "P"
+    case Invalid = "H"
+    case Expire = "E"
+    case Normal = "N"
+    case Unknown = ""
+}
+
 extension HomeRepository {
     func homeData(completion: @escaping HomeDataCompletion) {
         SVProgressHUD.show()
@@ -15,10 +27,10 @@ extension HomeRepository {
             completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             return
         }
-        /*
-         房屋状态：
-         待审核 P, 失效 H, 过期 E, 正常 N
-         */
+
+
+
+
         HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             guard let `self` = self else {
                 return
@@ -30,31 +42,53 @@ extension HomeRepository {
             RealmTools.addList(models, update: .all) {
                 logger.info("update done")
             }
+            var idAndStates: Array<(String, UnitStatus)> = Array<(String, UnitStatus)>()
+            models.forEach { model in
+                if let unitID = model.unitid?.jk.intToString {
+                    if let unitState = model.state, let status = UnitStatus.init(rawValue: unitState) {
+                        idAndStates.append((unitID, status))
+                    } else {
+                        idAndStates.append((unitID, .Unknown))
+                    }
 
-            // MARK: - 当前房间是否有效
-            if let cUnitID = ud.currentUnitID, let cUnit = models.first(where: { model in
-                model.unitid == cUnitID
-            }), let cUnitState = cUnit.state, cUnitState == "N" {
-                homeModuleArray = self.filterHomePageModules(cUnit)
-                self.adsAndNotice { ads, notices in
-                    adsArray = ads
-                    noticeArray = notices
-                    completion(homeModuleArray, adsArray, noticeArray, .Normal)
+
                 }
+            }
+            
+            if idAndStates.isEmpty {
+                // MARK: - 没有有效的房间
+                completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             } else {
-                // MARK: - 第一个有效的房屋
-                if let unit = models.first(where: { model in
-                    model.state == "N"
-                }), let unitID = unit.unitid {
-                    ud.currentUnitID = unitID
-                    homeModuleArray = self.filterHomePageModules(unit)
+                // MARK: - 当前房间有效
+                if let cUnitID = ud.currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }), let cUnit = models.first(where: {$0.unitid == cUnitID}) {
+                    homeModuleArray = self.filterHomePageModules(cUnit)
+
+
+
                     self.adsAndNotice { ads, notices in
                         adsArray = ads
                         noticeArray = notices
                         completion(homeModuleArray, adsArray, noticeArray, .Normal)
                     }
                 } else {
-                    completion(homeModuleArray, adsArray, noticeArray, .Invalid)
+                    // MARK: - 取第一个有效的房屋
+                    if let idAndStateNormal = idAndStates.first(where: {$0.1 == .Normal}),
+                       let unit = models.first(where: {$0.unitid?.jk.intToString == idAndStateNormal.0}),
+                       let unitID = unit.unitid {
+                        ud.currentUnitID = unitID
+                        homeModuleArray = self.filterHomePageModules(unit)
+                        self.adsAndNotice { ads, notices in
+                            adsArray = ads
+                            noticeArray = notices
+                            completion(homeModuleArray, adsArray, noticeArray, .Normal)
+                        }
+                    } else if let _ = idAndStates.first(where: {$0.1 == .Pendding}) {
+                        completion(homeModuleArray, adsArray, noticeArray, .Pendding)
+                    } else if let _ = idAndStates.first(where: {$0.1 == .Expire}){
+                        completion(homeModuleArray, adsArray, noticeArray, .Expire)
+                    } else {
+                        completion(homeModuleArray, adsArray, noticeArray, .Invalid)
+                    }
                 }
             }
         } failureCallback: { response in
