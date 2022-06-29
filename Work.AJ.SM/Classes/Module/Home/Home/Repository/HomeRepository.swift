@@ -18,12 +18,6 @@ typealias ElevatorConfigurationCompletion = (ElevatorConfiguration?) -> Void
 typealias NComAllDeviceInfoCompletion = ([NComDTU]) -> Void
 typealias NComCallRecordCompletion = ([NComRecordInfo], Int) -> Void
 
-enum UnitStatus {
-    case Invalid
-    case Normal
-    case Unknown
-}
-
 class HomeRepository {
     static let shared = HomeRepository()
 
