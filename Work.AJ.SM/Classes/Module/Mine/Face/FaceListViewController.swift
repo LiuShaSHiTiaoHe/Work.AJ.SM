@@ -227,9 +227,18 @@ extension FaceListViewController: FaceImageViewControllerDelegate {
 
     func faceImageCompleted(_ image: UIImage, _ faceImageVC: FaceImageViewController) {
         self.needReloadData = false
-        faceImageVC.dismiss(animated: true) {
-            self.needReloadData = true
-            self.go2ConfirmFaceImageVC(image)
+        let faces = image.facesInImage
+        switch faces {
+        case 0:
+            SVProgressHUD.showInfo(withStatus: "未检测到人脸信息")
+        case 1:
+            faceImageVC.dismiss(animated: true) {
+                self.needReloadData = true
+                self.go2ConfirmFaceImageVC(image)
+            }
+        default:
+            SVProgressHUD.showInfo(withStatus: "检测到多个人脸信息")
         }
+        
     }
 }
