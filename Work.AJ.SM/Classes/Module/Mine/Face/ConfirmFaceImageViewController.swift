@@ -35,14 +35,14 @@ class ConfirmFaceImageViewController: BaseViewController {
             return
         }
 
-        let identifiedNumber = getMemberIdentifierNumber()
-        if identifiedNumber.isEmpty {
-            SVProgressHUD.showInfo(withStatus: "请输入身份证号")
+        let memberPhoneNumber = getMemberPhoneNumber()
+        if memberPhoneNumber.isEmpty {
+            SVProgressHUD.showInfo(withStatus: "请输入手机号码")
             return
         }
         
-        if !identifiedNumber.isValidIDCardNumber() {
-            SVProgressHUD.showInfo(withStatus: "请输入正确的身份证号")
+        if !memberPhoneNumber.aj_isMobileNumber {
+            SVProgressHUD.showInfo(withStatus: "请输入正确的手机号码")
             return
         }
         
@@ -90,9 +90,9 @@ class ConfirmFaceImageViewController: BaseViewController {
         }
     }
 
-    func getMemberIdentifierNumber() -> String {
-        let cell = tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! CommonIDNumberInpuCell
-        if let PhoneNumber = cell.IDNumberInput.text {
+    func getMemberPhoneNumber() -> String {
+        let cell = tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! CommonPhoneNumberCell
+        if let PhoneNumber = cell.phoneInput.text {
             return PhoneNumber
         } else {
             return ""
@@ -167,7 +167,7 @@ class ConfirmFaceImageViewController: BaseViewController {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.register(CommonInputCell.self, forCellReuseIdentifier: CommonInputCellIdentifier)
         view.register(FaceUploadRoleSelectCell.self, forCellReuseIdentifier: FaceUploadRoleSelectCellIdentifier)
-        view.register(CommonIDNumberInpuCell.self, forCellReuseIdentifier: CommonIDNumberInpuCellIdentifier)
+        view.register(CommonPhoneNumberCell.self, forCellReuseIdentifier: CommonPhoneNumberCellIdentifier)
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.bg()
         return view
@@ -199,10 +199,10 @@ extension ConfirmFaceImageViewController: UITableViewDelegate, UITableViewDataSo
             cell.placeholder = "请输入家人/成员姓名"
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CommonIDNumberInpuCellIdentifier, for: indexPath) as! CommonIDNumberInpuCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CommonPhoneNumberCellIdentifier, for: indexPath) as! CommonPhoneNumberCell
             cell.accessoryType = .none
-            cell.nameLabel.text = "身份证"
-            cell.placeholder = "请输入家人/成员身份证号"
+            cell.nameLabel.text = "手机号"
+            cell.placeholder = "请输入手机号码"
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: FaceUploadRoleSelectCellIdentifier, for: indexPath) as! FaceUploadRoleSelectCell

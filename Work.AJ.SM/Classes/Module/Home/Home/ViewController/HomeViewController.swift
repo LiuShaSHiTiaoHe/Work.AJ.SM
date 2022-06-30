@@ -55,18 +55,20 @@ class HomeViewController: BaseViewController {
                 return
             }
             switch status {
-            case .Invalid:
+            case .Invalid, .Expire:
                 self.showNoDataView(.nohouse)
                 SVProgressHUD.showInfo(withStatus: "该房屋已被停用，请联系物业或添加其他房屋")
-                break
+
             case .Unknown:
                 self.showNoDataView(.nohouse)
-                break
+
             case .Normal:
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.contentView.updateAdsAndNotices(ads, notices)
-                break
+            case .Pendding:
+                self.showNoDataView(.nohouse)
+                SVProgressHUD.showInfo(withStatus: "该房屋审核中，请联系物业获取审核结果")
             }
 
         }
@@ -135,4 +137,3 @@ extension HomeViewController: ChooseVisitorModeDelegate {
         }
     }
 }
-
