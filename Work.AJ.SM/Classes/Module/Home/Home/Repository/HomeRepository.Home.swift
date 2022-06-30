@@ -28,9 +28,6 @@ extension HomeRepository {
             return
         }
 
-
-
-
         HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             guard let `self` = self else {
                 return
@@ -50,8 +47,6 @@ extension HomeRepository {
                     } else {
                         idAndStates.append((unitID, .Unknown))
                     }
-
-
                 }
             }
             
@@ -62,9 +57,6 @@ extension HomeRepository {
                 // MARK: - 当前房间有效
                 if let cUnitID = ud.currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }), let cUnit = models.first(where: {$0.unitid == cUnitID}) {
                     homeModuleArray = self.filterHomePageModules(cUnit)
-
-
-
                     self.adsAndNotice { ads, notices in
                         adsArray = ads
                         noticeArray = notices
