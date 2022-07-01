@@ -76,7 +76,7 @@ extension HomeAPI: TargetType {
     var task: Task {
         switch self {
         case let .getMyUnit(mobile):
-            return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["MOBILE": mobile, "apiVersion": "1"].ekey("MOBILE"), encoding: URLEncoding.default)
         case let .getAdvertisement(operID, communityID):
             return .requestParameters(parameters: ["OPERID": operID, "COMMUNITYID": communityID, "COVERS": "A"].ekey("OPERID"), encoding: URLEncoding.default)
         case let .getNotice(communityID, blockID, cellID):

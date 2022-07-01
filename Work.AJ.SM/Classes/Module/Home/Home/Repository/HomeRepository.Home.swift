@@ -6,13 +6,14 @@ import Foundation
 
 /*
  房屋状态：
- 待审核 P, 失效 H, 过期 E, 正常 N
+ 待审核 P, 失效 H, 过期 E, 正常 N, 停用 B
  */
 enum UnitStatus: String {
     case Pendding = "P"
     case Invalid = "H"
     case Expire = "E"
     case Normal = "N"
+    case Blocked = "B"
     case Unknown = ""
 }
 
@@ -27,9 +28,6 @@ extension HomeRepository {
             completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             return
         }
-
-
-
 
         HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             guard let `self` = self else {
@@ -62,9 +60,6 @@ extension HomeRepository {
                 // MARK: - 当前房间有效
                 if let cUnitID = ud.currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }), let cUnit = models.first(where: {$0.unitid == cUnitID}) {
                     homeModuleArray = self.filterHomePageModules(cUnit)
-
-
-
                     self.adsAndNotice { ads, notices in
                         adsArray = ads
                         noticeArray = notices
@@ -84,6 +79,8 @@ extension HomeRepository {
                         }
                     } else if let _ = idAndStates.first(where: {$0.1 == .Pendding}) {
                         completion(homeModuleArray, adsArray, noticeArray, .Pendding)
+                    } else if let _ = idAndStates.first(where: {$0.1 == .Blocked}){
+                       completion(homeModuleArray, adsArray, noticeArray, .Blocked)
                     } else if let _ = idAndStates.first(where: {$0.1 == .Expire}){
                         completion(homeModuleArray, adsArray, noticeArray, .Expire)
                     } else {

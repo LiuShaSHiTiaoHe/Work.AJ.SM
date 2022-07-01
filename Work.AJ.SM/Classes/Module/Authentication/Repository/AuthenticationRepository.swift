@@ -26,12 +26,11 @@ class AuthenticationRepository: NSObject {
                 GDataManager.shared.setupDataBase()
                 GDataManager.shared.loginNIMSDK()
                 GDataManager.shared.pushSetAlias(mobile)
-                RealmTools.add(userModel, update: .modified) {
-                }
-                if let data = JsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
-                    RealmTools.addList(units, update: .modified) {
-                    }
-                }
+                RealmTools.add(userModel, update: .modified) {}
+//                if let data = JsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
+//                    RealmTools.addList(units, update: .modified) {
+//                    }
+//                }
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

@@ -797,7 +797,7 @@
 				416F2EBB27BA46F1004E5AD9 /* Mine */,
 				416F2EBA27BA46E7004E5AD9 /* Neighbourhood */,
 				416F2EB927BA46C1004E5AD9 /* Service */,
-				416F2E9C27B5FDAD004E5AD9 /* LoginRegister */,
+				416F2E9C27B5FDAD004E5AD9 /* Authentication */,
 				416F2E5A27B0BEAC004E5AD9 /* Home */,
 			);
 			path = Module;
@@ -1004,7 +1004,7 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
-		416F2E9C27B5FDAD004E5AD9 /* LoginRegister */ = {
+		416F2E9C27B5FDAD004E5AD9 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				416F2EA127B5FDF1004E5AD9 /* Repository */,
@@ -1013,7 +1013,7 @@
 				416F2E9E27B5FDD4004E5AD9 /* Model */,
 				416F2E9D27B5FDCA004E5AD9 /* NetWork */,
 			);
-			path = LoginRegister;
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		416F2E9D27B5FDCA004E5AD9 /* NetWork */ = {

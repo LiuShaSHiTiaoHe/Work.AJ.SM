@@ -40,7 +40,7 @@ class MineRepository: NSObject {
 
             } else {
                 if let firstUnit = models.first(where: { model in
-                    model.state == "N"
+                    model.state == UnitStatus.Normal.rawValue
                 }), let unitID = firstUnit.unitid {
                     Defaults.currentUnitID = unitID
                 }
@@ -51,7 +51,6 @@ class MineRepository: NSObject {
             }
             completion("")
         } failureCallback: { response in
-            logger.info("\(response.message)")
             completion(response.message)
         }
     }
@@ -67,16 +66,8 @@ class MineRepository: NSObject {
             RealmTools.addList(models, update: .modified) {
                 logger.info("update done")
             }
-
-            completion(models.filter { unit in
-                if let state = unit.state {
-                    return state == "N"
-                } else {
-                    return false
-                }
-            })
+            completion(models.filter{$0.state == UnitStatus.Normal.rawValue})
         } failureCallback: { response in
-            logger.info("\(response.message)")
             completion([])
         }
     }
@@ -93,7 +84,6 @@ class MineRepository: NSObject {
                     completion(members)
                 }
             }, failureCallback: { response in
-                logger.info("\(response.message)")
                 completion([])
             })
         } else {
@@ -106,7 +96,6 @@ class MineRepository: NSObject {
             MineAPI.deleteMember(unitID: unitID, userID: userID, memberUserID: memberID).defaultRequest(cacheType: .ignoreCache, showError: false, successCallback: { jsonData in
                 completion("")
             }, failureCallback: { response in
-                logger.info("\(response.message)")
                 completion(response.message)
             })
         }
@@ -558,7 +547,6 @@ extension MineRepository {
                 if let dataArray = jsonData["data"].array {
                     if !dataArray.isEmpty {
                         if let dataDic = dataArray[0].dictionaryObject, let status = dataDic["STATUS"] as? String {
-                            // FIXME: - 难道是F的状态为打开？
                             if status == "F" {
                                 completion(true)
                             } else {

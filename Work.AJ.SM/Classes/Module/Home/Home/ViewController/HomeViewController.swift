@@ -55,13 +55,11 @@ class HomeViewController: BaseViewController {
                 return
             }
             switch status {
-            case .Invalid, .Expire:
+            case .Invalid, .Expire, .Blocked:
                 self.showNoDataView(.nohouse)
                 SVProgressHUD.showInfo(withStatus: "该房屋已被停用，请联系物业或添加其他房屋")
-
             case .Unknown:
                 self.showNoDataView(.nohouse)
-
             case .Normal:
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)

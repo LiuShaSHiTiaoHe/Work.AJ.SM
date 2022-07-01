@@ -32,14 +32,17 @@ class HouseCell: UITableViewCell {
     var unit: UnitModel? {
         didSet {
             if let state = unit?.state {
-                if state == "P" {
+                if state == UnitStatus.Pendding.rawValue {
                     currentStateLabel.text = "待审核"
                     currentStateLabel.textColor = R.color.sub_yellow()
-                }else if state == "H" {
+                }else if state == UnitStatus.Invalid.rawValue {
                     currentStateLabel.text = "已失效"
                     currentStateLabel.textColor = R.color.sub_red()
-                }else if state == "E" {
+                }else if state == UnitStatus.Expire.rawValue {
                     currentStateLabel.text = "已过期"
+                    currentStateLabel.textColor = R.color.sub_red()
+                }else if state == UnitStatus.Blocked.rawValue {
+                    currentStateLabel.text = "已停用"
                     currentStateLabel.textColor = R.color.sub_red()
                 }else{
                     currentStateLabel.text = ""
