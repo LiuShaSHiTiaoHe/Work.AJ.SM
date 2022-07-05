@@ -32,8 +32,8 @@ class HouseCell: UITableViewCell {
     var unit: UnitModel? {
         didSet {
             if let state = unit?.state {
-                if state == UnitStatus.Pendding.rawValue {
-                    currentStateLabel.text = "待审核"
+                if state == UnitStatus.Pending.rawValue {
+                    currentStateLabel.text = "审核中"
                     currentStateLabel.textColor = R.color.sub_yellow()
                 }else if state == UnitStatus.Invalid.rawValue {
                     currentStateLabel.text = "已失效"

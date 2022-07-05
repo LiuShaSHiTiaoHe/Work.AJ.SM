@@ -64,7 +64,7 @@ class HomeViewController: BaseViewController {
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.contentView.updateAdsAndNotices(ads, notices)
-            case .Pendding:
+            case .Pending:
                 self.showNoDataView(.nohouse)
                 SVProgressHUD.showInfo(withStatus: "该房屋审核中，请联系物业获取审核结果")
             }

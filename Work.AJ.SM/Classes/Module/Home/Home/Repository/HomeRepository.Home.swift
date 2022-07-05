@@ -9,7 +9,7 @@ import Foundation
  待审核 P, 失效 H, 过期 E, 正常 N, 停用 B
  */
 enum UnitStatus: String {
-    case Pendding = "P"
+    case Pending = "P"
     case Invalid = "H"
     case Expire = "E"
     case Normal = "N"
@@ -77,8 +77,8 @@ extension HomeRepository {
                             noticeArray = notices
                             completion(homeModuleArray, adsArray, noticeArray, .Normal)
                         }
-                    } else if let _ = idAndStates.first(where: {$0.1 == .Pendding}) {
-                        completion(homeModuleArray, adsArray, noticeArray, .Pendding)
+                    } else if let _ = idAndStates.first(where: {$0.1 == .Pending}) {
+                        completion(homeModuleArray, adsArray, noticeArray, .Pending)
                     } else if let _ = idAndStates.first(where: {$0.1 == .Blocked}){
                        completion(homeModuleArray, adsArray, noticeArray, .Blocked)
                     } else if let _ = idAndStates.first(where: {$0.1 == .Expire}){
