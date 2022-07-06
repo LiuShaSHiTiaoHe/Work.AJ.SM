@@ -175,7 +175,11 @@ class CallingViewController: BaseViewController {
     
     @objc
     func doHungUpPressed(_ sender: UIButton) {
-        close(.normally("通话已拒绝"))
+        guard let inviter = AgoraRtm.shared().inviter else {
+            fatalError("rtm inviter nil")
+        }
+        inviter.cancelLastOutgoingInvitation()
+        close(.normally("通话已取消"))
     }
     
     @objc
