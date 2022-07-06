@@ -139,7 +139,7 @@ extension BaseTabBarViewController: CallingViewControllerDelegate {
             case .error:
                 SVProgressHUD.showError(withStatus: "\(reason.description)")
             case .remoteReject(let remote):
-                SVProgressHUD.showError(withStatus: "\(reason.description)" + ": \(remote)")
+                SVProgressHUD.showError(withStatus: "对方拒绝接听")
             case .normally(let message):
                 logger.info("no normally close \(message)")
                 guard let inviter = AgoraRtm.shared().inviter else {

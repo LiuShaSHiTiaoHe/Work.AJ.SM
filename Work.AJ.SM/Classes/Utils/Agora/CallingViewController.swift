@@ -97,7 +97,7 @@ class CallingViewController: BaseViewController {
                case .offline:
                    self.checkRemoteStatus(for: 5, remoteNumber, data)
                case .unreachable:
-                   self.close(.remoteReject(remoteNumber))
+                   self.close(.normally("暂时无法呼叫"))
                @unknown default:
                    fatalError("queryPeerOnline")
                }
@@ -128,7 +128,7 @@ class CallingViewController: BaseViewController {
             if let _ = UInt(remoteNumber){
                 self.close(.toVideoChat(videoChatData))
             }else{
-                self.close(.normally("remoteNumber数据错误"))
+                self.close(.normally("呼叫数据错误"))
             }
         }, refused: { [weak self] in
             guard let self = self else { return }
