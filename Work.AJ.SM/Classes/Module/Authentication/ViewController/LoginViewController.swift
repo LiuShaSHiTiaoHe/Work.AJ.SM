@@ -113,7 +113,7 @@ extension LoginViewController: LoginViewDelegate {
 
     func showTermsOfServices() {
         let vc = BaseWebViewController.init()
-        vc.urlString = kPrivacyPageURLString
+        vc.urlString = kUserAgreementURLString
         navigationController?.pushViewController(vc, animated: true)
     }
 
