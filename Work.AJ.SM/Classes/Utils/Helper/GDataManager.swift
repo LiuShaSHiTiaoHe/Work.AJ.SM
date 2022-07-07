@@ -187,6 +187,7 @@ class GDataManager: NSObject {
 
     // MARK: - 删除用户数据
     func removeUserData() {
+        logoutAgoraRtm()
         ud.remove(\.loginState)
         ud.remove(\.username)
         ud.remove(\.userID)

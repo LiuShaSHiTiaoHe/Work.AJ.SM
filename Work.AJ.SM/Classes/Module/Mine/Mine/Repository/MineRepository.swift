@@ -562,7 +562,6 @@ extension MineRepository {
                 if let dataArray = jsonData["data"].array {
                     if !dataArray.isEmpty {
                         if let dataDic = dataArray[0].dictionaryObject, let status = dataDic["STATUS"] as? String {
-                            // FIXME: - 难道是F的状态为打开？
                             if status == "F" {
                                 completion(true)
                             } else {

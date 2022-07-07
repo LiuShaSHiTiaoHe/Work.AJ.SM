@@ -15,13 +15,12 @@ typealias HomeDataCompletion = ([HomePageFunctionModule], [AdsModel], [NoticeMod
 typealias HomeAllLocksCompletion = ([UnitLockModel]) -> Void
 typealias ElevatorConfigurationCompletion = (ElevatorConfiguration?) -> Void
 typealias AgoraTokenCompletion = (String) -> Void
-// MARK: - NCom
 typealias NComAllDeviceInfoCompletion = ([NComDTU]) -> Void
 typealias NComCallRecordCompletion = ([NComRecordInfo], Int) -> Void
 
 class HomeRepository {
     static let shared = HomeRepository()
-
+    private init(){}
 }
 
 // MARK: - SpecificPageNotice
@@ -35,7 +34,8 @@ extension HomeRepository {
                         }
                     }, failureCallback: { response in
                             completion(response.message, "")
-                    })
+                    }
+            )
         }
     }
 }
@@ -65,8 +65,13 @@ extension HomeRepository {
     }
 
     func openDoorViaPush(_ lockMac: String, completion: @escaping DefaultCompletion) {
-        if let userID = ud.userID, let unit = getCurrentUnit(), let physicalFloor = unit.physicalfloor, let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
-            HomeAPI.openDoor(lockMac: lockMac, userID: userID, communityID: communityID, blockID: blockID, unitID: unitID, cellID: cellID, physicalFloor: physicalFloor).defaultRequest { jsonData in
+        if let userID = ud.userID, let unit = getCurrentUnit(), let physicalFloor = unit.physicalfloor,
+            let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString,
+            let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString {
+            HomeAPI.openDoor(lockMac: lockMac, userID: userID, communityID: communityID,
+                             blockID: blockID, unitID: unitID, cellID: cellID,
+                             physicalFloor: physicalFloor)
+            .defaultRequest { jsonData in
                 completion("")
             } failureCallback: { response in
                 completion(response.message)
@@ -139,7 +144,7 @@ extension HomeRepository {
 }
 
 extension HomeRepository {
-    // FIXME: - 获取最新的声网RTM Token
+    // MARK: - 暂时选择无TOKEN的方式，不与服务器有交互
     func agoraRTMToken(completion: @escaping AgoraTokenCompletion) {
         if let mobile = ud.userMobile {
             HomeAPI.getAgoraRtmToken(account: mobile).defaultRequest(cacheType: .ignoreCache, showError: false) { jsonData in

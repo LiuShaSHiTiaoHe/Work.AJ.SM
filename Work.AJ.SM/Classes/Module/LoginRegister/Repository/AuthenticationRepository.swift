@@ -12,7 +12,6 @@ typealias LoginCompletion = (_ errorMsg: String?) -> Void
 
 class AuthenticationRepository: NSObject {
     static let shared = AuthenticationRepository()
-    // FIXME: - 登录成功之后，登录到agora RTM
     func login(mobile: String, password: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData in
             if let userData = JsonData["map"].rawString(), let userModel = UserModel(JSONString: userData) {
@@ -24,13 +23,11 @@ class AuthenticationRepository: NSObject {
                 ud.userID = userModel.rid
                 ud.NIMToken = userModel.loginToken
                 GDataManager.shared.setupDataBase()
-                GDataManager.shared.loginNIMSDK()
+                GDataManager.shared.loginAgoraRtm()
                 GDataManager.shared.pushSetAlias(mobile)
-                RealmTools.add(userModel, update: .modified) {
-                }
+                RealmTools.add(userModel, update: .modified) {}
                 if let data = JsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
-                    RealmTools.addList(units, update: .modified) {
-                    }
+                    RealmTools.addList(units, update: .modified) {}
                 }
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -57,8 +54,8 @@ class AuthenticationRepository: NSObject {
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
                 ud.NIMToken = userModel.loginToken
-                RealmTools.add(userModel, update: .modified) {
-                }
+                GDataManager.shared.loginAgoraRtm()
+                RealmTools.add(userModel, update: .modified) {}
                 completion("")
             }
         } failureCallback: { response in
