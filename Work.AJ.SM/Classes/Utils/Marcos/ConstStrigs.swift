@@ -11,6 +11,7 @@ import Foundation
 let kConstAPPNameString = "智慧社区"
 let kAboutUsPageURLString = "http://www.njanjar.com/index.php/Home/Index/about.html"
 let kPrivacyPageURLString = "http://www.njanjar.com/smarthome_privacy_statement.html"
+let kUserAgreementURLString = "http://www.njanjar.com/user_agreement.html"
 let kServiceSupportNumber = "025-52309399"
 let kAppID = "1444571864"
 let kAppStoreUrl = "https://itunes.apple.com/app/id\(kAppID)"
