@@ -201,7 +201,7 @@ class CallingViewController: BaseViewController {
             fatalError("rtm inviter nil")
         }
         inviter.refuseLastIncomingInvitation()
-        close(.normally(data?.remoteNumber ?? ""))
+        close(.normally("通话已拒绝"))
     }
     
     func close(_ reason: HangupReason) {
