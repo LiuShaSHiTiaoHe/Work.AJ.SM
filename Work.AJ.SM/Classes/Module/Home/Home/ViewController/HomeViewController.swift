@@ -75,29 +75,29 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: HomeViewDelegate {
     func chooseUnit() {
-        pushTo(viewController: SelectHouseViewController())
+        navigateTo(viewController: SelectHouseViewController())
     }
 
     func selectModule(_ module: HomePageModule) {
         switch module {
         case .mobileCallElevator:
-            pushTo(viewController: MobileCallElevatorViewController())
+            navigateTo(viewController: MobileCallElevatorViewController())
         case .ownerQRCode:
-            pushTo(viewController: OwnerQRCodeViewController())
+            navigateTo(viewController: OwnerQRCodeViewController())
         case .indoorCallElevator:
-            pushTo(viewController: IndoorCallElevatorViewController())
+            navigateTo(viewController: IndoorCallElevatorViewController())
         case .bleCallElevator:
             PopViewManager.shared.display(BleCallElevatorViewController(), .center, .init(
                     width: .constant(value: 280),
                     height: .constant(value: 380)
             ), true)
         case .cloudOpenGate:
-            pushTo(viewController: RemoteOpenDoorViewController())
+            navigateTo(viewController: RemoteOpenDoorViewController())
         case .cloudIntercom:
-            pushTo(viewController: RemoteIntercomViewController())
+            navigateTo(viewController: RemoteIntercomViewController())
         case .scanElevatorQRCode:
             if GDataManager.shared.checkAvailableCamera() {
-                pushTo(viewController: ScanQRCodeCallElevatorViewController())
+                navigateTo(viewController: ScanQRCodeCallElevatorViewController())
             } else {
                 SVProgressHUD.showError(withStatus: "没有可使用的相机")
             }
@@ -106,13 +106,13 @@ extension HomeViewController: HomeViewDelegate {
             view.delegate = self
             PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
         case .addFamilyMember:
-            pushTo(viewController: AddMemberViewController())
+            navigateTo(viewController: AddMemberViewController())
         case .deviceConfiguration:
             break
         case .elevatorConfiguration:
-            pushTo(viewController: ElevatorConfigurationViewController())
+            navigateTo(viewController: ElevatorConfigurationViewController())
         case .ncall:
-            pushTo(viewController: NComViewController())
+            navigateTo(viewController: NComViewController())
         }
     }
 }

@@ -19,7 +19,7 @@ enum AuthenticationAPI {
 extension AuthenticationAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: ApiBaseUrl())!
+        URL(string: ApiBaseUrl())!
     }
 
     var path: String {
@@ -47,9 +47,11 @@ extension AuthenticationAPI: TargetType {
     var task: Task {
         switch self {
         case let .login(mobile, passWord):
-            return .requestParameters(parameters: ["MOBILE": mobile, "PASSWORD": passWord].ekey("MOBILE"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["MOBILE": mobile, "PASSWORD": passWord, "apiVersion": "1",].ekey("MOBILE"), encoding: URLEncoding.default)
         case let .register(mobile, code, passWord):
-            return .requestParameters(parameters: ["MOBILE": mobile, "CODE": code, "PASSWORD": passWord, "USERNAME": mobile.jk.sub(from: mobile.count - 4), "REALNAME": mobile.jk.sub(from: mobile.count - 4)].ekey("USERNAME"), encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["MOBILE": mobile, "CODE": code, "PASSWORD": passWord,
+                                                   "USERNAME": mobile.jk.sub(from: mobile.count - 4),
+                                                   "REALNAME": mobile.jk.sub(from: mobile.count - 4)].ekey("USERNAME"), encoding: URLEncoding.default)
         case let .getMessageCode(mobile):
             return .requestParameters(parameters: ["MOBILE": mobile].ekey("MOBILE"), encoding: URLEncoding.default)
         case let .checkMessageCode(mobile, code):

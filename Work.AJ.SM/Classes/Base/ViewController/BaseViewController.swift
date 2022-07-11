@@ -59,18 +59,15 @@ class BaseViewController: UIViewController {
         }
     }
 
-    func initUI() {
-    }
+    func initUI() {}
 
-    func initData() {
-    }
+    func initData() {}
 
     // MARK: - HeaderRefresh
-    @objc func headerRefresh() {
-    }
+    @objc func headerRefresh() {}
 
-    // MARK: - PushAction
-    func pushTo(viewController vc: UIViewController, isHideBottomBar: Bool = true, isAnimated: Bool = true) {
+    // MARK: - NavigateAction
+    func navigateTo(viewController vc: UIViewController, isHideBottomBar: Bool = true, isAnimated: Bool = true) {
         vc.hidesBottomBarWhenPushed = isHideBottomBar
         navigationController?.pushViewController(vc, animated: isAnimated)
     }

@@ -26,10 +26,6 @@ class AuthenticationRepository: NSObject {
                 GDataManager.shared.loginAgoraRtm()
                 GDataManager.shared.pushSetAlias(mobile)
                 RealmTools.add(userModel, update: .modified) {}
-//                if let data = JsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
-//                    RealmTools.addList(units, update: .modified) {
-//                    }
-//                }
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -39,7 +35,6 @@ class AuthenticationRepository: NSObject {
             } else {
                 completion("数据解析错误")
             }
-
         } failureCallback: { response in
             completion(response.message)
         }
@@ -62,7 +57,6 @@ class AuthenticationRepository: NSObject {
         } failureCallback: { response in
             completion(response.message)
         }
-
     }
 
     func register(mobile: String, passWord: String, code: String, completion: @escaping LoginCompletion) {
@@ -72,7 +66,6 @@ class AuthenticationRepository: NSObject {
             completion(response.message)
         }
     }
-
 
     func sendMessageCode(_ mobile: String, completion: @escaping LoginCompletion) {
         AuthenticationAPI.getMessageCode(mobile: mobile).defaultRequest { jsonData in
@@ -97,6 +90,5 @@ class AuthenticationRepository: NSObject {
             completion(response.message)
         }
     }
-
 
 }

@@ -43,7 +43,7 @@ class MineViewController: BaseViewController {
     
     @objc
     private func userProfileView(){
-        pushTo(viewController: UserProfileViewController())
+        navigateTo(viewController: UserProfileViewController())
     }
     
     override func initUI() {
@@ -77,7 +77,7 @@ class MineViewController: BaseViewController {
     
     @objc
     func showMessageView() {
-        pushTo(viewController: MessageViewController())
+        navigateTo(viewController: MessageViewController())
     }
 
 }
@@ -110,23 +110,23 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
             if let moduleType = MineModuleType.init(rawValue: module.name) {
                 switch moduleType {
                 case .house:
-                    pushTo(viewController: HouseViewController())
+                    navigateTo(viewController: HouseViewController())
                 case .faceCertification:
-                    pushTo(viewController: FaceListViewController())
+                    navigateTo(viewController: FaceListViewController())
                 case .memberManager:
-                    pushTo(viewController: MemberListViewController())
+                    navigateTo(viewController: MemberListViewController())
                 case .visitorRecord:
-                    pushTo(viewController: VisitorRecordViewController())
+                    navigateTo(viewController: VisitorRecordViewController())
                 case .setting:
-                    pushTo(viewController: SettingViewController())
+                    navigateTo(viewController: SettingViewController())
                 case .opendoorSetting:
-                    pushTo(viewController: OpenDoorSettingViewController())
+                    navigateTo(viewController: OpenDoorSettingViewController())
                 case .videoCall:
-                    pushTo(viewController: CallNeighborViewController())
+                    navigateTo(viewController: CallNeighborViewController())
                 case .activateCard:
                     break
                 case .contactProperty:
-                    pushTo(viewController: PropertyContactViewController())
+                    navigateTo(viewController: PropertyContactViewController())
                 }
             }
         }

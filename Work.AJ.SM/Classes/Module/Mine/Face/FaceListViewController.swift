@@ -89,7 +89,7 @@ class FaceListViewController: BaseViewController {
     private func go2ConfirmFaceImageVC(_ faceImage: UIImage) {
         let vc = ConfirmFaceImageViewController()
         vc.faceImage = faceImage
-        pushTo(viewController: vc)
+        navigateTo(viewController: vc)
     }
 
     func getExtrasFaceFile() {
