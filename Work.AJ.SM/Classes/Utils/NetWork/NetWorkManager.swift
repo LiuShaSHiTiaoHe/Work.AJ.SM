@@ -201,8 +201,8 @@ extension TargetType {
 
     private func logNetWorkInfo(_ response: String) {
         #if DEBUG
-//        logger.info("\(baseURL)\(path) --- \(method.rawValue) ----> responseData：\(response)")
-        logger.info("\(baseURL)\(path) --- \(method.rawValue)")
+        logger.info("\(baseURL)\(path) --- \(method.rawValue) ----> responseData：\(response)")
+//        logger.info("\(baseURL)\(path) --- \(method.rawValue)")
         #endif
     }
 

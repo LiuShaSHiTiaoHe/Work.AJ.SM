@@ -90,6 +90,12 @@ extension HomeRepository {
             }
         } failureCallback: { response in
             logger.info("\(response.message)")
+            if response.code == 204 {
+                ud.remove(\.currentUnitID)
+                if let userID = ud.userID?.jk.toInt() {
+                    RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
+                }
+            }
             completion(homeModuleArray, adsArray, noticeArray, .Unknown)
         }
     }

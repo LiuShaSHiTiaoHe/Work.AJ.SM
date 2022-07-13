@@ -55,23 +55,23 @@ class MineRepository: NSObject {
             RealmTools.addList(models, update: .modified) {}
             completion("")
         } failureCallback: { response in
+            if response.code == 204 {
+                ud.remove(\.currentUnitID)
+                if let userID = ud.userID?.jk.toInt() {
+                    RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
+                }
+            }
             completion(response.message)
         }
     }
 
     func getAllSelectableUnit(completion: @escaping HouseChooseCompletion) {
-        SVProgressHUD.show()
-        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { models, response in
-            SVProgressHUD.dismiss()
-            guard models.count > 0 else {
-                completion([])
-                return
+        if let userID = ud.userID?.jk.toInt() {
+            let models = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "userid == %d", userID)).filter {
+                $0.state == UnitStatus.Normal.rawValue
             }
-            RealmTools.addList(models, update: .modified) {
-                logger.info("update done")
-            }
-            completion(models.filter{$0.state == UnitStatus.Normal.rawValue})
-        } failureCallback: { response in
+            completion(models)
+        } else {
             completion([])
         }
     }
