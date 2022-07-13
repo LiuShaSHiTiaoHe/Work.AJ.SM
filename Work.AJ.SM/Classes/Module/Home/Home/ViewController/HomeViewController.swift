@@ -22,6 +22,19 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(currentUnitChanged), name: .kCurrentUnitChanged, object: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let _ = ud.currentUnitID {
+            if isNoDataViewShow {
+                self.hideNoDataView()
+            }
+        } else {
+            if !isNoDataViewShow {
+                self.showNoDataView(.nohouse)
+            }
+        }
+    }
 
     override func initUI() {
         view.addSubview(contentView)

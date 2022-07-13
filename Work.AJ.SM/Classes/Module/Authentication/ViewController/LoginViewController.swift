@@ -46,7 +46,7 @@ class LoginViewController: BaseViewController {
         attributes.entryBackground = .color(color: .white)
         attributes.positionConstraints.size = .init(
             width: .fill,
-            height: .constant(value: 420)
+            height: .constant(value: 520)
         )
         SwiftEntryKit.display(entry: aView, using: attributes)
     }

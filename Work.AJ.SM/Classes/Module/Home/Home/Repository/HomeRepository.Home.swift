@@ -56,7 +56,8 @@ extension HomeRepository {
                 completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             } else {
                 // MARK: - 当前房间有效
-                if let cUnitID = ud.currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }), let cUnit = models.first(where: {$0.unitid == cUnitID}) {
+                if let cUnitID = ud.currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }),
+                    let cUnit = models.first(where: {$0.unitid == cUnitID}) {
                     homeModuleArray = self.filterHomePageModules(cUnit)
                     self.adsAndNotice { ads, notices in
                         adsArray = ads
@@ -64,6 +65,7 @@ extension HomeRepository {
                         completion(homeModuleArray, adsArray, noticeArray, .Normal)
                     }
                 } else {
+                    ud.remove(\.currentUnitID)
                     // MARK: - 取第一个有效的房屋
                     if let idAndStateNormal = idAndStates.first(where: {$0.1 == .Normal}),
                        let unit = models.first(where: {$0.unitid?.jk.intToString == idAndStateNormal.0}),

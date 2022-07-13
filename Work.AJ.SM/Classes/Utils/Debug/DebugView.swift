@@ -20,7 +20,6 @@ class DebugView: BaseView {
     @objc
     private func confirmAction() {
         if let host = hostInput.text, !host.isEmpty, let servicePath = servicePathInput.text, !servicePath.isEmpty {
-            logger.info("host ===> \(host) \n  servicePath ===> \(servicePath)")
             ud.appHost = host
             ud.appServicePath = servicePath
             SwiftEntryKit.dismiss(.displayed) {
@@ -32,13 +31,22 @@ class DebugView: BaseView {
     }
         
     override func initData() {
-        
         servicePathInput.text = ud.appServicePath
         hostInput.text = ud.appHost
-        
         closeButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmAction), for: .touchUpInside)
-        
+        selectDevButton.addTarget(self, action: #selector(devSelectAction), for: .touchUpInside)
+        selectDisButton.addTarget(self, action: #selector(disSelectAction), for: .touchUpInside)
+    }
+    
+    @objc
+    func devSelectAction() {
+        hostInput.text = APIs.developmentServerPath
+    }
+    
+    @objc
+    func disSelectAction() {
+        hostInput.text = APIs.distributionServerPath
     }
     
     
@@ -49,7 +57,12 @@ class DebugView: BaseView {
         self.addSubview(hostInput)
         self.addSubview(servicePathTipsLabel)
         self.addSubview(servicePathInput)
-        self.addSubview(tipsLabel)
+        
+        self.addSubview(developmentServerPath)
+        self.addSubview(selectDevButton)
+        self.addSubview(distributionServerPath)
+        self.addSubview(selectDisButton)
+        
         self.addSubview(confirmButton)
         
         titleLabel.snp.makeConstraints { make in
@@ -89,12 +102,33 @@ class DebugView: BaseView {
             make.height.equalTo(30)
             make.top.equalTo(servicePathTipsLabel.snp.bottom).offset(kMargin/2)
         }
+
+        developmentServerPath.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(kMargin).offset(kMargin*2)
+            make.top.equalTo(servicePathInput.snp.bottom).offset(kMargin*2)
+            make.height.equalTo(30)
+            make.right.equalToSuperview().offset(-kMargin*5)
+        }
         
-        tipsLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(kMargin)
+        selectDevButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
-            make.bottom.equalTo(confirmButton.snp.top).offset(-kMargin)
-            make.top.equalTo(servicePathInput.snp.bottom).offset(kMargin/2)
+            make.centerY.equalTo(developmentServerPath)
+            make.height.equalTo(30)
+            make.left.equalTo(developmentServerPath.snp.right).offset(kMargin/2)
+        }
+        
+        distributionServerPath.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(kMargin).offset(kMargin*2)
+            make.top.equalTo(developmentServerPath.snp.bottom).offset(kMargin)
+            make.height.equalTo(30)
+            make.right.equalToSuperview().offset(-kMargin*5)
+        }
+        
+        selectDisButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-kMargin)
+            make.centerY.equalTo(distributionServerPath)
+            make.height.equalTo(30)
+            make.left.equalTo(distributionServerPath.snp.right).offset(kMargin/2)
         }
         
         confirmButton.snp.makeConstraints { make in
@@ -157,13 +191,42 @@ class DebugView: BaseView {
         return textfield
     }()
     
-    lazy var tipsLabel: UILabel = {
+    lazy var developmentServerPath: UILabel = {
         let view = UILabel()
-        view.numberOfLines = 0
         view.textAlignment = .left
-        view.textColor = R.color.themecolor()
         view.font = k16Font
+        view.text = APIs.developmentServerPath
+        view.textColor = R.color.text_title()
         return view
+    }()
+    
+    lazy var selectDevButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setTitle("选择", for: .normal)
+        button.backgroundColor = R.color.themecolor()
+        button.titleLabel?.font = k16Font
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+    
+    lazy var distributionServerPath: UILabel = {
+        let view = UILabel()
+        view.textAlignment = .left
+        view.font = k16Font
+        view.text = APIs.distributionServerPath
+        view.textColor = R.color.text_title()
+        return view
+    }()
+    
+    lazy var selectDisButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setTitle("选择", for: .normal)
+        button.backgroundColor = R.color.themecolor()
+        button.titleLabel?.font = k16Font
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
     }()
     
     lazy var confirmButton: UIButton = {

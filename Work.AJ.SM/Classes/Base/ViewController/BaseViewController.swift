@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
 
     private let noDataViewTag: Int = 404
     var needReloadData: Bool = true
+    var isNoDataViewShow: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +98,7 @@ extension BaseViewController {
         noDataView.tag = noDataViewTag
         view.addSubview(noDataView)
         view.bringSubviewToFront(noDataView)
+        isNoDataViewShow = true
         if let view = constraintView {
             noDataView.snp.makeConstraints { make in
                 make.left.right.bottom.equalToSuperview()
@@ -114,6 +116,7 @@ extension BaseViewController {
             v.tag == noDataViewTag
         }) {
             noDataView.removeFromSuperview()
+            isNoDataViewShow = false
         }
     }
 }

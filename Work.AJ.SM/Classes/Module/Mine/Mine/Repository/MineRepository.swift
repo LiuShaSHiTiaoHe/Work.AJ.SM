@@ -36,19 +36,23 @@ class MineRepository: NSObject {
                 completion("数据为空")
                 return
             }
-            if let _ = Defaults.currentUnitID {
-
+            if let unitID = ud.currentUnitID {
+                let normalHouses = models.filter {$0.state == UnitStatus.Normal.rawValue }
+                if normalHouses.isEmpty {
+                    Defaults.remove(\.currentUnitID)
+                } else {
+                    if !normalHouses.contains(where: {$0.unitid == unitID }) {
+                        if let firstUnitID = normalHouses.first?.unitid {
+                            ud.currentUnitID = firstUnitID
+                        }
+                    }
+                }
             } else {
-                if let firstUnit = models.first(where: { model in
-                    model.state == UnitStatus.Normal.rawValue
-                }), let unitID = firstUnit.unitid {
-                    Defaults.currentUnitID = unitID
+                if let firstUnit = models.first(where: {$0.state == UnitStatus.Normal.rawValue}), let firstUnitID = firstUnit.unitid {
+                    ud.currentUnitID = firstUnitID
                 }
             }
-
-            RealmTools.addList(models, update: .modified) {
-                logger.info("update done")
-            }
+            RealmTools.addList(models, update: .modified) {}
             completion("")
         } failureCallback: { response in
             completion(response.message)

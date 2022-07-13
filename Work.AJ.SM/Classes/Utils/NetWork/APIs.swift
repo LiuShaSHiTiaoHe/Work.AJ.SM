@@ -16,6 +16,9 @@ func ApiBaseUrl() -> String {
 
 final class APIs {       
     
+    static let developmentServerPath = "http://47.111.8.231:9091/"
+    static let distributionServerPath = "http://120.27.237.7:9393/"
+    
     // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"
     static let notice = "appcity/getNotice.do"
