@@ -239,16 +239,7 @@
 		41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */; };
 		41C3503727CEFF67006E440F /* BleOpenDoorStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */; };
 		41E7D8C727EC4EDD00241706 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */; };
-		41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C827EC661300241706 /* ChatRingManager.swift */; };
-		41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */; };
-		41E7D8D427ED50EB00241706 /* video_chat_tip_OnCall.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */; };
-		41E7D8D527ED50EB00241706 /* video_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */; };
-		41E7D8D627ED50EB00241706 /* video_chat_tip_HangUp.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CE27ED50EB00241706 /* video_chat_tip_HangUp.aac */; };
 		41E7D8D727ED50EB00241706 /* message.wav in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CF27ED50EB00241706 /* message.wav */; };
-		41E7D8D827ED50EB00241706 /* video_chat_tip_receiver.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */; };
-		41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */; };
-		41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */; };
-		41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8E427F2947A00241706 /* BaseChatView.swift */; };
 		45C200928CCB76EAAE743194 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B17DDD0511F2BB7A9C3A9E5 /* Pods_Work_AJ_SM.framework */; };
 		680ED595285C89D0004A1857 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680ED594285C89D0004A1857 /* MyTimer.swift */; };
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
@@ -517,16 +508,7 @@
 		41C3503127CEF953006E440F /* OpenDoorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDoorPasswordViewController.swift; sourceTree = "<group>"; };
 		41C3503627CEFF67006E440F /* BleOpenDoorStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOpenDoorStyleCell.swift; sourceTree = "<group>"; };
 		41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
-		41E7D8C827EC661300241706 /* ChatRingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRingManager.swift; sourceTree = "<group>"; };
-		41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_connect_chat_tip_sender.aac; sourceTree = "<group>"; };
-		41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_OnCall.aac; sourceTree = "<group>"; };
-		41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_sender.aac; sourceTree = "<group>"; };
-		41E7D8CE27ED50EB00241706 /* video_chat_tip_HangUp.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_HangUp.aac; sourceTree = "<group>"; };
 		41E7D8CF27ED50EB00241706 /* message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = message.wav; sourceTree = "<group>"; };
-		41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_receiver.aac; sourceTree = "<group>"; };
-		41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_chat_tip_onTimer.aac; sourceTree = "<group>"; };
-		41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = video_chat_push.mp3; sourceTree = "<group>"; };
-		41E7D8E427F2947A00241706 /* BaseChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChatView.swift; sourceTree = "<group>"; };
 		4F0A35D66CFC868F2B639742 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		680ED594285C89D0004A1857 /* MyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
@@ -826,7 +808,6 @@
 			children = (
 				686E60EB284DF4140049BBC2 /* Debug */,
 				41A6202F2817BC0500DE3B54 /* Agora */,
-				41E7D8C327EC4AD700241706 /* Chat */,
 				41B7DBD627E0331D002A23D0 /* Camera */,
 				4173C20327C36FB500B8FBB8 /* QRCode */,
 				416F2EAA27B60B85004E5AD9 /* Kit */,
@@ -1871,46 +1852,14 @@
 			path = OnBoard;
 			sourceTree = "<group>";
 		};
-		41E7D8C327EC4AD700241706 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				41E7D8E627F294B700241706 /* Manager */,
-				41E7D8DD27ED8A7700241706 /* View */,
-			);
-			path = Chat;
-			sourceTree = "<group>";
-		};
 		41E7D8CA27ED50EB00241706 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				68D8F82F28409EE200D68FC6 /* videocall.aiff */,
 				41A62043281908E600DE3B54 /* ring.mp3 */,
-				41E7D8CB27ED50EB00241706 /* video_connect_chat_tip_sender.aac */,
-				41E7D8CC27ED50EB00241706 /* video_chat_tip_OnCall.aac */,
-				41E7D8CD27ED50EB00241706 /* video_chat_tip_sender.aac */,
-				41E7D8CE27ED50EB00241706 /* video_chat_tip_HangUp.aac */,
 				41E7D8CF27ED50EB00241706 /* message.wav */,
-				41E7D8D027ED50EB00241706 /* video_chat_tip_receiver.aac */,
-				41E7D8D127ED50EB00241706 /* video_chat_tip_onTimer.aac */,
-				41E7D8D227ED50EB00241706 /* video_chat_push.mp3 */,
 			);
 			path = Sounds;
-			sourceTree = "<group>";
-		};
-		41E7D8DD27ED8A7700241706 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				41E7D8E427F2947A00241706 /* BaseChatView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		41E7D8E627F294B700241706 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				41E7D8C827EC661300241706 /* ChatRingManager.swift */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		41E7D8E727F2E0F700241706 /* Model */ = {
@@ -2074,19 +2023,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41E7D8D827ED50EB00241706 /* video_chat_tip_receiver.aac in Resources */,
-				41E7D8D527ED50EB00241706 /* video_chat_tip_sender.aac in Resources */,
 				41A62044281908E600DE3B54 /* ring.mp3 in Resources */,
-				41E7D8D327ED50EB00241706 /* video_connect_chat_tip_sender.aac in Resources */,
 				41E7D8D727ED50EB00241706 /* message.wav in Resources */,
 				416F2E0B279BAF67004E5AD9 /* LaunchScreen.storyboard in Resources */,
 				68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */,
-				41E7D8DA27ED50EB00241706 /* video_chat_push.mp3 in Resources */,
-				41E7D8D927ED50EB00241706 /* video_chat_tip_onTimer.aac in Resources */,
 				416F2E08279BAF67004E5AD9 /* Assets.xcassets in Resources */,
-				41E7D8D427ED50EB00241706 /* video_chat_tip_OnCall.aac in Resources */,
 				416F2E06279BAF67004E5AD9 /* Main.storyboard in Resources */,
-				41E7D8D627ED50EB00241706 /* video_chat_tip_HangUp.aac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2226,7 +2168,6 @@
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
 				419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */,
 				41A6204828191CBA00DE3B54 /* AgoraCallingView.swift in Sources */,
-				41E7D8E527F2947A00241706 /* BaseChatView.swift in Sources */,
 				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
@@ -2379,7 +2320,6 @@
 				416F2EFD27BDF812004E5AD9 /* MCERepository.swift in Sources */,
 				416F2E7527B0BFB5004E5AD9 /* UnitButtonsModel.swift in Sources */,
 				416F2E4E27B0B60E004E5AD9 /* BaseTabBarItemContentView.swift in Sources */,
-				41E7D8C927EC661300241706 /* ChatRingManager.swift in Sources */,
 				419AD6AC27FFFB9900C902B8 /* ElevatorConfigurationDefines.swift in Sources */,
 				4173C24527C75E0300B8FBB8 /* SelectHouseViewController.swift in Sources */,
 				416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */,
@@ -2588,7 +2528,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Work.AJ.SM/Work.AJ.SMDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 999;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
@@ -2611,7 +2551,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2632,7 +2572,7 @@
 				CODE_SIGN_ENTITLEMENTS = Work.AJ.SM/Work.AJ.SMRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 999;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Work.AJ.SM/Info.plist;
@@ -2655,7 +2595,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2672,7 +2612,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 999;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -2692,7 +2632,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 999;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -2711,7 +2651,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 999;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -2729,7 +2669,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1003;
+				CURRENT_PROJECT_VERSION = 999;
 				DEVELOPMENT_TEAM = S49KHLDCWJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
