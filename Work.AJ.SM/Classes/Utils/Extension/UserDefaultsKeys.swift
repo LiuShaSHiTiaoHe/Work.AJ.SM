@@ -32,9 +32,6 @@ extension DefaultsKeys {
     var userRealName: DefaultsKey<String?> {
         .init("userRealName")
     }
-    var NIMToken: DefaultsKey<String?> {
-        .init("NIMToken")
-    }
     var password: DefaultsKey<String?> {
         .init("password")
     }

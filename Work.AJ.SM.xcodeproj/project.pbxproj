@@ -179,14 +179,6 @@
 		419AD6AE27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6AD27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift */; };
 		419AD6B027FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */; };
 		419AD6B22803B6DA00C902B8 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6B12803B6DA00C902B8 /* NoDataView.swift */; };
-		419AD6BA2805082E00C902B8 /* NComDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6B92805082E00C902B8 /* NComDevice.swift */; };
-		419AD6BC2805084E00C902B8 /* NComDTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6BB2805084E00C902B8 /* NComDTU.swift */; };
-		419AD6BE2805086800C902B8 /* NComRecordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6BD2805086800C902B8 /* NComRecordInfo.swift */; };
-		419AD6C028050F4B00C902B8 /* NComViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6BF28050F4B00C902B8 /* NComViewController.swift */; };
-		419AD6C228050FA500C902B8 /* NComView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C128050FA500C902B8 /* NComView.swift */; };
-		419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C3280514E900C902B8 /* NComRecordCell.swift */; };
-		419AD6C62805453400C902B8 /* NComRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C52805453400C902B8 /* NComRecordView.swift */; };
-		419AD6C82805456C00C902B8 /* NComRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AD6C72805456C00C902B8 /* NComRecordViewController.swift */; };
 		419C95D1283F3B8A001E7099 /* VersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419C95D0283F3B8A001E7099 /* VersionCheck.swift */; };
 		419C95D3283F59D3001E7099 /* AppUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419C95D2283F59D3001E7099 /* AppUpdateView.swift */; };
 		419C95D5283F5B6F001E7099 /* EntryKitCustomAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419C95D4283F5B6F001E7099 /* EntryKitCustomAttributes.swift */; };
@@ -241,6 +233,7 @@
 		41E7D8C727EC4EDD00241706 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */; };
 		41E7D8D727ED50EB00241706 /* message.wav in Resources */ = {isa = PBXBuildFile; fileRef = 41E7D8CF27ED50EB00241706 /* message.wav */; };
 		45C200928CCB76EAAE743194 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B17DDD0511F2BB7A9C3A9E5 /* Pods_Work_AJ_SM.framework */; };
+		68002DF1288104590045A77F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68002DF3288104590045A77F /* Localizable.strings */; };
 		680ED595285C89D0004A1857 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680ED594285C89D0004A1857 /* MyTimer.swift */; };
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
@@ -448,14 +441,6 @@
 		419AD6AD27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationSendDataViewController.swift; sourceTree = "<group>"; };
 		419AD6AF27FFFD0600C902B8 /* ElevatorConfigurationSendDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorConfigurationSendDataView.swift; sourceTree = "<group>"; };
 		419AD6B12803B6DA00C902B8 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
-		419AD6B92805082E00C902B8 /* NComDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComDevice.swift; sourceTree = "<group>"; };
-		419AD6BB2805084E00C902B8 /* NComDTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComDTU.swift; sourceTree = "<group>"; };
-		419AD6BD2805086800C902B8 /* NComRecordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordInfo.swift; sourceTree = "<group>"; };
-		419AD6BF28050F4B00C902B8 /* NComViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComViewController.swift; sourceTree = "<group>"; };
-		419AD6C128050FA500C902B8 /* NComView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComView.swift; sourceTree = "<group>"; };
-		419AD6C3280514E900C902B8 /* NComRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordCell.swift; sourceTree = "<group>"; };
-		419AD6C52805453400C902B8 /* NComRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordView.swift; sourceTree = "<group>"; };
-		419AD6C72805456C00C902B8 /* NComRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NComRecordViewController.swift; sourceTree = "<group>"; };
 		419C95D0283F3B8A001E7099 /* VersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheck.swift; sourceTree = "<group>"; };
 		419C95D2283F59D3001E7099 /* AppUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateView.swift; sourceTree = "<group>"; };
 		419C95D4283F5B6F001E7099 /* EntryKitCustomAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryKitCustomAttributes.swift; sourceTree = "<group>"; };
@@ -510,6 +495,7 @@
 		41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		41E7D8CF27ED50EB00241706 /* message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = message.wav; sourceTree = "<group>"; };
 		4F0A35D66CFC868F2B639742 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
+		68002DF2288104590045A77F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		680ED594285C89D0004A1857 /* MyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -905,7 +891,6 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				419AD6B528041E7700C902B8 /* NCall */,
 				419AD6A127FEB66000C902B8 /* ElevatorConfiguration */,
 				4173C25227C86E6600B8FBB8 /* ScanQRCodeForElevator */,
 				4173C22827C5D93A00B8FBB8 /* AddMember */,
@@ -985,6 +970,7 @@
 				416F2E04279BAF67004E5AD9 /* Main.storyboard */,
 				416F2E09279BAF67004E5AD9 /* LaunchScreen.storyboard */,
 				41E7D8CA27ED50EB00241706 /* Sounds */,
+				68002DF3288104590045A77F /* Localizable.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1499,18 +1485,10 @@
 		4173C22A27C5D94900B8FBB8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4173C22F27C5D98200B8FBB8 /* Cell */,
 				4173C22D27C5D97200B8FBB8 /* AddMemberView.swift */,
 				4173C23627C5F93400B8FBB8 /* MemberInvitationView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		4173C22F27C5D98200B8FBB8 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		4173C23827C6190F00B8FBB8 /* Repository */ = {
@@ -1664,53 +1642,6 @@
 				41B4D84D2823AC3D004DFCFC /* ElevatorMaskConfigurationCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		419AD6B528041E7700C902B8 /* NCall */ = {
-			isa = PBXGroup;
-			children = (
-				419AD6B82805081500C902B8 /* View */,
-				419AD6B72805080800C902B8 /* Controller */,
-				419AD6B62805080400C902B8 /* Model */,
-			);
-			path = NCall;
-			sourceTree = "<group>";
-		};
-		419AD6B62805080400C902B8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				419AD6B92805082E00C902B8 /* NComDevice.swift */,
-				419AD6BB2805084E00C902B8 /* NComDTU.swift */,
-				419AD6BD2805086800C902B8 /* NComRecordInfo.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		419AD6B72805080800C902B8 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				419AD6BF28050F4B00C902B8 /* NComViewController.swift */,
-				419AD6C72805456C00C902B8 /* NComRecordViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		419AD6B82805081500C902B8 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				419AD6C928054D3F00C902B8 /* Cell */,
-				419AD6C128050FA500C902B8 /* NComView.swift */,
-				419AD6C52805453400C902B8 /* NComRecordView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		419AD6C928054D3F00C902B8 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				419AD6C3280514E900C902B8 /* NComRecordCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		41A6202F2817BC0500DE3B54 /* Agora */ = {
@@ -2026,6 +1957,7 @@
 				41A62044281908E600DE3B54 /* ring.mp3 in Resources */,
 				41E7D8D727ED50EB00241706 /* message.wav in Resources */,
 				416F2E0B279BAF67004E5AD9 /* LaunchScreen.storyboard in Resources */,
+				68002DF1288104590045A77F /* Localizable.strings in Resources */,
 				68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */,
 				416F2E08279BAF67004E5AD9 /* Assets.xcassets in Resources */,
 				416F2E06279BAF67004E5AD9 /* Main.storyboard in Resources */,
@@ -2147,7 +2079,6 @@
 				416F2EEF27BCF99E004E5AD9 /* BleCallElevatorView.swift in Sources */,
 				41362574282A65A100186188 /* PropertyContactViewController.swift in Sources */,
 				41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */,
-				419AD6BC2805084E00C902B8 /* NComDTU.swift in Sources */,
 				4136256C282A2BD300186188 /* CallNeighborView.swift in Sources */,
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
 				410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */,
@@ -2166,13 +2097,11 @@
 				4173C20827C36FD400B8FBB8 /* QRCodeView.swift in Sources */,
 				41C3502227CCAD58006E440F /* FaceImageViewController.swift in Sources */,
 				416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */,
-				419AD6C4280514E900C902B8 /* NComRecordCell.swift in Sources */,
 				41A6204828191CBA00DE3B54 /* AgoraCallingView.swift in Sources */,
 				41B7DBEA27E07912002A23D0 /* AddFaceModel.swift in Sources */,
 				41B7DBD327DADE69002A23D0 /* SelectHouseIndexView.swift in Sources */,
 				41985F3E27D08FBD00E02A9A /* VisitorRecordViewController.swift in Sources */,
 				41B7DBCF27D9E52F002A23D0 /* CommonIDNumberInpuCell.swift in Sources */,
-				419AD6C228050FA500C902B8 /* NComView.swift in Sources */,
 				4173C23327C5DA9500B8FBB8 /* CommonSelectButtonCell.swift in Sources */,
 				419AD6B22803B6DA00C902B8 /* NoDataView.swift in Sources */,
 				416F2EDE27BCBE4F004E5AD9 /* IndoorCallElevatorView.swift in Sources */,
@@ -2209,9 +2138,7 @@
 				4173C22E27C5D97200B8FBB8 /* AddMemberView.swift in Sources */,
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
 				4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */,
-				419AD6BE2805086800C902B8 /* NComRecordInfo.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
-				419AD6C028050F4B00C902B8 /* NComViewController.swift in Sources */,
 				41A620342817BC8800DE3B54 /* AGEError.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
 				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
@@ -2234,7 +2161,6 @@
 				419AD6AA27FED04300C902B8 /* ElevatorConfiguration.swift in Sources */,
 				4143293027F5485F00DA8D47 /* UserProfileInputViewController.swift in Sources */,
 				4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */,
-				419AD6C62805453400C902B8 /* NComRecordView.swift in Sources */,
 				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
 				41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */,
@@ -2254,7 +2180,6 @@
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
 				41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */,
-				419AD6BA2805082E00C902B8 /* NComDevice.swift in Sources */,
 				41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */,
 				41C3502427CDAC15006E440F /* ConfirmFaceImageViewController.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
@@ -2269,7 +2194,6 @@
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
 				416F2E7027B0BFB5004E5AD9 /* NoticeModel.swift in Sources */,
-				419AD6C82805456C00C902B8 /* NComRecordViewController.swift in Sources */,
 				416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */,
 				41B7DBE427E044E8002A23D0 /* SwiftyCamViewControllerDelegate.swift in Sources */,
 				416F2E7227B0BFB5004E5AD9 /* UnitBcardModel.swift in Sources */,
@@ -2396,6 +2320,14 @@
 				41558FB627E970E1002D7BD1 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		68002DF3288104590045A77F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68002DF2288104590045A77F /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

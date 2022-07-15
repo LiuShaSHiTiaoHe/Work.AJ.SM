@@ -23,11 +23,6 @@ enum HomeAPI {
     case getAgoraRtmToken(account: String)
     case getAgoraRtcToken(channel: String)
     case getSpecificPageNotice(pageID: String, communityID: String, userID: String)
-
-    // MARK: - NCOM
-    case ncomAllDevice(unitID: String)
-    case ncomRecord(communityID: String, startTime: String, endTime: String, page: String, count: String)
-    case ncomSendStatus(communityID: String, unitID: String, callSource: String, callTarget: String, callType: Int, callStatus: Int, uniqueCode: String)
 }
 
 extension HomeAPI: TargetType {
@@ -60,12 +55,6 @@ extension HomeAPI: TargetType {
             return APIs.indoorCallElevator
         case .getElevatorConfiguration:
             return APIs.elevatorConfiguration
-        case .ncomAllDevice:
-            return APIs.allDTUInfo
-        case .ncomRecord:
-            return APIs.allNCallRecord
-        case .ncomSendStatus:
-            return APIs.sendNCallStatus
         case .getSpecificPageNotice:
             return APIs.specificPageNotice
         case .getAgoraRtmToken:
@@ -117,16 +106,6 @@ extension HomeAPI: TargetType {
         case let .getAgoraRtcToken(channel):
             // MARK: - 主要是根据channel获取token
             return .requestParameters(parameters: ["userAccount": "0", "channelName": channel, "expirationTimeInSeconds": 36000].ekey("userAccount"), encoding: URLEncoding.default)
-            
-        // MARK: - N方对讲
-        case let .ncomAllDevice(unitID):
-            return .requestParameters(parameters: ["UNITID": unitID].ekey("UNITID"), encoding: URLEncoding.default)
-        case let .ncomRecord(communityID, startTime, endTime, page, count):
-            let parameters = ["COMMUNITYID": communityID, "STARTTIME": startTime, "ENDTIME": endTime, "currentPage": page, "showCount": count].ekey("COMMUNITYID")
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        // FIXME: - 待完善
-        case .ncomSendStatus:
-            return .requestPlain
         }
     }
 

@@ -124,8 +124,6 @@ extension HomeViewController: HomeViewDelegate {
             break
         case .elevatorConfiguration:
             navigateTo(viewController: ElevatorConfigurationViewController())
-        case .ncall:
-            navigateTo(viewController: NComViewController())
         }
     }
 }

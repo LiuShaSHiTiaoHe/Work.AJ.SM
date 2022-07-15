@@ -50,12 +50,11 @@ class AddMemberViewController: BaseViewController {
         let memberName = getMemberName()
         let memberPhone = getPhoneNumber()
         if memberName.isEmpty {
-            SVProgressHUD.showError(withStatus: "请输入成员的姓名")
+            SVProgressHUD.showError(withStatus: "请输入姓名")
             return
         }
-        
         if memberPhone.isEmpty {
-            SVProgressHUD.showError(withStatus: "请输入成员的手机号码")
+            SVProgressHUD.showError(withStatus: "请输入手机号码")
             return
         }
         if !memberPhone.aj_isMobileNumber {
@@ -63,17 +62,12 @@ class AddMemberViewController: BaseViewController {
             return
         }
         if memberType == .initial {
-            SVProgressHUD.showError(withStatus: "请选择添加的角色")
+            SVProgressHUD.showError(withStatus: "请选择角色")
             return
         }
         
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let userID = unit.userid?.jk.intToString {
-            var type = "F"
-            if memberType == .family {
-                type = "F"
-            }else{
-                type = "R"
-            }
+            let type = memberType == .family ? "F": "R"
             MineAPI.addFamilyMember(communityID: communityID, unitID: unitID, userID: userID, name: memberName, phone: memberPhone, type: type).defaultRequest { [weak self] jsonData in
                 guard let self = self else { return }
                 if let qrCodeString = jsonData["data"]["iosDownload"].string {

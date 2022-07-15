@@ -163,7 +163,7 @@ class LoginView: BaseView {
 
     lazy var appNameLabel: UILabel = {
         let label = UILabel.init()
-        label.text = "安杰智慧社区"
+        label.text = kConstAPPNameString
         label.textColor = R.color.whitecolor()
         label.textAlignment = .left
         label.font = k20Font

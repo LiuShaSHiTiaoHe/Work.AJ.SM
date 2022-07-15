@@ -1,0 +1,126 @@
+/* 
+  Localizable.strings
+  Work.AJ.SM
+
+  Created by guguijun on 2022/7/15.
+  
+*/
+//"" = "";
+//MARK: - Base
+"app_privacy" = "《用户协议》";
+"user_agreement" = "《隐私声明》";
+
+"tabbar_home" = "首页";
+"tabbar_mine" = "我的";
+"tabbar_service" = "服务";
+"tabbar_community" = "邻里圈";
+
+"button_done" = "完成";
+"button_commit" = "提交";
+"button_cancel" = "取消";
+
+"success_save_image" = "保存成功";
+"failure_save_image" = "保存失败";
+"success_share" = "分享成功";
+"cancel_share" = "分享取消";
+
+"status_valid" = "有效";
+"status_expiried" = "已过期";
+
+"success_submission" = "提交成功";
+
+//MARK: - Permission & Device Capacity
+"error_no_available_camera" = "没有可使用的相机";
+"loading_camera" = "正在启动相机...";
+
+
+//MARK: - NetWork
+"network_response_succes" = "获取成功";
+"network_response_empty" = "暂无数据";
+"network_response_error" = "数据错误";
+"network_parsejson_error" = "数据解析错误";
+
+//MARK: - OnBoard
+"page_0_title" = "出入随心";
+"page_1_title" = "乘梯自由";
+"page_2_title" = "访客通行";
+"page_3_title" = "可视对讲";
+"page_0_description" = "支持蓝牙感应、人脸识别，开门更智能";
+"page_1_description" = "室内呼梯、选层，缩短等待时间，\n无接触防传染";
+"page_2_description" = "访客可通过二维码、密码通行，安全便捷";
+"page_3_description" = "随时与门禁设备视频通话，远程轻松开门";
+
+//MARK: - Authentication
+"welcome" = "欢迎使用";
+"account_login" = "账号登录";
+"account_regist" = "账号注册";
+"login" = "登录";
+"regist" = "注册";
+"forget_password" = "忘记密码?";
+"reset_password" = "重置密码";
+
+"success_login" = "登录成功";
+"success_regist" = "注册成功";
+"success_send_verification_code" = "验证码已发送";
+"success_reset_password" = "重置密码成功";
+
+"error_empty_password" = "请输入密码";
+"error_empty_mobile" = "请输入手机号码";
+"error_format_mobile" = "请输入正确的手机号码";
+"error_format_password" = "密码格式错误";
+"error_check_privacy" = "请同意服务以及隐私协议";
+"error_empty_verification_code" = "请输入验证码";
+"error_format_password" = "请设置正确格式的密码";
+
+//MARK: - Home
+"empty_notice" = "暂无公告";
+"tips_house_blocked" = "该房屋已被停用，请联系物业或添加其他房屋";
+"tips_house_pending" = "该房屋审核中，请联系物业获取审核结果";
+
+//MARK: - Home - scan qr code for elevator
+"tips_move_close_to_elevator" = "请移步至电梯厅，再选择目的楼层";
+"title_scan_qrcode_for_elevator" = "扫描二维码";
+"title_scan_qrcode_choose_floor" = "选择楼层";
+"error_qrcode_format" = "数据格式未按要求设定";
+"error_qrcode_result" = "扫描结果不符合要求";
+
+//MARK: - Home - addMember
+"title_add_member" = "添加家人/成员";
+"name_add_member" = "姓名";
+"mobile_add_member" = "手机号";
+"identity_add_member" = "身份";
+"name_place_holder_add_member" = "请输入家人/成员姓名";
+"mobile_place_holder_add_member" = "请输入家人/成员手机号";
+"identity_family_add_member" = "家人";
+"identity_member_add_member" = "成员";
+
+"invitation_add_member" = "邀请函";
+"invitation_to_house_add_member" = "邀请您加入房间";
+"invitation_tips1_add_member" = "1.  微信识别二维码，选择“接受邀请”。";
+"invitation_tips2_add_member" = "2. 下载“智慧社区”APP，使用手机尾号%@登录即可加入房屋。";
+"save_to_album" = "保存到相册";
+"share_to_people" = "分享给家人/成员";
+"title_add_member_to_house" = "----------------   加入房屋   ----------------";
+
+//MARK: - Home - Visitant
+"title_choose_visitant_style" = "请选择合适的访客方式";
+"visitant_qr_code" = "访客二维码";
+"visitant_password" = "访客密码";
+"title_visitant_qr_code" = "设置访客二维码";
+"title_visitant_password" = "设置访客密码";
+"invite_you_to_visit" = "邀请您到访";
+"visit_date" = "来访时间";
+"date_of_expiry" = "有效期至";
+"visitation_qr_code_expiry" = "访客二维码已过期";
+"share_to_visitor" = "分享给访客";
+"password_times_of_using_once" = "单次";
+"password_times_of_using_unlimited" = "无限次";
+"error_valid_date_earlier_than_visit_date" = "有效期早于来访时间";
+"error_valid_date_beyond_limitation" = "有效期超出限值";
+"error_valid_date_less_than_minimum" = "有效期最少为30分钟";
+"error_visit_date_empty" = "请选择来访时间";
+"error_times_of_using_empty" = "选择使用次数";
+
+//MARK: - Home - Remote OpenDoor
+
+

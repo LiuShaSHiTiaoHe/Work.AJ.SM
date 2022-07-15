@@ -21,7 +21,6 @@ class AuthenticationRepository: NSObject {
                 ud.password = password
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
-                ud.NIMToken = userModel.loginToken
                 GDataManager.shared.setupDataBase()
                 GDataManager.shared.loginAgoraRtm()
                 GDataManager.shared.pushSetAlias(mobile)
@@ -49,7 +48,6 @@ class AuthenticationRepository: NSObject {
                 ud.password = password
                 ud.userRealName = userModel.realName
                 ud.userID = userModel.rid
-                ud.NIMToken = userModel.loginToken
                 GDataManager.shared.loginAgoraRtm()
                 RealmTools.add(userModel, update: .modified) {}
                 completion("")

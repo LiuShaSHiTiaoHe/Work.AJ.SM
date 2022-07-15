@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - APP info
-let kConstAPPNameString = "智慧社区"
+let kConstAPPNameString = "安杰智慧社区"
 let kAboutUsPageURLString = "http://www.njanjar.com/index.php/Home/Index/about.html"
 let kPrivacyPageURLString = "http://www.njanjar.com/smarthome_privacy_statement.html"
 let kUserAgreementURLString = "http://www.njanjar.com/user_agreement.html"

@@ -16,15 +16,12 @@ enum HomePageModule: String {
     case cloudIntercom = "门禁对讲"
     case scanElevatorQRCode = "扫码乘梯"
     case inviteVisitors = "访客邀请"
-    case deviceConfiguration = "设备配置"
     case addFamilyMember = "添加家人/成员"
+    case deviceConfiguration = "设备配置"
     case elevatorConfiguration = "电梯配置"
-    case ncall = "N方对讲"
-
 
     var model: HomePageFunctionModule {
         switch self {
-
         case .addFamilyMember:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "addFamilyMember", tag: "", index: 9, showinpage: .home)
         case .deviceConfiguration:
@@ -47,9 +44,6 @@ enum HomePageModule: String {
             return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7, showinpage: .home)
         case .inviteVisitors:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8, showinpage: .home)
-        case .ncall:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudSpeak", tag: "OTHERUSED", index: 13)
-
         }
     }
 }
