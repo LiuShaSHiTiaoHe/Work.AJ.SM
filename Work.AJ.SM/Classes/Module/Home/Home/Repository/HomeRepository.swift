@@ -15,8 +15,6 @@ typealias HomeDataCompletion = ([HomePageFunctionModule], [AdsModel], [NoticeMod
 typealias HomeAllLocksCompletion = ([UnitLockModel]) -> Void
 typealias ElevatorConfigurationCompletion = (ElevatorConfiguration?) -> Void
 typealias AgoraTokenCompletion = (String) -> Void
-typealias NComAllDeviceInfoCompletion = ([NComDTU]) -> Void
-typealias NComCallRecordCompletion = ([NComRecordInfo], Int) -> Void
 
 class HomeRepository {
     static let shared = HomeRepository()
@@ -105,39 +103,6 @@ extension HomeRepository {
                 completion(model)
             } failureCallback: { response in
                 completion(nil)
-            }
-        }
-    }
-}
-
-// MARK: - N方对讲
-extension HomeRepository {
-    func allNComDeviceInfo(completion: @escaping NComAllDeviceInfoCompletion) {
-        if let unit = getCurrentUnit(), let unitID = unit.unitid?.jk.intToString {
-            HomeAPI.ncomAllDevice(unitID: unitID).request(modelType: [NComDTU].self, cacheType: .ignoreCache, showError: true) { models, response in
-                completion(models)
-            } failureCallback: { response in
-                completion([])
-            }
-        }
-    }
-
-    func loadNComRecord(_ sTime: String = "", _ eTime: String = "", _ page: String, _ count: String = "15", completion: @escaping NComCallRecordCompletion) {
-        if let unit = getCurrentUnit(), let communityID = unit.communityid?.jk.intToString {
-            HomeAPI.ncomRecord(communityID: communityID, startTime: sTime, endTime: eTime, page: page, count: count).defaultRequest { jsonData in
-                if let recordsData = jsonData["data"].rawString(), let records = [NComRecordInfo](JSONString: recordsData) {
-                    if let pageData = jsonData["page"].dictionaryObject, let tPage = pageData["totalPage"] as? Int {
-                        completion(records, tPage)
-                    } else {
-                        completion([], -1)
-                    }
-                } else {
-                    if let pageData = jsonData["page"].dictionaryObject, let tPage = pageData["totalPage"] as? Int {
-                        completion([], tPage)
-                    } else {
-                        completion([], -1)
-                    }
-                }
             }
         }
     }
