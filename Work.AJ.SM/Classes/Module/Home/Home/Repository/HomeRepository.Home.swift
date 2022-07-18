@@ -124,6 +124,9 @@ extension HomeRepository {
                 SVProgressHUD.dismiss()
                 completion(adsData, noticeData)
             }
+        } else {
+            SVProgressHUD.dismiss()
+            completion(adsData, noticeData)
         }
     }
 
