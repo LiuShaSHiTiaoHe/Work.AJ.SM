@@ -116,8 +116,8 @@ class HouseCertificationViewController: BaseViewController {
         }
     }
 
-    lazy var contentView: HouseCetificationView = {
-        let view = HouseCetificationView()
+    lazy var contentView: HouseCertificationView = {
+        let view = HouseCertificationView()
         return view
     }()
 }

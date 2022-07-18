@@ -5,7 +5,7 @@
   Created by guguijun on 2022/7/15.
   
 */
-//"" = "";
+
 //MARK: - Base
 "app_privacy" = "《用户协议》";
 "user_agreement" = "《隐私声明》";
@@ -18,21 +18,69 @@
 "button_done" = "完成";
 "button_commit" = "提交";
 "button_cancel" = "取消";
+"button_choose" = "选择";
+"button_refresh" = "刷新";
+"button_locate" = "重新定位";
+"button_search" = "搜索";
 
 "success_save_image" = "保存成功";
 "failure_save_image" = "保存失败";
 "success_share" = "分享成功";
 "cancel_share" = "分享取消";
+"success_submission" = "提交成功";
+"processing_submission" = "正在提交";
 
 "status_valid" = "有效";
+"status_invalid" = "已失效";
 "status_expiried" = "已过期";
+"status_pending" = "审核中";
+"status_blocked" = "已停用";
 
-"success_submission" = "提交成功";
+"title_current_unit" = "当前房屋";
+"title_current_city" = "当前城市";
+"title_current_select" = "当前已选择";
+
+"type_user_self" = "本人";
+"type_user_owner" = "业主";
+"type_user_family" = "家属";
+"type_user_member" = "成员";
+
+"base_name" = "姓名";
+"base_mobile" = "手机号";
+"base_identity" = "身份";
+"placeholder_enter_family_member_name" = "请输入家人/成员姓名";
+"placeholder_enter_family_member_mobile" = "请输入家人/成员手机号";
+"placeholder_enter_family_member_id" = "请输入家人/成员身份证号";
+"identity_family" = "家人";
+"identity_member" = "成员";
+"identity_owner" = "业主";
+
+
+//MARK: - Base - error
+"error_empty_id_card_number" = "身份类别不能为空";
+"error_format_id_card_number" = "身份证号码格式错误";
+"error_empty_name" = "姓名不能为空";
+"error_empty_password" = "请输入密码";
+"error_empty_mobile" = "请输入手机号码";
+"error_format_mobile" = "请输入正确的手机号码";
+"error_format_password" = "密码格式错误";
+"error_check_privacy" = "请同意服务以及隐私协议";
+"error_empty_verification_code" = "请输入验证码";
+"error_format_password" = "请设置正确格式的密码";
+"error_qrcode_format" = "数据格式未按要求设定";
+"error_qrcode_result" = "扫描结果不符合要求";
+"error_valid_date_earlier_than_visit_date" = "有效期早于来访时间";
+"error_valid_date_beyond_limitation" = "有效期超出限值";
+"error_valid_date_less_than_minimum" = "有效期最少为30分钟";
+"error_visit_date_empty" = "请选择来访时间";
+"error_times_of_using_empty" = "选择使用次数";
+"error_sn_number" = "SN数据错误";
 
 //MARK: - Permission & Device Capacity
 "error_no_available_camera" = "没有可使用的相机";
 "loading_camera" = "正在启动相机...";
-
+"error_open_mic_permission" = "请打开系统麦克风权限";
+"error_open_system_bluetooth" = "请打开蓝牙权限";
 
 //MARK: - NetWork
 "network_response_succes" = "获取成功";
@@ -64,14 +112,6 @@
 "success_send_verification_code" = "验证码已发送";
 "success_reset_password" = "重置密码成功";
 
-"error_empty_password" = "请输入密码";
-"error_empty_mobile" = "请输入手机号码";
-"error_format_mobile" = "请输入正确的手机号码";
-"error_format_password" = "密码格式错误";
-"error_check_privacy" = "请同意服务以及隐私协议";
-"error_empty_verification_code" = "请输入验证码";
-"error_format_password" = "请设置正确格式的密码";
-
 //MARK: - Home
 "empty_notice" = "暂无公告";
 "tips_house_blocked" = "该房屋已被停用，请联系物业或添加其他房屋";
@@ -81,19 +121,10 @@
 "tips_move_close_to_elevator" = "请移步至电梯厅，再选择目的楼层";
 "title_scan_qrcode_for_elevator" = "扫描二维码";
 "title_scan_qrcode_choose_floor" = "选择楼层";
-"error_qrcode_format" = "数据格式未按要求设定";
-"error_qrcode_result" = "扫描结果不符合要求";
+
 
 //MARK: - Home - addMember
 "title_add_member" = "添加家人/成员";
-"name_add_member" = "姓名";
-"mobile_add_member" = "手机号";
-"identity_add_member" = "身份";
-"name_place_holder_add_member" = "请输入家人/成员姓名";
-"mobile_place_holder_add_member" = "请输入家人/成员手机号";
-"identity_family_add_member" = "家人";
-"identity_member_add_member" = "成员";
-
 "invitation_add_member" = "邀请函";
 "invitation_to_house_add_member" = "邀请您加入房间";
 "invitation_tips1_add_member" = "1.  微信识别二维码，选择“接受邀请”。";
@@ -115,12 +146,75 @@
 "share_to_visitor" = "分享给访客";
 "password_times_of_using_once" = "单次";
 "password_times_of_using_unlimited" = "无限次";
-"error_valid_date_earlier_than_visit_date" = "有效期早于来访时间";
-"error_valid_date_beyond_limitation" = "有效期超出限值";
-"error_valid_date_less_than_minimum" = "有效期最少为30分钟";
-"error_visit_date_empty" = "请选择来访时间";
-"error_times_of_using_empty" = "选择使用次数";
+
 
 //MARK: - Home - Remote OpenDoor
+"title_remote_intercom" = "门禁对讲";
+"tips_remote_intercom" = "请选择视频通话的门禁设备";
+"success_open_door" = "开门成功";
+
+"title_remote_opendoor" = "远程开门";
+"tips_remote_opendoor" = "请选择设备开门";
+
+"status_device_online" = "在线";
+"status_device_offline" = "不在线";
+"status_device_unknow" = "未知";
+
+"location_device_g" = "小区门";
+"location_device_b" = "楼栋门";
+"location_device_c" = "单元门";
+"location_device_z" = "未知位置";
+
+//MARK: - Home - Mobile Call Elevator
+"title_mobile_call_elevator" = "乘梯选层";
+"tips_mobile_call_elevator" = "请移步至电梯厅，再选择目的楼层";
+"title_current_elevator" = "当前电梯";
+"title_choose_elevator" = "请选择电梯";
+
+//MARK: - Home - Ble Call Elevator
+"title_ble_call_elevator" = "在2米范围内，才能使用蓝牙操作哦";
+"tips_ble_call_elevator" = "请靠近电梯/门禁设备后再操作";
+
+"success_ble_call_elevator" = "已呼梯/开门！请稍候…";
+"failure_ble_call_elevator" = "呼梯/开门失败，请重试！";
+
+//MARK: - Home - Owner QR Code
+"title_owner_qr_code" = "一码通行";
+"tips_owner_qr_code" = "请在开门/乘梯时展示此二维码";
+
+//MARK: - Home - Indoor Call Elevator
+"title_indoor_call_elevator" = "室内呼梯";
+"tips_indoor_call_elevator" = "请选择电梯上行或下行";
+"success_indoor_call_elevator" = "呼梯成功！请移步至电梯…";
+"success_call_elevator" = "呼梯成功";
+
+//MARK: - Mine
+
+//MARK: - Mine - House
+"title_house_certification" = "房屋认证";
+"title_select_city" = "请选择城市";
+"title_user_house_list" = "我的房屋";
+"title_select_house" = "选择房屋";
+"title_add_new_house" = "添加房屋";
+"title_select_unit" = "选择小区/楼栋";
+"title_search_result" = "搜索结果";
+"tips_house_list" = "如需加快房屋审核，请联系物业";
+"placeholder_enter_key_words" = "请输入关键字";
+"placeholder_enter_city_name" = "请输入城市名或拼音";
+"success_submission_house_certification" = "提交验证信息成功，请等待审核";
+
+//MARK: - Mine - Member
+"title_member" = "房屋成员";
 
 
+//MARK: - Mine - Setting
+"title_setting" = "通用设置";
+"success_operation_done" = "操作成功";
+"success_clean_up" = "清理成功";
+"processing_clean_up" = "正在清理...";
+"logout" = "退出登录";
+"processing_logout" = "正在登出...";
+"account_delete" = "注销";
+"description_delete_account" = "注销之后，无法再使用此账号登录，需要重新注册账号，请谨慎操作。";
+"deleting_account" = "正在注销...";
+"sucess_delete_account" = "注销成功";

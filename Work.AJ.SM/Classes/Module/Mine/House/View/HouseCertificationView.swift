@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HouseCetificationView: BaseView {
+class HouseCertificationView: BaseView {
 
     override func initializeView() {
         addSubview(headerView)

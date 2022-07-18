@@ -185,7 +185,7 @@
 		419E2DE227D8A63E00B60633 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE127D8A63E00B60633 /* CellModel.swift */; };
 		419E2DE427D984E300B60633 /* UserUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE327D984E300B60633 /* UserUnitModel.swift */; };
 		419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */; };
-		419E2DE827D9977500B60633 /* HouseCetificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE727D9977500B60633 /* HouseCetificationView.swift */; };
+		419E2DE827D9977500B60633 /* HouseCertificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E2DE727D9977500B60633 /* HouseCertificationView.swift */; };
 		41A6202E2816723300DE3B54 /* CityTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A6202D2816723300DE3B54 /* CityTipsView.swift */; };
 		41A620312817BC2200DE3B54 /* AgoraRtm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620302817BC2200DE3B54 /* AgoraRtm.swift */; };
 		41A620342817BC8800DE3B54 /* AGEError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A620332817BC8700DE3B54 /* AGEError.swift */; };
@@ -447,7 +447,7 @@
 		419E2DE127D8A63E00B60633 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		419E2DE327D984E300B60633 /* UserUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUnitModel.swift; sourceTree = "<group>"; };
 		419E2DE527D9975700B60633 /* HouseCetificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationViewController.swift; sourceTree = "<group>"; };
-		419E2DE727D9977500B60633 /* HouseCetificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCetificationView.swift; sourceTree = "<group>"; };
+		419E2DE727D9977500B60633 /* HouseCertificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCertificationView.swift; sourceTree = "<group>"; };
 		41A6202D2816723300DE3B54 /* CityTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTipsView.swift; sourceTree = "<group>"; };
 		41A620302817BC2200DE3B54 /* AgoraRtm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraRtm.swift; sourceTree = "<group>"; };
 		41A620332817BC8700DE3B54 /* AGEError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGEError.swift; sourceTree = "<group>"; };
@@ -1171,7 +1171,7 @@
 				416F2ECD27BB7E0E004E5AD9 /* Cell */,
 				41AA41A127D607BC007020AD /* CurrentLocationView.swift */,
 				41985F4127D5B60E00E02A9A /* CommonSearchView.swift */,
-				419E2DE727D9977500B60633 /* HouseCetificationView.swift */,
+				419E2DE727D9977500B60633 /* HouseCertificationView.swift */,
 				41B7DBD227DADE69002A23D0 /* SelectHouseIndexView.swift */,
 				41A6202D2816723300DE3B54 /* CityTipsView.swift */,
 			);
@@ -2090,7 +2090,7 @@
 				41B7DBE827E044E8002A23D0 /* SwiftyCamViewController.swift in Sources */,
 				419AD6AE27FFFCCE00C902B8 /* ElevatorConfigurationSendDataViewController.swift in Sources */,
 				416F2E7627B0BFB5004E5AD9 /* UnitLockModel.swift in Sources */,
-				419E2DE827D9977500B60633 /* HouseCetificationView.swift in Sources */,
+				419E2DE827D9977500B60633 /* HouseCertificationView.swift in Sources */,
 				41362582282A78DF00186188 /* MessageTableViewCell.swift in Sources */,
 				416F2EDB27BCBE35004E5AD9 /* IndoorCallElevatorViewController.swift in Sources */,
 				416F2E03279BAF67004E5AD9 /* ViewController.swift in Sources */,
