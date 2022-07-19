@@ -80,7 +80,7 @@ class SettingViewController: BaseViewController {
     }
     
     func checkUpdate() {
-        GDataManager.shared.checkAppUpdate()
+        AppUpgradeManager.shared.checkAppUpdate()
     }
     
     func supportCall() {

@@ -42,16 +42,6 @@ class GDataManager: NSObject {
         }
     }
 
-    // MARK: - 初始化云信
-    func setupNIMSDK(){
-
-    }
-
-    // MARK: - 登陆云信
-    func loginNIMSDK() {
-        
-    }
-
     // MARK: - JPUSH
     func setupPush(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         #if DEBUG
@@ -106,7 +96,12 @@ class GDataManager: NSObject {
         pushModel.pushType = "1"
         pushModel.type = "videoCall"
         pushModel.title = "智慧社区视频通话"
-        pushModel.body = "收到视频通话呼叫请求，请及时接听..."
+        let unitName = HomeRepository.shared.getCurrentHouseName()
+        if unitName.isNotEmpty {
+            pushModel.body = "收到\(unitName)视频通话呼叫请求"
+        } else {
+            pushModel.body = "收到视频通话呼叫请求，请及时接听..."
+        }
         CommonRepository.shared.sendPushNotification(pushModel) { errorMsg in
             logger.info("\(errorMsg)")
         }
@@ -133,44 +128,6 @@ class GDataManager: NSObject {
         let status = AgoraRtm.shared().status
         if status == .online {
             kit.logOut()
-        }
-    }
-
-
-    // MARK: - 检查更新
-    func checkAppUpdate() {
-        MineAPI.versionCheck(type: "ios").defaultRequest { jsonData in
-            if let updateStr = jsonData["data"]["IFFORCE"].string, let effectiveStr = jsonData["data"]["EFFECTIVESTATUS"].string {
-                if effectiveStr == "T" {
-                    if updateStr == "T" {
-                        self.checkAppStoreNewVersion(true)
-                    } else if updateStr == "F" {
-                        self.checkAppStoreNewVersion(false)
-                    }
-                }
-            }
-        } failureCallback: { response in
-            SVProgressHUD.showError(withStatus: response.message)
-        }
-    }
-
-    private func checkAppStoreNewVersion(_ force: Bool) {
-        VersionCheck.shared.checkNewVersion { hasNewerVersion, versionResult, errorMsg in
-            if hasNewerVersion, let versionResult = versionResult {
-                let aView = AppUpdateView.init()
-                aView.configData(versionResult, force)
-                var attributes = EntryKitCustomAttributes.centerFloat.attributes
-                attributes.screenInteraction = .absorbTouches
-                attributes.scroll = .disabled
-                attributes.entryBackground = .color(color: .clear)
-                attributes.positionConstraints.size = .init(
-                    width: .ratio(value: 0.8),
-                    height: .constant(value: 420)
-                )
-                SwiftEntryKit.display(entry: aView, using: attributes)
-            } else {
-                SVProgressHUD.showInfo(withStatus: errorMsg)
-            }
         }
     }
 

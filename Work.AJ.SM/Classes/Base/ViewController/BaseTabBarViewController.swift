@@ -19,6 +19,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         initUI()
         initData()
+        AppUpgradeManager.shared.autoCheckVersion()
     }
 
     func initData() {

@@ -9,8 +9,6 @@ import UIKit
 import SwiftEntryKit
 
 class AppUpdateView: BaseView {
-
-    private var dataSource: AppStoreVersionModel.Results?
     
     override func initData() {
         cancelButton.addTarget(self , action: #selector(CancleAction), for: .touchUpInside)
@@ -34,7 +32,7 @@ class AppUpdateView: BaseView {
         }
     }
     
-    func configData(_ model: AppStoreVersionModel.Results, _ force: Bool) {
+    func configData(_ descString: String, _ force: Bool) {
         if force {
             cancelButton.isHidden = true
             confirmButton.snp.remakeConstraints { make  in
@@ -44,8 +42,7 @@ class AppUpdateView: BaseView {
                 make.height.equalTo(50)
             }
         }
-        dataSource = model
-        contentLabel.text = model.releaseNotes
+        contentLabel.text = descString
     }
             
     override func initializeView(){

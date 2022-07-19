@@ -15,7 +15,6 @@ extension DefaultsKeys {
     var onboardStatus: DefaultsKey<Bool> {
         .init("onboardStatus", defaultValue: false)
     }
-
     // MARK: - user
     var loginState: DefaultsKey<Bool> {
         .init("userloginstate", defaultValue: false)
@@ -39,6 +38,15 @@ extension DefaultsKeys {
     var userLastLoginDate: DefaultsKey<Date?> {
         .init("userLastLoginDate")
     }
+    // MARK: - APP Update
+    // 记录检查更新的时间，固定时间间隔去调用检查更新
+    var checkAppVersionDate: DefaultsKey<Date?> {
+        .init("checkAppVersionDate")
+    }
+    // 记录已经检查过的版本(如果已经检查过，在当前的版本，就不去调用检查更新的接口)
+    var checkedAppVersions: DefaultsKey<Array<String>> {
+        .init("checkedAppVersion", defaultValue: [])
+    }
 
     // MARK: - Unit
     var currentUnitID: DefaultsKey<Int?> {
@@ -59,18 +67,22 @@ extension DefaultsKeys {
     }
 
     // MARK: - Common Control
+    //通知栏显示
     var inAppNotification: DefaultsKey<Bool> {
         .init("inAppNotification", defaultValue: false)
-    }//通知栏显示
+    }
+    //震动
     var vibrationAvailable: DefaultsKey<Bool> {
         .init("vibrationAvailable", defaultValue: false)
-    }//震动
+    }
+    //响铃
     var ringtoneAvailable: DefaultsKey<Bool> {
         .init("ringtoneAvailable", defaultValue: false)
-    }//响铃
+    }
+    //允许访客呼叫手机
     var allowVisitorCall: DefaultsKey<Bool> {
         .init("allowVisitorCall", defaultValue: true)
-    }//允许访客呼叫手机
+    }
     //用户同步当前房间人脸的提示，只显示一次,记录提示过的房间ID
     var unitIDsOfShownSyncFaceImageNotification: DefaultsKey<Array<String>> {
         .init("showSyncFaceImageNotification", defaultValue: [])

@@ -16,6 +16,7 @@ class AuthenticationRepository: NSObject {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { JsonData in
             if let userData = JsonData["map"].rawString(), let userModel = UserModel(JSONString: userData) {
                 ud.loginState = true
+                ud.userLastLoginDate = Date()
                 ud.username = mobile
                 ud.userMobile = mobile
                 ud.password = password
@@ -43,6 +44,7 @@ class AuthenticationRepository: NSObject {
         AuthenticationAPI.login(mobile: mobile, passWord: password).defaultRequest { jsonData in
             if let userInfo = jsonData["map"].rawString(), let userModel = UserModel(JSONString: userInfo) {
                 ud.loginState = true
+                ud.userLastLoginDate = Date()
                 ud.username = mobile
                 ud.userMobile = mobile
                 ud.password = password

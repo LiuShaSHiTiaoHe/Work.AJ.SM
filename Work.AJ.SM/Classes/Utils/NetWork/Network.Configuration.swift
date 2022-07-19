@@ -45,7 +45,7 @@ public extension Network {
             configuration.addingHeaders = { (target: TargetType) -> [String: String] in
                 let version = Bundle.jk.appVersion
                 let identifierID = Keychain.init(service: kKeyChainServiceKey)["xbid"] ?? ""
-                let header: Dictionary<String, String> = ["version-code": version,"client-type": kDeviceType, "x-bid": identifierID,"x-device": DeviceManager.shared.requestHeaderXDeviceString()]
+                let header: Dictionary<String, String> = ["app-version": version,"client-type": kDeviceType, "x-bid": identifierID,"x-device": DeviceManager.shared.requestHeaderXDeviceString()]
                 return header
             }
             
