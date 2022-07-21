@@ -39,17 +39,24 @@ class MineRepository: NSObject {
             if let unitID = ud.currentUnitID {
                 let normalHouses = models.filter {$0.state == UnitStatus.Normal.rawValue }
                 if normalHouses.isEmpty {
-                    Defaults.remove(\.currentUnitID)
+                    ud.remove(\.currentUnitID)
+                    ud.remove(\.currentCommunityID)
                 } else {
                     if !normalHouses.contains(where: {$0.unitid == unitID }) {
                         if let firstUnitID = normalHouses.first?.unitid {
                             ud.currentUnitID = firstUnitID
+                        }
+                        if let communityID = normalHouses.first?.communityid {
+                            ud.currentCommunityID = communityID
                         }
                     }
                 }
             } else {
                 if let firstUnit = models.first(where: {$0.state == UnitStatus.Normal.rawValue}), let firstUnitID = firstUnit.unitid {
                     ud.currentUnitID = firstUnitID
+                    if let communityID = firstUnit.communityid {
+                        ud.currentCommunityID = communityID
+                    }
                 }
             }
             RealmTools.addList(models, update: .modified) {}
@@ -57,6 +64,7 @@ class MineRepository: NSObject {
         } failureCallback: { response in
             if response.code == 204 {
                 ud.remove(\.currentUnitID)
+                ud.remove(\.currentCommunityID)
                 if let userID = ud.userID?.jk.toInt() {
                     RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
                 }

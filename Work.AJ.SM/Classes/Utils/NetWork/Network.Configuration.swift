@@ -44,13 +44,18 @@ public extension Network {
             }
             configuration.addingHeaders = { (target: TargetType) -> [String: String] in
                 let version = Bundle.jk.appVersion
+                let userID = ud.userID ?? ""
+                var communityID = ""
+                if let unitString = ud.currentCommunityID?.jk.intToString {
+                    communityID = unitString
+                }
                 let identifierID = Keychain.init(service: kKeyChainServiceKey)["xbid"] ?? ""
-                let header: Dictionary<String, String> = ["app-version": version,"client-type": kDeviceType, "x-bid": identifierID,"x-device": DeviceManager.shared.requestHeaderXDeviceString()]
+                let header: Dictionary<String, String> = ["userId": userID, "communityId": communityID, "appVersion": version, "platform": kDeviceType, "deviceId": identifierID,"x-device": DeviceManager.shared.requestHeaderXDeviceString()]
+                logger.info("header:  \(header)")
                 return header
             }
-            
             return configuration
-        }()//Configuration()
+        }()
 
         public var addingHeaders: (TargetType) -> [String: String] = { _ in
             [:]

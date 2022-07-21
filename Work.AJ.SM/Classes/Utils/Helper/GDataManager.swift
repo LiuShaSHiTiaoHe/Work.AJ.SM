@@ -153,6 +153,7 @@ class GDataManager: NSObject {
         ud.remove(\.password)
         ud.remove(\.userLastLoginDate)
         ud.remove(\.currentUnitID)
+        ud.remove(\.currentCommunityID)
         ud.remove(\.openDoorStyle)
         ud.remove(\.personalOpenDoorPasswordStatus)
     }

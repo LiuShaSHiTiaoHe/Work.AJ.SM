@@ -193,7 +193,11 @@ class HouseCell: UITableViewCell {
     
     @objc
     func chooseUnit() {
+        if let communityID = unit?.communityid {
+            ud.currentCommunityID = communityID
+        }
         if let unitID = unit?.unitid {
+            ud.currentUnitID = unitID
             delegate?.chooseCurrentUnit(unitID: unitID)
         }
     }

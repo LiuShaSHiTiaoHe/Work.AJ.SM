@@ -16,6 +16,7 @@ enum CacheManager: String {
     case network = "anjie.network.cache"
     case liftrecord = "anjie.liftrecord.cache"
     case normal = "anjie.normal.cache"
+    case version = "anjie.version.cache"
 
     /// Current cached size
     var totalCost: Int {
@@ -79,6 +80,8 @@ enum CacheManager: String {
         case .liftrecord:
             return 200
         case .normal:
+            return 1000
+        case .version:
             return 1000
         }
     }

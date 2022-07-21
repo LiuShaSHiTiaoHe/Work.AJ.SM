@@ -52,6 +52,10 @@ extension DefaultsKeys {
     var currentUnitID: DefaultsKey<Int?> {
         .init("currentUnitID")
     }
+    
+    var currentCommunityID: DefaultsKey<Int?> {
+        .init("currentUnitID")
+    }
 
     // MARK: - Setting
     var bluetoothSignalStrength: DefaultsKey<Int> {

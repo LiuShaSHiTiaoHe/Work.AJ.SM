@@ -119,7 +119,6 @@ class HouseViewController: BaseViewController {
 
 extension HouseViewController: HouseCellDelegate {
     func chooseCurrentUnit(unitID: Int) {
-        Defaults.currentUnitID = unitID
         tableView.reloadData()
     }
 }
