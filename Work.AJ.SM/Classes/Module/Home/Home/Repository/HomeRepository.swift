@@ -21,6 +21,33 @@ class HomeRepository {
     private init(){}
 }
 
+// MARK: - ModuleStatusControlData
+extension HomeRepository {
+    // MARK: - 获取服务器根据版本控制的模块功能开关数据并缓存
+    func getModuleStatusFromServer() {
+        if GDataManager.shared.loginState(), let unit = getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityID = unit.communityid?.jk.intToString {
+            HomeAPI.getModuleStatusByVersion(unitID: unitID, communityID: communityID).request(modelType: ModuleStatusByVersion.self, cacheType: .ignoreCache, showError: false) { model, response in
+                if model.isNotEmpty() {
+                    let moduleStatusDictionary = model.getModuleDictionary()
+                    CacheManager.version.saveCacheWithDictionary(moduleStatusDictionary as NSDictionary, key: "ModuleStatus")
+                }
+            }
+        }
+    }
+    
+    func getModuleStatusFromCache(module: ModulesOfModuleStatus) -> Bool {
+        // FIXME: - 测试返回FALSE
+        return false
+        let moduleStatusDictionary = CacheManager.version.fetchCachedWithKey("ModuleStatus")
+        if let moduleStatusDictionary = moduleStatusDictionary, moduleStatusDictionary.count > 0, let status = moduleStatusDictionary[module.rawValue] as? Bool {
+            return status
+        } else {
+            getModuleStatusFromServer()
+        }
+        return true
+    }
+}
+
 // MARK: - SpecificPageNotice
 extension HomeRepository {
     func getSpecificPageNotice(with pageID: String, completion: @escaping (_ errorMsg: String, _ notice: String) -> Void) {

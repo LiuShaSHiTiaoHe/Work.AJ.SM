@@ -23,6 +23,7 @@ enum HomeAPI {
     case getAgoraRtmToken(account: String)
     case getAgoraRtcToken(channel: String)
     case getSpecificPageNotice(pageID: String, communityID: String, userID: String)
+    case getModuleStatusByVersion(unitID: String, communityID: String)
 }
 
 extension HomeAPI: TargetType {
@@ -57,6 +58,8 @@ extension HomeAPI: TargetType {
             return APIs.elevatorConfiguration
         case .getSpecificPageNotice:
             return APIs.specificPageNotice
+        case .getModuleStatusByVersion:
+            return APIs.moduleStatusWithVersion
         case .getAgoraRtmToken:
             return APIs.getAgoraRtmToken
         case .getAgoraRtcToken:
@@ -101,6 +104,8 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getSpecificPageNotice(pageID, communityID, userID):
             return .requestParameters(parameters: ["PAGEID": pageID, "USERID": userID, "COMMUNITYID": communityID].ekey("PAGEID"), encoding: URLEncoding.default)
+        case .getModuleStatusByVersion(_, _):
+            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         case let .getAgoraRtmToken(account):
             return .requestParameters(parameters: ["userAccount": account, "expirationTimeInSeconds": 36000].ekey("userAccount"), encoding: URLEncoding.default)
         case let .getAgoraRtcToken(channel):

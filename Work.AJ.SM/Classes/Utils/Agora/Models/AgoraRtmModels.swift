@@ -12,7 +12,7 @@ import AgoraRtmKit
 typealias Completion = (() -> Void)?
 typealias ErrorCompletion = ((AGEError) -> Void)?
 
-enum LoginStatus {
+enum AgoraLoginStatus {
     case online, offline
 }
 

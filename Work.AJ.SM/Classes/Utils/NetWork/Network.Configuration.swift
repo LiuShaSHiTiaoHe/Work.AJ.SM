@@ -50,7 +50,7 @@ public extension Network {
                     communityID = unitString
                 }
                 let identifierID = Keychain.init(service: kKeyChainServiceKey)["xbid"] ?? ""
-                let header: Dictionary<String, String> = ["userId": userID, "communityId": communityID, "appVersion": version, "platform": kDeviceType, "deviceId": identifierID,"x-device": DeviceManager.shared.requestHeaderXDeviceString()]
+                let header: Dictionary<String, String> = ["userId": userID, "communityId": communityID, "appVersion": version, "platform": kDeviceType.lowercased(), "deviceId": identifierID]
                 logger.info("header:  \(header)")
                 return header
             }

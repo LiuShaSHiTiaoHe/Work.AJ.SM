@@ -93,7 +93,17 @@ enum CacheManager: String {
 
     /// The maximum expiry time of objects in cache.
     private var maxAgeLimit: TimeInterval {
-        return TimeInterval(MAXFLOAT)
+        switch self {
+        case .network:
+            return TimeInterval(MAXFLOAT)
+        case .liftrecord:
+            return TimeInterval(MAXFLOAT)
+        case .normal:
+            return TimeInterval(MAXFLOAT)
+        case .version:
+            // FIXME: - 测试暂时缓存时间为1分钟
+            return TimeInterval(60*1.0)
+        }
     }
 
     /// The minimum free disk space (in bytes) which the cache should kept.

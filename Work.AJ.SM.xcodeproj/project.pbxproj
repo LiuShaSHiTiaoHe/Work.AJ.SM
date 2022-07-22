@@ -236,6 +236,7 @@
 		68002DF1288104590045A77F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68002DF3288104590045A77F /* Localizable.strings */; };
 		68002DF5288640A80045A77F /* AppUpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68002DF4288640A80045A77F /* AppUpgradeManager.swift */; };
 		680ED595285C89D0004A1857 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680ED594285C89D0004A1857 /* MyTimer.swift */; };
+		6861A988288A3E7300E45632 /* ModuleStatusByVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861A987288A3E7300E45632 /* ModuleStatusByVersion.swift */; };
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
 		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
@@ -499,6 +500,7 @@
 		68002DF2288104590045A77F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		68002DF4288640A80045A77F /* AppUpgradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpgradeManager.swift; sourceTree = "<group>"; };
 		680ED594285C89D0004A1857 /* MyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
+		6861A987288A3E7300E45632 /* ModuleStatusByVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleStatusByVersion.swift; sourceTree = "<group>"; };
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
@@ -924,6 +926,7 @@
 				416F2E6627B0BFB5004E5AD9 /* AdsModel.swift */,
 				416F2E6827B0BFB5004E5AD9 /* HomePageModule.swift */,
 				416F2E6727B0BFB5004E5AD9 /* NoticeModel.swift */,
+				6861A987288A3E7300E45632 /* ModuleStatusByVersion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2136,6 +2139,7 @@
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
 				419AD69E27FD3EB400C902B8 /* HomeView.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
+				6861A988288A3E7300E45632 /* ModuleStatusByVersion.swift in Sources */,
 				416F2EA727B5FE7C004E5AD9 /* AuthenticationAPI.swift in Sources */,
 				410A109027F3ED570059B2C3 /* UserAvatarCell.swift in Sources */,
 				4173C22E27C5D97200B8FBB8 /* AddMemberView.swift in Sources */,

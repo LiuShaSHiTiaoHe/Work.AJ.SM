@@ -14,7 +14,7 @@ class AgoraRtm: NSObject {
     
     // Kit
     let kit = AgoraRtmKit(appId: kAgoraAppID, delegate: nil)
-    var status: LoginStatus = .offline
+    var status: AgoraLoginStatus = .offline
     var account: String?
     
     // CallKit

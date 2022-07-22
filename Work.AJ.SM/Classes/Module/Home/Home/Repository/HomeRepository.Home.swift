@@ -66,11 +66,15 @@ extension HomeRepository {
                     }
                 } else {
                     ud.remove(\.currentUnitID)
+                    ud.remove(\.currentCommunityID)
                     // MARK: - 取第一个有效的房屋
                     if let idAndStateNormal = idAndStates.first(where: {$0.1 == .Normal}),
                        let unit = models.first(where: {$0.unitid?.jk.intToString == idAndStateNormal.0}),
                        let unitID = unit.unitid {
                         ud.currentUnitID = unitID
+                        if let communityID = unit.communityid {
+                            ud.currentCommunityID = communityID
+                        }
                         homeModuleArray = self.filterHomePageModules(unit)
                         self.adsAndNotice { ads, notices in
                             adsArray = ads
@@ -92,6 +96,7 @@ extension HomeRepository {
             logger.info("\(response.message)")
             if response.code == 204 {
                 ud.remove(\.currentUnitID)
+                ud.remove(\.currentCommunityID)
                 if let userID = ud.userID?.jk.toInt() {
                     RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
                 }

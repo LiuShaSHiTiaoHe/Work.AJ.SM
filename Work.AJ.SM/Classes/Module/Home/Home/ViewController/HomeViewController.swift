@@ -10,6 +10,7 @@ import SwiftEntryKit
 import AVFoundation
 import SVProgressHUD
 import swiftScan
+import JKSwiftExtension
 
 class HomeViewController: BaseViewController {
 
@@ -96,7 +97,10 @@ extension HomeViewController: HomeViewDelegate {
         case .mobileCallElevator:
             navigateTo(viewController: MobileCallElevatorViewController())
         case .ownerQRCode:
-            navigateTo(viewController: OwnerQRCodeViewController())
+            showModuleVersionControlTipsView(module: .PassQR) { [weak self] in
+                guard let `self` = self else { return }
+                self.navigateTo(viewController: OwnerQRCodeViewController())
+            }
         case .indoorCallElevator:
             navigateTo(viewController: IndoorCallElevatorViewController())
         case .bleCallElevator:
@@ -105,21 +109,36 @@ extension HomeViewController: HomeViewDelegate {
                     height: .constant(value: 380)
             ), true)
         case .cloudOpenGate:
-            navigateTo(viewController: RemoteOpenDoorViewController())
+            showModuleVersionControlTipsView(module: .RemoteOpendoor) { [weak self] in
+                guard let `self` = self else { return }
+                self.navigateTo(viewController: RemoteOpenDoorViewController())
+            }
         case .cloudIntercom:
-            navigateTo(viewController: RemoteIntercomViewController())
+            showModuleVersionControlTipsView(module: .RemoteIntercom) { [weak self] in
+                guard let `self` = self else { return }
+                self.navigateTo(viewController: RemoteIntercomViewController())
+            }
         case .scanElevatorQRCode:
-            if GDataManager.shared.checkAvailableCamera() {
-                navigateTo(viewController: ScanQRCodeCallElevatorViewController())
-            } else {
-                SVProgressHUD.showError(withStatus: "没有可使用的相机")
+            showModuleVersionControlTipsView(module: .ScanQR) { [weak self] in
+                guard let `self` = self else { return }
+                if GDataManager.shared.checkAvailableCamera() {
+                    self.navigateTo(viewController: ScanQRCodeCallElevatorViewController())
+                } else {
+                    SVProgressHUD.showError(withStatus: "没有可使用的相机")
+                }
             }
         case .inviteVisitors:
-            let view = ChooseVisitorModeView()
-            view.delegate = self
-            PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
+            showModuleVersionControlTipsView(module: .Invitation) { [weak self] in
+                guard let `self` = self else { return }
+                let view = ChooseVisitorModeView()
+                view.delegate = self
+                PopViewManager.shared.display(view, .center, .init(width: .constant(value: 260), height: .constant(value: 250)), true)
+            }
         case .addFamilyMember:
-            navigateTo(viewController: AddMemberViewController())
+            showModuleVersionControlTipsView(module: .AddMember) { [weak self] in
+                guard let `self` = self else { return }
+                self.navigateTo(viewController: AddMemberViewController())
+            }
         case .deviceConfiguration:
             break
         case .elevatorConfiguration:
@@ -128,6 +147,23 @@ extension HomeViewController: HomeViewDelegate {
     }
 }
 
+extension HomeViewController {
+    // MARK: - 功能模块开启状态，是否提示升级
+    func showModuleVersionControlTipsView(module: ModulesOfModuleStatus, completion: @escaping () -> Void) {
+        if HomeRepository.shared.getModuleStatusFromCache(module: module) {
+            completion()
+        } else {
+            let alert = UIAlertController.init(title: "升级提示", message: "您的APP版本过低，已严重影响您使用该功能，请升级至最新版本，点击“下载” \n 注意：升级过程中将无法使用软件 ", preferredStyle: .alert)
+            alert.addAction("取消", .cancel) {
+                completion()
+            }
+            alert.addAction("下载", .destructive) {
+                JKGlobalTools.updateApp(vc: self, appId: kAppID )
+            }
+            alert.show()
+        }
+    }
+}
 
 extension HomeViewController: ChooseVisitorModeDelegate {
     func qrcode() {

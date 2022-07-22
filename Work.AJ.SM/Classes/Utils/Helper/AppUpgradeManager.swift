@@ -11,6 +11,7 @@ import SwiftyJSON
 import SVProgressHUD
 
 class AppUpgradeManager {
+    // FIXME: - 测试检查更新间隔时间为0，也就是每次都检查
     private let checkTimeInterval = 0//60 * 60 * 24//检查更新时间间隔
 
     static let shared = AppUpgradeManager()
@@ -24,7 +25,7 @@ extension AppUpgradeManager {
             guard let `self` = self else { return }
             self.processVersionCompare(jsonData: jsonData) {version, needUpdate, isForce, releaseNotes, errorMsg in
                 if needUpdate {
-                    self.checkAppStoreNewVersion(isForce)
+                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce)
                 } else {
                     SVProgressHUD.showInfo(withStatus: errorMsg)
                 }
