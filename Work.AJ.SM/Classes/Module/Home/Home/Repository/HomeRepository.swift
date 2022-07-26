@@ -25,8 +25,9 @@ class HomeRepository {
 extension HomeRepository {
     // MARK: - 获取服务器根据版本控制的模块功能开关数据并缓存
     func getModuleStatusFromServer() {
-        if GDataManager.shared.loginState(), let unit = getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityID = unit.communityid?.jk.intToString {
-            HomeAPI.getModuleStatusByVersion(unitID: unitID, communityID: communityID).request(modelType: ModuleStatusByVersion.self, cacheType: .ignoreCache, showError: false) { model, response in
+        if GDataManager.shared.loginState(), let unit = getCurrentUnit(), let unitID = unit.unitid?.jk.intToString,
+           let communityID = unit.communityid?.jk.intToString, let userID = ud.userID {
+            HomeAPI.getModuleStatusByVersion(unitID: unitID, communityID: communityID, userID: userID).request(modelType: ModuleStatusByVersion.self, cacheType: .ignoreCache, showError: false) { model, response in
                 if model.isNotEmpty() {
                     let moduleStatusDictionary = model.getModuleDictionary()
                     CacheManager.version.saveCacheWithDictionary(moduleStatusDictionary as NSDictionary, key: "ModuleStatus")
