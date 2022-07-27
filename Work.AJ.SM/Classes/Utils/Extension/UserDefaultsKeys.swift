@@ -54,7 +54,7 @@ extension DefaultsKeys {
     }
     
     var currentCommunityID: DefaultsKey<Int?> {
-        .init("currentUnitID")
+        .init("currentCommunityID")
     }
 
     // MARK: - Setting

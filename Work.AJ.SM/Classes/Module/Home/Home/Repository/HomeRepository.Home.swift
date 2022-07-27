@@ -70,11 +70,9 @@ extension HomeRepository {
                     // MARK: - 取第一个有效的房屋
                     if let idAndStateNormal = idAndStates.first(where: {$0.1 == .Normal}),
                        let unit = models.first(where: {$0.unitid?.jk.intToString == idAndStateNormal.0}),
-                       let unitID = unit.unitid {
+                       let unitID = unit.unitid, let communityID = unit.communityid {
                         ud.currentUnitID = unitID
-                        if let communityID = unit.communityid {
-                            ud.currentCommunityID = communityID
-                        }
+                        ud.currentCommunityID = communityID
                         homeModuleArray = self.filterHomePageModules(unit)
                         self.adsAndNotice { ads, notices in
                             adsArray = ads
