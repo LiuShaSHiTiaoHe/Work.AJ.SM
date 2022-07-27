@@ -104,7 +104,7 @@ extension HomeAPI: TargetType {
             return .requestParameters(parameters: ["COMMUNITYID": communityID].ekey("COMMUNITYID"), encoding: URLEncoding.default)
         case let .getSpecificPageNotice(pageID, communityID, userID):
             return .requestParameters(parameters: ["PAGEID": pageID, "USERID": userID, "COMMUNITYID": communityID].ekey("PAGEID"), encoding: URLEncoding.default)
-        case .getModuleStatusByVersion(_, _, userID):
+        case let .getModuleStatusByVersion(_, _, userID):
             return .requestParameters(parameters: ["USERID": userID].ekey("USERID"), encoding: URLEncoding.default)
         case let .getAgoraRtmToken(account):
             return .requestParameters(parameters: ["userAccount": account, "expirationTimeInSeconds": 36000].ekey("userAccount"), encoding: URLEncoding.default)

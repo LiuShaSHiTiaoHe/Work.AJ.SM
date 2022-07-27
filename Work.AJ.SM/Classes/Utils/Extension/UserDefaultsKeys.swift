@@ -43,7 +43,7 @@ extension DefaultsKeys {
     var checkAppVersionDate: DefaultsKey<Date?> {
         .init("checkAppVersionDate")
     }
-    // 记录已经检查过的版本(如果已经检查过，在当前的版本，就不去调用检查更新的接口)
+    // 记录已经检查过的版本(如果已经检查过，在当前的版本，就不去展示升级的提示)
     var checkedAppVersions: DefaultsKey<Array<String>> {
         .init("checkedAppVersion", defaultValue: [])
     }
