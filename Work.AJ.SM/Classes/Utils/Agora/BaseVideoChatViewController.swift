@@ -177,6 +177,7 @@ extension BaseVideoChatViewController: AgoraRtcEngineDelegate{
         videoCanvas.uid = uid
         videoCanvas.view = contentView.remoteVideo
         videoCanvas.renderMode = .hidden
+        videoCanvas.mirrorMode = .disabled
         agoraKit.setupRemoteVideo(videoCanvas)
     }
     

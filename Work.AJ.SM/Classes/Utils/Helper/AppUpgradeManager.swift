@@ -79,9 +79,9 @@ extension AppUpgradeManager {
         if let deviceType = jsonData["data"]["TYPE"].string, deviceType.lowercased() == kDeviceType.lowercased(),
             let version = jsonData["data"]["VERSION"].string, self.isVaildAppVersion(version) {
             if JKGlobalTools.compareVersion(version: version) {
-                if let needUpgrade = jsonData["data"]["needUpgrade"].string, needUpgrade == "T" {
+                if let needUpgrade = jsonData["data"]["needUpgrade"].string, needUpgrade == "1" {
                     if let isForceUpdate = jsonData["data"]["IFFORCE"].string, isForceUpdate == "T" {
-                        if let releaseNotes = jsonData["data"]["releaseNotes"].string {
+                        if let releaseNotes = jsonData["data"]["RELEASENOTES"].string {
                             completion(version, true, true, releaseNotes, "")
                         } else {
                             completion(version, true, true, "检测到有新的版本", "")

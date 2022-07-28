@@ -19,7 +19,6 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         initUI()
         initData()
-        AppUpgradeManager.shared.autoCheckVersion()
     }
 
     func initData() {
@@ -28,6 +27,8 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
         if rtm.status == .offline {
             GDataManager.shared.loginAgoraRtm()
         }
+        AppUpgradeManager.shared.autoCheckVersion()
+        HomeRepository.shared.getModuleStatusFromServer()
     }
 
     func initUI() {

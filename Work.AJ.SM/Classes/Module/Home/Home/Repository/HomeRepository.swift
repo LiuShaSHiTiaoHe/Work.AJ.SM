@@ -37,8 +37,6 @@ extension HomeRepository {
     }
     
     func getModuleStatusFromCache(module: ModulesOfModuleStatus) -> Bool {
-        // FIXME: - 测试返回FALSE
-        return false
         let moduleStatusDictionary = CacheManager.version.fetchCachedWithKey("ModuleStatus")
         if let moduleStatusDictionary = moduleStatusDictionary, moduleStatusDictionary.count > 0, let status = moduleStatusDictionary[module.rawValue] as? Bool {
             return status

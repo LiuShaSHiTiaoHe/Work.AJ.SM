@@ -79,7 +79,11 @@ class SelectHouseViewController: BaseViewController {
 
     @objc
     func addHouse() {
-        navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
+        showModuleVersionControlTipsView(module: .FaceCetification) { [weak self] in
+            guard let `self` = self else { return }
+            self.navigateTo(viewController: SelectUnitBlockViewController())
+        }
+//        navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
     }
 
 
