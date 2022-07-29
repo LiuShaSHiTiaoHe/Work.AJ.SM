@@ -28,7 +28,6 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
             GDataManager.shared.loginAgoraRtm()
         }
         AppUpgradeManager.shared.autoCheckVersion()
-        HomeRepository.shared.getModuleStatusFromServer()
     }
 
     func initUI() {

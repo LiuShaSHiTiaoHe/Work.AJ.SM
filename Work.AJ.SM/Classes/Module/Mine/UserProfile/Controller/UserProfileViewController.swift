@@ -472,7 +472,7 @@ extension UserProfileViewController {
     }
     
     func updateAvater() {
-        if let userID = ud.userID, let avatarData = avatar?.pngData() {
+        if let userID = ud.userID, let avatarData = avatar?.jpegData(compressionQuality: 0.5) {
             MineRepository.shared.updateAvatar(with: userID, avatar: avatarData) { [weak self] errorMsg in
                 guard let self = self else { return }
                 if errorMsg.isEmpty {
