@@ -52,7 +52,7 @@
 		416F2E20279BAF67004E5AD9 /* Work_AJ_SMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E1F279BAF67004E5AD9 /* Work_AJ_SMUITests.swift */; };
 		416F2E22279BAF67004E5AD9 /* Work_AJ_SMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E21279BAF67004E5AD9 /* Work_AJ_SMUITestsLaunchTests.swift */; };
 		416F2E3427B0B3DD004E5AD9 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3327B0B3DD004E5AD9 /* APIs.swift */; };
-		416F2E3727B0B406004E5AD9 /* ConstStrigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3627B0B406004E5AD9 /* ConstStrigs.swift */; };
+		416F2E3727B0B406004E5AD9 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3627B0B406004E5AD9 /* Const.swift */; };
 		416F2E3927B0B427004E5AD9 /* ImportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3827B0B427004E5AD9 /* ImportFile.swift */; };
 		416F2E3C27B0B46F004E5AD9 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3B27B0B46F004E5AD9 /* UserDefaultsKeys.swift */; };
 		416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2E3D27B0B483004E5AD9 /* NotificationName.swift */; };
@@ -238,6 +238,7 @@
 		680ED595285C89D0004A1857 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680ED594285C89D0004A1857 /* MyTimer.swift */; };
 		6861A988288A3E7300E45632 /* ModuleStatusByVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861A987288A3E7300E45632 /* ModuleStatusByVersion.swift */; };
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
+		688343BC289376E80070EF2F /* ExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688343BB289376E80070EF2F /* ExpandButton.swift */; };
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
 		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
 		68DE5622286C26DB006560AA /* Image.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DE5621286C26DB006560AA /* Image.Extension.swift */; };
@@ -316,7 +317,7 @@
 		416F2E1F279BAF67004E5AD9 /* Work_AJ_SMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work_AJ_SMUITests.swift; sourceTree = "<group>"; };
 		416F2E21279BAF67004E5AD9 /* Work_AJ_SMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work_AJ_SMUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		416F2E3327B0B3DD004E5AD9 /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
-		416F2E3627B0B406004E5AD9 /* ConstStrigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstStrigs.swift; sourceTree = "<group>"; };
+		416F2E3627B0B406004E5AD9 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		416F2E3827B0B427004E5AD9 /* ImportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFile.swift; sourceTree = "<group>"; };
 		416F2E3B27B0B46F004E5AD9 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		416F2E3D27B0B483004E5AD9 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -502,6 +503,7 @@
 		680ED594285C89D0004A1857 /* MyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		6861A987288A3E7300E45632 /* ModuleStatusByVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleStatusByVersion.swift; sourceTree = "<group>"; };
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		688343BB289376E80070EF2F /* ExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandButton.swift; sourceTree = "<group>"; };
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
 		68DE5621286C26DB006560AA /* Image.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.Extension.swift; sourceTree = "<group>"; };
@@ -828,7 +830,7 @@
 		416F2E3527B0B3F3004E5AD9 /* Marcos */ = {
 			isa = PBXGroup;
 			children = (
-				416F2E3627B0B406004E5AD9 /* ConstStrigs.swift */,
+				416F2E3627B0B406004E5AD9 /* Const.swift */,
 				416F2E3827B0B427004E5AD9 /* ImportFile.swift */,
 				416F2E7927B0C5C5004E5AD9 /* Marcos.swift */,
 				416F2E8827B0CAD0004E5AD9 /* Fonts.swift */,
@@ -1074,6 +1076,7 @@
 				419AD69B27FD382100C902B8 /* CustomButton.swift */,
 				419AD6B12803B6DA00C902B8 /* NoDataView.swift */,
 				419C95D2283F59D3001E7099 /* AppUpdateView.swift */,
+				688343BB289376E80070EF2F /* ExpandButton.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -2157,6 +2160,7 @@
 				416F2F0227BE4559004E5AD9 /* SelectElevatorViewController.swift in Sources */,
 				41985F4227D5B60E00E02A9A /* CommonSearchView.swift in Sources */,
 				41985F2E27CF3B7100E02A9A /* OnBoardViewController.swift in Sources */,
+				688343BC289376E80070EF2F /* ExpandButton.swift in Sources */,
 				416F2E6327B0BF95004E5AD9 /* HomeModuleCell.swift in Sources */,
 				412FC54727D74529001050E9 /* BlockModel.swift in Sources */,
 				416F2ECC27BB78D4004E5AD9 /* CommonHeaderView.swift in Sources */,
@@ -2236,7 +2240,7 @@
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */,
 				4173C23A27C6192400B8FBB8 /* MineRepository.swift in Sources */,
-				416F2E3727B0B406004E5AD9 /* ConstStrigs.swift in Sources */,
+				416F2E3727B0B406004E5AD9 /* Const.swift in Sources */,
 				412FC54527D73D0B001050E9 /* CommunityModel.swift in Sources */,
 				419C95D3283F59D3001E7099 /* AppUpdateView.swift in Sources */,
 				419E2DE627D9975700B60633 /* HouseCetificationViewController.swift in Sources */,

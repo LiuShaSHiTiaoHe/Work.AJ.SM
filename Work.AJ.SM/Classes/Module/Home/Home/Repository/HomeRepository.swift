@@ -25,25 +25,43 @@ class HomeRepository {
 extension HomeRepository {
     // MARK: - 获取服务器根据版本控制的模块功能开关数据并缓存
     func getModuleStatusFromServer() {
-        if GDataManager.shared.loginState(), let unit = getCurrentUnit(), let unitID = unit.unitid?.jk.intToString,
-           let communityID = unit.communityid?.jk.intToString, let userID = ud.userID {
+        logger.info("获取服务器根据版本控制的模块功能开关数据并缓存")
+        if let unitID = ud.currentUnitID?.jk.intToString, let communityID = ud.currentCommunityID?.jk.intToString, let userID = ud.userID {
             HomeAPI.getModuleStatusByVersion(unitID: unitID, communityID: communityID, userID: userID).request(modelType: ModuleStatusByVersion.self, cacheType: .ignoreCache, showError: false) { model, response in
                 if model.isNotEmpty() {
                     let moduleStatusDictionary = model.getModuleDictionary()
                     CacheManager.version.saveCacheWithDictionary(moduleStatusDictionary as NSDictionary, key: "ModuleStatus")
+                    ud.getModuleStatusDate = Date()
                 }
             }
         }
     }
-    
+    // MARK: - 从缓存中获取模块控制开关数据，如果没有就去服务器请求，直接返回TRUE，不影响体验
     func getModuleStatusFromCache(module: ModulesOfModuleStatus) -> Bool {
         let moduleStatusDictionary = CacheManager.version.fetchCachedWithKey("ModuleStatus")
         if let moduleStatusDictionary = moduleStatusDictionary, moduleStatusDictionary.count > 0, let status = moduleStatusDictionary[module.rawValue] as? Bool {
+            //本地缓存的记录，超过设置的时间间隔，要去服务器重新请求数据，这次依旧返回缓存的状态
+            if !isModuleStatusCacheWithinTheExpirationDate() {
+                logger.info("本地缓存的记录，超过设置的时间间隔，要去服务器重新请求数据，这次依旧返回缓存的状态")
+                getModuleStatusFromServer()
+            } else {
+                logger.info("本地缓存的记录，没有超过设置的时间间隔，返回缓存的状态")
+            }
             return status
         } else {
             getModuleStatusFromServer()
         }
         return true
+    }
+    
+    private func isModuleStatusCacheWithinTheExpirationDate() -> Bool{
+        if let lastGetModuleStatusDate = ud.getModuleStatusDate, let intervalMinites = lastGetModuleStatusDate.jk.numberOfMinutes(from: Date()) {
+            logger.info("距离上次获取模块控制信息已经: \(abs(intervalMinites)) 分钟")
+            if abs(intervalMinites) < kModuleStatusTimeInterval {
+               return true
+            }
+        }
+        return false
     }
 }
 

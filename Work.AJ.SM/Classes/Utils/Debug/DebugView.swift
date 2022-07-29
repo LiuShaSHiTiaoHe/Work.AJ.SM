@@ -24,6 +24,7 @@ class DebugView: BaseView {
             ud.appServicePath = servicePath
             SwiftEntryKit.dismiss(.displayed) {
                 SVProgressHUD.showSuccess(withStatus: "保存成功")
+                SVProgressHUD.dismiss(withDelay: 1)
             }
         } else {
             SVProgressHUD.showError(withStatus: "输入数据错误")

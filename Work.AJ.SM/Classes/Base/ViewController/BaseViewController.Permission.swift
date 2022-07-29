@@ -26,7 +26,7 @@ extension BaseViewController {
             alert.addAction("取消", .cancel) {
                 completion()
             }
-            alert.addAction("下载", .destructive) {
+            alert.addAction("去下载", .destructive) {
                 JKGlobalTools.updateApp(vc: self, appId: kAppID )
             }
             alert.show()

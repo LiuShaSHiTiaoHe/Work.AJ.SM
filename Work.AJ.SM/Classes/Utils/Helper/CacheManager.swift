@@ -101,8 +101,7 @@ enum CacheManager: String {
         case .normal:
             return TimeInterval(MAXFLOAT)
         case .version:
-            // FIXME: - 测试暂时缓存时间为1分钟
-            return TimeInterval(60*1.0)
+            return TimeInterval(MAXFLOAT)
         }
     }
 

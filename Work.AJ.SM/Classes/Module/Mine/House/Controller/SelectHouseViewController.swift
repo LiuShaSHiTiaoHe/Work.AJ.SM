@@ -83,7 +83,6 @@ class SelectHouseViewController: BaseViewController {
             guard let `self` = self else { return }
             self.navigateTo(viewController: SelectUnitBlockViewController())
         }
-//        navigationController?.pushViewController(SelectUnitBlockViewController(), animated: true)
     }
 
 

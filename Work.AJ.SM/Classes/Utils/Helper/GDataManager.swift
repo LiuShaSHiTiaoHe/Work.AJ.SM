@@ -156,6 +156,9 @@ class GDataManager: NSObject {
         ud.remove(\.currentCommunityID)
         ud.remove(\.openDoorStyle)
         ud.remove(\.personalOpenDoorPasswordStatus)
+        ud.remove(\.getModuleStatusDate)
+        ud.remove(\.checkAppVersionDate)
+        ud.remove(\.checkedAppVersions)
     }
 
     // MARK: - 删除网络请求缓存

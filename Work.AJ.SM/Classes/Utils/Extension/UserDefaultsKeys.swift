@@ -38,15 +38,6 @@ extension DefaultsKeys {
     var userLastLoginDate: DefaultsKey<Date?> {
         .init("userLastLoginDate")
     }
-    // MARK: - APP Update
-    // 记录检查更新的时间，固定时间间隔去调用检查更新
-    var checkAppVersionDate: DefaultsKey<Date?> {
-        .init("checkAppVersionDate")
-    }
-    // 记录已经检查过的版本(如果已经检查过，在当前的版本，就不去展示升级的提示)
-    var checkedAppVersions: DefaultsKey<Array<String>> {
-        .init("checkedAppVersion", defaultValue: [])
-    }
 
     // MARK: - Unit
     var currentUnitID: DefaultsKey<Int?> {
@@ -99,5 +90,21 @@ extension DefaultsKeys {
     
     var appServicePath: DefaultsKey<String> {
         .init("appServicePath", defaultValue: "hxcloudplus/")
+    }
+    
+    // MARK: - APP Update
+    // 记录检查更新的时间，固定时间间隔去调用检查更新
+    var checkAppVersionDate: DefaultsKey<Date?> {
+        .init("checkAppVersionDate")
+    }
+    // 记录已经检查过的版本(如果已经检查过，在当前的版本，就不去展示升级的提示)
+    var checkedAppVersions: DefaultsKey<Array<String>> {
+        .init("checkedAppVersion", defaultValue: [])
+    }
+    
+    // MARK: - 模块控制信息
+    // 记录获取模块控制信息时间
+    var getModuleStatusDate: DefaultsKey<Date?> {
+        .init("getModuleStatusDate")
     }
 }

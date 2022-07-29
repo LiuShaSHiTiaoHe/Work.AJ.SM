@@ -141,9 +141,8 @@ class FaceTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var deleteButton: UIButton = {
-        let button = UIButton.init(type: .custom)
-
+    lazy var deleteButton: ExpandButton = {
+        let button = ExpandButton.init(type: .custom)
         button.setBackgroundImage(R.image.base_icon_trash(), for: .normal)
         return button
     }()
