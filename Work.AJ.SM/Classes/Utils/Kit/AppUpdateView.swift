@@ -7,16 +7,23 @@
 
 import UIKit
 import SwiftEntryKit
+import SnapKit
 
 class AppUpdateView: BaseView {
     
+    private var version: String = ""
+    
     override func initData() {
-        cancelButton.addTarget(self , action: #selector(CancleAction), for: .touchUpInside)
+        cancelButton.addTarget(self , action: #selector(cancleAction), for: .touchUpInside)
         confirmButton.addTarget(self , action: #selector(confirmAction), for: .touchUpInside)
     }
     
     @objc
-    func CancleAction() {
+    func cancleAction() {
+        let checkedVersions = ud.checkedAppVersions
+        var temp = Array<String>.init(checkedVersions)
+        temp.append(version)
+        ud.checkedAppVersions = temp
         SwiftEntryKit.dismiss()
     }
     
@@ -32,7 +39,7 @@ class AppUpdateView: BaseView {
         }
     }
     
-    func configData(_ descString: String, _ force: Bool) {
+    func configData(_ descString: String, _ force: Bool, _ latestVersion: String) {
         if force {
             cancelButton.isHidden = true
             confirmButton.snp.remakeConstraints { make  in
@@ -42,28 +49,29 @@ class AppUpdateView: BaseView {
                 make.height.equalTo(50)
             }
         }
-        contentLabel.text = descString
+        titleLabel.text = "发现新的版本"
+        contentTextView.text = descString
+        version = latestVersion
     }
             
     override func initializeView(){
-        self.addSubview(logoImageView)
-        self.addSubview(contentLabel)
+        self.addSubview(titleLabel)
+        self.addSubview(contentTextView)
         self.addSubview(cancelButton)
         self.addSubview(confirmButton)
-        
-        logoImageView.snp.makeConstraints { make  in
-            make.top.equalToSuperview()
+                
+        titleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.height.equalTo(40)
+            make.top.equalToSuperview().offset(kMargin)
         }
-        
-        contentLabel.snp.makeConstraints { make  in
-            make.top.equalToSuperview().offset(200)
+        contentTextView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(80)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.bottom.equalToSuperview().offset(-kMargin - kMargin - 50)
         }
-        
+
         cancelButton.snp.makeConstraints { make  in
             make.left.equalToSuperview().offset(kMargin)
             make.bottom.equalToSuperview().offset(-kMargin)
@@ -78,24 +86,22 @@ class AppUpdateView: BaseView {
             make.height.equalTo(34)
         }
     }
-
-    lazy var logoImageView: UIImageView = {
-        let imageView = UIImageView.init(image: R.image.base_image_updatebg())
-        return imageView
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel.init()
+        label.font = k20BoldFont
+        label.textColor = R.color.text_title()
+        label.textAlignment = .center
+        return label
     }()
     
-    lazy var contentBg: UIView = {
-        let view = UIView.init()
-        view.backgroundColor = R.color.bg()
+    lazy var contentTextView: UITextView = {
+        let view = UITextView()
+        view.font = k16BoldFont
+        view.textAlignment = .left
+        view.textColor = R.color.text_content()
+        view.backgroundColor = R.color.whitecolor()
         return view
-    }()
-    lazy var contentLabel: UILabel = {
-        let label = UILabel.init()
-        label.font = k16Font
-        label.textColor = R.color.text_content()
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        return label
     }()
     
     lazy var cancelButton: UIButton = {

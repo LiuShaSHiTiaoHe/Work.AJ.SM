@@ -23,7 +23,8 @@ extension AppUpgradeManager {
             guard let `self` = self else { return }
             self.processVersionCompare(jsonData: jsonData) {version, needUpdate, isForce, releaseNotes, errorMsg in
                 if needUpdate {
-                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce)
+                    //用户自己检查，不传最新版本，不记录最新版本
+                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: "")
                 } else {
                     SVProgressHUD.showInfo(withStatus: errorMsg)
                 }
@@ -46,10 +47,7 @@ extension AppUpgradeManager {
                         // 已记录的检查过的版本，不包含最新的版本号，进行版本的比较。并且记录最新版本，保证下次不再提示。
                         if !checkedVersions.contains(version) {
                             if needUpdate {
-                                var temp = Array<String>.init(checkedVersions)
-                                temp.append(version)
-                                ud.checkedAppVersions = temp
-                                self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce)
+                                self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version)
                             } else {
                                 logger.info("本地记录不为空，不需要更新，不记录需要更新的版本：\(version)")
                             }
@@ -60,8 +58,7 @@ extension AppUpgradeManager {
                         //本地记录为空，进行版本的比较，如果当前版本较低，就提示升级
                         if needUpdate {
                             logger.info("本地记录为空，需要更新，记录需要更新的版本：\(version)")
-                            ud.checkedAppVersions = [version]
-                            self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce)
+                            self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version)
                         } else {
                             logger.info("本地记录为空，不需要更新，不记录需要更新的版本：\(version)")
                         }
@@ -109,7 +106,7 @@ extension AppUpgradeManager {
         VersionCheck.shared.checkNewVersion { hasNewerVersion, versionResult, errorMsg in
             if hasNewerVersion, let versionResult = versionResult {
                 DispatchQueue.main.async {
-                    self.showAppUpdateView(releaseNotes: versionResult.releaseNotes ?? "", isForce: force)
+                    self.showAppUpdateView(releaseNotes: versionResult.releaseNotes ?? "", isForce: force, latestVersion: "")
                 }
             } else {
                 SVProgressHUD.showInfo(withStatus: errorMsg)
@@ -149,13 +146,13 @@ extension AppUpgradeManager {
         return true
     }
     // MARK: - 展示升级提示页面
-    private func showAppUpdateView(releaseNotes: String, isForce: Bool) {
+    private func showAppUpdateView(releaseNotes: String, isForce: Bool, latestVersion: String) {
         let aView = AppUpdateView.init()
-        aView.configData(releaseNotes, isForce)
+        aView.configData(releaseNotes, isForce, latestVersion)
         var attributes = EntryKitCustomAttributes.centerFloat.attributes
         attributes.screenInteraction = .absorbTouches
         attributes.scroll = .disabled
-        attributes.entryBackground = .color(color: .clear)
+        attributes.entryBackground = .color(color: .white)
         attributes.positionConstraints.size = .init(
             width: .ratio(value: 0.8),
             height: .constant(value: 420)

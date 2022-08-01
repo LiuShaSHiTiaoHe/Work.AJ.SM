@@ -29,6 +29,7 @@ let k34Font = fontSize(34)
 
 let k12BoldFont = UIFont.boldSystemFont(ofSize: 12)
 let k16BoldFont = UIFont.boldSystemFont(ofSize: 16)
+let k20BoldFont = UIFont.boldSystemFont(ofSize: 20)
 
 let kNaviTitleFont = k22Font
 let kHeaderTitleFont = k20Font
