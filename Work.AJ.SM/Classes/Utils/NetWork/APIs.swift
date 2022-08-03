@@ -7,17 +7,27 @@
 
 import Foundation
 
-// MARK: - 测试地址  "http://47.111.8.231:9091/"
-// MARK: - 线上地址  "http://120.27.237.7:9393/"
-
 func ApiBaseUrl() -> String {
-    return ud.appHost + ud.appServicePath
+    var appHost = ud.appHost
+    let servicePath = ud.appServicePath
+    if appHost == APIs.developmentServerIPPath {
+        appHost = APIs.developmentServerPath
+        ud.appHost = appHost
+    }
+    if appHost == APIs.distributionServerIPPath {
+        appHost = APIs.distributionServerPath
+        ud.appHost = appHost
+    }
+    return appHost + servicePath
 }
 
 final class APIs {       
     
-    static let developmentServerPath = "http://47.111.8.231:9091/"
-    static let distributionServerPath = "http://120.27.237.7:9393/"
+    static let developmentServerIPPath = "http://47.111.8.231:9091/"
+    static let distributionServerIPPath = "http://120.27.237.7:9393/"
+    
+    static let developmentServerPath = "http://apptest.njanjar.com/"
+    static let distributionServerPath = "http://app.njanjar.com/"
     
     // MARK: - 基础
     static let versionCheck = "appcity/getAppversion.do"

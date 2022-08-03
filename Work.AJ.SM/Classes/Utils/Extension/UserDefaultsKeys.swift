@@ -34,10 +34,6 @@ extension DefaultsKeys {
     var password: DefaultsKey<String?> {
         .init("password")
     }
-    // MARK: - Store Date
-    var userLastLoginDate: DefaultsKey<Date?> {
-        .init("userLastLoginDate")
-    }
 
     // MARK: - Unit
     var currentUnitID: DefaultsKey<Int?> {
@@ -85,14 +81,18 @@ extension DefaultsKeys {
     
     // MARK: - 配置信息
     var appHost: DefaultsKey<String> {
-        .init("appHost", defaultValue: "http://120.27.237.7:9393/")
+        .init("appHost", defaultValue: APIs.distributionServerPath)
     }
     
     var appServicePath: DefaultsKey<String> {
         .init("appServicePath", defaultValue: "hxcloudplus/")
     }
     
-    // MARK: - APP Update
+    // MARK: - Store Date
+    var userLastLoginDate: DefaultsKey<Date?> {
+        .init("userLastLoginDate")
+    }
+    
     // 记录检查更新的时间，固定时间间隔去调用检查更新
     var checkAppVersionDate: DefaultsKey<Date?> {
         .init("checkAppVersionDate")
