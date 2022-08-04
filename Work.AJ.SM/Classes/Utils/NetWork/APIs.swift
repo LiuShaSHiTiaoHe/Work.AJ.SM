@@ -9,7 +9,6 @@ import Foundation
 
 func ApiBaseUrl() -> String {
     var appHost = ud.appHost
-    let servicePath = ud.appServicePath
     if appHost == APIs.developmentServerIPPath {
         appHost = APIs.developmentServerPath
         ud.appHost = appHost
@@ -18,7 +17,7 @@ func ApiBaseUrl() -> String {
         appHost = APIs.distributionServerPath
         ud.appHost = appHost
     }
-    return appHost + servicePath
+    return appHost
 }
 
 final class APIs {       
@@ -38,7 +37,7 @@ final class APIs {
     static let propertyContactList = "appcity/getContact.do"
     static let messageList = "appcity/getMyMessage.do"
     static let commonPush = "appDevice/commonPush"
-    static let specificPageNotice = "/appcity/getMsg"
+    static let specificPageNotice = "appcity/getMsg"
     static let moduleStatusWithVersion = "appcity/functionModuleStatus"
     // MARK: - 用户鉴权
     static let login = "appcity/login.do"
@@ -52,7 +51,7 @@ final class APIs {
     // MARK: - 用户信息
     static let updateUserInfo = "appcity/perfectAppUser"
     static let updateAvatar = "appcity/addUserHeader.do"
-    static let getUserInfo = "/appcity/getUserInfo"
+    static let getUserInfo = "appcity/getUserInfo"
 
     // MARK: - 房屋
     static let userUnit = "appcity/getMyUnit.do"
@@ -82,7 +81,7 @@ final class APIs {
     static let generateVisitorPassword = "appcity/reduceGuestPassword.do"
     static let updateVisitorPassword = "appcity/updateGuestStatus.do"
     static let inviteVisitor = "appcity/inviteUser.do"
-    static let myUnitGuest = "/appcity/getMyUnitGuest"
+    static let myUnitGuest = "appcity/getMyUnitGuest"
 
     // MARK: - 业主添加家属
     static let addFamilyMember = "appcity/addFamilyer"
@@ -113,7 +112,7 @@ final class APIs {
     static let allNCallRecord = "appajNcomUser/findNcomCallLog.do"
     
     // MARK: - Agora
-    static let getAgoraRtmToken = "/agora/getRtmToken"
-    static let getAgoraRtcToken = "/agora/getRtcToken"
+    static let getAgoraRtmToken = "agora/getRtmToken"
+    static let getAgoraRtcToken = "agora/getRtcToken"
 
 }

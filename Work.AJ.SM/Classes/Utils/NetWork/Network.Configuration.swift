@@ -45,7 +45,7 @@ public extension Network {
             configuration.addingHeaders = { (target: TargetType) -> [String: String] in
                 let version = Bundle.jk.appVersion
                 let userID = ud.userID ?? ""
-                var communityID = ""
+                var communityID = "0"
                 if let unitString = ud.currentCommunityID?.jk.intToString {
                     communityID = unitString
                 }

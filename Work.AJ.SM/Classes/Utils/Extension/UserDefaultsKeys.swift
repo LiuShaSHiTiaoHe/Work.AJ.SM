@@ -83,11 +83,7 @@ extension DefaultsKeys {
     var appHost: DefaultsKey<String> {
         .init("appHost", defaultValue: APIs.distributionServerPath)
     }
-    
-    var appServicePath: DefaultsKey<String> {
-        .init("appServicePath", defaultValue: "hxcloudplus/")
-    }
-    
+        
     // MARK: - Store Date
     var userLastLoginDate: DefaultsKey<Date?> {
         .init("userLastLoginDate")

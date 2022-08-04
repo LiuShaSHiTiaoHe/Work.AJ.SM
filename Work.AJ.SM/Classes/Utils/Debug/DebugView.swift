@@ -19,9 +19,8 @@ class DebugView: BaseView {
     
     @objc
     private func confirmAction() {
-        if let host = hostInput.text, !host.isEmpty, let servicePath = servicePathInput.text, !servicePath.isEmpty {
+        if let host = hostInput.text, !host.isEmpty{
             ud.appHost = host
-            ud.appServicePath = servicePath
             SwiftEntryKit.dismiss(.displayed) {
                 SVProgressHUD.showSuccess(withStatus: "保存成功")
                 SVProgressHUD.dismiss(withDelay: 1)
@@ -32,7 +31,6 @@ class DebugView: BaseView {
     }
         
     override func initData() {
-        servicePathInput.text = ud.appServicePath
         hostInput.text = ud.appHost
         closeButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmAction), for: .touchUpInside)
@@ -56,8 +54,8 @@ class DebugView: BaseView {
         self.addSubview(closeButton)
         self.addSubview(hostTipsLabel)
         self.addSubview(hostInput)
-        self.addSubview(servicePathTipsLabel)
-        self.addSubview(servicePathInput)
+//        self.addSubview(servicePathTipsLabel)
+//        self.addSubview(servicePathInput)
         
         self.addSubview(developmentServerPath)
         self.addSubview(selectDevButton)
@@ -92,21 +90,21 @@ class DebugView: BaseView {
             make.top.equalTo(hostTipsLabel.snp.bottom).offset(kMargin/2)
         }
         
-        servicePathTipsLabel.snp.makeConstraints { make in
-            make.left.right.equalTo(hostTipsLabel)
-            make.height.equalTo(30)
-            make.top.equalTo(hostInput.snp.bottom).offset(kMargin)
-        }
-        
-        servicePathInput.snp.makeConstraints { make in
-            make.left.right.equalTo(hostTipsLabel)
-            make.height.equalTo(30)
-            make.top.equalTo(servicePathTipsLabel.snp.bottom).offset(kMargin/2)
-        }
+//        servicePathTipsLabel.snp.makeConstraints { make in
+//            make.left.right.equalTo(hostTipsLabel)
+//            make.height.equalTo(30)
+//            make.top.equalTo(hostInput.snp.bottom).offset(kMargin)
+//        }
+//
+//        servicePathInput.snp.makeConstraints { make in
+//            make.left.right.equalTo(hostTipsLabel)
+//            make.height.equalTo(30)
+//            make.top.equalTo(servicePathTipsLabel.snp.bottom).offset(kMargin/2)
+//        }
 
         developmentServerPath.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin).offset(kMargin*2)
-            make.top.equalTo(servicePathInput.snp.bottom).offset(kMargin*2)
+            make.top.equalTo(hostInput.snp.bottom).offset(kMargin*2)
             make.height.equalTo(30)
             make.right.equalToSuperview().offset(-kMargin*5)
         }
@@ -174,23 +172,23 @@ class DebugView: BaseView {
     }()
     
 
-    lazy var servicePathTipsLabel: UILabel = {
-        let view = UILabel()
-        view.text = "ServicePath"
-        view.font = k14Font
-        view.textAlignment = .left
-        view.textColor = R.color.text_content()
-        return view
-    }()
-    
-    lazy var servicePathInput: UITextField = {
-        let textfield = UITextField.init()
-        textfield.placeholder = ud.appServicePath
-        textfield.textColor = R.color.text_title()
-        textfield.font = k16Font
-        textfield.backgroundColor = R.color.bg_blue()
-        return textfield
-    }()
+//    lazy var servicePathTipsLabel: UILabel = {
+//        let view = UILabel()
+//        view.text = "ServicePath"
+//        view.font = k14Font
+//        view.textAlignment = .left
+//        view.textColor = R.color.text_content()
+//        return view
+//    }()
+//
+//    lazy var servicePathInput: UITextField = {
+//        let textfield = UITextField.init()
+//        textfield.placeholder = ud.appServicePath
+//        textfield.textColor = R.color.text_title()
+//        textfield.font = k16Font
+//        textfield.backgroundColor = R.color.bg_blue()
+//        return textfield
+//    }()
     
     lazy var developmentServerPath: UILabel = {
         let view = UILabel()
