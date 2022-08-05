@@ -22,10 +22,7 @@ class AppUpdateView: BaseView {
     @objc
     func cancleAction() {
         if isAutoCheck {
-            let checkedVersions = ud.checkedAppVersions
-            var temp = Array<String>.init(checkedVersions)
-            temp.append(version)
-            ud.checkedAppVersions = temp
+            AppUpgradeManager.shared.cacheCheckedVersion(version: version)
         }
         SwiftEntryKit.dismiss()
     }

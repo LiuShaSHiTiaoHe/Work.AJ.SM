@@ -148,7 +148,6 @@ extension AppUpgradeManager {
     // MARK: - 展示升级提示页面
     private func showAppUpdateView(releaseNotes: String, isForce: Bool, latestVersion: String, autoCheck: Bool) {
         let aView = AppUpdateView.init()
-//        aView.configData(releaseNotes, isForce, latestVersion)
         aView.configData(autoCheck: autoCheck, remoteVersion: latestVersion, description: releaseNotes, force: isForce)
         var attributes = EntryKitCustomAttributes.centerFloat.attributes
         attributes.screenInteraction = .absorbTouches
@@ -159,5 +158,12 @@ extension AppUpgradeManager {
             height: .constant(value: 420)
         )
         SwiftEntryKit.display(entry: aView, using: attributes)
+    }
+    
+    func cacheCheckedVersion(version: String) {
+        let checkedVersions = ud.checkedAppVersions
+        var temp = Array<String>.init(checkedVersions)
+        temp.append(version)
+        ud.checkedAppVersions = temp
     }
 }
