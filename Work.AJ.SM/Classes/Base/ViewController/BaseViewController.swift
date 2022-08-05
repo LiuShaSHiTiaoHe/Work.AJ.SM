@@ -73,17 +73,6 @@ class BaseViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: isAnimated)
     }
 
-    // MARK: - 添加房屋
-    @objc func go2AddNewHouseView() {
-        let vc = SelectUnitBlockViewController()
-        if let navigation = navigationController {
-            vc.hidesBottomBarWhenPushed = true
-            navigation.pushViewController(vc, animated: true)
-        } else {
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
-        }
-    }
     // MARK: - 重新加载数据
     @objc func emptyViewRefresh() {}
 }
@@ -117,6 +106,18 @@ extension BaseViewController {
         }) {
             noDataView.removeFromSuperview()
             isNoDataViewShow = false
+        }
+    }
+    
+    // MARK: - 添加房屋
+    @objc private func go2AddNewHouseView() {
+        let vc = SelectUnitBlockViewController()
+        if let navigation = navigationController {
+            vc.hidesBottomBarWhenPushed = true
+            navigation.pushViewController(vc, animated: true)
+        } else {
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
         }
     }
 }

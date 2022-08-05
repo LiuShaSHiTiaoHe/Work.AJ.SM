@@ -12,6 +12,7 @@ import SnapKit
 class AppUpdateView: BaseView {
     
     private var version: String = ""
+    private var isAutoCheck: Bool = false
     
     override func initData() {
         cancelButton.addTarget(self , action: #selector(cancleAction), for: .touchUpInside)
@@ -20,10 +21,12 @@ class AppUpdateView: BaseView {
     
     @objc
     func cancleAction() {
-        let checkedVersions = ud.checkedAppVersions
-        var temp = Array<String>.init(checkedVersions)
-        temp.append(version)
-        ud.checkedAppVersions = temp
+        if isAutoCheck {
+            let checkedVersions = ud.checkedAppVersions
+            var temp = Array<String>.init(checkedVersions)
+            temp.append(version)
+            ud.checkedAppVersions = temp
+        }
         SwiftEntryKit.dismiss()
     }
     
@@ -39,7 +42,7 @@ class AppUpdateView: BaseView {
         }
     }
     
-    func configData(_ descString: String, _ force: Bool, _ latestVersion: String) {
+    func configData(autoCheck: Bool, remoteVersion: String, description: String, force: Bool) {
         if force {
             cancelButton.isHidden = true
             confirmButton.snp.remakeConstraints { make  in
@@ -49,13 +52,16 @@ class AppUpdateView: BaseView {
                 make.height.equalTo(50)
             }
         }
+        isAutoCheck = autoCheck
         titleLabel.text = "发现新的版本"
-        contentTextView.text = descString
-        version = latestVersion
+        contentTextView.text = description
+        version = remoteVersion
+        versionLabel.text = "v\(version)"
     }
             
     override func initializeView(){
         self.addSubview(titleLabel)
+        self.addSubview(versionLabel)
         self.addSubview(contentTextView)
         self.addSubview(cancelButton)
         self.addSubview(confirmButton)
@@ -65,8 +71,15 @@ class AppUpdateView: BaseView {
             make.height.equalTo(40)
             make.top.equalToSuperview().offset(kMargin)
         }
+        
+        versionLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin/2)
+        }
+        
         contentTextView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(80)
+            make.top.equalTo(versionLabel.snp.bottom).offset(kMargin)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.bottom.equalToSuperview().offset(-kMargin - kMargin - 50)
@@ -95,11 +108,19 @@ class AppUpdateView: BaseView {
         return label
     }()
     
+    lazy var versionLabel: UILabel = {
+        let view = UILabel()
+        view.font = k20Font
+        view.textColor = R.color.text_content()
+        view.textAlignment = .center
+        return view
+    }()
+    
     lazy var contentTextView: UITextView = {
         let view = UITextView()
         view.font = k16BoldFont
         view.textAlignment = .left
-        view.textColor = R.color.text_content()
+        view.textColor = R.color.text_title()
         view.backgroundColor = R.color.whitecolor()
         return view
     }()

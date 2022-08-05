@@ -24,7 +24,7 @@ extension AppUpgradeManager {
             self.processVersionCompare(jsonData: jsonData) {version, needUpdate, isForce, releaseNotes, errorMsg in
                 if needUpdate {
                     //用户自己检查，不传最新版本，不记录最新版本
-                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: "")
+                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: "", autoCheck: false)
                 } else {
                     SVProgressHUD.showInfo(withStatus: errorMsg)
                 }
@@ -47,7 +47,7 @@ extension AppUpgradeManager {
                         // 已记录的检查过的版本，不包含最新的版本号，进行版本的比较。并且记录最新版本，保证下次不再提示。
                         if !checkedVersions.contains(version) {
                             if needUpdate {
-                                self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version)
+                                self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: true)
                             } else {
                                 logger.info("本地记录不为空，不需要更新，不记录需要更新的版本：\(version)")
                             }
@@ -58,7 +58,7 @@ extension AppUpgradeManager {
                         //本地记录为空，进行版本的比较，如果当前版本较低，就提示升级
                         if needUpdate {
                             logger.info("本地记录为空，需要更新，记录需要更新的版本：\(version)")
-                            self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version)
+                            self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: true)
                         } else {
                             logger.info("本地记录为空，不需要更新，不记录需要更新的版本：\(version)")
                         }
@@ -78,13 +78,13 @@ extension AppUpgradeManager {
                             if let releaseNotes = jsonData["data"]["RELEASENOTES"].string {
                                 completion(version, true, true, releaseNotes, "")
                             } else {
-                                completion(version, true, true, "检测到有新的版本", "")
+                                completion(version, true, true, "", "")
                             }
                         } else {
                             if let releaseNotes = jsonData["data"]["RELEASENOTES"].string {
                                 completion(version, true, false, releaseNotes, "")
                             } else {
-                                completion(version, true, false, "检测到有新的版本", "")
+                                completion(version, true, false, "", "")
                             }
                         }
                     } else {
@@ -106,7 +106,7 @@ extension AppUpgradeManager {
         VersionCheck.shared.checkNewVersion { hasNewerVersion, versionResult, errorMsg in
             if hasNewerVersion, let versionResult = versionResult {
                 DispatchQueue.main.async {
-                    self.showAppUpdateView(releaseNotes: versionResult.releaseNotes ?? "", isForce: force, latestVersion: "")
+                    self.showAppUpdateView(releaseNotes: versionResult.releaseNotes ?? "", isForce: force, latestVersion: "", autoCheck: true)
                 }
             } else {
                 SVProgressHUD.showInfo(withStatus: errorMsg)
@@ -146,9 +146,10 @@ extension AppUpgradeManager {
         return true
     }
     // MARK: - 展示升级提示页面
-    private func showAppUpdateView(releaseNotes: String, isForce: Bool, latestVersion: String) {
+    private func showAppUpdateView(releaseNotes: String, isForce: Bool, latestVersion: String, autoCheck: Bool) {
         let aView = AppUpdateView.init()
-        aView.configData(releaseNotes, isForce, latestVersion)
+//        aView.configData(releaseNotes, isForce, latestVersion)
+        aView.configData(autoCheck: autoCheck, remoteVersion: latestVersion, description: releaseNotes, force: isForce)
         var attributes = EntryKitCustomAttributes.centerFloat.attributes
         attributes.screenInteraction = .absorbTouches
         attributes.scroll = .disabled
