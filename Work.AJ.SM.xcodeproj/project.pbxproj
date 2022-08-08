@@ -239,6 +239,7 @@
 		6861A988288A3E7300E45632 /* ModuleStatusByVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861A987288A3E7300E45632 /* ModuleStatusByVersion.swift */; };
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
 		688343BC289376E80070EF2F /* ExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688343BB289376E80070EF2F /* ExpandButton.swift */; };
+		688EDE5C28A0E93100B158CD /* NetworkStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688EDE5B28A0E93100B158CD /* NetworkStatusManager.swift */; };
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
 		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
 		68DE5622286C26DB006560AA /* Image.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DE5621286C26DB006560AA /* Image.Extension.swift */; };
@@ -504,6 +505,7 @@
 		6861A987288A3E7300E45632 /* ModuleStatusByVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleStatusByVersion.swift; sourceTree = "<group>"; };
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		688343BB289376E80070EF2F /* ExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandButton.swift; sourceTree = "<group>"; };
+		688EDE5B28A0E93100B158CD /* NetworkStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusManager.swift; sourceTree = "<group>"; };
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
 		68DE5621286C26DB006560AA /* Image.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.Extension.swift; sourceTree = "<group>"; };
@@ -823,6 +825,7 @@
 				419AD69F27FD747600C902B8 /* NetWork.Cache.swift */,
 				416F2E4A27B0B58A004E5AD9 /* NetworkIndicatorPlugin.swift */,
 				416F2E5827B0BC14004E5AD9 /* NetWorkManager.swift */,
+				688EDE5B28A0E93100B158CD /* NetworkStatusManager.swift */,
 			);
 			path = NetWork;
 			sourceTree = "<group>";
@@ -2193,6 +2196,7 @@
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
 				41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */,
 				41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */,
+				688EDE5C28A0E93100B158CD /* NetworkStatusManager.swift in Sources */,
 				41C3502427CDAC15006E440F /* ConfirmFaceImageViewController.swift in Sources */,
 				4173C22127C4C9B900B8FBB8 /* NumberOfUseCell.swift in Sources */,
 				416F2E3E27B0B483004E5AD9 /* NotificationName.swift in Sources */,
@@ -2495,7 +2499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2539,7 +2543,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.home;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

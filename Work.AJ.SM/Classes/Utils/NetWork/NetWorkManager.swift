@@ -13,7 +13,6 @@ import SwiftyJSON
 import SVProgressHUD
 import CryptoSwift
 
-
 // MARK: - Completion Callback Block Defines
 typealias DefaultCompletion = (_ errorMsg: String) -> Void
 typealias RequestModelCallback<T: Mappable> = (T, ResponseModel?) -> Void

@@ -7,6 +7,7 @@
 
 import UIKit
 import SPPermissions
+import JKSwiftExtension
 
 extension BaseViewController {
     func checkPermission(_ permissions: [SPPermissions.Permission]) {
@@ -27,9 +28,24 @@ extension BaseViewController {
                 completion()
             }
             alert.addAction("去下载", .destructive) {
-                JKGlobalTools.updateApp(vc: self, appId: kAppID )
+                if NetworkStatusManager.shared.isOnCellular() {
+                    self.showOnCellularTips(completion: completion)
+                } else {
+                    JKGlobalTools.updateApp(vc: self, appId: kAppID )
+                }
             }
             alert.show()
         }
+    }
+    
+    func showOnCellularTips(completion: @escaping () -> Void) {
+        let alert = UIAlertController.init(title: "", message: "当前使用移动数据网络，立即安装将消耗数据流量", preferredStyle: .alert)
+        alert.addAction("打开WIFI", .cancel) {
+            JKGlobalTools.openSetting()
+        }
+        alert.addAction("直接下载", .destructive) {
+            JKGlobalTools.updateApp(vc: self, appId: kAppID )
+        }
+        alert.show()
     }
 }

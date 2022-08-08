@@ -11,6 +11,7 @@ import AVFoundation
 import SwiftyUserDefaults
 import SVProgressHUD
 import KeychainAccess
+import Alamofire
 
 class GDataManager: NSObject {
     static let shared = GDataManager()
@@ -169,6 +170,7 @@ class GDataManager: NSObject {
     // MARK: - 删除用户日常缓存
     func removeNormalCache() {
         CacheManager.normal.removeAllCache()
+        CacheManager.version.removeAllCache()
     }
 
     func isOwner() -> Bool {
