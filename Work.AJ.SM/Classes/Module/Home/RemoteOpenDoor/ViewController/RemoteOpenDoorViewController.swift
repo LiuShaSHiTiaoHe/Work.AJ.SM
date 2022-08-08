@@ -67,6 +67,7 @@ extension RemoteOpenDoorViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: RemoteOpenDoorCellIdentifier, for: indexPath) as! RemoteOpenDoorCell
         let unitLock = dataSource[indexPath.row]
         cell.setUpData(model: unitLock)
+        cell.cameraButton.isHidden = true
         cell.delegate = self
         return cell
     }
