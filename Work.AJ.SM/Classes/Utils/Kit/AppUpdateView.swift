@@ -136,7 +136,7 @@ class AppUpdateView: BaseView {
         let btn = UIButton.init(type: .custom)
         btn.setTitleColor(R.color.whitecolor(), for: .normal)
         btn.backgroundColor = R.color.themecolor()
-        btn.setTitle("更新", for: .normal)
+        btn.setTitle("下载", for: .normal)
         btn.layer.cornerRadius = 5
         return btn
     }()

@@ -104,7 +104,7 @@ class QRCodeInvitationView: BaseView {
         
         locationLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(kMargin)
-            make.height.equalTo(30)
+            make.height.equalTo(50)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
         }
@@ -225,6 +225,7 @@ class QRCodeInvitationView: BaseView {
         view.textColor = R.color.text_title()
         view.font = k20Font
         view.textAlignment = .center
+        view.numberOfLines = 2
         return view
     }()
     
