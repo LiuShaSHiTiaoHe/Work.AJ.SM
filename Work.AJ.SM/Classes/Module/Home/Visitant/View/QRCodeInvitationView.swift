@@ -45,7 +45,7 @@ class QRCodeInvitationView: BaseView {
 
     override func initializeView() {
         let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
-        let topPartHeight = 190.0
+        let topPartHeight = 210.0
         let qrCodeWidth = kScreenWidth - kMargin*2
         let qrCodeHeight = contentImageHeight - topPartHeight - 70 - 20
         
@@ -104,7 +104,7 @@ class QRCodeInvitationView: BaseView {
         
         locationLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(kMargin)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
         }

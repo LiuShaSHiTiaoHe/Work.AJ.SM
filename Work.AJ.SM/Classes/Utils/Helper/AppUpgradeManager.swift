@@ -23,8 +23,7 @@ extension AppUpgradeManager {
             guard let `self` = self else { return }
             self.processVersionCompare(jsonData: jsonData) {version, needUpdate, isForce, releaseNotes, errorMsg in
                 if needUpdate {
-                    //用户自己检查，不传最新版本，不记录最新版本
-                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: "", autoCheck: false)
+                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: false)
                 } else {
                     SVProgressHUD.showInfo(withStatus: errorMsg)
                 }

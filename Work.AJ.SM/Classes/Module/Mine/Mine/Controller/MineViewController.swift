@@ -125,7 +125,10 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                 case .opendoorSetting:
                     navigateTo(viewController: OpenDoorSettingViewController())
                 case .videoCall:
-                    navigateTo(viewController: CallNeighborViewController())
+                    showModuleVersionControlTipsView(module: .RemoteIntercom) { [weak self] in
+                        guard let `self` = self else { return }
+                        self.navigateTo(viewController: CallNeighborViewController())
+                    }
                 case .activateCard:
                     break
                 case .contactProperty:

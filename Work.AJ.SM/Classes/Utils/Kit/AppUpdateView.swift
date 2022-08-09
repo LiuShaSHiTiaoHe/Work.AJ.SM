@@ -60,6 +60,7 @@ class AppUpdateView: BaseView {
         self.addSubview(titleLabel)
         self.addSubview(versionLabel)
         self.addSubview(contentTextView)
+        addSubview(tipsLabel)
         self.addSubview(cancelButton)
         self.addSubview(confirmButton)
                 
@@ -79,7 +80,14 @@ class AppUpdateView: BaseView {
             make.top.equalTo(versionLabel.snp.bottom).offset(kMargin)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.bottom.equalToSuperview().offset(-kMargin - kMargin - 50)
+            make.bottom.equalToSuperview().offset(-kMargin - kMargin - 70)
+        }
+        
+        tipsLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(kMargin)
+            make.right.equalToSuperview()
+            make.top.equalTo(contentTextView.snp.bottom).offset(kMargin)
+            make.height.equalTo(20)
         }
 
         cancelButton.snp.makeConstraints { make  in
@@ -119,6 +127,15 @@ class AppUpdateView: BaseView {
         view.textAlignment = .left
         view.textColor = R.color.text_title()
         view.backgroundColor = R.color.whitecolor()
+        return view
+    }()
+    
+    lazy var tipsLabel: UILabel = {
+        let view = UILabel()
+        view.textColor = R.color.sub_red()
+        view.font = k14Font
+        view.textAlignment = .left
+        view.text = "注意：升级过程中将无法使用软件"
         return view
     }()
     
