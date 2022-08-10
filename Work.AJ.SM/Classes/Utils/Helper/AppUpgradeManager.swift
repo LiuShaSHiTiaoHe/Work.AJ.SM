@@ -39,28 +39,47 @@ extension AppUpgradeManager {
             MineAPI.versionCheck(type: kDeviceType.lowercased()).defaultRequest { [weak self] jsonData in
                 guard let `self` = self else { return }
                 self.processVersionCompare(jsonData: jsonData) {version, needUpdate, isForce, releaseNotes, errorMsg in
-                    let checkedVersions = ud.checkedAppVersions
-                    logger.info("当前版本：\(Bundle.jk.appVersion), 最新版本：\(version)")
-                    logger.info("记录的检测过的版本：\(checkedVersions)")
-                    if !checkedVersions.isEmpty {
-                        // 已记录的检查过的版本，不包含最新的版本号，进行版本的比较。并且记录最新版本，保证下次不再提示。
-                        if !checkedVersions.contains(version) {
+                    let currentVersion = Bundle.jk.appVersion
+                    logger.info("当前版本：\(currentVersion), 最新版本：\(version)")
+                    if currentVersion.isNotEmpty && version.isNotEmpty {
+                        let checkedVersions = ud.checkedAppVersions as Dictionary<String, Array<String>>
+                        logger.info("记录的用户拒绝过的版本：\(checkedVersions)")
+                        if checkedVersions.isEmpty {
+                            logger.info("记录的用户拒绝过的版本为空")
+                            //本地记录为空，进行版本的比较，如果当前版本较低，就提示升级
                             if needUpdate {
+                                logger.info("需要更新，记录需要更新的版本：\(version)")
                                 self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: true)
                             } else {
-                                logger.info("本地记录不为空，不需要更新，不记录需要更新的版本：\(version)")
+                                logger.info("不需要更新，不记录需要更新的版本：\(version)")
                             }
                         } else {
-                            logger.info("本地记录不为空，已记录版本：\(version)")
+                            logger.info("记录的用户拒绝过的版本信息不为空")
+                            //当前版本去检查更新时，记录的用户拒绝过的版本信息
+                            if checkedVersions.allKeys().contains(currentVersion), let versions = checkedVersions[currentVersion] {
+                                logger.info("当前版本记录的用户拒绝过的版本信息不为空")
+                                if versions.contains(version) {
+                                    logger.info("已记录版本：\(versions)")
+                                } else {
+                                    if needUpdate {
+                                        logger.info("需要更新")
+                                        self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: true)
+                                    } else {
+                                        logger.info("不需要更新，不记录需要更新的版本：\(version)")
+                                    }
+                                }
+                            } else {
+                                logger.info("当前版本记录的用户拒绝过的版本信息为空")
+                                if needUpdate {
+                                    logger.info("需要更新")
+                                    self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: true)
+                                } else {
+                                    logger.info("不需要更新，不记录需要更新的版本：\(version)")
+                                }
+                            }
                         }
                     } else {
-                        //本地记录为空，进行版本的比较，如果当前版本较低，就提示升级
-                        if needUpdate {
-                            logger.info("本地记录为空，需要更新，记录需要更新的版本：\(version)")
-                            self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: true)
-                        } else {
-                            logger.info("本地记录为空，不需要更新，不记录需要更新的版本：\(version)")
-                        }
+                        logger.info("本地版本或者远程获取的最新版本号为空，不做操作")
                     }
                 }
             }
@@ -123,9 +142,9 @@ extension AppUpgradeManager {
             return true
         }
         logger.info("上次检查更新时间====\(lastCheckDate.jk.toformatterTimeString()), 当前时间：\(Date().jk.toformatterTimeString())")
-        if let intervalMinites = lastCheckDate.jk.numberOfMinutes(from: Date()) {
-            logger.info("距离上次检查更新已经: \(abs(intervalMinites)) 分钟")
-            if abs(intervalMinites) > kCheckTimeInterval {
+        if let intervalMinutes = lastCheckDate.jk.numberOfMinutes(from: Date()) {
+            logger.info("距离上次检查更新已经: \(abs(intervalMinutes)) 分钟")
+            if abs(intervalMinutes) >= kCheckTimeInterval {
                 ud.checkAppVersionDate = Date()
                 return true
             }
@@ -160,9 +179,17 @@ extension AppUpgradeManager {
     }
     
     func cacheCheckedVersion(version: String) {
-        let checkedVersions = ud.checkedAppVersions
-        var temp = Array<String>.init(checkedVersions)
-        temp.append(version)
-        ud.checkedAppVersions = temp
+        var checkedVersions = ud.checkedAppVersions as Dictionary<String, Array<String>>
+        let currentVersion = Bundle.jk.appVersion
+        logger.info("更新记录之前的数据=== \(checkedVersions)")
+        if checkedVersions.allKeys().contains(currentVersion), let versions = checkedVersions[currentVersion] {
+            var updatedVersions = versions
+            updatedVersions.append(version)
+            checkedVersions.updateValue(updatedVersions, forKey: currentVersion)
+        } else {
+            checkedVersions.updateValue([version], forKey: currentVersion)
+        }
+        logger.info("更新记录之后的数据=== \(checkedVersions)")
+        ud.checkedAppVersions = checkedVersions
     }
 }

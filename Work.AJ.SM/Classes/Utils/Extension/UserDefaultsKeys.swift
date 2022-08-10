@@ -95,8 +95,9 @@ extension DefaultsKeys {
     }
     
     // 记录已经检查过并且取消更新的版本(如果已经检查过，在当前的版本，就不去展示升级的提示)
-    var checkedAppVersions: DefaultsKey<Array<String>> {
-        .init("checkedAppVersion", defaultValue: [])
+    //!!加上在对应的版本下去记录的<localVersion: [checkedVersion1, checkedVersion2]>
+    var checkedAppVersions: DefaultsKey<Dictionary<String, Array<String>>> {
+        .init("checkedAppVersion", defaultValue: [:])
     }
     
     // MARK: - 模块控制信息
