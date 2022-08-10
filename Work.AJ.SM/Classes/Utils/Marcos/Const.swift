@@ -38,4 +38,4 @@ let kDefaultRemoteOpenDoorTips = "设备离线状态下，无法远程开门和�
 // MARK: - 检查更新时间间隔，获取模块控制时间间隔
 // FIXME: - 测试检查更新间隔时间为0 分钟，也就是每次都检查
 let kCheckTimeInterval = 0//60 * 24
-let kModuleStatusTimeInterval = 0//60 * 24
+let kModuleStatusTimeInterval = 100//60 * 24

@@ -29,27 +29,36 @@ extension HomeRepository {
         if let unitID = ud.currentUnitID?.jk.intToString, let communityID = ud.currentCommunityID?.jk.intToString, let userID = ud.userID {
             HomeAPI.getModuleStatusByVersion(unitID: unitID, communityID: communityID, userID: userID).request(modelType: ModuleStatusByVersion.self, cacheType: .ignoreCache, showError: false) { model, response in
                 if model.isNotEmpty() {
-                    let moduleStatusDictionary = model.getModuleDictionary()
-                    CacheManager.version.saveCacheWithDictionary(moduleStatusDictionary as NSDictionary, key: "ModuleStatus")
-                    ud.getModuleStatusDate = Date()
+                    self.saveModuleControlStatusFromServer(model)
                 }
             }
         }
+
     }
+
+    private func saveModuleControlStatusFromServer(_ data: ModuleStatusByVersion) {
+        let moduleStatusDictionary = data.getModuleDictionary()
+        CacheManager.version.saveCacheWithDictionary(moduleStatusDictionary as NSDictionary, key: "ModuleStatus")
+        let currentVersion = Bundle.jk.appVersion
+        CacheManager.version.saveCacheWithDictionary(["version": currentVersion], key: "ModuleStatusVersion")
+        ud.getModuleStatusDate = Date()
+
+    }
+
     // MARK: - 从缓存中获取模块控制开关数据，如果没有就去服务器请求，直接返回TRUE，不影响体验
     func getModuleStatusFromCache(module: ModulesOfModuleStatus) -> Bool {
-        let moduleStatusDictionary = CacheManager.version.fetchCachedWithKey("ModuleStatus")
-        if let moduleStatusDictionary = moduleStatusDictionary, moduleStatusDictionary.count > 0, let status = moduleStatusDictionary[module.rawValue] as? Bool {
-            //本地缓存的记录，超过设置的时间间隔，要去服务器重新请求数据，这次依旧返回缓存的状态
-            if !isModuleStatusCacheWithinTheExpirationDate() {
-                logger.info("本地缓存的记录，超过设置的时间间隔，要去服务器重新请求数据，这次依旧返回缓存的状态")
-                getModuleStatusFromServer()
-            } else {
-                logger.info("本地缓存的记录，没有超过设置的时间间隔，返回缓存的状态")
-            }
-            return status
-        } else {
+        if !isModuleStatusCacheWithinTheExpirationDate() {
+            //本地缓存的记录，超过设置的时间间隔，要去服务器重新请求数据
             getModuleStatusFromServer()
+        }
+        let moduleStatusDictionary = CacheManager.version.fetchCachedWithKey("ModuleStatus")
+        let cachedVersion = CacheManager.version.fetchCachedWithKey("ModuleStatusVersion")
+        if let cachedVersion = cachedVersion, cachedVersion.count > 0, let version = cachedVersion["version"] as? String {
+            if version == Bundle.jk.appVersion {
+                if let moduleStatusDictionary = moduleStatusDictionary, moduleStatusDictionary.count > 0, let status = moduleStatusDictionary[module.rawValue] as? Bool {
+                    return status
+                }
+            }
         }
         return true
     }
