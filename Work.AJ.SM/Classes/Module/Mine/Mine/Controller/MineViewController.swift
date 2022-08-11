@@ -62,7 +62,7 @@ class MineViewController: BaseViewController {
                 contentView.avatar.kf.setImage(with: URL.init(string: (folderPath + avatarUrl).ajImageUrl()), placeholder: R.image.defaultavatar(), options: nil) { result in
                     switch result {
                        case .success(let value):
-                        if let imageData = value.image.pngData() {
+                        if let imageData = value.image.jpegData(compressionQuality: 0.5) {
                             DispatchQueue.main.async {
                                 CacheManager.normal.saveCacheWithDictionary([UserAvatarCacheKey: imageData], key: UserAvatarCacheKey)
                             }

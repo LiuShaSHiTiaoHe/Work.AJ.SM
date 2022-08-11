@@ -51,7 +51,7 @@ class ConfirmFaceImageViewController: BaseViewController {
             return
         }
 
-        if let imageData = faceImage?.pngData(),
+        if let imageData = faceImage?.jpegData(compressionQuality: 0.5),
            let unit = HomeRepository.shared.getCurrentUnit(),
            let communityID = unit.communityid?.jk.intToString,
            let blockID = unit.blockid?.jk.intToString,

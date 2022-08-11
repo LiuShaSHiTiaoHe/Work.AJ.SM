@@ -33,7 +33,6 @@ extension HomeRepository {
                 }
             }
         }
-
     }
 
     private func saveModuleControlStatusFromServer(_ data: ModuleStatusByVersion) {
