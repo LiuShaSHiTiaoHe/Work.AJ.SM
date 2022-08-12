@@ -39,7 +39,10 @@ class GDataManager: NSObject {
     // MARK: - 初始化realm
     func setupDataBase() {
         if let username = ud.username {
-            RealmTools.configRealm(userID: username, schemaVersion: 1)
+            //version 0 第一次数据库的表结构
+            //version 1 UnitLockModel增加了lockID
+            //version 2 UnitModel 增加了moudle18
+            RealmTools.configRealm(userID: username, schemaVersion: 2)
         }
     }
 

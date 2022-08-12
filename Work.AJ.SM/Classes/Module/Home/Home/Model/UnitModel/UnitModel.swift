@@ -45,6 +45,8 @@ class UnitModel: Object, Mappable  {
     @Persisted var moudle15: String?
     @Persisted var moudle16: String?
     @Persisted var moudle17: String?
+    //moudle18 门禁对讲 moudle2 改名为远程开门
+    @Persisted var moudle18: String?
 
     @Persisted var myset1: String?
     @Persisted var myset2: String?
@@ -191,5 +193,7 @@ class UnitModel: Object, Mappable  {
         physicalfloor <- map["PHYSICALFLOOR"]
         moudle16 <- map["MOUDLE16"]
         moudle17 <- map["MOUDLE17"]
+
+        stringValue1 <- map["MOUDLE18"]
     }
 }

@@ -146,6 +146,8 @@ class BLEAdvertisingManager: NSObject {
     // MARK: - Private Functions
 
     // MARK: - OpenDoor Data
+    //AJ 17307 3 75 M1 3655 11 08
+    //蓝牙数据组成 0-1 AJ 2-6 userID 7 sortbar 8-9 blesignal 10-11 M+space 12-15 cellmm 16-17 11 18-19 phsycalFloor
     private func prepareOpenDoorData() -> String? {
         if let unit = HomeRepository.shared.getCurrentUnit(), let cellMM = unit.cellmm, let userID = unit.userid, let phsycalFloorInt = unit.physicalfloor?.jk.toInt(), let sortbar = unit.sortbar {
             var sortBarString = "0"
