@@ -80,13 +80,13 @@ class AppUpdateView: BaseView {
             make.top.equalTo(versionLabel.snp.bottom).offset(kMargin)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
-            make.bottom.equalToSuperview().offset(-kMargin - kMargin - 70)
+            make.bottom.equalToSuperview().offset(-kMargin - kMargin - 80)
         }
         
         tipsLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview()
-            make.top.equalTo(contentTextView.snp.bottom).offset(kMargin)
+            make.top.equalTo(contentTextView.snp.bottom).offset(kMargin/2)
             make.height.equalTo(20)
         }
 
