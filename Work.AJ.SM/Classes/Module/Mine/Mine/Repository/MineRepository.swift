@@ -36,20 +36,13 @@ class MineRepository: NSObject {
                 completion("数据为空")
                 return
             }
-            if let unitID = ud.currentUnitID {
-                let normalHouses = models.filter {$0.state == UnitStatus.Normal.rawValue }
-                if normalHouses.isEmpty {
-                    ud.remove(\.currentUnitID)
-                    ud.remove(\.currentCommunityID)
-                } else {
-                    if !normalHouses.contains(where: {$0.unitid == unitID }) {
-                        if let firstUnitID = normalHouses.first?.unitid {
-                            ud.currentUnitID = firstUnitID
-                        }
-                        if let communityID = normalHouses.first?.communityid {
-                            ud.currentCommunityID = communityID
-                        }
-                    }
+            let currentUnitID = ud.currentUnitID
+            GDataManager.shared.clearUserUnit()
+            RealmTools.addList(models, update: .modified) {}
+            if let unitID = currentUnitID, let cUnit = models.first(where: {$0.unitid == unitID}), cUnit.state == UnitStatus.Normal.rawValue {
+                ud.currentUnitID = unitID
+                if let communityID = cUnit.communityid {
+                    ud.currentCommunityID = communityID
                 }
             } else {
                 if let firstUnit = models.first(where: {$0.state == UnitStatus.Normal.rawValue}), let firstUnitID = firstUnit.unitid {
@@ -59,15 +52,10 @@ class MineRepository: NSObject {
                     }
                 }
             }
-            RealmTools.addList(models, update: .modified) {}
             completion("")
         } failureCallback: { response in
             if response.code == 204 {
-                ud.remove(\.currentUnitID)
-                ud.remove(\.currentCommunityID)
-                if let userID = ud.userID?.jk.toInt() {
-                    RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
-                }
+                GDataManager.shared.clearUserUnit()
             }
             completion(response.message)
         }

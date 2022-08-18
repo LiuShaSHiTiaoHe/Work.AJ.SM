@@ -194,8 +194,7 @@ extension RealmTools {
         guard let results: Array<Object> = objectsWithPredicate(object: object, predicate: predicate) else {
             return
         }
-        deleteList(results) {
-        }
+        deleteList(results) {}
     }
 }
 
