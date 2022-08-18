@@ -37,9 +37,9 @@ extension HomeRepository {
                 completion(homeModuleArray, adsArray, noticeArray, .Unknown)
                 return
             }
-            RealmTools.addList(models, update: .all) {
-                logger.info("update done")
-            }
+            let currentUnitID = ud.currentUnitID
+            GDataManager.shared.clearUserUnit()
+            RealmTools.addList(models, update: .all) {}
             var idAndStates: Array<(String, UnitStatus)> = Array<(String, UnitStatus)>()
             models.forEach { model in
                 if let unitID = model.unitid?.jk.intToString {
@@ -56,8 +56,12 @@ extension HomeRepository {
                 completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             } else {
                 // MARK: - 当前房间有效
-                if let cUnitID = ud.currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }),
+                if let cUnitID = currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }),
                     let cUnit = models.first(where: {$0.unitid == cUnitID}) {
+                    ud.currentUnitID = cUnitID
+                    if let communityID = cUnit.communityid {
+                        ud.currentCommunityID = communityID
+                    }
                     homeModuleArray = self.filterHomePageModules(cUnit)
                     self.adsAndNotice { ads, notices in
                         adsArray = ads
@@ -65,8 +69,6 @@ extension HomeRepository {
                         completion(homeModuleArray, adsArray, noticeArray, .Normal)
                     }
                 } else {
-                    ud.remove(\.currentUnitID)
-                    ud.remove(\.currentCommunityID)
                     // MARK: - 取第一个有效的房屋
                     if let idAndStateNormal = idAndStates.first(where: {$0.1 == .Normal}),
                        let unit = models.first(where: {$0.unitid?.jk.intToString == idAndStateNormal.0}),
@@ -93,11 +95,7 @@ extension HomeRepository {
         } failureCallback: { response in
             logger.info("\(response.message)")
             if response.code == 204 {
-                ud.remove(\.currentUnitID)
-                ud.remove(\.currentCommunityID)
-                if let userID = ud.userID?.jk.toInt() {
-                    RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
-                }
+                GDataManager.shared.clearUserUnit()
             }
             completion(homeModuleArray, adsArray, noticeArray, .Unknown)
         }
@@ -142,10 +140,12 @@ extension HomeRepository {
 
     func getCurrentUnit() -> UnitModel? {
         if let unitID = Defaults.currentUnitID {
+            logger.info("currentUnitID is \(unitID)")
             if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first {
                 return unit
             }
         }
+        logger.info("currentUnitID is nil")
         return nil
     }
 

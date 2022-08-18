@@ -27,7 +27,8 @@ class AuthenticationRepository: NSObject {
                 GDataManager.shared.pushSetAlias(mobile)
                 RealmTools.add(userModel, update: .modified) {}
                 if let data = JsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
-                     RealmTools.addList(units, update: .all) {}
+                    GDataManager.shared.clearUserUnit()
+                    RealmTools.addList(units, update: .all) {}
                     if let unit = units.first(where: {$0.state == UnitStatus.Normal.rawValue}),
                        let unitID = unit.unitid, let communityID = unit.communityid {
                         ud.currentUnitID = unitID

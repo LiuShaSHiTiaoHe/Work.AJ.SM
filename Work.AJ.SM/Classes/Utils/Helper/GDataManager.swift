@@ -133,6 +133,13 @@ class GDataManager: NSObject {
     }
 
     
+    func clearUserUnit() {
+        ud.remove(\.currentUnitID)
+        ud.remove(\.currentCommunityID)
+        if let userID = ud.userID?.jk.toInt() {
+            RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
+        }
+    }
 
     // MARK: - 清除数据
     func clearAccount() {
