@@ -52,13 +52,6 @@ extension HomePageModule: CaseIterable {
 }
 
 
-enum ShowInPage {
-    case home
-    case service
-    case neighbour
-    case unknown
-}
-
 struct HomePageFunctionModule {
     var name: String = ""
     var icon: String = ""

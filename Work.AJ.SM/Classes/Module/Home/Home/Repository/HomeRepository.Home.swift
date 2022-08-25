@@ -195,18 +195,18 @@ extension HomeRepository {
 extension HomeRepository {
     func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule] {
         var result = [HomePageFunctionModule]()
-        let allkeys = HomePageModule.allCases
-        let allModules = allkeys.compactMap { moduleEnum in
+        let allKeys = HomePageModule.allCases
+        let allModules = allKeys.compactMap { moduleEnum in
             moduleEnum.model
         }
-        if let otherused = unit.otherused, otherused == 1 {
+        if let otherUsed = unit.otherused, otherUsed == 1 {
             return allModules.filter {
                 $0.tag == "OTHERUSED"
             }
         } else {
             let validModules = allValidModules(unit)
             allModules.forEach { module in
-                if module.showinpage == .home, !module.tag.isEmpty {
+                if !module.tag.isEmpty {
                     if validModules.contains(module.tag) {
                         result.append(module)
                     }

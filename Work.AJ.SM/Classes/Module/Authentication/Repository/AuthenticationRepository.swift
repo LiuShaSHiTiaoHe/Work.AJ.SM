@@ -62,6 +62,7 @@ class AuthenticationRepository: NSObject {
                 GDataManager.shared.loginAgoraRtm()
                 RealmTools.add(userModel, update: .modified) {}
                 if let data = jsonData["data"].rawString(), let units = [UnitModel](JSONString: data) {
+                    GDataManager.shared.clearUserUnit()
                     RealmTools.addList(units, update: .all) {}
                     if let unit = units.first(where: {$0.state == UnitStatus.Normal.rawValue}),
                        let unitID = unit.unitid, let communityID = unit.communityid {

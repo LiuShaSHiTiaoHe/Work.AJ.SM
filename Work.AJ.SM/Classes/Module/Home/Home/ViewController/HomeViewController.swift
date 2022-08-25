@@ -112,7 +112,7 @@ extension HomeViewController: HomeViewDelegate {
                     height: .constant(value: 380)
             ), true)
         case .cloudOpenGate:
-            showModuleVersionControlTipsView(module: .RemoteOpendoor) { [weak self] in
+            showModuleVersionControlTipsView(module: .RemoteOpenDoor) { [weak self] in
                 guard let `self` = self else { return }
                 self.navigateTo(viewController: RemoteOpenDoorViewController())
             }

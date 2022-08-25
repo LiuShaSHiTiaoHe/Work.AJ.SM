@@ -13,11 +13,11 @@ enum ModulesOfModuleStatus: String {
     case ScanQR = "scanQR"
     case AddMember = "addMember"
     case AddUnit = "addUnit"
-    case FaceCetification = "faceCertification"
+    case FaceCertification = "faceCertification"
     case Invitation = "invitation"
     case PassQR = "passQR"
     case RemoteIntercom = "remoteIntercom"
-    case RemoteOpendoor = "remoteOpendoor"
+    case RemoteOpenDoor = "remoteOpenDoor"
 }
 
 class ModuleStatusByVersion: Mappable {
@@ -28,7 +28,7 @@ class ModuleStatusByVersion: Mappable {
     var invitation: Bool?
     var passQR: Bool?
     var remoteIntercom: Bool?
-    var remoteOpendoor: Bool?
+    var remoteOpenDoor: Bool?
     
     required init?(map: ObjectMapper.Map) {}
 
@@ -40,11 +40,11 @@ class ModuleStatusByVersion: Mappable {
         invitation <- map["function_module_fkyq"]//访客邀请
         passQR <- map["function_module_ymt"]//一码通
         remoteIntercom <- map["function_module_mjdj"]//门禁对讲
-        remoteOpendoor <- map["function_module_yckm"]//远程开门
+        remoteOpenDoor <- map["function_module_yckm"]//远程开门
     }
     
     func isNotEmpty() -> Bool {
-        if let _ = scanQR, let _ = addMember, let _ = addUnit, let _ = faceCertification, let _ = invitation, let _ = passQR, let _ = remoteIntercom, let _ = remoteOpendoor {
+        if let _ = scanQR, let _ = addMember, let _ = addUnit, let _ = faceCertification, let _ = invitation, let _ = passQR, let _ = remoteIntercom, let _ = remoteOpenDoor {
             return true
         }
         return false
@@ -56,11 +56,11 @@ class ModuleStatusByVersion: Mappable {
             result.updateValue(scanQR!, forKey: ModulesOfModuleStatus.ScanQR.rawValue)
             result.updateValue(addMember!, forKey: ModulesOfModuleStatus.AddMember.rawValue)
             result.updateValue(addUnit!, forKey: ModulesOfModuleStatus.AddUnit.rawValue)
-            result.updateValue(faceCertification!, forKey: ModulesOfModuleStatus.FaceCetification.rawValue)
+            result.updateValue(faceCertification!, forKey: ModulesOfModuleStatus.FaceCertification.rawValue)
             result.updateValue(invitation!, forKey: ModulesOfModuleStatus.Invitation.rawValue)
             result.updateValue(passQR!, forKey: ModulesOfModuleStatus.PassQR.rawValue)
             result.updateValue(remoteIntercom!, forKey: ModulesOfModuleStatus.RemoteIntercom.rawValue)
-            result.updateValue(remoteOpendoor!, forKey: ModulesOfModuleStatus.RemoteOpendoor.rawValue)
+            result.updateValue(remoteOpenDoor!, forKey: ModulesOfModuleStatus.RemoteOpenDoor.rawValue)
         }
         return result
     }
