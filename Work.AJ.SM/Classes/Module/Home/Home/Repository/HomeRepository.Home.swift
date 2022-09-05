@@ -279,6 +279,9 @@ extension HomeRepository {
                 result.append("MOUDLE17")
             }
         }
+        if unit.moudle18 == "T" {
+            result.append("MOUDLE18")
+        }
         return result
     }
 }
