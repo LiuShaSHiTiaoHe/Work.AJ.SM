@@ -67,7 +67,7 @@ extension ScanQRCodeSelectElevatorViewController: ScanQRCodeSelectElevatorViewDe
 
 extension ScanQRCodeSelectElevatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MobileCallElevatorCellidentifier, for: indexPath) as? MCECollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MobileCallElevatorCellIdentifier, for: indexPath) as? MCECollectionViewCell else { return UICollectionViewCell() }
         let floor = dataSource[indexPath.row]
         if let showFloor = floor.showFloor {
             cell.elevatorName.text = showFloor

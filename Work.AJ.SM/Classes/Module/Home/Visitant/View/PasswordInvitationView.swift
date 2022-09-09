@@ -11,9 +11,9 @@ class PasswordInvitationView: BaseView {
     
     var isValid: Bool? {
         didSet {
-            if let isvalid = isValid {
+            if let isValid = isValid {
                 statusLabel.isHidden = false
-                if isvalid {
+                if isValid {
                     statusLabel.text = "有效"
                     statusLabel.backgroundColor = R.color.sub_green()
                     invalidTips.isHidden = true

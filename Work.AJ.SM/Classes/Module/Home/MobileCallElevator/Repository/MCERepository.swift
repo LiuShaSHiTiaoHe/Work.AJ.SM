@@ -55,9 +55,9 @@ class MCERepository {
     func sendCallElevatorData(_ elevatorID: String, _ showFloor: String, _ floorInfo: FloorMapInfo, _ origialData: MobileCallElevatorModel) {
         let authorizeFlag = "1"
         if let SNCode = getSNCodeString(elevatorID, origialData) {
-            if let doorType = floorInfo.doorType, let phisicalFloor = floorInfo.physicalFloor {
+            if let doorType = floorInfo.doorType, let physicalFloor = floorInfo.physicalFloor {
                 saveCallElevatorRecord()
-                BLEAdvertisingManager.shared.callElevator(SN: SNCode, authorizeFlag: authorizeFlag, side: doorType, floor: phisicalFloor)
+                BLEAdvertisingManager.shared.callElevator(SN: SNCode, authorizeFlag: authorizeFlag, side: doorType, floor: physicalFloor)
             }
         } else {
             SVProgressHUD.showError(withStatus: "SN数据错误")
@@ -227,9 +227,9 @@ class MCERepository {
 
     private func processFloorsBySNCode(floors: [FloorInfoMappable]) -> [FloorInfoMappable] {
         var floorMapInfoArray: [FloorInfoMappable] = []
-        if let unit = HomeRepository.shared.getCurrentUnit(), let physicalfloor = unit.physicalfloor {
+        if let unit = HomeRepository.shared.getCurrentUnit(), let physicalFloor = unit.physicalfloor {
             for floor in floors {
-                if floor.physicalFloor == physicalfloor {
+                if floor.physicalFloor == physicalFloor {
                     floorMapInfoArray.append(floor)
                     continue
                 }

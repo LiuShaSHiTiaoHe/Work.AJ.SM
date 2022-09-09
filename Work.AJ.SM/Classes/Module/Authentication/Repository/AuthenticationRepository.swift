@@ -34,7 +34,7 @@ class AuthenticationRepository: NSObject {
                         ud.currentUnitID = unitID
                         ud.currentCommunityID = communityID
                     }
-                 }
+                }
                 SVProgressHUD.showSuccess(withStatus: "登录成功")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

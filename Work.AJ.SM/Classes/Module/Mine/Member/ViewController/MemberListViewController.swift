@@ -99,8 +99,6 @@ class MemberListViewController: BaseViewController {
 
     @objc
     func addMemberAction() {
-//        let vc = AddMemberViewController()
-//        navigationController?.pushViewController(vc, animated: true)
         showModuleVersionControlTipsView(module: .AddMember) { [weak self] in
             guard let `self` = self else { return }
             self.navigateTo(viewController: AddMemberViewController())

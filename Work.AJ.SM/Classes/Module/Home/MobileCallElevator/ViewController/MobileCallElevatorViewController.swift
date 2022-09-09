@@ -26,7 +26,7 @@ class MobileCallElevatorViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadDatas()
+        reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,11 +62,11 @@ class MobileCallElevatorViewController: BaseViewController {
             if self.currentFloorID.isEmpty, let floorName = model.allKeys().first {
                 self.currentFloorID = floorName
             }
-            self.reloadDatas()
+            self.reloadData()
         }
     }
 
-    private func reloadDatas() {
+    private func reloadData() {
         mobileCallElevator.collectionView.reloadData()
         mobileCallElevator.elevatorTitle.text = MCERepository.shared.getFloorName(floorID: currentFloorID, model: originalData)
         mobileCallElevator.elevatorLocation.text = HomeRepository.shared.getCurrentUnitName()
@@ -107,7 +107,7 @@ extension MobileCallElevatorViewController: MobileCallElevatorViewDelegate {
 
 extension MobileCallElevatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MobileCallElevatorCellidentifier, for: indexPath) as? MCECollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MobileCallElevatorCellIdentifier, for: indexPath) as? MCECollectionViewCell else {
             return UICollectionViewCell()
         }
         if let floors = dataSource[currentFloorID] {
@@ -162,6 +162,6 @@ extension MobileCallElevatorViewController: SelectElevatorViewControllerDelegate
     func updateSelectedElevator(_ elevatorID: String) {
         currentFloorID = elevatorID
         selectFloor = ""
-        reloadDatas()
+        reloadData()
     }
 }

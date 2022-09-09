@@ -88,7 +88,7 @@ extension AppUpgradeManager {
     
     // MARK: - 处理返回数据
     private func processVersionCompare(jsonData: JSON, completion: @escaping (_ vesion: String, _ needUpdate: Bool, _ isForce: Bool, _ releaseNotes: String, _ errorMsg: String) -> Void){
-        if let deviceType = jsonData["data"]["TYPE"].string, deviceType.lowercased() == kDeviceType.lowercased(), let version = jsonData["data"]["VERSION"].string, self.isVaildAppVersion(version) {
+        if let deviceType = jsonData["data"]["TYPE"].string, deviceType.lowercased() == kDeviceType.lowercased(), let version = jsonData["data"]["VERSION"].string, self.isValidAppVersion(version) {
             if let effectiveStatus = jsonData["data"]["EFFECTIVESTATUS"].string, effectiveStatus == "T" {
                 if JKGlobalTools.compareVersion(version: version) {
                     if let needUpgrade = jsonData["data"]["needUpgrade"].string, needUpgrade == "1" {
@@ -153,7 +153,7 @@ extension AppUpgradeManager {
     }
     
     // MARK: - 版本号是否符合规则 x.x.x
-    private func isVaildAppVersion(_ version: String) -> Bool {
+    private func isValidAppVersion(_ version: String) -> Bool {
         let versionArray = version.jk.separatedByString(with: ".")
         guard versionArray.count == 3, let versionString1 = versionArray[0] as? String, let versionString2 = versionArray[1] as? String, let versionString3 = versionArray[2] as? String else {
             return false

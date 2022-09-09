@@ -7,7 +7,7 @@
 
 import UIKit
 
-let MobileCallElevatorCellidentifier = "MCECollectionViewCell"
+let MobileCallElevatorCellIdentifier = "MCECollectionViewCell"
 
 protocol MobileCallElevatorViewDelegate: NSObjectProtocol {
     func chooseElevator()
@@ -149,7 +149,7 @@ class MobileCallElevatorView: UIView {
         let c = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         c.alwaysBounceVertical = true
         c.backgroundColor = R.color.bg()
-        c.register(MCECollectionViewCell.self, forCellWithReuseIdentifier: MobileCallElevatorCellidentifier)
+        c.register(MCECollectionViewCell.self, forCellWithReuseIdentifier: MobileCallElevatorCellIdentifier)
         return c
     }()
 
