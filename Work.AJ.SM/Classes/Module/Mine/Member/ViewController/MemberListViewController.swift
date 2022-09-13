@@ -88,7 +88,9 @@ class MemberListViewController: BaseViewController {
     }
 
     func loadMemberData() {
+        SVProgressHUD.show()
         MineRepository.shared.getCurrentUnitMembers { [weak self] members in
+            SVProgressHUD.dismiss(withDelay: 1)
             guard let `self` = self else {
                 return
             }
