@@ -193,7 +193,6 @@ class UnitModel: Object, Mappable  {
         physicalfloor <- map["PHYSICALFLOOR"]
         moudle16 <- map["MOUDLE16"]
         moudle17 <- map["MOUDLE17"]
-
-        stringValue1 <- map["MOUDLE18"]
+        moudle18 <- map["MOUDLE18"]
     }
 }
