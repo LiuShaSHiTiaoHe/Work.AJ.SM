@@ -40,7 +40,6 @@ target 'Work.AJ.SM' do
   pod 'PGDatePicker'
   pod 'YPImagePicker'
   pod 'swiftScan'
-  pod 'BEMCheckBox'
   
   pod 'SPPermissions/Camera'
   pod 'SPPermissions/PhotoLibrary'
