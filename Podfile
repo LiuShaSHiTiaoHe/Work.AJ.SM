@@ -27,7 +27,7 @@ target 'Work.AJ.SM' do
   pod 'YYCategories'
   pod 'Haptica', '3.0.3'
   pod 'IQKeyboardManagerSwift', '6.5.9'
-  pod 'JKSwiftExtension', '2.1.5'
+#  pod 'JKSwiftExtension', '2.1.5'
   pod 'Kingfisher','7.2.0'
   pod 'DeviceKit', '~> 4.4.0'
   
@@ -41,10 +41,16 @@ target 'Work.AJ.SM' do
   pod 'YPImagePicker'
   pod 'swiftScan'
   
-  pod 'SPPermissions/Camera'
-  pod 'SPPermissions/PhotoLibrary'
-  pod 'SPPermissions/Bluetooth'
-  pod 'SPPermissions/Microphone'
+#  pod 'SPPermissions/Camera'
+#  pod 'SPPermissions/PhotoLibrary'
+#  pod 'SPPermissions/Bluetooth'
+#  pod 'SPPermissions/Microphone'
+
+#pod 'PermissionsKit/CameraPermission', :git => 'https://github.com/sparrowcode/PermissionsKit'
+#pod 'PermissionsKit/PhotoLibraryPermission', :git => 'https://github.com/sparrowcode/PermissionsKit'
+#pod 'PermissionsKit/MicrophonePermission', :git => 'https://github.com/sparrowcode/PermissionsKit'
+#pod 'PermissionsKit/BluetoothPermission', :git => 'https://github.com/sparrowcode/PermissionsKit'
+
     
   pod 'JCore', '2.1.4-noidfa'
   pod 'JPush', '3.2.4-noidfa'

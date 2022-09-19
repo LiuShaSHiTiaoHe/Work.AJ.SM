@@ -6,16 +6,7 @@
 //
 
 import UIKit
-import SPPermissions
 import JKSwiftExtension
-
-extension BaseViewController {
-    func checkPermission(_ permissions: [SPPermissions.Permission]) {
-        permissions.forEach { permission in
-            PermissionManager.shared.requestPermission(permission)
-        }
-    }
-}
 
 extension BaseViewController {
     // MARK: - 功能模块开启状态，是否提示升级

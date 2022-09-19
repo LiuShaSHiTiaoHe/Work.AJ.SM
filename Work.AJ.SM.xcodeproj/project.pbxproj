@@ -40,7 +40,7 @@
 		4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4143293927F848A300DA8D47 /* Dictionary.Extension.swift */; };
 		41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB327E95D8E002D7BD1 /* CacheManager.swift */; };
 		41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB727E972F0002D7BD1 /* PermissionManager.swift */; };
-		41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */; };
+		41558FBA27E9AD29002D7BD1 /* BaseViewController.Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41558FB927E9AD29002D7BD1 /* BaseViewController.Update.swift */; };
 		416A60E12832369F0035A7A2 /* FaceUploadRoleSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416A60E02832369F0035A7A2 /* FaceUploadRoleSelectCell.swift */; };
 		416F1E5227E46F47008E3749 /* HouseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */; };
 		416F2DFF279BAF67004E5AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416F2DFE279BAF67004E5AD9 /* AppDelegate.swift */; };
@@ -240,6 +240,13 @@
 		686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E60EC284DF4360049BBC2 /* DebugView.swift */; };
 		688343BC289376E80070EF2F /* ExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688343BB289376E80070EF2F /* ExpandButton.swift */; };
 		688EDE5C28A0E93100B158CD /* NetworkStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688EDE5B28A0E93100B158CD /* NetworkStatusManager.swift */; };
+		68B8FC6D28D853FF00B6850A /* BluetoothPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 68B8FC6C28D853FF00B6850A /* BluetoothPermission */; };
+		68B8FC6F28D853FF00B6850A /* CameraPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 68B8FC6E28D853FF00B6850A /* CameraPermission */; };
+		68B8FC7128D853FF00B6850A /* MicrophonePermission in Frameworks */ = {isa = PBXBuildFile; productRef = 68B8FC7028D853FF00B6850A /* MicrophonePermission */; };
+		68B8FC7328D853FF00B6850A /* PhotoLibraryPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 68B8FC7228D853FF00B6850A /* PhotoLibraryPermission */; };
+		68B8FC7628D8549400B6850A /* JKSwiftExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 68B8FC7528D8549400B6850A /* JKSwiftExtension */; };
+		68B8FC7928D85B9100B6850A /* PermissionRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B8FC7828D85B9100B6850A /* PermissionRequestView.swift */; };
+		68B8FC7B28D85EEC00B6850A /* PermissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B8FC7A28D85EEC00B6850A /* PermissionCell.swift */; };
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
 		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
 		68DE5622286C26DB006560AA /* Image.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DE5621286C26DB006560AA /* Image.Extension.swift */; };
@@ -302,7 +309,7 @@
 		41558FB527E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		41558FB627E970E1002D7BD1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		41558FB727E972F0002D7BD1 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
-		41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.Permission.swift; sourceTree = "<group>"; };
+		41558FB927E9AD29002D7BD1 /* BaseViewController.Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.Update.swift; sourceTree = "<group>"; };
 		416A60E02832369F0035A7A2 /* FaceUploadRoleSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUploadRoleSelectCell.swift; sourceTree = "<group>"; };
 		416F1E5127E46F47008E3749 /* HouseSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSearchViewController.swift; sourceTree = "<group>"; };
 		416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Work.AJ.SM.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -506,6 +513,8 @@
 		686E60EC284DF4360049BBC2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		688343BB289376E80070EF2F /* ExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandButton.swift; sourceTree = "<group>"; };
 		688EDE5B28A0E93100B158CD /* NetworkStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusManager.swift; sourceTree = "<group>"; };
+		68B8FC7828D85B9100B6850A /* PermissionRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRequestView.swift; sourceTree = "<group>"; };
+		68B8FC7A28D85EEC00B6850A /* PermissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCell.swift; sourceTree = "<group>"; };
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
 		68DE5621286C26DB006560AA /* Image.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.Extension.swift; sourceTree = "<group>"; };
@@ -519,7 +528,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68B8FC6D28D853FF00B6850A /* BluetoothPermission in Frameworks */,
+				68B8FC7128D853FF00B6850A /* MicrophonePermission in Frameworks */,
 				45C200928CCB76EAAE743194 /* Pods_Work_AJ_SM.framework in Frameworks */,
+				68B8FC6F28D853FF00B6850A /* CameraPermission in Frameworks */,
+				68B8FC7328D853FF00B6850A /* PhotoLibraryPermission in Frameworks */,
+				68B8FC7628D8549400B6850A /* JKSwiftExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +814,7 @@
 		416F2E31279D1E9F004E5AD9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				68B8FC7728D85B5E00B6850A /* Permission */,
 				686E60EB284DF4140049BBC2 /* Debug */,
 				41A6202F2817BC0500DE3B54 /* Agora */,
 				41B7DBD627E0331D002A23D0 /* Camera */,
@@ -864,7 +879,6 @@
 				416F2E4427B0B514004E5AD9 /* GDataManager.swift */,
 				41558FB327E95D8E002D7BD1 /* CacheManager.swift */,
 				416F2F0A27BF4724004E5AD9 /* BLEAdvertisingManager.swift */,
-				41558FB727E972F0002D7BD1 /* PermissionManager.swift */,
 				41E7D8C627EC4EDD00241706 /* AudioPlayer.swift */,
 				41B4D85128266042004DFCFC /* DeviceManager.swift */,
 				41B4D8532826750A004DFCFC /* Throttler.swift */,
@@ -892,7 +906,7 @@
 				416F2E5227B0B64F004E5AD9 /* BaseNavigationController.swift */,
 				416F2E5427B0B66C004E5AD9 /* BaseViewController.swift */,
 				416F2E5627B0B691004E5AD9 /* BaseWebViewController.swift */,
-				41558FB927E9AD29002D7BD1 /* BaseViewController.Permission.swift */,
+				41558FB927E9AD29002D7BD1 /* BaseViewController.Update.swift */,
 				41B4D84F2824EE26004DFCFC /* BaseViewController.AgoraCall.swift */,
 			);
 			path = ViewController;
@@ -1839,6 +1853,16 @@
 			path = Debug;
 			sourceTree = "<group>";
 		};
+		68B8FC7728D85B5E00B6850A /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				41558FB727E972F0002D7BD1 /* PermissionManager.swift */,
+				68B8FC7828D85B9100B6850A /* PermissionRequestView.swift */,
+				68B8FC7A28D85EEC00B6850A /* PermissionCell.swift */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
 		881377D0986D950C181598AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1875,6 +1899,13 @@
 			dependencies = (
 			);
 			name = Work.AJ.SM;
+			packageProductDependencies = (
+				68B8FC6C28D853FF00B6850A /* BluetoothPermission */,
+				68B8FC6E28D853FF00B6850A /* CameraPermission */,
+				68B8FC7028D853FF00B6850A /* MicrophonePermission */,
+				68B8FC7228D853FF00B6850A /* PhotoLibraryPermission */,
+				68B8FC7528D8549400B6850A /* JKSwiftExtension */,
+			);
 			productName = Work.AJ.SM;
 			productReference = 416F2DFB279BAF67004E5AD9 /* Work.AJ.SM.app */;
 			productType = "com.apple.product-type.application";
@@ -1950,6 +1981,10 @@
 				"zh-Hans",
 			);
 			mainGroup = 416F2DF2279BAF66004E5AD9;
+			packageReferences = (
+				68B8FC6B28D853FF00B6850A /* XCRemoteSwiftPackageReference "PermissionsKit" */,
+				68B8FC7428D8549400B6850A /* XCRemoteSwiftPackageReference "JKSwiftExtension" */,
+			);
 			productRefGroup = 416F2DFC279BAF67004E5AD9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2177,7 +2212,7 @@
 				4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */,
 				41B7DBD127D9E88F002A23D0 /* HouseCertificationModel.swift in Sources */,
 				416F2EB227B63828004E5AD9 /* CountdownLabel.swift in Sources */,
-				41558FBA27E9AD29002D7BD1 /* BaseViewController.Permission.swift in Sources */,
+				41558FBA27E9AD29002D7BD1 /* BaseViewController.Update.swift in Sources */,
 				68002DF5288640A80045A77F /* AppUpgradeManager.swift in Sources */,
 				41C3503227CEF953006E440F /* OpenDoorPasswordViewController.swift in Sources */,
 				41558FB827E972F0002D7BD1 /* PermissionManager.swift in Sources */,
@@ -2206,6 +2241,7 @@
 				41B9CA83282E3098004F87C0 /* ExtralFaceModel.swift in Sources */,
 				41C3501A27CC6B48006E440F /* FaceListViewController.swift in Sources */,
 				419AD69C27FD382100C902B8 /* CustomButton.swift in Sources */,
+				68B8FC7928D85B9100B6850A /* PermissionRequestView.swift in Sources */,
 				41AA41A227D607BC007020AD /* CurrentLocationView.swift in Sources */,
 				416F2E5927B0BC14004E5AD9 /* NetWorkManager.swift in Sources */,
 				4173C23727C5F93400B8FBB8 /* MemberInvitationView.swift in Sources */,
@@ -2241,6 +2277,7 @@
 				41B7DBE627E044E8002A23D0 /* SwiftyCamButton.swift in Sources */,
 				4106766E280FD5010011AA40 /* VisitorInvitationRecordViewController.swift in Sources */,
 				41362577282A672C00186188 /* PropertyContactModel.swift in Sources */,
+				68B8FC7B28D85EEC00B6850A /* PermissionCell.swift in Sources */,
 				416F2EEB27BCF931004E5AD9 /* PopViewManager.swift in Sources */,
 				410A108C27F2FFCA0059B2C3 /* UserProfileViewController.swift in Sources */,
 				4173C23A27C6192400B8FBB8 /* MineRepository.swift in Sources */,
@@ -2670,6 +2707,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		68B8FC6B28D853FF00B6850A /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/PermissionsKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		68B8FC7428D8549400B6850A /* XCRemoteSwiftPackageReference "JKSwiftExtension" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JoanKing/JKSwiftExtension.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		68B8FC6C28D853FF00B6850A /* BluetoothPermission */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68B8FC6B28D853FF00B6850A /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = BluetoothPermission;
+		};
+		68B8FC6E28D853FF00B6850A /* CameraPermission */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68B8FC6B28D853FF00B6850A /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = CameraPermission;
+		};
+		68B8FC7028D853FF00B6850A /* MicrophonePermission */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68B8FC6B28D853FF00B6850A /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = MicrophonePermission;
+		};
+		68B8FC7228D853FF00B6850A /* PhotoLibraryPermission */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68B8FC6B28D853FF00B6850A /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = PhotoLibraryPermission;
+		};
+		68B8FC7528D8549400B6850A /* JKSwiftExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68B8FC7428D8549400B6850A /* XCRemoteSwiftPackageReference "JKSwiftExtension" */;
+			productName = JKSwiftExtension;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 416F2DF3279BAF66004E5AD9 /* Project object */;
 }

@@ -25,7 +25,8 @@ class OnBoardViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        PermissionManager.shared.requestAllPermission()
+//        PermissionManager.shared.requestAllPermission()
+        PermissionManager.shared.onBoardPermissionRequest()
     }
         
     @objc func handleSkip() {

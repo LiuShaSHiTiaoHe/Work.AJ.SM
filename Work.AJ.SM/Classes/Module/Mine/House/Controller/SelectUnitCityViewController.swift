@@ -7,7 +7,7 @@
 
 import UIKit
 import SVProgressHUD
-import SPPermissions
+//import SPPermissions
 import SnapKit
 
 let UnitCityCellIdentifier = "UnitCityCellIdentifier"

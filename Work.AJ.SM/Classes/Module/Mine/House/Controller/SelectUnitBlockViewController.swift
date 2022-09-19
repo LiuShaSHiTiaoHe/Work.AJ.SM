@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SPPermissions
+//import SPPermissions
 import SVProgressHUD
 
 class SelectUnitBlockViewController: BaseViewController {
