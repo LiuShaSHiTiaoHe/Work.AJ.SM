@@ -49,6 +49,7 @@ extension DefaultsKeys {
         .init("BluetoothSignalStrength", defaultValue: 75)
     }
     //NonStopSend 0 Shake 1 ButtonPress 2
+    // shake 0, press 1
     var openDoorStyle: DefaultsKey<Int> {
         .init("openDoorStyle", defaultValue: 1)
     }

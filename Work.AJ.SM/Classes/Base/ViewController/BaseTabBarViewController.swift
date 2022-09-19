@@ -65,7 +65,7 @@ class BaseTabBarViewController: ESTabBarController, UITabBarControllerDelegate {
 extension BaseTabBarViewController {
     func observeOpenDoorStyle() {
         let _ = ud.observe(\.openDoorStyle) { update in
-            if update.newValue == 1 {
+            if update.newValue == OpenDoorStyle.OpenDoorShake.rawValue {
                 UIApplication.shared.applicationSupportsShakeToEdit = true
                 self.becomeFirstResponder()
             }
@@ -74,7 +74,7 @@ extension BaseTabBarViewController {
 
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if event?.subtype == .motionShake {
-            if ud.openDoorStyle == 1 {
+            if ud.openDoorStyle == OpenDoorStyle.OpenDoorShake.rawValue {
                 Haptic.impact(.heavy).generate()
             }
         }
@@ -82,7 +82,7 @@ extension BaseTabBarViewController {
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if event?.subtype == .motionShake {
-            if ud.openDoorStyle == 1 {
+            if ud.openDoorStyle == OpenDoorStyle.OpenDoorShake.rawValue {
                 BLEAdvertisingManager.shared.openDoor()
             }
         }

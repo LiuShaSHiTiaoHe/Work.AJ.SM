@@ -85,7 +85,7 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
         if section == 0 {
             return 1
         } else if section == 1 {
-            return 3
+            return 2
         }
         return 0
     }
@@ -109,14 +109,10 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
             let cell = tableView.dequeueReusableCell(withIdentifier: BleOpenDoorStyleCellIdentifier, for: indexPath) as! BleOpenDoorStyleCell
             switch indexPath.row {
             case 0:
-                cell.nameLabel.text = "自动感应开门"
-                cell.tipsLabel.text = "开启后，经过设备时将自动开门/呼梯"
-                break
-            case 1:
                 cell.nameLabel.text = "手机摇一摇开门"
                 cell.tipsLabel.text = "开启后，摇一摇手机即可开门/呼梯"
                 break
-            case 2:
+            case 1:
                 cell.nameLabel.text = "按键开门"
                 cell.tipsLabel.text = "开启后，在首页点击“蓝牙呼梯”可开门/呼梯"
                 break
@@ -181,17 +177,30 @@ extension OpenDoorSettingViewController: UITableViewDelegate, UITableViewDataSou
 
 extension OpenDoorSettingViewController : BleOpenDoorStyleCellDelegate {
     func switchValueChanged(style: Int, status: Bool) {
-        ud.openDoorStyle = style
         switch style {
-        case 0:
-            BLEAdvertisingManager.shared.noneStopSendOpenDoorData()
-        case 1:
+        case OpenDoorStyle.OpenDoorShake.rawValue:
+            if status {
+                ud.openDoorStyle = OpenDoorStyle.OpenDoorShake.rawValue
+            } else {
+                ud.openDoorStyle = OpenDoorStyle.OpenDoorPress.rawValue
+            }
             BLEAdvertisingManager.shared.stopSendOpenDoorData()
-        case 2:
+        case OpenDoorStyle.OpenDoorPress.rawValue:
+            if status {
+                ud.openDoorStyle = OpenDoorStyle.OpenDoorPress.rawValue
+            } else {
+                ud.openDoorStyle = OpenDoorStyle.OpenDoorShake.rawValue
+            }
             BLEAdvertisingManager.shared.stopSendOpenDoorData()
         default:
             break
         }
         tableView.reloadData()
     }
+}
+
+
+enum OpenDoorStyle: Int {
+    case OpenDoorShake = 0
+    case OpenDoorPress = 1
 }
