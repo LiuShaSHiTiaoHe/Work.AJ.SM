@@ -13,7 +13,7 @@ let PermissionCellIdentifier = "PermissionCellIdentifier"
 
 class PermissionCell: UITableViewCell {
     
-    private let buttonWidth: CGFloat = 50.0
+    private let buttonWidth: CGFloat = 60.0
     
     var permission: Permission? {
         didSet {
@@ -38,12 +38,16 @@ class PermissionCell: UITableViewCell {
                 switch permission.status {
                 case .notDetermined:
                     self.statusButton.setTitle("允许", for: .normal)
+                    self.statusButton.backgroundColor = R.color.sub_blue()
                 case .denied:
                     self.statusButton.setTitle("已拒绝", for: .normal)
+                    self.statusButton.backgroundColor = R.color.sub_red()
                 case .authorized:
                     self.statusButton.setTitle("已允许", for: .normal)
+                    self.statusButton.backgroundColor = R.color.sub_green()
                 case .notSupported:
                     self.statusButton.setTitle("暂不支持", for: .normal)
+                    self.statusButton.backgroundColor = R.color.sub_yellow()
                     self.statusButton.isEnabled = false
                 }
             }
@@ -57,11 +61,18 @@ class PermissionCell: UITableViewCell {
             permission.request {
                 if permission.authorized {
                     self.statusButton.setTitle("已允许", for: .normal)
+                    self.statusButton.backgroundColor = R.color.sub_green()
                 } else if permission.denied {
                     self.statusButton.setTitle("已拒绝", for: .normal)
+                    self.statusButton.backgroundColor = R.color.sub_red()
                 } else if permission.notDetermined {
                     self.statusButton.setTitle("允许", for: .normal)
+                    self.statusButton.backgroundColor = R.color.sub_blue()
                 }
+                NotificationCenter.default.post(name: .kUserPermissionStatusChanged, object: nil)
+//                DispatchQueue.main.async {
+//                    NotificationCenter.default.post(name: .kUserPermissionStatusChanged, object: nil)
+//                }
             }
         }
     }
@@ -113,7 +124,7 @@ class PermissionCell: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let view = UILabel()
-        view.font = k16Font
+        view.font = k20Font
         view.textColor = R.color.text_title()
         return view
     }()
@@ -122,14 +133,16 @@ class PermissionCell: UITableViewCell {
         let view = UILabel()
         view.font = k12Font
         view.textColor = R.color.text_content()
-        view.numberOfLines = 2
+        view.numberOfLines = 0
         return view
     }()
     
     lazy var statusButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.titleLabel?.font = k14Font
-        button.setTitleColor(R.color.text_title(), for: .normal)
+        button.setTitleColor(R.color.whitecolor(), for: .normal)
+        button.layer.cornerRadius = 20.0
+        button.backgroundColor = R.color.sub_blue()
         return button
     }()
 

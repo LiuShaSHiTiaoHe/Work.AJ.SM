@@ -18,14 +18,19 @@ class PermissionRequestView: UIView {
     lazy var listView: UITableView = {
         let view = UITableView.init(frame: CGRect.zero, style: .plain)
         view.separatorStyle = .none
+        view.isScrollEnabled = false
+        view.backgroundColor = .clear
         view.register(PermissionCell.self, forCellReuseIdentifier: PermissionCellIdentifier)
         return view
     }()
     
     func initializeView() {
+        self.backgroundColor = .clear
         self.addSubview(listView)
         listView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(kMargin)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-kMargin)
         }
     }
     

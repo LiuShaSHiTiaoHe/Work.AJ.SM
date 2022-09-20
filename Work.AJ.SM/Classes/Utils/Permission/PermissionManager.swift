@@ -7,7 +7,10 @@
 
 import UIKit
 import PermissionsKit
-//import SPPermissions
+import CameraPermission
+import BluetoothPermission
+import MicrophonePermission
+import PhotoLibraryPermission
 
 class PermissionManager {
     static let shared = PermissionManager()
@@ -15,15 +18,12 @@ class PermissionManager {
     
     func onBoardPermissionRequest() {
         let view = PermissionRequestView()
-        PopViewManager.shared.display(view, .center, .init(width: .constant(value: kScreenWidth - 50), height: .constant(value: 400)), true)
+        PopViewManager.shared.display(view, .center, .init(width: .constant(value: kScreenWidth - 50), height: .constant(value: 400 + kMargin*2)), true)
     }
     
-    
-    
-    
-//    func requestAllPermission() {
-//        request([.bluetooth, .camera, .microphone, .photoLibrary])
-//    }
+    func onBoardPermissionRequestDismiss() {
+        PopViewManager.shared.dissmiss {}
+    }
 
     static func permissionRequest(_ permission: Permission, _ completion: @escaping (Bool) -> Void) {
         permission.request {
@@ -31,26 +31,14 @@ class PermissionManager {
             completion(authorized)
         }
     }
-
-
-//    private func request(_ permissions: [Permission]) {
-//        if permissions.count == 1 {
-//            if let topViewController = UIViewController.jk.topViewController() {
-//                let controller = PermissionsKit.native(permissions)
-//                controller.delegate = self
-//                controller.dataSource = self
-//                controller.present(on: topViewController)
-//            }
-//        } else {
-//            if let topViewController = UIViewController.jk.topViewController() {
-//                let controller = PermissionsKit.dialog(permissions)
-//                controller.showCloseButton = true
-//                controller.delegate = self
-//                controller.dataSource = self
-//                controller.present(on: topViewController)
-//            }
-//        }
-//    }
+    
+    static func isAllRequestChecked() -> Bool {
+        if !Permission.camera.notDetermined && !Permission.bluetooth.notDetermined && !Permission.microphone.notDetermined && !Permission.photoLibrary.notDetermined {
+            return true
+        } else {
+            return false
+        }
+    }
 
     func go2Setting(_ permission: Permission) {
         let alert = UIAlertController.init(title: "\(permission.localisedName)权限已被拒绝", message: "请前往系统设置页面打开相应权限", preferredStyle: .alert)
@@ -63,7 +51,6 @@ class PermissionManager {
         alert.show()
     }
 
-    private init() {
-    }
+    private init() {}
 }
 
