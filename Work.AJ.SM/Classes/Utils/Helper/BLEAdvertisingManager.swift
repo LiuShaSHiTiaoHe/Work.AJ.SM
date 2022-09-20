@@ -151,7 +151,7 @@ class BLEAdvertisingManager: NSObject {
     private func prepareOpenDoorData() -> String? {
         if let unit = HomeRepository.shared.getCurrentUnit(), let cellMM = unit.cellmm, let userID = unit.userid, let phsycalFloorInt = unit.physicalfloor?.jk.toInt(), let doorside = unit.doorside?.uppercased() {
             let userIDString = String(format: "%05d", userID)
-            let bleSignal = Defaults.bluetoothSignalStrength.jk.intToString
+            let bleSignal = ud.bluetoothSignalStrength.jk.intToString
             let phsycalFloor = String(format: "%02d", phsycalFloorInt)
             let partOfData = userIDString + doorside + bleSignal + "M "
             let openDoorData = "AJ" + partOfData + cellMM + "11" + phsycalFloor

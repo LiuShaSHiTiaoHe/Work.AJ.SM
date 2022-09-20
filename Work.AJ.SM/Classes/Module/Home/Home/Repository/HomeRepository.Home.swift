@@ -139,7 +139,7 @@ extension HomeRepository {
     }
 
     func getCurrentUnit() -> UnitModel? {
-        if let unitID = Defaults.currentUnitID {
+        if let unitID = ud.currentUnitID {
             logger.info("currentUnitID is \(unitID)")
             if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first {
                 return unit
@@ -150,7 +150,7 @@ extension HomeRepository {
     }
 
     func getCurrentUnitName() -> String {
-        if let unitID = Defaults.currentUnitID {
+        if let unitID = ud.currentUnitID {
             if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname {
                 return communityname + cellname
             }
@@ -159,7 +159,7 @@ extension HomeRepository {
     }
 
     func getCurrentHouseName() -> String {
-        if let unitID = Defaults.currentUnitID {
+        if let unitID = ud.currentUnitID {
             if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let cell = unit.cellname, let community = unit.communityname, let unitno = unit.unitno, let blockName = unit.blockname {
                 return community + blockName + cell + unitno
             }

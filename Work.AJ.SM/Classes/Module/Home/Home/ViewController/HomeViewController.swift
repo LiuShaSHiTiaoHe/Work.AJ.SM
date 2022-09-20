@@ -8,9 +8,7 @@
 import UIKit
 import SwiftEntryKit
 import AVFoundation
-import SVProgressHUD
 import swiftScan
-import JKSwiftExtension
 
 class HomeViewController: BaseViewController {
 

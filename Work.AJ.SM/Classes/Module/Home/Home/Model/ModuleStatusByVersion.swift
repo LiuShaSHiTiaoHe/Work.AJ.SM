@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import ObjectMapper
-
 
 enum ModulesOfModuleStatus: String {
     case ScanQR = "scanQR"

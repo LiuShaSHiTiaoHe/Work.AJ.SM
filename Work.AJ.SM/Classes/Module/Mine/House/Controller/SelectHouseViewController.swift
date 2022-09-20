@@ -28,14 +28,14 @@ class SelectHouseViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if let unitID = Defaults.currentUnitID {
+        if let unitID = ud.currentUnitID {
             initialUnitID = unitID
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let unitID = Defaults.currentUnitID, initialUnitID != unitID {
+        if let unitID = ud.currentUnitID, initialUnitID != unitID {
             NotificationCenter.default.post(name: .kCurrentUnitChanged, object: nil)
         }
     }

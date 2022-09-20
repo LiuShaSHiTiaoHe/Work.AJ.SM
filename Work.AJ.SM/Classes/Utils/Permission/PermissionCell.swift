@@ -70,9 +70,6 @@ class PermissionCell: UITableViewCell {
                     self.statusButton.backgroundColor = R.color.sub_blue()
                 }
                 NotificationCenter.default.post(name: .kUserPermissionStatusChanged, object: nil)
-//                DispatchQueue.main.async {
-//                    NotificationCenter.default.post(name: .kUserPermissionStatusChanged, object: nil)
-//                }
             }
         }
     }
