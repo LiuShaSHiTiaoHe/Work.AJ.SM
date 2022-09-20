@@ -10,7 +10,7 @@ target 'Work.AJ.SM' do
   pod 'Moya'
   pod 'Realm', '10.27.0'
   pod 'RealmSwift', '10.27.0'
-  pod "ObjectMapper+Realm"
+  pod 'ObjectMapper+Realm'
   pod 'XCGLogger', '7.0.1'
   pod 'R.swift', '6.1.0'
   
