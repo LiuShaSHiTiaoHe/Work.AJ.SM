@@ -31,3 +31,12 @@ target 'Work.AJ.SM' do
   pod 'AgoraRtcEngine_iOS', '3.7.0', :subspecs => ['RtcBasic']
 end
 
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['CODE_SIGN_IDENTITY'] = ''
+         end
+    end
+  end
+end
