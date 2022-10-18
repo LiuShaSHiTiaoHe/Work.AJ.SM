@@ -20,5 +20,7 @@ extension Notification.Name {
     static let kUserUpdateOpenDoorPassword = Notification.Name("UserUpdateOpenDoorPassword")
     // MARK: - 添加房屋
     static let kUserAddNewHouse = Notification.Name("EmptyViewAddNewHouse")
+    // MARK: - 用户更新系统权限
+    static let kUserPermissionStatusChanged = Notification.Name("UserPermissionAuthorizeStatusChanged")
 
 }

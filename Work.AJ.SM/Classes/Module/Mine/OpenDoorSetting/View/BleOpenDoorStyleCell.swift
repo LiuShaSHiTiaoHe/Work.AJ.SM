@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import BEMCheckBox
 
 protocol BleOpenDoorStyleCellDelegate: NSObjectProtocol {
     func switchValueChanged(style: Int, status: Bool)
@@ -19,8 +18,7 @@ class BleOpenDoorStyleCell: UITableViewCell {
     var status: Bool? {
         didSet {
             if let status = status {
-                checkBox.setOn(status, animated: false)
-                checkBox.isUserInteractionEnabled = !status
+                switchView.isOn = status
             }
         }
     }
@@ -40,20 +38,14 @@ class BleOpenDoorStyleCell: UITableViewCell {
     }
     
     func initData() {
-        checkBox.addTarget(self, action: #selector(switchChange(_:)), for: .valueChanged)
+        switchView.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
     }
-    
-    @objc
-    func switchChange(_ sender: BEMCheckBox) {
-        if let openDoorStyle = openDoorStyle {
-            delegate?.switchValueChanged(style: openDoorStyle, status: sender.on)
-        }
-    }
+
     
     func initializeView() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(tipsLabel)
-        contentView.addSubview(checkBox)
+        contentView.addSubview(switchView)
 
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
@@ -69,10 +61,9 @@ class BleOpenDoorStyleCell: UITableViewCell {
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
         
-        checkBox.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+        switchView.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-kMargin)
-            make.height.width.equalTo(30)
+            make.centerY.equalToSuperview()
         }
     }
     
@@ -94,16 +85,19 @@ class BleOpenDoorStyleCell: UITableViewCell {
         return view
     }()
     
-    lazy var checkBox: BEMCheckBox = {
-        let box = BEMCheckBox.init()
-        box.boxType = .circle
-        box.onAnimationType = .oneStroke
-        box.offAnimationType = .oneStroke
-        box.tintColor = R.color.sub_green()!
-        box.onTintColor = R.color.sub_green()!
-        box.onCheckColor = R.color.sub_green()!
-        return box
+    lazy var switchView: UISwitch = {
+        let view = UISwitch.init()
+        view.tintColor = R.color.sub_green()
+        return view
     }()
+    
+    @objc
+    private func switchChanged(_ sender: UISwitch) {
+        if let openDoorStyle = openDoorStyle {
+            delegate?.switchValueChanged(style: openDoorStyle, status: sender.isOn)
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

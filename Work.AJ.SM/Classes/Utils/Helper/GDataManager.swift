@@ -39,7 +39,10 @@ class GDataManager: NSObject {
     // MARK: - 初始化realm
     func setupDataBase() {
         if let username = ud.username {
-            RealmTools.configRealm(userID: username, schemaVersion: 1)
+            //version 0 第一次数据库的表结构
+            //version 1 UnitLockModel增加了lockID
+            //version 2 UnitModel 增加了moudle18
+            RealmTools.configRealm(userID: username, schemaVersion: 2)
         }
     }
 
@@ -133,6 +136,13 @@ class GDataManager: NSObject {
     }
 
     
+    func clearUserUnit() {
+        ud.remove(\.currentUnitID)
+        ud.remove(\.currentCommunityID)
+        if let userID = ud.userID?.jk.toInt() {
+            RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
+        }
+    }
 
     // MARK: - 清除数据
     func clearAccount() {

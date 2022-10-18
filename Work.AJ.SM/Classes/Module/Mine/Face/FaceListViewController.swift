@@ -33,7 +33,9 @@ class FaceListViewController: BaseViewController {
         if !needReloadData {
             return
         }
+        SVProgressHUD.show()
         MineRepository.shared.getFaceList { [weak self] faces in
+            SVProgressHUD.dismiss(withDelay: 1)
             guard let `self` = self else {
                 return
             }

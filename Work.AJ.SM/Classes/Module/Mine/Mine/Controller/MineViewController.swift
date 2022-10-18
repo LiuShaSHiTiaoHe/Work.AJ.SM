@@ -112,7 +112,7 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                 case .house:
                     navigateTo(viewController: HouseViewController())
                 case .faceCertification:
-                    showModuleVersionControlTipsView(module: .FaceCetification) { [weak self] in
+                    showModuleVersionControlTipsView(module: .FaceCertification) { [weak self] in
                         guard let `self` = self else { return }
                         self.navigateTo(viewController: FaceListViewController())
                     }

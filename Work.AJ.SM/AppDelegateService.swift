@@ -30,7 +30,7 @@ extension AppDelegate {
         GDataManager.shared.setupKeyChain()
         GDataManager.shared.setupDataBase()
         GDataManager.shared.pushSetAlias()
-        setuplibs()
+        setupLibs()
     }
 
     func setupRootViewController() {
@@ -56,7 +56,7 @@ extension AppDelegate {
         window?.rootViewController = mainTabBarVc
     }
 
-    private func setuplibs() {
+    private func setupLibs() {
         SVProgressHUD.appearance().defaultStyle = .dark
         SVProgressHUD.appearance().maximumDismissTimeInterval = 2
         SVProgressHUD.appearance().minimumSize = CGSize.init(width: 100, height: 100)

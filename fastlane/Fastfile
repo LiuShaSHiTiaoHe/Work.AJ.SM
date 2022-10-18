@@ -32,7 +32,7 @@ platform :ios do
     ENV_PREFIX="Debug_"
     EXPORT_METHOD = "development"
     package(configuration: "Debug")
-    pgyer(api_key: "87c1082eb0e655043817ad9af99d08a5", user_key: "f0a0ba0ee6ac7844f0878e3e1e0326b1")#guguijun.yz@gmail.com
+    pgyer(api_key: "87c1082eb0e655043817ad9af99d08a5")#guguijun.yz@gmail.com
     notification(subtitle: "上传完成", message: "最新测试包已经上传至蒲公英平台")
   end
 
@@ -51,7 +51,7 @@ platform :ios do
 
   #package
   lane :package do |option|
-      cocoapods(repo_update: false, use_bundle_exec: false)
+      # cocoapods(repo_update: false, use_bundle_exec: false)
       PLIST_INFO_VERSION = get_version_number(target: "#{SCHEME}")
       IPA_NAME = "#{ENV_PREFIX}" + "#{APP_NAME}_"  +  "#{IPA_TIME}_" + "#{PLIST_INFO_VERSION}"+ ".ipa"
       

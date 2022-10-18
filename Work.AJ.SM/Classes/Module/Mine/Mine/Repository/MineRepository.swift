@@ -30,26 +30,19 @@ class MineRepository: NSObject {
 
     func getAllUnits(completion: @escaping DefaultCompletion) {
         SVProgressHUD.show()
-        HomeAPI.getMyUnit(mobile: Defaults.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { models, response in
+        HomeAPI.getMyUnit(mobile: ud.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { models, response in
             SVProgressHUD.dismiss()
             guard models.count > 0 else {
                 completion("数据为空")
                 return
             }
-            if let unitID = ud.currentUnitID {
-                let normalHouses = models.filter {$0.state == UnitStatus.Normal.rawValue }
-                if normalHouses.isEmpty {
-                    ud.remove(\.currentUnitID)
-                    ud.remove(\.currentCommunityID)
-                } else {
-                    if !normalHouses.contains(where: {$0.unitid == unitID }) {
-                        if let firstUnitID = normalHouses.first?.unitid {
-                            ud.currentUnitID = firstUnitID
-                        }
-                        if let communityID = normalHouses.first?.communityid {
-                            ud.currentCommunityID = communityID
-                        }
-                    }
+            let currentUnitID = ud.currentUnitID
+            GDataManager.shared.clearUserUnit()
+            RealmTools.addList(models, update: .modified) {}
+            if let unitID = currentUnitID, let cUnit = models.first(where: {$0.unitid == unitID}), cUnit.state == UnitStatus.Normal.rawValue {
+                ud.currentUnitID = unitID
+                if let communityID = cUnit.communityid {
+                    ud.currentCommunityID = communityID
                 }
             } else {
                 if let firstUnit = models.first(where: {$0.state == UnitStatus.Normal.rawValue}), let firstUnitID = firstUnit.unitid {
@@ -59,15 +52,10 @@ class MineRepository: NSObject {
                     }
                 }
             }
-            RealmTools.addList(models, update: .modified) {}
             completion("")
         } failureCallback: { response in
             if response.code == 204 {
-                ud.remove(\.currentUnitID)
-                ud.remove(\.currentCommunityID)
-                if let userID = ud.userID?.jk.toInt() {
-                    RealmTools.deleteByPredicate(object: UnitModel.self, predicate: NSPredicate(format: "userid == %d", userID))
-                }
+                GDataManager.shared.clearUserUnit()
             }
             completion(response.message)
         }
@@ -86,9 +74,7 @@ class MineRepository: NSObject {
 
     func getCurrentUnitMembers(completion: @escaping UnitMembersCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let userID = unit.userid?.jk.intToString, let unitID = unit.unitid?.jk.intToString {
-            SVProgressHUD.show()
             MineAPI.getUnitMembers(unitID: unitID, userID: userID).defaultRequest(cacheType: .ignoreCache, showError: true, successCallback: { jsonData in
-                SVProgressHUD.dismiss()
                 if let memberJsonString = jsonData["data"]["users"].rawString(), let members = [MemberModel](JSONString: memberJsonString) {
                     guard members.count > 0 else {
                         return
@@ -279,9 +265,7 @@ extension MineRepository {
 // MARK: - 访客
 extension MineRepository {
     func getMyVisitors(userID: String, unitID: String, completion: @escaping VisitorListCompletion) {
-        SVProgressHUD.show()
         MineAPI.myVisitors(userID: userID, unitID: unitID).request(modelType: [VisitorModel].self) { models, response in
-            SVProgressHUD.dismiss()
             completion(models)
         } failureCallback: { response in
             completion([])
@@ -289,9 +273,7 @@ extension MineRepository {
     }
 
     func getMyUnitGuest(userID: String, unitID: String, page: String, size: String, completion: @escaping MyUnitGuestCompletion) {
-        SVProgressHUD.show()
         MineAPI.getMyUnitGuest(userID: userID, unitID: unitID, currentPage: page, showCount: size).request(modelType: [UnitGuestModel].self, cacheType: .ignoreCache, showError: true) { models, response in
-            SVProgressHUD.dismiss()
             completion(models)
         } failureCallback: { response in
             completion([])
@@ -303,9 +285,7 @@ extension MineRepository {
 extension MineRepository {
     func getFaceList(completion: @escaping FaceListCompletion) {
         if let unit = HomeRepository.shared.getCurrentUnit(), let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let cellID = unit.cellid?.jk.intToString, let unitID = unit.unitid?.jk.intToString, let mobile = unit.mobile {
-            SVProgressHUD.show()
             MineAPI.allFace(communityID: communityID, blockID: blockID, cellID: cellID, unitID: unitID, mobile: mobile).request(modelType: [FaceModel].self) { models, response in
-                SVProgressHUD.dismiss()
                 completion(models)
             } failureCallback: { response in
                 logger.info("\(response.message)")

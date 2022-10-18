@@ -21,13 +21,21 @@ class OnBoardViewController: UIViewController {
         view.addSubview(swiftyOnboard)
         swiftyOnboard.dataSource = self
         swiftyOnboard.delegate = self
+        
+        NotificationCenter.default.addObserver(forName: .kUserPermissionStatusChanged, object: nil, queue: nil) { notification  in
+            if PermissionManager.isAllRequestChecked() {
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                    PermissionManager.shared.onBoardPermissionRequestDismiss()
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        PermissionManager.shared.requestAllPermission()
+        PermissionManager.shared.onBoardPermissionRequest()
     }
-        
+    
     @objc func handleSkip() {
         endOnboard()
     }

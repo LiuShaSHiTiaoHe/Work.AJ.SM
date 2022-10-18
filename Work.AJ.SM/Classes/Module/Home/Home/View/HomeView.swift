@@ -24,7 +24,7 @@ class HomeView: BaseView {
 
     // MARK: - Functions
     func updateTitle() {
-        if let unitID = Defaults.currentUnitID {
+        if let unitID = ud.currentUnitID {
             headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
         }
     }

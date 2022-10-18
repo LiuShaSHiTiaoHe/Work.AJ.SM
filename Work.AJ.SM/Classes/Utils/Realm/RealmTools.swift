@@ -62,7 +62,7 @@ extension RealmTools {
         let fileURL = FileManager.jk.DocumnetsDirectory() + "/" + ("\(userID ?? "")default.realm")
         let config = Realm.Configuration(fileURL: URL(string: fileURL), schemaVersion: schemaVersion, migrationBlock: { (migration, oldSchemaVersion) in
             // 目前我们还未进行数据迁移，因此 oldSchemaVersion == 0
-            if oldSchemaVersion < 1 {
+            if oldSchemaVersion < schemaVersion {
                 // 什么都不要做！Realm 会自行检测新增和需要移除的属性，然后自动更新硬盘上的数据库架构
             }
             // 低版本的数据库迁移......
@@ -194,8 +194,7 @@ extension RealmTools {
         guard let results: Array<Object> = objectsWithPredicate(object: object, predicate: predicate) else {
             return
         }
-        deleteList(results) {
-        }
+        deleteList(results) {}
     }
 }
 

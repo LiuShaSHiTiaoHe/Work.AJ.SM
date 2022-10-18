@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 class UnitButtonsModel: Object,  Mappable {
     @Persisted(primaryKey: true) var _id: ObjectId

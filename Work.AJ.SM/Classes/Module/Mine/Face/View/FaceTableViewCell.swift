@@ -19,8 +19,10 @@ class FaceTableViewCell: UITableViewCell {
     
     var faceData: FaceModel? {
         didSet {
-            if let faceData = faceData, let url = faceData.imageurl, let name = faceData.name{
-                nameLabel.text = name
+            if let faceData = faceData, let url = faceData.imageurl {
+                if let name = faceData.name {
+                    nameLabel.text = name
+                }
                 faceImage.kf.setImage(with: URL.init(string: url), placeholder: R.image.defaultavatar(), options: nil, completionHandler: nil)
                 if let faceType = faceData.faceType {
                     if faceType.isEmpty {
@@ -37,7 +39,6 @@ class FaceTableViewCell: UITableViewCell {
                             roleLabel.text = "子女"
                         default:
                             roleLabel.isHidden = true
-                            break
                         }
                     }
                 } else {
