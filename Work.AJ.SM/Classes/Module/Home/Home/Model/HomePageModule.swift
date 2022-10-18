@@ -39,7 +39,8 @@ enum HomePageModule: String {
         case .cloudOpenGate:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudOpneGate", tag: "MOUDLE2", index: 5)
         case .cloudIntercom:
-            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudIntercom", tag: "MOUDLE18", index: 6)
+            // FIXME: - 服务端还没有修改，暂时改回原来的配置
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "cloudIntercom", tag: "MOUDLE2", index: 6)
         case .scanElevatorQRCode:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7)
         case .inviteVisitors:
