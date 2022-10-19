@@ -89,7 +89,7 @@ class SelectHouseViewController: BaseViewController {
 }
 
 extension SelectHouseViewController: HouseCellDelegate {
-    func chooseCurrentUnit(unitID: Int) {
+    func chooseCurrentUnit(unitID: Int, status: UnitStatus) {
         tableView.reloadData()
         SVProgressHUD.show()
         SVProgressHUD.dismiss(withDelay: 1) {

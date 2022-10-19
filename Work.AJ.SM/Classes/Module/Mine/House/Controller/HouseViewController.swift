@@ -121,7 +121,7 @@ class HouseViewController: BaseViewController {
 }
 
 extension HouseViewController: HouseCellDelegate {
-    func chooseCurrentUnit(unitID: Int) {
+    func chooseCurrentUnit(unitID: Int, status: UnitStatus) {
         tableView.reloadData()
     }
 }

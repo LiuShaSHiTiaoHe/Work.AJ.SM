@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol HouseCellDelegate: NSObjectProtocol {
-    func chooseCurrentUnit(unitID: Int)
+    func chooseCurrentUnit(unitID: Int, status: UnitStatus)
 }
 
 class HouseCell: UITableViewCell {
@@ -196,9 +196,9 @@ class HouseCell: UITableViewCell {
         if let communityID = unit?.communityid {
             ud.currentCommunityID = communityID
         }
-        if let unitID = unit?.unitid {
+        if let unitID = unit?.unitid, let state = unit?.state, let unitStatus = UnitStatus.init(rawValue: state) {
             ud.currentUnitID = unitID
-            delegate?.chooseCurrentUnit(unitID: unitID)
+            delegate?.chooseCurrentUnit(unitID: unitID, status: unitStatus)
         }
     }
     
