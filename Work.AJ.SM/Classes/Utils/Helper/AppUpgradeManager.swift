@@ -115,7 +115,11 @@ extension AppUpgradeManager {
                 completion(version, false, false, "", "当前已是最新版本")
             }
         } else {
-            completion("", false, false, "", "暂时无法获取最新版本信息,请稍后再试.")
+            if(jsonData["code"] == "101") {
+                completion("", false, false, "", "当前已是最新版本")
+            } else {
+                completion("", false, false, "", "暂时无法获取最新版本信息,请稍后再试.")
+            }
         }
     }
     
