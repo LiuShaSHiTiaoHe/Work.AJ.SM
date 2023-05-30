@@ -19,7 +19,7 @@ extension DefaultsKeys {
     var loginState: DefaultsKey<Bool> {
         .init("userloginstate", defaultValue: false)
     }
-    var username: DefaultsKey<String?> {
+    var userName: DefaultsKey<String?> {
         .init("username")
     }
     var userID: DefaultsKey<String?> {

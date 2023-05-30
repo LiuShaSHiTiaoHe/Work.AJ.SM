@@ -17,7 +17,7 @@ class AuthenticationRepository: NSObject {
             if let userData = JsonData["map"].rawString(), let userModel = UserModel(JSONString: userData) {
                 ud.loginState = true
                 ud.userLastLoginDate = Date()
-                ud.username = mobile
+                ud.userName = mobile
                 ud.userMobile = mobile
                 ud.password = password
                 ud.userRealName = userModel.realName
@@ -54,7 +54,7 @@ class AuthenticationRepository: NSObject {
             if let userInfo = jsonData["map"].rawString(), let userModel = UserModel(JSONString: userInfo) {
                 ud.loginState = true
                 ud.userLastLoginDate = Date()
-                ud.username = mobile
+                ud.userName = mobile
                 ud.userMobile = mobile
                 ud.password = password
                 ud.userRealName = userModel.realName

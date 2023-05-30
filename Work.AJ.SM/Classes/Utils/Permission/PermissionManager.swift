@@ -33,11 +33,7 @@ class PermissionManager {
     }
     
     static func isAllRequestChecked() -> Bool {
-        if !Permission.camera.notDetermined && !Permission.bluetooth.notDetermined && !Permission.microphone.notDetermined && !Permission.photoLibrary.notDetermined {
-            return true
-        } else {
-            return false
-        }
+        return !Permission.camera.notDetermined && !Permission.bluetooth.notDetermined && !Permission.microphone.notDetermined && !Permission.photoLibrary.notDetermined
     }
 
     func go2Setting(_ permission: Permission) {

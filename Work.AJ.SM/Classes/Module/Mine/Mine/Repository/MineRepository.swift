@@ -30,7 +30,7 @@ class MineRepository: NSObject {
 
     func getAllUnits(completion: @escaping DefaultCompletion) {
         SVProgressHUD.show()
-        HomeAPI.getMyUnit(mobile: ud.username!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { models, response in
+        HomeAPI.getMyUnit(mobile: ud.userName!).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { models, response in
             SVProgressHUD.dismiss()
             guard models.count > 0 else {
                 completion("数据为空")

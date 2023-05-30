@@ -38,7 +38,7 @@ class GDataManager: NSObject {
     
     // MARK: - 初始化realm
     func setupDataBase() {
-        if let username = ud.username {
+        if let username = ud.userName {
             //version 0 第一次数据库的表结构
             //version 1 UnitLockModel增加了lockID
             //version 2 UnitModel 增加了moudle18
@@ -157,7 +157,7 @@ class GDataManager: NSObject {
     func removeUserData() {
         logoutAgoraRtm()
         ud.remove(\.loginState)
-        ud.remove(\.username)
+        ud.remove(\.userName)
         ud.remove(\.userID)
         ud.remove(\.userMobile)
         ud.remove(\.userRealName)

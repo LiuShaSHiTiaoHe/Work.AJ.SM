@@ -178,7 +178,7 @@ class OwnerQRCodeView: UIView {
     }
 
     func initData() {
-        if let mobile = ud.username {
+        if let mobile = ud.userName {
             let index = mobile.count - 4
             let str = mobile.jk.sub(from: index)
             nameLabel.text = "(尾号\(str)) 业主您好"
