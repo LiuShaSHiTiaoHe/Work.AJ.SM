@@ -19,7 +19,10 @@ enum HomePageModule: String {
     case addFamilyMember = "添加家人/成员"
     case deviceConfiguration = "设备配置"
     case elevatorConfiguration = "电梯配置"
-
+    
+    case userQRCode = "用户码"
+    case gusetQRCode = "访客二维码"
+    
     var model: HomePageFunctionModule {
         switch self {
         case .addFamilyMember:
@@ -45,6 +48,10 @@ enum HomePageModule: String {
             return HomePageFunctionModule.init(name: self.rawValue, icon: "scanElevatorQRCode", tag: "MOUDLE8", index: 7)
         case .inviteVisitors:
             return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "MOUDLE17", index: 8)
+        case .userQRCode:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "ownerQRCode", tag: "", index: 98)
+        case .gusetQRCode:
+            return HomePageFunctionModule.init(name: self.rawValue, icon: "inviteVisitors", tag: "", index: 99)
         }
     }
 }

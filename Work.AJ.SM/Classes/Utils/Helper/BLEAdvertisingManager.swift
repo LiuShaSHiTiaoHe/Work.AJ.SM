@@ -5,10 +5,10 @@
 //  Created by Anjie on 2022/2/18.
 //
 
-import UIKit
 import CoreBluetooth
-import SVProgressHUD
 import JKSwiftExtension
+import SVProgressHUD
+import UIKit
 
 enum AdvertisingType {
     case openDoor
@@ -20,12 +20,12 @@ class BLEAdvertisingManager: NSObject {
     private var peripheralManager: CBPeripheralManager?
     var isBleOpen: Bool = false
 
-    private override init() {
+    override private init() {
         super.init()
-        peripheralManager = CBPeripheralManager.init(delegate: self, queue: .main)
+        peripheralManager = CBPeripheralManager(delegate: self, queue: .main)
     }
 
-    func sendElevatorConfigData(_ data: String, _ para: String) {
+    func sendElevatorConfigData(_: String, _: String) {
         SVProgressHUD.show()
         if let peripheralManager = peripheralManager, isBleOpen {
             if !peripheralManager.isAdvertising {
@@ -41,8 +41,8 @@ class BLEAdvertisingManager: NSObject {
         }
     }
 
-
     // MARK: - 发送蓝牙开门数据
+
     @discardableResult
     func openDoor() -> Bool {
         SVProgressHUD.show()
@@ -50,7 +50,7 @@ class BLEAdvertisingManager: NSObject {
             if !peripheralManager.isAdvertising {
                 if let openDoorData = prepareOpenDoorData() {
                     logger.info("openDoorData===> \(openDoorData)")
-                    peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
+                    peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
                     stopAdvertismentIn {
                         SVProgressHUD.showSuccess(withStatus: "发送成功")
                     }
@@ -72,7 +72,7 @@ class BLEAdvertisingManager: NSObject {
             return
         }
         if let openDoorData = prepareOpenDoorData() {
-            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
+            peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: "B0B0")], CBAdvertisementDataLocalNameKey: openDoorData])
         }
     }
 
@@ -86,6 +86,7 @@ class BLEAdvertisingManager: NSObject {
     }
 
     // MARK: - 发送手机呼梯
+
     /**
      data[0] - data[9]
      蓝牙 ID，支持“0000000000” - “9999999999”
@@ -110,7 +111,7 @@ class BLEAdvertisingManager: NSObject {
                     fullFloorNumber = String(format: "%03d", floorInt)
                 }
                 let advertisementData = SN + authorizeFlag + side + fullFloorNumber + "00000"
-                peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID.init(string: "B0B0")], CBAdvertisementDataLocalNameKey: advertisementData])
+                peripheralManager.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: "B0B0")], CBAdvertisementDataLocalNameKey: advertisementData])
                 logger.shortLine()
                 logger.info("advertisementData ===>  \(advertisementData)")
                 logger.shortLine()
@@ -126,6 +127,7 @@ class BLEAdvertisingManager: NSObject {
     }
 
     // MARK: - Stop Advertising
+
     func stopAdvertismentIn(seconds: Double = 2, completion: @escaping (() -> Void)) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
             guard let `self` = self else {
@@ -146,8 +148,9 @@ class BLEAdvertisingManager: NSObject {
     // MARK: - Private Functions
 
     // MARK: - OpenDoor Data
-    //AJ 17307 3 75 M1 3655 11 08
-    //蓝牙数据组成 0-1 AJ 2-6 userID 7 sortbar 8-9 blesignal 10-11 M+space 12-15 cellmm 16-17 11 18-19 phsycalFloor
+
+    // AJ 17307 3 75 M1 3655 11 08
+    // 蓝牙数据组成 0-1 AJ 2-6 userID 7 sortbar 8-9 blesignal 10-11 M+space 12-15 cellmm 16-17 11 18-19 phsycalFloor
     private func prepareOpenDoorData() -> String? {
         if let unit = HomeRepository.shared.getCurrentUnit(), let cellMM = unit.cellmm, let userID = unit.userid, let phsycalFloorInt = unit.physicalfloor?.jk.toInt(), let doorside = unit.doorside?.uppercased() {
             let userIDString = String(format: "%05d", userID)
@@ -161,12 +164,13 @@ class BLEAdvertisingManager: NSObject {
     }
 
     // MARK: - addSum
+
     private func addSum(_ writeData: String, _ data: String) -> String {
         var result = ""
         if data.count % 2 != 0 {
             return result
         }
-        var sum: Int = 0
+        var sum = 0
         let dataLen = writeData.jk.sub(start: 2, length: 2)
         let dataCmd = writeData.jk.sub(start: 4, length: 2)
         sum += dataLen.jk.hexInt
@@ -183,7 +187,6 @@ class BLEAdvertisingManager: NSObject {
         result = writeData.jk.removeSomeStringUseSomeString(removeString: "*", replacingString: data + sumHexa)
         return result
     }
-
 }
 
 extension BLEAdvertisingManager: CBPeripheralManagerDelegate {
@@ -195,8 +198,7 @@ extension BLEAdvertisingManager: CBPeripheralManagerDelegate {
         }
     }
 
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+    func peripheralManagerDidStartAdvertising(_: CBPeripheralManager, error _: Error?) {
         logger.info("peripheralManagerDidStartAdvertising")
     }
-
 }

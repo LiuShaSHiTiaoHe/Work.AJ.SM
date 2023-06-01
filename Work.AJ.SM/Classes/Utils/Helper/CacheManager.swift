@@ -11,7 +11,6 @@ import YYCache
 let FaceImageCacheKey = "FaceImageCacheKey"
 let UserAvatarCacheKey = "UserAvatarCacheKey"
 
-
 enum CacheManager: String {
     case network = "anjie.network.cache"
     case liftrecord = "anjie.liftrecord.cache"
@@ -20,7 +19,7 @@ enum CacheManager: String {
 
     /// Current cached size
     var totalCost: Int {
-        if let cache = YYCache.init(name: self.rawValue) {
+        if let cache = YYCache(name: rawValue) {
             return cache.diskCache.totalCost()
         }
         return 0
@@ -28,7 +27,7 @@ enum CacheManager: String {
 
     /// The current number of cached items
     var totalCount: Int {
-        if let cache = YYCache.init(name: self.rawValue) {
+        if let cache = YYCache(name: rawValue) {
             return cache.diskCache.totalCount()
         }
         return 0
@@ -36,13 +35,13 @@ enum CacheManager: String {
 
     /// Delete the disk cache
     func removeAllCache() {
-        if let cache = YYCache.init(name: self.rawValue) {
+        if let cache = YYCache(name: rawValue) {
             cache.diskCache.removeAllObjects()
         }
     }
 
     func removeCacheWithKey(_ key: String) {
-        if let cache = YYCache.init(name: self.rawValue) {
+        if let cache = YYCache(name: rawValue) {
             cache.diskCache.removeObject(forKey: key)
         }
     }
@@ -52,7 +51,7 @@ enum CacheManager: String {
     ///   - dict: The cached object
     ///   - key: Cache key name
     func saveCacheWithDictionary(_ dict: NSDictionary, key: String) {
-        if let cache = YYCache.init(name: self.rawValue) {
+        if let cache = YYCache(name: rawValue) {
             cache.diskCache.countLimit = maxCountLimit
             cache.diskCache.costLimit = maxCostLimit
             cache.diskCache.ageLimit = maxAgeLimit
@@ -65,13 +64,14 @@ enum CacheManager: String {
     /// - Parameter key: Cache key name
     /// - Returns: Cache object
     func fetchCachedWithKey(_ key: String) -> NSDictionary? {
-        if let cache = YYCache.init(name: self.rawValue) {
+        if let cache = YYCache(name: rawValue) {
             return cache.object(forKey: key) as? NSDictionary
         }
         return nil
     }
 
     // MARK: - Private
+
     /// The maximum number of objects the cache should hold. default 100
     private var maxCountLimit: UInt {
         switch self {

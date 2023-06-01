@@ -1,7 +1,7 @@
 PODS:
   - ActiveLabel (1.1.0)
   - AgoraRtcEngine_iOS/RtcBasic (3.7.0)
-  - AgoraRtm_iOS (1.4.10)
+  - AgoraRtm_iOS (1.5.1)
   - BetterSegmentedControl (2.0.1)
   - ESTabBarController-swift (2.8.0)
   - Haptica (3.0.3)
@@ -20,9 +20,9 @@ PODS:
   - R.swift.Library (5.3.0)
   - SDCycleScrollView (1.82):
     - SDWebImage (>= 5.0.0)
-  - SDWebImage (5.12.5):
-    - SDWebImage/Core (= 5.12.5)
-  - SDWebImage/Core (5.12.5)
+  - SDWebImage (5.15.8):
+    - SDWebImage/Core (= 5.15.8)
+  - SDWebImage/Core (5.15.8)
   - SteviaLayout (4.7.3)
   - SVProgressHUD (2.2.5)
   - swiftScan (1.2.1)
@@ -85,7 +85,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   AgoraRtcEngine_iOS: e6bc354af9b8b883926382b5034f18822b5303df
-  AgoraRtm_iOS: 95e7070466f42a6494435a7f39fd2b13fc143cbf
+  AgoraRtm_iOS: 595a9fa33a409831e6183396ea8f8bc563918403
   BetterSegmentedControl: 09607b27861d49cbce48b7673b74f9150a3d371a
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Haptica: 23497230b2d7476621f7860263ae0667279a0a89
@@ -100,7 +100,7 @@ SPEC CHECKSUMS:
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
-  SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
+  SDWebImage: cb032eba469c54e0000e78bcb0a13cdde0a52798
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   swiftScan: 0849e7d7c1c641384767a573ee8cb90b88d1ddd9
@@ -108,6 +108,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: ee3404c9e9997aa37bb0915066b560f159a3c725
+PODFILE CHECKSUM: ea034101963b6cc6dd47a56c9b225e2a979fd329
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0

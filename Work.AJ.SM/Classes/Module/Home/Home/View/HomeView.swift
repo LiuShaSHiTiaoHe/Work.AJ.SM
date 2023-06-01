@@ -28,6 +28,10 @@ class HomeView: BaseView {
             headerView.updateTitle(unitName: HomeRepository.shared.getUnitName(unitID: unitID))
         }
     }
+    
+    func updateTitle(title: String) {
+        headerView.updateTitle(unitName: title)
+    }
 
     func reloadView() {
         collectionView.reloadData()

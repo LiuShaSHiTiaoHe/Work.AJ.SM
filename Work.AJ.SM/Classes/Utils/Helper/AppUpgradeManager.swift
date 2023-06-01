@@ -7,21 +7,21 @@
 
 import Foundation
 import JKSwiftExtension
-import SwiftyJSON
 import SVProgressHUD
+import SwiftyJSON
 
 class AppUpgradeManager {
-    
     static let shared = AppUpgradeManager()
     private init() {}
 }
 
 extension AppUpgradeManager {
     // MARK: - 用户手动检查更新
+
     func checkAppUpdate() {
         MineAPI.versionCheck(type: kDeviceType.lowercased()).defaultRequest { [weak self] jsonData in
             guard let `self` = self else { return }
-            self.processVersionCompare(jsonData: jsonData) {version, needUpdate, isForce, releaseNotes, errorMsg in
+            self.processVersionCompare(jsonData: jsonData) { version, needUpdate, isForce, releaseNotes, errorMsg in
                 if needUpdate {
                     self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: false)
                 } else {
@@ -32,21 +32,22 @@ extension AppUpgradeManager {
             SVProgressHUD.showError(withStatus: response.message)
         }
     }
-    
+
     // MARK: - 自动检测更新
+
     func autoCheckVersion() {
         if isAutoCheckUpdateAvailable() {
             MineAPI.versionCheck(type: kDeviceType.lowercased()).defaultRequest { [weak self] jsonData in
                 guard let `self` = self else { return }
-                self.processVersionCompare(jsonData: jsonData) {version, needUpdate, isForce, releaseNotes, errorMsg in
+                self.processVersionCompare(jsonData: jsonData) { version, needUpdate, isForce, releaseNotes, _ in
                     let currentVersion = Bundle.jk.appVersion
                     logger.info("当前版本：\(currentVersion), 最新版本：\(version)")
-                    if currentVersion.isNotEmpty && version.isNotEmpty {
-                        let checkedVersions = ud.checkedAppVersions as Dictionary<String, Array<String>>
+                    if currentVersion.isNotEmpty, version.isNotEmpty {
+                        let checkedVersions = ud.checkedAppVersions as [String: [String]]
                         logger.info("记录的用户拒绝过的版本：\(checkedVersions)")
                         if checkedVersions.isEmpty {
                             logger.info("记录的用户拒绝过的版本为空")
-                            //本地记录为空，进行版本的比较，如果当前版本较低，就提示升级
+                            // 本地记录为空，进行版本的比较，如果当前版本较低，就提示升级
                             if needUpdate {
                                 logger.info("需要更新，记录需要更新的版本：\(version)")
                                 self.showAppUpdateView(releaseNotes: releaseNotes, isForce: isForce, latestVersion: version, autoCheck: true)
@@ -55,7 +56,7 @@ extension AppUpgradeManager {
                             }
                         } else {
                             logger.info("记录的用户拒绝过的版本信息不为空")
-                            //当前版本去检查更新时，记录的用户拒绝过的版本信息
+                            // 当前版本去检查更新时，记录的用户拒绝过的版本信息
                             if checkedVersions.allKeys().contains(currentVersion), let versions = checkedVersions[currentVersion] {
                                 logger.info("当前版本记录的用户拒绝过的版本信息不为空")
                                 if versions.contains(version) {
@@ -85,10 +86,11 @@ extension AppUpgradeManager {
             }
         }
     }
-    
+
     // MARK: - 处理返回数据
-    private func processVersionCompare(jsonData: JSON, completion: @escaping (_ vesion: String, _ needUpdate: Bool, _ isForce: Bool, _ releaseNotes: String, _ errorMsg: String) -> Void){
-        if let deviceType = jsonData["data"]["TYPE"].string, deviceType.lowercased() == kDeviceType.lowercased(), let version = jsonData["data"]["VERSION"].string, self.isValidAppVersion(version) {
+
+    private func processVersionCompare(jsonData: JSON, completion: @escaping (_ vesion: String, _ needUpdate: Bool, _ isForce: Bool, _ releaseNotes: String, _ errorMsg: String) -> Void) {
+        if let deviceType = jsonData["data"]["TYPE"].string, deviceType.lowercased() == kDeviceType.lowercased(), let version = jsonData["data"]["VERSION"].string, isValidAppVersion(version) {
             if let effectiveStatus = jsonData["data"]["EFFECTIVESTATUS"].string, effectiveStatus == "T" {
                 if JKGlobalTools.compareVersion(version: version) {
                     if let needUpgrade = jsonData["data"]["needUpgrade"].string, needUpgrade == "1" {
@@ -115,15 +117,16 @@ extension AppUpgradeManager {
                 completion(version, false, false, "", "当前已是最新版本")
             }
         } else {
-            if(jsonData["code"] == "101") {
+            if jsonData["code"] == "101" {
                 completion("", false, false, "", "当前已是最新版本")
             } else {
                 completion("", false, false, "", "暂时无法获取最新版本信息,请稍后再试.")
             }
         }
     }
-    
+
     // MARK: - 去App Store检查版本信息。 暂时不使用了
+
     private func checkAppStoreNewVersion(_ force: Bool) {
         VersionCheck.shared.checkNewVersion { hasNewerVersion, versionResult, errorMsg in
             if hasNewerVersion, let versionResult = versionResult {
@@ -135,10 +138,11 @@ extension AppUpgradeManager {
             }
         }
     }
-    
+
     // MARK: - 是否在设定的自动检查更新时间端
+
     private func isAutoCheckUpdateAvailable() -> Bool {
-        //暂时保证用户在登录状态去检查更新
+        // 暂时保证用户在登录状态去检查更新
         guard let _ = ud.userID else { return false }
         guard let lastCheckDate = ud.checkAppVersionDate else {
             ud.checkAppVersionDate = Date()
@@ -155,8 +159,9 @@ extension AppUpgradeManager {
         }
         return false
     }
-    
+
     // MARK: - 版本号是否符合规则 x.x.x
+
     private func isValidAppVersion(_ version: String) -> Bool {
         let versionArray = version.jk.separatedByString(with: ".")
         guard versionArray.count == 3, let versionString1 = versionArray[0] as? String, let versionString2 = versionArray[1] as? String, let versionString3 = versionArray[2] as? String else {
@@ -167,9 +172,11 @@ extension AppUpgradeManager {
         }
         return true
     }
+
     // MARK: - 展示升级提示页面
+
     private func showAppUpdateView(releaseNotes: String, isForce: Bool, latestVersion: String, autoCheck: Bool) {
-        let aView = AppUpdateView.init()
+        let aView = AppUpdateView()
         aView.configData(autoCheck: autoCheck, remoteVersion: latestVersion, description: releaseNotes, force: isForce)
         var attributes = EntryKitCustomAttributes.centerFloat.attributes
         attributes.screenInteraction = .absorbTouches
@@ -181,9 +188,9 @@ extension AppUpgradeManager {
         )
         SwiftEntryKit.display(entry: aView, using: attributes)
     }
-    
+
     func cacheCheckedVersion(version: String) {
-        var checkedVersions = ud.checkedAppVersions as Dictionary<String, Array<String>>
+        var checkedVersions = ud.checkedAppVersions as [String: [String]]
         let currentVersion = Bundle.jk.appVersion
         logger.info("更新记录之前的数据=== \(checkedVersions)")
         if checkedVersions.allKeys().contains(currentVersion), let versions = checkedVersions[currentVersion] {

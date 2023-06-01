@@ -10,7 +10,6 @@
 		2896A030B641CD26C51E3A06 /* CommonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A1DFEC2819D06038541C /* CommonRepository.swift */; };
 		2896A05A179667FBB7FB0B56 /* CommonPushModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A7D62EA54D3BF83230B3 /* CommonPushModel.swift */; };
 		2896A68267A544DDAAF30F22 /* CommonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896AA07B102CCC4A4BDF9CE /* CommonAPI.swift */; };
-		3F5A70A0FC9BF7F428208626 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B94A740A2DA3DA0EDB24826B /* Pods_Work_AJ_SM.framework */; };
 		4106766C280D0F3E0011AA40 /* UnitGuestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */; };
 		4106766E280FD5010011AA40 /* VisitorInvitationRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106766D280FD5010011AA40 /* VisitorInvitationRecordViewController.swift */; };
 		41067670281138B70011AA40 /* StringProtocol.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106766F281138B70011AA40 /* StringProtocol.Extension.swift */; };
@@ -265,7 +264,15 @@
 		68C724CE2848A33700CFA047 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C724CD2848A33700CFA047 /* R.generated.swift */; };
 		68D8F83028409EE300D68FC6 /* videocall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 68D8F82F28409EE200D68FC6 /* videocall.aiff */; };
 		68DE5622286C26DB006560AA /* Image.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DE5621286C26DB006560AA /* Image.Extension.swift */; };
+		9617F83D2A282CC60027A0FC /* UserIdentifyQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617F83C2A282CC60027A0FC /* UserIdentifyQRCodeView.swift */; };
+		9617F83F2A282CED0027A0FC /* UserIdentifyQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617F83E2A282CED0027A0FC /* UserIdentifyQRCodeViewController.swift */; };
+		9617F8412A282F970027A0FC /* QRCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617F8402A282F970027A0FC /* QRCodeManager.swift */; };
+		9617F8462A2865F90027A0FC /* AddGuestQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617F8452A2865F90027A0FC /* AddGuestQRCodeView.swift */; };
+		9617F8482A2866030027A0FC /* GuestQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617F8472A2866030027A0FC /* GuestQRCodeView.swift */; };
+		9617F84A2A2866170027A0FC /* AddGuestQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617F8492A2866170027A0FC /* AddGuestQRCodeViewController.swift */; };
+		9617F84C2A28661D0027A0FC /* GuestQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617F84B2A28661D0027A0FC /* GuestQRCodeViewController.swift */; };
 		A8570471B6937C25D39B76FF /* HomeRepository.Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8570AB0E56DF35AF25F92DA /* HomeRepository.Home.swift */; };
+		B2A585E769664113104295C3 /* Pods_Work_AJ_SM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE6E1427656F879BB834912 /* Pods_Work_AJ_SM.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -286,11 +293,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		200E0F7D8FBDDFF05E4F1030 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 		2896A1DFEC2819D06038541C /* CommonRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonRepository.swift; sourceTree = "<group>"; };
 		2896A7D62EA54D3BF83230B3 /* CommonPushModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonPushModel.swift; sourceTree = "<group>"; };
 		2896AA07B102CCC4A4BDF9CE /* CommonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAPI.swift; sourceTree = "<group>"; };
-		2B875D58176593F0BF02E975 /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
+		2AE6E1427656F879BB834912 /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4106766B280D0F3E0011AA40 /* UnitGuestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitGuestModel.swift; sourceTree = "<group>"; };
 		4106766D280FD5010011AA40 /* VisitorInvitationRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorInvitationRecordViewController.swift; sourceTree = "<group>"; };
 		4106766F281138B70011AA40 /* StringProtocol.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.Extension.swift; sourceTree = "<group>"; };
@@ -535,8 +541,16 @@
 		68C724CD2848A33700CFA047 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		68D8F82F28409EE200D68FC6 /* videocall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = videocall.aiff; sourceTree = "<group>"; };
 		68DE5621286C26DB006560AA /* Image.Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.Extension.swift; sourceTree = "<group>"; };
+		6BAD82FCE7A2909719445F11 /* Pods-Work.AJ.SM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.release.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.release.xcconfig"; sourceTree = "<group>"; };
+		9617F83C2A282CC60027A0FC /* UserIdentifyQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdentifyQRCodeView.swift; sourceTree = "<group>"; };
+		9617F83E2A282CED0027A0FC /* UserIdentifyQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdentifyQRCodeViewController.swift; sourceTree = "<group>"; };
+		9617F8402A282F970027A0FC /* QRCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeManager.swift; sourceTree = "<group>"; };
+		9617F8452A2865F90027A0FC /* AddGuestQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGuestQRCodeView.swift; sourceTree = "<group>"; };
+		9617F8472A2866030027A0FC /* GuestQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestQRCodeView.swift; sourceTree = "<group>"; };
+		9617F8492A2866170027A0FC /* AddGuestQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGuestQRCodeViewController.swift; sourceTree = "<group>"; };
+		9617F84B2A28661D0027A0FC /* GuestQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestQRCodeViewController.swift; sourceTree = "<group>"; };
 		A8570AB0E56DF35AF25F92DA /* HomeRepository.Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRepository.Home.swift; sourceTree = "<group>"; };
-		B94A740A2DA3DA0EDB24826B /* Pods_Work_AJ_SM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_AJ_SM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B728714CAC0F18EC42109571 /* Pods-Work.AJ.SM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work.AJ.SM.debug.xcconfig"; path = "Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -563,7 +577,7 @@
 				68B8FC7E28D9956200B6850A /* Moya in Frameworks */,
 				68B8FC8128D9963300B6850A /* Realm in Frameworks */,
 				68B8FC7628D8549400B6850A /* JKSwiftExtension in Frameworks */,
-				3F5A70A0FC9BF7F428208626 /* Pods_Work_AJ_SM.framework in Frameworks */,
+				B2A585E769664113104295C3 /* Pods_Work_AJ_SM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +773,7 @@
 				416F2E1E279BAF67004E5AD9 /* Work.AJ.SMUITests */,
 				416F2DFC279BAF67004E5AD9 /* Products */,
 				F39FE6BFA7B5E0F81763EDF1 /* Pods */,
-				B02D2BB0921C4FA1CE876F19 /* Frameworks */,
+				D8C1BF7F54C09775CAFEE68B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -916,6 +930,7 @@
 				419C95D4283F5B6F001E7099 /* EntryKitCustomAttributes.swift */,
 				680ED594285C89D0004A1857 /* MyTimer.swift */,
 				68002DF4288640A80045A77F /* AppUpgradeManager.swift */,
+				9617F8402A282F970027A0FC /* QRCodeManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -945,6 +960,8 @@
 		416F2E5A27B0BEAC004E5AD9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9617F8422A2840B00027A0FC /* GuestQRCodeForDID */,
+				9617F8392A282C870027A0FC /* UserIdentifyQRCodeForDID */,
 				419AD6A127FEB66000C902B8 /* ElevatorConfiguration */,
 				4173C25227C86E6600B8FBB8 /* ScanQRCodeForElevator */,
 				4173C22827C5D93A00B8FBB8 /* AddMember */,
@@ -1894,10 +1911,62 @@
 			path = Permission;
 			sourceTree = "<group>";
 		};
-		B02D2BB0921C4FA1CE876F19 /* Frameworks */ = {
+		9617F8392A282C870027A0FC /* UserIdentifyQRCodeForDID */ = {
 			isa = PBXGroup;
 			children = (
-				B94A740A2DA3DA0EDB24826B /* Pods_Work_AJ_SM.framework */,
+				9617F83B2A282CAB0027A0FC /* ViewController */,
+				9617F83A2A282C9D0027A0FC /* View */,
+			);
+			path = UserIdentifyQRCodeForDID;
+			sourceTree = "<group>";
+		};
+		9617F83A2A282C9D0027A0FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9617F83C2A282CC60027A0FC /* UserIdentifyQRCodeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9617F83B2A282CAB0027A0FC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9617F83E2A282CED0027A0FC /* UserIdentifyQRCodeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9617F8422A2840B00027A0FC /* GuestQRCodeForDID */ = {
+			isa = PBXGroup;
+			children = (
+				9617F8442A2865CE0027A0FC /* ViewController */,
+				9617F8432A2865C60027A0FC /* View */,
+			);
+			path = GuestQRCodeForDID;
+			sourceTree = "<group>";
+		};
+		9617F8432A2865C60027A0FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9617F8452A2865F90027A0FC /* AddGuestQRCodeView.swift */,
+				9617F8472A2866030027A0FC /* GuestQRCodeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9617F8442A2865CE0027A0FC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9617F8492A2866170027A0FC /* AddGuestQRCodeViewController.swift */,
+				9617F84B2A28661D0027A0FC /* GuestQRCodeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D8C1BF7F54C09775CAFEE68B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AE6E1427656F879BB834912 /* Pods_Work_AJ_SM.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1905,8 +1974,8 @@
 		F39FE6BFA7B5E0F81763EDF1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				200E0F7D8FBDDFF05E4F1030 /* Pods-Work.AJ.SM.debug.xcconfig */,
-				2B875D58176593F0BF02E975 /* Pods-Work.AJ.SM.release.xcconfig */,
+				B728714CAC0F18EC42109571 /* Pods-Work.AJ.SM.debug.xcconfig */,
+				6BAD82FCE7A2909719445F11 /* Pods-Work.AJ.SM.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1918,12 +1987,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 416F2E25279BAF67004E5AD9 /* Build configuration list for PBXNativeTarget "Work.AJ.SM" */;
 			buildPhases = (
-				2565DF60A9F7CF78EEB8672D /* [CP] Check Pods Manifest.lock */,
+				A8EDA8C4C86C468141069DA8 /* [CP] Check Pods Manifest.lock */,
 				416F2E7B27B0C981004E5AD9 /* ShellScript */,
 				416F2DF7279BAF67004E5AD9 /* Sources */,
 				416F2DF8279BAF67004E5AD9 /* Frameworks */,
 				416F2DF9279BAF67004E5AD9 /* Resources */,
-				0E8E0329EDC69E81FFD793E4 /* [CP] Embed Pods Frameworks */,
+				1B8FC60B5CE55D3C8F3C29EF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2085,7 +2154,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E8E0329EDC69E81FFD793E4 /* [CP] Embed Pods Frameworks */ = {
+		1B8FC60B5CE55D3C8F3C29EF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2100,28 +2169,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work.AJ.SM/Pods-Work.AJ.SM-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2565DF60A9F7CF78EEB8672D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Work.AJ.SM-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		416F2E7B27B0C981004E5AD9 /* ShellScript */ = {
@@ -2142,6 +2189,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
+		A8EDA8C4C86C468141069DA8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Work.AJ.SM-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2174,6 +2243,7 @@
 				416F2EE527BCD0E5004E5AD9 /* OwnerQRCodeView.swift in Sources */,
 				416F2F1527BF97EC004E5AD9 /* RemoteOpenDoorCell.swift in Sources */,
 				41A620362817BD1400DE3B54 /* AgoraRtmModels.swift in Sources */,
+				9617F84A2A2866170027A0FC /* AddGuestQRCodeViewController.swift in Sources */,
 				419AD6A027FD747600C902B8 /* NetWork.Cache.swift in Sources */,
 				41AA41A927D6F067007020AD /* UITableView+SectionIndexView.swift in Sources */,
 				416F2EB827BA1E30004E5AD9 /* ResetPasswordView.swift in Sources */,
@@ -2185,6 +2255,7 @@
 				41558FB427E95D8E002D7BD1 /* CacheManager.swift in Sources */,
 				4136256C282A2BD300186188 /* CallNeighborView.swift in Sources */,
 				41C3502C27CDB428006E440F /* SettingTableViewCell.swift in Sources */,
+				9617F83D2A282CC60027A0FC /* UserIdentifyQRCodeView.swift in Sources */,
 				410A109327F4546B0059B2C3 /* UserProfileConstDefines.swift in Sources */,
 				416F2E4027B0B4D2004E5AD9 /* DynamicColor.swift in Sources */,
 				41067670281138B70011AA40 /* StringProtocol.Extension.swift in Sources */,
@@ -2235,6 +2306,7 @@
 				41C3503027CEF8FA006E440F /* OpenDoorSettingViewController.swift in Sources */,
 				686E60ED284DF4360049BBC2 /* DebugView.swift in Sources */,
 				416F2E7A27B0C5C5004E5AD9 /* Marcos.swift in Sources */,
+				9617F84C2A28661D0027A0FC /* GuestQRCodeViewController.swift in Sources */,
 				419AD69E27FD3EB400C902B8 /* HomeView.swift in Sources */,
 				4173C20227C3524C00B8FBB8 /* RemoteIntercomView.swift in Sources */,
 				6861A988288A3E7300E45632 /* ModuleStatusByVersion.swift in Sources */,
@@ -2244,6 +2316,7 @@
 				4173C21427C387EA00B8FBB8 /* SetVisitorQRCodeView.swift in Sources */,
 				4143293A27F848A300DA8D47 /* Dictionary.Extension.swift in Sources */,
 				416F2E5527B0B66C004E5AD9 /* BaseViewController.swift in Sources */,
+				9617F8412A282F970027A0FC /* QRCodeManager.swift in Sources */,
 				41A620342817BC8800DE3B54 /* AGEError.swift in Sources */,
 				416F2EB427B9FA14004E5AD9 /* UserModel.swift in Sources */,
 				4173C25527C8700400B8FBB8 /* ScanQRCodeCallElevatorViewController.swift in Sources */,
@@ -2287,6 +2360,7 @@
 				410A108E27F302780059B2C3 /* UserProfileView.swift in Sources */,
 				416F2E7427B0BFB5004E5AD9 /* UnitModel.swift in Sources */,
 				4173C24A27C769BE00B8FBB8 /* MemberListCell.swift in Sources */,
+				9617F8482A2866030027A0FC /* GuestQRCodeView.swift in Sources */,
 				41AA41AA27D6F067007020AD /* SectionIndexViewItemIndicator.swift in Sources */,
 				41C3502027CC8DDA006E440F /* FaceTableViewCell.swift in Sources */,
 				688EDE5C28A0E93100B158CD /* NetworkStatusManager.swift in Sources */,
@@ -2318,6 +2392,7 @@
 				41B7DBD527DAF7A0002A23D0 /* SelectHouseLocationIndexCell.swift in Sources */,
 				416F2E9627B2426C004E5AD9 /* AppDelegateService.swift in Sources */,
 				41B4D85228266042004DFCFC /* DeviceManager.swift in Sources */,
+				9617F8462A2865F90027A0FC /* AddGuestQRCodeView.swift in Sources */,
 				4173C22527C4E09E00B8FBB8 /* PasswordInvitationViewController.swift in Sources */,
 				416F2E6527B0BFA4004E5AD9 /* HomeAPI.swift in Sources */,
 				4173C21927C48E7C00B8FBB8 /* QRCodeInvitationViewController.swift in Sources */,
@@ -2378,6 +2453,7 @@
 				2896A030B641CD26C51E3A06 /* CommonRepository.swift in Sources */,
 				68DE5622286C26DB006560AA /* Image.Extension.swift in Sources */,
 				A8570471B6937C25D39B76FF /* HomeRepository.Home.swift in Sources */,
+				9617F83F2A282CED0027A0FC /* UserIdentifyQRCodeViewController.swift in Sources */,
 				41A6204628191B2A00DE3B54 /* AgoraVideoChatView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2564,7 +2640,7 @@
 		};
 		416F2E26279BAF67004E5AD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 200E0F7D8FBDDFF05E4F1030 /* Pods-Work.AJ.SM.debug.xcconfig */;
+			baseConfigurationReference = B728714CAC0F18EC42109571 /* Pods-Work.AJ.SM.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2607,7 +2683,7 @@
 		};
 		416F2E27279BAF67004E5AD9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B875D58176593F0BF02E975 /* Pods-Work.AJ.SM.release.xcconfig */;
+			baseConfigurationReference = 6BAD82FCE7A2909719445F11 /* Pods-Work.AJ.SM.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

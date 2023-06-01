@@ -26,26 +26,25 @@ let logger: XCGLogger = {
     log.dateFormatter = dateFormatter
     // 开始启用
     log.logAppDetails()
-    let logPath: URL = URL.init(string: FileManager.jk.CachesDirectory() + "Log.txt")!
+    let logPath = URL(string: FileManager.jk.CachesDirectory() + "Log.txt")!
     log.setup(level: .info, showLogIdentifier: false, showFunctionName: true, showThreadName: false, showLevel: true, showFileNames: true, showLineNumbers: true, showDate: true, writeToFile: logPath, fileLevel: .error)
     return log
 }()
 
 public extension XCGLogger {
-
     /// 自定义打印=================
     func shortLine(_ file: String = #file, function: String = #function, line: Int = #line) {
         #if DEBUG
-        let lineString = "======================================"
-        print("\((file as NSString).pathComponents.last!):\(line) \(function): \(lineString)")
+            let lineString = "======================================"
+            print("\((file as NSString).pathComponents.last!):\(line) \(function): \(lineString)")
         #endif
     }
 
     /// 自定义打印+++++++++++++++++++
     func plusLine(_ file: String = #file, function: String = #function, line: Int = #line) {
         #if DEBUG
-        let lineString = "+++++++++++++++++++++++++++++++++++++"
-        print("\((file as NSString).pathComponents.last!):\(line) \(function): \(lineString)")
+            let lineString = "+++++++++++++++++++++++++++++++++++++"
+            print("\((file as NSString).pathComponents.last!):\(line) \(function): \(lineString)")
         #endif
     }
 }

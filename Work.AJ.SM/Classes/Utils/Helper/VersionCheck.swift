@@ -5,9 +5,9 @@
 //  Created by Anjie on 2022/5/26.
 //
 
+import Alamofire
 import Foundation
 import UIKit
-import Alamofire
 
 typealias VersionCheckCompletion = (Bool, AppStoreVersionModel.Results?, String) -> Void
 
@@ -24,52 +24,49 @@ class VersionCheck {
             }
         }
     }
-    
+
     func checkNewVersion(newVersionBlock: @escaping VersionCheckCompletion) {
-            let infoDic = Bundle.main.infoDictionary
+        let infoDic = Bundle.main.infoDictionary
         let currentInstalledVersion = infoDic?["CFBundleShortVersionString"] as! String
-            let request = URLRequest(url: URL(string: kAppInfoLookUpUrl)!)
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if error != nil {
+        let request = URLRequest(url: URL(string: kAppInfoLookUpUrl)!)
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            if error != nil {
+                DispatchQueue.main.sync { newVersionBlock(false, nil, "检查版本失败") }
+            } else {
+                guard let data = data else {
                     DispatchQueue.main.sync { newVersionBlock(false, nil, "检查版本失败") }
-                } else {
-                    guard let data = data else {
+                    return
+                }
+                do {
+                    let model = try JSONDecoder().decode(AppStoreVersionModel.self, from: data)
+                    guard DataParser.isUpdateCompatibleWithDeviceOS(for: model) else {
+                        DispatchQueue.main.sync { newVersionBlock(false, nil, "当前系统版本过低，无法运行最新版的APP") }
+                        return
+                    }
+                    guard !model.results.isEmpty, let results = model.results.first else {
                         DispatchQueue.main.sync { newVersionBlock(false, nil, "检查版本失败") }
                         return
                     }
-                    do {
-                        let model = try JSONDecoder().decode(AppStoreVersionModel.self, from: data)
-                        guard DataParser.isUpdateCompatibleWithDeviceOS(for: model) else {
-                            DispatchQueue.main.sync { newVersionBlock(false, nil, "当前系统版本过低，无法运行最新版的APP") }
-                            return
-                        }
-                        guard !model.results.isEmpty, let results = model.results.first else {
-                            DispatchQueue.main.sync { newVersionBlock(false, nil, "检查版本失败") }
-                            return
-                        }
-                        guard let currentAppStoreVersion = model.results.first?.version else {
-                            DispatchQueue.main.sync { newVersionBlock(false, nil, "检查版本失败") }
-                            return
-                        }
-
-                        let isAppStoreVsersionNewer = DataParser.isAppStoreVersionNewer(installedVersion: currentInstalledVersion,
-                                                                                        appStoreVersion: currentAppStoreVersion)
-                        if isAppStoreVsersionNewer {
-                            DispatchQueue.main.sync { newVersionBlock(true, results, "") }
-                        } else {
-                            DispatchQueue.main.sync { newVersionBlock(false, results, "当前已是最新版本") }
-                        }
-                    } catch {
+                    guard let currentAppStoreVersion = model.results.first?.version else {
                         DispatchQueue.main.sync { newVersionBlock(false, nil, "检查版本失败") }
+                        return
                     }
-                }
-                
-            }
-            task.resume()
-        }
-    
-}
 
+                    let isAppStoreVsersionNewer = DataParser.isAppStoreVersionNewer(installedVersion: currentInstalledVersion,
+                                                                                    appStoreVersion: currentAppStoreVersion)
+                    if isAppStoreVsersionNewer {
+                        DispatchQueue.main.sync { newVersionBlock(true, results, "") }
+                    } else {
+                        DispatchQueue.main.sync { newVersionBlock(false, results, "当前已是最新版本") }
+                    }
+                } catch {
+                    DispatchQueue.main.sync { newVersionBlock(false, nil, "检查版本失败") }
+                }
+            }
+        }
+        task.resume()
+    }
+}
 
 struct AppStoreVersionModel: Decodable {
     /// Codable Coding Keys for the Top-Level iTunes Lookup API JSON response.
@@ -114,7 +111,7 @@ struct AppStoreVersionModel: Decodable {
     }
 }
 
-struct DataParser {
+enum DataParser {
     /// Checks to see if the App Store version of the app is newer than the installed version.
     ///
     /// - Parameters:
@@ -123,9 +120,10 @@ struct DataParser {
     /// - Returns: `true` if the App Store version is newer. Otherwise, `false`.
     static func isAppStoreVersionNewer(installedVersion: String?, appStoreVersion: String?) -> Bool {
         guard let installedVersion = installedVersion,
-            let appStoreVersion = appStoreVersion,
-            (installedVersion.compare(appStoreVersion, options: .numeric) == .orderedAscending) else {
-                return false
+              let appStoreVersion = appStoreVersion,
+              installedVersion.compare(appStoreVersion, options: .numeric) == .orderedAscending
+        else {
+            return false
         }
 
         return true
@@ -143,14 +141,14 @@ struct DataParser {
         let systemVersion = UIDevice.current.systemVersion
 
         guard systemVersion.compare(requiredOSVersion, options: .numeric) == .orderedDescending ||
-            systemVersion.compare(requiredOSVersion, options: .numeric) == .orderedSame else {
-                return false
+            systemVersion.compare(requiredOSVersion, options: .numeric) == .orderedSame
+        else {
+            return false
         }
 
         return true
     }
 
-    
     /// Splits a version-formatted `String into an `[Int]`.
     ///
     /// Converts `"a.b.c.d"` into `[a, b, c, d]`.
@@ -159,6 +157,6 @@ struct DataParser {
     ///
     /// - Returns: An array of integers representing a version of the app.
     private static func split(version: String) -> [Int] {
-        return version.lazy.split {$0 == "."}.map { String($0) }.map {Int($0) ?? 0}
+        return version.lazy.split { $0 == "." }.map { String($0) }.map { Int($0) ?? 0 }
     }
 }

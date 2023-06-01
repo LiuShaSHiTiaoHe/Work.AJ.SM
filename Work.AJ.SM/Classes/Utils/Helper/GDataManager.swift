@@ -5,13 +5,13 @@
 //  Created by Anjie on 2022/2/7.
 //
 
-import Foundation
-import CryptoSwift
-import AVFoundation
-import SwiftyUserDefaults
-import SVProgressHUD
-import KeychainAccess
 import Alamofire
+import AVFoundation
+import CryptoSwift
+import Foundation
+import KeychainAccess
+import SVProgressHUD
+import SwiftyUserDefaults
 
 class GDataManager: NSObject {
     static let shared = GDataManager()
@@ -27,50 +27,52 @@ class GDataManager: NSObject {
             currentVC.present(vc, animated: true, completion: nil)
         }
     }
-    
+
     func setupKeyChain() {
         let keychain = Keychain(service: kKeyChainServiceKey)
         let xbid = keychain["xbid"]
-        if  xbid == nil{
+        if xbid == nil {
             keychain["xbid"] = UUID().uuidString
         }
     }
-    
+
     // MARK: - 初始化realm
+
     func setupDataBase() {
         if let username = ud.userName {
-            //version 0 第一次数据库的表结构
-            //version 1 UnitLockModel增加了lockID
-            //version 2 UnitModel 增加了moudle18
+            // version 0 第一次数据库的表结构
+            // version 1 UnitLockModel增加了lockID
+            // version 2 UnitModel 增加了moudle18
             RealmTools.configRealm(userID: username, schemaVersion: 2)
         }
     }
 
     // MARK: - JPUSH
+
     func setupPush(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         #if DEBUG
-        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: false)
-        logger.info("JPUSH APS DEBUG")
+            JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: false)
+            logger.info("JPUSH APS DEBUG")
         #else
-        JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: true)
-        logger.info("JPUSH APS PRODUCTION")
+            JPUSHService.setup(withOption: launchOptions, appKey: kJPushAppKey, channel: "", apsForProduction: true)
+            logger.info("JPUSH APS PRODUCTION")
         #endif
         JPUSHService.setLogOFF()
-        JPUSHService.registrationIDCompletionHandler { resCode, registrationID in
+        JPUSHService.registrationIDCompletionHandler { _, registrationID in
             if let registrationID = registrationID {
                 logger.info("JPUSH registrationID ===> \(registrationID)")
             }
         }
     }
-    
+
     func pushSetAlias(_ alias: String? = nil) {
         if let alias = alias {
-            JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in
+            JPUSHService.setAlias(alias, completion: { iResCode, _, seq in
                 if seq != 1 { return }
-                if  iResCode != 0 {
-                    JPUSHService.deleteAlias({ diResCode, diAlias, dseq in
-                        if diResCode == 0 && dseq == 10086 {
-                            JPUSHService.setAlias(alias, completion: { iResCode, iAlias, seq in  }, seq: 3)
+                if iResCode != 0 {
+                    JPUSHService.deleteAlias({ diResCode, _, dseq in
+                        if diResCode == 0, dseq == 10086 {
+                            JPUSHService.setAlias(alias, completion: { _, _, _ in }, seq: 3)
                         }
                     }, seq: 10086)
                 }
@@ -85,13 +87,14 @@ class GDataManager: NSObject {
     func registerDeviceToken(_ token: Data) {
         JPUSHService.registerDeviceToken(token)
     }
-    
+
     func pushDeleteAlias() {
-        JPUSHService.deleteAlias({ iResCode, iAlias, seq in
+        JPUSHService.deleteAlias({ _, _, _ in
         }, seq: 2)
     }
-    
+
     // MARK: - 发送视频通话推送给对方，暂时用于户户通。
+
     func sendVideoCallNotification(_ alias: String) {
         var pushModel = CommonPushModel()
         pushModel.alias = alias
@@ -111,14 +114,15 @@ class GDataManager: NSObject {
         }
     }
 
-    func loginAgoraRtm(){
+    func loginAgoraRtm() {
         guard let kit = AgoraRtm.shared().kit else {
             return
         }
         if let userID = ud.userID {
             // MARK: - Agora Device Account 默认加41前缀，跟门口机设备区分
+
             let account = userID.ajAgoraAccount()
-            kit.login(account: account, token: nil, fail:  { (error) in
+            kit.login(account: account, token: nil, fail: { error in
                 logger.error("AgoraRtm ====> \(error.localizedDescription)")
                 SVProgressHUD.showError(withStatus: "error.localizedDescription")
             })
@@ -135,7 +139,6 @@ class GDataManager: NSObject {
         }
     }
 
-    
     func clearUserUnit() {
         ud.remove(\.currentUnitID)
         ud.remove(\.currentCommunityID)
@@ -145,6 +148,7 @@ class GDataManager: NSObject {
     }
 
     // MARK: - 清除数据
+
     func clearAccount() {
         pushDeleteAlias()
         RealmTools.deleteRealmFiles()
@@ -154,6 +158,7 @@ class GDataManager: NSObject {
     }
 
     // MARK: - 删除用户数据
+
     func removeUserData() {
         logoutAgoraRtm()
         ud.remove(\.loginState)
@@ -173,11 +178,13 @@ class GDataManager: NSObject {
     }
 
     // MARK: - 删除网络请求缓存
+
     func removeNetCache() {
         CacheManager.network.removeAllCache()
     }
 
     // MARK: - 删除用户日常缓存
+
     func removeNormalCache() {
         CacheManager.normal.removeAllCache()
         CacheManager.version.removeAllCache()
@@ -193,12 +200,12 @@ class GDataManager: NSObject {
 }
 
 extension GDataManager {
-    func headerMD5(_ dic: Dictionary<String, Any>, _ key: String) -> [String: Any] {
+    func headerMD5(_ dic: [String: Any], _ key: String) -> [String: Any] {
         if dic.has(key), let evalue = dic[key] as? String {
             let timestamp = NSDate().timeIntervalSince1970.jk.string
             let encryptString = evalue + timestamp + "p!P2QklnjGGaZKlw"
             let fkey = encryptString.md5()
-            var result = Dictionary().merging(dic) { (_, new) in
+            var result = Dictionary().merging(dic) { _, new in
                 new
             }
             result.updateValue(timestamp, forKey: "TIMESTAMP")
@@ -214,7 +221,7 @@ extension GDataManager {
     func checkAvailableCamera() -> Bool {
         if let device = AVCaptureDevice.default(for: .video) {
             do {
-                let _ = try AVCaptureDeviceInput.init(device: device)
+                let _ = try AVCaptureDeviceInput(device: device)
                 return true
             } catch {
                 return false
@@ -225,13 +232,12 @@ extension GDataManager {
     }
 }
 
-
 extension GDataManager {
     func timeDuration(withInterval time: Int) -> String {
         var result = ""
         let seconds = time % 60
         var minutes = time / 60
-        var hours: Int = 0
+        var hours = 0
         if minutes > 60 {
             hours = minutes / 60
             minutes = minutes % 60

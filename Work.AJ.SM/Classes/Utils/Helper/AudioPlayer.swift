@@ -22,20 +22,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
 import AVFoundation
+import Foundation
 
 public enum AudioPlayerError: Error {
     case fileExtension, fileNotFound
 }
 
-extension NSNotification.Name {
-    
-    public static let SoundDidFinishPlayingNotification : Notification.Name = Notification.Name.init("SoundDidFinishPlayingNotification")
-
+public extension NSNotification.Name {
+    static let SoundDidFinishPlayingNotification: Notification.Name = .init("SoundDidFinishPlayingNotification")
 }
-public class AudioPlayer: NSObject {
 
+public class AudioPlayer: NSObject {
     public static let SoundDidFinishPlayingSuccessfully = "success"
     public typealias SoundDidFinishCompletion = (_ didFinish: Bool) -> Void
 
@@ -75,7 +73,7 @@ public class AudioPlayer: NSObject {
             return 0.0
         }
         set {
-           sound?.currentTime = newValue
+            sound?.currentTime = newValue
         }
     }
 
@@ -149,34 +147,30 @@ public class AudioPlayer: NSObject {
         timer?.invalidate()
         sound?.delegate = nil
     }
-
 }
 
 // MARK: - Play / Stop
 
-extension AudioPlayer {
-
-    public func play(withDelay delay: Int = 0) {
+public extension AudioPlayer {
+    func play(withDelay delay: Int = 0) {
         if !isPlaying {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay)) {
                 self.sound?.play()
-            })
+            }
         }
     }
 
-    public func stop() {
+    func stop() {
         if isPlaying {
             soundDidFinishPlaying(successfully: false)
         }
     }
-
 }
 
 // MARK: - Fade
 
-extension AudioPlayer {
-
-    public func fadeTo(volume: Float, duration: TimeInterval = 1.0) {
+public extension AudioPlayer {
+    func fadeTo(volume: Float, duration: TimeInterval = 1.0) {
         startVolume = sound?.volume ?? 1
         targetVolume = volume
         fadeTime = duration
@@ -186,41 +180,40 @@ extension AudioPlayer {
         }
     }
 
-    public func fadeIn(duration: TimeInterval = 1.0) {
+    func fadeIn(duration: TimeInterval = 1.0) {
         volume = 0.0
         fadeTo(volume: 1.0, duration: duration)
     }
 
-    public func fadeOut(duration: TimeInterval = 1.0) {
+    func fadeOut(duration: TimeInterval = 1.0) {
         fadeTo(volume: 0.0, duration: duration)
     }
 
-    @objc func handleFadeTo() {
+    @objc internal func handleFadeTo() {
         let now = NSDate().timeIntervalSinceReferenceDate
         let delta: Float = (Float(now - fadeStart) / Float(fadeTime) * (targetVolume - startVolume))
         let volume = startVolume + delta
         sound?.volume = volume
         if delta > 0.0 && volume >= targetVolume ||
-            delta < 0.0 && volume <= targetVolume || delta == 0.0 {
+            delta < 0.0 && volume <= targetVolume || delta == 0.0
+        {
             sound?.volume = targetVolume
             timer?.invalidate()
             timer = nil
             if sound?.volume == 0 {
                 stop()
             }
-        // Continue fading, but if it's not currently playing, kick it off.
+            // Continue fading, but if it's not currently playing, kick it off.
         } else if !sound!.isPlaying {
             play()
         }
     }
-
 }
 
 // MARK: - AVAudioPlayerDelegate
 
 extension AudioPlayer: AVAudioPlayerDelegate {
-
-    public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    public func audioPlayerDidFinishPlaying(_: AVAudioPlayer, successfully flag: Bool) {
         soundDidFinishPlaying(successfully: flag)
     }
 
@@ -233,8 +226,7 @@ extension AudioPlayer: AVAudioPlayerDelegate {
             nonNilCompletionHandler(flag)
         }
 
-        let success = [ AudioPlayer.SoundDidFinishPlayingSuccessfully: flag ]
+        let success = [AudioPlayer.SoundDidFinishPlayingSuccessfully: flag]
         NotificationCenter.default.post(name: .SoundDidFinishPlayingNotification, object: self, userInfo: success)
     }
-
 }

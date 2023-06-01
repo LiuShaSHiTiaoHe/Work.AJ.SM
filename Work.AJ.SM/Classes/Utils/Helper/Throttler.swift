@@ -13,7 +13,7 @@ public class Throttler: NSObject {
     public enum ThrottleMode {
         case leading, trailing
     }
-    
+
     private let throttler: Throttle
     public init(seconds: Float, mode: ThrottleMode) {
         switch mode {
@@ -23,18 +23,17 @@ public class Throttler: NSObject {
             throttler = TrailingThrottler(interval: seconds)
         }
     }
-    
+
     public func throttle(block: @escaping () -> Void) {
         throttler.throttle {
             block()
         }
     }
-    
+
     public func invalidate() {
         throttler.invalidate()
     }
 }
-
 
 private protocol Throttle {
     var interval: Float { get }
@@ -47,7 +46,7 @@ private class LeadingThrottler: Throttle {
     init(interval: Float) {
         self.interval = interval
     }
-    
+
     private var lastRunningDate: Date?
     private var task: (() -> Void)?
     func throttle(block: @escaping () -> Void) {
@@ -56,17 +55,17 @@ private class LeadingThrottler: Throttle {
             resumeTask()
             return
         }
-        
+
         let timeInterval = Float(Date().timeIntervalSince(lastDate))
         if timeInterval > interval {
             resumeTask()
         }
     }
-    
+
     func invalidate() {
-        self.task = nil
+        task = nil
     }
-    
+
     private func resumeTask() {
         if let task = task {
             task()
@@ -80,19 +79,19 @@ private class TrailingThrottler: Throttle {
     init(interval: Float) {
         self.interval = interval
     }
-    
+
     private let queue = DispatchQueue(label: "com.roni.TrailingThrottler.", attributes: .concurrent)
     private var lastRunningDate: Date?
     private var nextRunningDate: Date?
     private var workItem: DispatchWorkItem?
-    
+
     func throttle(block: @escaping () -> Void) {
         workItem = DispatchWorkItem(block: block)
         let currentDate = Date()
         guard getNextRunningDate() == nil else {
             return
         }
-        
+
         if let lastDate = getLastRunningDate() {
             let timeInterval = Float(currentDate.timeIntervalSince(lastDate))
             var date: Date
@@ -105,22 +104,22 @@ private class TrailingThrottler: Throttle {
         } else {
             setNextRunningDate(currentDate.addingTimeInterval(TimeInterval(interval)))
         }
-        
+
         guard let nextDate = getNextRunningDate() else { return }
         let nextInterval = nextDate.timeIntervalSince(currentDate)
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + nextInterval) {
             self.workItem?.perform()
             self.setNextRunningDate(nil)
             self.setLastRunningDate(Date())
         }
     }
-    
+
     func invalidate() {
         workItem?.cancel()
         workItem = nil
     }
-    
+
     private func getNextRunningDate() -> Date? {
         var date: Date?
         queue.sync {
@@ -128,13 +127,13 @@ private class TrailingThrottler: Throttle {
         }
         return date
     }
-    
+
     private func setNextRunningDate(_ date: Date?) {
         queue.async(flags: .barrier) {
             self.nextRunningDate = date
         }
     }
-    
+
     private func getLastRunningDate() -> Date? {
         var date: Date?
         queue.sync {
@@ -142,7 +141,7 @@ private class TrailingThrottler: Throttle {
         }
         return date
     }
-    
+
     private func setLastRunningDate(_ date: Date) {
         queue.async(flags: .barrier) {
             self.lastRunningDate = date

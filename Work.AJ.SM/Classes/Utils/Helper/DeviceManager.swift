@@ -5,18 +5,18 @@
 //  Created by Anjie on 2022/5/7.
 //
 
-import Foundation
 import DeviceKit
-import KeychainAccess
+import Foundation
 import JKSwiftExtension
+import KeychainAccess
 
 class DeviceManager {
-    static let shared  = DeviceManager()
-    
+    static let shared = DeviceManager()
+
     func requestHeaderXDeviceString() -> String {
-        let currentDevice: Device = Device.current
-        let identifierID = Keychain.init(service: kKeyChainServiceKey)["xbid"] ?? ""
-        var deviceInfo: Dictionary<String, String> = [:]
+        let currentDevice = Device.current
+        let identifierID = Keychain(service: kKeyChainServiceKey)["xbid"] ?? ""
+        var deviceInfo: [String: String] = [:]
         deviceInfo.updateValue(kDeviceType, forKey: "deviceType")
         deviceInfo.updateValue(identifierID, forKey: "deviceId")
         deviceInfo.updateValue(currentDevice.name ?? "", forKey: "deviceName")
@@ -30,6 +30,6 @@ class DeviceManager {
         }
         return ""
     }
-    
+
     private init() {}
 }

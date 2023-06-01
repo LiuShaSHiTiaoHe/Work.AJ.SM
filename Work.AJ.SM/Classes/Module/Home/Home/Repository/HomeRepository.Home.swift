@@ -23,12 +23,13 @@ extension HomeRepository {
         var homeModuleArray: Array<HomePageFunctionModule> = []
         var adsArray: Array<AdsModel> = []
         var noticeArray: Array<NoticeModel> = []
+        // 没有手机号码，直接返回
         guard let userMobile = ud.userMobile else {
             SVProgressHUD.dismiss()
             completion(homeModuleArray, adsArray, noticeArray, .Unknown)
             return
         }
-
+        
         HomeAPI.getMyUnit(mobile: userMobile).request(modelType: [UnitModel].self, cacheType: .networkElseCache, showError: true) { [weak self] models, response in
             guard let `self` = self else {
                 return
@@ -57,7 +58,7 @@ extension HomeRepository {
             } else {
                 // MARK: - 当前房间有效
                 if let cUnitID = currentUnitID, let _ = idAndStates.first(where: {$0.0 == cUnitID.jk.intToString && $0.1 == .Normal }),
-                    let cUnit = models.first(where: {$0.unitid == cUnitID}) {
+                   let cUnit = models.first(where: {$0.unitid == cUnitID}) {
                     ud.currentUnitID = cUnitID
                     if let communityID = cUnit.communityid {
                         ud.currentCommunityID = communityID
@@ -84,7 +85,7 @@ extension HomeRepository {
                     } else if let _ = idAndStates.first(where: {$0.1 == .Pending}) {
                         completion(homeModuleArray, adsArray, noticeArray, .Pending)
                     } else if let _ = idAndStates.first(where: {$0.1 == .Blocked}){
-                       completion(homeModuleArray, adsArray, noticeArray, .Blocked)
+                        completion(homeModuleArray, adsArray, noticeArray, .Blocked)
                     } else if let _ = idAndStates.first(where: {$0.1 == .Expire}){
                         completion(homeModuleArray, adsArray, noticeArray, .Expire)
                     } else {
@@ -100,7 +101,7 @@ extension HomeRepository {
             completion(homeModuleArray, adsArray, noticeArray, .Unknown)
         }
     }
-
+    
     func adsAndNotice(completion: @escaping HomeAdsAndNoticeCompletion) {
         var adsData: [AdsModel] = []
         var noticeData: [NoticeModel] = []
@@ -130,14 +131,14 @@ extension HomeRepository {
             completion(adsData, noticeData)
         }
     }
-
+    
     func getUnitName(unitID: Int) -> String {
         if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname, let blockname = unit.blockname, let unitno = unit.unitno {
             return communityname + blockname + cellname + unitno + "室"
         }
         return ""
     }
-
+    
     func getCurrentUnit() -> UnitModel? {
         if let unitID = ud.currentUnitID {
             logger.info("currentUnitID is \(unitID)")
@@ -148,7 +149,7 @@ extension HomeRepository {
         logger.info("currentUnitID is nil")
         return nil
     }
-
+    
     func getCurrentUnitName() -> String {
         if let unitID = ud.currentUnitID {
             if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let communityname = unit.communityname, let cellname = unit.cellname {
@@ -157,7 +158,7 @@ extension HomeRepository {
         }
         return ""
     }
-
+    
     func getCurrentHouseName() -> String {
         if let unitID = ud.currentUnitID {
             if let unit = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "unitid == %d", unitID)).first, let cell = unit.cellname, let community = unit.communityname, let unitno = unit.unitno, let blockName = unit.blockname {
@@ -166,7 +167,7 @@ extension HomeRepository {
         }
         return ""
     }
-
+    
     func getCurrentUser() -> UserModel? {
         if let userID = ud.userID, let _ = userID.jk.toInt() {
             if let user = RealmTools.objectsWithPredicate(object: UserModel(), predicate: NSPredicate.init(format: "rid == %@", userID)).first {
@@ -175,14 +176,14 @@ extension HomeRepository {
         }
         return nil
     }
-
+    
     func currentUserType() -> String {
         if let unit = getCurrentUnit(), let type = unit.usertype {
             return type
         }
         return ""
     }
-
+    
     func isUnitOwner() -> Bool {
         if currentUserType() == "O" {
             return true
@@ -193,6 +194,18 @@ extension HomeRepository {
 
 // MARK: - filter
 extension HomeRepository {
+    
+    // 20230513 新版二维码，支持局域网DID，新增两个兜底模块
+    func defaultHomeageModules() -> [HomePageFunctionModule] {
+        var result = [HomePageFunctionModule]()
+        // 身份码
+        result.append(HomePageModule.userQRCode.model)
+        
+        // 访客二维码
+        result.append(HomePageModule.gusetQRCode.model)
+        return result
+    }
+    
     func filterHomePageModules(_ unit: UnitModel) -> [HomePageFunctionModule] {
         var result = [HomePageFunctionModule]()
         let allKeys = HomePageModule.allCases
@@ -215,10 +228,11 @@ extension HomeRepository {
             if isMemberManagementEnable(unit) {
                 result.append(HomePageModule.addFamilyMember.model)
             }
+            result.appends(defaultHomeageModules())
         }
         return result
     }
-
+    
     private func allValidModules(_ unit: UnitModel) -> [String] {
         var result: Array<String> = []
         if unit.moudle1 == "T" {
@@ -250,7 +264,7 @@ extension HomeRepository {
         }
         // FIXME: - 暂时隐藏蓝牙配置
         if let module10 = unit.moudle10, let mobile = unit.mobile, module10.contains(mobile) {
-//            result.append("MOUDLE10")
+            //            result.append("MOUDLE10")
         }
         if unit.moudle11 == "T" {
             result.append("MOUDLE11")
@@ -260,7 +274,7 @@ extension HomeRepository {
         }
         // FIXME: - 暂时隐藏电梯配置
         if let module13 = unit.moudle13, let mobile = unit.mobile, module13.contains(mobile) {
-//            result.append("MOUDLE13")
+            //            result.append("MOUDLE13")
         }
         if unit.moudle14 == "T" {
             result.append("MOUDLE14")
@@ -295,7 +309,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 访客密码功能是否支持
     func isVisitorPasswordEnable(_ unit: UnitModel) -> Bool {
         if let myset7 = unit.myset7, myset7 == "T" {
@@ -303,7 +317,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 访客二维码是否支持
     func isVisitorQrCodeEnable(_ unit: UnitModel) -> Bool {
         if let module17 = unit.moudle17, module17 == "T" {
@@ -311,7 +325,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 是否允许访客呼叫到手机
     func isVisitorCallUserMobileEnable(_ unit: UnitModel) -> Bool {
         if let myset8 = unit.myset8, myset8 == "T" {
@@ -319,7 +333,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 人脸认证是否支持
     func isFaceCertificationEnable(_ unit: UnitModel) -> Bool {
         if let myset1 = unit.myset1, myset1 == "T" {
@@ -327,7 +341,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     //MARK: - 开门设置是否支持
     func isOpenDoorSettingEnable(_ unit: UnitModel) -> Bool {
         if let myset6 = unit.myset6, myset6 == "T" {
@@ -335,7 +349,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 访客记录是否支持
     func isVisitorRecordEnable(_ unit: UnitModel) -> Bool {
         if isVisitorPasswordEnable(unit) {
@@ -346,7 +360,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 户户通是否支持
     func isCallOtherUserEnable(_ unit: UnitModel) -> Bool {
         if let myset2 = unit.myset2, myset2 == "T" {
@@ -354,7 +368,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 联系物业是否支持
     func isContactPropertyEnable(_ unit: UnitModel) -> Bool {
         if let myset9 = unit.myset9, myset9 == "T" {
@@ -362,7 +376,7 @@ extension HomeRepository {
         }
         return false
     }
-
+    
     // MARK: - 消息是否支持
     func isNoticeMessageEnable(_ unit: UnitModel? = nil) -> Bool {
         if let unit = unit {

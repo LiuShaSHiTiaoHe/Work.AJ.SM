@@ -5,15 +5,15 @@
 //  Created by Anjie on 2022/5/26.
 //
 
-import UIKit
 import SwiftEntryKit
+import UIKit
 
 enum EntryKitCustomAttributes: Int {
     case bottomFloat
     case centerFloat
     case fullScreenFloat
-    
-    var attributes: EKAttributes{
+
+    var attributes: EKAttributes {
         switch self {
         case .bottomFloat:
             var attributes: EKAttributes
@@ -56,7 +56,7 @@ enum EntryKitCustomAttributes: Int {
             attributes.positionConstraints.safeArea = .overridden
             attributes.statusBar = .inferred
             return attributes
-            
+
         case .centerFloat:
             var attributes: EKAttributes
             attributes = .centerFloat
@@ -140,7 +140,5 @@ enum EntryKitCustomAttributes: Int {
             attributes.statusBar = .inferred
             return attributes
         }
-    
     }
-    
 }

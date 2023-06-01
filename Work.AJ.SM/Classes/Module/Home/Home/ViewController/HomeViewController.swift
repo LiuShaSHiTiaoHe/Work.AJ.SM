@@ -5,13 +5,12 @@
 //  Created by Anjie on 2021/12/28.
 //
 
-import UIKit
-import SwiftEntryKit
 import AVFoundation
+import SwiftEntryKit
 import swiftScan
+import UIKit
 
 class HomeViewController: BaseViewController {
-
     lazy var contentView: HomeView = {
         let view = HomeView()
         return view
@@ -21,18 +20,18 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(currentUnitChanged), name: .kCurrentUnitChanged, object: nil)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let _ = ud.currentUnitID {
-            if isNoDataViewShow {
-                self.hideNoDataView()
-            }
-        } else {
-            if !isNoDataViewShow {
-                self.showNoDataView(.nohouse)
-            }
-        }
+        //        if let _ = ud.currentUnitID {
+        //            if isNoDataViewShow {
+        //                self.hideNoDataView()
+        //            }
+        //        } else {
+        //            if !isNoDataViewShow {
+        //                self.showNoDataView(.nohouse)
+        //            }
+        //        }
     }
 
     override func initUI() {
@@ -55,7 +54,7 @@ class HomeViewController: BaseViewController {
     override func emptyViewRefresh() {
         loadUnitData()
     }
-    
+
     @objc
     func currentUnitChanged() {
         loadUnitData()
@@ -67,23 +66,35 @@ class HomeViewController: BaseViewController {
                 return
             }
             switch status {
-            case .Invalid, .Expire, .Blocked:
-                self.showNoDataView(.nohouse)
-                SVProgressHUD.showInfo(withStatus: "该房屋已被停用，请联系物业或添加其他房屋")
-            case .Unknown:
-                self.showNoDataView(.nohouse)
+            case .Invalid, .Expire, .Blocked, .Unknown, .Pending:
+                self.contentView.updateTitle(title: "暂无可用房屋")
+                self.contentView.updateHomeFunctions(HomeRepository.shared.defaultHomeageModules())
             case .Normal:
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.contentView.updateAdsAndNotices(ads, notices)
+
                 // MARK: - 获取模块控制信息/自动检查版本，切换房屋或者刷新也有效
+
                 HomeRepository.shared.getModuleStatusFromServer()
                 AppUpgradeManager.shared.autoCheckVersion()
-            case .Pending:
-                self.showNoDataView(.nohouse)
-                SVProgressHUD.showInfo(withStatus: "该房屋审核中，请联系物业获取审核结果")
-            }
 
+                //            case .Invalid, .Expire, .Blocked:
+                //                self.showNoDataView(.nohouse)
+                //                SVProgressHUD.showInfo(withStatus: "该房屋已被停用，请联系物业或添加其他房屋")
+                //            case .Unknown:
+                //                self.showNoDataView(.nohouse)
+                //            case .Normal:
+                //                self.hideNoDataView()
+                //                self.contentView.updateHomeFunctions(modules)
+                //                self.contentView.updateAdsAndNotices(ads, notices)
+                //                // MARK: - 获取模块控制信息/自动检查版本，切换房屋或者刷新也有效
+                //                HomeRepository.shared.getModuleStatusFromServer()
+                //                AppUpgradeManager.shared.autoCheckVersion()
+                //            case .Pending:
+                //                self.showNoDataView(.nohouse)
+                //                SVProgressHUD.showInfo(withStatus: "该房屋审核中，请联系物业获取审核结果")
+            }
         }
     }
 }
@@ -106,8 +117,8 @@ extension HomeViewController: HomeViewDelegate {
             navigateTo(viewController: IndoorCallElevatorViewController())
         case .bleCallElevator:
             PopViewManager.shared.display(BleCallElevatorViewController(), .center, .init(
-                    width: .constant(value: 280),
-                    height: .constant(value: 380)
+                width: .constant(value: 280),
+                height: .constant(value: 380)
             ), true)
         case .cloudOpenGate:
             showModuleVersionControlTipsView(module: .RemoteOpenDoor) { [weak self] in
@@ -144,13 +155,15 @@ extension HomeViewController: HomeViewDelegate {
             break
         case .elevatorConfiguration:
             navigateTo(viewController: ElevatorConfigurationViewController())
+        case .userQRCode:
+            navigateTo(viewController: UserIdentifyQRCodeViewController())
+        case .gusetQRCode:
+            navigateTo(viewController: AddGuestQRCodeViewController())
         }
     }
 }
 
-extension HomeViewController {
-
-}
+extension HomeViewController {}
 
 extension HomeViewController: ChooseVisitorModeDelegate {
     func qrcode() {
