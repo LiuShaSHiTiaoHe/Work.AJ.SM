@@ -5,48 +5,44 @@
 //  Created by jason on 2023/6/1.
 //
 
-import UIKit
 import PGDatePicker
-import YYCategories
 import SVProgressHUD
+import UIKit
+import YYCategories
 
 class AddGuestQRCodeViewController: BaseViewController {
-    
     private var arriveTime: Date?
     private var validTime: Date?
     private var timeType: SelectTimeType = .arrive
-    
+
     lazy var contentView: AddGuestQRCodeView = {
         let view = AddGuestQRCodeView()
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
     }
-    
+
     override func initUI() {
         view.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
-    
+
     override func initData() {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
-        let location = HomeRepository.shared.getCurrentHouseName()
-        contentView.tipsLabel.text = location
         contentView.confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         defaultTime()
     }
-    
+
     func selectTime() {
-        let datePickerManager = PGDatePickManager.init()
+        let datePickerManager = PGDatePickManager()
         datePickerManager.isShadeBackground = true
         datePickerManager.style = .sheet
         datePickerManager.cancelButtonTextColor = R.color.sub_red()
@@ -65,65 +61,56 @@ class AddGuestQRCodeViewController: BaseViewController {
         datePicker?.textFontOfSelectedRow = k18Font
         datePicker?.lineBackgroundColor = R.color.themecolor()
         datePicker?.minimumDate = Date()
-        datePicker?.maximumDate = NSDate.init().addingHours(12)//addingMonths(13)
-        datePicker?.selectedDate = {[weak self] dateComponents in
+        datePicker?.maximumDate = NSDate().addingHours(12) // addingMonths(13)
+        datePicker?.selectedDate = { [weak self] dateComponents in
             guard let `self` = self else { return }
             switch self.timeType {
             case .arrive:
                 if let dc = dateComponents, let selectDate = Calendar.current.date(from: dc) {
                     self.arriveTime = selectDate
                 }
-                self.contentView.tableView.reloadRow(at: IndexPath.init(row: 0, section: 0), with: .none)
+                self.contentView.tableView.reloadRow(at: IndexPath(row: 0, section: 0), with: .none)
             case .valid:
                 if let dc = dateComponents, let selectDate = Calendar.current.date(from: dc) {
                     self.validTime = selectDate
                 }
-                self.contentView.tableView.reloadRow(at: IndexPath.init(row: 1, section: 0), with: .none)
+                self.contentView.tableView.reloadRow(at: IndexPath(row: 1, section: 0), with: .none)
             }
         }
-        present(datePickerManager, animated: false) {
-            
-        }
+        present(datePickerManager, animated: false) {}
     }
-    
+
     func defaultTime() {
         arriveTime = Date()
         validTime = NSDate().addingMinutes(30)
         contentView.tableView.reloadData()
     }
-    
+
     @objc
     func confirm() {
-        SVProgressHUD.show()
+        let cell = contentView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! CommonInputCell
+        var floors = [String]()
+        if let floor = cell.commonInput.text {
+            floors.append(floor)
+        }
         if let validTime = validTime, let arriveTime = arriveTime {
             if let interval = validTime.jk.numberOfMinutes(from: arriveTime), interval >= 30 {
-                if interval > 12*60 {
+                if interval > 12 * 60 {
                     SVProgressHUD.showError(withStatus: "有效期超过限制")
-                }else{
-                    if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let userID = ud.userID {
-                        let arriveTimeString = arriveTime.jk.toformatterTimeString()
-                        let validTimeString = validTime.jk.toformatterTimeString()
-                        HomeAPI.getInvitationQRCode(unitID: unitID, arriveTime: arriveTimeString, validTime: validTimeString, communityID: communityID, blockID: blockID, userID: userID).defaultRequest { JsonData in
-                            SVProgressHUD.dismiss()
-                            if let data = JsonData["data"].dictionary, let qrcode = data["qrcode"]?.string {
-                                DispatchQueue.main.async {
-                                    let vc = QRCodeInvitationViewController()
-                                    vc.arriveTime = arriveTime
-                                    vc.validTime = validTime
-                                    vc.qrCodeString = qrcode
-                                    self.navigationController?.pushViewController(vc, animated: true)
-                                }
-                            }
-                        } failureCallback: { response in
-                            logger.info("\(response.message)")
-                            SVProgressHUD.showError(withStatus: "\(response.message)")
+                } else {
+                    DispatchQueue.main.async {
+                        let vc = GuestQRCodeViewController()
+                        vc.arriveTime = arriveTime
+                        vc.validTime = validTime
+                        if !floors.isEmpty {
+                            vc.floor = floors.first
                         }
-                    }else{
-                        SVProgressHUD.showError(withStatus: "数据错误")
+                        vc.qrCodeImage = QRCodeManager.shared.generateGuestQRCode(arriveTime.timeIntervalSince1970.jk.int,
+                                                                                  validTime.timeIntervalSince1970.jk.int, floors)
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
-                    
                 }
-            }else{
+            } else {
                 SVProgressHUD.showError(withStatus: "有效期早于来访时间")
             }
         } else {
@@ -133,13 +120,13 @@ class AddGuestQRCodeViewController: BaseViewController {
 }
 
 extension AddGuestQRCodeViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
-        case 0,1 :
+        case 0, 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeSelectCellIdentifier, for: indexPath) as! TimeSelectCell
             cell.accessoryType = .none
             switch indexPath.row {
@@ -157,7 +144,7 @@ extension AddGuestQRCodeViewController: UITableViewDelegate, UITableViewDataSour
                 fatalError()
             }
             return cell
-        case 2 :
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: CommonInputCellIdentifier, for: indexPath) as! CommonInputCell
             cell.accessoryType = .none
             cell.nameLabel.text = "到访楼层(选填)"
@@ -167,11 +154,11 @@ extension AddGuestQRCodeViewController: UITableViewDelegate, UITableViewDataSour
             fatalError()
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         60.0
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         switch indexPath.row {
@@ -186,5 +173,4 @@ extension AddGuestQRCodeViewController: UITableViewDelegate, UITableViewDataSour
             fatalError()
         }
     }
-    
 }

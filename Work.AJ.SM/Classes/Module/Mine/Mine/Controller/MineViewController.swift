@@ -133,6 +133,10 @@ extension MineViewController: UITableViewDelegate, UITableViewDataSource {
                     break
                 case .contactProperty:
                     navigateTo(viewController: PropertyContactViewController())
+                case .userQRCode:
+                    navigateTo(viewController: UserIdentifyQRCodeViewController())
+                case .gusetQRCode:
+                    navigateTo(viewController: AddGuestQRCodeViewController())
                 }
             }
         }

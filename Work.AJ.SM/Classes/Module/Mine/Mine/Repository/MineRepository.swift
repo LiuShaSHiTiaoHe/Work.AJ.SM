@@ -64,7 +64,6 @@ class MineRepository: NSObject {
     func getAllSelectableUnit(completion: @escaping HouseChooseCompletion) {
         if let userID = ud.userID?.jk.toInt() {
             let models = RealmTools.objectsWithPredicate(object: UnitModel(), predicate: NSPredicate(format: "userid == %d", userID)).filter {
-//                $0.state == UnitStatus.Normal.rawValue
                 $0.state != UnitStatus.Unknown.rawValue
             }
             completion(models)

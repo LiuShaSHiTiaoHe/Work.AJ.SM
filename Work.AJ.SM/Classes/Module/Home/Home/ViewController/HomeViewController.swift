@@ -23,15 +23,6 @@ class HomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        if let _ = ud.currentUnitID {
-        //            if isNoDataViewShow {
-        //                self.hideNoDataView()
-        //            }
-        //        } else {
-        //            if !isNoDataViewShow {
-        //                self.showNoDataView(.nohouse)
-        //            }
-        //        }
     }
 
     override func initUI() {
@@ -75,25 +66,8 @@ class HomeViewController: BaseViewController {
                 self.contentView.updateAdsAndNotices(ads, notices)
 
                 // MARK: - 获取模块控制信息/自动检查版本，切换房屋或者刷新也有效
-
                 HomeRepository.shared.getModuleStatusFromServer()
                 AppUpgradeManager.shared.autoCheckVersion()
-
-                //            case .Invalid, .Expire, .Blocked:
-                //                self.showNoDataView(.nohouse)
-                //                SVProgressHUD.showInfo(withStatus: "该房屋已被停用，请联系物业或添加其他房屋")
-                //            case .Unknown:
-                //                self.showNoDataView(.nohouse)
-                //            case .Normal:
-                //                self.hideNoDataView()
-                //                self.contentView.updateHomeFunctions(modules)
-                //                self.contentView.updateAdsAndNotices(ads, notices)
-                //                // MARK: - 获取模块控制信息/自动检查版本，切换房屋或者刷新也有效
-                //                HomeRepository.shared.getModuleStatusFromServer()
-                //                AppUpgradeManager.shared.autoCheckVersion()
-                //            case .Pending:
-                //                self.showNoDataView(.nohouse)
-                //                SVProgressHUD.showInfo(withStatus: "该房屋审核中，请联系物业获取审核结果")
             }
         }
     }

@@ -200,7 +200,6 @@ extension HomeRepository {
         var result = [HomePageFunctionModule]()
         // 身份码
         result.append(HomePageModule.userQRCode.model)
-        
         // 访客二维码
         result.append(HomePageModule.gusetQRCode.model)
         return result
@@ -228,7 +227,6 @@ extension HomeRepository {
             if isMemberManagementEnable(unit) {
                 result.append(HomePageModule.addFamilyMember.model)
             }
-            result.appends(defaultHomeageModules())
         }
         return result
     }

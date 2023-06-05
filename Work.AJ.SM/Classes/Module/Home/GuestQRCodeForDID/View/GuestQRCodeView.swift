@@ -9,43 +9,10 @@ import UIKit
 import SnapKit
 
 class GuestQRCodeView: BaseView {
-    
-    var isValid: Bool? {
-        didSet {
-            if let isValid = isValid {
-                statusLabel.isHidden = false
-                if isValid {
-                    statusLabel.text = "有效"
-                    statusLabel.backgroundColor = R.color.sub_green()
-                    invalidTips.isHidden = true
-                    invalidIcon.isHidden = true
-                    qrCodeView.isHidden = false
-                }else{
-                    statusLabel.text = "已过期"
-                    statusLabel.backgroundColor = R.color.text_info()
-                    invalidTips.isHidden = false
-                    invalidIcon.isHidden = false
-                    qrCodeView.isHidden = true
-                    hideShareButtons()
-                }
-            }else{
-                statusLabel.isHidden = true
-                invalidTips.isHidden = true
-                invalidIcon.isHidden = true
-                qrCodeView.isHidden = false
-            }
-        }
-    }
-    
-    func hideShareButtons() {
-        saveButton.isHidden = true
-        shareButton.isHidden = true
-    }
-    
 
     override func initializeView() {
         let contentImageHeight = kScreenHeight - kTitleAndStateHeight - 100 - kMargin
-        let topPartHeight = 210.0
+        let topPartHeight = 150.0
         let qrCodeWidth = kScreenWidth - kMargin*2
         let qrCodeHeight = contentImageHeight - topPartHeight - 70 - 20
         
@@ -54,7 +21,6 @@ class GuestQRCodeView: BaseView {
         addSubview(bgContentView)
         
         bgContentView.addSubview(titleLabel)
-        bgContentView.addSubview(statusLabel)
         bgContentView.addSubview(locationLabel)
         bgContentView.addSubview(arriveLabel)
         bgContentView.addSubview(arriveTime)
@@ -62,15 +28,9 @@ class GuestQRCodeView: BaseView {
         bgContentView.addSubview(validTime)
         bgContentView.addSubview(dashLine)
         bgContentView.addSubview(qrCodeView)
-        bgContentView.addSubview(invalidIcon)
-        bgContentView.addSubview(invalidTips)
-        
+
         addSubview(saveButton)
         addSubview(shareButton)
-        
-        statusLabel.isHidden = true
-        invalidTips.isHidden = true
-        invalidIcon.isHidden = true
         
         bgImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -88,30 +48,23 @@ class GuestQRCodeView: BaseView {
             make.bottom.equalToSuperview().offset(-100)
         }
         
-        statusLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.width.equalTo(80)
-            make.height.equalTo(30)
-            make.top.equalToSuperview().offset(kMargin/2)
-        }
-        
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
             make.height.equalTo(20)
-            make.top.equalToSuperview().offset(kMargin)
+            make.top.equalToSuperview().offset(kMargin/2)
         }
         
         locationLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin)
-            make.height.equalTo(60)
+            make.top.equalTo(titleLabel.snp.bottom).offset(kMargin/2)
+            make.height.equalTo(20)
             make.left.equalToSuperview().offset(kMargin)
             make.right.equalToSuperview().offset(-kMargin)
         }
         
         arriveLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(kMargin)
-            make.top.equalTo(locationLabel.snp.bottom).offset(kMargin*2)
+            make.bottom.equalTo(validLabel.snp.top).offset(-kMargin)
             make.height.equalTo(20)
         }
         
@@ -124,7 +77,7 @@ class GuestQRCodeView: BaseView {
         
         validLabel.snp.makeConstraints { make in
             make.left.equalTo(arriveLabel)
-            make.top.equalTo(arriveLabel.snp.bottom).offset(kMargin)
+            make.bottom.equalTo(dashLine.snp.top).offset(-kMargin)
             make.height.equalTo(20)
         }
         
@@ -145,19 +98,7 @@ class GuestQRCodeView: BaseView {
         qrCodeView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.height.equalTo(min(qrCodeWidth, qrCodeHeight))
-            make.bottom.equalToSuperview().offset(-kMargin)
-        }
-        
-        invalidIcon.snp.makeConstraints { make in
-            make.right.equalTo(invalidTips.snp.left).offset(-kMargin/2)
-            make.width.height.equalTo(20)
-            make.centerY.equalTo(invalidTips)
-        }
-        
-        invalidTips.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.height.equalTo(30)
-            make.top.equalTo(qrCodeView.snp.centerY).offset(-kMargin)
+            make.top.equalTo(dashLine.snp.bottom).offset(kMargin)
         }
         
         saveButton.snp.makeConstraints { make in
@@ -210,16 +151,6 @@ class GuestQRCodeView: BaseView {
         return view
     }()
     
-    //状态标签
-    lazy var statusLabel: UILabel = {
-        let view = UILabel()
-        view.textColor = R.color.whitecolor()
-        view.font = k14Font
-        view.jk.addCorner(conrners: UIRectCorner.topRight, radius: 15.0)
-        view.jk.addCorner(conrners: UIRectCorner.bottomRight, radius: 15.0)
-        return view
-    }()
-    
     lazy var locationLabel: UILabel = {
         let view = UILabel.init()
         view.textColor = R.color.text_title()
@@ -269,20 +200,7 @@ class GuestQRCodeView: BaseView {
         let view = UIImageView()
         return view
     }()
-    
-    lazy var invalidIcon: UIImageView = {
-        let view = UIImageView.init(image: R.image.common_error_red())
-        return view
-    }()
-    
-    lazy var invalidTips: UILabel = {
-        let view = UILabel()
-        view.text = "访客二维码已过期"
-        view.font = k18Font
-        view.textColor = R.color.text_title()
-        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
-        return view
-    }()
+
     
     lazy var qrCodeView: UIImageView = {
         let view = UIImageView()

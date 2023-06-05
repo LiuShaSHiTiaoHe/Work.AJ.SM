@@ -20,6 +20,9 @@ enum MineModuleType: String {
     case activateCard = "激活蓝牙卡"
     case contactProperty = "联系物业"
 
+    case userQRCode = "用户码"
+    case gusetQRCode = "访客二维码"
+    
     var model: MineModule {
         switch self {
         case .house:
@@ -40,6 +43,10 @@ enum MineModuleType: String {
             return MineModule.init(name: self.rawValue, icon: "mine_icon_property", tag: mineModuleType, index: 1, destination: .mine_2)
         case .activateCard:
             return MineModule.init(name: self.rawValue, icon: "", tag: mineModuleType, index: 0, destination: .mine_2)
+        case .userQRCode:
+            return MineModule.init(name: self.rawValue, icon: "mine_icon_useridentify", tag: mineModuleType, index: 4, destination: .mine_0)
+        case .gusetQRCode:
+            return MineModule.init(name: self.rawValue, icon: "mine_icon_inviteguest", tag: mineModuleType, index: 5, destination: .mine_0)
         }
     }
 }

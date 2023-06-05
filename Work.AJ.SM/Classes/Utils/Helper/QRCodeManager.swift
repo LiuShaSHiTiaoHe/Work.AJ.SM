@@ -13,11 +13,9 @@ class QRCodeManager: NSObject {
     func generateUserIdentifyQRCode() -> UIImage? {
         if let mobile = ud.userMobile {
             let startTime = NSDate().timeIntervalSince1970.jk.int
-            logger.info("generateUserIdentifyQRCode: \(startTime)")
             let endTime = startTime + (5 * 60)
             let type = "1"
             let qrCodeString = generateQRCode(mobile, type, startTime, endTime, [])
-            logger.info("generateUserIdentifyQRCode: \(qrCodeString)")
             if let qrcodeImage = QRCode(string: qrCodeString, color: .black, backgroundColor: .white, size: CGSize(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
                 return image
             } else {
@@ -34,7 +32,6 @@ class QRCodeManager: NSObject {
         if let mobile = ud.userMobile {
             let type = "2"
             let qrCodeString = generateQRCode(mobile, type, startTime, endTime, floors)
-            logger.info("generateGuestQRCode: \(qrCodeString)")
             if let qrcodeImage = QRCode(string: qrCodeString, color: .black, backgroundColor: .white, size: CGSize(width: 280.0, height: 280.0), scale: 1.0, inputCorrection: .quartile), let image = qrcodeImage.unsafeImage {
                 return image
             } else {
@@ -69,6 +66,9 @@ class QRCodeManager: NSObject {
         default:
             result += "000"
         }
+        logger.info("generateQRCode result: \(result)")
+        let decode = result.jk.scaCrypt(cryptType: .AES128, key: "p!P2QklnjGGaZKlw", encode: true)
+        logger.info("generateQRCode decode: \(decode!)")
         return result
     }
 }
