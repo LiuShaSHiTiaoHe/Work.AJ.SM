@@ -39,6 +39,7 @@ class AddGuestQRCodeViewController: BaseViewController {
         contentView.confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         contentView.headerView.closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         defaultTime()
+        contentView.tipsLabel.text = "邀请访客"
     }
 
     func selectTime() {
@@ -61,7 +62,7 @@ class AddGuestQRCodeViewController: BaseViewController {
         datePicker?.textFontOfSelectedRow = k18Font
         datePicker?.lineBackgroundColor = R.color.themecolor()
         datePicker?.minimumDate = Date()
-        datePicker?.maximumDate = NSDate().addingHours(12) // addingMonths(13)
+        datePicker?.maximumDate = NSDate().addingHours(18)
         datePicker?.selectedDate = { [weak self] dateComponents in
             guard let `self` = self else { return }
             switch self.timeType {
@@ -95,7 +96,7 @@ class AddGuestQRCodeViewController: BaseViewController {
         }
         if let validTime = validTime, let arriveTime = arriveTime {
             if let interval = validTime.jk.numberOfMinutes(from: arriveTime), interval >= 30 {
-                if interval > 12 * 60 {
+                if interval > kInviteGuestValidTimeInterval {
                     SVProgressHUD.showError(withStatus: "有效期超过限制")
                 } else {
                     DispatchQueue.main.async {
@@ -168,9 +169,8 @@ extension AddGuestQRCodeViewController: UITableViewDelegate, UITableViewDataSour
         case 1:
             timeType = .valid
             selectTime()
-        case 2: break
         default:
-            fatalError()
+            break
         }
     }
 }

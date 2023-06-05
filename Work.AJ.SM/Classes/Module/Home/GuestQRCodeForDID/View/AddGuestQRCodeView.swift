@@ -25,6 +25,7 @@ class AddGuestQRCodeView: UIView {
         titleContentView.addSubview(locationIcon)
         titleContentView.addSubview(tipsLabel)
         addSubview(tableView)
+        addSubview(desLabel)
         addSubview(confirmButton)
         
         headerView.snp.makeConstraints { make in
@@ -54,12 +55,19 @@ class AddGuestQRCodeView: UIView {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleContentView.snp.bottom).offset(kMargin)
+            make.height.equalTo(200)
+        }
+        
+        desLabel.snp.makeConstraints { make in
+            make.top.equalTo(tableView.snp.bottom).offset(kMargin)
+            make.left.equalToSuperview().offset(kMargin)
+            make.right.equalToSuperview().offset(-kMargin)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-60)
         }
         
         confirmButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(tableView.snp.bottom).offset(kMargin/2)
+            make.top.equalTo(desLabel.snp.bottom).offset(kMargin/2)
             make.height.equalTo(40)
             make.width.equalTo(250)
         }
@@ -89,7 +97,6 @@ class AddGuestQRCodeView: UIView {
     
     lazy var tipsLabel: UILabel = {
         let view = UILabel()
-        view.textAlignment = .center
         view.font = k15Font
         view.textColor = R.color.text_title()
         view.textAlignment = .center
@@ -106,6 +113,16 @@ class AddGuestQRCodeView: UIView {
         view.separatorStyle = .singleLine
         view.backgroundColor = R.color.bg()
         view.tableFooterView = UIView()
+        return view
+    }()
+    
+    lazy var desLabel: UILabel = {
+        let view = UILabel()
+        view.font = k15Font
+        view.textColor = R.color.sub_red()
+        view.numberOfLines = 0
+        view.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        view.text = "温馨提示：\n\n如您拥有多楼层权限，请给访客填写指定的到访楼层；\n如您未填写指定到访楼层，则访客可访问您的所有楼层。"
         return view
     }()
     

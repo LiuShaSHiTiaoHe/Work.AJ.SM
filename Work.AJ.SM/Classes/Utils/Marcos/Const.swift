@@ -39,3 +39,7 @@ let kDefaultRemoteOpenDoorTips = "设备离线状态下，无法远程开门和�
 // FIXME: - 测试检查更新间隔时间为0 分钟，也就是每次都检查
 let kCheckTimeInterval = 0//60 * 24
 let kModuleStatusTimeInterval = 100//60 * 24
+
+
+// MARK: - 邀请访客时间间隔(second)
+let kInviteGuestValidTimeInterval = 18 * 60

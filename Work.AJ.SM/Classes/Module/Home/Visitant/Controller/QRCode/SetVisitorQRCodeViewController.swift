@@ -70,7 +70,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
         datePicker?.textFontOfSelectedRow = k18Font
         datePicker?.lineBackgroundColor = R.color.themecolor()
         datePicker?.minimumDate = Date()
-        datePicker?.maximumDate = NSDate.init().addingHours(12)//addingMonths(13)
+        datePicker?.maximumDate = NSDate.init().addingHours(18)//addingMonths(13)
         datePicker?.selectedDate = {[weak self] dateComponents in
             guard let `self` = self else { return }
             switch self.timeType {
@@ -102,7 +102,7 @@ class SetVisitorQRCodeViewController: BaseViewController {
         SVProgressHUD.show()
         if let validTime = validTime, let arriveTime = arriveTime {
             if let interval = validTime.jk.numberOfMinutes(from: arriveTime), interval >= 30 {
-                if interval > 12*60 {
+                if interval > kInviteGuestValidTimeInterval {
                     SVProgressHUD.showError(withStatus: "有效期超过限制")
                 }else{
                     if let unit = HomeRepository.shared.getCurrentUnit(), let unitID = unit.unitid?.jk.intToString, let communityID = unit.communityid?.jk.intToString, let blockID = unit.blockid?.jk.intToString, let userID = ud.userID {

@@ -64,7 +64,6 @@ class HomeViewController: BaseViewController {
                 self.hideNoDataView()
                 self.contentView.updateHomeFunctions(modules)
                 self.contentView.updateAdsAndNotices(ads, notices)
-
                 // MARK: - 获取模块控制信息/自动检查版本，切换房屋或者刷新也有效
                 HomeRepository.shared.getModuleStatusFromServer()
                 AppUpgradeManager.shared.autoCheckVersion()
