@@ -17,6 +17,11 @@ class UserIdentifyQRCodeViewController: BaseViewController {
         super.viewDidLoad()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateImageData()
+    }
+    
     override func initUI() {
         view.backgroundColor = R.color.bg()
         view.addSubview(ownerQRCodeView)
@@ -27,12 +32,15 @@ class UserIdentifyQRCodeViewController: BaseViewController {
 
     override func initData() {
         ownerQRCodeView.delegate = self
-        updateImageData()
     }
 
     func updateImageData() {
-        if let image = QRCodeManager.shared.generateUserIdentifyQRCode() {
-            self.ownerQRCodeView.qrcodeView.image = image
+        DispatchQueue.global().async {
+            if let image = QRCodeManager.shared.generateUserIdentifyQRCode() {
+                DispatchQueue.main.async {
+                    self.ownerQRCodeView.qrcodeView.image = image
+                }
+            }
         }
     }
 }
